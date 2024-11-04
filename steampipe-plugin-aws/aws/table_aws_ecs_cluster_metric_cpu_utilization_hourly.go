@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/opengovern/og-aws-describer-new/pkg/opengovernance-es-sdk"
-
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"

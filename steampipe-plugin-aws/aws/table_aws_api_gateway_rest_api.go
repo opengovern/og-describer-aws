@@ -7,7 +7,7 @@ import (
 
 	go_kit_packs "github.com/turbot/go-kit/types"
 
-	"github.com/opengovern/og-aws-describer-new/pkg/opengovernance-es-sdk"
+	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
