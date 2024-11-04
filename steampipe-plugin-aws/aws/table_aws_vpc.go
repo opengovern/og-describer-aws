@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/opengovern/og-aws-describer-new/pkg/opengovernance-es-sdk"
+	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
