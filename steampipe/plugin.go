@@ -10,6 +10,7 @@ import (
 
 	"fmt"
 
+	"github.com/opengovern/og-aws-describer-new/steampipe-plugin-aws/aws"
 	"github.com/opengovern/og-util/pkg/steampipe"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -25,18 +26,14 @@ func  buildContext() context.Context {
 }
 
 func  DescriptionToRecord(logger *zap.Logger, resource interface{}, indexName string) (map[string]*proto.Column, error) {
-	// To Do
-	// Example
-	// return steampipe.DescriptionToRecord(logger, aws.Plugin(buildContext()), resource, indexName)
-	return nil, nil
+
+	return steampipe.DescriptionToRecord(logger, aws.Plugin(buildContext()), resource, indexName)
 	
 }
 
 func  Cells(indexName string) ([]string, error) {
-	// To Do
-	// Example
-	// return steampipe.Cells(aws.Plugin(buildContext()), indexName)
-	return nil, nil
+
+	return steampipe.Cells(aws.Plugin(buildContext()), indexName)
 }
 
 func ExtractTableName(resourceType string) string {
@@ -60,10 +57,7 @@ func GetResourceTypeByTableName(tableName string) string {
 }
 
 func Plugin() *plugin.Plugin {
-	// To Do
-	// Example
-	// return aws.Plugin(buildContext())
-	return nil
+	return aws.Plugin(buildContext())
 }
 
 func ExtractTagsAndNames(logger *zap.Logger, plg *plugin.Plugin, resourceType string, source interface{}) (map[string]string, string, error) {

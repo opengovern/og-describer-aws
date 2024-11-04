@@ -34,7 +34,7 @@ const (
 type ResourceSender struct {
 	authToken                 string
 	logger                    *zap.Logger
-	resourceChannel           chan *any
+	resourceChannel           chan *golang.AWSResource
 	resourceIDs               []string
 	doneChannel               chan interface{}
 	conn                      *grpc.ClientConn
@@ -45,7 +45,7 @@ type ResourceSender struct {
 	client     golang.EsSinkServiceClient
 	httpClient *http.Client
 
-	sendBuffer    []*any
+	sendBuffer    []*golang.AWSResource
 	useOpenSearch bool
 }
 
@@ -53,7 +53,7 @@ func NewResourceSender(grpcEndpoint, ingestionPipelineEndpoint string, describeT
 	rs := ResourceSender{
 		authToken:                 describeToken,
 		logger:                    logger,
-		resourceChannel:           make(chan *any, ChannelSize),
+		resourceChannel:           make(chan *golang.AWSResource, ChannelSize),
 		resourceIDs:               nil,
 		doneChannel:               make(chan interface{}),
 		conn:                      nil,
@@ -113,7 +113,7 @@ func (s *ResourceSender) ResourceHandler() {
 			}
 			// Add resource ID to the list
 			// Example
-			// s.resourceIDs = append(s.resourceIDs, resource.UniqueId)
+			s.resourceIDs = append(s.resourceIDs, resource.UniqueId)
 			s.sendBuffer = append(s.sendBuffer, resource)
 
 			if len(s.sendBuffer) > MaxBufferSize {
@@ -243,6 +243,7 @@ func (s *ResourceSender) GetResourceIDs() []string {
 	return s.resourceIDs
 }
 
-func (s *ResourceSender) Send(resource *any) {
+func (s *ResourceSender) Send(resource *golang.AWSResource) {
 	s.resourceChannel <- resource
 }
+

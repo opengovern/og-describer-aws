@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/opengovern/og-describer-template/service"
 	"os"
 	"os/signal"
 	"syscall"
+
+	local "github.com/opengovern/og-aws-describer-new/service"
 )
 
 func main() {
