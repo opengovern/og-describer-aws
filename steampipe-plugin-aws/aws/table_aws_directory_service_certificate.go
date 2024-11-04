@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/opengovern/og-aws-describer-new/pkg/opengovernance-es-sdk"
+	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
 
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
