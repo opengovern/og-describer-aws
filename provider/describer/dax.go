@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
 func DAXCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {

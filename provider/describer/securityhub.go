@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
 func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {

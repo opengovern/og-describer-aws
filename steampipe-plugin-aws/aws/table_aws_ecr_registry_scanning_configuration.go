@@ -3,7 +3,7 @@ package aws
 import (
 	"context"
 
-	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
+	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
 
 	ecrv1 "github.com/aws/aws-sdk-go/service/ecr"
 

@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/docdb"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
 func DocDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {

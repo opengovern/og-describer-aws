@@ -1,7 +1,7 @@
 package provider
 
 import (
-	"github.com/opengovern/og-aws-describer-new/provider/describer"
+	"github.com/opengovern/og-describer-aws/provider/describer"
 	"github.com/opengovern/og-util/pkg/source"
 )
 

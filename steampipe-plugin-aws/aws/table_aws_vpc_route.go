@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	"github.com/opengovern/og-aws-describer-new/pkg/opengovernance-es-sdk"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
+	"github.com/opengovern/og-describer-aws/provider/model"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"

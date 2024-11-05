@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2"
 	sesv2types "github.com/aws/aws-sdk-go-v2/service/sesv2/types"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
 func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {

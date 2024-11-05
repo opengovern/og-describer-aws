@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 	"github.com/turbot/go-kit/types"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"

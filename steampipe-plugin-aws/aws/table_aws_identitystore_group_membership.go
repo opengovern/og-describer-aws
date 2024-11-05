@@ -4,7 +4,7 @@ import (
 	"context"
 
 	identitystorev1 "github.com/aws/aws-sdk-go/service/identitystore"
-	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
+	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"

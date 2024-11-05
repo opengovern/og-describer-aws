@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go/jetstream"
-	"github.com/opengovern/og-aws-describer-new/describer"
+	"github.com/opengovern/og-describer-aws/describer"
 
 	"github.com/opengovern/og-util/pkg/describe"
 	esSinkClient "github.com/opengovern/og-util/pkg/es/ingest/client"

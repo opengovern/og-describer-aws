@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/opengovern/og-aws-describer-new/steampipe-plugin-aws/aws"
+	"github.com/opengovern/og-describer-aws/steampipe-plugin-aws/aws"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 

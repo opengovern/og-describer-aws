@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic"
 	public_types "github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
 	"github.com/aws/smithy-go"
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
 func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {

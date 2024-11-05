@@ -3,7 +3,7 @@ package opengovernance
 
 import (
 	"context"
-	aws "github.com/opengovern/og-aws-describer-new/provider/model"
+	aws "github.com/opengovern/og-describer-aws/provider/model"
 	essdk "github.com/opengovern/og-util/pkg/opengovernance-es-sdk"
 	steampipesdk "github.com/opengovern/og-util/pkg/steampipe"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"

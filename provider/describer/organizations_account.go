@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/opengovern/og-aws-describer-new/provider/model"
+	"github.com/opengovern/og-describer-aws/provider/model"
 
 	// AWS SDK for Go V2 packages
 	"github.com/aws/aws-sdk-go-v2/aws"

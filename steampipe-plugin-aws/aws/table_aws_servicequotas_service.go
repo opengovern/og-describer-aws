@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	opengovernance "github.com/opengovern/og-aws-describer-new/SDK/generated"
+	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
 
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 

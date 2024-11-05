@@ -11,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go"
-	"github.com/opengovern/og-aws-describer-new/provider/describer"
+	"github.com/opengovern/og-describer-aws/provider/describer"
 	"github.com/opengovern/og-util/pkg/describe/enums"
 	"github.com/opengovern/og-util/pkg/source"
 	"go.uber.org/zap"

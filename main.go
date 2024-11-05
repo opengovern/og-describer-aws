@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	local "github.com/opengovern/og-aws-describer-new/service"
+	local "github.com/opengovern/og-describer-aws/service"
 )
 
 func main() {

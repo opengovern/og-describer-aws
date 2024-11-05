@@ -1,4 +1,4 @@
-module github.com/opengovern/og-aws-describer-new
+module github.com/opengovern/og-describer-aws
 
 go 1.22.0
 

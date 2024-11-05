@@ -2,9 +2,7 @@ package steampipe
 
 // Please import resource clients file after it's genrated completly
 import (
-	"github.com/opengovern/og-aws-describer-new/SDK/generated"
-	
-
+	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
 )
 var Map = map[string]string{
 "AWS::Redshift::Snapshot":                            "aws_redshift_snapshot",

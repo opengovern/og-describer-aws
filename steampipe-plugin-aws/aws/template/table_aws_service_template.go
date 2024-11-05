@@ -19,7 +19,7 @@ package aws
 
 import (
 	"context"
-	"github.com/opengovern/og-aws-describer-new/SDK/generated"
+	"github.com/opengovern/og-describer-aws/SDK/generated"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
