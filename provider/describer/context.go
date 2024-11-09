@@ -2,35 +2,28 @@ package describer
 
 import (
 	"context"
-	"go.uber.org/zap"
-
 	"github.com/opengovern/og-util/pkg/describe/enums"
+	"go.uber.org/zap"
 )
 
 var (
-	key            describeContextKey = "describe_ctx"
-	triggerTypeKey string             = "trigger_type"
+	triggerTypeKey string = "trigger_type"
 )
 
-type describeContextKey string
-
-type DescribeContext struct {
-	AccountID   string
-	Region      string
-	KaytuRegion string
-	Partition   string
+func WithTriggerType(ctx context.Context, tt enums.DescribeTriggerType) context.Context {
+	return context.WithValue(ctx, triggerTypeKey, tt)
 }
 
-func WithDescribeContext(ctx context.Context, describeCtx DescribeContext) context.Context {
-	return context.WithValue(ctx, key, describeCtx)
-}
-
-func GetDescribeContext(ctx context.Context) DescribeContext {
-	describe, ok := ctx.Value(key).(DescribeContext)
+func GetTriggerTypeFromContext(ctx context.Context) enums.DescribeTriggerType {
+	tt, ok := ctx.Value(triggerTypeKey).(enums.DescribeTriggerType)
 	if !ok {
-		panic("context key not found")
+		return ""
 	}
-	return describe
+	return tt
+}
+
+func GetParameterFromContext(ctx context.Context, key string) any {
+	return ctx.Value(key)
 }
 
 func WithLogger(ctx context.Context, logger *zap.Logger) context.Context {
@@ -43,16 +36,4 @@ func GetLoggerFromContext(ctx context.Context) *zap.Logger {
 		return zap.NewNop()
 	}
 	return logger
-}
-
-func WithTriggerType(ctx context.Context, tt enums.DescribeTriggerType) context.Context {
-	return context.WithValue(ctx, triggerTypeKey, tt)
-}
-
-func GetTriggerTypeFromContext(ctx context.Context) enums.DescribeTriggerType {
-	tt, ok := ctx.Value(triggerTypeKey).(enums.DescribeTriggerType)
-	if !ok {
-		return ""
-	}
-	return tt
 }

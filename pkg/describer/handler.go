@@ -6,19 +6,19 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"google.golang.org/grpc/credentials/insecure"
-	"os"
-	"time"
 	"github.com/golang-jwt/jwt/v5"
+	describepkg "github.com/opengovern/og-util/pkg/describe"
 	"github.com/opengovern/og-util/pkg/vault"
 	"github.com/opengovern/og-util/proto/src/golang"
 	"golang.org/x/oauth2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/metadata"
+	"os"
+	"time"
 
-	"github.com/opengovern/og-util/pkg/describe"
 	"go.uber.org/zap"
 )
 
@@ -62,7 +62,7 @@ const (
 
 // DescribeHandler
 // TriggeredBy is not used for now but might be relevant in the future
-func DescribeHandler(ctx context.Context, logger *zap.Logger, _ TriggeredBy, input describe.DescribeWorkerInput) error {
+func DescribeHandler(ctx context.Context, logger *zap.Logger, _ TriggeredBy, input describepkg.DescribeWorkerInput) error {
 	var err error
 	defer func() {
 		if r := recover(); r != nil {
@@ -147,6 +147,11 @@ func DescribeHandler(ctx context.Context, logger *zap.Logger, _ TriggeredBy, inp
 		}
 	}
 	logger.Info("Vault setup complete")
+
+	for k, v := range input.ExtraInputs {
+		ctx = context.WithValue(ctx, k, v)
+	}
+
 	resourceIds, err := Do(
 		ctx,
 		vaultSc,
@@ -179,15 +184,15 @@ func DescribeHandler(ctx context.Context, logger *zap.Logger, _ TriggeredBy, inp
 			Error:     errMsg,
 			ErrorCode: errCode,
 			DescribeJob: &golang.DescribeJob{
-			JobId:        uint32(input.DescribeJob.JobID),
-			ResourceType: input.DescribeJob.ResourceType,
-			SourceId:     input.DescribeJob.SourceID,
-			AccountId:    input.DescribeJob.AccountID,
-			DescribedAt:  input.DescribeJob.DescribedAt,
-			SourceType:   string(input.DescribeJob.SourceType),
-			ConfigReg:    input.DescribeJob.CipherText,
-			TriggerType:  string(input.DescribeJob.TriggerType),
-			RetryCounter: uint32(input.DescribeJob.RetryCounter),
+				JobId:           uint32(input.DescribeJob.JobID),
+				ResourceType:    input.DescribeJob.ResourceType,
+				IntegrationId:   input.DescribeJob.IntegrationID,
+				ProviderId:      input.DescribeJob.ProviderID,
+				DescribedAt:     input.DescribeJob.DescribedAt,
+				IntegrationType: string(input.DescribeJob.IntegrationType),
+				ConfigReg:       input.DescribeJob.CipherText,
+				TriggerType:     string(input.DescribeJob.TriggerType),
+				RetryCounter:    uint32(input.DescribeJob.RetryCounter),
 			},
 			DescribedResourceIds: resourceIds,
 		})
