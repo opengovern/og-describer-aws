@@ -12,7 +12,7 @@ func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
-		MaxResults: 100,
+		MaxResults: aws.Int32(100),
 	})
 
 	var values []Resource
@@ -61,7 +61,7 @@ func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *StreamSend
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeRecoveryInstancesPaginator(client, &drs.DescribeRecoveryInstancesInput{
-		MaxResults: 100,
+		MaxResults: aws.Int32(100),
 	})
 
 	var values []Resource
@@ -102,7 +102,7 @@ func DRSJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resour
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeJobsPaginator(client, &drs.DescribeJobsInput{
-		MaxResults: 100,
+		MaxResults: aws.Int32(100),
 	})
 
 	var values []Resource
@@ -143,7 +143,7 @@ func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *StreamSend
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
-		MaxResults: 100,
+		MaxResults: aws.Int32(100),
 	})
 
 	var values []Resource
@@ -160,7 +160,7 @@ func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 		for _, sourceServer := range page.Items {
 			recoverySnapshotPaginator := drs.NewDescribeRecoverySnapshotsPaginator(client, &drs.DescribeRecoverySnapshotsInput{
-				MaxResults:     100,
+				MaxResults:     aws.Int32(100),
 				SourceServerID: sourceServer.SourceServerID,
 			})
 			recoverySnapshotPageNo := 0
