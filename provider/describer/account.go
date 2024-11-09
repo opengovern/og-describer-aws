@@ -58,7 +58,7 @@ func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountI
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *op.AlternateContact.Name,
 		Description: model.AccountAlternateContactDescription{
 			AlternateContact: *op.AlternateContact,
@@ -99,7 +99,7 @@ func AccountContact(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *op.ContactInformation.FullName,
 		Description: model.AccountContactDescription{
 			AlternateContact: *op.ContactInformation,

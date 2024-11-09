@@ -473,7 +473,7 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.AccessPointArn,
 				Name:   *v.Name,
 				Description: model.S3AccessPointDescription{
@@ -516,7 +516,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 		for _, v := range page.StorageLensConfigurationList {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.StorageLensArn,
 				Name:        *v.Id,
 				Description: v,
@@ -562,7 +562,7 @@ func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	var values []Resource
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		// No ARN or ID. Account level setting
 		Name: accountId + " S3 Account Setting",
 		Description: model.S3AccountSettingDescription{
@@ -728,7 +728,7 @@ func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *Strea
 			arn := "arn:" + describeCtx.Partition + ":s3::" + accountId + ":accesspoint/" + *report.Name
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *report.Name,
 				Description: model.S3MultiRegionAccessPointDescription{

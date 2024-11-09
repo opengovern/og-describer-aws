@@ -62,7 +62,7 @@ func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.Pr
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ProtectionGroupArn,
 		Name:   *v.ProtectionGroupId,
 		Description: model.ShieldProtectionGroupDescription{

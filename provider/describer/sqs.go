@@ -57,7 +57,7 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 			output.Attributes["QueueUrl"] = url
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    url,
 				Name:   nameFromArn(url),
 				Description: model.SQSQueueDescription{
@@ -80,7 +80,7 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 func sQSQueueHandle(ctx context.Context, url string, queueAttributes *sqs.GetQueueAttributesOutput, tagOutput *sqs.ListQueueTagsOutput) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    url,
 		Name:   nameFromArn(url),
 		Description: model.SQSQueueDescription{

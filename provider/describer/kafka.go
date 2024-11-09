@@ -80,7 +80,7 @@ func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Clust
 		operationInfo = op.ClusterOperationInfo
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ClusterArn,
 		Name:   *cluster.ClusterName,
 		Description: model.KafkaClusterDescription{

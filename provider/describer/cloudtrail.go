@@ -122,7 +122,7 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.TrailARN,
 		Name:   *v.Name,
 		Description: model.CloudTrailTrailDescription{
@@ -222,7 +222,7 @@ func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *StreamSender
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *channel.ChannelArn,
 				Name:   *channel.Name,
 				Description: model.CloudTrailChannelDescription{
@@ -289,7 +289,7 @@ func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDa
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *eventDataStore.EventDataStoreArn,
 		Name:   *eventDataStore.Name,
 		Description: model.CloudTrailEventDataStoreDescription{
@@ -357,7 +357,7 @@ func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *StreamSender)
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *trailImport.ImportId,
 				Description: model.CloudTrailImportDescription{
 					Import: *output,
@@ -406,7 +406,7 @@ func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 					}
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   *query.QueryId,
 						Description: model.CloudTrailQueryDescription{
 							Query:             *output,
@@ -455,7 +455,7 @@ func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 			for _, event := range page.Events {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     *event.EventId,
 					Description: model.CloudTrailTrailEventDescription{
 						TrailEvent:   event,

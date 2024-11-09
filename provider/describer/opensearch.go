@@ -69,7 +69,7 @@ func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.Do
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *domain.ARN,
 		Name:   *domain.DomainName,
 		Description: model.OpenSearchDomainDescription{

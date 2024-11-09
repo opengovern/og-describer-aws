@@ -25,7 +25,7 @@ func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		}
 		for _, v := range page.Instances {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.InstanceArn,
 				Name:   *v.InstanceArn,
 				Description: model.SSOAdminInstanceDescription{
@@ -96,7 +96,7 @@ func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmi
 
 			for _, accountA := range accountAssignment.AccountAssignments {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s|%s|%s", *accountA.AccountId, *accountA.PermissionSetArn, *accountA.PrincipalId),
 					Description: model.SSOAdminAccountAssignmentDescription{
 						Instance:          instance,
@@ -191,7 +191,7 @@ func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, inst
 		tagsMap[*tag.Key] = *tag.Value
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *detail.PermissionSet.PermissionSetArn,
 		ARN:    *detail.PermissionSet.PermissionSetArn,
 		Description: model.SSOAdminPermissionSetDescription{
@@ -269,7 +269,7 @@ func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *sso
 
 		for _, item := range output.AttachedManagedPolicies {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *item.Arn,
 				ARN:    *item.Arn,
 				Description: model.SSOAdminPolicyAttachmentDescription{
@@ -337,7 +337,7 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *StreamSend
 										return nil, err
 									}
 									resource := Resource{
-										Region: describeCtx.KaytuRegion,
+										Region: describeCtx.OGRegion,
 										ID:     id,
 										Description: model.UserEffectiveAccessDescription{
 											AccountAssignment: accountA,
@@ -365,7 +365,7 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *StreamSend
 								return nil, err
 							}
 							resource := Resource{
-								Region: describeCtx.KaytuRegion,
+								Region: describeCtx.OGRegion,
 								ID:     id,
 								Description: model.UserEffectiveAccessDescription{
 									AccountAssignment: accountA,

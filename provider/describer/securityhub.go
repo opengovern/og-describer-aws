@@ -66,7 +66,7 @@ func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.
 		desc.AdministratorAccount = *data.Administrator
 	}
 	resource := Resource{
-		Region:      describeCtx.KaytuRegion,
+		Region:      describeCtx.OGRegion,
 		Description: desc,
 	}
 	if out.HubArn != nil {
@@ -130,7 +130,7 @@ func SecurityHubActionTarget(ctx context.Context, cfg aws.Config, stream *Stream
 func securityHubActionTargetHandle(ctx context.Context, actionTarget types.ActionTarget) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *actionTarget.ActionTargetArn,
 		Name:   *actionTarget.Name,
 		Description: model.SecurityHubActionTargetDescription{
@@ -179,7 +179,7 @@ func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, finding := range page.Findings {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *finding.Id,
 				Name:   *finding.Title,
 				Description: model.SecurityHubFindingDescription{
@@ -249,7 +249,7 @@ func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, fin
 		return Resource{}, err
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *findingAggregator.FindingAggregatorArn,
 		Description: model.SecurityHubFindingAggregatorDescription{
 			FindingAggregator: *findingAggregator,
@@ -305,7 +305,7 @@ func SecurityHubInsight(ctx context.Context, cfg aws.Config, stream *StreamSende
 func securityHubInsightHandle(ctx context.Context, insight types.Insight) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *insight.InsightArn,
 		Name:   *insight.Name,
 		Description: model.SecurityHubInsightDescription{
@@ -401,7 +401,7 @@ func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *StreamSender
 func securityHubMemberHandle(ctx context.Context, member types.Member) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *member.AccountId,
 		Description: model.SecurityHubMemberDescription{
 			Member: member,
@@ -448,7 +448,7 @@ func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, product := range page.Products {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *product.ProductName,
 				ARN:    *product.ProductArn,
 				Description: model.SecurityHubProductDescription{
@@ -514,7 +514,7 @@ func SecurityHubStandardsControl(ctx context.Context, cfg aws.Config, stream *St
 func securityHubStandardsControlHandle(ctx context.Context, standardsControl types.StandardsControl) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *standardsControl.ControlId,
 		Name:   *standardsControl.Title,
 		ARN:    *standardsControl.StandardsControlArn,
@@ -589,7 +589,7 @@ func securityHubStandardsSubscriptionHandle(ctx context.Context, standardSub typ
 
 	standard, _ := standards[*standardSub.StandardsArn]
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *standardSub.StandardsSubscriptionArn,
 		Description: model.SecurityHubStandardsSubscriptionDescription{
 			Standard:              standard,

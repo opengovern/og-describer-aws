@@ -55,7 +55,7 @@ func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (Resou
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *environment.Environment.Arn,
 		Name:   *environment.Environment.Name,
 		Description: model.MWAAEnvironmentDescription{

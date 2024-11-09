@@ -22,7 +22,7 @@ func TaggingResources(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		}
 		for _, v := range page.ResourceTagMappingList {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.ResourceARN,
 				Name:   *v.ResourceARN,
 				Description: model.TaggingResourcesDescription{

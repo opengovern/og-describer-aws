@@ -59,7 +59,7 @@ func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCl
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *cluster.DBClusterIdentifier,
 		ARN:    *cluster.DBClusterArn,
 		Description: model.DocDBClusterDescription{
@@ -145,7 +145,7 @@ func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance ty
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *instance.DBInstanceIdentifier,
 		ARN:    *instance.DBInstanceArn,
 		Description: model.DocDBClusterInstanceDescription{
@@ -252,7 +252,7 @@ func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *snapshot.DBClusterSnapshotIdentifier,
 		ARN:    *snapshot.DBClusterSnapshotArn,
 		Description: model.DocDBClusterSnapshotDescription{

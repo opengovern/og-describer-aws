@@ -73,7 +73,7 @@ func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDo
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ARN,
 		Name:   *v.DomainName,
 		Description: model.ESDomainDescription{

@@ -64,7 +64,7 @@ func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.FirewallArn,
 		Name:   *v.FirewallName,
 		Description: model.NetworkFirewallFirewallDescription{
@@ -139,7 +139,7 @@ func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *StreamSe
 				name = *v.Arn
 			}
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,
 				Description: model.NetworkFirewallFirewallPolicyDescription{
@@ -192,7 +192,7 @@ func NetworkFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *Strea
 				name = *v.Arn
 			}
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,
 				Description: model.NetworkFirewallRuleGroupDescription{

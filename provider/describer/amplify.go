@@ -46,7 +46,7 @@ func AmplifyApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 func amplifyAppHandle(ctx context.Context, item types.App) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *item.Name,
 		ARN:    *item.AppArn,
 		ID:     *item.AppId,

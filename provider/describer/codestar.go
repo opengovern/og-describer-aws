@@ -38,7 +38,7 @@ func CodeStarProject(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *project.Arn,
 				Name:   *project.Id,
 				Description: model.CodeStarProjectDescription{

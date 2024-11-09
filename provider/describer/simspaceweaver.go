@@ -46,7 +46,7 @@ func SimSpaceWeaverSimulation(ctx context.Context, cfg aws.Config, stream *Strea
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,
 				Description: model.SimSpaceWeaverSimulationDescription{

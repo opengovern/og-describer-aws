@@ -62,7 +62,7 @@ func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (R
 	arn := fmt.Sprintf("arn:%s:ses:%s:%s:configuration-set/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *output.ConfigurationSet.Name)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *output.ConfigurationSet.Name,
 		Description: model.SESConfigurationSetDescription{
@@ -178,7 +178,7 @@ func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2type
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.IdentityName,
 		Description: model.SESv2EmailIdentityDescription{
@@ -238,7 +238,7 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   v,
 		Description: model.SESIdentityDescription{
@@ -296,7 +296,7 @@ func SESContactList(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 		for _, v := range page.ContactLists {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.ContactListName,
 				Name:        *v.ContactListName,
 				Description: v,
@@ -326,7 +326,7 @@ func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	var values []Resource
 	for _, v := range output.Filters {
 		resource := Resource{
-			Region:      describeCtx.KaytuRegion,
+			Region:      describeCtx.OGRegion,
 			ID:          *v.Name,
 			Name:        *v.Name,
 			Description: v,
@@ -361,7 +361,7 @@ func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *StreamSender
 			}
 
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *output.Metadata.Name,
 				Name:        *output.Metadata.Name,
 				Description: output,
@@ -398,7 +398,7 @@ func SESTemplate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 
 		for _, v := range output.TemplatesMetadata {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.Name,
 				Name:        *v.Name,
 				Description: v,

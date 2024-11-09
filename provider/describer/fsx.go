@@ -37,7 +37,7 @@ func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.FileSystemId,
 		Description: model.FSXFileSystemDescription{
@@ -94,7 +94,7 @@ func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *Strea
 func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtualMachine) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
 		Description: model.FSXStorageVirtualMachineDescription{
@@ -139,7 +139,7 @@ func FSXTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 
 		for _, item := range page.DataRepositoryTasks {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.ResourceARN,
 				Name:   *item.TaskId,
 				Description: model.FSXTaskDescription{
@@ -187,7 +187,7 @@ func FSXVolume(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 func fSXVolumeHandle(ctx context.Context, item types.Volume) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
 		Description: model.FSXVolumeDescription{
@@ -245,7 +245,7 @@ func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
 		Description: model.FSXSnapshotDescription{

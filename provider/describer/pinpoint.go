@@ -48,7 +48,7 @@ func PinpointApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *app.Arn,
 				Name:   name,
 				Description: model.PinPointAppDescription{

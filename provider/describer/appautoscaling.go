@@ -46,7 +46,7 @@ func applicationAutoScalingTargetHandle(ctx context.Context, item types.Scalable
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *item.ResourceId,
 		Description: model.ApplicationAutoScalingTargetDescription{
@@ -110,7 +110,7 @@ func applicationAutoScalingPolicyHandle(ctx context.Context, item types.ScalingP
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *item.ResourceId,
 		Description: model.ApplicationAutoScalingPolicyDescription{

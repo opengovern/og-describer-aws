@@ -70,7 +70,7 @@ func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *Stre
 				return nil, err
 			}
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *v.Name,
 				Description: model.DirectoryServiceDirectoryDescription{
@@ -139,7 +139,7 @@ func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *St
 						return nil, err
 					}
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ID:     *certificate.Certificate.CertificateId,
 						Name:   *certificate.Certificate.CommonName,
 						Description: model.DirectoryServiceCertificateDescription{
@@ -194,7 +194,7 @@ func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream
 				}
 				for _, logSub := range logPage.LogSubscriptions {
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   *logSub.LogGroupName,
 						Description: model.DirectoryServiceLogSubscriptionDescription{
 							LogSubscription: logSub,

@@ -30,7 +30,7 @@ func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *StreamSen
 				return nil, err
 			}
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.Arn,
 				Name:   *item.Name,
 				Description: model.AppStreamApplicationDescription{
@@ -111,7 +111,7 @@ func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack)
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
 		Description: model.AppStreamStackDescription{
@@ -203,7 +203,7 @@ func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet)
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
 		Description: model.AppStreamFleetDescription{
@@ -305,7 +305,7 @@ func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image)
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
 		Description: model.AppStreamImageDescription{

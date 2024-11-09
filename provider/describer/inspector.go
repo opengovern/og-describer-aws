@@ -37,7 +37,7 @@ func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *StreamS
 
 		for _, assessmentRun := range assessmentRuns.AssessmentRuns {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *assessmentRun.Name,
 				ARN:    *assessmentRun.Arn,
 				Description: model.InspectorAssessmentRunDescription{
@@ -95,7 +95,7 @@ func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *Stre
 func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types.AssessmentTarget) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *assessmentTarget.Name,
 		ARN:    *assessmentTarget.Arn,
 		Description: model.InspectorAssessmentTargetDescription{
@@ -179,7 +179,7 @@ func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *St
 func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate types.AssessmentTemplate, eventSubscriptions *inspector.ListEventSubscriptionsOutput, tags *inspector.ListTagsForResourceOutput) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *assessmentTemplate.Name,
 		ARN:    *assessmentTemplate.Arn,
 		Description: model.InspectorAssessmentTemplateDescription{
@@ -255,7 +255,7 @@ func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 				for _, exclusion := range exclusions.Exclusions {
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   *exclusion.Title,
 						ARN:    *exclusion.Arn,
 						Description: model.InspectorExclusionDescription{
@@ -301,7 +301,7 @@ func InspectorFinding(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 		for _, finding := range findings.Findings {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *finding.Title,
 				ID:     *finding.Id,
 				ARN:    *finding.Arn,
@@ -337,7 +337,7 @@ func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, coveredResource := range page.CoveredResources {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *coveredResource.ResourceId,
 				Description: model.Inspector2CoverageDescription{
 					CoveredResource: coveredResource,
@@ -368,7 +368,7 @@ func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *St
 			return nil, err
 		}
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			Description: model.Inspector2CoverageStatisticDescription{
 				TotalCounts: page.TotalCounts,
 				Counts:      page.CountsByGroup,
@@ -430,7 +430,7 @@ func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client 
 		}
 		for _, member := range page.Members {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Description: model.Inspector2MemberDescription{
 					Member:         member,
 					OnlyAssociated: onlyAssociated,
@@ -458,7 +458,7 @@ func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *StreamSender
 			}
 			for _, v := range finding.Resources {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					Description: model.Inspector2FindingDescription{
 						Finding:  finding,
 						Resource: v,

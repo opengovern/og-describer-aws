@@ -208,7 +208,7 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 	ouId := aws.ToString(parent.Id)
 
 	details := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *acct.Arn,
 		ID:     *acct.Id,
 		Name:   *acct.Name,

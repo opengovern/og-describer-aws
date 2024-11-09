@@ -29,7 +29,7 @@ func EC2ElasticIP(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 	for _, addr := range addrs.Addresses {
 		resource := Resource{
 			ID:     *addr.AllocationId,
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			Description: model.EC2ElasticIPDescription{
 				Address: addr,
 			},
@@ -75,7 +75,7 @@ func eC2LocalGatewayHandle(ctx context.Context, v types.LocalGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":local-gateway/" + *v.LocalGatewayId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.LocalGatewayId,
 		Description: model.EC2LocalGatewayDescription{
@@ -134,7 +134,7 @@ func eC2VolumeSnapshotHandle(ctx context.Context, v types.Snapshot, attrs *ec2.D
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":snapshot/" + *v.SnapshotId
 	fmt.Println("=======", arn)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.SnapshotId,
 		Description: model.EC2VolumeSnapshotDescription{
@@ -233,7 +233,7 @@ func eC2VolumeHandle(ctx context.Context, v types.Volume, client *ec2.Client) (R
 
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":volume/" + *volume.VolumeId
 	resource := Resource{
-		Region:      describeCtx.KaytuRegion,
+		Region:      describeCtx.OGRegion,
 		ARN:         arn,
 		Name:        *volume.VolumeId,
 		Description: description,
@@ -294,7 +294,7 @@ func EC2CapacityReservation(ctx context.Context, cfg aws.Config, stream *StreamS
 func eC2CapacityReservationHandle(ctx context.Context, v types.CapacityReservation) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.CapacityReservationArn,
 		Name:   *v.CapacityReservationId,
 		Description: model.EC2CapacityReservationDescription{
@@ -350,7 +350,7 @@ func EC2CapacityReservationFleet(ctx context.Context, cfg aws.Config, stream *St
 func eC2CapacityReservationFleetHandle(ctx context.Context, v types.CapacityReservationFleet) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.CapacityReservationFleetArn,
 		Name:   *v.CapacityReservationFleetId,
 		Description: model.EC2CapacityReservationFleetDescription{
@@ -392,7 +392,7 @@ func EC2CarrierGateway(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 		for _, v := range page.CarrierGateways {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.CarrierGatewayId,
 				Name:        *v.CarrierGatewayId,
 				Description: v,
@@ -434,7 +434,7 @@ func EC2ClientVpnAuthorizationRule(ctx context.Context, cfg aws.Config, stream *
 
 			for _, v := range page.AuthorizationRules {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*v.ClientVpnEndpointId, *v.DestinationCidr, *v.GroupId),
 					Name:        *v.ClientVpnEndpointId,
 					Description: v,
@@ -471,7 +471,7 @@ func EC2ClientVpnEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 		for _, v := range page.ClientVpnEndpoints {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.ClientVpnEndpointId,
 				Name:   *v.ClientVpnEndpointId,
 				Description: model.EC2ClientVpnEndpointDescription{
@@ -515,7 +515,7 @@ func EC2ClientVpnRoute(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 			for _, v := range page.Routes {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*v.ClientVpnEndpointId, *v.DestinationCidr, *v.TargetSubnet),
 					Name:        *v.ClientVpnEndpointId,
 					Description: v,
@@ -558,7 +558,7 @@ func EC2ClientVpnTargetNetworkAssociation(ctx context.Context, cfg aws.Config, s
 
 			for _, v := range page.ClientVpnTargetNetworks {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          *v.AssociationId,
 					Name:        *v.AssociationId,
 					Description: v,
@@ -601,7 +601,7 @@ func EC2CustomerGateway(ctx context.Context, cfg aws.Config, stream *StreamSende
 func eC2CustomerGatewayHandle(ctx context.Context, v types.CustomerGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.CustomerGatewayId,
 		Description: model.EC2CustomerGatewayDescription{
 			CustomerGateway: v,
@@ -662,7 +662,7 @@ func EC2VerifiedAccessInstance(ctx context.Context, cfg aws.Config, stream *Stre
 func eC2VerifiedAccessInstanceHandle(ctx context.Context, v types.VerifiedAccessInstance) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.VerifiedAccessInstanceId,
 		Name:   *v.VerifiedAccessInstanceId,
 		Description: model.EC2VerifiedAccessInstanceDescription{
@@ -725,7 +725,7 @@ func EC2VerifiedAccessEndpoint(ctx context.Context, cfg aws.Config, stream *Stre
 func eC2VerifiedAccessEndpointHandle(ctx context.Context, v types.VerifiedAccessEndpoint) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.VerifiedAccessEndpointId,
 		Name:   *v.VerifiedAccessEndpointId,
 		Description: model.EC2VerifiedAccessEndpointDescription{
@@ -789,7 +789,7 @@ func EC2VerifiedAccessGroup(ctx context.Context, cfg aws.Config, stream *StreamS
 func eC2VerifiedAccessGroupHandle(ctx context.Context, v types.VerifiedAccessGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.VerifiedAccessGroupId,
 		Name:   *v.VerifiedAccessGroupId,
 		Description: model.EC2VerifiedAccessGroupDescription{
@@ -852,7 +852,7 @@ func EC2VerifiedAccessTrustProvider(ctx context.Context, cfg aws.Config, stream 
 func eC2VerifiedAccessTrustProviderHandle(ctx context.Context, v types.VerifiedAccessTrustProvider) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.VerifiedAccessTrustProviderId,
 		Name:   *v.VerifiedAccessTrustProviderId,
 		Description: model.EC2VerifiedAccessTrustProviderDescription{
@@ -914,7 +914,7 @@ func eC2DHCPOptionsHandle(ctx context.Context, v types.DhcpOptions) Resource {
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:dhcp-options/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.DhcpOptionsId)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.DhcpOptionsId,
 		Description: model.EC2DhcpOptionsDescription{
@@ -972,7 +972,7 @@ func eC2FleetHandle(ctx context.Context, v types.FleetData) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:fleet/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.FleetId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     arn,
 		Name:   *v.FleetId,
 		Description: model.EC2FleetDescription{
@@ -1032,7 +1032,7 @@ func eC2EgressOnlyInternetGatewayHandle(ctx context.Context, v types.EgressOnlyI
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:egress-only-internet-gateway/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.EgressOnlyInternetGatewayId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     arn,
 		Name:   *v.EgressOnlyInternetGatewayId,
 		Description: model.EC2EgressOnlyInternetGatewayDescription{
@@ -1087,7 +1087,7 @@ func eC2EIPHandle(ctx context.Context, v types.Address) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":eip/" + *v.AllocationId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.AllocationId,
 		Description: model.EC2EIPDescription{
@@ -1130,7 +1130,7 @@ func EC2EIPAddressTransfer(ctx context.Context, cfg aws.Config, stream *StreamSe
 		}
 		for _, item := range page.AddressTransfers {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *item.TransferAccountId,
 				Name:   *item.TransferAccountId,
 				Description: model.EC2EIPAddressTransferDescription{
@@ -1171,7 +1171,7 @@ func EC2EnclaveCertificateIamRoleAssociation(ctx context.Context, cfg aws.Config
 
 		for _, v := range output.AssociatedRoles {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.AssociatedRoleArn, // Don't set to ARN since that will be the same for the role itself and this association
 				Name:        *v.AssociatedRoleArn,
 				Description: v,
@@ -1218,7 +1218,7 @@ func eC2FlowLogHandle(ctx context.Context, v types.FlowLog) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":vpc-flow-log/" + *v.FlowLogId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.FlowLogId,
 		Description: model.EC2FlowLogDescription{
@@ -1278,7 +1278,7 @@ func eC2HostHandle(ctx context.Context, v types.Host) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:dedicated-host/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.HostId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     arn,
 		Name:   *v.HostId,
 		Description: model.EC2HostDescription{
@@ -1400,7 +1400,7 @@ func eC2InstanceHandle(ctx context.Context, v types.Instance, client *ec2.Client
 	}
 	desc.LaunchTemplateData = *op.LaunchTemplateData
 	resource := Resource{
-		Region:      describeCtx.KaytuRegion,
+		Region:      describeCtx.OGRegion,
 		ARN:         arn,
 		Name:        *v.InstanceId,
 		Description: desc,
@@ -1465,7 +1465,7 @@ func eC2InternetGatewayHandle(ctx context.Context, v types.InternetGateway) Reso
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":internet-gateway/" + *v.InternetGatewayId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.InternetGatewayId,
 		Description: model.EC2InternetGatewayDescription{
@@ -1524,7 +1524,7 @@ func eC2NatGatewayHandle(ctx context.Context, v types.NatGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":natgateway/" + *v.NatGatewayId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.NatGatewayId,
 		Description: model.EC2NatGatewayDescription{
@@ -1584,7 +1584,7 @@ func eC2NetworkAclHandle(ctx context.Context, v types.NetworkAcl) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":network-acl/" + *v.NetworkAclId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.NetworkAclId,
 		Description: model.EC2NetworkAclDescription{
@@ -1629,7 +1629,7 @@ func EC2NetworkInsightsAnalysis(ctx context.Context, cfg aws.Config, stream *Str
 
 		for _, v := range page.NetworkInsightsAnalyses {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.NetworkInsightsAnalysisArn,
 				Name:        *v.NetworkInsightsAnalysisArn,
 				Description: v,
@@ -1661,7 +1661,7 @@ func EC2NetworkInsightsPath(ctx context.Context, cfg aws.Config, stream *StreamS
 
 		for _, v := range page.NetworkInsightsPaths {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.NetworkInsightsPathArn,
 				Name:        *v.NetworkInsightsPathArn,
 				Description: v,
@@ -1715,7 +1715,7 @@ func eC2NetworkInterfaceHandle(ctx context.Context, v types.NetworkInterface) Re
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":network-interface/" + *v.NetworkInterfaceId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.NetworkInterfaceId,
 		Description: model.EC2NetworkInterfaceDescription{
@@ -1756,7 +1756,7 @@ func EC2NetworkInterfacePermission(ctx context.Context, cfg aws.Config, stream *
 
 		for _, v := range page.NetworkInterfacePermissions {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.NetworkInterfacePermissionId,
 				Name:        *v.NetworkInterfacePermissionId,
 				Description: v,
@@ -1798,7 +1798,7 @@ func eC2PlacementGroupHandle(ctx context.Context, v types.PlacementGroup) Resour
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:placement-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.GroupName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     arn,
 		Name:   *v.GroupName,
 		Description: model.EC2PlacementGroupDescription{
@@ -1843,7 +1843,7 @@ func EC2PrefixList(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 		for _, v := range page.PrefixLists {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.PrefixListId,
 				Name:        *v.PrefixListName,
 				Description: v,
@@ -1878,7 +1878,7 @@ func EC2RegionalSettings(ctx context.Context, cfg aws.Config, stream *StreamSend
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		// No ID or ARN. Per Account Configuration
 		Name: cfg.Region + " EC2 Settings", // Based on Steampipe
 		Description: model.EC2RegionalSettingsDescription{
@@ -1929,7 +1929,7 @@ func eC2RouteTableHandle(ctx context.Context, v types.RouteTable) Resource {
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":route-table/" + *v.RouteTableId
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.RouteTableId,
 		Description: model.EC2RouteTableDescription{
@@ -1971,7 +1971,7 @@ func EC2LocalGatewayRouteTable(ctx context.Context, cfg aws.Config, stream *Stre
 
 		for _, v := range page.LocalGatewayRouteTables {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.LocalGatewayRouteTableArn,
 				Name:        *v.LocalGatewayRouteTableId,
 				Description: v,
@@ -2003,7 +2003,7 @@ func EC2LocalGatewayRouteTableVPCAssociation(ctx context.Context, cfg aws.Config
 
 		for _, v := range page.LocalGatewayRouteTableVpcAssociations {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.LocalGatewayRouteTableVpcAssociationId,
 				Name:        *v.LocalGatewayRouteTableVpcAssociationId,
 				Description: v,
@@ -2054,7 +2054,7 @@ func eC2TransitGatewayRouteTableHandle(ctx context.Context, v types.TransitGatew
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:transit-gateway-route-table/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.TransitGatewayRouteTableId)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.TransitGatewayRouteTableId,
 		Description: model.EC2TransitGatewayRouteTableDescription{
@@ -2107,7 +2107,7 @@ func EC2TransitGatewayRouteTableAssociation(ctx context.Context, cfg aws.Config,
 
 			for _, v := range page.Associations {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          *v.TransitGatewayAttachmentId,
 					Name:        *v.TransitGatewayAttachmentId,
 					Description: v,
@@ -2150,7 +2150,7 @@ func EC2TransitGatewayRouteTablePropagation(ctx context.Context, cfg aws.Config,
 
 			for _, v := range page.TransitGatewayRouteTablePropagations {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*routeTable.TransitGatewayRouteTableId, *v.TransitGatewayAttachmentId),
 					Name:        *routeTable.TransitGatewayRouteTableId,
 					Description: v,
@@ -2198,7 +2198,7 @@ func eC2SecurityGroupHandle(ctx context.Context, v types.SecurityGroup) Resource
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:security-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.GroupId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.GroupName,
 		Description: model.EC2SecurityGroupDescription{
@@ -2346,7 +2346,7 @@ func eC2SecurityGroupRuleHandle(ctx context.Context, desc model.EC2SecurityGroup
 
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:security-group/%s:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *desc.Group.GroupId, hashCode)
 	resource := Resource{
-		Region:      describeCtx.KaytuRegion,
+		Region:      describeCtx.OGRegion,
 		ARN:         arn,
 		Name:        fmt.Sprintf("%s_%s", *desc.Group.GroupId, hashCode),
 		Description: desc,
@@ -2403,7 +2403,7 @@ func EC2SpotFleet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 		for _, v := range page.SpotFleetRequestConfigs {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.SpotFleetRequestId,
 				Name:        *v.SpotFleetRequestId,
 				Description: v,
@@ -2449,7 +2449,7 @@ func EC2Subnet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 func eC2SubnetHandle(ctx context.Context, v types.Subnet) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.SubnetArn,
 		Name:   *v.SubnetId,
 		Description: model.EC2SubnetDescription{
@@ -2492,7 +2492,7 @@ func EC2TrafficMirrorFilter(ctx context.Context, cfg aws.Config, stream *StreamS
 
 		for _, v := range page.TrafficMirrorFilters {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.TrafficMirrorFilterId,
 				Name:        *v.TrafficMirrorFilterId,
 				Description: v,
@@ -2524,7 +2524,7 @@ func EC2TrafficMirrorSession(ctx context.Context, cfg aws.Config, stream *Stream
 
 		for _, v := range page.TrafficMirrorSessions {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.TrafficMirrorSessionId,
 				Name:        *v.TrafficMirrorFilterId,
 				Description: v,
@@ -2556,7 +2556,7 @@ func EC2TrafficMirrorTarget(ctx context.Context, cfg aws.Config, stream *StreamS
 
 		for _, v := range page.TrafficMirrorTargets {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.TrafficMirrorTargetId,
 				Name:        *v.TrafficMirrorTargetId,
 				Description: v,
@@ -2605,7 +2605,7 @@ func EC2TransitGateway(ctx context.Context, cfg aws.Config, stream *StreamSender
 func eC2TransitGatewayHandle(ctx context.Context, v types.TransitGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.TransitGatewayArn,
 		Name:   *v.TransitGatewayId,
 		Description: model.EC2TransitGatewayDescription{
@@ -2649,7 +2649,7 @@ func EC2TransitGatewayConnect(ctx context.Context, cfg aws.Config, stream *Strea
 
 		for _, v := range page.TransitGatewayConnects {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.TransitGatewayAttachmentId,
 				Name:        *v.TransitGatewayAttachmentId,
 				Description: v,
@@ -2681,7 +2681,7 @@ func EC2TransitGatewayMulticastDomain(ctx context.Context, cfg aws.Config, strea
 
 		for _, v := range page.TransitGatewayMulticastDomains {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.TransitGatewayMulticastDomainArn,
 				Name:        *v.TransitGatewayMulticastDomainArn,
 				Description: v,
@@ -2721,7 +2721,7 @@ func EC2TransitGatewayMulticastDomainAssociation(ctx context.Context, cfg aws.Co
 
 			for _, v := range page.MulticastDomainAssociations {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          *v.TransitGatewayAttachmentId,
 					Name:        *v.TransitGatewayAttachmentId,
 					Description: v,
@@ -2769,7 +2769,7 @@ func EC2TransitGatewayMulticastGroupMember(ctx context.Context, cfg aws.Config, 
 
 			for _, v := range page.MulticastGroups {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*tgmdID, *v.GroupIpAddress),
 					Name:        *v.GroupIpAddress,
 					Description: v,
@@ -2817,7 +2817,7 @@ func EC2TransitGatewayMulticastGroupSource(ctx context.Context, cfg aws.Config, 
 
 			for _, v := range page.MulticastGroups {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*tgmdID, *v.GroupIpAddress),
 					Name:        *v.GroupIpAddress,
 					Description: v,
@@ -2850,7 +2850,7 @@ func EC2TransitGatewayPeeringAttachment(ctx context.Context, cfg aws.Config, str
 
 		for _, v := range page.TransitGatewayPeeringAttachments {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.TransitGatewayAttachmentId,
 				Name:        *v.TransitGatewayAttachmentId,
 				Description: v,
@@ -2896,7 +2896,7 @@ func eC2VPCHandle(ctx context.Context, v types.Vpc) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":vpc/" + *v.VpcId
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.VpcId,
 		Description: model.EC2VpcDescription{
@@ -2954,7 +2954,7 @@ func eC2VPCEndpointHandle(ctx context.Context, v types.VpcEndpoint) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":vpc-endpoint/" + *v.VpcEndpointId
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *v.VpcEndpointId,
 		Name:   *v.VpcEndpointId,
@@ -2997,7 +2997,7 @@ func EC2VPCEndpointConnectionNotification(ctx context.Context, cfg aws.Config, s
 
 		for _, v := range page.ConnectionNotificationSet {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.ConnectionNotificationArn,
 				Name:        *v.ConnectionNotificationArn,
 				Description: v,
@@ -3093,7 +3093,7 @@ func EC2VPCEndpointService(ctx context.Context, cfg aws.Config, stream *StreamSe
 		fmt.Println("EC2VPCEndpointService DescribeVpcEndpointConnections done")
 
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ARN:    arn,
 			Description: model.EC2VPCEndpointServiceDescription{
 				VpcEndpointService:     v,
@@ -3154,7 +3154,7 @@ func EC2VPCEndpointServicePermissions(ctx context.Context, cfg aws.Config, strea
 
 			for _, v := range page.AllowedPrincipals {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ARN:         *v.Principal,
 					Name:        *v.Principal,
 					Description: v,
@@ -3202,7 +3202,7 @@ func eC2VPCPeeringConnectionHandle(ctx context.Context, v types.VpcPeeringConnec
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:vpc-peering-connection/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.VpcPeeringConnectionId)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.VpcPeeringConnectionId,
 		Description: model.EC2VpcPeeringConnectionDescription{
@@ -3255,7 +3255,7 @@ func eC2VPNConnectionHandle(ctx context.Context, v types.VpnConnection) Resource
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":vpn-connection/" + *v.VpnConnectionId
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.VpnConnectionId,
 		Description: model.EC2VPNConnectionDescription{
@@ -3309,7 +3309,7 @@ func eC2VPNGatewayHandle(ctx context.Context, v types.VpnGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:vpn-gateway/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.VpnGatewayId)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *v.VpnGatewayId,
 		Name:   *v.VpnGatewayId,
@@ -3352,7 +3352,7 @@ func EC2Region(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 	for _, v := range output.Regions {
 		arn := "arn:" + describeCtx.Partition + "::" + *v.RegionName + ":" + describeCtx.AccountID
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ARN:    arn,
 			Name:   *v.RegionName,
 			Description: model.EC2RegionDescription{
@@ -3416,7 +3416,7 @@ func eC2AvailabilityZoneHandle(ctx context.Context, v types.AvailabilityZone, re
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s::%s::availability-zone/%s", describeCtx.Partition, *region.RegionName, *v.ZoneName)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.RegionName,
 		Description: model.EC2AvailabilityZoneDescription{
@@ -3487,7 +3487,7 @@ func eC2KeyPairHandle(ctx context.Context, v types.KeyPairInfo) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":key-pair/" + *v.KeyName
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.KeyName,
 		Description: model.EC2KeyPairDescription{
@@ -3557,7 +3557,7 @@ func eC2AMIHandle(ctx context.Context, v types.Image, imageAttribute *ec2.Descri
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":image/" + *v.ImageId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.ImageId,
 		Description: model.EC2AMIDescription{
@@ -3652,7 +3652,7 @@ func eC2ReservedInstancesHandle(ctx context.Context, v types.ReservedInstances, 
 
 	arn := "arn:" + describeCtx.Partition + ":ec2:" + describeCtx.Region + ":" + describeCtx.AccountID + ":reserved-instances/" + *v.ReservedInstancesId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.ReservedInstancesId,
 		Description: model.EC2ReservedInstancesDescription{
@@ -3726,7 +3726,7 @@ func EC2IpamPool(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 func eC2IpamPoolHandle(ctx context.Context, v types.IpamPool) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.IpamPoolArn,
 		Name:   *v.IpamPoolId,
 		Description: model.EC2IpamPoolDescription{
@@ -3781,7 +3781,7 @@ func EC2Ipam(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 func eC2IpamHandle(ctx context.Context, v types.Ipam) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.IpamArn,
 		Name:   *v.IpamId,
 		Description: model.EC2IpamDescription{
@@ -3824,7 +3824,7 @@ func EC2InstanceAvailability(ctx context.Context, cfg aws.Config, stream *Stream
 		for _, v := range page.InstanceTypeOfferings {
 			arn := fmt.Sprintf("arn:%s:ec2:%s::instance-type/%s", describeCtx.Partition, *v.Location, v.InstanceType)
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   fmt.Sprintf("%s (%s)", v.InstanceType, *v.Location),
 				Description: model.EC2InstanceAvailabilityDescription{
@@ -3861,7 +3861,7 @@ func EC2InstanceType(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 		for _, v := range page.InstanceTypes {
 			arn := fmt.Sprintf("arn:%s:ec2:::instance-type/%s", describeCtx.Partition, v.InstanceType)
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   string(v.InstanceType),
 				Description: model.EC2InstanceTypeDescription{
@@ -3909,7 +3909,7 @@ func EC2ManagedPrefixList(ctx context.Context, cfg aws.Config, stream *StreamSen
 func eC2ManagedPrefixListHandle(ctx context.Context, v types.ManagedPrefixList) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.PrefixListArn,
 		Name:   *v.PrefixListName,
 		Description: model.EC2ManagedPrefixListDescription{
@@ -3964,7 +3964,7 @@ func EC2SpotPrice(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 				avZone = *v.AvailabilityZone
 			}
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   fmt.Sprintf("%s-%s (%s)", v.InstanceType, *v.SpotPrice, avZone),
 				Description: model.EC2SpotPriceDescription{
 					SpotPrice: v,
@@ -4014,7 +4014,7 @@ func EC2TransitGatewayRoute(ctx context.Context, cfg aws.Config, stream *StreamS
 			for _, route := range routes.Routes {
 				arn := fmt.Sprintf("arn:%s:ec2:%s:%s:transit-gateway-route-table/%s:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *transitGatewayRouteTable.TransitGatewayRouteTableId, *route.DestinationCidrBlock)
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ARN:    arn,
 					Name:   *route.DestinationCidrBlock,
 					Description: model.EC2TransitGatewayRouteDescription{
@@ -4052,7 +4052,7 @@ func GetEC2TransitGatewayRoute(ctx context.Context, cfg aws.Config, fields map[s
 	for _, v := range routTable.TransitGatewayRouteTables {
 		arn := fmt.Sprintf("arn:%s:ec2:%s:%s:transit-gateway-route-table/%s:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.TransitGatewayRouteTableId)
 		values = append(values, Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ARN:    arn,
 			Name:   *v.TransitGatewayRouteTableId,
 			Description: model.EC2TransitGatewayRouteTableDescription{
@@ -4092,7 +4092,7 @@ func eC2TransitGatewayAttachmentHandle(ctx context.Context, v types.TransitGatew
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:transit-gateway-attachment/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.TransitGatewayAttachmentId)
 	values = Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.TransitGatewayAttachmentId,
 		ARN:    arn,
 		Description: model.EC2TransitGatewayAttachmentDescription{
@@ -4148,7 +4148,7 @@ func eC2LaunchTemplateHandle(ctx context.Context, v types.LaunchTemplate) Resour
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:ec2:%s:%s:launch-template/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.LaunchTemplateId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.LaunchTemplateId,
 		ARN:    arn,
 		Name:   *v.LaunchTemplateName,
@@ -4199,7 +4199,7 @@ func EbsVolumeMetricReadOps(ctx context.Context, cfg aws.Config, stream *StreamS
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricReadOpsDescription{
 						CloudWatchMetricRow: metric,
@@ -4241,7 +4241,7 @@ func EbsVolumeMetricReadOpsDaily(ctx context.Context, cfg aws.Config, stream *St
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s-daily", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricReadOpsDailyDescription{
 						CloudWatchMetricRow: metric,
@@ -4283,7 +4283,7 @@ func EbsVolumeMetricReadOpsHourly(ctx context.Context, cfg aws.Config, stream *S
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s-hourly", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricReadOpsHourlyDescription{
 						CloudWatchMetricRow: metric,
@@ -4325,7 +4325,7 @@ func EbsVolumeMetricWriteOps(ctx context.Context, cfg aws.Config, stream *Stream
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricWriteOpsDescription{
 						CloudWatchMetricRow: metric,
@@ -4367,7 +4367,7 @@ func EbsVolumeMetricWriteOpsDaily(ctx context.Context, cfg aws.Config, stream *S
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s-daily", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricWriteOpsDailyDescription{
 						CloudWatchMetricRow: metric,
@@ -4409,7 +4409,7 @@ func EbsVolumeMetricWriteOpsHourly(ctx context.Context, cfg aws.Config, stream *
 			}
 			for _, metric := range metrics {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s-hourly", *v.VolumeId, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.EbsVolumeMetricWriteOpsHourlyDescription{
 						CloudWatchMetricRow: metric,
@@ -4455,7 +4455,7 @@ func EC2VPCNatGatewayMetricBytesOutToDestination(ctx context.Context, cfg aws.Co
 func eC2VPCNatGatewayMetricBytesOutToDestinationHandle(ctx context.Context, v types.NatGateway) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *v.NatGatewayId,
 		Description: model.EC2NatGatewayMetricBytesOutToDestinationDescription{
 			NatGateway: v,
@@ -4520,7 +4520,7 @@ func EC2LaunchTemplateVersion(ctx context.Context, cfg aws.Config, stream *Strea
 func eC2LaunchTemplateVersionHandle(ctx context.Context, v types.LaunchTemplateVersion) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Description: model.EC2LaunchTemplateVersionDescription{
 			LaunchTemplateVersion: v,
 		},
@@ -4586,7 +4586,7 @@ func EC2ManagedPrefixListEntry(ctx context.Context, cfg aws.Config, stream *Stre
 func eC2ManagedPrefixListEntryHandle(ctx context.Context, prefixListId string, v types.PrefixListEntry) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	values := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Description: model.EC2ManagedPrefixListEntryDescription{
 			PrefixListEntry: v,
 			PrefixListId:    prefixListId,
@@ -4638,7 +4638,7 @@ func getEc2InstanceMetricCpuUtilizationHourly(ctx context.Context, cfg aws.Confi
 	for _, s := range statistics {
 		values = append(values, Resource{
 			Account: describeCtx.AccountID,
-			Region:  describeCtx.KaytuRegion,
+			Region:  describeCtx.OGRegion,
 			Description: model.EC2InstanceMetricCpuUtilizationHourlyDescription{
 				InstanceId:  instanceId,
 				Timestamp:   s.Timestamp,

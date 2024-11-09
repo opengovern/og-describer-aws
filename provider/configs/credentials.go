@@ -1,5 +1,7 @@
 package configs
 
+import "github.com/opengovern/opengovernance/services/integration/integration-type/aws-account/configs"
+
 type IntegrationCredentials struct {
-	// You should provide Credentials for any Provider.
+	configs.IntegrationCredentials
 }

@@ -78,7 +78,7 @@ func redshiftClusterHandle(ctx context.Context, cfg aws.Config, v types.Cluster)
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ClusterNamespaceArn,
 		Name:   *v.ClusterIdentifier,
 		Description: model.RedshiftClusterDescription{
@@ -135,7 +135,7 @@ func RedshiftEventSubscription(ctx context.Context, cfg aws.Config, stream *Stre
 
 		for _, v := range page.EventSubscriptionsList {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.CustSubscriptionId,
 				Name:   *v.CustSubscriptionId,
 				Description: model.RedshiftEventSubscriptionDescription{
@@ -210,7 +210,7 @@ func redshiftClusterParameterGroupHandle(ctx context.Context, cfg aws.Config, v 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.ParameterGroupName,
 		Description: model.RedshiftClusterParameterGroupDescription{
@@ -270,7 +270,7 @@ func RedshiftClusterSecurityGroup(ctx context.Context, cfg aws.Config, stream *S
 
 		for _, v := range page.ClusterSecurityGroups {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.ClusterSecurityGroupName,
 				Name:        *v.ClusterSecurityGroupName,
 				Description: v,
@@ -302,7 +302,7 @@ func RedshiftClusterSubnetGroup(ctx context.Context, cfg aws.Config, stream *Str
 
 		for _, v := range page.ClusterSubnetGroups {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.ClusterSubnetGroupName,
 				Name:        *v.ClusterSubnetGroupName,
 				Description: v,
@@ -352,7 +352,7 @@ func redshiftSnapshotHandle(ctx context.Context, v types.Snapshot) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:redshift:%s:%s:snapshot:%s/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.ClusterIdentifier, *v.SnapshotIdentifier)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.SnapshotIdentifier,
 		Description: model.RedshiftSnapshotDescription{
@@ -431,7 +431,7 @@ func redshiftServerlessNamespaceHandle(ctx context.Context, cfg aws.Config, v ty
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.NamespaceArn,
 		Name:   *v.NamespaceName,
 		Description: model.RedshiftServerlessNamespaceDescription{
@@ -516,7 +516,7 @@ func redshiftServerlessSnapshotHandle(ctx context.Context, cfg aws.Config, v typ
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.NamespaceArn,
 		Name:   *v.NamespaceName,
 		Description: model.RedshiftServerlessSnapshotDescription{
@@ -575,7 +575,7 @@ func RedshiftServerlessWorkgroup(ctx context.Context, cfg aws.Config, stream *St
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.WorkgroupArn,
 				Name:   *v.WorkgroupName,
 				Description: model.RedshiftServerlessWorkgroupDescription{
@@ -623,9 +623,9 @@ func RedshiftSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSend
 }
 func redshiftSubnetGroupHandle(ctx context.Context, clusterSubnetGroup types.ClusterSubnetGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
-	arn := fmt.Sprintf("arn:%s:redshift:%s:%s:subnetgroup:%s", describeCtx.Partition, describeCtx.KaytuRegion, describeCtx.AccountID, *clusterSubnetGroup.ClusterSubnetGroupName)
+	arn := fmt.Sprintf("arn:%s:redshift:%s:%s:subnetgroup:%s", describeCtx.Partition, describeCtx.OGRegion, describeCtx.AccountID, *clusterSubnetGroup.ClusterSubnetGroupName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *clusterSubnetGroup.ClusterSubnetGroupName,
 		ARN:    arn,
 		Description: model.RedshiftSubnetGroupDescription{

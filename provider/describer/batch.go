@@ -39,7 +39,7 @@ func BatchComputeEnvironment(ctx context.Context, cfg aws.Config, stream *Stream
 func batchComputeEnvironmentHandle(ctx context.Context, v types.ComputeEnvironmentDetail) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ComputeEnvironmentArn,
 		Name:   *v.ComputeEnvironmentName,
 		Description: model.BatchComputeEnvironmentDescription{
@@ -108,7 +108,7 @@ func BatchJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 func batchJobHandle(ctx context.Context, v types.JobSummary) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.JobArn,
 		Name:   *v.JobName,
 		Description: model.BatchJobDescription{
@@ -166,7 +166,7 @@ func BatchJobQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 		}
 		for _, jq := range page.JobQueues {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *jq.JobQueueArn,
 				Name:   *jq.JobQueueName,
 				Description: model.BatchJobQueueDescription{

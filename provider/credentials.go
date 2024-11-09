@@ -2,10 +2,40 @@ package provider
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 	model "github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"github.com/opengovern/og-describer-aws/provider/configs"
 	"github.com/opengovern/og-util/pkg/describe"
+	"golang.org/x/net/context"
 )
+
+// GenerateAWSConfig creates an AWS configuration using the provided credentials provider.
+func GenerateAWSConfig(credsProvider aws.CredentialsProvider) (aws.Config, error) {
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithCredentialsProvider(credsProvider),
+	)
+	if err != nil {
+		return aws.Config{}, fmt.Errorf("failed to load configuration: %v", err)
+	}
+	return cfg, nil
+}
+
+func GetConfig(config configs.IntegrationCredentials) (*aws.Config, error) {
+	credsProvider := aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(
+		config.AwsAccessKeyID,
+		config.AwsSecretAccessKey,
+		"",
+	))
+
+	cfg, err := GenerateAWSConfig(credsProvider)
+	if err != nil {
+		return nil, err
+	}
+	return &cfg, nil
+}
 
 // AccountCredentialsFromMap TODO: converts a map to an configs.IntegrationCredentials.
 func AccountCredentialsFromMap(m map[string]any) (configs.IntegrationCredentials, error) {
@@ -36,8 +66,10 @@ func AdjustResource(job describe.DescribeJob, resource *model.Resource) error {
 }
 
 // GetAdditionalParameters TODO: pass additional parameters needed in describer wrappers in /provider/describer_wrapper.go
-func GetAdditionalParameters(job describe.DescribeJob) (map[string]string, error) {
-	additionalParameters := make(map[string]string)
+func GetAdditionalParameters(job describe.DescribeJob) (map[string]any, error) {
+	additionalParameters := make(map[string]any)
+
+	additionalParameters["accountID"] = job.ProviderID
 
 	return additionalParameters, nil
 }

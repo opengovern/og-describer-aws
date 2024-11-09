@@ -58,7 +58,7 @@ func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item type
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ReplicationInstanceArn,
 		Name:   *item.ReplicationInstanceIdentifier,
 		Description: model.DMSReplicationInstanceDescription{
@@ -148,7 +148,7 @@ func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint)
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.EndpointArn,
 		Name:   *item.EndpointIdentifier,
 		Description: model.DMSEndpointDescription{
@@ -209,7 +209,7 @@ func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.Re
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ReplicationTaskArn,
 		ID:     *item.ReplicationTaskIdentifier,
 		Name:   *item.ReplicationTaskIdentifier,

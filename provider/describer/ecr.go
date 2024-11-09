@@ -94,7 +94,7 @@ func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_typ
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.RepositoryArn,
 		Name:   *v.RepositoryName,
 		Description: model.ECRPublicRepositoryDescription{
@@ -174,7 +174,7 @@ func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.RegistryArn,
 				Name:   *v.RegistryId,
 				Description: model.ECRPublicRegistryDescription{
@@ -285,7 +285,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.RepositoryArn,
 		Name:   *v.RepositoryName,
 		Description: model.ECRRepositoryDescription{
@@ -335,7 +335,7 @@ func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	var values []Resource
 	resource := Resource{
-		Region:      describeCtx.KaytuRegion,
+		Region:      describeCtx.OGRegion,
 		ID:          *output.RegistryId,
 		Name:        *output.RegistryId,
 		Description: output,
@@ -361,7 +361,7 @@ func ECRRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 
 	var values []Resource
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *output.RegistryId,
 		Name:   *output.RegistryId,
 		Description: model.ECRRegistryDescription{
@@ -436,7 +436,7 @@ func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   fmt.Sprintf("%s:%s", *repository.RepositoryArn, *image.ImageDigest),
 		Description: model.ECRImageDescription{
 			Image:    image,
@@ -494,7 +494,7 @@ func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, strea
 	var values []Resource
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *scanningConfiguration.RegistryId,
 		Name:   *scanningConfiguration.RegistryId,
 		Description: model.ECRRegistryScanningConfigurationDescription{

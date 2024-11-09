@@ -52,7 +52,7 @@ func CloudFrontDistribution(ctx context.Context, cfg aws.Config, stream *StreamS
 func cloudFrontDistributionHandle(ctx context.Context, tags *cloudfront.ListTagsForResourceOutput, distribution *cloudfront.GetDistributionOutput, ARN *string, Id *string) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *ARN,
 		Name:   *Id,
 		Description: model.CloudFrontDistributionDescription{
@@ -130,7 +130,7 @@ func CloudFrontStreamingDistribution(ctx context.Context, cfg aws.Config, stream
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.ARN,
 				Name:   *item.Id,
 				Description: model.CloudFrontStreamingDistributionDescription{
@@ -198,7 +198,7 @@ func cloudFrontOriginAccessControlHandle(ctx context.Context, cfg aws.Config, v 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.Id,
 		Description: model.CloudFrontOriginAccessControlDescription{
@@ -280,7 +280,7 @@ func cloudFrontCachePolicyHandle(ctx context.Context, cachePolicy *cloudfront.Ge
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:cache-policy/%s", describeCtx.Partition, describeCtx.AccountID, id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     id,
 		Description: model.CloudFrontCachePolicyDescription{
@@ -350,7 +350,7 @@ func cloudFrontFunctionHandle(ctx context.Context, function *cloudfront.Describe
 	describeCtx := GetDescribeContext(ctx)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *function.FunctionSummary.FunctionMetadata.FunctionARN,
 		Name:   *function.FunctionSummary.Name,
 		Description: model.CloudFrontFunctionDescription{
@@ -413,7 +413,7 @@ func cloudFrontOriginAccessIdentityHandle(ctx context.Context, originAccessIdent
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:origin-access-identity/%s", describeCtx.Partition, describeCtx.AccountID, id)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   id,
 		Description: model.CloudFrontOriginAccessIdentityDescription{
@@ -484,7 +484,7 @@ func cloudFrontOriginRequestPolicyHandle(ctx context.Context, policy *cloudfront
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:origin-request-policy/%s", describeCtx.Partition, describeCtx.AccountID, &id)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *policy.OriginRequestPolicy.Id,
 		Description: model.CloudFrontOriginRequestPolicyDescription{
@@ -557,7 +557,7 @@ func cloudFrontResponseHeadersPolicyHandle(ctx context.Context, policy *cloudfro
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:response-headers-policy/%s", describeCtx.Partition, describeCtx.AccountID, *id)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *policy.ResponseHeadersPolicy.Id,
 		Description: model.CloudFrontResponseHeadersPolicyDescription{

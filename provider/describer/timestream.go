@@ -27,7 +27,7 @@ func TimestreamDatabase(ctx context.Context, cfg aws.Config, stream *StreamSende
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.DatabaseName,
 				Description: model.TimestreamDatabaseDescription{

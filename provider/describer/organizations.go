@@ -46,7 +46,7 @@ func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *Stre
 func organizationsOrganizationHandle(ctx context.Context, req *organizations.DescribeOrganizationOutput) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *req.Organization.Arn,
 		Name:   *req.Organization.Id,
 		Description: model.OrganizationsOrganizationDescription{
@@ -125,7 +125,7 @@ func OrganizationAccounts(ctx context.Context, cfg aws.Config) ([]types.Account,
 //			}
 //
 //			resource := Resource{
-//				Region: describeCtx.KaytuRegion,
+//				Region: describeCtx.OGRegion,
 //				ARN:    *acc.Arn,
 //				Name:   *acc.Name,
 //				Description: model.OrganizationsAccountDescription{
@@ -188,7 +188,7 @@ func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyTyp
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *p.Arn,
 				Name:   *p.Name,
 				Description: model.OrganizationsPolicyDescription{
@@ -232,7 +232,7 @@ func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *StreamSender
 func organizationsRootHandle(ctx context.Context, root types.Root) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *root.Arn,
 		Name:   *root.Name,
 		Description: model.OrganizationsRootDescription{
@@ -321,7 +321,7 @@ func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizatio
 		tags = tagsResponse.Tags
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *unit.Arn,
 		Name:   *unit.Name,
 		ID:     *unit.Id,
@@ -463,7 +463,7 @@ func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organiza
 				return nil, err
 			}
 			values = append(values, Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *policy.Arn,
 				Name:   *policy.Name,
 				Description: model.OrganizationsPolicyTargetDescription{

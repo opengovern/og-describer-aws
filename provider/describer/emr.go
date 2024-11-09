@@ -58,7 +58,7 @@ func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (Re
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *out.Cluster.ClusterArn,
 		Name:   *out.Cluster.Name,
 		Description: model.EMRClusterDescription{
@@ -110,7 +110,7 @@ func EMRInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 					describeCtx := GetDescribeContext(ctx)
 					arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instance.Id)
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ID:     *instance.Id,
 						ARN:    arn,
 						Description: model.EMRInstanceDescription{
@@ -176,7 +176,7 @@ func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFle
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-fleet/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceFleet.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *instanceFleet.Id,
 		Name:   *instanceFleet.Name,
 		ARN:    arn,
@@ -256,7 +256,7 @@ func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGro
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceGroup.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *instanceGroup.Id,
 		ARN:    arn,
 		Description: model.EMRInstanceGroupDescription{
@@ -296,7 +296,7 @@ func EMRBlockPublicAccessConfiguration(ctx context.Context, cfg aws.Config, stre
 	}
 	var values []Resource
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Description: model.EMRBlockPublicAccessConfigurationDescription{
 			Configuration:         *op.BlockPublicAccessConfiguration,
 			ConfigurationMetadata: *op.BlockPublicAccessConfigurationMetadata,

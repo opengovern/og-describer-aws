@@ -36,7 +36,7 @@ func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *St
 func elastiCacheReplicationGroupHandle(ctx context.Context, item types.ReplicationGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.ARN,
 		Name:   *item.ARN,
 		Description: model.ElastiCacheReplicationGroupDescription{
@@ -110,7 +110,7 @@ func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, c
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ARN,
 		Name:   *cluster.ARN,
 		Description: model.ElastiCacheClusterDescription{
@@ -172,7 +172,7 @@ func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *Stre
 func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup types.CacheParameterGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *cacheParameterGroup.ARN,
 		Name:   *cacheParameterGroup.CacheParameterGroupName,
 		Description: model.ElastiCacheParameterGroupDescription{
@@ -227,7 +227,7 @@ func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *S
 func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode types.ReservedCacheNode) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *reservedCacheNode.ReservationARN,
 		ID:     *reservedCacheNode.ReservedCacheNodeId,
 		Description: model.ElastiCacheReservedCacheNodeDescription{
@@ -285,7 +285,7 @@ func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamS
 func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.CacheSubnetGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *cacheSubnetGroup.ARN,
 		Name:   *cacheSubnetGroup.CacheSubnetGroupName,
 		Description: model.ElastiCacheSubnetGroupDescription{

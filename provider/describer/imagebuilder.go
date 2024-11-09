@@ -69,7 +69,7 @@ func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary t
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *image.Image.Arn,
 		Name:   *image.Image.Name,
 		Description: model.ImageBuilderImageDescription{

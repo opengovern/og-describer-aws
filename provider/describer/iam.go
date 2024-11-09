@@ -117,7 +117,7 @@ func IAMAccessAdvisor(ctx context.Context, cfg aws.Config, stream *StreamSender)
 			// Stream results
 			for _, serviceLastAccessed := range resp.ServicesLastAccessed {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					Name:   *serviceLastAccessed.ServiceName,
 					ID:     fmt.Sprintf("%s|%s", principal, *serviceLastAccessed.ServiceName),
 					Description: model.IAMAccessAdvisorDescription{
@@ -186,7 +186,7 @@ func IAMAccount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 		}
 
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ARN:    *acc.Arn,
 			ID:     *acc.Id,
 			Name:   *acc.Name,
@@ -261,7 +261,7 @@ func IAMAccountSummary(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	var values []Resource
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		// No ID or ARN. Per Account Configuration
 		Name:        accountId + " Account Summary",
 		Description: desc,
@@ -316,7 +316,7 @@ func iAMAccountPasswordPolicyHandle(ctx context.Context, cfg aws.Config) (Resour
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		// No ID or ARN. Per Account Configuration
 		Name: accountId + " IAM Password Policy",
 		Description: model.IAMAccountPasswordPolicyDescription{
@@ -415,7 +415,7 @@ func iAMAccessKeyHandle(ctx context.Context, cfg aws.Config, user types.User, v 
 	}
 	arn := "arn:" + describeCtx.Partition + ":iam::" + describeCtx.AccountID + ":user/" + username + "/accesskey/" + *v.AccessKeyId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Description: model.IAMAccessKeyDescription{
 			AccessKeyLastUsed: lastUsed.AccessKeyLastUsed,
@@ -501,7 +501,7 @@ func iAMSSHPublicKeyHandle(ctx context.Context, cfg aws.Config, user types.User,
 	}
 	arn := "arn:" + describeCtx.Partition + ":iam::" + describeCtx.AccountID + ":user/" + username + "/sshpublickey/" + *v.SSHPublicKeyId
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Description: model.IAMSSHPublicKeyDescription{
 			SSHPublicKeyKey: v,
@@ -582,7 +582,7 @@ func IAMCredentialReport(ctx context.Context, cfg aws.Config, stream *StreamSend
 	for _, report := range reports {
 		report.GeneratedTime = output.GeneratedTime
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ID:     report.UserName, // Unique report entry per user
 			Name:   report.UserName + " Credential Report",
 			Description: model.IAMCredentialReportDescription{
@@ -646,7 +646,7 @@ func IAMPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 func iAMPolicyHandle(ctx context.Context, v types.Policy, version *types.PolicyVersion) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.PolicyName,
 		Description: model.IAMPolicyDescription{
@@ -741,7 +741,7 @@ func IAMGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 func iAMGroupHandle(ctx context.Context, v types.Group, aPolicies []string, policies []model.InlinePolicy, users []types.User) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.GroupName,
 		Description: model.IAMGroupDescription{
@@ -882,7 +882,7 @@ func IAMInstanceProfile(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, v := range page.InstanceProfiles {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.InstanceProfileName,
 				Description: v,
@@ -916,7 +916,7 @@ func IAMManagedPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 		for _, v := range page.Policies {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.PolicyName,
 				Description: v,
@@ -945,7 +945,7 @@ func IAMOIDCProvider(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	var values []Resource
 	for _, v := range output.OpenIDConnectProviderList {
 		resource := Resource{
-			Region:      describeCtx.KaytuRegion,
+			Region:      describeCtx.OGRegion,
 			ARN:         *v.Arn,
 			Name:        *v.Arn,
 			Description: v,
@@ -993,7 +993,7 @@ func IAMGroupPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 				}
 
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*v.GroupName, *v.PolicyName),
 					Name:        *v.GroupName,
 					Description: v,
@@ -1049,7 +1049,7 @@ func IAMUserPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 				}
 
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*v.UserName, *v.PolicyName),
 					Name:        *v.UserName,
 					Description: v,
@@ -1105,7 +1105,7 @@ func IAMRolePolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 				}
 
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*v.RoleName, *v.PolicyName),
 					Name:        *v.RoleName,
 					Description: v,
@@ -1189,7 +1189,7 @@ func iAMRoleHandle(ctx context.Context, client *iam.Client, v types.Role) (*Reso
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.RoleName,
 		Description: model.IAMRoleDescription{
@@ -1348,7 +1348,7 @@ func iAMServerCertificateHandle(ctx context.Context, v types.ServerCertificateMe
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.ServerCertificateName,
 		Description: model.IAMServerCertificateDescription{
@@ -1471,7 +1471,7 @@ func iAMUserHandle(ctx context.Context, cfg aws.Config, v types.User) (Resource,
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.UserName,
 		Description: model.IAMUserDescription{
@@ -1547,7 +1547,7 @@ func IAMPolicyAttachment(ctx context.Context, cfg aws.Config, stream *StreamSend
 			}
 			resource := Resource{
 				ARN:    *policy.Arn,
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   fmt.Sprintf("%s - Attachments", *policy.Arn),
 				Description: model.IAMPolicyAttachmentDescription{
 					PolicyArn:             *policy.Arn,
@@ -1574,7 +1574,7 @@ func IAMPolicyAttachment(ctx context.Context, cfg aws.Config, stream *StreamSend
 func iAMPolicyAttachmentHandle(ctx context.Context, policy types.Policy, policyGroups []types.PolicyGroup, policyRoles []types.PolicyRole, policyUsers []types.PolicyUser) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   fmt.Sprintf("%s - Attachments", *policy.Arn),
 		Description: model.IAMPolicyAttachmentDescription{
 			PolicyArn:             *policy.Arn,
@@ -1652,7 +1652,7 @@ func IAMSamlProvider(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 func iAMSamlProviderHandle(ctx context.Context, samlProvider *iam.GetSAMLProviderOutput, Arn string) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    Arn,
 		Description: model.IAMSamlProviderDescription{
 			SamlProvider: *samlProvider,
@@ -1717,7 +1717,7 @@ func IAMServiceSpecificCredential(ctx context.Context, cfg aws.Config, stream *S
 func iAMServiceSpecificCredentialHandle(ctx context.Context, credential types.ServiceSpecificCredentialMetadata) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *credential.ServiceSpecificCredentialId,
 		Description: model.IAMServiceSpecificCredentialDescription{
 			ServiceSpecificCredential: credential,
@@ -1863,7 +1863,7 @@ func IAMVirtualMFADevice(ctx context.Context, cfg aws.Config, stream *StreamSend
 func iAMVirtualMFADeviceHandle(ctx context.Context, v types.VirtualMFADevice, output *iam.ListMFADeviceTagsOutput) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.SerialNumber,
 		Name:   *v.SerialNumber,
 		Description: model.IAMVirtualMFADeviceDescription{
@@ -1940,7 +1940,7 @@ func iAMOpenIdConnectProviderHandle(ctx context.Context, cfg aws.Config, arn str
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Description: model.IAMOpenIdConnectProviderDescription{
 			ClientIDList:   op.ClientIDList,

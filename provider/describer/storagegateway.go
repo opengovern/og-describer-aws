@@ -50,7 +50,7 @@ func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gat
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    gatewayARN,
 		Name:   gatewayId,
 		Description: model.StorageGatewayStorageGatewayDescription{

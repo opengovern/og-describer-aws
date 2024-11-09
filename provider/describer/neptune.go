@@ -41,7 +41,7 @@ func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBInstanceArn,
 				Name:   name,
 				Description: model.NeptuneDatabaseDescription{
@@ -94,7 +94,7 @@ func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *StreamS
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBClusterArn,
 				Name:   name,
 				Description: model.NeptuneDatabaseClusterDescription{
@@ -197,7 +197,7 @@ func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *snapshot.DBClusterSnapshotArn,
 		Name:   *snapshot.DBClusterSnapshotIdentifier,
 		ID:     *snapshot.DBClusterSnapshotIdentifier,

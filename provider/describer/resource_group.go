@@ -32,7 +32,7 @@ func ResourceGroups(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.GroupArn,
 				Name:   *v.GroupName,
 				Description: model.ResourceGroupsGroupDescription{

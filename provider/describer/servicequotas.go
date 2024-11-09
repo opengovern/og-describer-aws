@@ -23,10 +23,10 @@ func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *StreamSen
 		}
 
 		for _, service := range servicesPage.Services {
-			arn := fmt.Sprintf("arn:%s:servicequotas:%s:%s:%s", describeCtx.Partition, describeCtx.KaytuRegion, describeCtx.AccountID, *service.ServiceCode)
+			arn := fmt.Sprintf("arn:%s:servicequotas:%s:%s:%s", describeCtx.Partition, describeCtx.OGRegion, describeCtx.AccountID, *service.ServiceCode)
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *service.ServiceName,
 				ID:     *service.ServiceCode,
@@ -71,7 +71,7 @@ func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, strea
 
 				for _, quota := range page.Quotas {
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ARN:    *quota.QuotaArn + "--default",
 						Name:   *quota.QuotaName,
 						ID:     *quota.QuotaCode,
@@ -123,7 +123,7 @@ func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *Stre
 						tags = &servicequotas.ListTagsForResourceOutput{}
 					}
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ARN:    *quota.QuotaArn,
 						Name:   *quota.QuotaName,
 						ID:     *quota.QuotaCode,
@@ -167,9 +167,9 @@ func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config,
 				tags = &servicequotas.ListTagsForResourceOutput{}
 			}
 
-			arn := fmt.Sprintf("arn:aws:servicequotas:%s:%s:changeRequest/%s", describeCtx.KaytuRegion, describeCtx.AccountID, *requestedQuota.Id)
+			arn := fmt.Sprintf("arn:aws:servicequotas:%s:%s:changeRequest/%s", describeCtx.OGRegion, describeCtx.AccountID, *requestedQuota.Id)
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				ID:     *requestedQuota.Id,
 				Description: model.ServiceQuotasServiceQuotaChangeRequestDescription{

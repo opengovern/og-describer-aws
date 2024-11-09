@@ -30,7 +30,7 @@ func BackupPlan(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.BackupPlanArn,
 				Name:   *v.BackupPlanName,
 				Description: model.BackupPlanDescription{
@@ -111,7 +111,7 @@ func BackupRecoveryPoint(ctx context.Context, cfg aws.Config, stream *StreamSend
 					}
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ARN:    *recoveryPoint.RecoveryPointArn,
 						Name:   nameFromArn(*out.RecoveryPointArn),
 						Description: model.BackupRecoveryPointDescription{
@@ -148,7 +148,7 @@ func BackupProtectedResource(ctx context.Context, cfg aws.Config, stream *Stream
 
 		for _, resource := range page.Results {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *resource.ResourceArn,
 				Name:   nameFromArn(*resource.ResourceArn),
 				Description: model.BackupProtectedResourceDescription{
@@ -201,7 +201,7 @@ func BackupSelection(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 
 				name := "arn:" + describeCtx.Partition + ":backup:" + describeCtx.Region + ":" + describeCtx.AccountID + ":backup-plan:" + *v.BackupPlanId + "/selection/" + *v.SelectionId
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					ARN:    name,
 					Name:   *v.SelectionName,
 					Description: model.BackupSelectionDescription{
@@ -288,7 +288,7 @@ func backupVaultHandle(ctx context.Context, cfg aws.Config, v types.BackupVaultL
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.BackupVaultArn,
 		Name:   *v.BackupVaultName,
 		Description: model.BackupVaultDescription{
@@ -384,7 +384,7 @@ func backupFrameworkHandle(ctx context.Context, cfg aws.Config, v types.Framewor
 	})
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.FrameworkArn,
 		Name:   *v.FrameworkName,
 		Description: model.BackupFrameworkDescription{
@@ -445,7 +445,7 @@ func BackupLegalHold(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *v.Title,
 				ARN:    *v.LegalHoldArn,
 				ID:     *v.LegalHoldId,
@@ -511,7 +511,7 @@ func backupReportPlanHandle(ctx context.Context, cfg aws.Config, v types.ReportP
 	})
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ReportPlanArn,
 		Name:   *v.ReportPlanName,
 		Description: model.BackupReportPlanDescription{
@@ -562,9 +562,9 @@ func BackupRegionSetting(ctx context.Context, cfg aws.Config, stream *StreamSend
 	var values []Resource
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Description: model.BackupRegionSettingDescription{
-			Region:                           describeCtx.KaytuRegion,
+			Region:                           describeCtx.OGRegion,
 			ResourceTypeManagementPreference: regionSetting.ResourceTypeManagementPreference,
 			ResourceTypeOptInPreference:      regionSetting.ResourceTypeOptInPreference,
 		},

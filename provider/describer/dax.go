@@ -49,7 +49,7 @@ func DAXCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 func dAXClusterHandle(ctx context.Context, tags *dax.ListTagsOutput, cluster types.Cluster) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ClusterArn,
 		Name:   *cluster.ClusterName,
 		Description: model.DAXClusterDescription{
@@ -128,7 +128,7 @@ func DAXParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender
 func dAXParameterGroupHandle(ctx context.Context, parameterGroup types.ParameterGroup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *parameterGroup.ParameterGroupName,
 		Description: model.DAXParameterGroupDescription{
 			ParameterGroup: parameterGroup,
@@ -185,7 +185,7 @@ func DAXParameter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 				for _, parameter := range parameters.Parameters {
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   *parameter.ParameterName,
 						Description: model.DAXParameterDescription{
 							Parameter:          parameter,
@@ -257,7 +257,7 @@ func dAXSubnetGroupHandle(ctx context.Context, subnetGroup types.SubnetGroup) Re
 	arn := fmt.Sprintf("arn:%s:dax:%s::subnetgroup:%s", describeCtx.Partition, describeCtx.Region, *subnetGroup.SubnetGroupName)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *subnetGroup.SubnetGroupName,
 		ARN:    arn,
 		Description: model.DAXSubnetGroupDescription{

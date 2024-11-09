@@ -77,7 +77,7 @@ func ramPrincipalAssociationHandle(ctx context.Context, cfg aws.Config, associat
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *association.ResourceShareName,
 		ARN:    *association.ResourceShareArn,
 		Description: model.RamPrincipalAssociationDescription{
@@ -132,7 +132,7 @@ func ramResourceAssociationHandle(ctx context.Context, cfg aws.Config, associati
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *association.ResourceShareName,
 		ARN:    *association.ResourceShareArn,
 		Description: model.RamResourceAssociationDescription{

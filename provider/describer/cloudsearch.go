@@ -46,7 +46,7 @@ func CloudSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender
 func cloudSearchDomainHandle(ctx context.Context, domain types.DomainStatus) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *domain.ARN,
 		Name:   *domain.DomainName,
 		ID:     *domain.DomainId,

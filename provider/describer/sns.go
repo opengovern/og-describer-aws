@@ -38,7 +38,7 @@ func SNSSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.SubscriptionArn,
 				Name:   nameFromArn(*v.SubscriptionArn),
 				Description: model.SNSSubscriptionDescription{
@@ -117,7 +117,7 @@ func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (Resourc
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.TopicArn,
 		Name:   nameFromArn(*v.TopicArn),
 		Description: model.SNSTopicDescription{

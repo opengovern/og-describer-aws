@@ -53,7 +53,7 @@ func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.Work
 		return Resource{}, err
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *output.WorkGroup.Name,
 		Description: model.AthenaWorkGroupDescription{
 			WorkGroup: output.WorkGroup,
@@ -107,7 +107,7 @@ func authenaQueryExecutionHandle(ctx context.Context, cfg aws.Config, id string)
 		return Resource{}, err
 	}
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *output.QueryExecution.QueryExecutionId,
 		Name:   *output.QueryExecution.Query,
 		Description: model.AthenaQueryExecutionDescription{

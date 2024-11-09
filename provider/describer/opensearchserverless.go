@@ -38,7 +38,7 @@ func OpenSearchServerlessCollection(ctx context.Context, cfg aws.Config, stream 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Name,
 				Description: model.OpenSearchServerlessCollectionDescription{

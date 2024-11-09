@@ -61,7 +61,7 @@ func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container ty
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *container.ARN,
 		Name:   *container.Name,
 		Description: model.MediaStoreContainerDescription{

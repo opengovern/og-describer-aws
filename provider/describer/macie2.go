@@ -71,7 +71,7 @@ func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId st
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *job.JobArn,
 		Name:   *job.Name,
 		ID:     *job.JobId,

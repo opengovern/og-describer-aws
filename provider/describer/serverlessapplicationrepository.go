@@ -56,7 +56,7 @@ func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg a
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *application.ApplicationId,
 		Name:   *application.ApplicationId,
 		Description: model.ServerlessApplicationRepositoryApplicationDescription{

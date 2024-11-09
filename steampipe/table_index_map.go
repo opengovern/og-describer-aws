@@ -1,11 +1,11 @@
 package steampipe
 
-// Please import resource clients file after it's genrated completly
 import (
-	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
+	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
 )
+
 var Map = map[string]string{
-"AWS::Redshift::Snapshot":                            "aws_redshift_snapshot",
+	"AWS::Redshift::Snapshot":                            "aws_redshift_snapshot",
 	"AWS::IAM::AccountSummary":                           "aws_iam_account_summary",
 	"AWS::Glacier::Vault":                                "aws_glacier_vault",
 	"AWS::Organizations::Organization":                   "aws_organizations_organization",
@@ -894,7 +894,6 @@ var DescriptionMap = map[string]interface{}{
 	"AWS::IdentityStore::User":                           opengovernance.IdentityStoreUser{},
 	"AWS::IdentityStore::Group":                          opengovernance.IdentityStoreGroup{},
 	"AWS::IdentityStore::GroupMembership":                opengovernance.IdentityStoreGroupMembership{},
-	
 }
 
 var ReverseMap = map[string]string{
@@ -1341,5 +1340,4 @@ var ReverseMap = map[string]string{
 	"aws_identitystore_user":                          "AWS::IdentityStore::User",
 	"aws_identitystore_group":                         "AWS::IdentityStore::Group",
 	"aws_identitystore_group_membership":              "AWS::IdentityStore::GroupMembership",
-
 }

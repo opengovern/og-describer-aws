@@ -29,7 +29,7 @@ func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *St
 
 		arn := "arn:" + describeCtx.Partition + ":config:" + describeCtx.Region + ":" + describeCtx.AccountID + ":config-recorder" + "/" + *item.Name
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			ARN:    arn,
 			Name:   *item.Name,
 			Description: model.ConfigConfigurationRecorderDescription{
@@ -70,7 +70,7 @@ func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *S
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.AggregationAuthorizationArn,
 				ID:     *item.AuthorizedAccountId,
 				Description: model.ConfigAggregationAuthorizationDescription{
@@ -104,7 +104,7 @@ func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *StreamSe
 		}
 		for _, item := range page.ConformancePackDetails {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.ConformancePackArn,
 				ID:     *item.ConformancePackId,
 				Name:   *item.ConformancePackName,
@@ -162,7 +162,7 @@ func ConfigRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *item.ConfigRuleArn,
 				ID:     *item.ConfigRuleId,
 				Name:   *item.ConfigRuleName,
@@ -199,7 +199,7 @@ func ConfigRetentionConfiguration(ctx context.Context, cfg aws.Config, stream *S
 		}
 		for _, item := range page.RetentionConfigurations {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *item.Name,
 				Description: model.ConfigRetentionConfigurationDescription{
 					RetentionConfiguration: item,

@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	opengovernance "github.com/opengovern/og-describer-aws/SDK/generated"
+	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
 
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"

@@ -28,7 +28,7 @@ func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 		for _, v := range output.CapacityProviders {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.CapacityProviderArn,
 				Name:        *v.Name,
 				Description: v,
@@ -94,7 +94,7 @@ func ECSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 func eCSClusterHandle(ctx context.Context, v types.Cluster) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ClusterArn,
 		Name:   *v.ClusterName,
 		Description: model.ECSClusterDescription{
@@ -190,7 +190,7 @@ func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) 
 	}
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ServiceArn,
 		Name:   *v.ServiceName,
 		Description: model.ECSServiceDescription{
@@ -284,7 +284,7 @@ func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (R
 	name := splitArn[len(splitArn)-1]
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   name,
 		Description: model.ECSTaskDefinitionDescription{
@@ -368,7 +368,7 @@ func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.TaskSetArn,
 		Name:   *v.Id,
 		Description: model.ECSTaskSetDescription{
@@ -484,7 +484,7 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 			for _, v := range output.ContainerInstances {
 				for _, c := range describeCluster.Clusters {
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ARN:    *v.ContainerInstanceArn,
 						Name:   *v.ContainerInstanceArn,
 						Description: model.ECSContainerInstanceDescription{
@@ -576,7 +576,7 @@ func ECSTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 						description.TaskProtection = &taskProtection
 					}
 					resource := Resource{
-						Region:      describeCtx.KaytuRegion,
+						Region:      describeCtx.OGRegion,
 						ARN:         *v.TaskArn,
 						Name:        *v.TaskArn,
 						Description: description,

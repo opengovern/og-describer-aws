@@ -52,7 +52,7 @@ func apiGatewayStageHandle(ctx context.Context, stageItem types.Stage, id string
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":apigateway:" + describeCtx.Region + "::/restapis/" + id + "/stages/" + *stageItem.StageName
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   name,
 		Description: model.ApiGatewayStageDescription{
@@ -143,7 +143,7 @@ func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 		for _, stage := range stages {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     CompositeID(*api.ApiId, *stage.StageName),
 				Name:   *api.Name,
 				Description: model.ApiGatewayV2StageDescription{
@@ -199,7 +199,7 @@ func apiGatewayRestAPIHandle(ctx context.Context, restItem types.RestApi) Resour
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s", describeCtx.Partition, describeCtx.Region, *restItem.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *restItem.Name,
 		Description: model.ApiGatewayRestAPIDescription{
@@ -274,7 +274,7 @@ func apiGatewayApiKeyHandle(ctx context.Context, apiKey types.ApiKey) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apikeys/%s", describeCtx.Partition, describeCtx.Region, *apiKey.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *apiKey.Id,
 		ARN:    arn,
 		Name:   *apiKey.Name,
@@ -347,7 +347,7 @@ func apiGatewayUsagePlanHandle(ctx context.Context, usagePlan types.UsagePlan) R
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/usageplans/%s", describeCtx.Partition, describeCtx.Region, *usagePlan.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *usagePlan.Id,
 		ARN:    arn,
 		Name:   *usagePlan.Name,
@@ -426,7 +426,7 @@ func apiGatewayAuthorizerHandle(ctx context.Context, authorizer types.Authorizer
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s/authorizer/%s", describeCtx.Partition, describeCtx.Region, apiId, *authorizer.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *authorizer.Id,
 		ARN:    arn,
 		Name:   apiName,
@@ -504,7 +504,7 @@ func apiGatewayV2APIHandle(ctx context.Context, api typesv2.Api) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s", describeCtx.Partition, describeCtx.Region, *api.ApiId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *api.Name,
 		Description: model.ApiGatewayV2APIDescription{
@@ -588,7 +588,7 @@ func apiGatewayV2DomainNameHandle(ctx context.Context, domainName typesv2.Domain
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainnames/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *domainName.DomainName,
 		Description: model.ApiGatewayV2DomainNameDescription{
@@ -687,7 +687,7 @@ func apiGatewayV2IntegrationHandle(ctx context.Context, integration typesv2.Inte
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/integrations/%s", describeCtx.Partition, describeCtx.Region, apiId, *integration.IntegrationId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *integration.IntegrationId,
 		Description: model.ApiGatewayV2IntegrationDescription{
@@ -778,7 +778,7 @@ func apiGatewayDomainNameHandle(ctx context.Context, domainName types.DomainName
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainname/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *domainName.DomainName,
 		Description: model.ApiGatewayDomainNameDescription{
@@ -861,7 +861,7 @@ func apiGatewayV2Route(ctx context.Context, route typesv2.Route) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/routes/%s", describeCtx.Partition, describeCtx.Region, *route.RouteId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *route.RouteId,
 		Description: model.ApiGatewayV2RouteDescription{

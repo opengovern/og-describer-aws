@@ -54,7 +54,7 @@ func secretsManagerSecretHandle(ctx context.Context, cfg aws.Config, Arn *string
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *Arn,
 		Name:   *Name,
 		Description: model.SecretsManagerSecretDescription{

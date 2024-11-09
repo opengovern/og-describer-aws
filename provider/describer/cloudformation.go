@@ -69,7 +69,7 @@ func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stac
 	template.TemplateBody = nil
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.StackId,
 		Name:   *v.StackName,
 		Description: model.CloudFormationStackDescription{
@@ -147,7 +147,7 @@ func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *stackSet.StackSet.StackSetARN,
 		Name:   *stackSet.StackSet.StackSetName,
 		Description: model.CloudFormationStackSetDescription{
@@ -226,7 +226,7 @@ func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stac
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *stackResource.StackResourceDetail.LogicalResourceId,
 		Description: model.CloudFormationStackResourceDescription{
 			StackResource: *stackResource.StackResourceDetail,

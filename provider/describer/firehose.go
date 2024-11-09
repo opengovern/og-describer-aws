@@ -76,7 +76,7 @@ func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryS
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *deliveryStream.DeliveryStreamDescription.DeliveryStreamARN,
 		Name:   *deliveryStream.DeliveryStreamDescription.DeliveryStreamName,
 		Description: model.FirehoseDeliveryStreamDescription{

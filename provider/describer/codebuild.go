@@ -51,7 +51,7 @@ func CodeBuildProject(ctx context.Context, cfg aws.Config, stream *StreamSender)
 func codeBuildProjectHandle(ctx context.Context, project types.Project) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *project.Arn,
 		Name:   *project.Name,
 		Description: model.CodeBuildProjectDescription{
@@ -105,7 +105,7 @@ func CodeBuildSourceCredential(ctx context.Context, cfg aws.Config, stream *Stre
 func codeBuildSourceCredentialHandle(ctx context.Context, item types.SourceCredentialsInfo) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   nameFromArn(*item.Arn),
 		Description: model.CodeBuildSourceCredentialDescription{
@@ -179,7 +179,7 @@ func CodeBuildBuild(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 func codeBuildBuildHandle(ctx context.Context, build types.Build) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *build.Arn,
 		ID:     *build.Id,
 		Description: model.CodeBuildBuildDescription{

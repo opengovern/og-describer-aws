@@ -49,7 +49,7 @@ func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBClust
 	}
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.DBClusterArn,
 		Name:   *v.DBClusterIdentifier,
 		Description: model.RDSDBClusterDescription{
@@ -130,7 +130,7 @@ func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBC
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.DBClusterSnapshotArn,
 		Name:   *v.DBClusterSnapshotIdentifier,
 		Description: model.RDSDBClusterSnapshotDescription{
@@ -205,7 +205,7 @@ func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *Str
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBClusterParameterGroupArn,
 				Name:   *v.DBClusterParameterGroupName,
 				Description: model.RDSDBClusterParameterGroupDescription{
@@ -280,7 +280,7 @@ func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInst
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.DBInstanceArn,
 		Name:   *v.DBInstanceIdentifier,
 		Description: model.RDSDBInstanceDescription{
@@ -348,7 +348,7 @@ func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSend
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBParameterGroupArn,
 				Name:   *v.DBParameterGroupName,
 				Description: model.RDSDBParameterGroupDescription{
@@ -391,7 +391,7 @@ func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBProxyArn,
 				Name:   *v.DBProxyName,
 				Description: model.RDSDBProxyDescription{
@@ -426,7 +426,7 @@ func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, v := range page.DBProxyEndpoints {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBProxyEndpointArn,
 				Name:        *v.DBProxyEndpointName,
 				Description: v,
@@ -468,7 +468,7 @@ func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 
 			for _, v := range page.TargetGroups {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ARN:         *v.TargetGroupArn,
 					Name:        *v.TargetGroupName,
 					Description: v,
@@ -501,7 +501,7 @@ func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 		for _, v := range page.DBSecurityGroups {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBSecurityGroupArn,
 				Name:        *v.DBSecurityGroupName,
 				Description: v,
@@ -540,7 +540,7 @@ func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender)
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.DBSubnetGroupArn,
 				Name:   *v.DBSubnetGroupName,
 				Description: model.RDSDBSubnetGroupDescription{
@@ -589,7 +589,7 @@ func RDSDBEventSubscription(ctx context.Context, cfg aws.Config, stream *StreamS
 func rDSDBEventSubscriptionHandle(ctx context.Context, v types.EventSubscription) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.EventSubscriptionArn,
 		Name:   *v.CustSubscriptionId,
 		Description: model.RDSDBEventSubscriptionDescription{
@@ -656,7 +656,7 @@ func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalC
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.GlobalClusterArn,
 		Name:   *v.GlobalClusterIdentifier,
 		Description: model.RDSGlobalClusterDescription{
@@ -735,7 +735,7 @@ func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGro
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.OptionGroupArn,
 		Name:   *v.OptionGroupName,
 		Description: model.RDSOptionGroupDescription{
@@ -822,7 +822,7 @@ func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.DBSnapshotArn,
 		Name:   *v.DBSnapshotIdentifier,
 		Description: model.RDSDBSnapshotDescription{
@@ -890,7 +890,7 @@ func RDSReservedDBInstance(ctx context.Context, cfg aws.Config, stream *StreamSe
 func rDSReservedDBInstanceHandle(ctx context.Context, reservedDBInstance types.ReservedDBInstance) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *reservedDBInstance.ReservedDBInstanceArn,
 		ID:     *reservedDBInstance.ReservedDBInstanceId,
 		Description: model.RDSReservedDBInstanceDescription{
@@ -948,7 +948,7 @@ func RDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, stream *S
 func rDSDBInstanceAutomatedBackupHandle(ctx context.Context, v types.DBInstanceAutomatedBackup) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.DBInstanceArn,
 		ID:     *v.DBInstanceIdentifier,
 		Description: model.RDSDBInstanceAutomatedBackupDescription{
@@ -1016,7 +1016,7 @@ func rDSDBEngineVersionHandle(ctx context.Context, v types.DBEngineVersion) Reso
 	}
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Description: model.RDSDBEngineVersionDescription{
 			EngineVersion: v,
@@ -1062,7 +1062,7 @@ func rDSDBRecommendationHandler(ctx context.Context, v types.DBRecommendation) R
 	describeCtx := GetDescribeContext(ctx)
 
 	return Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.ResourceArn,
 		Description: model.RDSDBRecommendationDescription{
 			DBRecommendation: v,

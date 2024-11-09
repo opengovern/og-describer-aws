@@ -40,7 +40,7 @@ func glueCatalogDatabaseHandle(ctx context.Context, database types.Database) Res
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:database/%s", describeCtx.Region, describeCtx.AccountID, *database.Name)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *database.Name,
 		ARN:    arn,
 		Description: model.GlueCatalogDatabaseDescription{
@@ -147,7 +147,7 @@ func glueCatalogTableHandle(ctx context.Context, client *lakeformation.Client, t
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *table.Name,
 		ARN:    arn,
 		Description: model.GlueCatalogTableDescription{
@@ -213,7 +213,7 @@ func glueConnectionHandle(ctx context.Context, connection types.Connection) Reso
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:connection/%s", describeCtx.Region, describeCtx.AccountID, *connection.Name)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *connection.Name,
 		ARN:    arn,
 		Description: model.GlueConnectionDescription{
@@ -271,7 +271,7 @@ func glueCrawlerHandle(ctx context.Context, crawler types.Crawler) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:crawler/%s", describeCtx.Region, describeCtx.AccountID, *crawler.Name)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *crawler.Name,
 		ARN:    arn,
 		Description: model.GlueCrawlerDescription{
@@ -324,7 +324,7 @@ func GlueDataCatalogEncryptionSettings(ctx context.Context, cfg aws.Config, stre
 func glueDataCatalogEncryptionSettingsHandle(ctx context.Context, settings *glue.GetDataCatalogEncryptionSettingsOutput) Resource {
 	describeCtx := GetDescribeContext(ctx)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Description: model.GlueDataCatalogEncryptionSettingsDescription{
 			DataCatalogEncryptionSettings: *settings.DataCatalogEncryptionSettings,
 		},
@@ -370,7 +370,7 @@ func GlueDataQualityRuleset(ctx context.Context, cfg aws.Config, stream *StreamS
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *listRuleset.Name,
 				Description: model.GlueDataQualityRulesetDescription{
 					DataQualityRuleset: *ruleset,
@@ -418,7 +418,7 @@ func glueDevEndpointHandle(ctx context.Context, devEndpoint types.DevEndpoint) R
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:devEndpoint/%s", describeCtx.Region, describeCtx.AccountID, *devEndpoint.EndpointName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *devEndpoint.EndpointName,
 		ARN:    arn,
 		Description: model.GlueDevEndpointDescription{
@@ -484,7 +484,7 @@ func glueJobHandle(ctx context.Context, cfg aws.Config, job types.Job) Resource 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *job.Name,
 		ARN:    arn,
 		Description: model.GlueJobDescription{
@@ -542,7 +542,7 @@ func glueSecurityConfigurationHandle(ctx context.Context, securityConfiguration 
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:security-configuration/%s", describeCtx.Region, describeCtx.AccountID, *securityConfiguration.Name)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *securityConfiguration.Name,
 		ARN:    arn,
 		Description: model.GlueSecurityConfigurationDescription{

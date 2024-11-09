@@ -22,7 +22,7 @@ func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *StreamSe
 
 		for _, v := range page.Indexes {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Arn,
 				Description: model.ResourceExplorer2IndexDescription{
@@ -56,7 +56,7 @@ func ResourceExplorer2SupportedResourceType(ctx context.Context, cfg aws.Config,
 
 		for _, v := range page.ResourceTypes {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *v.ResourceType,
 				Description: model.ResourceExplorer2SupportedResourceTypeDescription{
 					SupportedResourceType: v,

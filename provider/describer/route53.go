@@ -59,7 +59,7 @@ func Route53HealthCheck(ctx context.Context, cfg aws.Config, stream *StreamSende
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.Id,
 				Description: model.Route53HealthCheckDescription{
 					HealthCheck: v,
@@ -182,7 +182,7 @@ func route53HostedZoneHandle(ctx context.Context, cfg aws.Config, v types.Hosted
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.Name,
 		Description: model.Route53HostedZoneDescription{
@@ -237,7 +237,7 @@ func Route53DNSSEC(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 		}
 
 		resource := Resource{
-			Region:      describeCtx.KaytuRegion,
+			Region:      describeCtx.OGRegion,
 			ID:          *id, // Unique per HostedZone
 			Name:        *id,
 			Description: v,
@@ -280,7 +280,7 @@ func Route53RecordSet(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 			for _, v := range output.ResourceRecordSets {
 				resource := Resource{
-					Region:      describeCtx.KaytuRegion,
+					Region:      describeCtx.OGRegion,
 					ID:          CompositeID(*id, *v.Name),
 					Name:        *v.Name,
 					Description: v,
@@ -319,7 +319,7 @@ func Route53ResolverFirewallDomainList(ctx context.Context, cfg aws.Config, stre
 
 		for _, v := range page.FirewallDomainLists {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.Name,
 				Description: v,
@@ -351,7 +351,7 @@ func Route53ResolverFirewallRuleGroup(ctx context.Context, cfg aws.Config, strea
 
 		for _, v := range page.FirewallRuleGroups {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.Name,
 				Description: v,
@@ -383,7 +383,7 @@ func Route53ResolverFirewallRuleGroupAssociation(ctx context.Context, cfg aws.Co
 
 		for _, v := range page.FirewallRuleGroupAssociations {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.Name,
 				Description: v,
@@ -420,7 +420,7 @@ func Route53ResolverResolverDNSSECConfig(ctx context.Context, cfg aws.Config, st
 		}
 
 		resource := Resource{
-			Region:      describeCtx.KaytuRegion,
+			Region:      describeCtx.OGRegion,
 			ID:          *v.ResolverDNSSECConfig.Id,
 			Name:        *v.ResolverDNSSECConfig.Id,
 			Description: v.ResolverDNSSECConfig,
@@ -451,7 +451,7 @@ func Route53ResolverResolverQueryLoggingConfig(ctx context.Context, cfg aws.Conf
 
 		for _, v := range page.ResolverQueryLogConfigs {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.Name,
 				Description: v,
@@ -483,7 +483,7 @@ func Route53ResolverResolverQueryLoggingConfigAssociation(ctx context.Context, c
 
 		for _, v := range page.ResolverQueryLogConfigAssociations {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.Id,
 				Name:        *v.Id,
 				Description: v,
@@ -545,7 +545,7 @@ func Route53ResolverResolverRule(ctx context.Context, cfg aws.Config, stream *St
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Name,
 				Description: model.Route53ResolverResolverRuleDescription{
@@ -611,7 +611,7 @@ func route53ResolverResolverEndpointHandle(ctx context.Context, cfg aws.Config, 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *resolverEndpoint.Arn,
 		Name:   *resolverEndpoint.Name,
 		ID:     *resolverEndpoint.Id,
@@ -654,7 +654,7 @@ func Route53ResolverResolverRuleAssociation(ctx context.Context, cfg aws.Config,
 
 		for _, v := range page.ResolverRuleAssociations {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.Id,
 				Name:        *v.Name,
 				Description: v,
@@ -718,7 +718,7 @@ func Route53DomainHandle(ctx context.Context, cfg aws.Config, v types3.DomainSum
 
 	arn := fmt.Sprintf("arn:%s:route53domains:::domain/%s", describeCtx.Partition, *v.DomainName)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *domain.DomainName,
 		ARN:    arn,
 		Description: model.Route53DomainDescription{
@@ -802,7 +802,7 @@ func route53RecordHandle(ctx context.Context, record types.ResourceRecordSet, ho
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:route53:::hostedzone/%s/recordset/%s/%s", describeCtx.Partition, hostedZoneId, *record.Name, record.Type)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *record.Name,
 		ARN:    arn,
 		Description: model.Route53RecordDescription{
@@ -896,7 +896,7 @@ func route53TrafficPolicyHandle(ctx context.Context, cfg aws.Config, policySumma
 
 	arn := fmt.Sprintf("arn:%s:route53::%s:trafficpolicy/%s/%s", describeCtx.Partition, describeCtx.AccountID, *policy.TrafficPolicy.Id, string(*policy.TrafficPolicy.Version))
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *policy.TrafficPolicy.Name,
 		ID:     *policy.TrafficPolicy.Id,
 		ARN:    arn,
@@ -968,7 +968,7 @@ func route53TrafficPolicyInstanceHandle(ctx context.Context, policyInstance type
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:route53::%s:trafficpolicyinstance/%s", describeCtx.Partition, describeCtx.AccountID, *policyInstance.Id)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		Name:   *policyInstance.Name,
 		ID:     *policyInstance.Id,
 		ARN:    arn,
@@ -1014,7 +1014,7 @@ func Route53QueryLog(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			arn := fmt.Sprintf("arn:%s:route53:::query-log/%s/%s", describeCtx.Partition, *v.HostedZoneId, *v.Id)
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.Id,
 				ARN:    arn,
 				Description: model.Route53QueryLogDescription{
@@ -1063,7 +1063,7 @@ func route53ResolverQueryLogConfigHandle(ctx context.Context, cfg aws.Config, qu
 	describeCtx := GetDescribeContext(ctx)
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *queryLogConfig.Arn,
 		Name:   *queryLogConfig.Name,
 		ID:     *queryLogConfig.Id,

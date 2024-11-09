@@ -51,7 +51,7 @@ func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ID:     *application.Id,
 		Name:   *application.Name,
 		ARN:    arn,

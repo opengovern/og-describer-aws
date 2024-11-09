@@ -67,7 +67,7 @@ func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, e
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *out.EndpointConfigArn,
 		Name:   *out.EndpointConfigName,
 		Description: model.SageMakerEndpointConfigurationDescription{
@@ -141,7 +141,7 @@ func SageMakerApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 					}
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						ARN:    *data.AppArn,
 						Name:   *data.AppName,
 						Description: model.SageMakerAppDescription{
@@ -203,7 +203,7 @@ func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *domain.DomainArn,
 				Name:   *domain.DomainName,
 				Description: model.SageMakerDomainDescription{
@@ -282,7 +282,7 @@ func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *s
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *out.NotebookInstanceArn,
 		Name:   *out.NotebookInstanceName,
 		Description: model.SageMakerNotebookInstanceDescription{
@@ -362,7 +362,7 @@ func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagema
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *sageModel.ModelArn,
 		Name:   *sageModel.ModelName,
 		Description: model.SageMakerModelDescription{
@@ -419,7 +419,7 @@ func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *StreamSen
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *trainingJob.TrainingJobArn,
 				Name:   *trainingJob.TrainingJobName,
 				Description: model.SageMakerTrainingJobDescription{

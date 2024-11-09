@@ -38,7 +38,7 @@ func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *Stream
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.WorkloadArn,
 				Name:   *v.WorkloadName,
 				Description: model.WellArchitectedWorkloadDescription{
@@ -100,7 +100,7 @@ func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *StreamSe
 						}
 
 						resource := Resource{
-							Region: describeCtx.KaytuRegion,
+							Region: describeCtx.OGRegion,
 							Description: model.WellArchitectedAnswerDescription{
 								Answer:          *op.Answer,
 								WorkloadId:      *op.WorkloadId,
@@ -177,7 +177,7 @@ func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *Str
 				for _, c := range page.CheckDetails {
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   des.WorkloadName,
 						Description: model.WellArchitectedCheckDetailDescription{
 							CheckDetail: c,
@@ -247,7 +247,7 @@ func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *St
 				for _, c := range page.CheckSummaries {
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Name:   *c.Name,
 						Description: model.WellArchitectedCheckSummaryDescription{
 							CheckSummary: c,
@@ -335,7 +335,7 @@ func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config
 		for _, v := range page.Metrics {
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedCheckConsolidatedReportDescription{
 					IncludeSharedResources: input.IncludeSharedResources,
 					ConsolidateReport:      v,
@@ -386,7 +386,7 @@ func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *StreamSend
 			}
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *v.LensArn,
 				Description: model.WellArchitectedLensDescription{
 					LensSummary: v,
@@ -447,7 +447,7 @@ func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *Stre
 					}
 				}
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensReviewDescription{
 						LensReview: *review.LensReview,
 					},
@@ -497,7 +497,7 @@ func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, s
 					}
 					for _, improvement := range output.ImprovementSummaries {
 						resource := Resource{
-							Region: describeCtx.KaytuRegion,
+							Region: describeCtx.OGRegion,
 							Description: model.WellArchitectedLensReviewImprovementDescription{
 								LensAlias:          *output.LensAlias,
 								LensArn:            *output.LensArn,
@@ -551,7 +551,7 @@ func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream
 				}
 
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensReviewReportDescription{
 						Report:          *report.LensReviewReport,
 						MilestoneNumber: report.MilestoneNumber,
@@ -598,7 +598,7 @@ func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *Strea
 			}
 			for _, share := range page.LensShareSummaries {
 				resource := Resource{
-					Region: describeCtx.KaytuRegion,
+					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensShareDescription{
 						Lens:  lens,
 						Share: share,
@@ -650,7 +650,7 @@ func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *Strea
 						return nil, err
 					}
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Description: model.WellArchitectedMilestoneDescription{
 							Milestone: *milestone.Milestone,
 						},
@@ -683,7 +683,7 @@ func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *St
 		for _, v := range page.NotificationSummaries {
 
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedNotificationDescription{
 					Notification: v,
 				},
@@ -717,7 +717,7 @@ func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream 
 		}
 		for _, v := range page.ShareInvitationSummaries {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedShareInvitationDescription{
 					ShareInvitation: v,
 				},
@@ -766,7 +766,7 @@ func WellArchitectedWorkloadShare(ctx context.Context, cfg aws.Config, stream *S
 					arn := "arn:" + describeCtx.Partition + ":waf::" + describeCtx.AccountID + ":ratebasedrule" + "/" + *m.ShareId
 
 					resource := Resource{
-						Region: describeCtx.KaytuRegion,
+						Region: describeCtx.OGRegion,
 						Description: model.WellArchitectedWorkloadShareDescription{
 							Share:      m,
 							WorkloadId: *v.WorkloadId,

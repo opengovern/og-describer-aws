@@ -23,7 +23,7 @@ func CloudControlResource(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 		for _, v := range page.ResourceDescriptions {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ID:     *v.Identifier,
 				Description: model.CloudControlResourceDescription{
 					Resource: v,

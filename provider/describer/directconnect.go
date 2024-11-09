@@ -36,7 +36,7 @@ func directConnectConnectionHandle(ctx context.Context, v types.Connection) Reso
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:directconnect:%s:%s:dxcon/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.ConnectionId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.ConnectionId,
 		Description: model.DirectConnectConnectionDescription{
@@ -130,7 +130,7 @@ func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGatewa
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.DirectConnectGatewayName,
 		Description: model.DirectConnectGatewayDescription{

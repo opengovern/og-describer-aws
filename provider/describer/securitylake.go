@@ -27,7 +27,7 @@ func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *StreamSen
 			continue
 		}
 		resource := Resource{
-			Region: describeCtx.KaytuRegion,
+			Region: describeCtx.OGRegion,
 			Name:   *lake.DataLakeArn,
 			ARN:    *lake.DataLakeArn,
 			Description: model.SecurityLakeDataLakeDescription{
@@ -63,7 +63,7 @@ func SecurityLakeSubscriber(ctx context.Context, cfg aws.Config, stream *StreamS
 
 		for _, subscriber := range page.Subscribers {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				Name:   *subscriber.SubscriberName,
 				Description: model.SecurityLakeSubscriberDescription{
 					Subscriber: subscriber,

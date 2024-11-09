@@ -64,7 +64,7 @@ func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) 
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    *v.BrokerArn,
 		Name:   *v.BrokerName,
 		Description: model.MQBrokerDescription{

@@ -25,7 +25,7 @@ func MGNApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 		for _, application := range applications.Items {
 			resource := Resource{
-				Region: describeCtx.KaytuRegion,
+				Region: describeCtx.OGRegion,
 				ARN:    *application.Arn,
 				Name:   *application.Name,
 				ID:     *application.ApplicationID,

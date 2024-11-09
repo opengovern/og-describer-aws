@@ -21,7 +21,7 @@ func ApplicationInsightsApplication(ctx context.Context, cfg aws.Config, stream 
 
 		for _, v := range page.ApplicationInfoList {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.ResourceGroupName,
 				Name:        *v.ResourceGroupName,
 				Description: v,

@@ -25,7 +25,7 @@ func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *Stre
 
 		for _, v := range output.ConnectionAliases {
 			resource := Resource{
-				Region:      describeCtx.KaytuRegion,
+				Region:      describeCtx.OGRegion,
 				ID:          *v.AliasId,
 				Name:        *v.AliasId,
 				Description: v,
@@ -96,7 +96,7 @@ func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Work
 	}
 
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.WorkspaceId,
 		Description: model.WorkspacesWorkspaceDescription{
@@ -167,7 +167,7 @@ func workspacesBundleHandle(ctx context.Context, v types.WorkspaceBundle, tags *
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:workspaces:%s:%s:workspacebundle/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.BundleId)
 	resource := Resource{
-		Region: describeCtx.KaytuRegion,
+		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.BundleId,
 		Description: model.WorkspacesBundleDescription{
