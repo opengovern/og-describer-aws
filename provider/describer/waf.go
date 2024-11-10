@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 
 	"github.com/aws/smithy-go"
 
@@ -1267,7 +1267,7 @@ func wAFRuleHandle(ctx context.Context, cfg aws.Config, roleId string) (models.R
 			return models.Resource{}, err
 		}
 		tags = &waf.ListTagsForResourceOutput{
-			TagInfoForResource: &waftypes.TagInfoFormodels.Resource{},
+			TagInfoForResource: &waftypes.TagInfoForResource{},
 		}
 	}
 

@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig"

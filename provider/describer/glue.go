@@ -129,8 +129,8 @@ func glueCatalogTableHandle(ctx context.Context, client *lakeformation.Client, t
 	params := &lakeformation.GetResourceLFTagsInput{
 		CatalogId:          table.CatalogId,
 		ShowAssignedLFTags: aws.Bool(true),
-		Resource:           &lakeformationTypes.models.Resource, {
-			Table: &lakeformationTypes.Tablemodels.Resource{
+		Resource: &lakeformationTypes.Resource{
+			Table: &lakeformationTypes.TableResource{
 				CatalogId:    table.CatalogId,
 				DatabaseName: table.DatabaseName,
 				Name:         table.Name,
