@@ -2,18 +2,19 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ResourceGroups(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ResourceGroups(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := resourcegroups.NewFromConfig(cfg)
 	paginator := resourcegroups.NewListGroupsPaginator(client, &resourcegroups.ListGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -31,7 +32,7 @@ func ResourceGroups(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.GroupArn,
 				Name:   *v.GroupName,

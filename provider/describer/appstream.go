@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeApplications(ctx, &appstream.DescribeApplicationsInput{
 			NextToken: prevToken,
@@ -29,7 +30,7 @@ func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *StreamSen
 			if err != nil {
 				return nil, err
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *item.Arn,
 				Name:   *item.Name,
@@ -56,10 +57,10 @@ func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func AppStreamStack(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AppStreamStack(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := appstream.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeStacks(ctx, &appstream.DescribeStacksInput{
 			NextToken: prevToken,
@@ -71,7 +72,7 @@ func AppStreamStack(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 		for _, item := range output.Stacks {
 
 			resource, err := appStreamStackHandle(ctx, cfg, item)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -96,7 +97,7 @@ func AppStreamStack(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack) (Resource, error) {
+func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 
@@ -105,12 +106,12 @@ func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack)
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
@@ -121,7 +122,7 @@ func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack)
 	}
 	return resource, nil
 }
-func GetAppStreamStack(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAppStreamStack(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
 	client := appstream.NewFromConfig(cfg)
 	out, err := client.DescribeStacks(ctx, &appstream.DescribeStacksInput{
@@ -134,11 +135,11 @@ func GetAppStreamStack(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Stacks {
 
 		resource, err := appStreamStackHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -151,10 +152,10 @@ func GetAppStreamStack(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func AppStreamFleet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AppStreamFleet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := appstream.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeFleets(ctx, &appstream.DescribeFleetsInput{
 			NextToken: prevToken,
@@ -165,7 +166,7 @@ func AppStreamFleet(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 		for _, item := range output.Fleets {
 			resource, err := appStreamFleetHandle(ctx, cfg, item)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -189,7 +190,7 @@ func AppStreamFleet(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet) (Resource, error) {
+func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &appstream.ListTagsForResourceInput{
@@ -197,12 +198,12 @@ func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet)
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
@@ -214,7 +215,7 @@ func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet)
 
 	return resource, nil
 }
-func GetAppStreamFleet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAppStreamFleet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
 	client := appstream.NewFromConfig(cfg)
 
@@ -228,11 +229,11 @@ func GetAppStreamFleet(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Fleets {
 
 		resource, err := appStreamFleetHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -245,10 +246,10 @@ func GetAppStreamFleet(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func AppStreamImage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AppStreamImage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := appstream.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeImages(ctx, &appstream.DescribeImagesInput{
 			NextToken: prevToken,
@@ -263,7 +264,7 @@ func AppStreamImage(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 		for _, item := range output.Images {
 			resource, err := appStreamImageHandle(ctx, cfg, item)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -291,7 +292,7 @@ func AppStreamImage(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image) (Resource, error) {
+func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &appstream.ListTagsForResourceInput{
@@ -299,12 +300,12 @@ func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image)
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") || isErr(err, "AccessDeniedException") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   *item.Name,
@@ -316,7 +317,7 @@ func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image)
 
 	return resource, nil
 }
-func GetAppStreamImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAppStreamImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
 	client := appstream.NewFromConfig(cfg)
 
@@ -330,11 +331,11 @@ func GetAppStreamImage(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Images {
 
 		resource, err := appStreamImageHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

@@ -4,8 +4,6 @@ import (
 	"strings"
 )
 
-type StreamSender func(Resource) error
-
 type Resource struct {
 	// ARN uniquely identifies an AWS resource across regions, accounts and types.
 	ARN string
@@ -19,14 +17,6 @@ type Resource struct {
 	Region    string
 	Partition string
 	Type      string
-}
-
-func (r Resource) UniqueID() string {
-	if r.ARN != "" {
-		return r.ARN
-	}
-
-	return CompositeID(r.Partition, r.Region, r.Account, r.Type, r.ID)
 }
 
 func CompositeID(list ...string) string {

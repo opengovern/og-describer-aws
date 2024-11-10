@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake"
@@ -9,11 +10,11 @@ import (
 )
 
 // SecurityLakeDataLake TODO: new sdk version available but a field is missing
-func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securitylake.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	lakes, err := client.ListDataLakes(ctx, &securitylake.ListDataLakesInput{})
 	if err != nil {
 		if isErr(err, "AccessDeniedException") {
@@ -26,7 +27,7 @@ func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *StreamSen
 		if lake.DataLakeArn == nil {
 			continue
 		}
-		resource := Resource{
+		resource := models.Resource{
 			Region: describeCtx.OGRegion,
 			Name:   *lake.DataLakeArn,
 			ARN:    *lake.DataLakeArn,
@@ -46,11 +47,11 @@ func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func SecurityLakeSubscriber(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityLakeSubscriber(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securitylake.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securitylake.NewListSubscribersPaginator(client, &securitylake.ListSubscribersInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -62,7 +63,7 @@ func SecurityLakeSubscriber(ctx context.Context, cfg aws.Config, stream *StreamS
 		}
 
 		for _, subscriber := range page.Subscribers {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *subscriber.SubscriberName,
 				Description: model.SecurityLakeSubscriberDescription{

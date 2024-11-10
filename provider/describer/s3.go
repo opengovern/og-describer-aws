@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -27,24 +28,17 @@ const (
 	s3BucketNoOfWorkers                              = 8
 )
 
-type s3bucketResult struct {
-	Bucket   types.Bucket
-	Resource Resource
-	Region   string
-	Err      error
-}
-
 // S3Bucket describe S3 buckets.
 // ListBuckets returns buckets in all regions. However, this function categorizes the buckets based
 // on their location constaint, aka the regions they reside in.
-func S3Bucket(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3Bucket(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := s3.NewFromConfig(cfg)
 	output, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
 	if err != nil {
 		return nil, fmt.Errorf("error listing buckets: %w", err)
 	}
 
-	var values []Resource
+	var values []models.Resource
 
 	for _, bucket := range output.Buckets {
 		region, err := getBucketLocation(ctx, client, bucket)
@@ -72,10 +66,10 @@ func S3Bucket(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 	}
 	return values, nil
 }
-func s3BucketHandle(ctx context.Context, region string, desc *model.S3BucketDescription, bucket types.Bucket) Resource {
+func s3BucketHandle(ctx context.Context, region string, desc *model.S3BucketDescription, bucket types.Bucket) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":s3:::" + *bucket.Name
-	resource := Resource{
+	resource := models.Resource{
 		Region:      region,
 		ARN:         arn,
 		Name:        *bucket.Name,
@@ -83,7 +77,7 @@ func s3BucketHandle(ctx context.Context, region string, desc *model.S3BucketDesc
 	}
 	return resource
 }
-func GetS3Bucket(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetS3Bucket(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	bucketName := fields["buketName"]
 
 	client := s3.NewFromConfig(cfg)
@@ -92,7 +86,7 @@ func GetS3Bucket(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		return nil, fmt.Errorf("error listing buckets: %w", err)
 	}
 
-	var values []Resource
+	var values []models.Resource
 
 	for _, bucket := range output.Buckets {
 		if *bucket.Name != bucketName {
@@ -418,7 +412,7 @@ func isErr(err error, code string) bool {
 	return errors.As(err, &ae) && ae.ErrorCode() == code
 }
 
-func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	stsClient := sts.NewFromConfig(cfg)
 	output, err := stsClient.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
@@ -431,7 +425,7 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 		AccountId: output.Account,
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -472,7 +466,7 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 				}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.AccessPointArn,
 				Name:   *v.Name,
@@ -494,7 +488,7 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 	return values, nil
 }
 
-func S3StorageLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3StorageLens(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	stsClient := sts.NewFromConfig(cfg)
 	output, err := stsClient.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
@@ -507,7 +501,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 		AccountId: output.Account,
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -515,7 +509,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 		}
 
 		for _, v := range page.StorageLensConfigurationList {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.StorageLensArn,
 				Name:        *v.Id,
@@ -534,7 +528,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 	return values, nil
 }
 
-func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	accountId, err := STSAccount(ctx, cfg)
 	if err != nil {
@@ -560,8 +554,8 @@ func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		}
 	}
 
-	var values []Resource
-	resource := Resource{
+	var values []models.Resource
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		// No ARN or ID. Account level setting
 		Name: accountId + " S3 Account Setting",
@@ -580,14 +574,14 @@ func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func S3Object(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3Object(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := s3.NewFromConfig(cfg)
 	buckets, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, bucket := range buckets.Buckets {
 		region, err := getBucketLocation(ctx, client, bucket)
 		if err != nil {
@@ -636,7 +630,7 @@ func S3Object(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 					return nil, err
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: region,
 					ARN:    arn,
 					Description: model.S3ObjectDescription{
@@ -661,13 +655,13 @@ func S3Object(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 	return values, nil
 }
 
-func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := s3.NewFromConfig(cfg)
 	buckets, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, bucket := range buckets.Buckets {
 		region, err := getBucketLocation(ctx, client, bucket)
 		if err != nil {
@@ -681,7 +675,7 @@ func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config
 			return nil, err
 		}
 		for _, v := range conf.IntelligentTieringConfigurationList {
-			resource := Resource{
+			resource := models.Resource{
 				Region: region,
 				ID:     *v.Id,
 				Description: model.S3BucketIntelligentTieringConfigurationDescription{
@@ -702,7 +696,7 @@ func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config
 	return values, nil
 }
 
-func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	accountId, err := STSAccount(ctx, cfg)
 	if err != nil {
@@ -715,7 +709,7 @@ func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *Strea
 	}
 
 	paginator := s3control.NewListMultiRegionAccessPointsPaginator(client, input)
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -727,7 +721,7 @@ func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *Strea
 		for _, report := range page.AccessPoints {
 			arn := "arn:" + describeCtx.Partition + ":s3::" + accountId + ":accesspoint/" + *report.Name
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *report.Name,

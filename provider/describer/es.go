@@ -5,14 +5,15 @@ import (
 	"math"
 
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	es "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ESDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
-	var values []Resource
+func ESDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
+	var values []models.Resource
 
 	client := es.NewFromConfig(cfg)
 	listNamesOut, err := client.ListDomainNames(ctx, &es.ListDomainNamesInput{})
@@ -39,7 +40,7 @@ func ESDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 		for _, v := range out.DomainStatusList {
 			resource, err := ESDomainHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -58,7 +59,7 @@ func ESDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 	}
 	return values, nil
 }
-func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDomainStatus) (Resource, error) {
+func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDomainStatus) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := es.NewFromConfig(cfg)
 
@@ -67,12 +68,12 @@ func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDo
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ARN,
 		Name:   *v.DomainName,
@@ -83,9 +84,9 @@ func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDo
 	}
 	return resource, nil
 }
-func GetESDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetESDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	domainName := fields["domainName"]
-	var values []Resource
+	var values []models.Resource
 
 	client := es.NewFromConfig(cfg)
 	describeElasticSearch, err := client.DescribeElasticsearchDomain(ctx, &es.DescribeElasticsearchDomainInput{
@@ -96,7 +97,7 @@ func GetESDomain(ctx context.Context, cfg aws.Config, fields map[string]string) 
 	}
 
 	resource, err := ESDomainHandle(ctx, cfg, *describeElasticSearch.DomainStatus)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

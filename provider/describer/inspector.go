@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"reflect"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -12,12 +13,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentRunsPaginator(client, &inspector.ListAssessmentRunsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -36,7 +37,7 @@ func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *StreamS
 		}
 
 		for _, assessmentRun := range assessmentRuns.AssessmentRuns {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *assessmentRun.Name,
 				ARN:    *assessmentRun.Arn,
@@ -57,11 +58,11 @@ func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *StreamS
 	return values, nil
 }
 
-func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentTargetsPaginator(client, &inspector.ListAssessmentTargetsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -92,9 +93,9 @@ func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *Stre
 	}
 	return values, nil
 }
-func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types.AssessmentTarget) Resource {
+func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types.AssessmentTarget) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *assessmentTarget.Name,
 		ARN:    *assessmentTarget.Arn,
@@ -104,9 +105,9 @@ func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types
 	}
 	return resource
 }
-func GetInspectorAssessmentTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetInspectorAssessmentTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	AssessmentTargetArn := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 	client := inspector.NewFromConfig(cfg)
 
 	describeAssessments, err := client.DescribeAssessmentTargets(ctx, &inspector.DescribeAssessmentTargetsInput{
@@ -126,11 +127,11 @@ func GetInspectorAssessmentTarget(ctx context.Context, cfg aws.Config, fields ma
 	return values, nil
 }
 
-func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentTemplatesPaginator(client, &inspector.ListAssessmentTemplatesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -176,9 +177,9 @@ func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *St
 
 	return values, nil
 }
-func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate types.AssessmentTemplate, eventSubscriptions *inspector.ListEventSubscriptionsOutput, tags *inspector.ListTagsForResourceOutput) Resource {
+func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate types.AssessmentTemplate, eventSubscriptions *inspector.ListEventSubscriptionsOutput, tags *inspector.ListTagsForResourceOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *assessmentTemplate.Name,
 		ARN:    *assessmentTemplate.Arn,
@@ -190,11 +191,11 @@ func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate t
 	}
 	return resource
 }
-func GetInspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetInspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := inspector.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	assessmentTemplates, err := client.DescribeAssessmentTemplates(ctx, &inspector.DescribeAssessmentTemplatesInput{
 		AssessmentTemplateArns: []string{arn},
 	})
@@ -223,12 +224,12 @@ func GetInspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, fields 
 	return values, nil
 }
 
-func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentRunsPaginator(client, &inspector.ListAssessmentRunsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -254,7 +255,7 @@ func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *StreamSende
 				}
 
 				for _, exclusion := range exclusions.Exclusions {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   *exclusion.Title,
 						ARN:    *exclusion.Arn,
@@ -276,12 +277,12 @@ func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func InspectorFinding(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func InspectorFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListFindingsPaginator(client, &inspector.ListFindingsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -300,7 +301,7 @@ func InspectorFinding(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		}
 
 		for _, finding := range findings.Findings {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *finding.Title,
 				ID:     *finding.Id,
@@ -323,12 +324,12 @@ func InspectorFinding(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListCoveragePaginator(client, &inspector2.ListCoverageInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -336,7 +337,7 @@ func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *StreamSende
 		}
 
 		for _, coveredResource := range page.CoveredResources {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *coveredResource.ResourceId,
 				Description: model.Inspector2CoverageDescription{
@@ -356,18 +357,18 @@ func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListCoverageStatisticsPaginator(client, &inspector2.ListCoverageStatisticsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
-		resource := Resource{
+		resource := models.Resource{
 			Region: describeCtx.OGRegion,
 			Description: model.Inspector2CoverageStatisticDescription{
 				TotalCounts: page.TotalCounts,
@@ -386,7 +387,7 @@ func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *St
 	return values, nil
 }
 
-func Inspector2CoverageMember(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func Inspector2CoverageMember(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := inspector2.NewFromConfig(cfg)
 	associated, err := Inspector2CoverageMemberHelper(ctx, cfg, client, true)
 	if err != nil {
@@ -396,7 +397,7 @@ func Inspector2CoverageMember(ctx context.Context, cfg aws.Config, stream *Strea
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	values = append(values, associated...)
 	for _, resource := range notAssociated {
 		if !ContainsResource(resource, values) {
@@ -406,7 +407,7 @@ func Inspector2CoverageMember(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func ContainsResource(val Resource, values []Resource) bool {
+func ContainsResource(val models.Resource, values []models.Resource) bool {
 	for _, v := range values {
 		if reflect.DeepEqual(val, v) {
 			return true
@@ -415,21 +416,21 @@ func ContainsResource(val Resource, values []Resource) bool {
 	return false
 }
 
-func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client *inspector2.Client, onlyAssociated bool) ([]Resource, error) {
+func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client *inspector2.Client, onlyAssociated bool) ([]models.Resource, error) {
 	input := &inspector2.ListMembersInput{
 		OnlyAssociated: &onlyAssociated,
 	}
 	paginator := inspector2.NewListMembersPaginator(client, input)
 	describeCtx := GetDescribeContext(ctx)
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, member := range page.Members {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Description: model.Inspector2MemberDescription{
 					Member:         member,
@@ -444,12 +445,12 @@ func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client 
 	return values, nil
 }
 
-func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListFindingsPaginator(client, &inspector2.ListFindingsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		for _, finding := range page.Findings {
@@ -457,7 +458,7 @@ func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *StreamSender
 				return nil, err
 			}
 			for _, v := range finding.Resources {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					Description: model.Inspector2FindingDescription{
 						Finding:  finding,

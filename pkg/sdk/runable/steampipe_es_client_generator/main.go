@@ -82,6 +82,7 @@ type {{ .Name }} struct {
 	ResourceID string ` + "`json:\"resource_id\"`" + `
 	PlatformID string ` + "`json:\"platform_id\"`" + `
 	Description   {{ .IntegrationType }}.{{ .Name }}Description 	` + "`json:\"description\"`" + `
+	Metadata      {{ .IntegrationType }}.Metadata 					` + "`json:\"metadata\"`" + `
 	DescribedBy int ` + "`json:\"described_by\"`" + `
 	ResourceType  string ` + "`json:\"resource_type\"`" + `
 	IntegrationType    string ` + "`json:\"integration_type\"`" + `
@@ -383,6 +384,8 @@ func Get{{ .Name }}(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 						s.ListFilters[fparts[0]] = fparts[1]
 					}
 				}
+				s.GetFilters["og_account_id"] = "metadata.IntegrationID"
+				s.ListFilters["og_account_id"] = "metadata.IntegrationID"
 			}
 
 			if s.Index != "" {

@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless"
@@ -9,12 +10,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func OpenSearchServerlessCollection(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OpenSearchServerlessCollection(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := opensearchserverless.NewFromConfig(cfg)
 	paginator := opensearchserverless.NewListCollectionsPaginator(client, &opensearchserverless.ListCollectionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -37,7 +38,7 @@ func OpenSearchServerlessCollection(ctx context.Context, cfg aws.Config, stream 
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Name,

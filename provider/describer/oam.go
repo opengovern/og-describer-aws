@@ -2,18 +2,19 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/oam"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func OAMLink(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OAMLink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := oam.NewFromConfig(cfg)
 	paginator := oam.NewListLinksPaginator(client, &oam.ListLinksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -37,7 +38,7 @@ func OAMLink(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 				name = *out.Id
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,
@@ -58,12 +59,12 @@ func OAMLink(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 	return values, nil
 }
 
-func OAMSink(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OAMSink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := oam.NewFromConfig(cfg)
 	paginator := oam.NewListSinksPaginator(client, &oam.ListSinksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -87,7 +88,7 @@ func OAMSink(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 				name = *v.Name
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,

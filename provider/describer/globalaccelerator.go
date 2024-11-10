@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func GlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func GlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := globalaccelerator.NewFromConfig(cfg)
 	paginator := globalaccelerator.NewListAcceleratorsPaginator(client, &globalaccelerator.ListAcceleratorsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -47,9 +48,9 @@ func GlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func globalAcceleratorAcceleratorHandle(ctx context.Context, attribute *globalaccelerator.DescribeAcceleratorAttributesOutput, tags *globalaccelerator.ListTagsForResourceOutput, accelerator types.Accelerator) Resource {
+func globalAcceleratorAcceleratorHandle(ctx context.Context, attribute *globalaccelerator.DescribeAcceleratorAttributesOutput, tags *globalaccelerator.ListTagsForResourceOutput, accelerator types.Accelerator) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *accelerator.AcceleratorArn,
 		Name:   *accelerator.Name,
@@ -61,10 +62,10 @@ func globalAcceleratorAcceleratorHandle(ctx context.Context, attribute *globalac
 	}
 	return resource
 }
-func GetGlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetGlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	acceleratorArn := fields["arn"]
 	client := globalaccelerator.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	accelerator, err := client.DescribeAccelerator(ctx, &globalaccelerator.DescribeAcceleratorInput{
 		AcceleratorArn: &acceleratorArn,
@@ -101,11 +102,11 @@ func GetGlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, fields
 	return values, nil
 }
 
-func GlobalAcceleratorListener(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func GlobalAcceleratorListener(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := globalaccelerator.NewFromConfig(cfg)
 	paginator := globalaccelerator.NewListAcceleratorsPaginator(client, &globalaccelerator.ListAcceleratorsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -139,9 +140,9 @@ func GlobalAcceleratorListener(ctx context.Context, cfg aws.Config, stream *Stre
 
 	return values, nil
 }
-func globalAcceleratorListenerHandle(ctx context.Context, listener types.Listener, ARN string) Resource {
+func globalAcceleratorListenerHandle(ctx context.Context, listener types.Listener, ARN string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *listener.ListenerArn,
 		Name:   *listener.ListenerArn,
@@ -152,8 +153,8 @@ func globalAcceleratorListenerHandle(ctx context.Context, listener types.Listene
 	}
 	return resource
 }
-func GetGlobalAcceleratorListener(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetGlobalAcceleratorListener(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	acceleratorArn := fields["arn"]
 	client := globalaccelerator.NewFromConfig(cfg)
 	accelerator, err := client.DescribeAccelerator(ctx, &globalaccelerator.DescribeAcceleratorInput{
@@ -183,11 +184,11 @@ func GetGlobalAcceleratorListener(ctx context.Context, cfg aws.Config, fields ma
 	return values, nil
 }
 
-func GlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func GlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := globalaccelerator.NewFromConfig(cfg)
 	paginator := globalaccelerator.NewListAcceleratorsPaginator(client, &globalaccelerator.ListAcceleratorsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -229,9 +230,9 @@ func GlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, stream 
 
 	return values, nil
 }
-func globalAcceleratorEndpointGroupHandle(ctx context.Context, endpointGroup types.EndpointGroup, listener types.Listener, ARN string) Resource {
+func globalAcceleratorEndpointGroupHandle(ctx context.Context, endpointGroup types.EndpointGroup, listener types.Listener, ARN string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *endpointGroup.EndpointGroupArn,
 		Name:   *endpointGroup.EndpointGroupArn,
@@ -243,10 +244,10 @@ func globalAcceleratorEndpointGroupHandle(ctx context.Context, endpointGroup typ
 	}
 	return resource
 }
-func GetGlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetGlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	acceleratorArn := fields["arn"]
 	client := globalaccelerator.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	accelerator, err := client.DescribeAccelerator(ctx, &globalaccelerator.DescribeAcceleratorInput{
 		AcceleratorArn: &acceleratorArn,

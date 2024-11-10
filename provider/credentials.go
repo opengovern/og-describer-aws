@@ -6,10 +6,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
+	awsmodel "github.com/opengovern/og-aws-describer/aws/model"
 	model "github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"github.com/opengovern/og-describer-aws/provider/configs"
 	"github.com/opengovern/og-util/pkg/describe"
 	"golang.org/x/net/context"
+	"strings"
 )
 
 // GenerateAWSConfig creates an AWS configuration using the provided credentials provider.
@@ -56,7 +58,23 @@ func AccountCredentialsFromMap(m map[string]any) (configs.IntegrationCredentials
 // GetResourceMetadata TODO: Get metadata as a map to add to the resources
 func GetResourceMetadata(job describe.DescribeJob, resource model.Resource) (map[string]string, error) {
 	metadata := make(map[string]string)
+	awsMetadata := awsmodel.Metadata{
+		Name:         resource.Name,
+		AccountID:    job.IntegrationID,
+		SourceID:     job.ProviderID,
+		Region:       resource.Region,
+		ResourceType: strings.ToLower(job.ResourceType),
+	}
 
+	awsMetadataBytes, err := json.Marshal(awsMetadata)
+	if err != nil {
+		return nil, fmt.Errorf("marshal metadata: %v", err.Error())
+	}
+
+	err = json.Unmarshal(awsMetadataBytes, &metadata)
+	if err != nil {
+		return nil, fmt.Errorf("unmarshal metadata: %v", err.Error())
+	}
 	return metadata, nil
 }
 

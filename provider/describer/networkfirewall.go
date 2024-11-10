@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func NetworkFirewallFirewall(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NetworkFirewallFirewall(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := networkfirewall.NewFromConfig(cfg)
 	paginator := networkfirewall.NewListFirewallsPaginator(client, &networkfirewall.ListFirewallsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -25,7 +26,7 @@ func NetworkFirewallFirewall(ctx context.Context, cfg aws.Config, stream *Stream
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -45,7 +46,7 @@ func NetworkFirewallFirewall(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.FirewallMetadata) (Resource, error) {
+func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.FirewallMetadata) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	firewall, err := client.DescribeFirewall(ctx, &networkfirewall.DescribeFirewallInput{
@@ -53,17 +54,17 @@ func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.
 		FirewallArn:  v.FirewallArn,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	firewallLogging, err := client.DescribeLoggingConfiguration(ctx, &networkfirewall.DescribeLoggingConfigurationInput{
 		FirewallArn: firewall.Firewall.FirewallArn,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.FirewallArn,
 		Name:   *v.FirewallName,
@@ -75,8 +76,8 @@ func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.
 	}
 	return resource, nil
 }
-func GetNetworkFirewallFirewall(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetNetworkFirewallFirewall(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	firewallArn := fields["firewallArn"]
 	client := networkfirewall.NewFromConfig(cfg)
 
@@ -96,7 +97,7 @@ func GetNetworkFirewallFirewall(ctx context.Context, cfg aws.Config, fields map[
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -107,12 +108,12 @@ func GetNetworkFirewallFirewall(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	paginator := networkfirewall.NewListFirewallPoliciesPaginator(client, &networkfirewall.ListFirewallPoliciesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -138,7 +139,7 @@ func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *StreamSe
 			} else {
 				name = *v.Arn
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,
@@ -160,12 +161,12 @@ func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func NetworkFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NetworkFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	paginator := networkfirewall.NewListRuleGroupsPaginator(client, &networkfirewall.ListRuleGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -191,7 +192,7 @@ func NetworkFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *Strea
 			} else {
 				name = *v.Arn
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,

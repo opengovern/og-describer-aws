@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"math/rand"
 	"os"
 	"sync"
@@ -103,10 +104,10 @@ func IsManagementAccount(ctx context.Context, cfg aws.Config) error {
 }
 
 // GetOrganizationAccounts fetches all organization accounts with their details.
-func GetOrganizationAccounts(ctx context.Context, cfg aws.Config) ([]Resource, error) {
+func GetOrganizationAccounts(ctx context.Context, cfg aws.Config) ([]models.Resource, error) {
 	orgClient := organizations.NewFromConfig(cfg)
 
-	var accounts []Resource
+	var accounts []models.Resource
 	var mu sync.Mutex // Protects the accounts slice
 
 	input := &organizations.ListAccountsInput{}
@@ -159,7 +160,7 @@ func GetOrganizationAccounts(ctx context.Context, cfg aws.Config) ([]Resource, e
 }
 
 // processAccount processes individual account details.
-func processAccount(ctx context.Context, orgClient *organizations.Client, acct orgtypes.Account) (Resource, error) {
+func processAccount(ctx context.Context, orgClient *organizations.Client, acct orgtypes.Account) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	// Get Tags
@@ -168,7 +169,7 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 		return limiter.Wait(ctx)
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	err = callWithRetry(ctx, func() error {
 		var err error
@@ -178,7 +179,7 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 		return err
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	// Get Parent OU ID
@@ -187,7 +188,7 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 		return limiter.Wait(ctx)
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	err = callWithRetry(ctx, func() error {
 		var err error
@@ -197,17 +198,17 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 		return err
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	if len(parentsOutput.Parents) == 0 {
 		// No parent found
-		return Resource{}, fmt.Errorf("no parent found for account %s", aws.ToString(acct.Id))
+		return models.Resource{}, fmt.Errorf("no parent found for account %s", aws.ToString(acct.Id))
 	}
 
 	parent := parentsOutput.Parents[0]
 	ouId := aws.ToString(parent.Id)
 
-	details := Resource{
+	details := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *acct.Arn,
 		ID:     *acct.Id,
@@ -296,7 +297,7 @@ func pauseAllWorkers() {
 	fmt.Fprintf(os.Stderr, "Increasing API rate limit to %v requests per second.\n", newLimit)
 }
 
-func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	// Seed the random number generator for jitter
 	rand.Seed(time.Now().UnixNano())
 
@@ -312,7 +313,7 @@ func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *StreamSen
 		return nil, err
 	}
 
-	values := make([]Resource, len(accounts))
+	values := make([]models.Resource, len(accounts))
 
 	for _, resource := range accounts {
 		if stream != nil {

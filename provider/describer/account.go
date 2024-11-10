@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/account"
@@ -9,10 +10,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
-	var values []Resource
+	var values []models.Resource
 
 	contactTypes := []types.AlternateContactType{types.AlternateContactTypeBilling, types.AlternateContactTypeOperations, types.AlternateContactTypeSecurity}
 	input := &account.GetAlternateContactInput{
@@ -24,7 +25,7 @@ func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *Stream
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			continue
 		}
@@ -42,7 +43,7 @@ func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountId string, contactType types.AlternateContactType) (Resource, error) {
+func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountId string, contactType types.AlternateContactType) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := account.NewFromConfig(cfg)
@@ -54,10 +55,10 @@ func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountI
 		if isErr(err, "ResourceNotFoundException") {
 			op = &account.GetAlternateContactOutput{}
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *op.AlternateContact.Name,
 		Description: model.AccountAlternateContactDescription{
@@ -67,16 +68,16 @@ func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountI
 	}
 	return resource, nil
 }
-func GetAccountAlternateContact(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAccountAlternateContact(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	accountId := fields["accountId"]
 	contactTypes := []types.AlternateContactType{types.AlternateContactTypeBilling, types.AlternateContactTypeOperations, types.AlternateContactTypeSecurity}
-	var values []Resource
+	var values []models.Resource
 	for _, contactType := range contactTypes {
 		resource, err := accountAlternateContactHandle(ctx, cfg, accountId, contactType)
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -85,12 +86,12 @@ func GetAccountAlternateContact(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func AccountContact(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AccountContact(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := account.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 
 	input := &account.GetContactInformationInput{}
 	op, err := client.GetContactInformation(ctx, input)
@@ -98,7 +99,7 @@ func AccountContact(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 		return nil, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *op.ContactInformation.FullName,
 		Description: model.AccountContactDescription{

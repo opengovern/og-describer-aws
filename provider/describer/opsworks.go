@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func OpsWorksCMServer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OpsWorksCMServer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := opsworkscm.NewFromConfig(cfg)
 	paginator := opsworkscm.NewDescribeServersPaginator(client, &opsworkscm.DescribeServersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -22,7 +23,7 @@ func OpsWorksCMServer(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 		for _, v := range page.Servers {
 			resource, err := opsWorksCMServerHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -42,7 +43,7 @@ func OpsWorksCMServer(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	return values, nil
 }
-func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server) (Resource, error) {
+func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := opsworkscm.NewFromConfig(cfg)
 
@@ -51,12 +52,12 @@ func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server)
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ServerArn,
 		Name:   *v.ServerName,
@@ -67,7 +68,7 @@ func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server)
 	}
 	return resource, nil
 }
-func GetOpsWorksCMServer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetOpsWorksCMServer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	serverName := fields["name"]
 	client := opsworkscm.NewFromConfig(cfg)
 
@@ -77,11 +78,11 @@ func GetOpsWorksCMServer(ctx context.Context, cfg aws.Config, fields map[string]
 	if err != nil {
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range server.Servers {
 
 		resource, err := opsWorksCMServerHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

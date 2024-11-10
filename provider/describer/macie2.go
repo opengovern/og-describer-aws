@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -9,10 +10,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func Macie2ClassificationJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func Macie2ClassificationJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := macie2.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		classificationJobs, err := client.ListClassificationJobs(ctx, &macie2.ListClassificationJobsInput{
 			NextToken: prevToken,
@@ -34,7 +35,7 @@ func Macie2ClassificationJob(ctx context.Context, cfg aws.Config, stream *Stream
 					return nil, err
 				}
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -56,7 +57,7 @@ func Macie2ClassificationJob(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId string) (Resource, error) {
+func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := macie2.NewFromConfig(cfg)
 
@@ -65,12 +66,12 @@ func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId st
 	})
 	if err != nil {
 		if isErr(err, "DescribeClassificationJobNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *job.JobArn,
 		Name:   *job.Name,
@@ -81,15 +82,15 @@ func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId st
 	}
 	return resource, nil
 }
-func GetMacie2ClassificationJob(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMacie2ClassificationJob(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	jobId := fields["jobId"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := macie2ClassificationJobHandle(ctx, cfg, jobId)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

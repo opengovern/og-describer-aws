@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	dms "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
@@ -9,13 +10,13 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DMSReplicationInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DMSReplicationInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dms.NewFromConfig(cfg)
 
 	paginator := dms.NewDescribeReplicationInstancesPaginator(client,
 		&dms.DescribeReplicationInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -27,7 +28,7 @@ func DMSReplicationInstance(ctx context.Context, cfg aws.Config, stream *StreamS
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -44,7 +45,7 @@ func DMSReplicationInstance(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item types.ReplicationInstance) (Resource, error) {
+func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item types.ReplicationInstance) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
@@ -52,12 +53,12 @@ func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item type
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNoFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ReplicationInstanceArn,
 		Name:   *item.ReplicationInstanceIdentifier,
@@ -68,7 +69,7 @@ func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item type
 	}
 	return resource, nil
 }
-func GetDMSReplicationInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDMSReplicationInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	replicationInstanceArn := fields["arn"]
 	client := dms.NewFromConfig(cfg)
 
@@ -77,7 +78,7 @@ func GetDMSReplicationInstance(ctx context.Context, cfg aws.Config, fields map[s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.ReplicationInstances {
 
 		if *item.ReplicationInstanceArn != replicationInstanceArn {
@@ -88,7 +89,7 @@ func GetDMSReplicationInstance(ctx context.Context, cfg aws.Config, fields map[s
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -98,13 +99,13 @@ func GetDMSReplicationInstance(ctx context.Context, cfg aws.Config, fields map[s
 	return values, nil
 }
 
-func DMSEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DMSEndpoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dms.NewFromConfig(cfg)
 
 	paginator := dms.NewDescribeEndpointsPaginator(client,
 		&dms.DescribeEndpointsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -116,7 +117,7 @@ func DMSEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -134,7 +135,7 @@ func DMSEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint) (Resource, error) {
+func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
@@ -142,12 +143,12 @@ func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint)
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNoFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.EndpointArn,
 		Name:   *item.EndpointIdentifier,
@@ -159,13 +160,13 @@ func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint)
 	return resource, nil
 }
 
-func DMSReplicationTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DMSReplicationTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dms.NewFromConfig(cfg)
 
 	paginator := dms.NewDescribeReplicationTasksPaginator(client,
 		&dms.DescribeReplicationTasksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -177,7 +178,7 @@ func DMSReplicationTask(ctx context.Context, cfg aws.Config, stream *StreamSende
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -195,7 +196,7 @@ func DMSReplicationTask(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.ReplicationTask) (Resource, error) {
+func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.ReplicationTask) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
@@ -203,12 +204,12 @@ func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.Re
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNoFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ReplicationTaskArn,
 		ID:     *item.ReplicationTaskIdentifier,

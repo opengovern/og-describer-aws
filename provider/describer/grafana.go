@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/grafana"
@@ -10,11 +11,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func GrafanaWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func GrafanaWorkspace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := grafana.NewFromConfig(cfg)
 	paginator := grafana.NewListWorkspacesPaginator(client, &grafana.ListWorkspacesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -35,11 +36,11 @@ func GrafanaWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	return values, nil
 }
-func grafanaWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) Resource {
+func grafanaWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:grafana:%s:%s:/workspaces/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.Id)
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.Id,
@@ -49,7 +50,7 @@ func grafanaWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) Resou
 	}
 	return resource
 }
-func GetGrafanaWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetGrafanaWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	workspaceId := fields["workspaceId"]
 	client := grafana.NewFromConfig(cfg)
 
@@ -77,7 +78,7 @@ func GetGrafanaWorkspace(ctx context.Context, cfg aws.Config, fields map[string]
 		Tags:                     out.Workspace.Tags,
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, grafanaWorkspaceHandle(ctx, workspace))
 	return values, nil
 }

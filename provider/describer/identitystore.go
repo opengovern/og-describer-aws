@@ -4,19 +4,20 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -31,7 +32,7 @@ func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *StreamSende
 				}
 
 				for _, group := range page2.Groups {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ID:     *group.GroupId,
 						Name:   *group.DisplayName,
@@ -54,13 +55,13 @@ func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -79,7 +80,7 @@ func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *StreamSender
 						primaryEmail = e.Value
 					}
 				}
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     *user.UserId,
 					Name:   *user.UserName,
@@ -102,14 +103,14 @@ func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func IdentityStoreGroupMembership(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func IdentityStoreGroupMembership(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -133,7 +134,7 @@ func IdentityStoreGroupMembership(ctx context.Context, cfg aws.Config, stream *S
 						return nil, err
 					}
 					for _, membership := range membershipPage.GroupMemberships {
-						resource := Resource{
+						resource := models.Resource{
 							Region: describeCtx.OGRegion,
 							ID:     *membership.MembershipId,
 							Description: model.IdentityStoreGroupMembershipDescription{

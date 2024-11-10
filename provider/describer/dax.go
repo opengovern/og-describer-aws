@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
@@ -12,7 +13,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DAXCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DAXCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dax.NewFromConfig(cfg)
 	out, err := client.DescribeClusters(ctx, &dax.DescribeClustersInput{})
 	if err != nil {
@@ -22,7 +23,7 @@ func DAXCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range out.Clusters {
 		tags, err := client.ListTags(ctx, &dax.ListTagsInput{
 			ResourceName: cluster.ClusterArn,
@@ -46,9 +47,9 @@ func DAXCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 	}
 	return values, nil
 }
-func dAXClusterHandle(ctx context.Context, tags *dax.ListTagsOutput, cluster types.Cluster) Resource {
+func dAXClusterHandle(ctx context.Context, tags *dax.ListTagsOutput, cluster types.Cluster) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ClusterArn,
 		Name:   *cluster.ClusterName,
@@ -59,9 +60,9 @@ func dAXClusterHandle(ctx context.Context, tags *dax.ListTagsOutput, cluster typ
 	}
 	return resource
 }
-func GetDAXCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDAXCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := dax.NewFromConfig(cfg)
 
 	clusterDescribe, err := client.DescribeClusters(ctx, &dax.DescribeClustersInput{
@@ -91,10 +92,10 @@ func GetDAXCluster(ctx context.Context, cfg aws.Config, fields map[string]string
 	return values, nil
 }
 
-func DAXParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DAXParameterGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dax.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		parameterGroups, err := client.DescribeParameterGroups(ctx, &dax.DescribeParameterGroupsInput{
 			MaxResults: aws.Int32(100),
@@ -125,9 +126,9 @@ func DAXParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func dAXParameterGroupHandle(ctx context.Context, parameterGroup types.ParameterGroup) Resource {
+func dAXParameterGroupHandle(ctx context.Context, parameterGroup types.ParameterGroup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *parameterGroup.ParameterGroupName,
 		Description: model.DAXParameterGroupDescription{
@@ -136,9 +137,9 @@ func dAXParameterGroupHandle(ctx context.Context, parameterGroup types.Parameter
 	}
 	return resource
 }
-func GetDAXParameterGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDAXParameterGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	parameterGroupName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	client := dax.NewFromConfig(cfg)
 	parameterGroups, err := client.DescribeParameterGroups(ctx, &dax.DescribeParameterGroupsInput{
@@ -157,12 +158,12 @@ func GetDAXParameterGroup(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func DAXParameter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DAXParameter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	//
 	client := dax.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		parameterGroups, err := client.DescribeParameterGroups(ctx, &dax.DescribeParameterGroupsInput{
 			MaxResults: aws.Int32(100),
@@ -184,7 +185,7 @@ func DAXParameter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 				}
 
 				for _, parameter := range parameters.Parameters {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   *parameter.ParameterName,
 						Description: model.DAXParameterDescription{
@@ -218,11 +219,11 @@ func DAXParameter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 	return values, nil
 }
 
-func DAXSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DAXSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 
 	client := dax.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		subnetGroups, err := client.DescribeSubnetGroups(ctx, &dax.DescribeSubnetGroupsInput{
 			MaxResults: aws.Int32(100),
@@ -252,11 +253,11 @@ func DAXSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func dAXSubnetGroupHandle(ctx context.Context, subnetGroup types.SubnetGroup) Resource {
+func dAXSubnetGroupHandle(ctx context.Context, subnetGroup types.SubnetGroup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:dax:%s::subnetgroup:%s", describeCtx.Partition, describeCtx.Region, *subnetGroup.SubnetGroupName)
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *subnetGroup.SubnetGroupName,
 		ARN:    arn,
@@ -266,9 +267,9 @@ func dAXSubnetGroupHandle(ctx context.Context, subnetGroup types.SubnetGroup) Re
 	}
 	return resource
 }
-func GetDAXSubnetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDAXSubnetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	SubnetGroupNames := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := dax.NewFromConfig(cfg)
 
 	subnetGroups, err := client.DescribeSubnetGroups(ctx, &dax.DescribeSubnetGroupsInput{

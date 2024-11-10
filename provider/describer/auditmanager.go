@@ -5,20 +5,21 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
 	//
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -34,7 +35,7 @@ func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *StreamS
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *assessment.Assessment.Arn,
 				Name:   *assessment.Assessment.Metadata.Name,
@@ -56,11 +57,11 @@ func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *StreamS
 	return values, nil
 }
 
-func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, ctype := range []types.ControlType{types.ControlTypeStandard, types.ControlTypeCustom} {
 		paginator := auditmanager.NewListControlsPaginator(client, &auditmanager.ListControlsInput{
 			ControlType: ctype,
@@ -80,7 +81,7 @@ func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *StreamSend
 					return nil, err
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ARN:    *control.Control.Arn,
 					Name:   *control.Control.Name,
@@ -103,7 +104,7 @@ func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	controlID := fields["id"]
 	client := auditmanager.NewFromConfig(cfg)
@@ -114,8 +115,8 @@ func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[stri
 		return nil, err
 	}
 
-	var values []Resource
-	values = append(values, Resource{
+	var values []models.Resource
+	values = append(values, models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *control.Control.Arn,
 		Name:   *control.Control.Name,
@@ -128,12 +129,12 @@ func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -164,7 +165,7 @@ func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 						for _, evidence := range evidencePage.Evidence {
 							arn := fmt.Sprintf("arn:%s:auditmanager:%s:%s:evidence/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *evidence.Id)
-							resource := Resource{
+							resource := models.Resource{
 								Region: describeCtx.OGRegion,
 								ARN:    arn,
 								ID:     *evidence.Id,
@@ -191,12 +192,12 @@ func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -216,7 +217,7 @@ func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *Str
 
 				for _, evidenceFolder := range evidenceFolderPage.EvidenceFolders {
 					arn := fmt.Sprintf("arn:%s:auditmanager:%s:%s:evidence-folder/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *evidenceFolder.Id)
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    arn,
 						Name:   *evidenceFolder.Name,
@@ -241,11 +242,11 @@ func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *Str
 	return values, nil
 }
 
-func AuditManagerFramework(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AuditManagerFramework(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, ftype := range []types.FrameworkType{types.FrameworkTypeStandard, types.FrameworkTypeCustom} {
 		paginator := auditmanager.NewListAssessmentFrameworksPaginator(client, &auditmanager.ListAssessmentFrameworksInput{
 			FrameworkType: ftype,
@@ -264,7 +265,7 @@ func AuditManagerFramework(ctx context.Context, cfg aws.Config, stream *StreamSe
 					return nil, err
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ARN:    *framework.Framework.Arn,
 					Name:   *framework.Framework.Name,

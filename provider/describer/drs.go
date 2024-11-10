@@ -2,20 +2,21 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/drs"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
 		MaxResults: aws.Int32(100),
 	})
 
-	var values []Resource
+	var values []models.Resource
 	pageNo := 0
 	for paginator.HasMorePages() && pageNo < 5 {
 		pageNo++
@@ -35,7 +36,7 @@ func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.SourceServerID,
@@ -57,14 +58,14 @@ func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeRecoveryInstancesPaginator(client, &drs.DescribeRecoveryInstancesInput{
 		MaxResults: aws.Int32(100),
 	})
 
-	var values []Resource
+	var values []models.Resource
 	pageNo := 0
 	for paginator.HasMorePages() && pageNo < 5 {
 		pageNo++
@@ -77,7 +78,7 @@ func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *StreamSend
 		}
 
 		for _, v := range page.Items {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.RecoveryInstanceID,
@@ -98,14 +99,14 @@ func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func DRSJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DRSJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeJobsPaginator(client, &drs.DescribeJobsInput{
 		MaxResults: aws.Int32(100),
 	})
 
-	var values []Resource
+	var values []models.Resource
 	pageNo := 0
 	for paginator.HasMorePages() && pageNo < 5 {
 		pageNo++
@@ -118,7 +119,7 @@ func DRSJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resour
 		}
 
 		for _, v := range page.Items {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				ID:     *v.JobID,
@@ -139,14 +140,14 @@ func DRSJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resour
 	return values, nil
 }
 
-func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
 		MaxResults: aws.Int32(100),
 	})
 
-	var values []Resource
+	var values []models.Resource
 	sourceServerPageNo := 0
 	for paginator.HasMorePages() && sourceServerPageNo < 5 {
 		sourceServerPageNo++
@@ -173,7 +174,7 @@ func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *StreamSend
 				}
 
 				for _, recoverySnapshot := range recoverySnapshotPage.Items {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ID:     *recoverySnapshot.SnapshotID,
 						Description: model.DRSRecoverySnapshotDescription{

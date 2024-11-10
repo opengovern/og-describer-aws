@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -23,7 +24,7 @@ func OrganizationOrganization(ctx context.Context, cfg aws.Config) (*types.Organ
 	return req.Organization, nil
 }
 
-func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := organizations.NewFromConfig(cfg)
 
 	req, err := client.DescribeOrganization(ctx, &organizations.DescribeOrganizationInput{})
@@ -31,7 +32,7 @@ func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *Stre
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	resource := organizationsOrganizationHandle(ctx, req)
 	if stream != nil {
 		if err := (*stream)(resource); err != nil {
@@ -43,9 +44,9 @@ func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *Stre
 
 	return values, nil
 }
-func organizationsOrganizationHandle(ctx context.Context, req *organizations.DescribeOrganizationOutput) Resource {
+func organizationsOrganizationHandle(ctx context.Context, req *organizations.DescribeOrganizationOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *req.Organization.Arn,
 		Name:   *req.Organization.Id,
@@ -55,9 +56,9 @@ func organizationsOrganizationHandle(ctx context.Context, req *organizations.Des
 	}
 	return resource
 }
-func GetOrganizationsOrganization(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetOrganizationsOrganization(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := organizations.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	describes, err := client.DescribeOrganization(ctx, &organizations.DescribeOrganizationInput{})
 	if err != nil {
 		return nil, err
@@ -100,13 +101,13 @@ func OrganizationAccounts(ctx context.Context, cfg aws.Config) ([]types.Account,
 	return values, nil
 }
 
-//func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+//func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 //	describeCtx := GetDescribeContext(ctx)
 //	client := organizations.NewFromConfig(cfg)
 //
 //	paginator := organizations.NewListAccountsPaginator(client, &organizations.ListAccountsInput{})
 //
-//	var values []Resource
+//	var values []models.Resource
 //	for paginator.HasMorePages() {
 //		page, err := paginator.NextPage(ctx)
 //		if err != nil {
@@ -124,7 +125,7 @@ func OrganizationAccounts(ctx context.Context, cfg aws.Config) ([]types.Account,
 //				return nil, err
 //			}
 //
-//			resource := Resource{
+//			resource := models.Resource{
 //				Region: describeCtx.OGRegion,
 //				ARN:    *acc.Arn,
 //				Name:   *acc.Name,
@@ -146,8 +147,8 @@ func OrganizationAccounts(ctx context.Context, cfg aws.Config) ([]types.Account,
 //	return values, nil
 //}
 
-func OrganizationsPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
-	var values []Resource
+func OrganizationsPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
+	var values []models.Resource
 	for _, pType := range []types.PolicyType{types.PolicyTypeServiceControlPolicy, types.PolicyTypeTagPolicy,
 		types.PolicyTypeBackupPolicy, types.PolicyTypeAiservicesOptOutPolicy} {
 		resources, err := getOrganizationsPolicyByType(ctx, cfg, pType)
@@ -167,12 +168,12 @@ func OrganizationsPolicy(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyType types.PolicyType) ([]Resource, error) {
+func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyType types.PolicyType) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := organizations.NewFromConfig(cfg)
 	paginator := organizations.NewListPoliciesPaginator(client, &organizations.ListPoliciesInput{Filter: policyType})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -187,7 +188,7 @@ func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyTyp
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *p.Arn,
 				Name:   *p.Name,
@@ -202,12 +203,12 @@ func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyTyp
 	return values, nil
 }
 
-func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := organizations.NewFromConfig(cfg)
 
 	paginator := organizations.NewListRootsPaginator(client, &organizations.ListRootsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -229,9 +230,9 @@ func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func organizationsRootHandle(ctx context.Context, root types.Root) Resource {
+func organizationsRootHandle(ctx context.Context, root types.Root) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *root.Arn,
 		Name:   *root.Name,
@@ -242,12 +243,12 @@ func organizationsRootHandle(ctx context.Context, root types.Root) Resource {
 	return resource
 }
 
-func OrganizationsOrganizationalUnit(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OrganizationsOrganizationalUnit(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := organizations.NewFromConfig(cfg)
 
 	paginator := organizations.NewListRootsPaginator(client, &organizations.ListRootsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -274,12 +275,12 @@ func OrganizationsOrganizationalUnit(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 
-func listAllNestedOUs(ctx context.Context, svc *organizations.Client, parentId string, currentPath string) ([]Resource, error) {
+func listAllNestedOUs(ctx context.Context, svc *organizations.Client, parentId string, currentPath string) ([]models.Resource, error) {
 	params := &organizations.ListOrganizationalUnitsForParentInput{
 		ParentId: aws.String(parentId),
 	}
 	paginator := organizations.NewListOrganizationalUnitsForParentPaginator(svc, params)
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -308,7 +309,7 @@ func listAllNestedOUs(ctx context.Context, svc *organizations.Client, parentId s
 	return values, nil
 }
 
-func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizations.Client, unit types.OrganizationalUnit, parentId, path string) (*Resource, error) {
+func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizations.Client, unit types.OrganizationalUnit, parentId, path string) (*models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	tagsResponse, err := svc.ListTagsForResource(ctx, &organizations.ListTagsForResourceInput{
 		ResourceId: unit.Id,
@@ -320,7 +321,7 @@ func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizatio
 	if tagsResponse != nil {
 		tags = tagsResponse.Tags
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *unit.Arn,
 		Name:   *unit.Name,
@@ -335,12 +336,12 @@ func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizatio
 	return &resource, nil
 }
 
-func OrganizationsPolicyTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OrganizationsPolicyTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := organizations.NewFromConfig(cfg)
 
 	// We should get the policies for different target types
 
-	var values []Resource
+	var values []models.Resource
 	// Accounts
 	paginator := organizations.NewListAccountsPaginator(client, &organizations.ListAccountsInput{})
 
@@ -423,8 +424,8 @@ func OrganizationsPolicyTarget(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func organizationsPolicyForTarget(ctx context.Context, svc *organizations.Client, targetId string) ([]Resource, error) {
-	var values []Resource
+func organizationsPolicyForTarget(ctx context.Context, svc *organizations.Client, targetId string) ([]models.Resource, error) {
+	var values []models.Resource
 	for _, pType := range []types.PolicyType{types.PolicyTypeServiceControlPolicy, types.PolicyTypeTagPolicy,
 		types.PolicyTypeBackupPolicy, types.PolicyTypeAiservicesOptOutPolicy} {
 		resources, err := organizationsPolicyForTargetByPolicyType(ctx, svc, targetId, pType)
@@ -438,10 +439,10 @@ func organizationsPolicyForTarget(ctx context.Context, svc *organizations.Client
 	return values, nil
 }
 
-func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organizations.Client, targetId string, policyType types.PolicyType) ([]Resource, error) {
+func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organizations.Client, targetId string, policyType types.PolicyType) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
-	var values []Resource
+	var values []models.Resource
 
 	params := &organizations.ListPoliciesForTargetInput{
 		Filter:   policyType,
@@ -462,7 +463,7 @@ func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organiza
 			if err != nil {
 				return nil, err
 			}
-			values = append(values, Resource{
+			values = append(values, models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *policy.Arn,
 				Name:   *policy.Name,

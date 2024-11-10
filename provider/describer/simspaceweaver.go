@@ -4,18 +4,19 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SimSpaceWeaverSimulation(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SimSpaceWeaverSimulation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := simspaceweaver.NewFromConfig(cfg)
 	paginator := simspaceweaver.NewListSimulationsPaginator(client, &simspaceweaver.ListSimulationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -45,7 +46,7 @@ func SimSpaceWeaverSimulation(ctx context.Context, cfg aws.Config, stream *Strea
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   name,

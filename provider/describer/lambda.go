@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
@@ -13,7 +14,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func LambdaFunction(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaFunction(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	logger := GetLoggerFromContext(ctx)
 
 	logger.Info("LambdaFunction start working")
@@ -22,7 +23,7 @@ func LambdaFunction(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	paginator := lambda.NewListFunctionsPaginator(client, &lambda.ListFunctionsInput{})
 
 	logger.Info("LambdaFunction start getting pages")
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -38,7 +39,7 @@ func LambdaFunction(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -56,7 +57,7 @@ func LambdaFunction(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.FunctionConfiguration) (Resource, error) {
+func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.FunctionConfiguration) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	listUrlConfig, err := client.ListFunctionUrlConfigs(ctx, &lambda.ListFunctionUrlConfigsInput{
@@ -66,7 +67,7 @@ func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.Fu
 		if isErr(err, "ListFunctionUrlConfigsNotFound") || isErr(err, "InvalidParameterValue") {
 			listUrlConfig = &lambda.ListFunctionUrlConfigsOutput{}
 		} else {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
 	}
 
@@ -88,7 +89,7 @@ func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.Fu
 		}
 
 		if err != nil {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -96,10 +97,10 @@ func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.Fu
 		FunctionName: v.FunctionName,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.FunctionArn,
 		Name:   *v.FunctionName,
@@ -111,7 +112,7 @@ func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.Fu
 	}
 	return resource, nil
 }
-func GetLambdaFunction(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetLambdaFunction(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	functionName := fields["name"]
 	client := lambda.NewFromConfig(cfg)
 	out, err := client.GetFunction(ctx, &lambda.GetFunctionInput{
@@ -122,13 +123,13 @@ func GetLambdaFunction(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := lambdaFunctionHandle(ctx, client, *out.Configuration)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -137,14 +138,14 @@ func GetLambdaFunction(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func LambdaFunctionVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaFunctionVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListFunctionsPaginator(client, &lambda.ListFunctionsInput{
 		FunctionVersion: types.FunctionVersionAll,
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -166,7 +167,7 @@ func LambdaFunctionVersion(ctx context.Context, cfg aws.Config, stream *StreamSe
 				}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     id,
 				Description: model.LambdaFunctionVersionDescription{
@@ -186,7 +187,7 @@ func LambdaFunctionVersion(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func LambdaAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	fns, err := LambdaFunction(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -194,7 +195,7 @@ func LambdaAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 
 	client := lambda.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, f := range fns {
 		fn := f.Description.(model.LambdaFunctionDescription).Function.Configuration
 		paginator := lambda.NewListAliasesPaginator(client, &lambda.ListAliasesInput{
@@ -229,7 +230,7 @@ func LambdaAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	}
 	return values, nil
 }
-func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfiguration, fn *types.FunctionConfiguration) (Resource, error) {
+func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfiguration, fn *types.FunctionConfiguration) (models.Resource, error) {
 	client := lambda.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -241,7 +242,7 @@ func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfigu
 		if isErr(err, "ResourceNotFoundException") {
 			policy = &lambda.GetPolicyOutput{}
 		} else {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -253,11 +254,11 @@ func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfigu
 		if isErr(err, "ResourceNotFoundException") {
 			urlConfig = &lambda.GetFunctionUrlConfigOutput{}
 		} else {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.AliasArn,
 		Name:   *v.Name,
@@ -270,7 +271,7 @@ func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfigu
 	}
 	return resource, nil
 }
-func GetLambdaAlias(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetLambdaAlias(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["aliasName"]
 	client := lambda.NewFromConfig(cfg)
 
@@ -279,7 +280,7 @@ func GetLambdaAlias(ctx context.Context, cfg aws.Config, fields map[string]strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, fn := range fns.Functions {
 
 		out, err := client.GetAlias(ctx, &lambda.GetAliasInput{
@@ -308,7 +309,7 @@ func GetLambdaAlias(ctx context.Context, cfg aws.Config, fields map[string]strin
 	return values, nil
 }
 
-func LambdaPermission(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaPermission(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	fns, err := LambdaFunction(ctx, cfg, nil)
 	if err != nil {
@@ -317,7 +318,7 @@ func LambdaPermission(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	client := lambda.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, f := range fns {
 		fn := f.Description.(model.LambdaFunctionDescription).Function.Configuration
 		v, err := client.GetPolicy(ctx, &lambda.GetPolicyInput{
@@ -332,7 +333,7 @@ func LambdaPermission(ctx context.Context, cfg aws.Config, stream *StreamSender)
 			return nil, err
 		}
 
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*fn.FunctionArn, *v.Policy),
 			Name:        *v.Policy,
@@ -350,7 +351,7 @@ func LambdaPermission(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	fns, err := LambdaFunction(ctx, cfg, nil)
 	if err != nil {
@@ -359,7 +360,7 @@ func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *Stream
 
 	client := lambda.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, f := range fns {
 		fn := f.Description.(model.LambdaFunctionDescription).Function.Configuration
 		paginator := lambda.NewListFunctionEventInvokeConfigsPaginator(client, &lambda.ListFunctionEventInvokeConfigsInput{
@@ -373,7 +374,7 @@ func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *Stream
 			}
 
 			for _, v := range page.FunctionEventInvokeConfigs {
-				resource := Resource{
+				resource := models.Resource{
 					Region:      describeCtx.OGRegion,
 					ID:          *fn.FunctionName, // Invoke Config is unique per function
 					Name:        *fn.FunctionName,
@@ -394,12 +395,12 @@ func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *Stream
 	return values, nil
 }
 
-func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListCodeSigningConfigsPaginator(client, &lambda.ListCodeSigningConfigsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -407,7 +408,7 @@ func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *Stream
 		}
 
 		for _, v := range page.CodeSigningConfigs {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.CodeSigningConfigArn,
 				Name:        *v.CodeSigningConfigArn,
@@ -426,12 +427,12 @@ func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *Stream
 	return values, nil
 }
 
-func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListEventSourceMappingsPaginator(client, &lambda.ListEventSourceMappingsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -439,7 +440,7 @@ func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *Strea
 		}
 
 		for _, v := range page.EventSourceMappings {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.EventSourceArn,
 				Name:        *v.UUID,
@@ -458,7 +459,7 @@ func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func LambdaLayerVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaLayerVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	layers, err := listLayers(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -466,7 +467,7 @@ func LambdaLayerVersion(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 	client := lambda.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, layer := range layers {
 		paginator := lambda.NewListLayerVersionsPaginator(client, &lambda.ListLayerVersionsInput{
 			LayerName: layer.LayerArn,
@@ -497,7 +498,7 @@ func LambdaLayerVersion(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 	return values, nil
 }
-func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.LayersListItem, v types.LayerVersionsListItem) (Resource, error) {
+func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.LayersListItem, v types.LayerVersionsListItem) (models.Resource, error) {
 	client := lambda.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 	layerVersion, err := client.GetLayerVersion(ctx, &lambda.GetLayerVersionInput{
@@ -505,7 +506,7 @@ func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.L
 		VersionNumber: &v.Version,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	policy, err := client.GetLayerVersionPolicy(ctx, &lambda.GetLayerVersionPolicyInput{
@@ -516,11 +517,11 @@ func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.L
 		if isErr(err, "ResourceNotFoundException") {
 			policy = &lambda.GetLayerVersionPolicyOutput{}
 		} else {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.LayerVersionArn,
 		Name:   *v.LayerVersionArn,
@@ -533,7 +534,7 @@ func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.L
 	return resource, nil
 
 }
-func GetLambdaLayerVersion(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetLambdaLayerVersion(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	layerArn := fields["arn"]
 	client := lambda.NewFromConfig(cfg)
 
@@ -545,7 +546,7 @@ func GetLambdaLayerVersion(ctx context.Context, cfg aws.Config, fields map[strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, layer := range layers.Layers {
 		if *layer.LayerArn != layerArn {
 			continue
@@ -574,16 +575,16 @@ func GetLambdaLayerVersion(ctx context.Context, cfg aws.Config, fields map[strin
 	return values, nil
 }
 
-func LambdaLayer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaLayer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	layers, err := listLayers(ctx, cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, layer := range layers {
-		resource := Resource{
+		resource := models.Resource{
 			Region: describeCtx.OGRegion,
 			ARN:    *layer.LayerArn,
 			Name:   *layer.LayerName,
@@ -603,7 +604,7 @@ func LambdaLayer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	lvs, err := LambdaLayerVersion(ctx, cfg, nil)
 	if err != nil {
@@ -612,7 +613,7 @@ func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *S
 
 	client := lambda.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, lv := range lvs {
 		arn := lv.Description.(model.LambdaLayerVersionDescription).LayerVersion.LayerVersionArn
 		version := lv.Description.(model.LambdaLayerVersionDescription).LayerVersion.Version
@@ -624,7 +625,7 @@ func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *S
 			return nil, err
 		}
 
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*arn, fmt.Sprintf("%d", version)),
 			Name:        *arn,

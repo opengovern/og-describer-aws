@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strconv"
 	"strings"
 
@@ -14,7 +15,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 	out, err := client.DescribeHub(ctx, &securityhub.DescribeHubInput{})
 	if err != nil {
@@ -24,7 +25,7 @@ func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := securityHubHubHandle(ctx, cfg, out)
 	if err != nil {
@@ -41,21 +42,21 @@ func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.DescribeHubOutput) (Resource, error) {
+func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.DescribeHubOutput) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &securityhub.ListTagsForResourceInput{ResourceArn: out.HubArn})
 	if err != nil {
 		if isErr(err, "InvalidAccessException") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	data, err := client.GetAdministratorAccount(ctx, &securityhub.GetAdministratorAccountInput{})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	desc := model.SecurityHubHubDescription{
@@ -65,7 +66,7 @@ func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.
 	if data.Administrator != nil {
 		desc.AdministratorAccount = *data.Administrator
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		Description: desc,
 	}
@@ -75,9 +76,9 @@ func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.
 	}
 	return resource, nil
 }
-func GetSecurityHubHub(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubHub(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 	client := securityhub.NewFromConfig(cfg)
 
 	out, err := client.DescribeHub(ctx, &securityhub.DescribeHubInput{
@@ -98,10 +99,10 @@ func GetSecurityHubHub(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func SecurityHubActionTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubActionTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewDescribeActionTargetsPaginator(client, &securityhub.DescribeActionTargetsInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -127,9 +128,9 @@ func SecurityHubActionTarget(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func securityHubActionTargetHandle(ctx context.Context, actionTarget types.ActionTarget) Resource {
+func securityHubActionTargetHandle(ctx context.Context, actionTarget types.ActionTarget) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *actionTarget.ActionTargetArn,
 		Name:   *actionTarget.Name,
@@ -139,7 +140,7 @@ func securityHubActionTargetHandle(ctx context.Context, actionTarget types.Actio
 	}
 	return resource
 }
-func GetSecurityHubActionTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubActionTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	actionTargetArn := fields["arn"]
 	client := securityhub.NewFromConfig(cfg)
 
@@ -153,7 +154,7 @@ func GetSecurityHubActionTarget(ctx context.Context, cfg aws.Config, fields map[
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, actionTarget := range out.ActionTargets {
 
 		values = append(values, securityHubActionTargetHandle(ctx, actionTarget))
@@ -162,11 +163,11 @@ func GetSecurityHubActionTarget(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewGetFindingsPaginator(client, &securityhub.GetFindingsInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -178,7 +179,7 @@ func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *StreamSende
 		}
 
 		for _, finding := range page.Findings {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *finding.Id,
 				Name:   *finding.Title,
@@ -199,10 +200,10 @@ func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func SecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewListFindingAggregatorsPaginator(client, &securityhub.ListFindingAggregatorsInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -218,7 +219,7 @@ func SecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, stream *S
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -235,7 +236,7 @@ func SecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, findingAggregatorArn string) (Resource, error) {
+func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, findingAggregatorArn string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
@@ -244,11 +245,11 @@ func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, fin
 	})
 	if err != nil {
 		if isErr(err, "InvalidAccessException") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *findingAggregator.FindingAggregatorArn,
 		Description: model.SecurityHubFindingAggregatorDescription{
@@ -257,15 +258,15 @@ func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, fin
 	}
 	return resource, nil
 }
-func GetSecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := securityHubFindingAggregatorHandle(ctx, cfg, arn)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -274,10 +275,10 @@ func GetSecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, fields
 	return values, nil
 }
 
-func SecurityHubInsight(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubInsight(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewGetInsightsPaginator(client, &securityhub.GetInsightsInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -302,9 +303,9 @@ func SecurityHubInsight(ctx context.Context, cfg aws.Config, stream *StreamSende
 	}
 	return values, nil
 }
-func securityHubInsightHandle(ctx context.Context, insight types.Insight) Resource {
+func securityHubInsightHandle(ctx context.Context, insight types.Insight) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *insight.InsightArn,
 		Name:   *insight.Name,
@@ -314,7 +315,7 @@ func securityHubInsightHandle(ctx context.Context, insight types.Insight) Resour
 	}
 	return resource
 }
-func GetSecurityHubInsight(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubInsight(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := securityhub.NewFromConfig(cfg)
 
@@ -328,7 +329,7 @@ func GetSecurityHubInsight(ctx context.Context, cfg aws.Config, fields map[strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, insight := range out.Insights {
 		resource := securityHubInsightHandle(ctx, insight)
 		values = append(values, resource)
@@ -336,7 +337,7 @@ func GetSecurityHubInsight(ctx context.Context, cfg aws.Config, fields map[strin
 	return values, nil
 }
 
-func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	params := &securityhub.ListMembersInput{
 		OnlyAssociated: aws.Bool(false),
 	}
@@ -368,7 +369,7 @@ func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *StreamSender
 		})
 	})
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewListMembersPaginator(client, params, func(o *securityhub.ListMembersPaginatorOptions) {
 		o.StopOnDuplicateToken = true
 	})
@@ -398,9 +399,9 @@ func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func securityHubMemberHandle(ctx context.Context, member types.Member) Resource {
+func securityHubMemberHandle(ctx context.Context, member types.Member) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *member.AccountId,
 		Description: model.SecurityHubMemberDescription{
@@ -409,7 +410,7 @@ func securityHubMemberHandle(ctx context.Context, member types.Member) Resource 
 	}
 	return resource
 }
-func GetSecurityHubMember(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubMember(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	accountId := fields["accountId"]
 	client := securityhub.NewFromConfig(cfg)
 
@@ -423,7 +424,7 @@ func GetSecurityHubMember(ctx context.Context, cfg aws.Config, fields map[string
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, member := range out.Members {
 		resource := securityHubMemberHandle(ctx, member)
 		values = append(values, resource)
@@ -431,11 +432,11 @@ func GetSecurityHubMember(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := securityhub.NewDescribeProductsPaginator(client, &securityhub.DescribeProductsInput{})
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -447,7 +448,7 @@ func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *StreamSende
 		}
 
 		for _, product := range page.Products {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *product.ProductName,
 				ARN:    *product.ProductArn,
@@ -468,10 +469,10 @@ func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func SecurityHubStandardsControl(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubStandardsControl(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 
 	subPaginator := securityhub.NewGetEnabledStandardsPaginator(client, &securityhub.GetEnabledStandardsInput{})
 	for subPaginator.HasMorePages() {
@@ -511,9 +512,9 @@ func SecurityHubStandardsControl(ctx context.Context, cfg aws.Config, stream *St
 	}
 	return values, nil
 }
-func securityHubStandardsControlHandle(ctx context.Context, standardsControl types.StandardsControl) Resource {
+func securityHubStandardsControlHandle(ctx context.Context, standardsControl types.StandardsControl) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *standardsControl.ControlId,
 		Name:   *standardsControl.Title,
@@ -524,7 +525,7 @@ func securityHubStandardsControlHandle(ctx context.Context, standardsControl typ
 	}
 	return resource
 }
-func GetSecurityHubStandardsControl(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubStandardsControl(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	standardsSubscriptionArn := fields["arn"]
 	client := securityhub.NewFromConfig(cfg)
 	out, err := client.DescribeStandardsControls(ctx, &securityhub.DescribeStandardsControlsInput{
@@ -533,7 +534,7 @@ func GetSecurityHubStandardsControl(ctx context.Context, cfg aws.Config, fields 
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Controls {
 		resource := securityHubStandardsControlHandle(ctx, v)
 		values = append(values, resource)
@@ -541,10 +542,10 @@ func GetSecurityHubStandardsControl(ctx context.Context, cfg aws.Config, fields 
 	return values, nil
 }
 
-func SecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	standardsPaginator := securityhub.NewDescribeStandardsPaginator(client, &securityhub.DescribeStandardsInput{})
 	standards := make(map[string]types.Standard)
 	for standardsPaginator.HasMorePages() {
@@ -584,11 +585,11 @@ func SecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, strea
 
 	return values, nil
 }
-func securityHubStandardsSubscriptionHandle(ctx context.Context, standardSub types.StandardsSubscription, standards map[string]types.Standard) Resource {
+func securityHubStandardsSubscriptionHandle(ctx context.Context, standardSub types.StandardsSubscription, standards map[string]types.Standard) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 
 	standard, _ := standards[*standardSub.StandardsArn]
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *standardSub.StandardsSubscriptionArn,
 		Description: model.SecurityHubStandardsSubscriptionDescription{
@@ -598,11 +599,11 @@ func securityHubStandardsSubscriptionHandle(ctx context.Context, standardSub typ
 	}
 	return resource
 }
-func GetSecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	standardsSubscriptionArn := fields["standardsSubscriptionArn"]
 	client := securityhub.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	standardsPaginator := securityhub.NewDescribeStandardsPaginator(client, &securityhub.DescribeStandardsInput{})
 	standards := make(map[string]types.Standard)
 	for standardsPaginator.HasMorePages() {

@@ -6,19 +6,20 @@ import (
 	"fmt"
 
 	"github.com/aws/smithy-go"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -69,7 +70,7 @@ func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *Stre
 				}
 				return nil, err
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *v.Name,
@@ -94,13 +95,13 @@ func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -138,7 +139,7 @@ func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *St
 					if err != nil {
 						return nil, err
 					}
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ID:     *certificate.Certificate.CertificateId,
 						Name:   *certificate.Certificate.CommonName,
@@ -162,13 +163,13 @@ func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *St
 	return values, nil
 }
 
-func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -193,7 +194,7 @@ func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream
 					return nil, err
 				}
 				for _, logSub := range logPage.LogSubscriptions {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   *logSub.LogGroupName,
 						Description: model.DirectoryServiceLogSubscriptionDescription{

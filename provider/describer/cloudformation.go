@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CloudFormationStack(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudFormationStack(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudformation.NewFromConfig(cfg)
 	paginator := cloudformation.NewDescribeStacksPaginator(client, &cloudformation.DescribeStacksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -42,7 +43,7 @@ func CloudFormationStack(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 	return values, nil
 }
-func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stack) (Resource, error) {
+func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stack) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 
@@ -51,7 +52,7 @@ func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stac
 	})
 	if err != nil {
 		if !isErr(err, "ValidationError") && !isErr(err, "ResourceNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		template = &cloudformation.GetTemplateOutput{}
 	}
@@ -61,14 +62,14 @@ func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stac
 	})
 	if err != nil {
 		if !isErr(err, "ValidationError") && !isErr(err, "ResourceNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		stackResources = &cloudformation.DescribeStackResourcesOutput{}
 	}
 
 	template.TemplateBody = nil
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.StackId,
 		Name:   *v.StackName,
@@ -80,7 +81,7 @@ func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stac
 	}
 	return resource, nil
 }
-func GetCloudFormationStack(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudFormationStack(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	stackName := fields["name"]
 	client := cloudformation.NewFromConfig(cfg)
 	out, err := client.DescribeStacks(ctx, &cloudformation.DescribeStacksInput{
@@ -92,7 +93,7 @@ func GetCloudFormationStack(ctx context.Context, cfg aws.Config, fields map[stri
 		}
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, stack := range out.Stacks {
 		resource, err := cloudFormationStackHandle(ctx, cfg, stack)
 		if err != nil {
@@ -103,11 +104,11 @@ func GetCloudFormationStack(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func CloudFormationStackSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudFormationStackSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudformation.NewFromConfig(cfg)
 	paginator := cloudformation.NewListStackSetsPaginator(client, &cloudformation.ListStackSetsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -131,14 +132,14 @@ func CloudFormationStackSet(ctx context.Context, cfg aws.Config, stream *StreamS
 	}
 	return values, nil
 }
-func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName string) (Resource, error) {
+func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 	stackSet, err := client.DescribeStackSet(ctx, &cloudformation.DescribeStackSetInput{
 		StackSetName: &stackName,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	if stackSet.StackSet.TemplateBody != nil && len(*stackSet.StackSet.TemplateBody) > 5000 {
@@ -146,7 +147,7 @@ func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName
 		stackSet.StackSet.TemplateBody = aws.String(v[:5000])
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *stackSet.StackSet.StackSetARN,
 		Name:   *stackSet.StackSet.StackSetName,
@@ -156,10 +157,10 @@ func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName
 	}
 	return resource, nil
 }
-func GetCloudFormationStackSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudFormationStackSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	stackName := fields["name"]
 
-	var values []Resource
+	var values []models.Resource
 	resource, err := cloudFormationStackSetHandle(ctx, cfg, stackName)
 	if err != nil {
 		return nil, err
@@ -169,11 +170,11 @@ func GetCloudFormationStackSet(ctx context.Context, cfg aws.Config, fields map[s
 	return values, nil
 }
 
-func CloudFormationStackResource(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudFormationStackResource(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudformation.NewFromConfig(cfg)
 	paginator := cloudformation.NewDescribeStacksPaginator(client, &cloudformation.DescribeStacksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -211,7 +212,7 @@ func CloudFormationStackResource(ctx context.Context, cfg aws.Config, stream *St
 
 	return values, nil
 }
-func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stackName string, resourceId string) (Resource, error) {
+func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stackName string, resourceId string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 
@@ -221,11 +222,11 @@ func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stac
 	})
 	if err != nil {
 		if !isErr(err, "ValidationError") && !isErr(err, "ResourceNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *stackResource.StackResourceDetail.LogicalResourceId,
 		Description: model.CloudFormationStackResourceDescription{
@@ -234,7 +235,7 @@ func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stac
 	}
 	return resource, nil
 }
-func GetCloudFormationStackResource(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudFormationStackResource(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	stackName := fields["stack_name"]
 	LogicalResourceId := fields["logical_resource_id"]
 
@@ -243,5 +244,5 @@ func GetCloudFormationStackResource(ctx context.Context, cfg aws.Config, fields 
 		return nil, err
 	}
 
-	return []Resource{resource}, nil
+	return []models.Resource{resource}, nil
 }

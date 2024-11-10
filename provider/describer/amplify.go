@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 
@@ -10,10 +11,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AmplifyApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AmplifyApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := amplify.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.ListApps(ctx, &amplify.ListAppsInput{
 			MaxResults: 100,
@@ -43,9 +44,9 @@ func AmplifyApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	return values, nil
 }
-func amplifyAppHandle(ctx context.Context, item types.App) Resource {
+func amplifyAppHandle(ctx context.Context, item types.App) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *item.Name,
 		ARN:    *item.AppArn,
@@ -56,7 +57,7 @@ func amplifyAppHandle(ctx context.Context, item types.App) Resource {
 	}
 	return resource
 }
-func GetAmplifyApp(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAmplifyApp(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	appId := fields["appId"]
 	client := amplify.NewFromConfig(cfg)
 
@@ -68,7 +69,7 @@ func GetAmplifyApp(ctx context.Context, cfg aws.Config, fields map[string]string
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, app := range out.Apps {
 		if *app.AppId != appId {
 			continue

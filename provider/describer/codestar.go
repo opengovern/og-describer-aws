@@ -2,17 +2,18 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CodeStarProject(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeStarProject(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := codestar.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		projects, err := client.ListProjects(ctx, &codestar.ListProjectsInput{
 			MaxResults: aws.Int32(100),
@@ -37,7 +38,7 @@ func CodeStarProject(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *project.Arn,
 				Name:   *project.Id,

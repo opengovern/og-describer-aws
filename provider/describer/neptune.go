@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/neptune"
@@ -9,12 +10,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := neptune.NewFromConfig(cfg)
 	paginator := neptune.NewDescribeDBInstancesPaginator(client, &neptune.DescribeDBInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -40,7 +41,7 @@ func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				name = *v.DBName
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBInstanceArn,
 				Name:   name,
@@ -62,12 +63,12 @@ func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := neptune.NewFromConfig(cfg)
 	paginator := neptune.NewDescribeDBClustersPaginator(client, &neptune.DescribeDBClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -93,7 +94,7 @@ func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *StreamS
 				name = *v.DBClusterIdentifier
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBClusterArn,
 				Name:   name,
@@ -115,11 +116,11 @@ func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *StreamS
 	return values, nil
 }
 
-func NeptuneDatabaseClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NeptuneDatabaseClusterSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := neptune.NewFromConfig(cfg)
 	paginator := neptune.NewDescribeDBClustersPaginator(client, &neptune.DescribeDBClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -165,7 +166,7 @@ func NeptuneDatabaseClusterSnapshot(ctx context.Context, cfg aws.Config, stream 
 	return values, nil
 }
 
-func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.Client, snapshot types.DBClusterSnapshot) (Resource, error) {
+func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.Client, snapshot types.DBClusterSnapshot) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	params := &neptune.DescribeDBClusterSnapshotAttributesInput{
@@ -174,7 +175,7 @@ func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.
 
 	dbClusterSnapshotData, err := client.DescribeDBClusterSnapshotAttributes(ctx, params)
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	var attributes = make([]map[string]interface{}, 0)
@@ -196,7 +197,7 @@ func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *snapshot.DBClusterSnapshotArn,
 		Name:   *snapshot.DBClusterSnapshotIdentifier,

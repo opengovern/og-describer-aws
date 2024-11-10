@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/pipes"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func PipesPipe(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func PipesPipe(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := pipes.NewFromConfig(cfg)
 
 	paginator := pipes.NewListPipesPaginator(client, &pipes.ListPipesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -32,7 +33,7 @@ func PipesPipe(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 				name = *pipe.Name
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *pipe.Arn,
 				Name:   name,

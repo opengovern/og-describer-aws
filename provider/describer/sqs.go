@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
@@ -9,12 +10,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SQSQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SQSQueue(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sqs.NewFromConfig(cfg)
 	paginator := sqs.NewListQueuesPaginator(client, &sqs.ListQueuesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -56,7 +57,7 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 			// Add Queue URL since it doesn't exists in the description
 			output.Attributes["QueueUrl"] = url
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    url,
 				Name:   nameFromArn(url),
@@ -77,9 +78,9 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func sQSQueueHandle(ctx context.Context, url string, queueAttributes *sqs.GetQueueAttributesOutput, tagOutput *sqs.ListQueueTagsOutput) Resource {
+func sQSQueueHandle(ctx context.Context, url string, queueAttributes *sqs.GetQueueAttributesOutput, tagOutput *sqs.ListQueueTagsOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    url,
 		Name:   nameFromArn(url),
@@ -90,9 +91,9 @@ func sQSQueueHandle(ctx context.Context, url string, queueAttributes *sqs.GetQue
 	}
 	return resource
 }
-func GetSQSQueue(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSQSQueue(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	QueueName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := sqs.NewFromConfig(cfg)
 	url, err := client.GetQueueUrl(ctx, &sqs.GetQueueUrlInput{
 		QueueName: &QueueName,

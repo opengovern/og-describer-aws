@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicecatalog.NewFromConfig(cfg)
 
 	paginator := servicecatalog.NewSearchProductsPaginator(client, &servicecatalog.SearchProductsInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -35,7 +36,7 @@ func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *StreamSe
 			if err != nil {
 				return nil, err
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *item.Id,
 				Name:   *item.Name,
@@ -57,11 +58,11 @@ func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *StreamSe
 	}
 	return values, nil
 }
-func ServiceCatalogPortfolio(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceCatalogPortfolio(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicecatalog.NewFromConfig(cfg)
 	paginator := servicecatalog.NewListPortfoliosPaginator(client, &servicecatalog.ListPortfoliosInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -71,7 +72,7 @@ func ServiceCatalogPortfolio(ctx context.Context, cfg aws.Config, stream *Stream
 			client.DescribePortfolio(ctx, &servicecatalog.DescribePortfolioInput{
 				Id: v.Id,
 			})
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *v.Id,
 				Name:   *v.ProviderName,

@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,7 +13,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudtrail.NewFromConfig(cfg)
 	paginator := cloudtrail.NewListTrailsPaginator(client, &cloudtrail.ListTrailsInput{})
 
@@ -25,7 +26,7 @@ func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	//	return nil, err
 	//}
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -63,7 +64,7 @@ func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 
 		for _, v := range output.TrailList {
 			resource, err := cloudTrailTrailHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -83,7 +84,7 @@ func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 
 	return values, nil
 }
-func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (Resource, error) {
+func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudtrail.NewFromConfig(cfg)
 	statusOutput, err := client.GetTrailStatus(ctx, &cloudtrail.GetTrailStatusInput{
@@ -91,9 +92,9 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	})
 	if err != nil {
 		if isErr(err, "GetTrailStatusNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	selectorOutput, err := client.GetEventSelectors(ctx, &cloudtrail.GetEventSelectorsInput{
@@ -101,9 +102,9 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	})
 	if err != nil {
 		if isErr(err, "GetEventSelectorsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tagsOutput, err := client.ListTags(ctx, &cloudtrail.ListTagsInput{
@@ -111,9 +112,9 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	var tags []types.Tag
@@ -121,7 +122,7 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 		tags = tagsOutput.ResourceTagList[0].TagsList
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.TrailARN,
 		Name:   *v.Name,
@@ -135,7 +136,7 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	}
 	return resource, nil
 }
-func GetCloudTrailTrail(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudTrailTrail(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
 	client := cloudtrail.NewFromConfig(cfg)
 
@@ -185,10 +186,10 @@ func GetCloudTrailTrail(ctx context.Context, cfg aws.Config, fields map[string]s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range output.TrailList {
 		resource, err := cloudTrailTrailHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -201,12 +202,12 @@ func GetCloudTrailTrail(ctx context.Context, cfg aws.Config, fields map[string]s
 	return values, nil
 }
 
-func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudtrail.NewFromConfig(cfg)
 	paginator := cloudtrail.NewListChannelsPaginator(client, &cloudtrail.ListChannelsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -221,7 +222,7 @@ func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *StreamSender
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *channel.ChannelArn,
 				Name:   *channel.Name,
@@ -242,11 +243,11 @@ func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func CloudTrailEventDataStore(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailEventDataStore(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudtrail.NewFromConfig(cfg)
 	paginator := cloudtrail.NewListEventDataStoresPaginator(client, &cloudtrail.ListEventDataStoresInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -255,7 +256,7 @@ func CloudTrailEventDataStore(ctx context.Context, cfg aws.Config, stream *Strea
 
 		for _, eventDataStore := range page.EventDataStores {
 			resource, err := cloudTrailEventDataStoreHandle(ctx, cfg, eventDataStore)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -274,7 +275,7 @@ func CloudTrailEventDataStore(ctx context.Context, cfg aws.Config, stream *Strea
 	}
 	return values, nil
 }
-func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDataStore types.EventDataStore) (Resource, error) {
+func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDataStore types.EventDataStore) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudtrail.NewFromConfig(cfg)
 
@@ -283,12 +284,12 @@ func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDa
 	})
 	if err != nil {
 		if isErr(err, "GetEventDataStoreNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *eventDataStore.EventDataStoreArn,
 		Name:   *eventDataStore.Name,
@@ -298,7 +299,7 @@ func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDa
 	}
 	return resource, nil
 }
-func GetCloudTrailEventDataStore(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudTrailEventDataStore(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	eventDataStoreName := fields["name"]
 	client := cloudtrail.NewFromConfig(cfg)
 
@@ -310,14 +311,14 @@ func GetCloudTrailEventDataStore(ctx context.Context, cfg aws.Config, fields map
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, evenDataStore := range out.EventDataStores {
 		if !strings.EqualFold(eventDataStoreName, *evenDataStore.Name) {
 			continue
 		}
 
 		resource, err := cloudTrailEventDataStoreHandle(ctx, cfg, evenDataStore)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -330,12 +331,12 @@ func GetCloudTrailEventDataStore(ctx context.Context, cfg aws.Config, fields map
 	return values, nil
 }
 
-func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudtrail.NewFromConfig(cfg)
 	paginator := cloudtrail.NewListImportsPaginator(client, &cloudtrail.ListImportsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -356,7 +357,7 @@ func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *StreamSender)
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *trailImport.ImportId,
 				Description: model.CloudTrailImportDescription{
@@ -376,12 +377,12 @@ func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudtrail.NewFromConfig(cfg)
 	paginator := cloudtrail.NewListEventDataStoresPaginator(client, &cloudtrail.ListEventDataStoresInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -405,7 +406,7 @@ func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 						return nil, err
 					}
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   *query.QueryId,
 						Description: model.CloudTrailQueryDescription{
@@ -428,7 +429,7 @@ func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 
@@ -437,7 +438,7 @@ func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *StreamSen
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, logGroup := range logGroups {
 		paginator := cloudwatchlogs.NewFilterLogEventsPaginator(client, &cloudwatchlogs.FilterLogEventsInput{
 			LogGroupName: logGroup.Description.(model.CloudWatchLogsLogGroupDescription).LogGroup.LogGroupName,
@@ -454,7 +455,7 @@ func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *StreamSen
 			}
 
 			for _, event := range page.Events {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     *event.EventId,
 					Description: model.CloudTrailTrailEventDescription{

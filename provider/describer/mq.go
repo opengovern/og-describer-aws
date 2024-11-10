@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mq"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func MQBroker(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func MQBroker(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := mq.NewFromConfig(cfg)
 	paginator := mq.NewListBrokersPaginator(client, &mq.ListBrokersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -26,7 +27,7 @@ func MQBroker(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -43,7 +44,7 @@ func MQBroker(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) (Resource, error) {
+func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := mq.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &mq.ListTagsInput{
@@ -51,19 +52,19 @@ func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) 
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	brokerDescription, err := client.DescribeBroker(ctx, &mq.DescribeBrokerInput{
 		BrokerId: v.BrokerId,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.BrokerArn,
 		Name:   *v.BrokerName,
@@ -74,7 +75,7 @@ func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) 
 	}
 	return resource, nil
 }
-func GetMQBroker(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMQBroker(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	brokerId := fields["id"]
 	client := mq.NewFromConfig(cfg)
 
@@ -86,7 +87,7 @@ func GetMQBroker(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, broker := range brokers.BrokerSummaries {
 		if *broker.BrokerId != brokerId {
 			continue
@@ -96,7 +97,7 @@ func GetMQBroker(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			continue
 		}

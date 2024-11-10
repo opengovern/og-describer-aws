@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
@@ -15,10 +16,10 @@ const (
 	efsPolicyNotFound = "PolicyNotFound"
 )
 
-func EFSAccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EFSAccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := efs.NewFromConfig(cfg)
 	paginator := efs.NewDescribeAccessPointsPaginator(client, &efs.DescribeAccessPointsInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -38,14 +39,14 @@ func EFSAccessPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	}
 	return values, nil
 }
-func eFSAccessPointHandle(ctx context.Context, v types.AccessPointDescription) Resource {
+func eFSAccessPointHandle(ctx context.Context, v types.AccessPointDescription) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	name := aws.ToString(v.Name)
 	if name == "" {
 		name = *v.AccessPointId
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.AccessPointArn,
 		Name:   name,
@@ -55,7 +56,7 @@ func eFSAccessPointHandle(ctx context.Context, v types.AccessPointDescription) R
 	}
 	return resource
 }
-func GetEFSAccessPoint(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEFSAccessPoint(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	accessPointId := fields["id"]
 	client := efs.NewFromConfig(cfg)
 	out, err := client.DescribeAccessPoints(ctx, &efs.DescribeAccessPointsInput{
@@ -68,7 +69,7 @@ func GetEFSAccessPoint(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.AccessPoints {
 		resource := eFSAccessPointHandle(ctx, v)
 		values = append(values, resource)
@@ -76,11 +77,11 @@ func GetEFSAccessPoint(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func EFSFileSystem(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EFSFileSystem(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := efs.NewFromConfig(cfg)
 	paginator := efs.NewDescribeFileSystemsPaginator(client, &efs.DescribeFileSystemsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -114,14 +115,14 @@ func EFSFileSystem(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 	return values, nil
 }
-func eFSFileSystemHandle(ctx context.Context, describeFSPolicy *efs.DescribeFileSystemPolicyOutput, v types.FileSystemDescription) Resource {
+func eFSFileSystemHandle(ctx context.Context, describeFSPolicy *efs.DescribeFileSystemPolicyOutput, v types.FileSystemDescription) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	name := aws.ToString(v.Name)
 	if name == "" {
 		name = *v.FileSystemId
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.FileSystemArn,
 		Name:   name,
@@ -132,10 +133,10 @@ func eFSFileSystemHandle(ctx context.Context, describeFSPolicy *efs.DescribeFile
 	}
 	return resource
 }
-func GetEFSFileSystem(ctx context.Context, cfg aws.Config, field map[string]string) ([]Resource, error) {
+func GetEFSFileSystem(ctx context.Context, cfg aws.Config, field map[string]string) ([]models.Resource, error) {
 	fileSystemId := field["id"]
 	client := efs.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	describeFSPolicy, err := client.DescribeFileSystemPolicy(ctx, &efs.DescribeFileSystemPolicyInput{
 		FileSystemId: &fileSystemId,
 	})
@@ -164,10 +165,10 @@ func GetEFSFileSystem(ctx context.Context, cfg aws.Config, field map[string]stri
 	return values, nil
 }
 
-func EFSMountTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EFSMountTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := efs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 
 	filesystems, err := EFSFileSystem(ctx, cfg, nil)
 	if err != nil {
@@ -210,11 +211,11 @@ func EFSMountTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func eFSMountTargetHandle(ctx context.Context, securityGroups *efs.DescribeMountTargetSecurityGroupsOutput, v types.MountTargetDescription, FileSystemId *string) Resource {
+func eFSMountTargetHandle(ctx context.Context, securityGroups *efs.DescribeMountTargetSecurityGroupsOutput, v types.MountTargetDescription, FileSystemId *string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:elasticfilesystem:%s:%s:file-system/%s/mount-target/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *FileSystemId, *v.MountTargetId)
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *v.MountTargetId,
@@ -225,9 +226,9 @@ func eFSMountTargetHandle(ctx context.Context, securityGroups *efs.DescribeMount
 	}
 	return resource
 }
-func GetEFSMountTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEFSMountTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	fileSystemId := fields["id"]
-	var values []Resource
+	var values []models.Resource
 
 	client := efs.NewFromConfig(cfg)
 	out, err := client.DescribeMountTargets(ctx, &efs.DescribeMountTargetsInput{

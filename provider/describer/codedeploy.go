@@ -3,19 +3,20 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListApplicationsPaginator(client, &codedeploy.ListApplicationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -52,7 +53,7 @@ func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *Stre
 						return nil, err
 					}
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    arn,
 						Name:   *deploymentGroup.DeploymentGroupInfo.DeploymentGroupName,
@@ -76,13 +77,13 @@ func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListApplicationsPaginator(client, &codedeploy.ListApplicationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -106,7 +107,7 @@ func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *StreamSe
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *application.Application.ApplicationName,
@@ -128,13 +129,13 @@ func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func CodeDeployDeploymentConfig(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeDeployDeploymentConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListDeploymentConfigsPaginator(client, &codedeploy.ListDeploymentConfigsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -151,7 +152,7 @@ func CodeDeployDeploymentConfig(ctx context.Context, cfg aws.Config, stream *Str
 
 			arn := fmt.Sprintf("arn:%s:codedeploy:%s:%s:deploymentconfig:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *config.DeploymentConfigInfo.DeploymentConfigName)
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *config.DeploymentConfigInfo.DeploymentConfigName,

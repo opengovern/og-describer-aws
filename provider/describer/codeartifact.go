@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,11 +11,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CodeArtifactRepository(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeArtifactRepository(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codeartifact.NewFromConfig(cfg)
 	paginator := codeartifact.NewListRepositoriesPaginator(client, &codeartifact.ListRepositoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -26,7 +27,7 @@ func CodeArtifactRepository(ctx context.Context, cfg aws.Config, stream *StreamS
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -43,7 +44,7 @@ func CodeArtifactRepository(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.RepositorySummary) (Resource, error) {
+func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.RepositorySummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := codeartifact.NewFromConfig(cfg)
 
@@ -52,9 +53,9 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	var policy types.ResourcePolicy
 	policyOutput, err := client.GetRepositoryPermissionsPolicy(ctx, &codeartifact.GetRepositoryPermissionsPolicyInput{
@@ -67,9 +68,9 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 			policy = types.ResourcePolicy{}
 		} else {
 			if isErr(err, "GetRepositoryPermissionsPolicyNotFound") || isErr(err, "InvalidParameterValue") {
-				return Resource{}, nil
+				return models.Resource{}, nil
 			}
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	} else {
 		policy = *policyOutput.Policy
@@ -81,9 +82,9 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 	})
 	if err != nil {
 		if isErr(err, "DescribeRepositoryNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	resultData := []string{}
@@ -99,18 +100,18 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 		}
 
 		if err != nil {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 
 		data, err := client.GetRepositoryEndpoint(ctx, params)
 
 		if err != nil {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		resultData = append(resultData, *data.RepositoryEndpoint)
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.Name,
@@ -124,7 +125,7 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 	}
 	return resource, nil
 }
-func GetCodeArtifactRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodeArtifactRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	repository := fields["repository"]
 	client := codeartifact.NewFromConfig(cfg)
 
@@ -147,13 +148,13 @@ func GetCodeArtifactRepository(ctx context.Context, cfg aws.Config, fields map[s
 		Name:                 out.Repository.Name,
 	}
 
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := codeArtifactRepositoryHandle(ctx, cfg, Repo)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -162,11 +163,11 @@ func GetCodeArtifactRepository(ctx context.Context, cfg aws.Config, fields map[s
 	return values, nil
 }
 
-func CodeArtifactDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeArtifactDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codeartifact.NewFromConfig(cfg)
 	paginator := codeartifact.NewListDomainsPaginator(client, &codeartifact.ListDomainsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -178,7 +179,7 @@ func CodeArtifactDomain(ctx context.Context, cfg aws.Config, stream *StreamSende
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -195,7 +196,7 @@ func CodeArtifactDomain(ctx context.Context, cfg aws.Config, stream *StreamSende
 
 	return values, nil
 }
-func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.DomainSummary) (Resource, error) {
+func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.DomainSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := codeartifact.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &codeartifact.ListTagsForResourceInput{
@@ -203,9 +204,9 @@ func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.Domai
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	domain, err := client.DescribeDomain(ctx, &codeartifact.DescribeDomainInput{
@@ -214,9 +215,9 @@ func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.Domai
 	})
 	if err != nil {
 		if isErr(err, "DescribeDomainNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	policy, err := client.GetDomainPermissionsPolicy(ctx, &codeartifact.GetDomainPermissionsPolicyInput{
@@ -227,11 +228,11 @@ func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.Domai
 		if isErr(err, "ResourceNotFoundException") {
 			policy = &codeartifact.GetDomainPermissionsPolicyOutput{}
 		} else {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Description: model.CodeArtifactDomainDescription{
@@ -246,7 +247,7 @@ func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.Domai
 
 	return resource, nil
 }
-func GetCodeArtifactDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodeArtifactDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	domainName := fields["domainName"]
 	client := codeartifact.NewFromConfig(cfg)
 	domains, err := client.ListDomains(ctx, &codeartifact.ListDomainsInput{})
@@ -257,7 +258,7 @@ func GetCodeArtifactDomain(ctx context.Context, cfg aws.Config, fields map[strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range domains.Domains {
 		if *v.Name != domainName {
 			continue
@@ -267,7 +268,7 @@ func GetCodeArtifactDomain(ctx context.Context, cfg aws.Config, fields map[strin
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

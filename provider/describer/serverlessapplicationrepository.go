@@ -2,17 +2,18 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := serverlessapplicationrepository.NewFromConfig(cfg)
 	paginator := serverlessapplicationrepository.NewListApplicationsPaginator(client, &serverlessapplicationrepository.ListApplicationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -37,7 +38,7 @@ func ServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Con
 
 	return values, nil
 }
-func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg aws.Config, applicationId string) (Resource, error) {
+func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg aws.Config, applicationId string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := serverlessapplicationrepository.NewFromConfig(cfg)
 
@@ -45,7 +46,7 @@ func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg a
 		ApplicationId: &applicationId,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	policy, err := client.GetApplicationPolicy(ctx, &serverlessapplicationrepository.GetApplicationPolicyInput{
@@ -55,7 +56,7 @@ func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg a
 		policy = &serverlessapplicationrepository.GetApplicationPolicyOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *application.ApplicationId,
 		Name:   *application.ApplicationId,
@@ -66,10 +67,10 @@ func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg a
 	}
 	return resource, nil
 }
-func GetServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	applicationId := fields["applicationId"]
 
-	var values []Resource
+	var values []models.Resource
 	resource, err := serverlessApplicationRepositoryApplicationHandle(ctx, cfg, applicationId)
 	if err != nil {
 		return nil, err

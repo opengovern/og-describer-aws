@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CodeBuildProject(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeBuildProject(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codebuild.NewFromConfig(cfg)
 	paginator := codebuild.NewListProjectsPaginator(client, &codebuild.ListProjectsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -48,9 +49,9 @@ func CodeBuildProject(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	return values, nil
 }
-func codeBuildProjectHandle(ctx context.Context, project types.Project) Resource {
+func codeBuildProjectHandle(ctx context.Context, project types.Project) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *project.Arn,
 		Name:   *project.Name,
@@ -60,7 +61,7 @@ func codeBuildProjectHandle(ctx context.Context, project types.Project) Resource
 	}
 	return resource
 }
-func GetCodeBuildProject(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodeBuildProject(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
 	client := codebuild.NewFromConfig(cfg)
 
@@ -74,7 +75,7 @@ func GetCodeBuildProject(ctx context.Context, cfg aws.Config, fields map[string]
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, project := range out.Projects {
 		resource := codeBuildProjectHandle(ctx, project)
 		values = append(values, resource)
@@ -82,14 +83,14 @@ func GetCodeBuildProject(ctx context.Context, cfg aws.Config, fields map[string]
 	return values, nil
 }
 
-func CodeBuildSourceCredential(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeBuildSourceCredential(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codebuild.NewFromConfig(cfg)
 	out, err := client.ListSourceCredentials(ctx, &codebuild.ListSourceCredentialsInput{})
 	if err != nil {
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.SourceCredentialsInfos {
 		resource := codeBuildSourceCredentialHandle(ctx, item)
 		if stream != nil {
@@ -102,9 +103,9 @@ func CodeBuildSourceCredential(ctx context.Context, cfg aws.Config, stream *Stre
 	}
 	return values, nil
 }
-func codeBuildSourceCredentialHandle(ctx context.Context, item types.SourceCredentialsInfo) Resource {
+func codeBuildSourceCredentialHandle(ctx context.Context, item types.SourceCredentialsInfo) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.Arn,
 		Name:   nameFromArn(*item.Arn),
@@ -114,7 +115,7 @@ func codeBuildSourceCredentialHandle(ctx context.Context, item types.SourceCrede
 	}
 	return resource
 }
-func GetCodeBuildSourceCredential(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodeBuildSourceCredential(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := codebuild.NewFromConfig(cfg)
 	credentials, err := client.ListSourceCredentials(ctx, &codebuild.ListSourceCredentialsInput{})
@@ -125,7 +126,7 @@ func GetCodeBuildSourceCredential(ctx context.Context, cfg aws.Config, fields ma
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range credentials.SourceCredentialsInfos {
 
 		if *item.Arn != arn {
@@ -138,11 +139,11 @@ func GetCodeBuildSourceCredential(ctx context.Context, cfg aws.Config, fields ma
 	return values, nil
 }
 
-func CodeBuildBuild(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodeBuildBuild(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codebuild.NewFromConfig(cfg)
 	paginator := codebuild.NewListBuildsPaginator(client, &codebuild.ListBuildsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -176,9 +177,9 @@ func CodeBuildBuild(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func codeBuildBuildHandle(ctx context.Context, build types.Build) Resource {
+func codeBuildBuildHandle(ctx context.Context, build types.Build) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *build.Arn,
 		ID:     *build.Id,
@@ -188,7 +189,7 @@ func codeBuildBuildHandle(ctx context.Context, build types.Build) Resource {
 	}
 	return resource
 }
-func GetCodeBuildBuild(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodeBuildBuild(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	id := fields["id"]
 	client := codebuild.NewFromConfig(cfg)
 
@@ -202,7 +203,7 @@ func GetCodeBuildBuild(ctx context.Context, cfg aws.Config, fields map[string]st
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, build := range out.Builds {
 		resource := codeBuildBuildHandle(ctx, build)
 		values = append(values, resource)

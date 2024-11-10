@@ -4,18 +4,19 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/fms"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func FMSPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FMSPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := fms.NewFromConfig(cfg)
 	paginator := fms.NewListPoliciesPaginator(client, &fms.ListPoliciesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -29,7 +30,7 @@ func FMSPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 			if err != nil {
 				return nil, err
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.PolicyArn,
 				Name:   *v.PolicyName,
@@ -51,7 +52,7 @@ func FMSPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 	return values, nil
 }
 
-func GetFMSPolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFMSPolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	policyID := fields["id"]
 	client := fms.NewFromConfig(cfg)
@@ -61,14 +62,14 @@ func GetFMSPolicy(ctx context.Context, cfg aws.Config, fields map[string]string)
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	tags, err := client.ListTagsForResource(ctx, &fms.ListTagsForResourceInput{
 		ResourceArn: out.PolicyArn,
 	})
 	if err != nil {
 		return nil, err
 	}
-	values = append(values, Resource{
+	values = append(values, models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *out.PolicyArn,
 		Name:   *out.Policy.PolicyName,

@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kafka"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func KafkaCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KafkaCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := kafka.NewFromConfig(cfg)
 	paginator := kafka.NewListClustersV2Paginator(client, &kafka.ListClustersV2Input{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -23,7 +24,7 @@ func KafkaCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 		for _, cluster := range page.ClusterInfoList {
 			resource, err := kafkaClusterHandle(ctx, cfg, cluster)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -43,7 +44,7 @@ func KafkaCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	return values, nil
 }
-func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (Resource, error) {
+func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := kafka.NewFromConfig(cfg)
 
@@ -61,9 +62,9 @@ func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Clust
 		configOut, err = client.DescribeConfiguration(ctx, &kafka.DescribeConfigurationInput{Arn: &configArn})
 		if err != nil {
 			if isErr(err, "DescribeConfigurationNotFound") || isErr(err, "InvalidParameterValue") {
-				return Resource{}, nil
+				return models.Resource{}, nil
 			}
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -73,13 +74,13 @@ func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Clust
 		})
 		if err != nil {
 			if isErr(err, "DescribeClusterOperationNotFound") || isErr(err, "InvalidParameterValue") {
-				return Resource{}, nil
+				return models.Resource{}, nil
 			}
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		operationInfo = op.ClusterOperationInfo
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ClusterArn,
 		Name:   *cluster.ClusterName,
@@ -91,9 +92,9 @@ func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Clust
 	}
 	return resource, nil
 }
-func GetKafkaCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKafkaCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["nameCluster"]
-	var values []Resource
+	var values []models.Resource
 
 	client := kafka.NewFromConfig(cfg)
 	out, err := client.ListClustersV2(ctx, &kafka.ListClustersV2Input{
@@ -112,7 +113,7 @@ func GetKafkaCluster(ctx context.Context, cfg aws.Config, fields map[string]stri
 		}
 
 		resource, err := kafkaClusterHandle(ctx, cfg, cluster)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

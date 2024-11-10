@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SageMakerEndpointConfiguration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerEndpointConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sagemaker.NewFromConfig(cfg)
 	paginator := sagemaker.NewListEndpointConfigsPaginator(client, &sagemaker.ListEndpointConfigsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -33,7 +34,7 @@ func SageMakerEndpointConfiguration(ctx context.Context, cfg aws.Config, stream 
 			}
 
 			resource, err := sageMakerEndpointConfigurationHandle(ctx, cfg, item.EndpointConfigArn, out)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -52,7 +53,7 @@ func SageMakerEndpointConfiguration(ctx context.Context, cfg aws.Config, stream 
 	}
 	return values, nil
 }
-func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, endpointConfigArn *string, out *sagemaker.DescribeEndpointConfigOutput) (Resource, error) {
+func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, endpointConfigArn *string, out *sagemaker.DescribeEndpointConfigOutput) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
@@ -61,12 +62,12 @@ func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, e
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *out.EndpointConfigArn,
 		Name:   *out.EndpointConfigName,
@@ -77,9 +78,9 @@ func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, e
 	}
 	return resource, nil
 }
-func GetMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	endpointConfigName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := sagemaker.NewFromConfig(cfg)
 	out, err := client.DescribeEndpointConfig(ctx, &sagemaker.DescribeEndpointConfigInput{
 		EndpointConfigName: &endpointConfigName,
@@ -92,7 +93,7 @@ func GetMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, fi
 	}
 
 	resource, err := sageMakerEndpointConfigurationHandle(ctx, cfg, out.EndpointConfigArn, out)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -104,11 +105,11 @@ func GetMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, fi
 	return values, nil
 }
 
-func SageMakerApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := sagemaker.NewListDomainsPaginator(client, &sagemaker.ListDomainsInput{})
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
@@ -140,7 +141,7 @@ func SageMakerApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 						return nil, err
 					}
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *data.AppArn,
 						Name:   *data.AppName,
@@ -163,11 +164,11 @@ func SageMakerApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 	return values, nil
 }
 
-func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := sagemaker.NewListDomainsPaginator(client, &sagemaker.ListDomainsInput{})
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
@@ -202,7 +203,7 @@ func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *domain.DomainArn,
 				Name:   *domain.DomainName,
@@ -224,11 +225,11 @@ func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func SageMakerNotebookInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerNotebookInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sagemaker.NewFromConfig(cfg)
 	paginator := sagemaker.NewListNotebookInstancesPaginator(client, &sagemaker.ListNotebookInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -247,7 +248,7 @@ func SageMakerNotebookInstance(ctx context.Context, cfg aws.Config, stream *Stre
 			}
 
 			resource, err := sageMakerNotebookInstanceHandle(ctx, cfg, out)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -267,7 +268,7 @@ func SageMakerNotebookInstance(ctx context.Context, cfg aws.Config, stream *Stre
 
 	return values, nil
 }
-func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *sagemaker.DescribeNotebookInstanceOutput) (Resource, error) {
+func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *sagemaker.DescribeNotebookInstanceOutput) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
@@ -276,12 +277,12 @@ func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *s
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *out.NotebookInstanceArn,
 		Name:   *out.NotebookInstanceName,
@@ -292,9 +293,9 @@ func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *s
 	}
 	return resource, nil
 }
-func GetSageMakerNotebookInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSageMakerNotebookInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeNetbookInstanceName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	client := sagemaker.NewFromConfig(cfg)
 	out, err := client.DescribeNotebookInstance(ctx, &sagemaker.DescribeNotebookInstanceInput{
@@ -308,7 +309,7 @@ func GetSageMakerNotebookInstance(ctx context.Context, cfg aws.Config, fields ma
 	}
 
 	resource, err := sageMakerNotebookInstanceHandle(ctx, cfg, out)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -320,10 +321,10 @@ func GetSageMakerNotebookInstance(ctx context.Context, cfg aws.Config, fields ma
 	return values, nil
 }
 
-func SageMakerModel(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerModel(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sagemaker.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := sagemaker.NewListModelsPaginator(client, &sagemaker.ListModelsInput{})
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
@@ -350,7 +351,7 @@ func SageMakerModel(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	}
 	return values, nil
 }
-func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagemaker.DescribeModelOutput) Resource {
+func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagemaker.DescribeModelOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
@@ -361,7 +362,7 @@ func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagema
 		tags = &sagemaker.ListTagsOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *sageModel.ModelArn,
 		Name:   *sageModel.ModelName,
@@ -372,9 +373,9 @@ func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagema
 	}
 	return resource
 }
-func GetSageMakerModel(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSageMakerModel(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	modelName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	client := sagemaker.NewFromConfig(cfg)
 	out, err := client.DescribeModel(ctx, &sagemaker.DescribeModelInput{
@@ -391,11 +392,11 @@ func GetSageMakerModel(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	paginator := sagemaker.NewListTrainingJobsPaginator(client, &sagemaker.ListTrainingJobsInput{})
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
@@ -418,7 +419,7 @@ func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *StreamSen
 				tags = &sagemaker.ListTagsOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *trainingJob.TrainingJobArn,
 				Name:   *trainingJob.TrainingJobName,

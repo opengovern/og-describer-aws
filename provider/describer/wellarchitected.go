@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"reflect"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,12 +11,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -37,7 +38,7 @@ func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *Stream
 				}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.WorkloadArn,
 				Name:   *v.WorkloadName,
@@ -58,12 +59,12 @@ func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *Stream
 	return values, nil
 }
 
-func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -99,7 +100,7 @@ func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *StreamSe
 							return nil, err
 						}
 
-						resource := Resource{
+						resource := models.Resource{
 							Region: describeCtx.OGRegion,
 							Description: model.WellArchitectedAnswerDescription{
 								Answer:          *op.Answer,
@@ -125,7 +126,7 @@ func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	answers, err := WellArchitectedAnswer(ctx, cfg, stream)
@@ -136,7 +137,7 @@ func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *Str
 			return nil, err
 		}
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, answer := range answers {
 		des := answer.Description.(model.WellArchitectedAnswerDescription)
 		params := &wellarchitected.GetAnswerInput{
@@ -176,7 +177,7 @@ func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *Str
 				}
 				for _, c := range page.CheckDetails {
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   des.WorkloadName,
 						Description: model.WellArchitectedCheckDetailDescription{
@@ -199,7 +200,7 @@ func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *Str
 	return values, nil
 }
 
-func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	answers, err := WellArchitectedAnswer(ctx, cfg, stream)
@@ -210,7 +211,7 @@ func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *St
 			return nil, err
 		}
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, answer := range answers {
 		des := answer.Description.(model.WellArchitectedAnswerDescription)
 		params := &wellarchitected.GetAnswerInput{
@@ -246,7 +247,7 @@ func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *St
 				}
 				for _, c := range page.CheckSummaries {
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Name:   *c.Name,
 						Description: model.WellArchitectedCheckSummaryDescription{
@@ -269,10 +270,10 @@ func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *St
 	return values, nil
 }
 
-func WellArchitectedConsolidatedReport(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedConsolidatedReport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	for _, rFormat := range []types.ReportFormat{types.ReportFormatPdf, types.ReportFormatJson} {
 		input := &wellarchitected.GetConsolidatedReportInput{
 			IncludeSharedResources: aws.Bool(true),
@@ -308,7 +309,7 @@ func WellArchitectedConsolidatedReport(ctx context.Context, cfg aws.Config, stre
 	return values, nil
 }
 
-func Contains(values []Resource, value Resource) bool {
+func Contains(values []models.Resource, value models.Resource) bool {
 	for _, v := range values {
 		val := v.Description.(model.WellArchitectedCheckConsolidatedReportDescription)
 		val1 := value.Description.(model.WellArchitectedCheckConsolidatedReportDescription)
@@ -319,10 +320,10 @@ func Contains(values []Resource, value Resource) bool {
 	return false
 }
 
-func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config, stream *StreamSender, client *wellarchitected.Client, describeCtx DescribeContext, input *wellarchitected.GetConsolidatedReportInput) ([]Resource, error) {
+func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config, stream *models.StreamSender, client *wellarchitected.Client, describeCtx DescribeContext, input *wellarchitected.GetConsolidatedReportInput) ([]models.Resource, error) {
 	paginator := wellarchitected.NewGetConsolidatedReportPaginator(client, input)
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -334,7 +335,7 @@ func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config
 		}
 		for _, v := range page.Metrics {
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedCheckConsolidatedReportDescription{
 					IncludeSharedResources: input.IncludeSharedResources,
@@ -354,12 +355,12 @@ func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config
 	return values, nil
 }
 
-func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListLensesPaginator(client, &wellarchitected.ListLensesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -385,7 +386,7 @@ func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *StreamSend
 				}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.LensArn,
 				Description: model.WellArchitectedLensDescription{
@@ -408,12 +409,12 @@ func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -446,7 +447,7 @@ func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *Stre
 						return nil, err
 					}
 				}
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensReviewDescription{
 						LensReview: *review.LensReview,
@@ -465,12 +466,12 @@ func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -496,7 +497,7 @@ func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, s
 						}
 					}
 					for _, improvement := range output.ImprovementSummaries {
-						resource := Resource{
+						resource := models.Resource{
 							Region: describeCtx.OGRegion,
 							Description: model.WellArchitectedLensReviewImprovementDescription{
 								LensAlias:          *output.LensAlias,
@@ -521,12 +522,12 @@ func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, s
 	return values, nil
 }
 
-func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -550,7 +551,7 @@ func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream
 					}
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensReviewReportDescription{
 						Report:          *report.LensReviewReport,
@@ -572,7 +573,7 @@ func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 
-func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 
@@ -580,7 +581,7 @@ func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *Strea
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, v := range lenses {
 		lens := v.Description.(model.WellArchitectedLensDescription).Lens
 		input := &wellarchitected.ListLensSharesInput{
@@ -597,7 +598,7 @@ func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *Strea
 				}
 			}
 			for _, share := range page.LensShareSummaries {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					Description: model.WellArchitectedLensShareDescription{
 						Lens:  lens,
@@ -617,12 +618,12 @@ func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -649,7 +650,7 @@ func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *Strea
 					if err != nil {
 						return nil, err
 					}
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Description: model.WellArchitectedMilestoneDescription{
 							Milestone: *milestone.Milestone,
@@ -669,12 +670,12 @@ func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListNotificationsPaginator(client, &wellarchitected.ListNotificationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -682,7 +683,7 @@ func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *St
 		}
 		for _, v := range page.NotificationSummaries {
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedNotificationDescription{
 					Notification: v,
@@ -700,12 +701,12 @@ func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *St
 	return values, nil
 }
 
-func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListShareInvitationsPaginator(client, &wellarchitected.ListShareInvitationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -716,7 +717,7 @@ func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream 
 			}
 		}
 		for _, v := range page.ShareInvitationSummaries {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Description: model.WellArchitectedShareInvitationDescription{
 					ShareInvitation: v,
@@ -734,12 +735,12 @@ func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream 
 	return values, nil
 }
 
-func WellArchitectedWorkloadShare(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WellArchitectedWorkloadShare(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -765,7 +766,7 @@ func WellArchitectedWorkloadShare(ctx context.Context, cfg aws.Config, stream *S
 				for _, m := range output.WorkloadShareSummaries {
 					arn := "arn:" + describeCtx.Partition + ":waf::" + describeCtx.AccountID + ":ratebasedrule" + "/" + *m.ShareId
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						Description: model.WellArchitectedWorkloadShareDescription{
 							Share:      m,

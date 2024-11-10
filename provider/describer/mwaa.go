@@ -2,17 +2,18 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func MWAAEnvironment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func MWAAEnvironment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := mwaa.NewFromConfig(cfg)
 	paginator := mwaa.NewListEnvironmentsPaginator(client, &mwaa.ListEnvironmentsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -24,7 +25,7 @@ func MWAAEnvironment(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -41,7 +42,7 @@ func MWAAEnvironment(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 
 	return values, nil
 }
-func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (Resource, error) {
+func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := mwaa.NewFromConfig(cfg)
 	environment, err := client.GetEnvironment(ctx, &mwaa.GetEnvironmentInput{
@@ -49,12 +50,12 @@ func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (Resou
 	})
 	if err != nil {
 		if isErr(err, "GetEnvironmentNotFound") || isErr(err, "InvalidParameterVaLue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *environment.Environment.Arn,
 		Name:   *environment.Environment.Name,
@@ -64,14 +65,14 @@ func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (Resou
 	}
 	return resource, nil
 }
-func GetMWAAEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMWAAEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	environmentName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	resource, err := mWAAEnvironmentHandle(ctx, cfg, environmentName)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

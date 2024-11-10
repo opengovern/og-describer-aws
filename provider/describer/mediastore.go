@@ -4,16 +4,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func MediaStoreContainer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func MediaStoreContainer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := mediastore.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		containers, err := client.ListContainers(ctx, &mediastore.ListContainersInput{
 			NextToken: prevToken,
@@ -42,7 +43,7 @@ func MediaStoreContainer(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 	return values, nil
 }
-func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container types.Container) Resource {
+func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container types.Container) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	client := mediastore.NewFromConfig(cfg)
 
@@ -60,7 +61,7 @@ func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container ty
 		tags = &mediastore.ListTagsForResourceOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *container.ARN,
 		Name:   *container.Name,
@@ -73,9 +74,9 @@ func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container ty
 
 	return resource
 }
-func GetMediaStoreContainer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMediaStoreContainer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	containerName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := mediastore.NewFromConfig(cfg)
 	out, err := client.DescribeContainer(ctx, &mediastore.DescribeContainerInput{
 		ContainerName: &containerName,

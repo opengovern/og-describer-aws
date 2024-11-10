@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
@@ -12,11 +13,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sesv2.NewFromConfig(cfg)
 	paginator := sesv2.NewListConfigurationSetsPaginator(client, &sesv2.ListConfigurationSetsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -26,7 +27,7 @@ func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *StreamSend
 		for _, v := range page.ConfigurationSets {
 
 			resource, err := sESConfigurationSetHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -46,7 +47,7 @@ func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 	return values, nil
 }
-func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (Resource, error) {
+func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	sesClient := ses.NewFromConfig(cfg)
@@ -54,14 +55,14 @@ func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (R
 	output, err := sesClient.DescribeConfigurationSet(ctx, &ses.DescribeConfigurationSetInput{ConfigurationSetName: aws.String(v)})
 	if err != nil {
 		if isErr(err, "DescribeConfigurationSetNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	arn := fmt.Sprintf("arn:%s:ses:%s:%s:configuration-set/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *output.ConfigurationSet.Name)
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *output.ConfigurationSet.Name,
@@ -71,12 +72,12 @@ func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (R
 	}
 	return resource, nil
 }
-func GetSESConfigurationSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSESConfigurationSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	configurationSetName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := sESConfigurationSetHandle(ctx, cfg, configurationSetName)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -88,11 +89,11 @@ func GetSESConfigurationSet(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func SESIdentity(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESIdentity(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ses.NewFromConfig(cfg)
 	paginator := ses.NewListIdentitiesPaginator(client, &ses.ListIdentitiesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 
 		page, err := paginator.NextPage(ctx)
@@ -103,7 +104,7 @@ func SESIdentity(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 		for _, v := range page.Identities {
 
 			resource, err := sESIdentityHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -124,11 +125,11 @@ func SESIdentity(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func SESv2EmailIdentities(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESv2EmailIdentities(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sesv2.NewFromConfig(cfg)
 	paginator := sesv2.NewListEmailIdentitiesPaginator(client, &sesv2.ListEmailIdentitiesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 
 		page, err := paginator.NextPage(ctx)
@@ -139,7 +140,7 @@ func SESv2EmailIdentities(ctx context.Context, cfg aws.Config, stream *StreamSen
 		for _, v := range page.EmailIdentities {
 
 			resource, err := sESv2EmailIdentitiesHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -160,7 +161,7 @@ func SESv2EmailIdentities(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2types.IdentityInfo) (Resource, error) {
+func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2types.IdentityInfo) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := sesv2.NewFromConfig(cfg)
@@ -172,12 +173,12 @@ func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2type
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.IdentityName,
@@ -190,7 +191,7 @@ func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2type
 	return resource, nil
 }
 
-func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource, error) {
+func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := ses.NewFromConfig(cfg)
@@ -202,9 +203,9 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	})
 	if err != nil {
 		if isErr(err, "GetIdentityVerificationAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	notif, err := client.GetIdentityNotificationAttributes(ctx, &ses.GetIdentityNotificationAttributesInput{
@@ -212,9 +213,9 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	})
 	if err != nil {
 		if isErr(err, "GetIdentityNotificationAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	DkimAtrb, err := client.GetIdentityDkimAttributes(ctx, &ses.GetIdentityDkimAttributesInput{
@@ -222,9 +223,9 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	})
 	if err != nil {
 		if isErr(err, "GetIdentityDkimAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	identityMail, err := client.GetIdentityMailFromDomainAttributes(ctx, &ses.GetIdentityMailFromDomainAttributesInput{
@@ -232,12 +233,12 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	})
 	if err != nil {
 		if isErr(err, "GetIdentityMailFromDomainAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   v,
@@ -252,7 +253,7 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (Resource,
 	}
 	return resource, nil
 }
-func GetSESIdentity(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSESIdentity(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	IdentityType := fields["identityType"]
 	client := ses.NewFromConfig(cfg)
 
@@ -266,10 +267,10 @@ func GetSESIdentity(ctx context.Context, cfg aws.Config, fields map[string]strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Identities {
 		resource, err := sESIdentityHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -282,12 +283,12 @@ func GetSESIdentity(ctx context.Context, cfg aws.Config, fields map[string]strin
 	return values, nil
 }
 
-func SESContactList(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESContactList(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sesv2.NewFromConfig(cfg)
 	paginator := sesv2.NewListContactListsPaginator(client, &sesv2.ListContactListsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -295,7 +296,7 @@ func SESContactList(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 		}
 
 		for _, v := range page.ContactLists {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *v.ContactListName,
 				Name:        *v.ContactListName,
@@ -314,7 +315,7 @@ func SESContactList(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	return values, nil
 }
 
-func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
@@ -323,9 +324,9 @@ func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range output.Filters {
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ID:          *v.Name,
 			Name:        *v.Name,
@@ -343,11 +344,11 @@ func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.ListReceiptRuleSets(ctx, &ses.ListReceiptRuleSetsInput{NextToken: prevToken})
 		if err != nil {
@@ -360,7 +361,7 @@ func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *StreamSender
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *output.Metadata.Name,
 				Name:        *output.Metadata.Name,
@@ -385,11 +386,11 @@ func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func SESTemplate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SESTemplate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.ListTemplates(ctx, &ses.ListTemplatesInput{NextToken: prevToken})
 		if err != nil {
@@ -397,7 +398,7 @@ func SESTemplate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 		}
 
 		for _, v := range output.TemplatesMetadata {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *v.Name,
 				Name:        *v.Name,

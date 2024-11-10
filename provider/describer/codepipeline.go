@@ -2,17 +2,18 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CodePipelinePipeline(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CodePipelinePipeline(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := codepipeline.NewFromConfig(cfg)
 	paginator := codepipeline.NewListPipelinesPaginator(client, &codepipeline.ListPipelinesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -49,7 +50,7 @@ func CodePipelinePipeline(ctx context.Context, cfg aws.Config, stream *StreamSen
 	}
 	return values, nil
 }
-func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *codepipeline.GetPipelineOutput) (Resource, error) {
+func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *codepipeline.GetPipelineOutput) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := codepipeline.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &codepipeline.ListTagsForResourceInput{
@@ -57,12 +58,12 @@ func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *c
 	})
 	if err != nil {
 		if !isErr(err, "InvalidParameter") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		tags = &codepipeline.ListTagsForResourceOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *pipeline.Metadata.PipelineArn,
 		Name:   *pipeline.Pipeline.Name,
@@ -74,9 +75,9 @@ func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *c
 	}
 	return resource, nil
 }
-func GetCodePipelinePipeline(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCodePipelinePipeline(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := codepipeline.NewFromConfig(cfg)
 
 	pipeline, err := client.GetPipeline(ctx, &codepipeline.GetPipelineInput{

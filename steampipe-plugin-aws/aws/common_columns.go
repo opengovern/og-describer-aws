@@ -92,7 +92,7 @@ func commonAwsKaytuRegionalColumns() []*plugin.Column {
 			Name:        "og_account_id",
 			Type:        proto.ColumnType_STRING,
 			Description: "The Platform Account ID in which the resource is located.",
-			Transform:   transform.FromField("Metadata.SourceID"),
+			Transform:   transform.FromField("Metadata.IntegrationID"),
 		},
 		{
 			Name:        "og_resource_id",

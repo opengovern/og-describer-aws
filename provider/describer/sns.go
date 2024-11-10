@@ -4,18 +4,19 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SNSSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SNSSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sns.NewFromConfig(cfg)
 	paginator := sns.NewListSubscriptionsPaginator(client, &sns.ListSubscriptionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -37,7 +38,7 @@ func SNSSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				output = &sns.GetSubscriptionAttributesOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.SubscriptionArn,
 				Name:   nameFromArn(*v.SubscriptionArn),
@@ -59,11 +60,11 @@ func SNSSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func SNSTopic(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SNSTopic(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := sns.NewFromConfig(cfg)
 	paginator := sns.NewListTopicsPaginator(client, &sns.ListTopicsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -72,7 +73,7 @@ func SNSTopic(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 		for _, v := range page.Topics {
 			resource, err := sNSTopicHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -92,7 +93,7 @@ func SNSTopic(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (Resource, error) {
+func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sns.NewFromConfig(cfg)
 
@@ -101,9 +102,9 @@ func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (Resourc
 	})
 	if err != nil {
 		if isErr(err, "GetTopicAttributesNotFound") || isErr(err, "invalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tOutput, err := client.ListTagsForResource(ctx, &sns.ListTagsForResourceInput{
@@ -111,12 +112,12 @@ func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (Resourc
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "invalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.TopicArn,
 		Name:   nameFromArn(*v.TopicArn),
@@ -127,9 +128,9 @@ func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (Resourc
 	}
 	return resource, nil
 }
-func GetSNSTopic(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetSNSTopic(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 	client := sns.NewFromConfig(cfg)
 	list, err := client.ListTopics(ctx, &sns.ListTopicsInput{})
 	if err != nil {
@@ -141,7 +142,7 @@ func GetSNSTopic(ctx context.Context, cfg aws.Config, fields map[string]string) 
 			continue
 		}
 		resource, err := sNSTopicHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

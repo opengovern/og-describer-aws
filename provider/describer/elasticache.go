@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticache.NewFromConfig(cfg)
 	paginator := elasticache.NewDescribeReplicationGroupsPaginator(client, &elasticache.DescribeReplicationGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -33,9 +34,9 @@ func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *St
 	}
 	return values, nil
 }
-func elastiCacheReplicationGroupHandle(ctx context.Context, item types.ReplicationGroup) Resource {
+func elastiCacheReplicationGroupHandle(ctx context.Context, item types.ReplicationGroup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ARN,
 		Name:   *item.ARN,
@@ -45,7 +46,7 @@ func elastiCacheReplicationGroupHandle(ctx context.Context, item types.Replicati
 	}
 	return resource
 }
-func GetElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	CacheReplicationId := fields["CacheReplicationId"]
 	client := elasticache.NewFromConfig(cfg)
 	out, err := client.DescribeReplicationGroups(ctx, &elasticache.DescribeReplicationGroupsInput{
@@ -58,18 +59,18 @@ func GetElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, fields 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.ReplicationGroups {
 		values = append(values, elastiCacheReplicationGroupHandle(ctx, v))
 	}
 	return values, nil
 }
 
-func ElastiCacheCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElastiCacheCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticache.NewFromConfig(cfg)
 	paginator := elasticache.NewDescribeCacheClustersPaginator(client, &elasticache.DescribeCacheClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -95,7 +96,7 @@ func ElastiCacheCluster(ctx context.Context, cfg aws.Config, stream *StreamSende
 	}
 	return values, nil
 }
-func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, client *elasticache.Client) (Resource, error) {
+func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, client *elasticache.Client) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	tagsOutput, err := client.ListTagsForResource(ctx, &elasticache.ListTagsForResourceInput{
@@ -103,13 +104,13 @@ func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, c
 	})
 	if err != nil {
 		if !isErr(err, "CacheClusterNotFound") && !isErr(err, "InvalidParameterValue") {
-			return Resource{}, err
+			return models.Resource{}, err
 		} else {
 			tagsOutput = &elasticache.ListTagsForResourceOutput{}
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ARN,
 		Name:   *cluster.ARN,
@@ -120,7 +121,7 @@ func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, c
 	}
 	return resource, nil
 }
-func GetElastiCacheCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElastiCacheCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterID := fields["id"]
 	client := elasticache.NewFromConfig(cfg)
 	out, err := client.DescribeCacheClusters(ctx, &elasticache.DescribeCacheClustersInput{
@@ -133,7 +134,7 @@ func GetElastiCacheCluster(ctx context.Context, cfg aws.Config, fields map[strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range out.CacheClusters {
 		resource, err := elastiCacheClusterHandle(ctx, cluster, client)
 		if err != nil {
@@ -144,11 +145,11 @@ func GetElastiCacheCluster(ctx context.Context, cfg aws.Config, fields map[strin
 	return values, nil
 }
 
-func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticache.NewFromConfig(cfg)
 	paginator := elasticache.NewDescribeCacheParameterGroupsPaginator(client, &elasticache.DescribeCacheParameterGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -169,9 +170,9 @@ func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *Stre
 
 	return values, nil
 }
-func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup types.CacheParameterGroup) Resource {
+func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup types.CacheParameterGroup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cacheParameterGroup.ARN,
 		Name:   *cacheParameterGroup.CacheParameterGroupName,
@@ -181,9 +182,9 @@ func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup ty
 	}
 	return resource
 }
-func GetElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	cacheParameterGroupName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := elasticache.NewFromConfig(cfg)
 
 	out, err := client.DescribeCacheParameterGroups(ctx, &elasticache.DescribeCacheParameterGroupsInput{
@@ -199,11 +200,11 @@ func GetElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, fields ma
 	return values, nil
 }
 
-func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticache.NewFromConfig(cfg)
 	paginator := elasticache.NewDescribeReservedCacheNodesPaginator(client, &elasticache.DescribeReservedCacheNodesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -224,9 +225,9 @@ func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode types.ReservedCacheNode) Resource {
+func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode types.ReservedCacheNode) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *reservedCacheNode.ReservationARN,
 		ID:     *reservedCacheNode.ReservedCacheNodeId,
@@ -236,7 +237,7 @@ func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode t
 	}
 	return resource
 }
-func GetElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	id := fields["id"]
 	client := elasticache.NewFromConfig(cfg)
 	out, err := client.DescribeReservedCacheNodes(ctx, &elasticache.DescribeReservedCacheNodesInput{
@@ -249,7 +250,7 @@ func GetElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, fields
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.ReservedCacheNodes {
 		resource := elastiCacheReservedCacheNodeHandle(ctx, v)
 		values = append(values, resource)
@@ -257,11 +258,11 @@ func GetElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, fields
 	return values, nil
 }
 
-func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticache.NewFromConfig(cfg)
 	paginator := elasticache.NewDescribeCacheSubnetGroupsPaginator(client, &elasticache.DescribeCacheSubnetGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -282,9 +283,9 @@ func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.CacheSubnetGroup) Resource {
+func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.CacheSubnetGroup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cacheSubnetGroup.ARN,
 		Name:   *cacheSubnetGroup.CacheSubnetGroupName,
@@ -294,7 +295,7 @@ func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.Ca
 	}
 	return resource
 }
-func GetElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	cacheSubnetGroupsName := fields["name"]
 	client := elasticache.NewFromConfig(cfg)
 
@@ -308,7 +309,7 @@ func GetElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, fields map[s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cacheSubnetGroup := range out.CacheSubnetGroups {
 
 		resource := elastiCacheSubnetGroupHandle(ctx, cacheSubnetGroup)

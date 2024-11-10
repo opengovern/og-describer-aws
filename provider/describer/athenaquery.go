@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/athena"
@@ -9,10 +10,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AthenaWrokgroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AthenaWrokgroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := athena.NewFromConfig(cfg)
 	pager := athena.NewListWorkGroupsPaginator(client, &athena.ListWorkGroupsInput{})
-	var values []Resource
+	var values []models.Resource
 	for pager.HasMorePages() {
 		page, err := pager.NextPage(ctx)
 		if err != nil {
@@ -20,7 +21,7 @@ func AthenaWrokgroup(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 		}
 		for _, item := range page.WorkGroups {
 			resource, err := authenaWorkgroupHandle(ctx, cfg, item)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -40,7 +41,7 @@ func AthenaWrokgroup(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.WorkGroupSummary) (Resource, error) {
+func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.WorkGroupSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := athena.NewFromConfig(cfg)
 	output, err := client.GetWorkGroup(ctx, &athena.GetWorkGroupInput{
@@ -48,11 +49,11 @@ func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.Work
 	})
 	if err != nil {
 		if isErr(err, "GetWorkGroupNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *output.WorkGroup.Name,
 		Description: model.AthenaWorkGroupDescription{
@@ -63,10 +64,10 @@ func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.Work
 	return resource, nil
 }
 
-func AthenaQueryExecution(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AthenaQueryExecution(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := athena.NewFromConfig(cfg)
 	pager := athena.NewListQueryExecutionsPaginator(client, &athena.ListQueryExecutionsInput{})
-	var values []Resource
+	var values []models.Resource
 	for pager.HasMorePages() {
 		page, err := pager.NextPage(ctx)
 		if err != nil {
@@ -74,7 +75,7 @@ func AthenaQueryExecution(ctx context.Context, cfg aws.Config, stream *StreamSen
 		}
 		for _, item := range page.QueryExecutionIds {
 			resource, err := authenaQueryExecutionHandle(ctx, cfg, item)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -94,7 +95,7 @@ func AthenaQueryExecution(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func authenaQueryExecutionHandle(ctx context.Context, cfg aws.Config, id string) (Resource, error) {
+func authenaQueryExecutionHandle(ctx context.Context, cfg aws.Config, id string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := athena.NewFromConfig(cfg)
 	output, err := client.GetQueryExecution(ctx, &athena.GetQueryExecutionInput{
@@ -102,11 +103,11 @@ func authenaQueryExecutionHandle(ctx context.Context, cfg aws.Config, id string)
 	})
 	if err != nil {
 		if isErr(err, "GetQueryExecutionNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *output.QueryExecution.QueryExecutionId,
 		Name:   *output.QueryExecution.Query,

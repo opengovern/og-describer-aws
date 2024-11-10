@@ -4,16 +4,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func LightsailInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func LightsailInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := lightsail.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		instances, err := client.GetInstances(ctx, &lightsail.GetInstancesInput{
 			PageToken: prevToken,
@@ -42,9 +43,9 @@ func LightsailInstance(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func lightsailInstanceHandle(ctx context.Context, instance types.Instance) Resource {
+func lightsailInstanceHandle(ctx context.Context, instance types.Instance) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *instance.Arn,
 		Name:   *instance.Name,
@@ -54,9 +55,9 @@ func lightsailInstanceHandle(ctx context.Context, instance types.Instance) Resou
 	}
 	return resource
 }
-func GetLightsailInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetLightsailInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	instanceName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	client := lightsail.NewFromConfig(cfg)
 	instance, err := client.GetInstance(ctx, &lightsail.GetInstanceInput{

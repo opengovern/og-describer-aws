@@ -2,18 +2,19 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListServicesPaginator(client, &servicediscovery.ListServicesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -27,7 +28,7 @@ func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *Stream
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *item.Id,
 				Description: model.ServiceDiscoveryServiceDescription{
@@ -47,12 +48,12 @@ func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *Stream
 	return values, nil
 }
 
-func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListNamespacesPaginator(client, &servicediscovery.ListNamespacesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -66,7 +67,7 @@ func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *Stre
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *v.Id,
 				Name:   *v.Name,
@@ -86,11 +87,11 @@ func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *Stre
 	}
 	return values, nil
 }
-func ServiceDiscoveryInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceDiscoveryInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListServicesPaginator(client, &servicediscovery.ListServicesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -115,19 +116,19 @@ func ServiceDiscoveryInstance(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func getServiceDiscoveryInstances(ctx context.Context, cfg aws.Config, id *string) ([]Resource, error) {
+func getServiceDiscoveryInstances(ctx context.Context, cfg aws.Config, id *string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListInstancesPaginator(client, &servicediscovery.ListInstancesInput{ServiceId: id})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, v := range page.Instances {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *v.Id,
 				Name:   *v.Id,

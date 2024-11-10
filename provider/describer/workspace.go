@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
@@ -10,11 +11,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := workspaces.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeConnectionAliases(ctx, &workspaces.DescribeConnectionAliasesInput{
 			NextToken: prevToken,
@@ -24,7 +25,7 @@ func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *Stre
 		}
 
 		for _, v := range output.ConnectionAliases {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *v.AliasId,
 				Name:        *v.AliasId,
@@ -49,11 +50,11 @@ func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func WorkspacesWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WorkspacesWorkspace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := workspaces.NewFromConfig(cfg)
 	paginator := workspaces.NewDescribeWorkspacesPaginator(client, &workspaces.DescribeWorkspacesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -80,7 +81,7 @@ func WorkspacesWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSend
 	}
 	return values, nil
 }
-func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Workspace) (Resource, error) {
+func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Workspace) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := workspaces.NewFromConfig(cfg)
 
@@ -90,12 +91,12 @@ func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Work
 	})
 	if err != nil {
 		if !isErr(err, "ValidationException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		tags = &workspaces.DescribeTagsOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.WorkspaceId,
@@ -106,10 +107,10 @@ func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Work
 	}
 	return resource, nil
 }
-func GetWorkspacesWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetWorkspacesWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := workspaces.NewFromConfig(cfg)
 	workspaceId := fields["workspaceId"]
-	var values []Resource
+	var values []models.Resource
 	workspace, err := client.DescribeWorkspaces(ctx, &workspaces.DescribeWorkspacesInput{
 		WorkspaceIds: []string{workspaceId},
 	})
@@ -131,11 +132,11 @@ func GetWorkspacesWorkspace(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func WorkspacesBundle(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func WorkspacesBundle(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := workspaces.NewFromConfig(cfg)
 	paginator := workspaces.NewDescribeWorkspaceBundlesPaginator(client, &workspaces.DescribeWorkspaceBundlesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -163,10 +164,10 @@ func WorkspacesBundle(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	return values, nil
 }
-func workspacesBundleHandle(ctx context.Context, v types.WorkspaceBundle, tags *workspaces.DescribeTagsOutput) Resource {
+func workspacesBundleHandle(ctx context.Context, v types.WorkspaceBundle, tags *workspaces.DescribeTagsOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:workspaces:%s:%s:workspacebundle/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.BundleId)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.BundleId,
@@ -177,8 +178,8 @@ func workspacesBundleHandle(ctx context.Context, v types.WorkspaceBundle, tags *
 	}
 	return resource
 }
-func GetWorkspacesBundle(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetWorkspacesBundle(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	BundleId := fields["bundleId"]
 	client := workspaces.NewFromConfig(cfg)
 

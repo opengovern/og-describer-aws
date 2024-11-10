@@ -4,15 +4,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CloudSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudSearchDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := cloudsearch.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	output, err := client.ListDomainNames(ctx, &cloudsearch.ListDomainNamesInput{})
 	if err != nil {
@@ -43,9 +44,9 @@ func CloudSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender
 	}
 	return values, nil
 }
-func cloudSearchDomainHandle(ctx context.Context, domain types.DomainStatus) Resource {
+func cloudSearchDomainHandle(ctx context.Context, domain types.DomainStatus) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *domain.ARN,
 		Name:   *domain.DomainName,
@@ -56,11 +57,11 @@ func cloudSearchDomainHandle(ctx context.Context, domain types.DomainStatus) Res
 	}
 	return resource
 }
-func GetCloudSearchDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudSearchDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	domainList := fields["domainList"]
 	client := cloudsearch.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	domains, err := client.DescribeDomains(ctx, &cloudsearch.DescribeDomainsInput{
 		DomainNames: []string{domainList},
 	})

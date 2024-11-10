@@ -4,6 +4,7 @@ import (
 	"context"
 	_ "database/sql/driver"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
@@ -13,11 +14,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ApiGatewayStage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayStage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
 	paginator := apigateway.NewGetRestApisPaginator(client, &apigateway.GetRestApisInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -48,10 +49,10 @@ func ApiGatewayStage(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	}
 	return values, nil
 }
-func apiGatewayStageHandle(ctx context.Context, stageItem types.Stage, id string, name string) Resource {
+func apiGatewayStageHandle(ctx context.Context, stageItem types.Stage, id string, name string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":apigateway:" + describeCtx.Region + "::/restapis/" + id + "/stages/" + *stageItem.StageName
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   name,
@@ -62,11 +63,11 @@ func apiGatewayStageHandle(ctx context.Context, stageItem types.Stage, id string
 	}
 	return resource
 }
-func GetApiGatewayStage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayStage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	restAPIID := fields["respApiId"]
 	stageName := fields["stageName"]
 	client := apigateway.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	stage, err := client.GetStage(ctx, &apigateway.GetStageInput{
 		RestApiId: &restAPIID,
@@ -102,7 +103,7 @@ func GetApiGatewayStage(ctx context.Context, cfg aws.Config, fields map[string]s
 	return values, nil
 }
 
-func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := apigatewayv2.NewFromConfig(cfg)
 
@@ -122,7 +123,7 @@ func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *StreamSender
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, api := range apis {
 		var stages []typesv2.Stage
 		err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
@@ -142,7 +143,7 @@ func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *StreamSender
 		}
 
 		for _, stage := range stages {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     CompositeID(*api.ApiId, *stage.StageName),
 				Name:   *api.Name,
@@ -166,11 +167,11 @@ func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func ApiGatewayRestAPI(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayRestAPI(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
 	paginator := apigateway.NewGetRestApisPaginator(client, &apigateway.GetRestApisInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -195,10 +196,10 @@ func ApiGatewayRestAPI(ctx context.Context, cfg aws.Config, stream *StreamSender
 	}
 	return values, nil
 }
-func apiGatewayRestAPIHandle(ctx context.Context, restItem types.RestApi) Resource {
+func apiGatewayRestAPIHandle(ctx context.Context, restItem types.RestApi) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s", describeCtx.Partition, describeCtx.Region, *restItem.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *restItem.Name,
@@ -208,7 +209,7 @@ func apiGatewayRestAPIHandle(ctx context.Context, restItem types.RestApi) Resour
 	}
 	return resource
 }
-func GetApiGatewayRestAPI(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayRestAPI(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	id := fields["id"]
 	client := apigateway.NewFromConfig(cfg)
 
@@ -222,7 +223,7 @@ func GetApiGatewayRestAPI(ctx context.Context, cfg aws.Config, fields map[string
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayRestAPIHandle(ctx, types.RestApi{
 		ApiKeySource:              out.ApiKeySource,
 		BinaryMediaTypes:          out.BinaryMediaTypes,
@@ -241,11 +242,11 @@ func GetApiGatewayRestAPI(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func ApiGatewayApiKey(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayApiKey(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
 	paginator := apigateway.NewGetApiKeysPaginator(client, &apigateway.GetApiKeysInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -270,10 +271,10 @@ func ApiGatewayApiKey(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	}
 	return values, nil
 }
-func apiGatewayApiKeyHandle(ctx context.Context, apiKey types.ApiKey) Resource {
+func apiGatewayApiKeyHandle(ctx context.Context, apiKey types.ApiKey) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apikeys/%s", describeCtx.Partition, describeCtx.Region, *apiKey.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *apiKey.Id,
 		ARN:    arn,
@@ -284,7 +285,7 @@ func apiGatewayApiKeyHandle(ctx context.Context, apiKey types.ApiKey) Resource {
 	}
 	return resource
 }
-func GetApiGatewayApiKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayApiKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	apiKeyVa := fields["apiKeyVa"]
 	client := apigateway.NewFromConfig(cfg)
 
@@ -298,7 +299,7 @@ func GetApiGatewayApiKey(ctx context.Context, cfg aws.Config, fields map[string]
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayApiKeyHandle(ctx, types.ApiKey{
 		StageKeys:       out.StageKeys,
 		Name:            out.Name,
@@ -314,11 +315,11 @@ func GetApiGatewayApiKey(ctx context.Context, cfg aws.Config, fields map[string]
 	return values, nil
 }
 
-func ApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
 	paginator := apigateway.NewGetUsagePlansPaginator(client, &apigateway.GetUsagePlansInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -343,10 +344,10 @@ func ApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, stream *StreamSend
 	}
 	return values, nil
 }
-func apiGatewayUsagePlanHandle(ctx context.Context, usagePlan types.UsagePlan) Resource {
+func apiGatewayUsagePlanHandle(ctx context.Context, usagePlan types.UsagePlan) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/usageplans/%s", describeCtx.Partition, describeCtx.Region, *usagePlan.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *usagePlan.Id,
 		ARN:    arn,
@@ -357,7 +358,7 @@ func apiGatewayUsagePlanHandle(ctx context.Context, usagePlan types.UsagePlan) R
 	}
 	return resource
 }
-func GetApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	usagePlanId := fields["usagePlanId"]
 	client := apigateway.NewFromConfig(cfg)
 
@@ -371,7 +372,7 @@ func GetApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, fields map[stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayUsagePlanHandle(ctx, types.UsagePlan{
 		Name:        out.Name,
 		Tags:        out.Tags,
@@ -385,11 +386,11 @@ func GetApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func ApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
 	paginator := apigateway.NewGetRestApisPaginator(client, &apigateway.GetRestApisInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -422,10 +423,10 @@ func ApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, stream *StreamSen
 	}
 	return values, nil
 }
-func apiGatewayAuthorizerHandle(ctx context.Context, authorizer types.Authorizer, apiId string, apiName string) Resource {
+func apiGatewayAuthorizerHandle(ctx context.Context, authorizer types.Authorizer, apiId string, apiName string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s/authorizer/%s", describeCtx.Partition, describeCtx.Region, apiId, *authorizer.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *authorizer.Id,
 		ARN:    arn,
@@ -437,10 +438,10 @@ func apiGatewayAuthorizerHandle(ctx context.Context, authorizer types.Authorizer
 	}
 	return resource
 }
-func GetApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	restApiId := fields["restApiId"]
 	authorizerId := fields["authorizerId"]
-	var values []Resource
+	var values []models.Resource
 	client := apigateway.NewFromConfig(cfg)
 
 	out, err := client.GetAuthorizer(ctx, &apigateway.GetAuthorizerInput{
@@ -469,10 +470,10 @@ func GetApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, fields map[str
 	return values, nil
 }
 
-func ApiGatewayV2API(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayV2API(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigatewayv2.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	pagesLeft := true
 	params := &apigatewayv2.GetApisInput{}
 	for pagesLeft {
@@ -500,10 +501,10 @@ func ApiGatewayV2API(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func apiGatewayV2APIHandle(ctx context.Context, api typesv2.Api) Resource {
+func apiGatewayV2APIHandle(ctx context.Context, api typesv2.Api) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s", describeCtx.Partition, describeCtx.Region, *api.ApiId)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *api.Name,
@@ -513,7 +514,7 @@ func apiGatewayV2APIHandle(ctx context.Context, api typesv2.Api) Resource {
 	}
 	return resource
 }
-func GetApiGatewayV2API(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayV2API(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	apiID := fields["id"]
 	client := apigatewayv2.NewFromConfig(cfg)
 
@@ -527,7 +528,7 @@ func GetApiGatewayV2API(ctx context.Context, cfg aws.Config, fields map[string]s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayV2APIHandle(ctx, typesv2.Api{
 		Name:                      out.Name,
 		ProtocolType:              out.ProtocolType,
@@ -549,9 +550,9 @@ func GetApiGatewayV2API(ctx context.Context, cfg aws.Config, fields map[string]s
 	return values, nil
 }
 
-func ApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigatewayv2.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.GetDomainNames(ctx, &apigatewayv2.GetDomainNamesInput{
 			NextToken: prevToken,
@@ -584,10 +585,10 @@ func ApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func apiGatewayV2DomainNameHandle(ctx context.Context, domainName typesv2.DomainName) Resource {
+func apiGatewayV2DomainNameHandle(ctx context.Context, domainName typesv2.DomainName) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainnames/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *domainName.DomainName,
@@ -597,7 +598,7 @@ func apiGatewayV2DomainNameHandle(ctx context.Context, domainName typesv2.Domain
 	}
 	return resource
 }
-func GetApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	domainName := fields["domain_name"]
 
 	client := apigatewayv2.NewFromConfig(cfg)
@@ -611,7 +612,7 @@ func GetApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, fields map[s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayV2DomainNameHandle(ctx, typesv2.DomainName{
 		DomainName:                    out.DomainName,
 		ApiMappingSelectionExpression: out.ApiMappingSelectionExpression,
@@ -622,10 +623,10 @@ func GetApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, fields map[s
 	return values, nil
 }
 
-func ApiGatewayV2Integration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayV2Integration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigatewayv2.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (*string, error) {
 		output, err := client.GetApis(ctx, &apigatewayv2.GetApisInput{
 			NextToken: prevToken,
@@ -683,10 +684,10 @@ func ApiGatewayV2Integration(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func apiGatewayV2IntegrationHandle(ctx context.Context, integration typesv2.Integration, apiId string) Resource {
+func apiGatewayV2IntegrationHandle(ctx context.Context, integration typesv2.Integration, apiId string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/integrations/%s", describeCtx.Partition, describeCtx.Region, apiId, *integration.IntegrationId)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		ID:     *integration.IntegrationId,
@@ -697,7 +698,7 @@ func apiGatewayV2IntegrationHandle(ctx context.Context, integration typesv2.Inte
 	}
 	return resource
 }
-func GetApiGatewayV2Integration(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayV2Integration(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	apiId := fields["api_id"]
 	integrationID := fields["id"]
 
@@ -721,7 +722,7 @@ func GetApiGatewayV2Integration(ctx context.Context, cfg aws.Config, fields map[
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	integration := typesv2.Integration{
 		ApiGatewayManaged:                      out.ApiGatewayManaged,
 		ConnectionId:                           out.ConnectionId,
@@ -748,9 +749,9 @@ func GetApiGatewayV2Integration(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func ApiGatewayDomainName(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayDomainName(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigateway.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	pager := apigateway.NewGetDomainNamesPaginator(client, &apigateway.GetDomainNamesInput{})
 	for pager.HasMorePages() {
 		output, err := pager.NextPage(ctx)
@@ -774,10 +775,10 @@ func ApiGatewayDomainName(ctx context.Context, cfg aws.Config, stream *StreamSen
 	}
 	return values, nil
 }
-func apiGatewayDomainNameHandle(ctx context.Context, domainName types.DomainName) Resource {
+func apiGatewayDomainNameHandle(ctx context.Context, domainName types.DomainName) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainname/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *domainName.DomainName,
@@ -787,7 +788,7 @@ func apiGatewayDomainNameHandle(ctx context.Context, domainName types.DomainName
 	}
 	return resource
 }
-func GetApiGatewayDomainName(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApiGatewayDomainName(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	domainName := fields["domain_name"]
 
 	client := apigateway.NewFromConfig(cfg)
@@ -801,7 +802,7 @@ func GetApiGatewayDomainName(ctx context.Context, cfg aws.Config, fields map[str
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	values = append(values, apiGatewayDomainNameHandle(ctx, types.DomainName{
 		DomainName:                          out.DomainName,
 		CertificateName:                     out.CertificateName,
@@ -824,14 +825,14 @@ func GetApiGatewayDomainName(ctx context.Context, cfg aws.Config, fields map[str
 	return values, nil
 }
 
-func ApiGatewayV2Route(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApiGatewayV2Route(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := apigatewayv2.NewFromConfig(cfg)
 
 	apis, err := ApiGatewayV2API(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, a := range apis {
 		api := a.Description.(model.ApiGatewayV2APIDescription).API
 		output, err := client.GetRoutes(ctx, &apigatewayv2.GetRoutesInput{
@@ -857,10 +858,10 @@ func ApiGatewayV2Route(ctx context.Context, cfg aws.Config, stream *StreamSender
 	}
 	return values, nil
 }
-func apiGatewayV2Route(ctx context.Context, route typesv2.Route) Resource {
+func apiGatewayV2Route(ctx context.Context, route typesv2.Route) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/routes/%s", describeCtx.Partition, describeCtx.Region, *route.RouteId)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *route.RouteId,

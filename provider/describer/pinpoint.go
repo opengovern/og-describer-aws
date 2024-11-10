@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
@@ -10,7 +11,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func PinpointApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func PinpointApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := pinpoint.NewFromConfig(cfg)
 
@@ -18,7 +19,7 @@ func PinpointApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 		PageSize: aws.String("1000"),
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for {
 		apps, err := client.GetApps(ctx, input)
 		if err != nil {
@@ -47,7 +48,7 @@ func PinpointApp(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 				name = *app.Name
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *app.Arn,
 				Name:   name,

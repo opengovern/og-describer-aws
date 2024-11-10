@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeFileSystemsPaginator(client, &fsx.DescribeFileSystemsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -34,9 +35,9 @@ func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 	return values, nil
 }
-func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) Resource {
+func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.FileSystemId,
@@ -46,7 +47,7 @@ func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) Resource {
 	}
 	return resource
 }
-func GetFSXFileSystem(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFSXFileSystem(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	filesystemId := fields["id"]
 	client := fsx.NewFromConfig(cfg)
 
@@ -60,18 +61,18 @@ func GetFSXFileSystem(ctx context.Context, cfg aws.Config, fields map[string]str
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range filesystem.FileSystems {
 		values = append(values, fSXFileSystemHandle(ctx, v))
 	}
 	return values, nil
 }
 
-func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeStorageVirtualMachinesPaginator(client, &fsx.DescribeStorageVirtualMachinesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -91,9 +92,9 @@ func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *Strea
 	}
 	return values, nil
 }
-func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtualMachine) Resource {
+func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtualMachine) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
@@ -103,7 +104,7 @@ func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtu
 	}
 	return resource
 }
-func GetFSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	storageVirtualMachineId := fields["id"]
 
 	client := fsx.NewFromConfig(cfg)
@@ -117,7 +118,7 @@ func GetFSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, fields map
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.StorageVirtualMachines {
 		values = append(values, fSXStorageVirtualMachineHandle(ctx, v))
 	}
@@ -125,12 +126,12 @@ func GetFSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, fields map
 	return values, nil
 }
 
-func FSXTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FSXTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeDataRepositoryTasksPaginator(client, &fsx.DescribeDataRepositoryTasksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -138,7 +139,7 @@ func FSXTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 		}
 
 		for _, item := range page.DataRepositoryTasks {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *item.ResourceARN,
 				Name:   *item.TaskId,
@@ -159,11 +160,11 @@ func FSXTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 	return values, nil
 }
 
-func FSXVolume(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FSXVolume(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeVolumesPaginator(client, &fsx.DescribeVolumesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -184,9 +185,9 @@ func FSXVolume(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Res
 
 	return values, nil
 }
-func fSXVolumeHandle(ctx context.Context, item types.Volume) Resource {
+func fSXVolumeHandle(ctx context.Context, item types.Volume) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
@@ -196,7 +197,7 @@ func fSXVolumeHandle(ctx context.Context, item types.Volume) Resource {
 	}
 	return resource
 }
-func GetFSXVolume(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFSXVolume(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	volumeId := fields["id"]
 	client := fsx.NewFromConfig(cfg)
 
@@ -210,18 +211,18 @@ func GetFSXVolume(ctx context.Context, cfg aws.Config, fields map[string]string)
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range volumes.Volumes {
 		values = append(values, fSXVolumeHandle(ctx, item))
 	}
 	return values, nil
 }
 
-func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeSnapshotsPaginator(client, &fsx.DescribeSnapshotsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -242,9 +243,9 @@ func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 
 	return values, nil
 }
-func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) Resource {
+func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
 		Name:   *item.Name,
@@ -254,7 +255,7 @@ func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) Resource {
 	}
 	return resource
 }
-func GetFSXSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFSXSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	snapshotId := fields["id"]
 	client := fsx.NewFromConfig(cfg)
 
@@ -268,7 +269,7 @@ func GetFSXSnapshot(ctx context.Context, cfg aws.Config, fields map[string]strin
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range snapshot.Snapshots {
 		values = append(values, fSXSnapshotHandle(ctx, item))
 	}

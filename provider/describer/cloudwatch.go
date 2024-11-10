@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 	"time"
 
@@ -14,14 +15,14 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAlarmsPaginator(client, &cloudwatch.DescribeAlarmsInput{
 		AlarmTypes: []types.AlarmType{types.AlarmTypeMetricAlarm},
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -36,7 +37,7 @@ func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				tags = &cloudwatch.ListTagsForResourceOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.AlarmArn,
 				Name:   *v.AlarmName,
@@ -58,7 +59,7 @@ func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return values, nil
 }
 
-func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	alarmName := fields["name"]
 	client := cloudwatch.NewFromConfig(cfg)
@@ -69,7 +70,7 @@ func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.MetricAlarms {
 		tags, err := client.ListTagsForResource(ctx, &cloudwatch.ListTagsForResourceInput{
 			ResourceARN: v.AlarmArn,
@@ -78,7 +79,7 @@ func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]s
 			tags = &cloudwatch.ListTagsForResourceOutput{}
 		}
 
-		values = append(values, Resource{
+		values = append(values, models.Resource{
 			Region: describeCtx.OGRegion,
 			ARN:    *v.AlarmArn,
 			Name:   *v.AlarmName,
@@ -92,7 +93,7 @@ func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]s
 	return values, nil
 }
 
-func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.DescribeAnomalyDetectors(ctx, &cloudwatch.DescribeAnomalyDetectorsInput{})
@@ -100,9 +101,9 @@ func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *Stre
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range output.AnomalyDetectors {
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*v.SingleMetricAnomalyDetector.Namespace, *v.SingleMetricAnomalyDetector.MetricName),
 			Name:        *v.SingleMetricAnomalyDetector.MetricName,
@@ -120,14 +121,14 @@ func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAlarmsPaginator(client, &cloudwatch.DescribeAlarmsInput{
 		AlarmTypes: []types.AlarmType{types.AlarmTypeCompositeAlarm},
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -135,7 +136,7 @@ func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *Strea
 		}
 
 		for _, v := range page.MetricAlarms {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.AlarmArn,
 				Name:        *v.AlarmName,
@@ -154,7 +155,7 @@ func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.ListDashboards(ctx, &cloudwatch.ListDashboardsInput{})
@@ -162,9 +163,9 @@ func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *StreamSend
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range output.DashboardEntries {
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ARN:         *v.DashboardArn,
 			Name:        *v.DashboardName,
@@ -182,12 +183,12 @@ func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeInsightRulesPaginator(client, &cloudwatch.DescribeInsightRulesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -195,7 +196,7 @@ func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *StreamSe
 		}
 
 		for _, v := range page.InsightRules {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *v.Name,
 				Name:        *v.Name,
@@ -214,7 +215,7 @@ func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.ListMetricStreams(ctx, &cloudwatch.ListMetricStreamsInput{})
@@ -222,9 +223,9 @@ func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *StreamS
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range output.Entries {
-		resource := Resource{
+		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
 			ARN:         *v.Arn,
 			Name:        *v.Name,
@@ -242,12 +243,12 @@ func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *StreamS
 	return values, nil
 }
 
-func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeDestinationsPaginator(client, &cloudwatchlogs.DescribeDestinationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -255,7 +256,7 @@ func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *Stre
 		}
 
 		for _, v := range page.Destinations {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.DestinationName,
@@ -274,12 +275,12 @@ func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeLogGroupsPaginator(client, &cloudwatchlogs.DescribeLogGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -305,7 +306,7 @@ func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *StreamS
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.LogGroupName,
@@ -328,12 +329,12 @@ func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *StreamS
 	return values, nil
 }
 
-func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeMetricFiltersPaginator(client, &cloudwatchlogs.DescribeMetricFiltersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -342,7 +343,7 @@ func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *Str
 
 		for _, v := range page.MetricFilters {
 			arn := "arn:" + describeCtx.Partition + ":logs:" + describeCtx.Region + ":" + describeCtx.AccountID + ":log-group:" + *v.LogGroupName + ":metric-filter:" + *v.FilterName
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				ID:     *v.FilterName,
@@ -364,11 +365,11 @@ func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *Str
 	return values, nil
 }
 
-func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeQueryDefinitions(ctx, &cloudwatchlogs.DescribeQueryDefinitionsInput{NextToken: prevToken})
 		if err != nil {
@@ -376,7 +377,7 @@ func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *
 		}
 
 		for _, v := range output.QueryDefinitions {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ID:          *v.QueryDefinitionId,
 				Name:        *v.Name,
@@ -401,14 +402,14 @@ func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 
-func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroups, err := CloudWatchLogsLogGroup(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, logGroup := range logGroups {
 		logGroupName := logGroup.Description.(model.CloudWatchLogsLogGroupDescription).LogGroup.LogGroupName
 		paginator := cloudwatchlogs.NewFilterLogEventsPaginator(client, &cloudwatchlogs.FilterLogEventsInput{
@@ -426,7 +427,7 @@ func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *StreamSende
 			}
 
 			for _, v := range page.Events {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     *v.EventId,
 					Name:   *v.LogStreamName,
@@ -449,11 +450,11 @@ func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeResourcePolicies(ctx, &cloudwatchlogs.DescribeResourcePoliciesInput{
 			NextToken: prevToken,
@@ -463,7 +464,7 @@ func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *S
 		}
 
 		for _, v := range output.ResourcePolicies {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *v.PolicyName,
 				Description: model.CloudWatchLogResourcePolicyDescription{
@@ -489,7 +490,7 @@ func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *S
 	return values, nil
 }
 
-func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroups, err := CloudWatchLogsLogGroup(ctx, cfg, nil)
@@ -497,7 +498,7 @@ func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *StreamSend
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, logGroup := range logGroups {
 		logGroupName := logGroup.Description.(model.CloudWatchLogsLogGroupDescription).LogGroup.LogGroupName
 		paginator := cloudwatchlogs.NewDescribeLogStreamsPaginator(client, &cloudwatchlogs.DescribeLogStreamsInput{
@@ -518,7 +519,7 @@ func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *StreamSend
 			}
 
 			for _, v := range page.LogStreams {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ARN:    *v.Arn,
 					Name:   *v.LogStreamName,
@@ -541,13 +542,13 @@ func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroupPaginator := cloudwatchlogs.NewDescribeLogGroupsPaginator(client, &cloudwatchlogs.DescribeLogGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for logGroupPaginator.HasMorePages() {
 		logGroupPage, err := logGroupPaginator.NextPage(ctx)
 		if err != nil {
@@ -568,7 +569,7 @@ func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, strea
 
 				for _, v := range page.SubscriptionFilters {
 					arn := fmt.Sprintf("arn:%s:logs:%s:%s:log-group:%s:subscription-filter:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *logGroupName, *v.FilterName)
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ID:     CompositeID(*v.LogGroupName, *v.FilterName),
 						ARN:    arn,
@@ -593,12 +594,12 @@ func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, strea
 	return values, nil
 }
 
-func CloudWatchMetrics(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchMetrics(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewListMetricsPaginator(client, &cloudwatch.ListMetricsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -606,7 +607,7 @@ func CloudWatchMetrics(ctx context.Context, cfg aws.Config, stream *StreamSender
 		}
 
 		for _, v := range page.Metrics {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *v.MetricName,
 				Description: model.CloudWatchMetricDescription{
@@ -707,12 +708,12 @@ func listCloudWatchMetricStatistics(ctx context.Context, cfg aws.Config, granula
 	return values, nil
 }
 
-func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAnomalyDetectorsPaginator(client, &cloudwatch.DescribeAnomalyDetectorsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -732,7 +733,7 @@ func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *Stre
 					}
 					for _, r := range metricsPage.MetricDataResults {
 						for item := 0; item < len(r.Timestamps); item++ {
-							resource := Resource{
+							resource := models.Resource{
 								Region: describeCtx.OGRegion,
 								ID:     *r.Id,
 								Description: model.CloudWatchMetricDataPointDescription{
@@ -760,12 +761,12 @@ func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *Stre
 }
 
 //
-//func CloudWatchMetricStatisticDataPoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+//func CloudWatchMetricStatisticDataPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 //	describeCtx := GetDescribeContext(ctx)
 //	client := cloudwatch.NewFromConfig(cfg)
 //	paginator := cloudwatch.NewDescribeAnomalyDetectorsPaginator(client, &cloudwatch.DescribeAnomalyDetectorsInput{})
 //
-//	var values []Resource
+//	var values []models.Resource
 //	for paginator.HasMorePages() {
 //		page, err := paginator.NextPage(ctx)
 //		if err != nil {
@@ -792,7 +793,7 @@ func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *Stre
 //					}
 //					for _, r := range metricsPage.MetricDataResults {
 //						for item := 0; item < len(r.Timestamps); item++ {
-//							resource := Resource{
+//							resource := models.Resource{
 //								Region: describeCtx.OGRegion,
 //								ID:     *r.Id,
 //								Description: model.CloudWatchMetricDataPointDescription{

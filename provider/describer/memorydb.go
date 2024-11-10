@@ -4,16 +4,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func MemoryDbCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func MemoryDbCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := memorydb.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		clusters, err := client.DescribeClusters(ctx, &memorydb.DescribeClustersInput{
 			NextToken: prevToken,
@@ -27,7 +28,7 @@ func MemoryDbCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -50,7 +51,7 @@ func MemoryDbCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 
 	return values, nil
 }
-func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (Resource, error) {
+func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := memorydb.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &memorydb.ListTagsInput{
@@ -58,12 +59,12 @@ func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cl
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cluster.ARN,
 		Name:   *cluster.Name,
@@ -74,7 +75,7 @@ func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cl
 	}
 	return resource, nil
 }
-func GetMemoryDbCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetMemoryDbCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["clusterName"]
 	client := memorydb.NewFromConfig(cfg)
 
@@ -88,13 +89,13 @@ func GetMemoryDbCluster(ctx context.Context, cfg aws.Config, fields map[string]s
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range describers.Clusters {
 		resource, err := memoryDbClusterHandle(ctx, cfg, cluster)
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

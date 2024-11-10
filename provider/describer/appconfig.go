@@ -10,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AppConfigApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AppConfigApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := appconfig.NewFromConfig(cfg)
 	paginator := appconfig.NewListApplicationsPaginator(client, &appconfig.ListApplicationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -38,7 +38,7 @@ func AppConfigApplication(ctx context.Context, cfg aws.Config, stream *StreamSen
 	}
 	return values, nil
 }
-func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application types.Application) (Resource, error) {
+func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application types.Application) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := appconfig.NewFromConfig(cfg)
 	arn := fmt.Sprintf("arn:%s:appconfig:%s:%s:application/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *application.Id)
@@ -47,10 +47,10 @@ func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application
 		ResourceArn: aws.String(arn),
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *application.Id,
 		Name:   *application.Name,
@@ -62,8 +62,8 @@ func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application
 	}
 	return resource, nil
 }
-func GetAppConfigApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetAppConfigApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	applicationId := fields["id"]
 	client := appconfig.NewFromConfig(cfg)
 	applications, err := client.ListApplications(ctx, &appconfig.ListApplicationsInput{})

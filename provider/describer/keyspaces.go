@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	_ "database/sql/driver"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
 
@@ -11,11 +12,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func KeyspacesKeyspace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KeyspacesKeyspace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := keyspaces.NewFromConfig(cfg)
 	paginator := keyspaces.NewListKeyspacesPaginator(client, &keyspaces.ListKeyspacesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -24,7 +25,7 @@ func KeyspacesKeyspace(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 		for _, v := range page.Keyspaces {
 			resource, err := keyspacesKeyspaceHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -44,7 +45,7 @@ func KeyspacesKeyspace(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.KeyspaceSummary) (Resource, error) {
+func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.KeyspaceSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := keyspaces.NewFromConfig(cfg)
 
@@ -53,12 +54,12 @@ func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.Keyspa
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ResourceArn,
 		Name:   *v.KeyspaceName,
@@ -69,9 +70,9 @@ func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.Keyspa
 	}
 	return resource, nil
 }
-func GetKeyspacesKeyspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKeyspacesKeyspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	name := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := keyspaces.NewFromConfig(cfg)
 	out, err := client.GetKeyspace(ctx, &keyspaces.GetKeyspaceInput{
 		KeyspaceName: &name,
@@ -89,7 +90,7 @@ func GetKeyspacesKeyspace(ctx context.Context, cfg aws.Config, fields map[string
 	}
 
 	resource, err := keyspacesKeyspaceHandle(ctx, cfg, keyspace)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -101,11 +102,11 @@ func GetKeyspacesKeyspace(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func KeyspacesTable(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KeyspacesTable(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := keyspaces.NewFromConfig(cfg)
 	keyspacePaginator := keyspaces.NewListKeyspacesPaginator(client, &keyspaces.ListKeyspacesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for keyspacePaginator.HasMorePages() {
 		keyspacePage, err := keyspacePaginator.NextPage(ctx)
 		if err != nil {
@@ -125,7 +126,7 @@ func KeyspacesTable(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 				for _, v := range page.Tables {
 					resource, err := keyspacesTableHandle(ctx, cfg, v)
-					emptyResource := Resource{}
+					emptyResource := models.Resource{}
 					if err == nil && resource == emptyResource {
 						return nil, nil
 					}
@@ -147,7 +148,7 @@ func KeyspacesTable(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSummary) (Resource, error) {
+func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := keyspaces.NewFromConfig(cfg)
 
@@ -156,12 +157,12 @@ func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSumm
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *v.ResourceArn,
 		Name:   *v.KeyspaceName,
@@ -172,8 +173,8 @@ func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSumm
 	}
 	return resource, nil
 }
-func GetKeyspacesTable(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetKeyspacesTable(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	name := fields["name"]
 	client := keyspaces.NewFromConfig(cfg)
 
@@ -189,7 +190,7 @@ func GetKeyspacesTable(ctx context.Context, cfg aws.Config, fields map[string]st
 
 	for _, v := range list.Tables {
 		resource, err := keyspacesTableHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

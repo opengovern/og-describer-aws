@@ -2,18 +2,19 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func TimestreamDatabase(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func TimestreamDatabase(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := timestreamwrite.NewFromConfig(cfg)
 	paginator := timestreamwrite.NewListDatabasesPaginator(client, &timestreamwrite.ListDatabasesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -26,7 +27,7 @@ func TimestreamDatabase(ctx context.Context, cfg aws.Config, stream *StreamSende
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.DatabaseName,

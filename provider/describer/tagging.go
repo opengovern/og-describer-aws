@@ -4,24 +4,25 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func TaggingResources(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func TaggingResources(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := resourcegroupstaggingapi.NewFromConfig(cfg)
 	paginator := resourcegroupstaggingapi.NewGetResourcesPaginator(client, &resourcegroupstaggingapi.GetResourcesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, v := range page.ResourceTagMappingList {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *v.ResourceARN,
 				Name:   *v.ResourceARN,

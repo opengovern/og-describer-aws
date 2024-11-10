@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
@@ -12,10 +13,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func KinesisStream(ctx context.Context, cfg aws.Config, streamS *StreamSender) ([]Resource, error) {
+func KinesisStream(ctx context.Context, cfg aws.Config, streamS *models.StreamSender) ([]models.Resource, error) {
 	client := kinesis.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	var lastStreamName *string = nil
 	for {
 		streams, err := client.ListStreams(ctx, &kinesis.ListStreamsInput{
@@ -78,9 +79,9 @@ func KinesisStream(ctx context.Context, cfg aws.Config, streamS *StreamSender) (
 
 	return values, nil
 }
-func kinesisStreamHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, streamSummery *kinesis.DescribeStreamSummaryOutput, tags *kinesis.ListTagsForStreamOutput) Resource {
+func kinesisStreamHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, streamSummery *kinesis.DescribeStreamSummaryOutput, tags *kinesis.ListTagsForStreamOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *stream.StreamDescription.StreamARN,
 		Name:   *stream.StreamDescription.StreamName,
@@ -92,10 +93,10 @@ func kinesisStreamHandle(ctx context.Context, stream *kinesis.DescribeStreamOutp
 	}
 	return resource
 }
-func GetKinesisStream(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKinesisStream(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	streamName := fields["name"]
 
-	var values []Resource
+	var values []models.Resource
 	client := kinesis.NewFromConfig(cfg)
 	stream, err := client.DescribeStream(ctx, &kinesis.DescribeStreamInput{
 		StreamName: &streamName,
@@ -131,9 +132,9 @@ func GetKinesisStream(ctx context.Context, cfg aws.Config, fields map[string]str
 	return values, nil
 }
 
-func KinesisConsumer(ctx context.Context, cfg aws.Config, streamS *StreamSender) ([]Resource, error) {
+func KinesisConsumer(ctx context.Context, cfg aws.Config, streamS *models.StreamSender) ([]models.Resource, error) {
 	client := kinesis.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(startName *string) (*string, error) {
 		streams, err := client.ListStreams(ctx, &kinesis.ListStreamsInput{
 			ExclusiveStartStreamName: startName,
@@ -192,9 +193,9 @@ func KinesisConsumer(ctx context.Context, cfg aws.Config, streamS *StreamSender)
 
 	return values, nil
 }
-func kinesisConsumerHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, consumer types.Consumer) Resource {
+func kinesisConsumerHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, consumer types.Consumer) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *consumer.ConsumerARN,
 		Name:   *consumer.ConsumerName,
@@ -205,9 +206,9 @@ func kinesisConsumerHandle(ctx context.Context, stream *kinesis.DescribeStreamOu
 	}
 	return resource
 }
-func GetKinesisConsumer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKinesisConsumer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	streamName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := kinesis.NewFromConfig(cfg)
 	stream, err := client.DescribeStream(ctx, &kinesis.DescribeStreamInput{
 		StreamName: &streamName,
@@ -236,11 +237,11 @@ func GetKinesisConsumer(ctx context.Context, cfg aws.Config, fields map[string]s
 	return values, nil
 }
 
-func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *StreamSender) ([]Resource, error) {
+func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := kinesisvideo.NewFromConfig(cfg)
 	paginator := kinesisvideo.NewListStreamsPaginator(client, &kinesisvideo.ListStreamsInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -254,7 +255,7 @@ func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *StreamSend
 				tags = &kinesisvideo.ListTagsForStreamOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *stream.StreamARN,
 				Name:   *stream.StreamName,
@@ -276,9 +277,9 @@ func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *StreamSend
 	return values, nil
 }
 
-func KinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := kinesisanalyticsv2.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	err := PaginateRetrieveAll(func(prevToken *string) (*string, error) {
 		applications, err := client.ListApplications(ctx, &kinesisanalyticsv2.ListApplicationsInput{
@@ -322,9 +323,9 @@ func KinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, stream *
 
 	return values, nil
 }
-func kinesisAnalyticsV2ApplicationHandle(ctx context.Context, description *kinesisanalyticsv2.DescribeApplicationOutput, tags *kinesisanalyticsv2.ListTagsForResourceOutput) Resource {
+func kinesisAnalyticsV2ApplicationHandle(ctx context.Context, description *kinesisanalyticsv2.DescribeApplicationOutput, tags *kinesisanalyticsv2.ListTagsForResourceOutput) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *description.ApplicationDetail.ApplicationARN,
 		Name:   *description.ApplicationDetail.ApplicationName,
@@ -335,10 +336,10 @@ func kinesisAnalyticsV2ApplicationHandle(ctx context.Context, description *kines
 	}
 	return resource
 }
-func GetKinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	applicationName := fields["name"]
 
-	var values []Resource
+	var values []models.Resource
 	client := kinesisanalyticsv2.NewFromConfig(cfg)
 	description, err := client.DescribeApplication(ctx, &kinesisanalyticsv2.DescribeApplicationInput{
 		ApplicationName: &applicationName,

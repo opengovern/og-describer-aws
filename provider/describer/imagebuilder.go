@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ImageBuilderImage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ImageBuilderImage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := imagebuilder.NewFromConfig(cfg)
 	paginator := imagebuilder.NewListImagesPaginator(client, &imagebuilder.ListImagesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -33,7 +34,7 @@ func ImageBuilderImage(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 				for _, imageSummary := range buildVersionPage.ImageSummaryList {
 					resource, err := imageBuilderImageHandle(ctx, cfg, imageSummary)
-					emptyResource := Resource{}
+					emptyResource := models.Resource{}
 					if err == nil && resource == emptyResource {
 						return nil, nil
 					}
@@ -55,7 +56,7 @@ func ImageBuilderImage(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary types.ImageSummary) (Resource, error) {
+func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary types.ImageSummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := imagebuilder.NewFromConfig(cfg)
 	image, err := client.GetImage(ctx, &imagebuilder.GetImageInput{
@@ -63,12 +64,12 @@ func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary t
 	})
 	if err != nil {
 		if isErr(err, "GetImageNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *image.Image.Arn,
 		Name:   *image.Image.Name,
@@ -78,7 +79,7 @@ func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary t
 	}
 	return resource, nil
 }
-func GetImageBuilderImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetImageBuilderImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := imagebuilder.NewFromConfig(cfg)
 	out, err := client.ListImageBuildVersions(ctx, &imagebuilder.ListImageBuildVersionsInput{
@@ -90,11 +91,11 @@ func GetImageBuilderImage(ctx context.Context, cfg aws.Config, fields map[string
 		}
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, imageSummery := range out.ImageSummaryList {
 
 		resource, err := imageBuilderImageHandle(ctx, cfg, imageSummery)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

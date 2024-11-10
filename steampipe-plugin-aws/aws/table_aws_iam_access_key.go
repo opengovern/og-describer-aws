@@ -83,7 +83,7 @@ func tableAwsIamAccessKey(_ context.Context) *plugin.Table {
 //// HYDRATE FUNCTIONS
 
 func getIamAccessKeyAka(ctx context.Context, d *transform.TransformData) (interface{}, error) {
-	arn := d.HydrateItem.(opengovernance.IAMAccessKey).ARN
+	arn := d.HydrateItem.(opengovernance.IAMAccessKey).ResourceID
 
 	aka := []string{arn}
 	return aka, nil

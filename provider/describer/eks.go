@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -34,18 +35,18 @@ type EKSIdentityProviderConfigDescription struct {
 	IdentityProviderConfig types.OidcIdentityProviderConfig
 }
 
-func EKSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		// This prevents Implicit memory aliasing in for loop
 		cluster := cluster
 		resource, err := eKSClusterHandle(ctx, cfg, cluster)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -64,19 +65,19 @@ func EKSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	return values, nil
 }
-func eKSClusterHandle(ctx context.Context, cfg aws.Config, cluster string) (Resource, error) {
+func eKSClusterHandle(ctx context.Context, cfg aws.Config, cluster string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := eks.NewFromConfig(cfg)
 
 	output, err := client.DescribeCluster(ctx, &eks.DescribeClusterInput{Name: aws.String(cluster)})
 	if err != nil {
 		if isErr(err, "DescribeClusterNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *output.Cluster.Arn,
 		Name:   *output.Cluster.Name,
@@ -86,13 +87,13 @@ func eKSClusterHandle(ctx context.Context, cfg aws.Config, cluster string) (Reso
 	}
 	return resource, nil
 }
-func GetEKSCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEKSCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["name"]
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		cluster := cluster
 		if !strings.EqualFold(*aws.String(cluster), clusterName) {
@@ -100,7 +101,7 @@ func GetEKSCluster(ctx context.Context, cfg aws.Config, fields map[string]string
 		}
 
 		resource, err := eKSClusterHandle(ctx, cfg, cluster)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -113,7 +114,7 @@ func GetEKSCluster(ctx context.Context, cfg aws.Config, fields map[string]string
 	return values, nil
 }
 
-func EKSAddon(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSAddon(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -121,7 +122,7 @@ func EKSAddon(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	client := eks.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		var addons []string
 
@@ -137,7 +138,7 @@ func EKSAddon(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 		for _, addon := range addons {
 			resource, err := eKSAddonHandle(ctx, cfg, addon, cluster)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -157,7 +158,7 @@ func EKSAddon(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterName string) (Resource, error) {
+func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterName string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := eks.NewFromConfig(cfg)
 
@@ -167,12 +168,12 @@ func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterNa
 	})
 	if err != nil {
 		if isErr(err, "DescribeAddonNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *output.Addon.AddonArn,
 		Name:   *output.Addon.AddonName,
@@ -182,7 +183,7 @@ func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterNa
 	}
 	return resource, nil
 }
-func GetEKSAddon(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEKSAddon(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["clusterName"]
 	client := eks.NewFromConfig(cfg)
 	addons, err := client.ListAddons(ctx, &eks.ListAddonsInput{
@@ -195,10 +196,10 @@ func GetEKSAddon(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, addon := range addons.Addons {
 		resource, err := eKSAddonHandle(ctx, cfg, addon, clusterName)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -211,7 +212,7 @@ func GetEKSAddon(ctx context.Context, cfg aws.Config, fields map[string]string) 
 	return values, nil
 }
 
-func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -219,7 +220,7 @@ func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	client := eks.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		var profiles []string
 
@@ -234,7 +235,7 @@ func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 		for _, profile := range profiles {
 			resource, err := eKSFargateProfileHandle(ctx, cfg, profile, cluster)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -254,7 +255,7 @@ func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (Resource, error) {
+func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (models.Resource, error) {
 	client := eks.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 	output, err := client.DescribeFargateProfile(ctx, &eks.DescribeFargateProfileInput{
@@ -263,12 +264,12 @@ func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string
 	})
 	if err != nil {
 		if isErr(err, "DescribeFargateProfileNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *output.FargateProfile.FargateProfileArn,
 		Name:   *output.FargateProfile.FargateProfileName,
@@ -278,7 +279,7 @@ func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string
 	}
 	return resource, nil
 }
-func GetEKSFargateProfile(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEKSFargateProfile(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["name"]
 	client := eks.NewFromConfig(cfg)
 
@@ -292,11 +293,11 @@ func GetEKSFargateProfile(ctx context.Context, cfg aws.Config, fields map[string
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, profile := range profiles.FargateProfileNames {
 
 		resource, err := eKSFargateProfileHandle(ctx, cfg, profile, clusterName)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -309,7 +310,7 @@ func GetEKSFargateProfile(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -317,7 +318,7 @@ func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	client := eks.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		cluster := cluster
 		var groups []string
@@ -335,7 +336,7 @@ func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 		for _, profile := range groups {
 
 			resource, err := eKSNodegroupHandle(ctx, cfg, profile, cluster)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -355,7 +356,7 @@ func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	return values, nil
 }
-func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (Resource, error) {
+func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (models.Resource, error) {
 	client := eks.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -365,12 +366,12 @@ func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clu
 	})
 	if err != nil {
 		if isErr(err, "DescribeNodegroupNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *output.Nodegroup.NodegroupArn,
 		Name:   *output.Nodegroup.NodegroupName,
@@ -380,7 +381,7 @@ func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clu
 	}
 	return resource, nil
 }
-func GetEKSNodegroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEKSNodegroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterName := fields["name"]
 
 	client := eks.NewFromConfig(cfg)
@@ -394,10 +395,10 @@ func GetEKSNodegroup(ctx context.Context, cfg aws.Config, fields map[string]stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, profile := range groups.Nodegroups {
 		resource, err := eKSNodegroupHandle(ctx, cfg, profile, clusterName)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -410,14 +411,14 @@ func GetEKSNodegroup(ctx context.Context, cfg aws.Config, fields map[string]stri
 	return values, nil
 }
 
-func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		cluster := cluster
 		client := eks.NewFromConfig(cfg)
@@ -441,7 +442,7 @@ func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *Stre
 					return nil, err
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ARN:    *output.IdentityProviderConfig.Oidc.IdentityProviderConfigArn,
 					Name:   *config.Name,
@@ -466,13 +467,13 @@ func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func EKSAddonVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EKSAddonVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := eks.NewFromConfig(cfg)
 	paginator := eks.NewDescribeAddonVersionsPaginator(client, &eks.DescribeAddonVersionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -491,7 +492,7 @@ func EKSAddonVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 					return nil, err
 				}
 
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ARN:    arn,
 					Description: model.EKSAddonVersionDescription{

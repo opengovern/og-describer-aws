@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"math"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -11,14 +12,14 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DirectConnectConnection(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DirectConnectConnection(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := directconnect.NewFromConfig(cfg)
 	connections, err := client.DescribeConnections(ctx, &directconnect.DescribeConnectionsInput{})
 	if err != nil {
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range connections.Connections {
 		resource := directConnectConnectionHandle(ctx, v)
 		if stream != nil {
@@ -32,10 +33,10 @@ func DirectConnectConnection(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func directConnectConnectionHandle(ctx context.Context, v types.Connection) Resource {
+func directConnectConnectionHandle(ctx context.Context, v types.Connection) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:directconnect:%s:%s:dxcon/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.ConnectionId)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.ConnectionId,
@@ -45,7 +46,7 @@ func directConnectConnectionHandle(ctx context.Context, v types.Connection) Reso
 	}
 	return resource
 }
-func GetDirectConnectConnection(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDirectConnectConnection(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	connectionId := fields["id"]
 	client := directconnect.NewFromConfig(cfg)
 	out, err := client.DescribeConnections(ctx, &directconnect.DescribeConnectionsInput{
@@ -54,7 +55,7 @@ func GetDirectConnectConnection(ctx context.Context, cfg aws.Config, fields map[
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Connections {
 		resource := directConnectConnectionHandle(ctx, v)
 		values = append(values, resource)
@@ -66,11 +67,11 @@ func getDirectConnectGatewayArn(describeCtx DescribeContext, directConnectGatewa
 	return fmt.Sprintf("arn:%s:directconnect::%s:dx-gateway/%s", describeCtx.Partition, describeCtx.AccountID, directConnectGatewayId)
 }
 
-func DirectConnectGateway(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DirectConnectGateway(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := directconnect.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		connections, err := client.DescribeDirectConnectGateways(ctx, &directconnect.DescribeDirectConnectGatewaysInput{
 			MaxResults: aws.Int32(100),
@@ -120,7 +121,7 @@ func DirectConnectGateway(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 	return values, nil
 }
-func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGateway, arnToTagMap map[string][]types.Tag) Resource {
+func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGateway, arnToTagMap map[string][]types.Tag) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := getDirectConnectGatewayArn(describeCtx, *v.DirectConnectGatewayId)
 
@@ -129,7 +130,7 @@ func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGatewa
 		tagsList = []types.Tag{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *v.DirectConnectGatewayName,
@@ -140,7 +141,7 @@ func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGatewa
 	}
 	return resource
 }
-func GetDirectConnectGateway(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDirectConnectGateway(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	DirectConnectGatewayId := fields["id"]
 
@@ -175,7 +176,7 @@ func GetDirectConnectGateway(ctx context.Context, cfg aws.Config, fields map[str
 			arnToTagMap[*tag.ResourceArn] = tag.Tags
 		}
 	}
-	var values []Resource
+	var values []models.Resource
 
 	for _, v := range out.DirectConnectGateways {
 		resource := directConnectGatewayHandle(ctx, v, arnToTagMap)

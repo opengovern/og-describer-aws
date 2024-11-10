@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/aws/smithy-go"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/turbot/go-kit/helpers"
@@ -16,11 +17,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func KMSAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KMSAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := kms.NewFromConfig(cfg)
 	paginator := kms.NewListAliasesPaginator(client, &kms.ListAliasesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -41,9 +42,9 @@ func KMSAlias(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func KMSAliasHandle(ctx context.Context, v types.AliasListEntry) Resource {
+func KMSAliasHandle(ctx context.Context, v types.AliasListEntry) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ARN:         *v.AliasArn,
 		Name:        *v.AliasName,
@@ -51,7 +52,7 @@ func KMSAliasHandle(ctx context.Context, v types.AliasListEntry) Resource {
 	}
 	return resource
 }
-func GetKMSAlias(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKMSAlias(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	keyId := fields["keyId"]
 	client := kms.NewFromConfig(cfg)
 
@@ -65,19 +66,19 @@ func GetKMSAlias(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Aliases {
 		values = append(values, KMSAliasHandle(ctx, v))
 	}
 	return values, nil
 }
 
-func KMSKey(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KMSKey(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := kms.NewFromConfig(cfg)
 	paginator := kms.NewListKeysPaginator(client, &kms.ListKeysInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -164,7 +165,7 @@ func KMSKey(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resour
 				title = *key.KeyMetadata.KeyId
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.KeyArn,
 				Name:   *v.KeyId,
@@ -190,12 +191,12 @@ func KMSKey(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resour
 	return values, nil
 }
 
-func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	id := fields["id"]
 	client := kms.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	key, err := client.DescribeKey(ctx, &kms.DescribeKeyInput{
 		KeyId: &id,
 	})
@@ -266,7 +267,7 @@ func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([
 		}
 	}
 
-	values = append(values, Resource{
+	values = append(values, models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *key.KeyMetadata.Arn,
 		Name:   *v.KeyId,
@@ -282,7 +283,7 @@ func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([
 	return values, nil
 }
 
-func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	logger := GetLoggerFromContext(ctx)
 
 	logger.Info("KMSKeyRotation start working")
@@ -294,7 +295,7 @@ func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	paginator := kms.NewListKeysPaginator(client, &kms.ListKeysInput{})
 
 	logger.Info("KMSKeyRotation start getting pages")
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -317,7 +318,7 @@ func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 				}
 
 				for _, rotation := range output.Rotations {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *v.KeyArn,
 						Name:   *v.KeyId,

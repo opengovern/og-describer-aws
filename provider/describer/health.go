@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 
@@ -10,12 +11,12 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func HealthEvent(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func HealthEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := health.NewFromConfig(cfg)
 	paginator := health.NewDescribeEventsPaginator(client, &health.DescribeEventsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -23,7 +24,7 @@ func HealthEvent(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 		}
 
 		for _, event := range page.Events {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *event.Arn,
 				Description: model.HealthEventDescription{
@@ -42,12 +43,12 @@ func HealthEvent(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func HealthAffectedEntity(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func HealthAffectedEntity(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := health.NewFromConfig(cfg)
 	paginator := health.NewDescribeEventsPaginator(client, &health.DescribeEventsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -66,7 +67,7 @@ func HealthAffectedEntity(ctx context.Context, cfg aws.Config, stream *StreamSen
 					return nil, err
 				}
 				for _, entity := range entitiesPage.Entities {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *event.Arn,
 						Description: model.HealthAffectedEntityDescription{

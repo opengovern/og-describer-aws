@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
@@ -9,7 +10,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func GlacierVault(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func GlacierVault(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := glacier.NewFromConfig(cfg)
@@ -17,7 +18,7 @@ func GlacierVault(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 		AccountId: &describeCtx.AccountID,
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -76,7 +77,7 @@ func GlacierVault(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 				vaultNotificationConfig = *notifications.VaultNotificationConfig
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *vault.VaultARN,
 				Name:   *vault.VaultName,
@@ -103,7 +104,7 @@ func GlacierVault(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 	return values, nil
 }
 
-func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	vaultName := fields["name"]
 
@@ -119,7 +120,7 @@ func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]stri
 		return nil, nil
 	}
 
-	var values []Resource
+	var values []models.Resource
 	accessPolicy, err := client.GetVaultAccessPolicy(ctx, &glacier.GetVaultAccessPolicyInput{
 		AccountId: &describeCtx.AccountID,
 		VaultName: vault.VaultName,
@@ -155,7 +156,7 @@ func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]stri
 		tags = &glacier.ListTagsForVaultOutput{}
 	}
 
-	values = append(values, Resource{
+	values = append(values, models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *vault.VaultARN,
 		Name:   *vault.VaultName,

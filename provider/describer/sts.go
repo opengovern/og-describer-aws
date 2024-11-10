@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"github.com/opengovern/og-describer-aws/provider/model"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,16 +21,16 @@ func STSAccount(ctx context.Context, cfg aws.Config) (string, error) {
 	return *acc.Account, nil
 }
 
-func STSCallerIdentity(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func STSCallerIdentity(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := sts.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	ci, err := client.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
 		return nil, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *ci.UserId,
 		ARN:    *ci.Arn,

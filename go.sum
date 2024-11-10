@@ -975,6 +975,8 @@ github.com/opengovern/og-aws-describer v0.60.0 h1:Cl0a4KW8eV9gmtFyDbNRtfxR+jyRNk
 github.com/opengovern/og-aws-describer v0.60.0/go.mod h1:gHBFpQcnj1KAX/s6/PzitZxQ/5ockN7cjzaOdPoBYCs=
 github.com/opengovern/og-util v1.0.6-0.20241108102418-e20a35efc8ca h1:yeF0lhv15WWULbOb811lVAv/KTY5nfsA0dkzd4GODlk=
 github.com/opengovern/og-util v1.0.6-0.20241108102418-e20a35efc8ca/go.mod h1:7l7fNhK6uewIwA0cs7QagJuhjt/E6hEAC01SR8Y0kKk=
+github.com/opengovern/og-util v1.1.0 h1:bV2XKX8aIpJGC2CR4kh9CU/rJWPQed76gtVXM2zBDXM=
+github.com/opengovern/og-util v1.1.0/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
 github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0 h1:DYxFV9K4IGm9xe5TpXMi8HAVEdlb4sYDKbBkRTgZRms=
 github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0/go.mod h1:ozdf1nCN4iXbHT+CzmgboQLd6aPE1coa09Ze599g9SE=
 github.com/opensearch-project/opensearch-go/v2 v2.3.0 h1:nQIEMr+A92CkhHrZgUhcfsrZjibvB3APXf2a1VwCmMQ=

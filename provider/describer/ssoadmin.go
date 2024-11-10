@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,19 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(client, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, v := range page.Instances {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.InstanceArn,
 				Name:   *v.InstanceArn,
@@ -44,11 +45,11 @@ func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func SSOAdminAccountAssignment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SSOAdminAccountAssignment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(client, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -73,12 +74,12 @@ func SSOAdminAccountAssignment(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmin.Client, instance types.InstanceMetadata) ([]Resource, error) {
+func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmin.Client, instance types.InstanceMetadata) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	paginator := ssoadmin.NewListPermissionSetsPaginator(client, &ssoadmin.ListPermissionSetsInput{
 		InstanceArn: instance.InstanceArn,
 	})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -95,7 +96,7 @@ func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmi
 			}
 
 			for _, accountA := range accountAssignment.AccountAssignments {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s|%s|%s", *accountA.AccountId, *accountA.PermissionSetArn, *accountA.PrincipalId),
 					Description: model.SSOAdminAccountAssignmentDescription{
@@ -110,11 +111,11 @@ func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmi
 	return values, nil
 }
 
-func SSOAdminPermissionSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SSOAdminPermissionSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(client, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -139,11 +140,11 @@ func SSOAdminPermissionSet(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func ListSSOAdminInstancePermissionSets(ctx context.Context, client *ssoadmin.Client, instanceArn string) ([]Resource, error) {
+func ListSSOAdminInstancePermissionSets(ctx context.Context, client *ssoadmin.Client, instanceArn string) ([]models.Resource, error) {
 	paginator := ssoadmin.NewListPermissionSetsPaginator(client, &ssoadmin.ListPermissionSetsInput{
 		InstanceArn: &instanceArn,
 	})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -160,7 +161,7 @@ func ListSSOAdminInstancePermissionSets(ctx context.Context, client *ssoadmin.Cl
 	return values, nil
 }
 
-func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) (*Resource, error) {
+func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) (*models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	detail, err := client.DescribePermissionSet(ctx, &ssoadmin.DescribePermissionSetInput{
 		InstanceArn:      aws.String(instanceArn),
@@ -190,7 +191,7 @@ func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, inst
 	for _, tag := range tags {
 		tagsMap[*tag.Key] = *tag.Value
 	}
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *detail.PermissionSet.PermissionSetArn,
 		ARN:    *detail.PermissionSet.PermissionSetArn,
@@ -203,11 +204,11 @@ func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, inst
 	return &resource, nil
 }
 
-func SSOAdminManagedPolicyAttachment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func SSOAdminManagedPolicyAttachment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(client, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -232,11 +233,11 @@ func SSOAdminManagedPolicyAttachment(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 
-func ListSSOAdminInstanceManagedPolicyAttachments(ctx context.Context, client *ssoadmin.Client, instanceArn string) ([]Resource, error) {
+func ListSSOAdminInstanceManagedPolicyAttachments(ctx context.Context, client *ssoadmin.Client, instanceArn string) ([]models.Resource, error) {
 	paginator := ssoadmin.NewListPermissionSetsPaginator(client, &ssoadmin.ListPermissionSetsInput{
 		InstanceArn: &instanceArn,
 	})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -253,14 +254,14 @@ func ListSSOAdminInstanceManagedPolicyAttachments(ctx context.Context, client *s
 	return values, nil
 }
 
-func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) ([]Resource, error) {
+func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	paginator := ssoadmin.NewListManagedPoliciesInPermissionSetPaginator(client, &ssoadmin.ListManagedPoliciesInPermissionSetInput{
 		InstanceArn:      aws.String(instanceArn),
 		PermissionSetArn: aws.String(permissionSetArn),
 	})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		output, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -268,7 +269,7 @@ func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *sso
 		}
 
 		for _, item := range output.AttachedManagedPolicies {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     *item.Arn,
 				ARN:    *item.Arn,
@@ -284,14 +285,14 @@ func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *sso
 	return values, nil
 }
 
-func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -336,7 +337,7 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *StreamSend
 									if err != nil {
 										return nil, err
 									}
-									resource := Resource{
+									resource := models.Resource{
 										Region: describeCtx.OGRegion,
 										ID:     id,
 										Description: model.UserEffectiveAccessDescription{
@@ -364,7 +365,7 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *StreamSend
 							if err != nil {
 								return nil, err
 							}
-							resource := Resource{
+							resource := models.Resource{
 								Region: describeCtx.OGRegion,
 								ID:     id,
 								Description: model.UserEffectiveAccessDescription{

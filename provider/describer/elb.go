@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 	"time"
 
@@ -15,11 +16,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancingv2.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -44,21 +45,21 @@ func ElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, str
 
 	return values, nil
 }
-func elasticLoadBalancingV2LoadBalancerHandle(ctx context.Context, cfg aws.Config, v types.LoadBalancer) (Resource, error) {
+func elasticLoadBalancingV2LoadBalancerHandle(ctx context.Context, cfg aws.Config, v types.LoadBalancer) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	attrs, err := client.DescribeLoadBalancerAttributes(ctx, &elasticloadbalancingv2.DescribeLoadBalancerAttributesInput{
 		LoadBalancerArn: v.LoadBalancerArn,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tags, err := client.DescribeTags(ctx, &elasticloadbalancingv2.DescribeTagsInput{
 		ResourceArns: []string{*v.LoadBalancerArn},
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	description := model.ElasticLoadBalancingV2LoadBalancerDescription{
@@ -70,7 +71,7 @@ func elasticLoadBalancingV2LoadBalancerHandle(ctx context.Context, cfg aws.Confi
 		description.Tags = tags.TagDescriptions[0].Tags
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ARN:         *v.LoadBalancerArn,
 		Name:        *v.LoadBalancerName,
@@ -78,7 +79,7 @@ func elasticLoadBalancingV2LoadBalancerHandle(ctx context.Context, cfg aws.Confi
 	}
 	return resource, nil
 }
-func GetElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	lbARN := fields["arn"]
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	out, err := client.DescribeLoadBalancers(ctx, &elasticloadbalancingv2.DescribeLoadBalancersInput{
@@ -88,7 +89,7 @@ func GetElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.LoadBalancers {
 		resource, err := elasticLoadBalancingV2LoadBalancerHandle(ctx, cfg, v)
 		if err != nil {
@@ -100,7 +101,7 @@ func GetElasticLoadBalancingV2LoadBalancer(ctx context.Context, cfg aws.Config, 
 	return values, nil
 }
 
-func ElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	lbs, err := ElasticLoadBalancingV2LoadBalancer(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -108,7 +109,7 @@ func ElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, stream 
 
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, lb := range lbs {
 		arn := lb.Description.(model.ElasticLoadBalancingV2LoadBalancerDescription).LoadBalancer.LoadBalancerArn
 		paginator := elasticloadbalancingv2.NewDescribeListenersPaginator(client, &elasticloadbalancingv2.DescribeListenersInput{
@@ -137,9 +138,9 @@ func ElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, stream 
 
 	return values, nil
 }
-func elasticLoadBalancingV2ListenerHandle(ctx context.Context, v types.Listener) Resource {
+func elasticLoadBalancingV2ListenerHandle(ctx context.Context, v types.Listener) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ListenerArn,
 		Name:   nameFromArn(*v.ListenerArn),
@@ -149,7 +150,7 @@ func elasticLoadBalancingV2ListenerHandle(ctx context.Context, v types.Listener)
 	}
 	return resource
 }
-func GetElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	lbArn := fields["load_balancer_arn"]
 	listenerARN := fields["arn"]
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
@@ -161,7 +162,7 @@ func GetElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, fiel
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Listeners {
 		resource := elasticLoadBalancingV2ListenerHandle(ctx, v)
 		values = append(values, resource)
@@ -169,14 +170,14 @@ func GetElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, fiel
 	return values, nil
 }
 
-func ElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	listeners, err := ElasticLoadBalancingV2Listener(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 	for _, l := range listeners {
 		arn := l.Description.(model.ElasticLoadBalancingV2ListenerDescription).Listener.ListenerArn
 		err = PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
@@ -207,9 +208,9 @@ func ElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, str
 
 	return values, nil
 }
-func elasticLoadBalancingV2ListenerRuleHandle(ctx context.Context, v types.Rule) Resource {
+func elasticLoadBalancingV2ListenerRuleHandle(ctx context.Context, v types.Rule) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.RuleArn,
 		Name:   *v.RuleArn,
@@ -219,9 +220,9 @@ func elasticLoadBalancingV2ListenerRuleHandle(ctx context.Context, v types.Rule)
 	}
 	return resource
 }
-func GetElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 
 	listeners, err := ElasticLoadBalancingV2Listener(ctx, cfg, nil)
@@ -248,11 +249,11 @@ func GetElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, 
 	return values, nil
 }
 
-func ElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticloadbalancing.NewFromConfig(cfg)
 	paginator := elasticloadbalancing.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancing.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -277,7 +278,7 @@ func ElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, strea
 
 	return values, nil
 }
-func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config, v types3.LoadBalancerDescription) (Resource, error) {
+func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config, v types3.LoadBalancerDescription) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancing.NewFromConfig(cfg)
 
@@ -286,9 +287,9 @@ func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config,
 	})
 	if err != nil {
 		if isErr(err, "DescribeLoadBalancerAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tags, err := client.DescribeTags(ctx, &elasticloadbalancing.DescribeTagsInput{
@@ -296,9 +297,9 @@ func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config,
 	})
 	if err != nil {
 		if isErr(err, "DescribeTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	description := model.ElasticLoadBalancingLoadBalancerDescription{
@@ -311,7 +312,7 @@ func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config,
 	}
 
 	arn := "arn:" + describeCtx.Partition + ":elasticloadbalancing:" + describeCtx.Region + ":" + describeCtx.AccountID + ":loadbalancer/" + *v.LoadBalancerName
-	resource := Resource{
+	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ARN:         arn,
 		Name:        *v.LoadBalancerName,
@@ -319,7 +320,7 @@ func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config,
 	}
 	return resource, nil
 }
-func GetElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	LoadBalancerNames := fields["loadBalancerName"]
 
 	client := elasticloadbalancing.NewFromConfig(cfg)
@@ -329,7 +330,7 @@ func GetElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, fi
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 	for _, loadBalancer := range out.LoadBalancerDescriptions {
 		resource, err := elasticLoadBalancingLoadBalancerHandle(ctx, cfg, loadBalancer)
 		if err != nil {
@@ -340,12 +341,12 @@ func GetElasticLoadBalancingLoadBalancer(ctx context.Context, cfg aws.Config, fi
 	return values, nil
 }
 
-func ElasticLoadBalancingV2SslPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingV2SslPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeSSLPolicies(ctx, &elasticloadbalancingv2.DescribeSSLPoliciesInput{
 			Marker: prevToken,
@@ -356,7 +357,7 @@ func ElasticLoadBalancingV2SslPolicy(ctx context.Context, cfg aws.Config, stream
 
 		for _, v := range output.SslPolicies {
 			arn := fmt.Sprintf("arn:%s:elbv2:%s:%s:ssl-policy/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.Name)
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *v.Name,
 				ARN:    arn,
@@ -383,11 +384,11 @@ func ElasticLoadBalancingV2SslPolicy(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 
-func ElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeTargetGroupsPaginator(client, &elasticloadbalancingv2.DescribeTargetGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -400,7 +401,7 @@ func ElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, stre
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -417,7 +418,7 @@ func ElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, stre
 
 	return values, nil
 }
-func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config, v types.TargetGroup) (Resource, error) {
+func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config, v types.TargetGroup) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	healthDescriptions, err := client.DescribeTargetHealth(ctx, &elasticloadbalancingv2.DescribeTargetHealthInput{
@@ -425,9 +426,9 @@ func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config
 	})
 	if err != nil {
 		if isErr(err, "DescribeTargetHealthNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tags, err := client.DescribeTags(ctx, &elasticloadbalancingv2.DescribeTagsInput{
@@ -435,9 +436,9 @@ func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config
 	})
 	if err != nil {
 		if isErr(err, "DescribeTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	var tagsA []types.Tag
@@ -445,7 +446,7 @@ func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config
 		tagsA = tags.TagDescriptions[0].Tags
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.TargetGroupArn,
 		Name:   *v.TargetGroupName,
@@ -457,7 +458,7 @@ func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config
 	}
 	return resource, nil
 }
-func GetElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	targetGroupArn := fields["targetGroupArn"]
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	resource, err := client.DescribeTargetGroups(ctx, &elasticloadbalancingv2.DescribeTargetGroupsInput{
@@ -470,13 +471,13 @@ func GetElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, f
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range resource.TargetGroups {
 		resource, err := elasticLoadBalancingV2TargetGroupHandle(ctx, cfg, v)
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -486,12 +487,12 @@ func GetElasticLoadBalancingV2TargetGroup(ctx context.Context, cfg aws.Config, f
 	return values, nil
 }
 
-func ApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancingv2.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -508,7 +509,7 @@ func ApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Conf
 				return nil, err
 			}
 			for _, metric := range metrics {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.ApplicationLoadBalancerMetricRequestCountDescription{
@@ -529,7 +530,7 @@ func ApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Conf
 	return values, nil
 }
 
-func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	loadBalancerARN := fields["arn"]
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
@@ -540,7 +541,7 @@ func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.C
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, loadBalancer := range out.LoadBalancers {
 		if loadBalancer.Type != types.LoadBalancerTypeEnumApplication {
 			continue
@@ -551,7 +552,7 @@ func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.C
 			return nil, err
 		}
 		for _, metric := range metrics {
-			values = append(values, Resource{
+			values = append(values, models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 				Description: model.ApplicationLoadBalancerMetricRequestCountDescription{
@@ -564,12 +565,12 @@ func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.C
 	return values, nil
 }
 
-func ApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancingv2.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -586,7 +587,7 @@ func ApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws
 				return nil, err
 			}
 			for _, metric := range metrics {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.ApplicationLoadBalancerMetricRequestCountDailyDescription{
@@ -607,7 +608,7 @@ func ApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws
 	return values, nil
 }
 
-func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	loadBalancerARN := fields["arn"]
 
@@ -617,7 +618,7 @@ func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, loadBalancer := range out.LoadBalancers {
 		if loadBalancer.Type != types.LoadBalancerTypeEnumApplication {
 			continue
@@ -628,7 +629,7 @@ func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg 
 			return nil, err
 		}
 		for _, metric := range metrics {
-			values = append(values, Resource{
+			values = append(values, models.Resource{
 				Region: describeCtx.OGRegion,
 				ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 				Description: model.ApplicationLoadBalancerMetricRequestCountDailyDescription{
@@ -641,12 +642,12 @@ func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg 
 	return values, nil
 }
 
-func NetworkLoadBalancerMetricNetFlowCount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NetworkLoadBalancerMetricNetFlowCount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancingv2.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -663,7 +664,7 @@ func NetworkLoadBalancerMetricNetFlowCount(ctx context.Context, cfg aws.Config, 
 				return nil, err
 			}
 			for _, metric := range metrics {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.NetworkLoadBalancerMetricNetFlowCountDescription{
@@ -684,12 +685,12 @@ func NetworkLoadBalancerMetricNetFlowCount(ctx context.Context, cfg aws.Config, 
 	return values, nil
 }
 
-func NetworkLoadBalancerMetricNetFlowCountDaily(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func NetworkLoadBalancerMetricNetFlowCountDaily(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticloadbalancingv2.NewFromConfig(cfg)
 	paginator := elasticloadbalancingv2.NewDescribeLoadBalancersPaginator(client, &elasticloadbalancingv2.DescribeLoadBalancersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -706,7 +707,7 @@ func NetworkLoadBalancerMetricNetFlowCountDaily(ctx context.Context, cfg aws.Con
 				return nil, err
 			}
 			for _, metric := range metrics {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.NetworkLoadBalancerMetricNetFlowCountDailyDescription{

@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	_ "database/sql/driver"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 	"github.com/opengovern/og-describer-aws/provider/model"
@@ -11,11 +12,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 )
 
-func ShieldProtectionGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ShieldProtectionGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := shield.NewFromConfig(cfg)
 	paginator := shield.NewListProtectionGroupsPaginator(client, &shield.ListProtectionGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -30,7 +31,7 @@ func ShieldProtectionGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -47,7 +48,7 @@ func ShieldProtectionGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 
 	return values, nil
 }
-func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.ProtectionGroup) (Resource, error) {
+func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.ProtectionGroup) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := shield.NewFromConfig(cfg)
 
@@ -56,12 +57,12 @@ func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.Pr
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ProtectionGroupArn,
 		Name:   *v.ProtectionGroupId,
@@ -72,10 +73,10 @@ func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.Pr
 	}
 	return resource, nil
 }
-func GetShieldProtectionGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetShieldProtectionGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	protectionGroupId := fields["id"]
 	client := shield.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	out, err := client.DescribeProtectionGroup(ctx, &shield.DescribeProtectionGroupInput{
 		ProtectionGroupId: &protectionGroupId,
@@ -91,7 +92,7 @@ func GetShieldProtectionGroup(ctx context.Context, cfg aws.Config, fields map[st
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

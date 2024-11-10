@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
@@ -12,7 +13,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := acm.NewFromConfig(cfg)
 	output, err := client.GetAccountConfiguration(ctx, &acm.GetAccountConfigurationInput{})
@@ -20,7 +21,7 @@ func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *Stre
 		return nil, err
 	}
 
-	return []Resource{
+	return []models.Resource{
 		{
 			Region: describeCtx.OGRegion,
 			// No ID or ARN. Per Account Configuration
@@ -28,12 +29,12 @@ func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *Stre
 		}}, nil
 }
 
-func CertificateManagerCertificate(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func CertificateManagerCertificate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := acm.NewFromConfig(cfg)
 	paginator := acm.NewListCertificatesPaginator(client, &acm.ListCertificatesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -68,7 +69,7 @@ func CertificateManagerCertificate(ctx context.Context, cfg aws.Config, stream *
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.CertificateArn,
 				Name:   nameFromArn(*v.CertificateArn),
@@ -99,11 +100,11 @@ func CertificateManagerCertificate(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 
-func ACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := acmpca.NewFromConfig(cfg)
 	paginator := acmpca.NewListCertificateAuthoritiesPaginator(client, &acmpca.ListCertificateAuthoritiesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -115,7 +116,7 @@ func ACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, stream *Str
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -134,7 +135,7 @@ func ACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, stream *Str
 
 	return values, nil
 }
-func aCMPCACertificateAuthorityHandle(ctx context.Context, cfg aws.Config, v types.CertificateAuthority) (Resource, error) {
+func aCMPCACertificateAuthorityHandle(ctx context.Context, cfg aws.Config, v types.CertificateAuthority) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := acmpca.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &acmpca.ListTagsInput{
@@ -142,12 +143,12 @@ func aCMPCACertificateAuthorityHandle(ctx context.Context, cfg aws.Config, v typ
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   nameFromArn(*v.Arn),
@@ -158,7 +159,7 @@ func aCMPCACertificateAuthorityHandle(ctx context.Context, cfg aws.Config, v typ
 	}
 	return resource, nil
 }
-func GetACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	certificateAuthorityArn := fields["arn"]
 	client := acmpca.NewFromConfig(cfg)
 
@@ -172,12 +173,12 @@ func GetACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, fields m
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	resource, err := aCMPCACertificateAuthorityHandle(ctx, cfg, *out.CertificateAuthority)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

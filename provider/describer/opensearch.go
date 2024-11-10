@@ -5,13 +5,14 @@ import (
 	"math"
 
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := opensearch.NewFromConfig(cfg)
 
 	domainNamesOutput, err := client.ListDomainNames(ctx, &opensearch.ListDomainNamesInput{})
@@ -23,7 +24,7 @@ func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender)
 		domainNames = append(domainNames, *domainName.DomainName)
 	}
 
-	var values []Resource
+	var values []models.Resource
 	// OpenSearch API only allows 5 domains per request
 	for i := 0; i < len(domainNames); i = i + 5 {
 		domains, err := client.DescribeDomains(ctx, &opensearch.DescribeDomainsInput{
@@ -35,7 +36,7 @@ func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 		for _, domain := range domains.DomainStatusList {
 			resource, err := openSearchDomainHandle(ctx, cfg, domain)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -54,7 +55,7 @@ func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	}
 	return values, nil
 }
-func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.DomainStatus) (Resource, error) {
+func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.DomainStatus) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := opensearch.NewFromConfig(cfg)
 
@@ -63,12 +64,12 @@ func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.Do
 	})
 	if err != nil {
 		if isErr(err, "ListTagsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *domain.ARN,
 		Name:   *domain.DomainName,
@@ -79,9 +80,9 @@ func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.Do
 	}
 	return resource, nil
 }
-func GetOpenSearchDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetOpenSearchDomain(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := opensearch.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	domainName := fields["domainName"]
 	domain, err := client.DescribeDomain(ctx, &opensearch.DescribeDomainInput{
@@ -92,7 +93,7 @@ func GetOpenSearchDomain(ctx context.Context, cfg aws.Config, fields map[string]
 	}
 
 	resource, err := openSearchDomainHandle(ctx, cfg, *domain.DomainStatus)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

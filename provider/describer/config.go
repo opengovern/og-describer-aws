@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
@@ -9,7 +10,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := configservice.NewFromConfig(cfg)
@@ -18,7 +19,7 @@ func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *St
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.ConfigurationRecorders {
 		status, err := client.DescribeConfigurationRecorderStatus(ctx, &configservice.DescribeConfigurationRecorderStatusInput{
 			ConfigurationRecorderNames: []string{*item.Name},
@@ -28,7 +29,7 @@ func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *St
 		}
 
 		arn := "arn:" + describeCtx.Partition + ":config:" + describeCtx.Region + ":" + describeCtx.AccountID + ":config-recorder" + "/" + *item.Name
-		resource := Resource{
+		resource := models.Resource{
 			Region: describeCtx.OGRegion,
 			ARN:    arn,
 			Name:   *item.Name,
@@ -50,12 +51,12 @@ func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *St
 	return values, nil
 }
 
-func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeAggregationAuthorizationsPaginator(client, &configservice.DescribeAggregationAuthorizationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -69,7 +70,7 @@ func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *S
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *item.AggregationAuthorizationArn,
 				ID:     *item.AuthorizedAccountId,
@@ -91,19 +92,19 @@ func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *S
 	return values, nil
 }
 
-func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeConformancePacksPaginator(client, &configservice.DescribeConformancePacksInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, item := range page.ConformancePackDetails {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *item.ConformancePackArn,
 				ID:     *item.ConformancePackId,
@@ -125,12 +126,12 @@ func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func ConfigRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ConfigRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeConfigRulesPaginator(client, &configservice.DescribeConfigRulesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -161,7 +162,7 @@ func ConfigRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *item.ConfigRuleArn,
 				ID:     *item.ConfigRuleId,
@@ -186,19 +187,19 @@ func ConfigRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 	return values, nil
 }
 
-func ConfigRetentionConfiguration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ConfigRetentionConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeRetentionConfigurationsPaginator(client, &configservice.DescribeRetentionConfigurationsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, item := range page.RetentionConfigurations {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *item.Name,
 				Description: model.ConfigRetentionConfigurationDescription{

@@ -6,18 +6,19 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func StepFunctionsStateMachine(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func StepFunctionsStateMachine(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -49,7 +50,7 @@ func StepFunctionsStateMachine(ctx context.Context, cfg aws.Config, stream *Stre
 				data.Definition = aws.String(v[:5000])
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.StateMachineArn,
 				Name:   name,
@@ -77,13 +78,13 @@ type historyInfo struct {
 	ExecutionArn string
 }
 
-func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -146,7 +147,7 @@ func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Co
 
 			for item := range executionCh {
 				for _, data := range item {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    data.ExecutionArn,
 						Name:   data.ExecutionArn,
@@ -170,13 +171,13 @@ func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Co
 	return values, nil
 }
 
-func StepFunctionsStateMachineExecution(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func StepFunctionsStateMachineExecution(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -215,7 +216,7 @@ func StepFunctionsStateMachineExecution(ctx context.Context, cfg aws.Config, str
 						data.Output = aws.String(v[:5000])
 					}
 
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *execution.ExecutionArn,
 						Name:   *execution.ExecutionArn,

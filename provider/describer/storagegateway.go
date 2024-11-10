@@ -4,17 +4,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func StorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func StorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := storagegateway.NewFromConfig(cfg)
 	paginator := storagegateway.NewListGatewaysPaginator(client, &storagegateway.ListGatewaysInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -39,17 +40,17 @@ func StorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gatewayARN string, gatewayId string, v types.GatewayInfo) (Resource, error) {
+func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gatewayARN string, gatewayId string, v types.GatewayInfo) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := storagegateway.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &storagegateway.ListTagsForResourceInput{
 		ResourceARN: &gatewayARN,
 	})
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    gatewayARN,
 		Name:   gatewayId,
@@ -60,7 +61,7 @@ func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gat
 	}
 	return resource, nil
 }
-func GetStorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetStorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	gatewayArn := fields["arn"]
 	client := storagegateway.NewFromConfig(cfg)
 	out, err := client.DescribeGatewayInformation(ctx, &storagegateway.DescribeGatewayInformationInput{
@@ -82,7 +83,7 @@ func GetStorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, fields
 		HostEnvironmentId: out.HostEnvironmentId,
 	}
 
-	var values []Resource
+	var values []models.Resource
 	resource, err := storageGatewayStorageGatewayHandle(ctx, cfg, *out.GatewayARN, *out.GatewayId, storageGateway)
 	if err != nil {
 		return nil, err

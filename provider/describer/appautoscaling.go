@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	_ "github.com/aws/aws-sdk-go-v2/service/inspector/types"
 
@@ -11,10 +12,10 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := applicationautoscaling.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, serviceNameSpace := range types.ServiceNamespaceEcs.Values() {
 		paginator := applicationautoscaling.NewDescribeScalableTargetsPaginator(client, &applicationautoscaling.DescribeScalableTargetsInput{
 			ServiceNamespace: serviceNameSpace,
@@ -41,11 +42,11 @@ func ApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func applicationAutoScalingTargetHandle(ctx context.Context, item types.ScalableTarget) Resource {
+func applicationAutoScalingTargetHandle(ctx context.Context, item types.ScalableTarget) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *item.ResourceId,
@@ -56,10 +57,10 @@ func applicationAutoScalingTargetHandle(ctx context.Context, item types.Scalable
 	return resource
 }
 
-func GetApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	resourceId := fields["resourceId"]
 	client := applicationautoscaling.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	describers, err := client.DescribeScalableTargets(ctx, &applicationautoscaling.DescribeScalableTargetsInput{
 		ResourceIds: []string{resourceId},
@@ -75,10 +76,10 @@ func GetApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, fields
 	return values, nil
 }
 
-func ApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := applicationautoscaling.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, serviceNameSpace := range types.ServiceNamespaceEcs.Values() {
 		paginator := applicationautoscaling.NewDescribeScalingPoliciesPaginator(client, &applicationautoscaling.DescribeScalingPoliciesInput{
 			ServiceNamespace: serviceNameSpace,
@@ -105,11 +106,11 @@ func ApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func applicationAutoScalingPolicyHandle(ctx context.Context, item types.ScalingPolicy) Resource {
+func applicationAutoScalingPolicyHandle(ctx context.Context, item types.ScalingPolicy) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   *item.ResourceId,
@@ -120,10 +121,10 @@ func applicationAutoScalingPolicyHandle(ctx context.Context, item types.ScalingP
 	return resource
 }
 
-func GetApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	resourceId := fields["resourceId"]
 	client := applicationautoscaling.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	describers, err := client.DescribeScalingPolicies(ctx, &applicationautoscaling.DescribeScalingPoliciesInput{
 		ResourceId: &resourceId,

@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dlm"
@@ -9,7 +10,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DLMLifecyclePolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DLMLifecyclePolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := dlm.NewFromConfig(cfg)
 
 	lifecyclePolicies, err := client.GetLifecyclePolicies(ctx, &dlm.GetLifecyclePoliciesInput{})
@@ -17,11 +18,11 @@ func DLMLifecyclePolicy(ctx context.Context, cfg aws.Config, stream *StreamSende
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, policySummary := range lifecyclePolicies.Policies {
 
 		resource, err := dLMLifecyclePolicyHandle(ctx, cfg, policySummary)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -39,7 +40,7 @@ func DLMLifecyclePolicy(ctx context.Context, cfg aws.Config, stream *StreamSende
 	}
 	return values, nil
 }
-func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary types.LifecyclePolicySummary) (Resource, error) {
+func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary types.LifecyclePolicySummary) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := dlm.NewFromConfig(cfg)
 	policy, err := client.GetLifecyclePolicy(ctx, &dlm.GetLifecyclePolicyInput{
@@ -47,12 +48,12 @@ func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary
 	})
 	if err != nil {
 		if isErr(err, "GetLifecyclePolicyNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *policy.Policy.PolicyId,
 		ARN:    *policy.Policy.PolicyArn,
@@ -62,9 +63,9 @@ func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary
 	}
 	return resource, nil
 }
-func GetDLMLifecyclePolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDLMLifecyclePolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	policyId := fields["policyId"]
-	var values []Resource
+	var values []models.Resource
 	client := dlm.NewFromConfig(cfg)
 
 	policies, err := client.GetLifecyclePolicies(ctx, &dlm.GetLifecyclePoliciesInput{
@@ -79,7 +80,7 @@ func GetDLMLifecyclePolicy(ctx context.Context, cfg aws.Config, fields map[strin
 
 	for _, policySummary := range policies.Policies {
 		resource, err := dLMLifecyclePolicyHandle(ctx, cfg, policySummary)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}

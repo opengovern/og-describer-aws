@@ -9,7 +9,7 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	analyzerName := fields["name"]
 	client := accessanalyzer.NewFromConfig(cfg)
@@ -25,7 +25,7 @@ func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[s
 		return nil, err
 	}
 
-	return []Resource{
+	return []models.Resource{
 		{
 			Region: describeCtx.OGRegion,
 			ARN:    *v.Analyzer.Arn,
@@ -37,12 +37,12 @@ func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[s
 		}}, nil
 }
 
-func AccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := accessanalyzer.NewFromConfig(cfg)
 	paginator := accessanalyzer.NewListAnalyzersPaginator(client, &accessanalyzer.ListAnalyzersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -54,7 +54,7 @@ func AccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, stream *StreamS
 			if err != nil {
 				return nil, err
 			}
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Name,
@@ -96,12 +96,12 @@ func getAnalyzerFindings(ctx context.Context, client *accessanalyzer.Client, ana
 	return findings, nil
 }
 
-func AccessAnalyzerAnalyzerFinding(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AccessAnalyzerAnalyzerFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := accessanalyzer.NewFromConfig(cfg)
 	paginator := accessanalyzer.NewListAnalyzersPaginator(client, &accessanalyzer.ListAnalyzersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -114,7 +114,7 @@ func AccessAnalyzerAnalyzerFinding(ctx context.Context, cfg aws.Config, stream *
 				return nil, err
 			}
 			for _, finding := range findings {
-				resource := Resource{
+				resource := models.Resource{
 					Region: describeCtx.OGRegion,
 					ID:     *finding.Id,
 					Description: model.AccessAnalyzerAnalyzerFindingDescription{

@@ -2,19 +2,20 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := eventbridge.NewFromConfig(cfg)
 
 	input := eventbridge.ListEventBusesInput{Limit: aws.Int32(100)}
 
-	var values []Resource
+	var values []models.Resource
 	for {
 		response, err := client.ListEventBuses(ctx, &input)
 		if err != nil {
@@ -34,7 +35,7 @@ func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 				tagsOutput = &eventbridge.ListTagsForResourceOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *bus.Arn,
 				Name:   *bus.Name,
@@ -60,11 +61,11 @@ func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 	return values, nil
 }
 
-func EventBridgeRule(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EventBridgeRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := eventbridge.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		listRulesOutput, err := client.ListRules(ctx, &eventbridge.ListRulesInput{
 			NextToken: prevToken,
@@ -100,7 +101,7 @@ func EventBridgeRule(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 				targets = &eventbridge.ListTargetsByRuleOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *rule.Arn,
 				Name:   *rule.Name,

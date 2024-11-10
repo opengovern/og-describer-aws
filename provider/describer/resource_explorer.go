@@ -2,18 +2,19 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := resourceexplorer2.NewFromConfig(cfg)
 	paginator := resourceexplorer2.NewListIndexesPaginator(client, &resourceexplorer2.ListIndexesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -21,7 +22,7 @@ func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *StreamSe
 		}
 
 		for _, v := range page.Indexes {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.Arn,
 				Name:   *v.Arn,
@@ -42,12 +43,12 @@ func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func ResourceExplorer2SupportedResourceType(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ResourceExplorer2SupportedResourceType(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := resourceexplorer2.NewFromConfig(cfg)
 	paginator := resourceexplorer2.NewListSupportedResourceTypesPaginator(client, &resourceexplorer2.ListSupportedResourceTypesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -55,7 +56,7 @@ func ResourceExplorer2SupportedResourceType(ctx context.Context, cfg aws.Config,
 		}
 
 		for _, v := range page.ResourceTypes {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				Name:   *v.ResourceType,
 				Description: model.ResourceExplorer2SupportedResourceTypeDescription{

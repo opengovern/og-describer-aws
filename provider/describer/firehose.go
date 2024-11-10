@@ -2,16 +2,17 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func FirehoseDeliveryStream(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func FirehoseDeliveryStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := firehose.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 
 	err := PaginateRetrieveAll(func(prevToken *string) (lastName *string, err error) {
 		deliveryStreams, err := client.ListDeliveryStreams(ctx, &firehose.ListDeliveryStreamsInput{
@@ -27,7 +28,7 @@ func FirehoseDeliveryStream(ctx context.Context, cfg aws.Config, stream *StreamS
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -51,7 +52,7 @@ func FirehoseDeliveryStream(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryStreamName string) (Resource, error) {
+func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryStreamName string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := firehose.NewFromConfig(cfg)
 
@@ -60,9 +61,9 @@ func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryS
 	})
 	if err != nil {
 		if isErr(err, "DescribeDeliveryStreamNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	tags, err := client.ListTagsForDeliveryStream(ctx, &firehose.ListTagsForDeliveryStreamInput{
@@ -70,12 +71,12 @@ func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryS
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForDeliveryStreamNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *deliveryStream.DeliveryStreamDescription.DeliveryStreamARN,
 		Name:   *deliveryStream.DeliveryStreamDescription.DeliveryStreamName,
@@ -86,15 +87,15 @@ func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryS
 	}
 	return resource, nil
 }
-func GetFirehoseDeliveryStream(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetFirehoseDeliveryStream(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	deliveryStreamName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := FirehoseDeliveryStreamHandle(ctx, cfg, deliveryStreamName)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}

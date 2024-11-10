@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	_ "golang.org/x/tools/go/analysis/passes/ctrlflow"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -11,11 +12,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func BatchComputeEnvironment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func BatchComputeEnvironment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := batch.NewFromConfig(cfg)
 	paginator := batch.NewDescribeComputeEnvironmentsPaginator(client, &batch.DescribeComputeEnvironmentsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -36,9 +37,9 @@ func BatchComputeEnvironment(ctx context.Context, cfg aws.Config, stream *Stream
 
 	return values, nil
 }
-func batchComputeEnvironmentHandle(ctx context.Context, v types.ComputeEnvironmentDetail) Resource {
+func batchComputeEnvironmentHandle(ctx context.Context, v types.ComputeEnvironmentDetail) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ComputeEnvironmentArn,
 		Name:   *v.ComputeEnvironmentName,
@@ -48,8 +49,8 @@ func batchComputeEnvironmentHandle(ctx context.Context, v types.ComputeEnvironme
 	}
 	return resource
 }
-func GetBatchComputeEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetBatchComputeEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	ComputeEnvironments := fields["computeEnvironment"]
 	client := batch.NewFromConfig(cfg)
 	deComputeEnv, err := client.DescribeComputeEnvironments(ctx, &batch.DescribeComputeEnvironmentsInput{
@@ -69,11 +70,11 @@ func GetBatchComputeEnvironment(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func BatchJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func BatchJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := batch.NewFromConfig(cfg)
 	paginator := batch.NewDescribeJobQueuesPaginator(client, &batch.DescribeJobQueuesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -105,9 +106,9 @@ func BatchJob(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func batchJobHandle(ctx context.Context, v types.JobSummary) Resource {
+func batchJobHandle(ctx context.Context, v types.JobSummary) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.JobArn,
 		Name:   *v.JobName,
@@ -117,9 +118,9 @@ func batchJobHandle(ctx context.Context, v types.JobSummary) Resource {
 	}
 	return resource
 }
-func GetBatchJob(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetBatchJob(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	jobQueues := fields["jobQueues"]
-	var values []Resource
+	var values []models.Resource
 
 	client := batch.NewFromConfig(cfg)
 	jobqs, err := client.DescribeJobQueues(ctx, &batch.DescribeJobQueuesInput{
@@ -153,19 +154,19 @@ func GetBatchJob(ctx context.Context, cfg aws.Config, fields map[string]string) 
 	return values, nil
 }
 
-func BatchJobQueue(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func BatchJobQueue(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := batch.NewFromConfig(cfg)
 	paginator := batch.NewDescribeJobQueuesPaginator(client, &batch.DescribeJobQueuesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, jq := range page.JobQueues {
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *jq.JobQueueArn,
 				Name:   *jq.JobQueueName,

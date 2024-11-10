@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
@@ -9,11 +10,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func RDSDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBClustersPaginator(client, &rds.DescribeDBClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -34,7 +35,7 @@ func RDSDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	return values, nil
 }
-func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBCluster) Resource {
+func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBCluster) models.Resource {
 	var actions []types.ResourcePendingMaintenanceActions
 	pendingMaintenanceActions, err := client.DescribePendingMaintenanceActions(ctx, &rds.DescribePendingMaintenanceActionsInput{
 		Filters: []types.Filter{
@@ -48,7 +49,7 @@ func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBClust
 		actions = pendingMaintenanceActions.PendingMaintenanceActions
 	}
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.DBClusterArn,
 		Name:   *v.DBClusterIdentifier,
@@ -59,7 +60,7 @@ func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBClust
 	}
 	return resource
 }
-func GetRDSDBCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := rds.NewFromConfig(cfg)
 
@@ -73,7 +74,7 @@ func GetRDSDBCluster(ctx context.Context, cfg aws.Config, fields map[string]stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.DBClusters {
 		resource := rDSDBClusterHandle(ctx, client, v)
 		values = append(values, resource)
@@ -82,11 +83,11 @@ func GetRDSDBCluster(ctx context.Context, cfg aws.Config, fields map[string]stri
 	return values, nil
 }
 
-func RDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBClusterSnapshotsPaginator(client, &rds.DescribeDBClusterSnapshotsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -95,7 +96,7 @@ func RDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 		for _, v := range page.DBClusterSnapshots {
 			resource, err := rDSDBClusterSnapshotHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -115,7 +116,7 @@ func RDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 	return values, nil
 }
-func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBClusterSnapshot) (Resource, error) {
+func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBClusterSnapshot) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 
@@ -124,12 +125,12 @@ func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBC
 	})
 	if err != nil {
 		if isErr(err, "DescribeDBClusterSnapshotAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.DBClusterSnapshotArn,
 		Name:   *v.DBClusterSnapshotIdentifier,
@@ -140,10 +141,10 @@ func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBC
 	}
 	return resource, nil
 }
-func GetRDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	DBClusterSnapshotIdentifier := fields["ClusterSnapshotId"]
 	SnapshotType := fields["snapshotType"]
-	var values []Resource
+	var values []models.Resource
 
 	client := rds.NewFromConfig(cfg)
 	clusterSnapshot, err := client.DescribeDBClusterSnapshots(ctx, &rds.DescribeDBClusterSnapshotsInput{
@@ -159,7 +160,7 @@ func GetRDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, fields map[str
 
 	for _, v := range clusterSnapshot.DBClusterSnapshots {
 		resource, err := rDSDBClusterSnapshotHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -172,12 +173,12 @@ func GetRDSDBClusterSnapshot(ctx context.Context, cfg aws.Config, fields map[str
 	return values, nil
 }
 
-func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBClusterParameterGroupsPaginator(client, &rds.DescribeDBClusterParameterGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -204,7 +205,7 @@ func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *Str
 				tags = op.TagList
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBClusterParameterGroupArn,
 				Name:   *v.DBClusterParameterGroupName,
@@ -227,11 +228,11 @@ func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *Str
 	return values, nil
 }
 
-func RDSDBInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBInstancesPaginator(client, &rds.DescribeDBInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -258,7 +259,7 @@ func RDSDBInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 	return values, nil
 }
-func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInstance) (*Resource, error) {
+func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInstance) (*models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	pendingMaintenance, err := client.DescribePendingMaintenanceActions(ctx, &rds.DescribePendingMaintenanceActionsInput{
 		ResourceIdentifier: v.DBInstanceArn,
@@ -279,7 +280,7 @@ func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInst
 		return nil, nil
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.DBInstanceArn,
 		Name:   *v.DBInstanceIdentifier,
@@ -291,7 +292,7 @@ func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInst
 	}
 	return &resource, nil
 }
-func GetRDSDBInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	dbInstanceId := fields["id"]
 	client := rds.NewFromConfig(cfg)
 
@@ -305,7 +306,7 @@ func GetRDSDBInstance(ctx context.Context, cfg aws.Config, fields map[string]str
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.DBInstances {
 		resource, err := rDSDBInstanceHandle(ctx, client, v)
 		if err != nil {
@@ -320,12 +321,12 @@ func GetRDSDBInstance(ctx context.Context, cfg aws.Config, fields map[string]str
 	return values, nil
 }
 
-func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBParameterGroupsPaginator(client, &rds.DescribeDBParameterGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -347,7 +348,7 @@ func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSend
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBParameterGroupArn,
 				Name:   *v.DBParameterGroupName,
@@ -370,12 +371,12 @@ func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBProxiesPaginator(client, &rds.DescribeDBProxiesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -390,7 +391,7 @@ func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 				tags = &rds.ListTagsForResourceOutput{}
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBProxyArn,
 				Name:   *v.DBProxyName,
@@ -412,12 +413,12 @@ func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 	return values, nil
 }
 
-func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBProxyEndpointsPaginator(client, &rds.DescribeDBProxyEndpointsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -425,7 +426,7 @@ func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSende
 		}
 
 		for _, v := range page.DBProxyEndpoints {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBProxyEndpointArn,
 				Name:        *v.DBProxyEndpointName,
@@ -444,7 +445,7 @@ func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	proxies, err := RDSDBProxy(ctx, cfg, nil)
 	if err != nil {
@@ -453,7 +454,7 @@ func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 
 	client := rds.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, p := range proxies {
 		proxy := p.Description.(types.DBProxy)
 		paginator := rds.NewDescribeDBProxyTargetGroupsPaginator(client, &rds.DescribeDBProxyTargetGroupsInput{
@@ -467,7 +468,7 @@ func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 			}
 
 			for _, v := range page.TargetGroups {
-				resource := Resource{
+				resource := models.Resource{
 					Region:      describeCtx.OGRegion,
 					ARN:         *v.TargetGroupArn,
 					Name:        *v.TargetGroupName,
@@ -487,12 +488,12 @@ func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *StreamSe
 	return values, nil
 }
 
-func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBSecurityGroupsPaginator(client, &rds.DescribeDBSecurityGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -500,7 +501,7 @@ func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *StreamSende
 		}
 
 		for _, v := range page.DBSecurityGroups {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBSecurityGroupArn,
 				Name:        *v.DBSecurityGroupName,
@@ -519,12 +520,12 @@ func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBSubnetGroupsPaginator(client, &rds.DescribeDBSubnetGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -539,7 +540,7 @@ func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender)
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.DBSubnetGroupArn,
 				Name:   *v.DBSubnetGroupName,
@@ -561,11 +562,11 @@ func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	return values, nil
 }
 
-func RDSDBEventSubscription(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBEventSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeEventSubscriptionsPaginator(client, &rds.DescribeEventSubscriptionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -586,9 +587,9 @@ func RDSDBEventSubscription(ctx context.Context, cfg aws.Config, stream *StreamS
 
 	return values, nil
 }
-func rDSDBEventSubscriptionHandle(ctx context.Context, v types.EventSubscription) Resource {
+func rDSDBEventSubscriptionHandle(ctx context.Context, v types.EventSubscription) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.EventSubscriptionArn,
 		Name:   *v.CustSubscriptionId,
@@ -598,9 +599,9 @@ func rDSDBEventSubscriptionHandle(ctx context.Context, v types.EventSubscription
 	}
 	return resource
 }
-func GetRDSDBEventSubscription(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBEventSubscription(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	subscriptionName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 
 	client := rds.NewFromConfig(cfg)
 	describes, err := client.DescribeEventSubscriptions(ctx, &rds.DescribeEventSubscriptionsInput{
@@ -619,11 +620,11 @@ func GetRDSDBEventSubscription(ctx context.Context, cfg aws.Config, fields map[s
 	return values, nil
 }
 
-func RDSGlobalCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSGlobalCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeGlobalClustersPaginator(client, &rds.DescribeGlobalClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -644,7 +645,7 @@ func RDSGlobalCluster(ctx context.Context, cfg aws.Config, stream *StreamSender)
 
 	return values, nil
 }
-func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalCluster) Resource {
+func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalCluster) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 
@@ -655,7 +656,7 @@ func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalC
 		tags = &rds.ListTagsForResourceOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.GlobalClusterArn,
 		Name:   *v.GlobalClusterIdentifier,
@@ -666,8 +667,8 @@ func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalC
 	}
 	return resource
 }
-func GetRDSGlobalCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetRDSGlobalCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	arn := fields["arn"]
 	client := rds.NewFromConfig(cfg)
 
@@ -687,11 +688,11 @@ func GetRDSGlobalCluster(ctx context.Context, cfg aws.Config, fields map[string]
 	return values, nil
 }
 
-func RDSOptionGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSOptionGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeOptionGroupsPaginator(client, &rds.DescribeOptionGroupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -700,7 +701,7 @@ func RDSOptionGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 		for _, v := range page.OptionGroupsList {
 			resource, err := rDSOptionGroupHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -720,7 +721,7 @@ func RDSOptionGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) (
 
 	return values, nil
 }
-func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGroup) (Resource, error) {
+func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGroup) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 
@@ -729,12 +730,12 @@ func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGro
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.OptionGroupArn,
 		Name:   *v.OptionGroupName,
@@ -745,9 +746,9 @@ func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGro
 	}
 	return resource, nil
 }
-func GetRDSOptionGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSOptionGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	optionGroupName := fields["name"]
-	var values []Resource
+	var values []models.Resource
 	client := rds.NewFromConfig(cfg)
 
 	describers, err := client.DescribeOptionGroups(ctx, &rds.DescribeOptionGroupsInput{
@@ -762,7 +763,7 @@ func GetRDSOptionGroup(ctx context.Context, cfg aws.Config, fields map[string]st
 
 	for _, v := range describers.OptionGroupsList {
 		resource, err := rDSOptionGroupHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -775,11 +776,11 @@ func GetRDSOptionGroup(ctx context.Context, cfg aws.Config, fields map[string]st
 	return values, nil
 }
 
-func RDSDBSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBSnapshotsPaginator(client, &rds.DescribeDBSnapshotsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -788,7 +789,7 @@ func RDSDBSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 		for _, v := range page.DBSnapshots {
 			resource, err := rDSDBSnapshotHandle(ctx, cfg, v)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -808,7 +809,7 @@ func RDSDBSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 	return values, nil
 }
-func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot) (Resource, error) {
+func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := rds.NewFromConfig(cfg)
 	attrs, err := client.DescribeDBSnapshotAttributes(ctx, &rds.DescribeDBSnapshotAttributesInput{
@@ -816,12 +817,12 @@ func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot
 	})
 	if err != nil {
 		if isErr(err, "DescribeDBSnapshotAttributesNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.DBSnapshotArn,
 		Name:   *v.DBSnapshotIdentifier,
@@ -833,9 +834,9 @@ func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot
 
 	return resource, nil
 }
-func GetRDSDBSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBSnapshot(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	dbiResourceId := fields["id"]
-	var values []Resource
+	var values []models.Resource
 	client := rds.NewFromConfig(cfg)
 	describers, err := client.DescribeDBSnapshots(ctx, &rds.DescribeDBSnapshotsInput{
 		DbiResourceId: &dbiResourceId,
@@ -849,7 +850,7 @@ func GetRDSDBSnapshot(ctx context.Context, cfg aws.Config, fields map[string]str
 
 	for _, v := range describers.DBSnapshots {
 		resource, err := rDSDBSnapshotHandle(ctx, cfg, v)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -862,11 +863,11 @@ func GetRDSDBSnapshot(ctx context.Context, cfg aws.Config, fields map[string]str
 	return values, nil
 }
 
-func RDSReservedDBInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSReservedDBInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeReservedDBInstancesPaginator(client, &rds.DescribeReservedDBInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -887,9 +888,9 @@ func RDSReservedDBInstance(ctx context.Context, cfg aws.Config, stream *StreamSe
 
 	return values, nil
 }
-func rDSReservedDBInstanceHandle(ctx context.Context, reservedDBInstance types.ReservedDBInstance) Resource {
+func rDSReservedDBInstanceHandle(ctx context.Context, reservedDBInstance types.ReservedDBInstance) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *reservedDBInstance.ReservedDBInstanceArn,
 		ID:     *reservedDBInstance.ReservedDBInstanceId,
@@ -899,9 +900,9 @@ func rDSReservedDBInstanceHandle(ctx context.Context, reservedDBInstance types.R
 	}
 	return resource
 }
-func GetRDSReservedDBInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSReservedDBInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	reservedDBInstanceId := fields["id"]
-	var values []Resource
+	var values []models.Resource
 
 	client := rds.NewFromConfig(cfg)
 	describers, err := client.DescribeReservedDBInstances(ctx, &rds.DescribeReservedDBInstancesInput{
@@ -920,11 +921,11 @@ func GetRDSReservedDBInstance(ctx context.Context, cfg aws.Config, fields map[st
 	return values, nil
 }
 
-func RDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBInstanceAutomatedBackupsPaginator(client, &rds.DescribeDBInstanceAutomatedBackupsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -945,9 +946,9 @@ func RDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, stream *S
 
 	return values, nil
 }
-func rDSDBInstanceAutomatedBackupHandle(ctx context.Context, v types.DBInstanceAutomatedBackup) Resource {
+func rDSDBInstanceAutomatedBackupHandle(ctx context.Context, v types.DBInstanceAutomatedBackup) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.DBInstanceArn,
 		ID:     *v.DBInstanceIdentifier,
@@ -957,7 +958,7 @@ func rDSDBInstanceAutomatedBackupHandle(ctx context.Context, v types.DBInstanceA
 	}
 	return resource
 }
-func GetRDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetRDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	arn := fields["arn"]
 	client := rds.NewFromConfig(cfg)
 
@@ -971,7 +972,7 @@ func GetRDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, fields
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.DBInstanceAutomatedBackups {
 		resource := rDSDBInstanceAutomatedBackupHandle(ctx, v)
 		values = append(values, resource)
@@ -980,11 +981,11 @@ func GetRDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, fields
 	return values, nil
 }
 
-func RDSDBEngineVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBEngineVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := rds.NewFromConfig(cfg)
 	paginator := rds.NewDescribeDBEngineVersionsPaginator(client, &rds.DescribeDBEngineVersionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -1009,13 +1010,13 @@ func RDSDBEngineVersion(ctx context.Context, cfg aws.Config, stream *StreamSende
 	return values, nil
 }
 
-func rDSDBEngineVersionHandle(ctx context.Context, v types.DBEngineVersion) Resource {
+func rDSDBEngineVersionHandle(ctx context.Context, v types.DBEngineVersion) models.Resource {
 	var arn string
 	if v.DBEngineVersionArn != nil {
 		arn = *v.DBEngineVersionArn
 	}
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Description: model.RDSDBEngineVersionDescription{
@@ -1025,7 +1026,7 @@ func rDSDBEngineVersionHandle(ctx context.Context, v types.DBEngineVersion) Reso
 	return resource
 }
 
-func RDSDBRecommendation(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func RDSDBRecommendation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	logger := GetLoggerFromContext(ctx)
 
 	logger.Info("RDSDBRecommendation start working")
@@ -1034,7 +1035,7 @@ func RDSDBRecommendation(ctx context.Context, cfg aws.Config, stream *StreamSend
 	paginator := rds.NewDescribeDBRecommendationsPaginator(client, &rds.DescribeDBRecommendationsInput{})
 
 	logger.Info("RDSDBRecommendation start getting pages")
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -1058,10 +1059,10 @@ func RDSDBRecommendation(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func rDSDBRecommendationHandler(ctx context.Context, v types.DBRecommendation) Resource {
+func rDSDBRecommendationHandler(ctx context.Context, v types.DBRecommendation) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 
-	return Resource{
+	return models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ResourceArn,
 		Description: model.RDSDBRecommendationDescription{

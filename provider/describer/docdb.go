@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	types2 "github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -12,11 +13,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func DocDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DocDBCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	paginator := docdb.NewDescribeDBClustersPaginator(client, &docdb.DescribeDBClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -27,7 +28,7 @@ func DocDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -44,7 +45,7 @@ func DocDBCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	return values, nil
 }
-func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCluster) (Resource, error) {
+func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCluster) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -53,12 +54,12 @@ func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCl
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *cluster.DBClusterIdentifier,
 		ARN:    *cluster.DBClusterArn,
@@ -69,7 +70,7 @@ func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCl
 	}
 	return resource, nil
 }
-func GetDocDBCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDocDBCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	dbClusterIdentifier := fields["identifier"]
 
@@ -80,14 +81,14 @@ func GetDocDBCluster(ctx context.Context, cfg aws.Config, fields map[string]stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range out.DBClusters {
 
 		resource, err := DocDBClusterHandle(ctx, cfg, cluster)
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -97,11 +98,11 @@ func GetDocDBCluster(ctx context.Context, cfg aws.Config, fields map[string]stri
 	return values, nil
 }
 
-func DocDBClusterInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DocDBClusterInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	paginator := docdb.NewDescribeDBInstancesPaginator(client, &docdb.DescribeDBInstancesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -112,7 +113,7 @@ func DocDBClusterInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -130,7 +131,7 @@ func DocDBClusterInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance types2.DBInstance) (Resource, error) {
+func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance types2.DBInstance) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -139,12 +140,12 @@ func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance ty
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *instance.DBInstanceIdentifier,
 		ARN:    *instance.DBInstanceArn,
@@ -156,7 +157,7 @@ func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance ty
 	return resource, nil
 }
 
-func GetDocDBClusterInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetDocDBClusterInstance(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	identifier := fields["identifier"]
 
@@ -167,14 +168,14 @@ func GetDocDBClusterInstance(ctx context.Context, cfg aws.Config, fields map[str
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range out.DBInstances {
 
 		resource, err := DocDBClusterInstanceHandle(ctx, cfg, cluster)
 		if err != nil {
 			return nil, err
 		}
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -184,12 +185,12 @@ func GetDocDBClusterInstance(ctx context.Context, cfg aws.Config, fields map[str
 	return values, nil
 }
 
-func DocDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func DocDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 
 	paginator := docdb.NewDescribeDBClustersPaginator(client, &docdb.DescribeDBClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -227,7 +228,7 @@ func DocDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, cfg aws.Config, snapshot types2.DBClusterSnapshot) (Resource, error) {
+func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, cfg aws.Config, snapshot types2.DBClusterSnapshot) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -236,9 +237,9 @@ func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, 
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	params := &docdb.DescribeDBClusterSnapshotAttributesInput{
@@ -248,10 +249,10 @@ func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, 
 	dbClusterSnapshotData, err := docdbClient.DescribeDBClusterSnapshotAttributes(ctx, params)
 	if err != nil {
 		plugin.Logger(ctx).Error("aws_docdb_cluster_snapshot.getAwsDocDBClusterSnapshotAttributes", "api_error", err)
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *snapshot.DBClusterSnapshotIdentifier,
 		ARN:    *snapshot.DBClusterSnapshotArn,

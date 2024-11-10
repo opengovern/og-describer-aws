@@ -2,6 +2,7 @@ package describer
 
 import (
 	"context"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 
@@ -10,11 +11,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func AMPWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func AMPWorkspace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := amp.NewFromConfig(cfg)
 	paginator := amp.NewListWorkspacesPaginator(client, &amp.ListWorkspacesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -38,9 +39,9 @@ func AMPWorkspace(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]
 
 	return values, nil
 }
-func aMPWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) Resource {
+func aMPWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
 		Name:   *v.WorkspaceId,
@@ -50,7 +51,7 @@ func aMPWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) Resource 
 	}
 	return resource
 }
-func GetAMPWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetAMPWorkspace(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	workspaceID := fields["id"]
 	client := amp.NewFromConfig(cfg)
 
@@ -62,7 +63,7 @@ func GetAMPWorkspace(ctx context.Context, cfg aws.Config, fields map[string]stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Workspaces {
 		if *v.WorkspaceId != workspaceID {
 			continue

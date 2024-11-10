@@ -3,6 +3,7 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
@@ -11,11 +12,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func EMRCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EMRCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
 	paginator := emr.NewListClustersPaginator(client, &emr.ListClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -24,7 +25,7 @@ func EMRCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 		for _, item := range page.Clusters {
 			resource, err := eMRClusterHandle(ctx, cfg, *item.Id)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -43,7 +44,7 @@ func EMRCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 	}
 	return values, nil
 }
-func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (Resource, error) {
+func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := emr.NewFromConfig(cfg)
 
@@ -52,12 +53,12 @@ func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (Re
 	})
 	if err != nil {
 		if isErr(err, "DescribeClusterNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *out.Cluster.ClusterArn,
 		Name:   *out.Cluster.Name,
@@ -67,12 +68,12 @@ func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (Re
 	}
 	return resource, nil
 }
-func GetEMRCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEMRCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterId := fields["id"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := eMRClusterHandle(ctx, cfg, clusterId)
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -84,11 +85,11 @@ func GetEMRCluster(ctx context.Context, cfg aws.Config, fields map[string]string
 	return values, nil
 }
 
-func EMRInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EMRInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
 	clusterPaginator := emr.NewListClustersPaginator(client, &emr.ListClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for clusterPaginator.HasMorePages() {
 		clusterPage, err := clusterPaginator.NextPage(ctx)
 		if err != nil {
@@ -109,7 +110,7 @@ func EMRInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 				for _, instance := range instancePage.Instances {
 					describeCtx := GetDescribeContext(ctx)
 					arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instance.Id)
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ID:     *instance.Id,
 						ARN:    arn,
@@ -132,11 +133,11 @@ func EMRInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func EMRInstanceFleet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EMRInstanceFleet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
 	clusterPaginator := emr.NewListClustersPaginator(client, &emr.ListClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for clusterPaginator.HasMorePages() {
 		clusterPage, err := clusterPaginator.NextPage(ctx)
 		if err != nil {
@@ -172,10 +173,10 @@ func EMRInstanceFleet(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	}
 	return values, nil
 }
-func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFleet, clusterId string) Resource {
+func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFleet, clusterId string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-fleet/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceFleet.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *instanceFleet.Id,
 		Name:   *instanceFleet.Name,
@@ -187,8 +188,8 @@ func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFle
 	}
 	return resource
 }
-func GetEMRInstanceFleet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
-	var values []Resource
+func GetEMRInstanceFleet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
+	var values []models.Resource
 	clusterId := fields["clusterId"]
 	client := emr.NewFromConfig(cfg)
 
@@ -208,11 +209,11 @@ func GetEMRInstanceFleet(ctx context.Context, cfg aws.Config, fields map[string]
 	return values, nil
 }
 
-func EMRInstanceGroup(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EMRInstanceGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
 	clusterPaginator := emr.NewListClustersPaginator(client, &emr.ListClustersInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for clusterPaginator.HasMorePages() {
 		clusterPage, err := clusterPaginator.NextPage(ctx)
 		if err != nil {
@@ -252,10 +253,10 @@ func EMRInstanceGroup(ctx context.Context, cfg aws.Config, stream *StreamSender)
 	}
 	return values, nil
 }
-func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGroup, clusterId string) Resource {
+func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGroup, clusterId string) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceGroup.Id)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *instanceGroup.Id,
 		ARN:    arn,
@@ -266,10 +267,10 @@ func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGro
 	}
 	return resource
 }
-func GetEMRInstanceGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetEMRInstanceGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	clusterId := fields["clusterId"]
 	client := emr.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	instances, err := client.ListInstanceGroups(ctx, &emr.ListInstanceGroupsInput{
 		ClusterId: &clusterId,
@@ -287,15 +288,15 @@ func GetEMRInstanceGroup(ctx context.Context, cfg aws.Config, fields map[string]
 	return values, nil
 }
 
-func EMRBlockPublicAccessConfiguration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func EMRBlockPublicAccessConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 	op, err := client.GetBlockPublicAccessConfiguration(ctx, &emr.GetBlockPublicAccessConfigurationInput{})
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
-	resource := Resource{
+	var values []models.Resource
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Description: model.EMRBlockPublicAccessConfigurationDescription{
 			Configuration:         *op.BlockPublicAccessConfiguration,

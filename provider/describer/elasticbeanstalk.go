@@ -5,13 +5,14 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
 
 	out, err := client.DescribeEnvironments(ctx, &elasticbeanstalk.DescribeEnvironmentsInput{})
@@ -19,11 +20,11 @@ func ElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, stream *St
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.Environments {
 
 		resource, err := elasticBeanstalkEnvironmentHandle(ctx, cfg, item)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -42,7 +43,7 @@ func ElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, stream *St
 
 	return values, nil
 }
-func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item types.EnvironmentDescription) (Resource, error) {
+func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item types.EnvironmentDescription) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := elasticbeanstalk.NewFromConfig(cfg)
@@ -52,9 +53,9 @@ func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item
 	})
 	if err != nil {
 		if isErr(err, "ListTagsForResourceNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	managedActions, err := client.DescribeEnvironmentManagedActions(ctx, &elasticbeanstalk.DescribeEnvironmentManagedActionsInput{
@@ -63,9 +64,9 @@ func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item
 	})
 	if err != nil {
 		if isErr(err, "DescribeEnvironmentManagedActionsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	params := &elasticbeanstalk.DescribeConfigurationSettingsInput{
@@ -77,15 +78,15 @@ func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item
 	configurationSettings, err := client.DescribeConfigurationSettings(ctx, params)
 	if err != nil {
 		if isErr(err, "DescribeConfigurationSettingsNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	if configurationSettings != nil && len(configurationSettings.ConfigurationSettings) > 0 {
 		configurationSettingsDescription = configurationSettings.ConfigurationSettings
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.EnvironmentArn,
 		Name:   *item.EnvironmentName,
@@ -98,7 +99,7 @@ func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item
 	}
 	return resource, nil
 }
-func GetElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
 
 	environmentName := fields["name"]
@@ -113,11 +114,11 @@ func GetElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, fields 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.Environments {
 
 		resource, err := elasticBeanstalkEnvironmentHandle(ctx, cfg, item)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -130,7 +131,7 @@ func GetElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, fields 
 	return values, nil
 }
 
-func ElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
 	out, err := client.DescribeApplications(ctx, &elasticbeanstalk.DescribeApplicationsInput{})
 	if err != nil {
@@ -140,7 +141,7 @@ func ElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, stream *St
 		return nil, nil
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.Applications {
 		resource, err := elasticBeanstalkApplicationHandle(ctx, cfg, item)
 		if err != nil {
@@ -158,7 +159,7 @@ func ElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, stream *St
 
 	return values, nil
 }
-func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item types.ApplicationDescription) (Resource, error) {
+func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item types.ApplicationDescription) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 
 	client := elasticbeanstalk.NewFromConfig(cfg)
@@ -168,12 +169,12 @@ func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item
 	})
 	if err != nil {
 		if !isErr(err, "ResourceNotFoundException") && !isErr(err, "InsufficientPrivilegesException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		tags = &elasticbeanstalk.ListTagsForResourceOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ApplicationArn,
 		Name:   *item.ApplicationName,
@@ -185,7 +186,7 @@ func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item
 
 	return resource, nil
 }
-func GetElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	applicationName := fields["name"]
 
 	client := elasticbeanstalk.NewFromConfig(cfg)
@@ -200,7 +201,7 @@ func GetElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, fields 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Applications {
 		resource, err := elasticBeanstalkApplicationHandle(ctx, cfg, v)
 		if err != nil {
@@ -212,12 +213,12 @@ func GetElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, fields 
 	return values, nil
 }
 
-func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := elasticbeanstalk.NewFromConfig(cfg)
 	paginator := elasticbeanstalk.NewListPlatformVersionsPaginator(client, &elasticbeanstalk.ListPlatformVersionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -232,7 +233,7 @@ func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *Strea
 				return nil, err
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *platform.PlatformDescription.PlatformArn,
 				Name:   *platform.PlatformDescription.PlatformName,
@@ -253,7 +254,7 @@ func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *Strea
 	return values, nil
 }
 
-func ElasticBeanstalkApplicationVersion(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ElasticBeanstalkApplicationVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
 
 	pagesLeft := true
@@ -265,7 +266,7 @@ func ElasticBeanstalkApplicationVersion(ctx context.Context, cfg aws.Config, str
 		return nil, nil
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, item := range out.Applications {
 		params := &elasticbeanstalk.DescribeApplicationVersionsInput{
 			ApplicationName: item.ApplicationName,
@@ -302,7 +303,7 @@ func ElasticBeanstalkApplicationVersion(ctx context.Context, cfg aws.Config, str
 	return values, nil
 }
 
-func elasticBeanstalkApplicationVersionHandle(ctx context.Context, cfg aws.Config, v types.ApplicationVersionDescription) (Resource, error) {
+func elasticBeanstalkApplicationVersionHandle(ctx context.Context, cfg aws.Config, v types.ApplicationVersionDescription) (models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -311,12 +312,12 @@ func elasticBeanstalkApplicationVersionHandle(ctx context.Context, cfg aws.Confi
 	})
 	if err != nil {
 		if !isErr(err, "ResourceNotFoundException") && !isErr(err, "InsufficientPrivilegesException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		tags = &elasticbeanstalk.ListTagsForResourceOutput{}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ApplicationVersionArn,
 		Name:   *v.ApplicationName,

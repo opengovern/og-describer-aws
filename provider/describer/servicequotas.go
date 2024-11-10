@@ -3,19 +3,20 @@ package describer
 import (
 	"context"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas"
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
 	servicesPaginator := servicequotas.NewListServicesPaginator(client, &servicequotas.ListServicesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for servicesPaginator.HasMorePages() {
 		servicesPage, err := servicesPaginator.NextPage(ctx)
 		if err != nil {
@@ -25,7 +26,7 @@ func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *StreamSen
 		for _, service := range servicesPage.Services {
 			arn := fmt.Sprintf("arn:%s:servicequotas:%s:%s:%s", describeCtx.Partition, describeCtx.OGRegion, describeCtx.AccountID, *service.ServiceCode)
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				Name:   *service.ServiceName,
@@ -47,11 +48,11 @@ func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	servicesPaginator := servicequotas.NewListServicesPaginator(client, &servicequotas.ListServicesInput{})
 	for servicesPaginator.HasMorePages() {
 		servicesPage, err := servicesPaginator.NextPage(ctx)
@@ -70,7 +71,7 @@ func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, strea
 				}
 
 				for _, quota := range page.Quotas {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *quota.QuotaArn + "--default",
 						Name:   *quota.QuotaName,
@@ -93,11 +94,11 @@ func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, strea
 	return values, nil
 }
 
-func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	servicesPaginator := servicequotas.NewListServicesPaginator(client, &servicequotas.ListServicesInput{})
 	for servicesPaginator.HasMorePages() {
 		servicesPage, err := servicesPaginator.NextPage(ctx)
@@ -122,7 +123,7 @@ func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *Stre
 					if err != nil {
 						tags = &servicequotas.ListTagsForResourceOutput{}
 					}
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *quota.QuotaArn,
 						Name:   *quota.QuotaName,
@@ -146,11 +147,11 @@ func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *Stre
 	return values, nil
 }
 
-func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 
 	paginator := servicequotas.NewListRequestedServiceQuotaChangeHistoryPaginator(client, &servicequotas.ListRequestedServiceQuotaChangeHistoryInput{})
 	for paginator.HasMorePages() {
@@ -168,7 +169,7 @@ func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config,
 			}
 
 			arn := fmt.Sprintf("arn:aws:servicequotas:%s:%s:changeRequest/%s", describeCtx.OGRegion, describeCtx.AccountID, *requestedQuota.Id)
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    arn,
 				ID:     *requestedQuota.Id,

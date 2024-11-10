@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -15,15 +16,15 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	// Only supported in US-EAST-1
 	if !strings.EqualFold(cfg.Region, "us-east-1") {
-		return []Resource{}, nil
+		return []models.Resource{}, nil
 	}
 
 	client := ecrpublic.NewFromConfig(cfg)
 	paginator := ecrpublic.NewDescribeRepositoriesPaginator(client, &ecrpublic.DescribeRepositoriesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -50,7 +51,7 @@ func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *StreamSend
 			}
 
 			resource, err := eCRPublicRepositoryHandle(ctx, cfg, v, imageDetails)
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				return nil, nil
 			}
@@ -70,7 +71,7 @@ func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *StreamSend
 
 	return values, nil
 }
-func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_types.Repository, imageDetails []public_types.ImageDetail) (Resource, error) {
+func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_types.Repository, imageDetails []public_types.ImageDetail) (models.Resource, error) {
 	client := ecrpublic.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 	policyOutput, err := client.GetRepositoryPolicy(ctx, &ecrpublic.GetRepositoryPolicyInput{
@@ -78,7 +79,7 @@ func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_typ
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -87,13 +88,13 @@ func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_typ
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		} else {
 			tagsOutput = &ecrpublic.ListTagsForResourceOutput{}
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.RepositoryArn,
 		Name:   *v.RepositoryName,
@@ -106,7 +107,7 @@ func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_typ
 	}
 	return resource, nil
 }
-func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	repositoryName := fields["name"]
 	client := ecrpublic.NewFromConfig(cfg)
 	out, err := client.DescribeRepositories(ctx, &ecrpublic.DescribeRepositoriesInput{
@@ -119,7 +120,7 @@ func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[stri
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range out.Repositories {
 
 		var imageDetails []public_types.ImageDetail
@@ -135,7 +136,7 @@ func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[stri
 		imageDetails = append(imageDetails, images.ImageDetails...)
 
 		resource, err := eCRPublicRepositoryHandle(ctx, cfg, v, imageDetails)
-		emptyResource := Resource{}
+		emptyResource := models.Resource{}
 		if err == nil && resource == emptyResource {
 			return nil, nil
 		}
@@ -148,16 +149,16 @@ func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[stri
 	return values, nil
 }
 
-func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	// Only supported in US-EAST-1
 	if !strings.EqualFold(cfg.Region, "us-east-1") {
-		return []Resource{}, nil
+		return []models.Resource{}, nil
 	}
 
 	client := ecrpublic.NewFromConfig(cfg)
 	paginator := ecrpublic.NewDescribeRegistriesPaginator(client, &ecrpublic.DescribeRegistriesInput{})
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -173,7 +174,7 @@ func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender
 				tags = tagsOutput.Tags
 			}
 
-			resource := Resource{
+			resource := models.Resource{
 				Region: describeCtx.OGRegion,
 				ARN:    *v.RegistryArn,
 				Name:   *v.RegistryId,
@@ -195,11 +196,11 @@ func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func ECRRepository(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRRepository(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ecr.NewFromConfig(cfg)
 	paginator := ecr.NewDescribeRepositoriesPaginator(client, &ecr.DescribeRepositoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -227,7 +228,7 @@ func ECRRepository(ctx context.Context, cfg aws.Config, stream *StreamSender) ([
 
 	return values, nil
 }
-func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository) (Resource, error) {
+func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	lifeCyclePolicyOutput, err := client.GetLifecyclePolicy(ctx, &ecr.GetLifecyclePolicyInput{
@@ -235,7 +236,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") || isErr(err, "AccessDeniedException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -249,7 +250,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 			if isErr(err, "RepositoryNotFoundException") || isErr(err, "RepositoryPolicyNotFoundException") || isErr(err, "LifecyclePolicyNotFoundException") {
 				continue
 			}
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 		imageDetails = append(imageDetails, imagePage.ImageDetails...)
 	}
@@ -260,7 +261,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -269,7 +270,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		}
 	}
 
@@ -278,13 +279,13 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	})
 	if err != nil {
 		if !isErr(err, "RepositoryNotFoundException") && !isErr(err, "RepositoryPolicyNotFoundException") && !isErr(err, "LifecyclePolicyNotFoundException") {
-			return Resource{}, err
+			return models.Resource{}, err
 		} else {
 			tagsOutput = &ecr.ListTagsForResourceOutput{}
 		}
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.RepositoryArn,
 		Name:   *v.RepositoryName,
@@ -299,7 +300,7 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	}
 	return resource, nil
 }
-func GetECRRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECRRepository(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := ecr.NewFromConfig(cfg)
 	repositoryName := fields["name"]
 	out, err := client.DescribeRepositories(ctx, &ecr.DescribeRepositoriesInput{
@@ -309,7 +310,7 @@ func GetECRRepository(ctx context.Context, cfg aws.Config, fields map[string]str
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, repository := range out.Repositories {
 		resource, err := eCRRepositoryHandle(ctx, cfg, repository)
 		if err != nil {
@@ -320,7 +321,7 @@ func GetECRRepository(ctx context.Context, cfg aws.Config, fields map[string]str
 	return values, nil
 }
 
-func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	output, err := client.GetRegistryPolicy(ctx, &ecr.GetRegistryPolicyInput{})
@@ -328,13 +329,13 @@ func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender
 		var ae smithy.APIError
 		e := types.RegistryPolicyNotFoundException{}
 		if errors.As(err, &ae) && ae.ErrorCode() == e.ErrorCode() {
-			return []Resource{}, nil
+			return []models.Resource{}, nil
 		}
 		return nil, err
 	}
 
-	var values []Resource
-	resource := Resource{
+	var values []models.Resource
+	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ID:          *output.RegistryId,
 		Name:        *output.RegistryId,
@@ -351,7 +352,7 @@ func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *StreamSender
 	return values, nil
 }
 
-func ECRRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRRegistry(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	output, err := client.DescribeRegistry(ctx, &ecr.DescribeRegistryInput{})
@@ -359,8 +360,8 @@ func ECRRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 		return nil, err
 	}
 
-	var values []Resource
-	resource := Resource{
+	var values []models.Resource
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *output.RegistryId,
 		Name:   *output.RegistryId,
@@ -380,11 +381,11 @@ func ECRRegistry(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]R
 	return values, nil
 }
 
-func ECRImage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRImage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ecr.NewFromConfig(cfg)
 	repositoryPaginator := ecr.NewDescribeRepositoriesPaginator(client, &ecr.DescribeRepositoriesInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for repositoryPaginator.HasMorePages() {
 		repositoryPage, err := repositoryPaginator.NextPage(ctx)
 		if err != nil {
@@ -426,7 +427,7 @@ func ECRImage(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Reso
 
 	return values, nil
 }
-func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail, repository types.Repository) (Resource, error) {
+func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail, repository types.Repository) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	var uri string
 	if len(image.ImageTags) == 0 {
@@ -435,7 +436,7 @@ func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail
 		uri = describeCtx.AccountID + ".dkr.ecr." + describeCtx.Region + ".amazonaws.com/" + *image.RepositoryName + ":" + image.ImageTags[0]
 	}
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   fmt.Sprintf("%s:%s", *repository.RepositoryArn, *image.ImageDigest),
 		Description: model.ECRImageDescription{
@@ -445,7 +446,7 @@ func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail
 	}
 	return resource, nil
 }
-func GetECRImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECRImage(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	repositoryName := fields["repositoryName"]
 	client := ecr.NewFromConfig(cfg)
 
@@ -459,7 +460,7 @@ func GetECRImage(ctx context.Context, cfg aws.Config, fields map[string]string) 
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, repository := range out.Repositories {
 		images, err := client.DescribeImages(ctx, &ecr.DescribeImagesInput{
 			RepositoryName: repository.RepositoryName,
@@ -483,7 +484,7 @@ func GetECRImage(ctx context.Context, cfg aws.Config, fields map[string]string) 
 	return values, nil
 }
 
-func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ecr.NewFromConfig(cfg)
 	describeCtx := GetDescribeContext(ctx)
 
@@ -491,9 +492,9 @@ func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, strea
 	if err != nil {
 		return nil, err
 	}
-	var values []Resource
+	var values []models.Resource
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *scanningConfiguration.RegistryId,
 		Name:   *scanningConfiguration.RegistryId,

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,11 +13,11 @@ import (
 	"github.com/opengovern/og-describer-aws/provider/model"
 )
 
-func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ecs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {
 		output, err := client.DescribeCapacityProviders(ctx, &ecs.DescribeCapacityProvidersInput{NextToken: prevToken})
 		if err != nil {
@@ -27,7 +28,7 @@ func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *StreamSend
 		}
 
 		for _, v := range output.CapacityProviders {
-			resource := Resource{
+			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.CapacityProviderArn,
 				Name:        *v.Name,
@@ -51,7 +52,7 @@ func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *StreamSend
 	return values, nil
 }
 
-func ECSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -59,7 +60,7 @@ func ECSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	client := ecs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	// Describe in batch of 100 which is the limit
 	for i := 0; i < len(clusters); i = i + 100 {
 		j := i + 100
@@ -91,9 +92,9 @@ func ECSCluster(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	return values, nil
 }
-func eCSClusterHandle(ctx context.Context, v types.Cluster) Resource {
+func eCSClusterHandle(ctx context.Context, v types.Cluster) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ClusterArn,
 		Name:   *v.ClusterName,
@@ -103,12 +104,12 @@ func eCSClusterHandle(ctx context.Context, v types.Cluster) Resource {
 	}
 	return resource
 }
-func GetECSCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECSCluster(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	client := ecs.NewFromConfig(cfg)
 
 	cluster := fields["name"]
 
-	var values []Resource
+	var values []models.Resource
 	output, err := client.DescribeClusters(ctx, &ecs.DescribeClustersInput{
 		Clusters: []string{cluster},
 	})
@@ -126,7 +127,7 @@ func GetECSCluster(ctx context.Context, cfg aws.Config, fields map[string]string
 	return values, nil
 }
 
-func ECSService(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSService(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -134,7 +135,7 @@ func ECSService(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	client := ecs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		// This prevents Implicit memory aliasing in for loop
 		cluster := cluster
@@ -179,17 +180,17 @@ func ECSService(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	return values, nil
 }
-func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) (Resource, error) {
+func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) (models.Resource, error) {
 	params := &ecs.ListTagsForResourceInput{
 		ResourceArn: v.ServiceArn,
 	}
 
 	response, err := client.ListTagsForResource(ctx, params)
 	if err != nil {
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ServiceArn,
 		Name:   *v.ServiceName,
@@ -200,12 +201,12 @@ func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) 
 	}
 	return resource, err
 }
-func GetECSService(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECSService(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	cluster := fields["cluster"]
 	service := fields["service"]
 	client := ecs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	output, err := client.DescribeServices(ctx, &ecs.DescribeServicesInput{
 		Cluster:  &cluster,
 		Services: []string{service},
@@ -228,11 +229,11 @@ func GetECSService(ctx context.Context, cfg aws.Config, fields map[string]string
 	return values, nil
 }
 
-func ECSTaskDefinition(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSTaskDefinition(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ecs.NewFromConfig(cfg)
 	paginator := ecs.NewListTaskDefinitionsPaginator(client, &ecs.ListTaskDefinitionsInput{})
 
-	var values []Resource
+	var values []models.Resource
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
 		if err != nil {
@@ -245,7 +246,7 @@ func ECSTaskDefinition(ctx context.Context, cfg aws.Config, stream *StreamSender
 			if err != nil {
 				return nil, err
 			}
-			emptyResource := Resource{}
+			emptyResource := models.Resource{}
 			if err == nil && resource == emptyResource {
 				continue
 			}
@@ -262,7 +263,7 @@ func ECSTaskDefinition(ctx context.Context, cfg aws.Config, stream *StreamSender
 
 	return values, nil
 }
-func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (Resource, error) {
+func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	client := ecs.NewFromConfig(cfg)
 
@@ -274,16 +275,16 @@ func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (R
 	})
 	if err != nil {
 		if isErr(err, "DescribeTaskDefinitionNotFound") || isErr(err, "InvalidParameterValue") {
-			return Resource{}, nil
+			return models.Resource{}, nil
 		}
-		return Resource{}, err
+		return models.Resource{}, err
 	}
 
 	// From Steampipe
 	splitArn := strings.Split(arn, ":")
 	name := splitArn[len(splitArn)-1]
 
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    arn,
 		Name:   name,
@@ -294,15 +295,15 @@ func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (R
 	}
 	return resource, nil
 }
-func GetECSTaskDefinition(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECSTaskDefinition(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	taskDefinitionARN := fields["arn"]
-	var values []Resource
+	var values []models.Resource
 
 	resource, err := eCSTaskDefinitionHandle(ctx, cfg, taskDefinitionARN)
 	if err != nil {
 		return nil, err
 	}
-	emptyResource := Resource{}
+	emptyResource := models.Resource{}
 	if err == nil && resource == emptyResource {
 		return nil, nil
 	}
@@ -310,14 +311,14 @@ func GetECSTaskDefinition(ctx context.Context, cfg aws.Config, fields map[string
 	return values, nil
 }
 
-func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	client := ecs.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	for _, cluster := range clusters {
 		cluster := cluster
@@ -365,9 +366,9 @@ func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Re
 
 	return values, nil
 }
-func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) Resource {
+func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) models.Resource {
 	describeCtx := GetDescribeContext(ctx)
-	resource := Resource{
+	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.TaskSetArn,
 		Name:   *v.Id,
@@ -377,7 +378,7 @@ func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) Resource {
 	}
 	return resource
 }
-func GetECSTaskSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]Resource, error) {
+func GetECSTaskSet(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
 	cluster := fields["cluster"]
 	service := fields["service"]
 	client := ecs.NewFromConfig(cfg)
@@ -393,7 +394,7 @@ func GetECSTaskSet(ctx context.Context, cfg aws.Config, fields map[string]string
 		return nil, err
 	}
 
-	var values []Resource
+	var values []models.Resource
 	for _, v := range taskSets.TaskSets {
 		resource := eCSTaskSetHandle(ctx, v)
 		values = append(values, resource)
@@ -420,7 +421,7 @@ func listECsServices(ctx context.Context, cfg aws.Config, cluster string) ([]str
 	return services, nil
 }
 
-func listEcsClusters(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]string, error) {
+func listEcsClusters(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]string, error) {
 	client := ecs.NewFromConfig(cfg)
 	paginator := ecs.NewListClustersPaginator(client, &ecs.ListClustersInput{})
 
@@ -437,7 +438,7 @@ func listEcsClusters(ctx context.Context, cfg aws.Config, stream *StreamSender) 
 	return clusters, nil
 }
 
-func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
@@ -446,7 +447,7 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 	client := ecs.NewFromConfig(cfg)
 
-	var values []Resource
+	var values []models.Resource
 	for _, cluster := range clusters {
 		paginator := ecs.NewListContainerInstancesPaginator(client, &ecs.ListContainerInstancesInput{
 			Cluster: &cluster,
@@ -483,7 +484,7 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 
 			for _, v := range output.ContainerInstances {
 				for _, c := range describeCluster.Clusters {
-					resource := Resource{
+					resource := models.Resource{
 						Region: describeCtx.OGRegion,
 						ARN:    *v.ContainerInstanceArn,
 						Name:   *v.ContainerInstanceArn,
@@ -508,7 +509,7 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *StreamSen
 	return values, nil
 }
 
-func ECSTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resource, error) {
+func ECSTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	describeCtx := GetDescribeContext(ctx)
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
@@ -516,7 +517,7 @@ func ECSTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 	}
 
 	client := ecs.NewFromConfig(cfg)
-	var values []Resource
+	var values []models.Resource
 
 	for _, cluster := range clusters {
 		cluster := cluster
@@ -575,7 +576,7 @@ func ECSTask(ctx context.Context, cfg aws.Config, stream *StreamSender) ([]Resou
 					if taskProtection, ok := taskProtectionMap[*v.TaskArn]; ok {
 						description.TaskProtection = &taskProtection
 					}
-					resource := Resource{
+					resource := models.Resource{
 						Region:      describeCtx.OGRegion,
 						ARN:         *v.TaskArn,
 						Name:        *v.TaskArn,
