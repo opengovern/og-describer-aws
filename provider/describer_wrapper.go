@@ -80,11 +80,9 @@ func ParallelDescribeRegionalSingleResource(describe func(context.Context, aws.C
 
 			partition, _ := PartitionOf(resp.region)
 			for i := range resp.resources {
-				resp.resources[i].IntegrationMetadata = map[string]interface{}{
-					"accountID": additionalData["accountID"].(string),
-					"region":    resp.region,
-					"partition": partition,
-				}
+				resp.resources[i].Account = additionalData["accountID"].(string)
+				resp.resources[i].Partition = partition
+				resp.resources[i].Region = resp.region
 			}
 
 			output = append(output, resp.resources...)
@@ -216,11 +214,9 @@ func ParallelDescribeRegional(describe func(context.Context, aws.Config, *model.
 
 			partition, _ := PartitionOf(resp.region)
 			for i := range resp.resources {
-				resp.resources[i].IntegrationMetadata = map[string]interface{}{
-					"accountID": additionalData["accountID"].(string),
-					"region":    resp.region,
-					"partition": partition,
-				}
+				resp.resources[i].Account = additionalData["accountID"].(string)
+				resp.resources[i].Partition = partition
+				resp.resources[i].Region = resp.region
 			}
 
 			output = append(output, resp.resources...)
@@ -271,10 +267,8 @@ func SequentialDescribeGlobal(describe func(context.Context, aws.Config, *model.
 			}
 
 			for i := range resources {
-				resources[i].IntegrationMetadata = map[string]interface{}{
-					"accountID": additionalData["accountID"].(string),
-					"region":    "global",
-				}
+				resources[i].Account = additionalData["accountID"].(string)
+				resources[i].Region = "global"
 			}
 
 			output = append(output, resources...)
