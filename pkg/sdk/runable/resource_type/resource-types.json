@@ -2,7 +2,7 @@
   {
     "ResourceName": "AWS::Redshift::Snapshot",
     "ListDescriber": "ParallelDescribeRegional(describer.RedshiftSnapshot)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetRedshiftSnapshot)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_redshift_snapshot",
     "Model": "RedshiftSnapshot"
   },
@@ -16,7 +16,7 @@
   {
     "ResourceName": "AWS::Glacier::Vault",
     "ListDescriber": "ParallelDescribeRegional(describer.GlacierVault)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetGlacierVault)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_glacier_vault",
     "Model": "GlacierVault"
   },
@@ -65,7 +65,7 @@
   {
     "ResourceName": "AWS::DynamoDb::GlobalSecondaryIndex",
     "ListDescriber": "ParallelDescribeRegional(describer.DynamoDbGlobalSecondaryIndex)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetDynamoDbGlobalSecondaryIndex)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_dynamodb_global_secondary_index",
     "Model": "DynamoDbGlobalSecondaryIndex"
   },
@@ -78,7 +78,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2RouteTable)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2RouteTable)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_route_table",
     "Model": "EC2RouteTable"
   },
@@ -99,7 +99,7 @@
   {
     "ResourceName": "AWS::Inspector::AssessmentTemplate",
     "ListDescriber": "ParallelDescribeRegional(describer.InspectorAssessmentTemplate)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetInspectorAssessmentTemplate)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_inspector_assessment_template",
     "Model": "InspectorAssessmentTemplate"
   },
@@ -140,7 +140,7 @@
   {
     "ResourceName": "AWS::EC2::VPCEndpoint",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPCEndpoint)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VPCEndpoint)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_endpoint",
     "Model": "EC2VPCEndpoint"
   },
@@ -161,14 +161,14 @@
   {
     "ResourceName": "AWS::CodeBuild::Project",
     "ListDescriber": "ParallelDescribeRegional(describer.CodeBuildProject)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetCodeBuildProject)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_codebuild_project",
     "Model": "CodeBuildProject"
   },
   {
     "ResourceName": "AWS::CodeBuild::Build",
     "ListDescriber": "ParallelDescribeRegional(describer.CodeBuildBuild)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetCodeBuildBuild)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_codebuild_build",
     "Model": "CodeBuildBuild"
   },
@@ -189,7 +189,7 @@
   {
     "ResourceName": "AWS::Glue::Crawler",
     "ListDescriber": "ParallelDescribeRegional(describer.GlueCrawler)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetGlueCrawler)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_glue_crawler",
     "Model": "GlueCrawler"
   },
@@ -210,7 +210,7 @@
   {
     "ResourceName": "AWS::EC2::EIP",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2EIP)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2EIP)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_eip",
     "Model": "EC2EIP"
   },
@@ -223,7 +223,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2InternetGateway)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2InternetGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_internet_gateway",
     "Model": "EC2InternetGateway"
   },
@@ -264,14 +264,14 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayRestAPI)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayRestAPI)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gateway_rest_api",
     "Model": "ApiGatewayRestAPI"
   },
   {
     "ResourceName": "AWS::ApiGatewayV2::Integration",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayV2Integration)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2Integration)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gatewayv2_integration",
     "Model": "ApiGatewayV2Integration"
   },
@@ -284,7 +284,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.AutoScalingAutoScalingGroup)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetAutoScalingAutoScalingGroup)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_autoscaling_group",
     "Model": "AutoScalingGroup"
   },
@@ -298,7 +298,7 @@
   {
     "ResourceName": "AWS::EC2::KeyPair",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2KeyPair)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2KeyPair)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_key_pair",
     "Model": "EC2KeyPair"
   },
@@ -485,7 +485,7 @@
   {
     "ResourceName": "AWS::ECS::Service",
     "ListDescriber": "ParallelDescribeRegional(describer.ECSService)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetECSService)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ecs_service",
     "Model": "ECSService"
   },
@@ -540,7 +540,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ElastiCacheCluster)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetElastiCacheCluster)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_elasticache_cluster",
     "Model": "ElastiCacheCluster"
   },
@@ -602,7 +602,7 @@
   {
     "ResourceName": "AWS::ApiGatewayV2::Api",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayV2API)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2API)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gatewayv2_api",
     "Model": "ApiGatewayV2API"
   },
@@ -615,7 +615,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Volume)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Volume)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ebs_volume",
     "Model": "EC2Volume"
   },
@@ -691,7 +691,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.LambdaFunction)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetLambdaFunction)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_lambda_function",
     "Model": "LambdaFunction"
   },
@@ -754,7 +754,7 @@
   {
     "ResourceName": "AWS::EC2::NetworkAcl",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2NetworkAcl)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2NetworkAcl)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_network_acl",
     "Model": "EC2NetworkAcl"
   },
@@ -852,7 +852,7 @@
   {
     "ResourceName": "AWS::EC2::VPCPeeringConnection",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPCPeeringConnection)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VPCPeeringConnection)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_peering_connection",
     "Model": "EC2VpcPeeringConnection"
   },
@@ -901,7 +901,7 @@
   {
     "ResourceName": "AWS::AccessAnalyzer::Analyzer",
     "ListDescriber": "ParallelDescribeRegional(describer.AccessAnalyzerAnalyzer)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetAccessAnalyzerAnalyzer)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_accessanalyzer_analyzer",
     "Model": "AccessAnalyzerAnalyzer"
   },
@@ -957,14 +957,14 @@
   {
     "ResourceName": "AWS::EC2::NetworkInterface",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2NetworkInterface)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2NetworkInterface)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_network_interface",
     "Model": "EC2NetworkInterface"
   },
   {
     "ResourceName": "AWS::EC2::VPNConnection",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPNConnection)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VPNConnection)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_vpn_connection",
     "Model": "EC2VPNConnection"
   },
@@ -1006,14 +1006,14 @@
   {
     "ResourceName": "AWS::AppStream::Image",
     "ListDescriber": "ParallelDescribeRegional(describer.AppStreamImage)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetAppStreamImage)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_appstream_image",
     "Model": "AppStreamImage"
   },
   {
     "ResourceName": "AWS::CloudWatch::Alarm",
     "ListDescriber": "ParallelDescribeRegional(describer.CloudWatchAlarm)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetCloudWatchAlarm)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_cloudwatch_alarm",
     "Model": "CloudWatchAlarm"
   },
@@ -1034,7 +1034,7 @@
   {
     "ResourceName": "AWS::RDS::DBCluster",
     "ListDescriber": "ParallelDescribeRegional(describer.RDSDBCluster)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetRDSDBCluster)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_rds_db_cluster",
     "Model": "RDSDBCluster"
   },
@@ -1069,7 +1069,7 @@
   {
     "ResourceName": "AWS::EC2::CapacityReservationFleet",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2CapacityReservationFleet)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2CapacityReservationFleet)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_capacity_reservation_fleet",
     "Model": "EC2CapacityReservationFleet"
   },
@@ -1103,14 +1103,14 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.RDSDBInstance)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetRDSDBInstance)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_rds_db_instance",
     "Model": "RDSDBInstance"
   },
   {
     "ResourceName": "AWS::RDS::DBInstanceAutomatedBackup",
     "ListDescriber": "ParallelDescribeRegional(describer.RDSDBInstanceAutomatedBackup)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetRDSDBInstanceAutomatedBackup)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_rds_db_instance_automated_backup",
     "Model": "RDSDBInstanceAutomatedBackup"
   },
@@ -1191,14 +1191,14 @@
   {
     "ResourceName": "AWS::EC2::FlowLog",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2FlowLog)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2FlowLog)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_flow_log",
     "Model": "EC2FlowLog"
   },
   {
     "ResourceName": "AWS::EC2::IpamPool",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2IpamPool)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2IpamPool)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_ipam_pool",
     "Model": "EC2IpamPool"
   },
@@ -1226,7 +1226,7 @@
   {
     "ResourceName": "AWS::EC2::PlacementGroup",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2PlacementGroup)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2PlacementGroup)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_placement_group",
     "Model": "EC2PlacementGroup"
   },
@@ -1240,7 +1240,7 @@
   {
     "ResourceName": "AWS::KMS::Key",
     "ListDescriber": "ParallelDescribeRegional(describer.KMSKey)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetKMSKey)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_kms_key",
     "Model": "KMSKey"
   },
@@ -1254,7 +1254,7 @@
   {
     "ResourceName": "AWS::EC2::Ipam",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Ipam)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Ipam)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_ipam",
     "Model": "EC2Ipam"
   },
@@ -1296,7 +1296,7 @@
   {
     "ResourceName": "AWS::Backup::ReportPlan",
     "ListDescriber": "ParallelDescribeRegional(describer.BackupReportPlan)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetBackupReportPlan)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_backup_report_plan",
     "Model": "BackupReportPlan"
   },
@@ -1317,7 +1317,7 @@
   {
     "ResourceName": "AWS::EC2::EgressOnlyInternetGateway",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2EgressOnlyInternetGateway)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2EgressOnlyInternetGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_egress_only_internet_gateway",
     "Model": "EC2EgressOnlyInternetGateway"
   },
@@ -1344,7 +1344,7 @@
   {
     "ResourceName": "AWS::Glue::Job",
     "ListDescriber": "ParallelDescribeRegional(describer.GlueJob)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetGlueJob)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_glue_job",
     "Model": "GlueJob"
   },
@@ -1382,7 +1382,7 @@
       "category": ["Networking"]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2SecurityGroup)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2SecurityGroup)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_security_group",
     "Model": "EC2SecurityGroup"
   },
@@ -1438,14 +1438,14 @@
   {
     "ResourceName": "AWS::EC2::AvailabilityZone",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2AvailabilityZone)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2AvailabilityZone)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_availability_zone",
     "Model": "EC2AvailabilityZone"
   },
   {
     "ResourceName": "AWS::EC2::TransitGateway",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2TransitGateway)",
-    "GetDescriber": " ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_transit_gateway",
     "Model": "EC2TransitGateway"
   },
@@ -1466,7 +1466,7 @@
   {
     "ResourceName": "AWS::EC2::Fleet",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Fleet)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Fleet)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_fleet",
     "Model": "EC2Fleet"
   },
@@ -1480,7 +1480,7 @@
   {
     "ResourceName": "AWS::ElasticLoadBalancingV2::LoadBalancer",
     "ListDescriber": "ParallelDescribeRegional(describer.ElasticLoadBalancingV2LoadBalancer)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetElasticLoadBalancingV2LoadBalancer)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_application_load_balancer",
     "Model": "ElasticLoadBalancingV2LoadBalancer"
   },
@@ -1522,7 +1522,7 @@
   {
     "ResourceName": "AWS::EC2::TransitGatewayAttachment",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2TransitGatewayAttachment)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayAttachment)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_transit_gateway_vpc_attachment",
     "Model": "EC2TransitGatewayAttachment"
   },
@@ -1676,7 +1676,7 @@
   {
     "ResourceName": "AWS::AutoScaling::LaunchConfiguration",
     "ListDescriber": "ParallelDescribeRegional(describer.AutoScalingLaunchConfiguration)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetAutoScalingLaunchConfiguration)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_launch_configuration",
     "Model": "AutoScalingLaunchConfiguration"
   },
@@ -1738,7 +1738,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Instance)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Instance)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_instance",
     "Model": "EC2Instance"
   },
@@ -1772,7 +1772,7 @@
   {
     "ResourceName": "AWS::EC2::ReservedInstances",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2ReservedInstances)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2ReservedInstances)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_reserved_instance",
     "Model": "EC2ReservedInstances"
   },
@@ -1816,7 +1816,7 @@
   {
     "ResourceName": "AWS::ElasticLoadBalancingV2::Listener",
     "ListDescriber": "ParallelDescribeRegional(describer.ElasticLoadBalancingV2Listener)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetElasticLoadBalancingV2Listener)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_load_balancer_listener",
     "Model": "ElasticLoadBalancingV2Listener"
   },
@@ -1830,7 +1830,7 @@
   {
     "ResourceName": "AWS::IAM::OpenIdConnectProvider",
     "ListDescriber": "SequentialDescribeGlobal(describer.IAMOpenIdConnectProvider)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetIAMOpenIdConnectProvider)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_iam_open_id_connect_provider",
     "Model": "IAMOpenIdConnectProvider"
   },
@@ -1886,7 +1886,7 @@
   {
     "ResourceName": "AWS::ApiGateway::Stage",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayStage)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayStage)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gateway_stage",
     "Model": "ApiGatewayStage"
   },
@@ -1948,7 +1948,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2AMI)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2AMI)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_ami",
     "Model": "EC2AMI"
   },
@@ -1958,7 +1958,7 @@
       "category": ["Networking"]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Subnet)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Subnet)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_subnet",
     "Model": "EC2Subnet"
   },
@@ -1992,7 +1992,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.DocDBCluster)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetDocDBCluster)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_docdb_cluster",
     "Model": "DocDBCluster"
   },
@@ -2012,7 +2012,7 @@
   {
     "ResourceName": "AWS::DocDB::ClusterInstance",
     "ListDescriber": "ParallelDescribeRegional(describer.DocDBClusterInstance)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetDocDBClusterInstance)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_docdb_cluster_instance",
     "Model": "DocDBClusterInstance"
   },
@@ -2054,7 +2054,7 @@
   {
     "ResourceName": "AWS::EC2::ManagedPrefixList",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2ManagedPrefixList)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2ManagedPrefixList)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_managed_prefix_list",
     "Model": "EC2ManagedPrefixList"
   },
@@ -2068,7 +2068,7 @@
   {
     "ResourceName": "AWS::EC2::ClientVpnEndpoint",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2ClientVpnEndpoint)",
-    "GetDescriber": "",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_client_vpn_endpoint",
     "Model": "EC2ClientVpnEndpoint"
   },
@@ -2256,7 +2256,7 @@
   {
     "ResourceName": "AWS::Route53Resolver::QueryLogConfig",
     "ListDescriber": "ParallelDescribeRegional(describer.Route53ResolverQueryLogConfig)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetRoute53ResolverQueryLogConfig)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_route53_resolver_query_log_config",
     "Model": "Route53ResolverQueryLogConfig"
   },
@@ -2332,35 +2332,35 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2CustomerGateway)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2CustomerGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_customer_gateway",
     "Model": "EC2CustomerGateway"
   },
   {
     "ResourceName": "AWS::EC2::VerifiedAccessInstance",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VerifiedAccessInstance)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessInstance)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_verified_access_instance",
     "Model": "EC2VerifiedAccessInstance"
   },
   {
     "ResourceName": "AWS::EC2::VerifiedAccessEndpoint",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VerifiedAccessEndpoint)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessEndpoint)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_verified_access_endpoint",
     "Model": "EC2VerifiedAccessEndpoint"
   },
   {
     "ResourceName": "AWS::EC2::VerifiedAccessGroup",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VerifiedAccessGroup)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessGroup)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_verified_access_group",
     "Model": "EC2VerifiedAccessGroup"
   },
   {
     "ResourceName": "AWS::EC2::VerifiedAccessTrustProvider",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VerifiedAccessTrustProvider)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessTrustProvider)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_verified_access_trust_provider",
     "Model": "EC2VerifiedAccessTrustProvider"
   },
@@ -2373,7 +2373,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPNGateway)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VPNGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_vpn_gateway",
     "Model": "EC2VPNGateway"
   },
@@ -2401,7 +2401,7 @@
   {
     "ResourceName": "AWS::EC2::TransitGatewayRoute",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2TransitGatewayRoute)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayRoute)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_transit_gateway_route",
     "Model": "EC2TransitGatewayRoute"
   },
@@ -2415,7 +2415,7 @@
   {
     "ResourceName": "AWS::ECS::TaskDefinition",
     "ListDescriber": "ParallelDescribeRegional(describer.ECSTaskDefinition)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetECSTaskDefinition)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ecs_task_definition",
     "Model": "ECSTaskDefinition"
   },
@@ -2429,21 +2429,21 @@
   {
     "ResourceName": "AWS::ApiGatewayV2::DomainName",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayV2DomainName)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2DomainName)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gatewayv2_domain_name",
     "Model": "ApiGatewayV2DomainName"
   },
   {
     "ResourceName": "AWS::ApiGateway::DomainName",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayDomainName)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetApiGatewayDomainName)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gateway_domain_name",
     "Model": "ApiGatewayDomainName"
   },
   {
     "ResourceName": "AWS::ApiGatewayV2::Route",
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayV2Route)",
-    "GetDescriber": "",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_api_gatewayv2_route",
     "Model": "ApiGatewayV2Route"
   },
@@ -2464,14 +2464,14 @@
   {
     "ResourceName": "AWS::CloudFormation::Stack",
     "ListDescriber": "ParallelDescribeRegional(describer.CloudFormationStack)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetCloudFormationStack)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_cloudformation_stack",
     "Model": "CloudFormationStack"
   },
   {
     "ResourceName": "AWS::CloudFormation::StackResource",
     "ListDescriber": "ParallelDescribeRegional(describer.CloudFormationStackResource)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetCloudFormationStackResource)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_cloudformation_stack_resource",
     "Model": "CloudFormationStackResource"
   },
@@ -2551,7 +2551,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2NatGateway)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2NatGateway)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_nat_gateway",
     "Model": "EC2NatGateway"
   },
@@ -2565,7 +2565,7 @@
   {
     "ResourceName": "AWS::ECS::Cluster",
     "ListDescriber": "ParallelDescribeRegional(describer.ECSCluster)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetECSCluster)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ecs_cluster",
     "Model": "ECSCluster"
   },
@@ -2600,7 +2600,7 @@
   {
     "ResourceName": "AWS::EC2::CapacityReservation",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2CapacityReservation)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2CapacityReservation)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_capacity_reservation",
     "Model": "EC2CapacityReservation"
   },
@@ -2627,7 +2627,7 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VolumeSnapshot)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VolumeSnapshot)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ebs_snapshot",
     "Model": "EC2VolumeSnapshot"
   },
@@ -2703,7 +2703,7 @@
   {
     "ResourceName": "AWS::EC2::Host",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Host)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2Host)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_host",
     "Model": "EC2Host"
   },
@@ -2716,14 +2716,14 @@
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPC)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2VPC)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc",
     "Model": "EC2Vpc"
   },
   {
     "ResourceName": "AWS::EC2::TransitGatewayRouteTable",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2TransitGatewayRouteTable)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayRouteTable)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_transit_gateway_route_table",
     "Model": "EC2TransitGatewayRouteTable"
   },
@@ -2772,7 +2772,7 @@
   {
     "ResourceName": "AWS::EC2::DHCPOptions",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2DHCPOptions)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2DHCPOptions)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_vpc_dhcp_options",
     "Model": "EC2DhcpOptions"
   },
@@ -2786,7 +2786,7 @@
   {
     "ResourceName": "AWS::Batch::ComputeEnvironment",
     "ListDescriber": "ParallelDescribeRegional(describer.BatchComputeEnvironment)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetBatchComputeEnvironment)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_batch_compute_environment",
     "Model": "BatchComputeEnvironment"
   },
@@ -3156,14 +3156,14 @@
   {
     "ResourceName": "AWS::EC2::LaunchTemplate",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2LaunchTemplate)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2LaunchTemplate)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_launch_template",
     "Model": "EC2LaunchTemplate"
   },
   {
     "ResourceName": "AWS::EC2::LaunchTemplateVersion",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2LaunchTemplateVersion)",
-    "GetDescriber": "ParallelDescribeRegionalSingleResource(describer.GetEC2LaunchTemplateVersion)",
+    "GetDescriber": "nil",
     "SteampipeTable": "aws_ec2_launch_template_version",
     "Model": "EC2LaunchTemplateVersion"
   },

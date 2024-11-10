@@ -15,7 +15,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.RedshiftSnapshot),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetRedshiftSnapshot),
+		GetDescriber:    nil,
 	},
 
 	"AWS::IAM::AccountSummary": {
@@ -35,7 +35,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.GlacierVault),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetGlacierVault),
+		GetDescriber:    nil,
 	},
 
 	"AWS::Organizations::Organization": {
@@ -105,7 +105,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.DynamoDbGlobalSecondaryIndex),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetDynamoDbGlobalSecondaryIndex),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::RouteTable": {
@@ -118,7 +118,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2RouteTable),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2RouteTable),
+		GetDescriber:  nil,
 	},
 
 	"AWS::SecurityHub::Hub": {
@@ -148,7 +148,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.InspectorAssessmentTemplate),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetInspectorAssessmentTemplate),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElasticLoadBalancingV2::ListenerRule": {
@@ -201,7 +201,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VPCEndpoint),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VPCEndpoint),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EventBridge::EventRule": {
@@ -231,7 +231,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.CodeBuildProject),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetCodeBuildProject),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CodeBuild::Build": {
@@ -241,7 +241,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.CodeBuildBuild),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetCodeBuildBuild),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElastiCache::ParameterGroup": {
@@ -271,7 +271,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.GlueCrawler),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetGlueCrawler),
+		GetDescriber:    nil,
 	},
 
 	"AWS::DirectConnect::Gateway": {
@@ -301,7 +301,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2EIP),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2EIP),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::InternetGateway": {
@@ -314,7 +314,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2InternetGateway),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2InternetGateway),
+		GetDescriber:  nil,
 	},
 
 	"AWS::GuardDuty::PublishingDestination": {
@@ -367,7 +367,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.ApiGatewayRestAPI),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetApiGatewayRestAPI),
+		GetDescriber:  nil,
 	},
 
 	"AWS::ApiGatewayV2::Integration": {
@@ -377,7 +377,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ApiGatewayV2Integration),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2Integration),
+		GetDescriber:    nil,
 	},
 
 	"AWS::AutoScaling::AutoScalingGroup": {
@@ -390,7 +390,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.AutoScalingAutoScalingGroup),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetAutoScalingAutoScalingGroup),
+		GetDescriber:  nil,
 	},
 
 	"AWS::DynamoDb::TableExport": {
@@ -410,7 +410,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2KeyPair),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2KeyPair),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EFS::FileSystem": {
@@ -666,7 +666,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ECSService),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetECSService),
+		GetDescriber:    nil,
 	},
 
 	"AWS::FSX::Task": {
@@ -739,7 +739,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.ElastiCacheCluster),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetElastiCacheCluster),
+		GetDescriber:  nil,
 	},
 
 	"AWS::Logs::LogGroup": {
@@ -822,7 +822,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ApiGatewayV2API),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2API),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::Volume": {
@@ -835,7 +835,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2Volume),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2Volume),
+		GetDescriber:  nil,
 	},
 
 	"AWS::ApiGateway::ApiKey": {
@@ -938,7 +938,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.LambdaFunction),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetLambdaFunction),
+		GetDescriber:  nil,
 	},
 
 	"AWS::RDS::DBSnapshot": {
@@ -1028,7 +1028,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2NetworkAcl),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2NetworkAcl),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ECS::ContainerInstance": {
@@ -1168,7 +1168,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VPCPeeringConnection),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VPCPeeringConnection),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EKS::FargateProfile": {
@@ -1238,7 +1238,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.AccessAnalyzerAnalyzer),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetAccessAnalyzerAnalyzer),
+		GetDescriber:    nil,
 	},
 
 	"AWS::AccessAnalyzer::Finding": {
@@ -1318,7 +1318,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2NetworkInterface),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2NetworkInterface),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VPNConnection": {
@@ -1328,7 +1328,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VPNConnection),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VPNConnection),
+		GetDescriber:    nil,
 	},
 
 	"AWS::FSX::StorageVirtualMachine": {
@@ -1388,7 +1388,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.AppStreamImage),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetAppStreamImage),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CloudWatch::Alarm": {
@@ -1398,7 +1398,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.CloudWatchAlarm),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetCloudWatchAlarm),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CloudWatch::LogSubscriptionFilter": {
@@ -1428,7 +1428,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.RDSDBCluster),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetRDSDBCluster),
+		GetDescriber:    nil,
 	},
 
 	"AWS::RDS::DBClusterSnapshot": {
@@ -1478,7 +1478,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2CapacityReservationFleet),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2CapacityReservationFleet),
+		GetDescriber:    nil,
 	},
 
 	"AWS::NetworkFirewall::Firewall": {
@@ -1521,7 +1521,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.RDSDBInstance),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetRDSDBInstance),
+		GetDescriber:  nil,
 	},
 
 	"AWS::RDS::DBInstanceAutomatedBackup": {
@@ -1531,7 +1531,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.RDSDBInstanceAutomatedBackup),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetRDSDBInstanceAutomatedBackup),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EFS::MountTarget": {
@@ -1644,7 +1644,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2FlowLog),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2FlowLog),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::IpamPool": {
@@ -1654,7 +1654,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2IpamPool),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2IpamPool),
+		GetDescriber:    nil,
 	},
 
 	"AWS::IAM::SamlProvider": {
@@ -1694,7 +1694,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2PlacementGroup),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2PlacementGroup),
+		GetDescriber:    nil,
 	},
 
 	"AWS::FSX::Snapshot": {
@@ -1714,7 +1714,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.KMSKey),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetKMSKey),
+		GetDescriber:    nil,
 	},
 
 	"AWS::KMS::KeyRotation": {
@@ -1734,7 +1734,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2Ipam),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2Ipam),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElasticBeanstalk::Environment": {
@@ -1794,7 +1794,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.BackupReportPlan),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetBackupReportPlan),
+		GetDescriber:    nil,
 	},
 
 	"AWS::Backup::RegionSetting": {
@@ -1824,7 +1824,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2EgressOnlyInternetGateway),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2EgressOnlyInternetGateway),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CloudFront::Distribution": {
@@ -1857,7 +1857,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.GlueJob),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetGlueJob),
+		GetDescriber:    nil,
 	},
 
 	"AWS::AppStream::Fleet": {
@@ -1909,7 +1909,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2SecurityGroup),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2SecurityGroup),
+		GetDescriber:  nil,
 	},
 
 	"AWS::GuardDuty::IPSet": {
@@ -1989,7 +1989,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2AvailabilityZone),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2AvailabilityZone),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::TransitGateway": {
@@ -1999,7 +1999,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2TransitGateway),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGateway),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ApiGateway::UsagePlan": {
@@ -2029,7 +2029,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2Fleet),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2Fleet),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElasticBeanstalk::Application": {
@@ -2049,7 +2049,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ElasticLoadBalancingV2LoadBalancer),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetElasticLoadBalancingV2LoadBalancer),
+		GetDescriber:    nil,
 	},
 
 	"AWS::OpenSearch::Domain": {
@@ -2109,7 +2109,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2TransitGatewayAttachment),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayAttachment),
+		GetDescriber:    nil,
 	},
 
 	"AWS::SES::Identity": {
@@ -2329,7 +2329,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.AutoScalingLaunchConfiguration),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetAutoScalingLaunchConfiguration),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CloudTrail::EventDataStore": {
@@ -2412,7 +2412,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2Instance),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2Instance),
+		GetDescriber:  nil,
 	},
 
 	"AWS::EC2::InstanceMetricCpuUtilizationHourly": {
@@ -2455,7 +2455,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2ReservedInstances),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2ReservedInstances),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ECR::Repository": {
@@ -2504,7 +2504,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ElasticLoadBalancingV2Listener),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetElasticLoadBalancingV2Listener),
+		GetDescriber:    nil,
 	},
 
 	"AWS::IAM::Group": {
@@ -2524,7 +2524,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   SequentialDescribeGlobal(describer.IAMOpenIdConnectProvider),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetIAMOpenIdConnectProvider),
+		GetDescriber:    nil,
 	},
 
 	"AWS::Backup::Plan": {
@@ -2604,7 +2604,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ApiGatewayStage),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetApiGatewayStage),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ApiGatewayV2::Stage": {
@@ -2687,7 +2687,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2AMI),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2AMI),
+		GetDescriber:  nil,
 	},
 
 	"AWS::EC2::Subnet": {
@@ -2699,7 +2699,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2Subnet),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2Subnet),
+		GetDescriber:  nil,
 	},
 
 	"AWS::ECS::TaskSet": {
@@ -2742,7 +2742,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.DocDBCluster),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetDocDBCluster),
+		GetDescriber:  nil,
 	},
 
 	"AWS::DocDB::ClusterSnapshot": {
@@ -2765,7 +2765,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.DocDBClusterInstance),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetDocDBClusterInstance),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElastiCache::ReplicationGroup": {
@@ -2825,7 +2825,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2ManagedPrefixList),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2ManagedPrefixList),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::ManagedPrefixListEntry": {
@@ -3108,7 +3108,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.Route53ResolverQueryLogConfig),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetRoute53ResolverQueryLogConfig),
+		GetDescriber:    nil,
 	},
 
 	"AWS::SageMaker::App": {
@@ -3211,7 +3211,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2CustomerGateway),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2CustomerGateway),
+		GetDescriber:  nil,
 	},
 
 	"AWS::EC2::VerifiedAccessInstance": {
@@ -3221,7 +3221,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VerifiedAccessInstance),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessInstance),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VerifiedAccessEndpoint": {
@@ -3231,7 +3231,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VerifiedAccessEndpoint),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessEndpoint),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VerifiedAccessGroup": {
@@ -3241,7 +3241,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VerifiedAccessGroup),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessGroup),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VerifiedAccessTrustProvider": {
@@ -3251,7 +3251,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2VerifiedAccessTrustProvider),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2VerifiedAccessTrustProvider),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VPNGateway": {
@@ -3264,7 +3264,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2VPNGateway),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2VPNGateway),
+		GetDescriber:  nil,
 	},
 
 	"AWS::WAFv2::IPSet": {
@@ -3304,7 +3304,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2TransitGatewayRoute),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayRoute),
+		GetDescriber:    nil,
 	},
 
 	"AWS::GuardDuty::Filter": {
@@ -3324,7 +3324,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ECSTaskDefinition),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetECSTaskDefinition),
+		GetDescriber:    nil,
 	},
 
 	"AWS::GuardDuty::ThreatIntelSet": {
@@ -3344,7 +3344,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ApiGatewayV2DomainName),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetApiGatewayV2DomainName),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ApiGateway::DomainName": {
@@ -3354,7 +3354,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ApiGatewayDomainName),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetApiGatewayDomainName),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ApiGatewayV2::Route": {
@@ -3394,7 +3394,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.CloudFormationStack),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetCloudFormationStack),
+		GetDescriber:    nil,
 	},
 
 	"AWS::CloudFormation::StackResource": {
@@ -3404,7 +3404,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.CloudFormationStackResource),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetCloudFormationStackResource),
+		GetDescriber:    nil,
 	},
 
 	"AWS::DirectConnect::Connection": {
@@ -3507,7 +3507,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2NatGateway),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2NatGateway),
+		GetDescriber:  nil,
 	},
 
 	"AWS::ECR::PublicRepository": {
@@ -3527,7 +3527,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.ECSCluster),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetECSCluster),
+		GetDescriber:    nil,
 	},
 
 	"AWS::ElasticLoadBalancingV2::TargetGroup": {
@@ -3577,7 +3577,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2CapacityReservation),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2CapacityReservation),
+		GetDescriber:    nil,
 	},
 
 	"AWS::SageMaker::NotebookInstance": {
@@ -3610,7 +3610,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2VolumeSnapshot),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2VolumeSnapshot),
+		GetDescriber:  nil,
 	},
 
 	"AWS::EC2::Region": {
@@ -3713,7 +3713,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2Host),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2Host),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::VPC": {
@@ -3726,7 +3726,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
 		ListDescriber: ParallelDescribeRegional(describer.EC2VPC),
-		GetDescriber:  ParallelDescribeRegionalSingleResource(describer.GetEC2VPC),
+		GetDescriber:  nil,
 	},
 
 	"AWS::EC2::TransitGatewayRouteTable": {
@@ -3736,7 +3736,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2TransitGatewayRouteTable),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2TransitGatewayRouteTable),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EKS::Nodegroup": {
@@ -3806,7 +3806,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2DHCPOptions),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2DHCPOptions),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::InstanceType": {
@@ -3826,7 +3826,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.BatchComputeEnvironment),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetBatchComputeEnvironment),
+		GetDescriber:    nil,
 	},
 
 	"AWS::DMS::ReplicationInstance": {
@@ -4349,7 +4349,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2LaunchTemplate),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2LaunchTemplate),
+		GetDescriber:    nil,
 	},
 
 	"AWS::EC2::LaunchTemplateVersion": {
@@ -4359,7 +4359,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		Labels:          map[string]string{},
 		Annotations:     map[string]string{},
 		ListDescriber:   ParallelDescribeRegional(describer.EC2LaunchTemplateVersion),
-		GetDescriber:    ParallelDescribeRegionalSingleResource(describer.GetEC2LaunchTemplateVersion),
+		GetDescriber:    nil,
 	},
 
 	"AWS::SNS::Subscription": {
