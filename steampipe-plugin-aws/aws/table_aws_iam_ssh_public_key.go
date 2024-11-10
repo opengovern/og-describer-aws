@@ -61,7 +61,7 @@ func tableAwsIamSshPublicKey(_ context.Context) *plugin.Table {
 }
 
 func getIamSSHPublicKeyAka(ctx context.Context, d *transform.TransformData) (interface{}, error) {
-	arn := d.HydrateItem.(opengovernance.IAMSSHPublicKey).Description.SSHPublicKeyKey.SSHPublicKeyId
+	arn := d.HydrateItem.(opengovernance.IAMSSHPublicKey).Metadata.AccountID
 
 	aka := []string{arn}
 	return aka, nil
