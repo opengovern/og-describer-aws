@@ -3,9 +3,6 @@ package opengovernance
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
-	awsDescriber "github.com/opengovern/og-describer-aws/provider/describer"
 	aws "github.com/opengovern/og-describer-aws/provider/model"
 	essdk "github.com/opengovern/og-util/pkg/opengovernance-es-sdk"
 	steampipesdk "github.com/opengovern/og-util/pkg/steampipe"
