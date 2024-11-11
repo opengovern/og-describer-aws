@@ -3,6 +3,9 @@ package opengovernance
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
+	awsDescriber "github.com/opengovern/og-describer-aws/provider/describer"
 	aws "github.com/opengovern/og-describer-aws/provider/model"
 	essdk "github.com/opengovern/og-util/pkg/opengovernance-es-sdk"
 	steampipesdk "github.com/opengovern/og-util/pkg/steampipe"
@@ -21,7 +24,7 @@ type AccessAnalyzerAnalyzer struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.AccessAnalyzerAnalyzerDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -246,7 +249,7 @@ type AccessAnalyzerAnalyzerFinding struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.AccessAnalyzerAnalyzerFindingDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -479,7 +482,7 @@ type ApiGatewayStage struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.ApiGatewayStageDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -722,7 +725,7 @@ type ApiGatewayV2Stage struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ApiGatewayV2StageDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -964,7 +967,7 @@ type ApiGatewayRestAPI struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ApiGatewayRestAPIDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -1193,7 +1196,7 @@ type ApiGatewayApiKey struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.ApiGatewayApiKeyDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -1416,7 +1419,7 @@ type ApiGatewayUsagePlan struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.ApiGatewayUsagePlanDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -1637,7 +1640,7 @@ type ApiGatewayAuthorizer struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.ApiGatewayAuthorizerDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -1860,7 +1863,7 @@ type ApiGatewayV2API struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.ApiGatewayV2APIDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -2083,7 +2086,7 @@ type ApiGatewayV2DomainName struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.ApiGatewayV2DomainNameDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -2298,7 +2301,7 @@ type ApiGatewayDomainName struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.ApiGatewayDomainNameDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -2504,7 +2507,7 @@ type ApiGatewayV2Route struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ApiGatewayV2RouteDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -2736,7 +2739,7 @@ type ApiGatewayV2Integration struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.ApiGatewayV2IntegrationDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -2983,7 +2986,7 @@ type ElasticBeanstalkEnvironment struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.ElasticBeanstalkEnvironmentDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -3236,7 +3239,7 @@ type ElasticBeanstalkApplication struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.ElasticBeanstalkApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -3459,7 +3462,7 @@ type ElasticBeanstalkApplicationVersion struct {
 	PlatformID      string                                            `json:"platform_id"`
 	Description     aws.ElasticBeanstalkApplicationVersionDescription `json:"description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
-	DescribedBy     int                                               `json:"described_by"`
+	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
 	IntegrationType string                                            `json:"integration_type"`
 	IntegrationID   string                                            `json:"integration_id"`
@@ -3684,7 +3687,7 @@ type ElastiCacheReplicationGroup struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.ElastiCacheReplicationGroupDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -3935,7 +3938,7 @@ type ElastiCacheCluster struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.ElastiCacheClusterDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -4208,7 +4211,7 @@ type ElastiCacheParameterGroup struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.ElastiCacheParameterGroupDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -4421,7 +4424,7 @@ type ElastiCacheReservedCacheNode struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.ElastiCacheReservedCacheNodeDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -4652,7 +4655,7 @@ type ElastiCacheSubnetGroup struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.ElastiCacheSubnetGroupDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -4867,7 +4870,7 @@ type ESDomain struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.ESDomainDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -5122,7 +5125,7 @@ type EMRCluster struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.EMRClusterDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -5389,7 +5392,7 @@ type EMRInstance struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.EMRInstanceDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -5624,7 +5627,7 @@ type EMRInstanceFleet struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.EMRInstanceFleetDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -5853,7 +5856,7 @@ type EMRInstanceGroup struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.EMRInstanceGroupDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -6098,7 +6101,7 @@ type EMRBlockPublicAccessConfiguration struct {
 	PlatformID      string                                           `json:"platform_id"`
 	Description     aws.EMRBlockPublicAccessConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
-	DescribedBy     int                                              `json:"described_by"`
+	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
 	IntegrationType string                                           `json:"integration_type"`
 	IntegrationID   string                                           `json:"integration_id"`
@@ -6311,7 +6314,7 @@ type GuardDutyFinding struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.GuardDutyFindingDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -6542,7 +6545,7 @@ type GuardDutyDetector struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.GuardDutyDetectorDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -6767,7 +6770,7 @@ type GuardDutyFilter struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.GuardDutyFilterDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -6986,7 +6989,7 @@ type GuardDutyIPSet struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.GuardDutyIPSetDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -7205,7 +7208,7 @@ type GuardDutyMember struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.GuardDutyMemberDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -7424,7 +7427,7 @@ type GuardDutyPublishingDestination struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.GuardDutyPublishingDestinationDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -7641,7 +7644,7 @@ type GuardDutyThreatIntelSet struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.GuardDutyThreatIntelSetDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -7860,7 +7863,7 @@ type BackupPlan struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.BackupPlanDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -8087,7 +8090,7 @@ type BackupSelection struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.BackupSelectionDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -8310,7 +8313,7 @@ type BackupVault struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.BackupVaultDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -8535,7 +8538,7 @@ type BackupRecoveryPoint struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.BackupRecoveryPointDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -8778,7 +8781,7 @@ type BackupProtectedResource struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.BackupProtectedResourceDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -8987,7 +8990,7 @@ type BackupFramework struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.BackupFrameworkDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -9208,7 +9211,7 @@ type BackupLegalHold struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.BackupLegalHoldDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -9429,7 +9432,7 @@ type BackupReportPlan struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.BackupReportPlanDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -9653,7 +9656,7 @@ type BackupRegionSetting struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.BackupRegionSettingDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -9863,7 +9866,7 @@ type CloudFrontDistribution struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.CloudFrontDistributionDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -10124,7 +10127,7 @@ type CloudFrontStreamingDistribution struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.CloudFrontStreamingDistributionDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -10337,7 +10340,7 @@ type CloudFrontOriginAccessControl struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.CloudFrontOriginAccessControlDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -10548,7 +10551,7 @@ type CloudFrontCachePolicy struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.CloudFrontCachePolicyDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -10771,7 +10774,7 @@ type CloudFrontFunction struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.CloudFrontFunctionDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -10988,7 +10991,7 @@ type CloudFrontOriginAccessIdentity struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.CloudFrontOriginAccessIdentityDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -11203,7 +11206,7 @@ type CloudFrontOriginRequestPolicy struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.CloudFrontOriginRequestPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -11424,7 +11427,7 @@ type CloudFrontResponseHeadersPolicy struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.CloudFrontResponseHeadersPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -11641,7 +11644,7 @@ type CloudWatchAlarm struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.CloudWatchAlarmDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -11902,7 +11905,7 @@ type CloudWatchLogEvent struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.CloudWatchLogEventDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -12112,7 +12115,7 @@ type CloudWatchLogResourcePolicy struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.CloudWatchLogResourcePolicyDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -12321,7 +12324,7 @@ type CloudWatchLogStream struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.CloudWatchLogStreamDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -12534,7 +12537,7 @@ type CloudWatchLogSubscriptionFilter struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.CloudWatchLogSubscriptionFilterDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -12751,7 +12754,7 @@ type CloudWatchMetric struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.CloudWatchMetricDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -12962,7 +12965,7 @@ type CloudWatchLogsLogGroup struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.CloudWatchLogsLogGroupDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -13185,7 +13188,7 @@ type CloudWatchLogsMetricFilter struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.CloudWatchLogsMetricFilterDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -13398,7 +13401,7 @@ type CodeBuildProject struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.CodeBuildProjectDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -13655,7 +13658,7 @@ type CodeBuildSourceCredential struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.CodeBuildSourceCredentialDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -13864,7 +13867,7 @@ type CodeBuildBuild struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.CodeBuildBuildDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -14131,7 +14134,7 @@ type ConfigConfigurationRecorder struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.ConfigConfigurationRecorderDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -14348,7 +14351,7 @@ type ConfigAggregationAuthorization struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.ConfigAggregationAuthorizationDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -14563,7 +14566,7 @@ type ConfigConformancePack struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.ConfigConformancePackDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -14784,7 +14787,7 @@ type ConfigRule struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.ConfigRuleDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -15015,7 +15018,7 @@ type ConfigRetentionConfiguration struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.ConfigRetentionConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -15224,7 +15227,7 @@ type DAXCluster struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.DAXClusterDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -15465,7 +15468,7 @@ type DAXParameterGroup struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.DAXParameterGroupDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -15674,7 +15677,7 @@ type DAXParameter struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.DAXParameterDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -15899,7 +15902,7 @@ type DAXSubnetGroup struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.DAXSubnetGroupDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -16112,7 +16115,7 @@ type DMSReplicationInstance struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.DMSReplicationInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -16365,7 +16368,7 @@ type DMSEndpoint struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.DMSEndpointDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -16640,7 +16643,7 @@ type DMSReplicationTask struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.DMSReplicationTaskDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -16883,7 +16886,7 @@ type DynamoDbTable struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.DynamoDbTableDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -17132,7 +17135,7 @@ type DynamoDbGlobalSecondaryIndex struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.DynamoDbGlobalSecondaryIndexDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -17341,7 +17344,7 @@ type DynamoDbLocalSecondaryIndex struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.DynamoDbLocalSecondaryIndexDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -17550,7 +17553,7 @@ type DynamoDbStream struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.DynamoDbStreamDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -17759,7 +17762,7 @@ type DynamoDbBackup struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.DynamoDbBackupDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -17984,7 +17987,7 @@ type DynamoDbGlobalTable struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.DynamoDbGlobalTableDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -18199,7 +18202,7 @@ type DynamoDbTableExport struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.DynamoDbTableExportDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -18440,7 +18443,7 @@ type OAMLink struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.OAMLinkDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -18659,7 +18662,7 @@ type OAMSink struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.OAMSinkDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -18872,7 +18875,7 @@ type EC2VolumeSnapshot struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.EC2VolumeSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -19109,7 +19112,7 @@ type EC2ElasticIP struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.EC2ElasticIPDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -19316,7 +19319,7 @@ type EC2CustomerGateway struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.EC2CustomerGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -19537,7 +19540,7 @@ type EC2VerifiedAccessInstance struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.EC2VerifiedAccessInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -19752,7 +19755,7 @@ type EC2VerifiedAccessEndpoint struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.EC2VerifiedAccessEndpointDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -19991,7 +19994,7 @@ type EC2VerifiedAccessGroup struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.EC2VerifiedAccessGroupDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -20212,7 +20215,7 @@ type EC2VerifiedAccessTrustProvider struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.EC2VerifiedAccessTrustProviderDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -20435,7 +20438,7 @@ type EC2VPNGateway struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.EC2VPNGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -20652,7 +20655,7 @@ type EC2Volume struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.EC2VolumeDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -20891,7 +20894,7 @@ type EC2ClientVpnEndpoint struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.EC2ClientVpnEndpointDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -21139,7 +21142,7 @@ type EC2Instance struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.EC2InstanceDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -21480,7 +21483,7 @@ type EC2Vpc struct {
 	PlatformID      string                `json:"platform_id"`
 	Description     aws.EC2VpcDescription `json:"description"`
 	Metadata        aws.Metadata          `json:"metadata"`
-	DescribedBy     int                   `json:"described_by"`
+	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
 	IntegrationType string                `json:"integration_type"`
 	IntegrationID   string                `json:"integration_id"`
@@ -21705,7 +21708,7 @@ type EC2NetworkInterface struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.EC2NetworkInterfaceDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -21976,7 +21979,7 @@ type EC2RegionalSettings struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.EC2RegionalSettingsDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -22185,7 +22188,7 @@ type EC2Subnet struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.EC2SubnetDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -22422,7 +22425,7 @@ type EC2VPCEndpoint struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.EC2VPCEndpointDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -22655,7 +22658,7 @@ type EC2SecurityGroup struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.EC2SecurityGroupDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -22878,7 +22881,7 @@ type EC2EIP struct {
 	PlatformID      string                `json:"platform_id"`
 	Description     aws.EC2EIPDescription `json:"description"`
 	Metadata        aws.Metadata          `json:"metadata"`
-	DescribedBy     int                   `json:"described_by"`
+	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
 	IntegrationType string                `json:"integration_type"`
 	IntegrationID   string                `json:"integration_id"`
@@ -23113,7 +23116,7 @@ type EC2InternetGateway struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.EC2InternetGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -23324,7 +23327,7 @@ type EC2NetworkAcl struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.EC2NetworkAclDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -23543,7 +23546,7 @@ type EC2VPNConnection struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.EC2VPNConnectionDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -23772,7 +23775,7 @@ type EC2RouteTable struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.EC2RouteTableDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -23991,7 +23994,7 @@ type EC2NatGateway struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.EC2NatGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -24218,7 +24221,7 @@ type EC2LocalGateway struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.EC2LocalGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -24427,7 +24430,7 @@ type EC2Region struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.EC2RegionDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -24640,7 +24643,7 @@ type EC2AvailabilityZone struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.EC2AvailabilityZoneDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -24863,7 +24866,7 @@ type EC2FlowLog struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.EC2FlowLogDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -25094,7 +25097,7 @@ type EC2CapacityReservation struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.EC2CapacityReservationDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -25337,7 +25340,7 @@ type EC2KeyPair struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.EC2KeyPairDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -25552,7 +25555,7 @@ type EC2AMI struct {
 	PlatformID      string                `json:"platform_id"`
 	Description     aws.EC2AMIDescription `json:"description"`
 	Metadata        aws.Metadata          `json:"metadata"`
-	DescribedBy     int                   `json:"described_by"`
+	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
 	IntegrationType string                `json:"integration_type"`
 	IntegrationID   string                `json:"integration_id"`
@@ -25809,7 +25812,7 @@ type EC2ReservedInstances struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.EC2ReservedInstancesDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -26052,7 +26055,7 @@ type EC2CapacityReservationFleet struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.EC2CapacityReservationFleetDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -26261,7 +26264,7 @@ type EC2Fleet struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.EC2FleetDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -26470,7 +26473,7 @@ type EC2Host struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.EC2HostDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -26679,7 +26682,7 @@ type EC2PlacementGroup struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.EC2PlacementGroupDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -26890,7 +26893,7 @@ type EC2TransitGateway struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.EC2TransitGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -27127,7 +27130,7 @@ type EC2TransitGatewayRouteTable struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.EC2TransitGatewayRouteTableDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -27344,7 +27347,7 @@ type EC2DhcpOptions struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.EC2DhcpOptionsDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -27563,7 +27566,7 @@ type EC2EgressOnlyInternetGateway struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.EC2EgressOnlyInternetGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -27772,7 +27775,7 @@ type EC2VpcPeeringConnection struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.EC2VpcPeeringConnectionDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -28015,7 +28018,7 @@ type EC2SecurityGroupRule struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.EC2SecurityGroupRuleDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -28268,7 +28271,7 @@ type EC2IpamPool struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.EC2IpamPoolDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -28477,7 +28480,7 @@ type EC2Ipam struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.EC2IpamDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -28686,7 +28689,7 @@ type EC2VPCEndpointService struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.EC2VPCEndpointServiceDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -28919,7 +28922,7 @@ type EC2InstanceAvailability struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.EC2InstanceAvailabilityDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -29130,7 +29133,7 @@ type EC2InstanceType struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.EC2InstanceTypeDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -29375,7 +29378,7 @@ type EC2ManagedPrefixList struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.EC2ManagedPrefixListDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -29600,7 +29603,7 @@ type EC2ManagedPrefixListEntry struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.EC2ManagedPrefixListEntryDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -29807,7 +29810,7 @@ type EC2TransitGatewayRoute struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.EC2TransitGatewayRouteDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -30024,7 +30027,7 @@ type EC2TransitGatewayAttachment struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.EC2TransitGatewayAttachmentDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -30249,7 +30252,7 @@ type EC2LaunchTemplate struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.EC2LaunchTemplateDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -30470,7 +30473,7 @@ type EC2LaunchTemplateVersion struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.EC2LaunchTemplateVersionDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -30709,7 +30712,7 @@ type EC2InstanceMetricCpuUtilizationHourly struct {
 	PlatformID      string                                               `json:"platform_id"`
 	Description     aws.EC2InstanceMetricCpuUtilizationHourlyDescription `json:"description"`
 	Metadata        aws.Metadata                                         `json:"metadata"`
-	DescribedBy     int                                                  `json:"described_by"`
+	DescribedBy     string                                               `json:"described_by"`
 	ResourceType    string                                               `json:"resource_type"`
 	IntegrationType string                                               `json:"integration_type"`
 	IntegrationID   string                                               `json:"integration_id"`
@@ -30926,7 +30929,7 @@ type ElasticLoadBalancingV2SslPolicy struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingV2SslPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -31138,7 +31141,7 @@ type ElasticLoadBalancingV2TargetGroup struct {
 	PlatformID      string                                           `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingV2TargetGroupDescription `json:"description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
-	DescribedBy     int                                              `json:"described_by"`
+	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
 	IntegrationType string                                           `json:"integration_type"`
 	IntegrationID   string                                           `json:"integration_id"`
@@ -31381,7 +31384,7 @@ type ElasticLoadBalancingV2LoadBalancer struct {
 	PlatformID      string                                            `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingV2LoadBalancerDescription `json:"description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
-	DescribedBy     int                                               `json:"described_by"`
+	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
 	IntegrationType string                                            `json:"integration_type"`
 	IntegrationID   string                                            `json:"integration_id"`
@@ -31618,7 +31621,7 @@ type ElasticLoadBalancingLoadBalancer struct {
 	PlatformID      string                                          `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingLoadBalancerDescription `json:"description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
-	DescribedBy     int                                             `json:"described_by"`
+	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
 	IntegrationType string                                          `json:"integration_type"`
 	IntegrationID   string                                          `json:"integration_id"`
@@ -31891,7 +31894,7 @@ type ElasticLoadBalancingV2Listener struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingV2ListenerDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -32110,7 +32113,7 @@ type ElasticLoadBalancingV2Rule struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.ElasticLoadBalancingV2RuleDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -32317,7 +32320,7 @@ type FSXFileSystem struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.FSXFileSystemDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -32562,7 +32565,7 @@ type FSXStorageVirtualMachine struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.FSXStorageVirtualMachineDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -32773,7 +32776,7 @@ type FSXTask struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.FSXTaskDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -32982,7 +32985,7 @@ type FSXVolume struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.FSXVolumeDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -33193,7 +33196,7 @@ type FSXSnapshot struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.FSXSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -33404,7 +33407,7 @@ type ApplicationAutoScalingTarget struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.ApplicationAutoScalingTargetDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -33625,7 +33628,7 @@ type ApplicationAutoScalingPolicy struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.ApplicationAutoScalingPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -33850,7 +33853,7 @@ type AutoScalingGroup struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.AutoScalingGroupDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -34131,7 +34134,7 @@ type AutoScalingLaunchConfiguration struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.AutoScalingLaunchConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -34378,7 +34381,7 @@ type CertificateManagerCertificate struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.CertificateManagerCertificateDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -34633,7 +34636,7 @@ type CloudTrailTrail struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.CloudTrailTrailDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -34898,7 +34901,7 @@ type CloudTrailChannel struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.CloudTrailChannelDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -35117,7 +35120,7 @@ type CloudTrailEventDataStore struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.CloudTrailEventDataStoreDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -35342,7 +35345,7 @@ type CloudTrailImport struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.CloudTrailImportDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -35565,7 +35568,7 @@ type CloudTrailQuery struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.CloudTrailQueryDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -35794,7 +35797,7 @@ type CloudTrailTrailEvent struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.CloudTrailTrailEventDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -36012,7 +36015,7 @@ type IAMAccount struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.IAMAccountDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -36243,7 +36246,7 @@ type IAMAccessAdvisor struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.IAMAccessAdvisorDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -36462,7 +36465,7 @@ type IAMAccountSummary struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.IAMAccountSummaryDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -36729,7 +36732,7 @@ type IAMAccessKey struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.IAMAccessKeyDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -36948,7 +36951,7 @@ type IAMSSHPublicKey struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.IAMSSHPublicKeyDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -37161,7 +37164,7 @@ type IAMAccountPasswordPolicy struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.IAMAccountPasswordPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -37384,7 +37387,7 @@ type IAMUser struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.IAMUserDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -37617,7 +37620,7 @@ type IAMGroup struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.IAMGroupDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -37838,7 +37841,7 @@ type IAMRole struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.IAMRoleDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -38073,7 +38076,7 @@ type IAMServerCertificate struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.IAMServerCertificateDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -38300,7 +38303,7 @@ type IAMPolicy struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.IAMPolicyDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -38527,7 +38530,7 @@ type IAMCredentialReport struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.IAMCredentialReportDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -38774,7 +38777,7 @@ type IAMVirtualMFADevice struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.IAMVirtualMFADeviceDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -38991,7 +38994,7 @@ type IAMPolicyAttachment struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.IAMPolicyAttachmentDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -39203,7 +39206,7 @@ type IAMSamlProvider struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.IAMSamlProviderDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -39416,7 +39419,7 @@ type IAMServiceSpecificCredential struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.IAMServiceSpecificCredentialDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -39633,7 +39636,7 @@ type IAMOpenIdConnectProvider struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.IAMOpenIdConnectProviderDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -39846,7 +39849,7 @@ type RDSDBCluster struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.RDSDBClusterDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -40161,7 +40164,7 @@ type RDSDBClusterParameterGroup struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.RDSDBClusterParameterGroupDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -40378,7 +40381,7 @@ type RDSOptionGroup struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.RDSOptionGroupDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -40601,7 +40604,7 @@ type RDSDBParameterGroup struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.RDSDBParameterGroupDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -40818,7 +40821,7 @@ type RDSDBProxy struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.RDSDBProxyDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -41055,7 +41058,7 @@ type RDSDBSubnetGroup struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.RDSDBSubnetGroupDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -41274,7 +41277,7 @@ type RDSDBClusterSnapshot struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.RDSDBClusterSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -41523,7 +41526,7 @@ type RDSDBEventSubscription struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.RDSDBEventSubscriptionDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -41746,7 +41749,7 @@ type RDSDBInstance struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.RDSDBInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -42091,7 +42094,7 @@ type RDSDBSnapshot struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.RDSDBSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -42356,7 +42359,7 @@ type RDSGlobalCluster struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.RDSGlobalClusterDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -42565,7 +42568,7 @@ type RDSReservedDBInstance struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.RDSReservedDBInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -42802,7 +42805,7 @@ type RDSDBInstanceAutomatedBackup struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.RDSDBInstanceAutomatedBackupDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -43060,7 +43063,7 @@ type RDSDBEngineVersion struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.RDSDBEngineVersionDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -43319,7 +43322,7 @@ type RDSDBRecommendation struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.RDSDBRecommendationDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -43560,7 +43563,7 @@ type RedshiftCluster struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.RedshiftClusterDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -43867,7 +43870,7 @@ type RedshiftEventSubscription struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.RedshiftEventSubscriptionDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -44094,7 +44097,7 @@ type RedshiftServerlessWorkgroup struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.RedshiftServerlessWorkgroupDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -44327,7 +44330,7 @@ type RedshiftClusterParameterGroup struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.RedshiftClusterParameterGroupDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -44542,7 +44545,7 @@ type RedshiftSnapshot struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.RedshiftSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -44815,7 +44818,7 @@ type RedshiftServerlessNamespace struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.RedshiftServerlessNamespaceDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -45044,7 +45047,7 @@ type RedshiftServerlessSnapshot struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.RedshiftServerlessSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -45253,7 +45256,7 @@ type RedshiftSubnetGroup struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.RedshiftSubnetGroupDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -45470,7 +45473,7 @@ type SNSTopic struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.SNSTopicDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -45719,7 +45722,7 @@ type SNSSubscription struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.SNSSubscriptionDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -45938,7 +45941,7 @@ type SQSQueue struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.SQSQueueDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -46169,7 +46172,7 @@ type S3Bucket struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.S3BucketDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -46412,7 +46415,7 @@ type S3AccountSetting struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.S3AccountSettingDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -46623,7 +46626,7 @@ type S3Object struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.S3ObjectDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -46916,7 +46919,7 @@ type S3BucketIntelligentTieringConfiguration struct {
 	PlatformID      string                                                 `json:"platform_id"`
 	Description     aws.S3BucketIntelligentTieringConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                           `json:"metadata"`
-	DescribedBy     int                                                    `json:"described_by"`
+	DescribedBy     string                                                 `json:"described_by"`
 	ResourceType    string                                                 `json:"resource_type"`
 	IntegrationType string                                                 `json:"integration_type"`
 	IntegrationID   string                                                 `json:"integration_id"`
@@ -47131,7 +47134,7 @@ type S3MultiRegionAccessPoint struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.S3MultiRegionAccessPointDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -47348,7 +47351,7 @@ type SageMakerEndpointConfiguration struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.SageMakerEndpointConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -47567,7 +47570,7 @@ type SageMakerApp struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.SageMakerAppDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -47794,7 +47797,7 @@ type SageMakerDomain struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.SageMakerDomainDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -48037,7 +48040,7 @@ type SageMakerNotebookInstance struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.SageMakerNotebookInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -48284,7 +48287,7 @@ type SageMakerModel struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.SageMakerModelDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -48509,7 +48512,7 @@ type SageMakerTrainingJob struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.SageMakerTrainingJobDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -48794,7 +48797,7 @@ type SecretsManagerSecret struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.SecretsManagerSecretDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -49035,7 +49038,7 @@ type SecurityHubHub struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.SecurityHubHubDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -49248,7 +49251,7 @@ type SecurityHubActionTarget struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.SecurityHubActionTargetDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -49459,7 +49462,7 @@ type SecurityHubFinding struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.SecurityHubFindingDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -49738,7 +49741,7 @@ type SecurityHubFindingAggregator struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.SecurityHubFindingAggregatorDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -49949,7 +49952,7 @@ type SecurityHubInsight struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.SecurityHubInsightDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -50162,7 +50165,7 @@ type SecurityHubMember struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.SecurityHubMemberDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -50381,7 +50384,7 @@ type SecurityHubProduct struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.SecurityHubProductDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -50604,7 +50607,7 @@ type SecurityHubStandardsControl struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.SecurityHubStandardsControlDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -50827,7 +50830,7 @@ type SecurityHubStandardsSubscription struct {
 	PlatformID      string                                          `json:"platform_id"`
 	Description     aws.SecurityHubStandardsSubscriptionDescription `json:"description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
-	DescribedBy     int                                             `json:"described_by"`
+	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
 	IntegrationType string                                          `json:"integration_type"`
 	IntegrationID   string                                          `json:"integration_id"`
@@ -51050,7 +51053,7 @@ type SSMManagedInstance struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.SSMManagedInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -51293,7 +51296,7 @@ type SSMAssociation struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.SSMAssociationDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -51546,7 +51549,7 @@ type SSMDocument struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.SSMDocumentDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -51812,7 +51815,7 @@ type SSMDocumentPermission struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.SSMDocumentPermissionDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -52025,7 +52028,7 @@ type SSMInventory struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.SSMInventoryDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -52242,7 +52245,7 @@ type SSMInventoryEntry struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.SSMInventoryEntryDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -52457,7 +52460,7 @@ type SSMMaintenanceWindow struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.SSMMaintenanceWindowDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -52700,7 +52703,7 @@ type SSMParameter struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.SSMParameterDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -52933,7 +52936,7 @@ type SSMPatchBaseline struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.SSMPatchBaselineDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -53171,7 +53174,7 @@ type SSMManagedInstanceCompliance struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.SSMManagedInstanceComplianceDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -53392,7 +53395,7 @@ type SSMManagedInstancePatchState struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.SSMManagedInstancePatchStateDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -53639,7 +53642,7 @@ type ECSTaskDefinition struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ECSTaskDefinitionDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -53886,7 +53889,7 @@ type ECSCluster struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.ECSClusterDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -54119,7 +54122,7 @@ type ECSService struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.ECSServiceDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -54386,7 +54389,7 @@ type ECSContainerInstance struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.ECSContainerInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -54625,7 +54628,7 @@ type ECSTaskSet struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.ECSTaskSetDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -54834,7 +54837,7 @@ type ECSTask struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.ECSTaskDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -55110,7 +55113,7 @@ type EFSFileSystem struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.EFSFileSystemDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -55346,7 +55349,7 @@ type EFSAccessPoint struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.EFSAccessPointDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -55569,7 +55572,7 @@ type EFSMountTarget struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.EFSMountTargetDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -55796,7 +55799,7 @@ type EKSCluster struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.EKSClusterDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -56031,7 +56034,7 @@ type EKSAddon struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.EKSAddonDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -56256,7 +56259,7 @@ type EKSNodegroup struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.EKSNodegroupDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -56507,7 +56510,7 @@ type EKSAddonVersion struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.EKSAddonVersionDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -56724,7 +56727,7 @@ type EKSFargateProfile struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.EKSFargateProfileDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -56947,7 +56950,7 @@ type WAFv2WebACL struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.WAFv2WebACLDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -57183,7 +57186,7 @@ type WAFv2IPSet struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.WAFv2IPSetDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -57409,7 +57412,7 @@ type WAFv2RegexPatternSet struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.WAFv2RegexPatternSetDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -57631,7 +57634,7 @@ type WAFv2RuleGroup struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.WAFv2RuleGroupDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -57859,7 +57862,7 @@ type KMSKey struct {
 	PlatformID      string                `json:"platform_id"`
 	Description     aws.KMSKeyDescription `json:"description"`
 	Metadata        aws.Metadata          `json:"metadata"`
-	DescribedBy     int                   `json:"described_by"`
+	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
 	IntegrationType string                `json:"integration_type"`
 	IntegrationID   string                `json:"integration_id"`
@@ -58098,7 +58101,7 @@ type KMSKeyRotation struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.KMSKeyRotationDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -58309,7 +58312,7 @@ type KMSAlias struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.KMSAliasDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -58524,7 +58527,7 @@ type LambdaFunction struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.LambdaFunctionDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -58803,7 +58806,7 @@ type LambdaFunctionVersion struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.LambdaFunctionVersionDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -59084,7 +59087,7 @@ type LambdaAlias struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.LambdaAliasDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -59306,7 +59309,7 @@ type LambdaLayer struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.LambdaLayerDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -59529,7 +59532,7 @@ type LambdaLayerVersion struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.LambdaLayerVersionDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -59758,7 +59761,7 @@ type S3AccessPoint struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.S3AccessPointDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -59986,7 +59989,7 @@ type CostExplorerByAccountMonthly struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.CostExplorerByAccountMonthlyDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -60191,7 +60194,7 @@ type CostExplorerByServiceMonthly struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.CostExplorerByServiceMonthlyDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -60396,7 +60399,7 @@ type CostExplorerByRecordTypeMonthly struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.CostExplorerByRecordTypeMonthlyDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -60603,7 +60606,7 @@ type CostExplorerByServiceUsageTypeMonthly struct {
 	PlatformID      string                                               `json:"platform_id"`
 	Description     aws.CostExplorerByServiceUsageTypeMonthlyDescription `json:"description"`
 	Metadata        aws.Metadata                                         `json:"metadata"`
-	DescribedBy     int                                                  `json:"described_by"`
+	DescribedBy     string                                               `json:"described_by"`
 	ResourceType    string                                               `json:"resource_type"`
 	IntegrationType string                                               `json:"integration_type"`
 	IntegrationID   string                                               `json:"integration_id"`
@@ -60810,7 +60813,7 @@ type CostExplorerForcastMonthly struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.CostExplorerForcastMonthlyDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -61019,7 +61022,7 @@ type CostExplorerByAccountDaily struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.CostExplorerByAccountDailyDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -61224,7 +61227,7 @@ type CostExplorerByServiceDaily struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.CostExplorerByServiceDailyDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -61431,7 +61434,7 @@ type CostExplorerByRecordTypeDaily struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.CostExplorerByRecordTypeDailyDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -61638,7 +61641,7 @@ type CostExplorerByServiceUsageTypeDaily struct {
 	PlatformID      string                                             `json:"platform_id"`
 	Description     aws.CostExplorerByServiceUsageTypeDailyDescription `json:"description"`
 	Metadata        aws.Metadata                                       `json:"metadata"`
-	DescribedBy     int                                                `json:"described_by"`
+	DescribedBy     string                                             `json:"described_by"`
 	ResourceType    string                                             `json:"resource_type"`
 	IntegrationType string                                             `json:"integration_type"`
 	IntegrationID   string                                             `json:"integration_id"`
@@ -61845,7 +61848,7 @@ type CostExplorerForcastDaily struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.CostExplorerForcastDailyDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -62054,7 +62057,7 @@ type ECRRepository struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.ECRRepositoryDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -62289,7 +62292,7 @@ type ECRImage struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.ECRImageDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -62516,7 +62519,7 @@ type ECRPublicRepository struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.ECRPublicRepositoryDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -62737,7 +62740,7 @@ type ECRPublicRegistry struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ECRPublicRegistryDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -62946,7 +62949,7 @@ type ECRRegistry struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.ECRRegistryDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -63155,7 +63158,7 @@ type ECRRegistryScanningConfiguration struct {
 	PlatformID      string                                          `json:"platform_id"`
 	Description     aws.ECRRegistryScanningConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
-	DescribedBy     int                                             `json:"described_by"`
+	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
 	IntegrationType string                                          `json:"integration_type"`
 	IntegrationID   string                                          `json:"integration_id"`
@@ -63358,7 +63361,7 @@ type EventBridgeBus struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.EventBridgeBusDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -63571,7 +63574,7 @@ type EventBridgeRule struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.EventBridgeRuleDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -63798,7 +63801,7 @@ type AppStreamApplication struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.AppStreamApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -64009,7 +64012,7 @@ type AppStreamStack struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.AppStreamStackDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -64220,7 +64223,7 @@ type AppStreamFleet struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.AppStreamFleetDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -64477,7 +64480,7 @@ type AppStreamImage struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.AppStreamImageDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -64718,7 +64721,7 @@ type AthenaWorkGroup struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.AthenaWorkGroupDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -64955,7 +64958,7 @@ type AthenaQueryExecution struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.AthenaQueryExecutionDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -65225,7 +65228,7 @@ type KinesisStream struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.KinesisStreamDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -65456,7 +65459,7 @@ type KinesisVideoStream struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.KinesisVideoStreamDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -65681,7 +65684,7 @@ type KinesisConsumer struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.KinesisConsumerDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -65896,7 +65899,7 @@ type KinesisAnalyticsV2Application struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.KinesisAnalyticsV2ApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -66125,7 +66128,7 @@ type GlacierVault struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.GlacierVaultDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -66352,7 +66355,7 @@ type WorkspacesWorkspace struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.WorkspacesWorkspaceDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -66591,7 +66594,7 @@ type WorkspacesBundle struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.WorkspacesBundleDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -66802,7 +66805,7 @@ type KeyspacesKeyspace struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.KeyspacesKeyspaceDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -67011,7 +67014,7 @@ type KeyspacesTable struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.KeyspacesTableDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -67220,7 +67223,7 @@ type GrafanaWorkspace struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.GrafanaWorkspaceDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -67433,7 +67436,7 @@ type AMPWorkspace struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.AMPWorkspaceDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -67644,7 +67647,7 @@ type KafkaCluster struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.KafkaClusterDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -67855,7 +67858,7 @@ type MWAAEnvironment struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.MWAAEnvironmentDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -68066,7 +68069,7 @@ type MemoryDbCluster struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.MemoryDbClusterDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -68275,7 +68278,7 @@ type MQBroker struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.MQBrokerDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -68546,7 +68549,7 @@ type NeptuneDatabase struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.NeptuneDatabaseDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -68757,7 +68760,7 @@ type NeptuneDatabaseCluster struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.NeptuneDatabaseClusterDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -69037,7 +69040,7 @@ type NeptuneDatabaseClusterSnapshot struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.NeptuneDatabaseClusterSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -69282,7 +69285,7 @@ type OpenSearchDomain struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.OpenSearchDomainDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -69537,7 +69540,7 @@ type SESConfigurationSet struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.SESConfigurationSetDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -69746,7 +69749,7 @@ type SESIdentity struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.SESIdentityDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -69956,7 +69959,7 @@ type SESv2EmailIdentity struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.SESv2EmailIdentityDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -70165,7 +70168,7 @@ type CloudFormationStack struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.CloudFormationStackDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -70410,7 +70413,7 @@ type CloudFormationStackSet struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.CloudFormationStackSetDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -70651,7 +70654,7 @@ type CloudFormationStackResource struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.CloudFormationStackResourceDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -70877,7 +70880,7 @@ type CodeCommitRepository struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.CodeCommitRepositoryDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -71102,7 +71105,7 @@ type CodePipelinePipeline struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.CodePipelinePipelineDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -71327,7 +71330,7 @@ type DirectoryServiceDirectory struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.DirectoryServiceDirectoryDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -71592,7 +71595,7 @@ type DirectoryServiceCertificate struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.DirectoryServiceCertificateDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -71816,7 +71819,7 @@ type DirectoryServiceLogSubscription struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.DirectoryServiceLogSubscriptionDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -72027,7 +72030,7 @@ type SSOAdminInstance struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.SSOAdminInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -72236,7 +72239,7 @@ type SSOAdminAccountAssignment struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.SSOAdminAccountAssignmentDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -72449,7 +72452,7 @@ type SSOAdminPermissionSet struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.SSOAdminPermissionSetDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -72672,7 +72675,7 @@ type SSOAdminPolicyAttachment struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.SSOAdminPolicyAttachmentDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -72885,7 +72888,7 @@ type UserEffectiveAccess struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.UserEffectiveAccessDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -73100,7 +73103,7 @@ type WAFRule struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.WAFRuleDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -73315,7 +73318,7 @@ type WAFRegionalRule struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.WAFRegionalRuleDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -73530,7 +73533,7 @@ type WAFRateBasedRule struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.WAFRateBasedRuleDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -73751,7 +73754,7 @@ type WAFRuleGroup struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.WAFRuleGroupDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -73968,7 +73971,7 @@ type WAFWebAcl struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.WAFWebAclDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -74189,7 +74192,7 @@ type WellArchitectedWorkload struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.WellArchitectedWorkloadDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -74440,7 +74443,7 @@ type WellArchitectedAnswer struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.WellArchitectedAnswerDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -74681,7 +74684,7 @@ type WellArchitectedCheckDetail struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.WellArchitectedCheckDetailDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -74914,7 +74917,7 @@ type WellArchitectedCheckSummary struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.WellArchitectedCheckSummaryDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -75143,7 +75146,7 @@ type WellArchitectedCheckConsolidatedReport struct {
 	PlatformID      string                                                `json:"platform_id"`
 	Description     aws.WellArchitectedCheckConsolidatedReportDescription `json:"description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
-	DescribedBy     int                                                   `json:"described_by"`
+	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
 	IntegrationType string                                                `json:"integration_type"`
 	IntegrationID   string                                                `json:"integration_id"`
@@ -75366,7 +75369,7 @@ type WellArchitectedLens struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.WellArchitectedLensDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -75593,7 +75596,7 @@ type WellArchitectedLensReview struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.WellArchitectedLensReviewDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -75816,7 +75819,7 @@ type WellArchitectedLensReviewImprovement struct {
 	PlatformID      string                                              `json:"platform_id"`
 	Description     aws.WellArchitectedLensReviewImprovementDescription `json:"description"`
 	Metadata        aws.Metadata                                        `json:"metadata"`
-	DescribedBy     int                                                 `json:"described_by"`
+	DescribedBy     string                                              `json:"described_by"`
 	ResourceType    string                                              `json:"resource_type"`
 	IntegrationType string                                              `json:"integration_type"`
 	IntegrationID   string                                              `json:"integration_id"`
@@ -76041,7 +76044,7 @@ type WellArchitectedLensReviewReport struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.WellArchitectedLensReviewReportDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -76254,7 +76257,7 @@ type WellArchitectedLensShare struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.WellArchitectedLensShareDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -76473,7 +76476,7 @@ type WellArchitectedMilestone struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.WellArchitectedMilestoneDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -76686,7 +76689,7 @@ type WellArchitectedNotification struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.WellArchitectedNotificationDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -76903,7 +76906,7 @@ type WellArchitectedShareInvitation struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.WellArchitectedShareInvitationDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -77124,7 +77127,7 @@ type WellArchitectedWorkloadShare struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.WellArchitectedWorkloadShareDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -77343,7 +77346,7 @@ type WAFRegionalWebAcl struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.WAFRegionalWebAclDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -77568,7 +77571,7 @@ type WAFRegionalRuleGroup struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.WAFRegionalRuleGroupDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -77789,7 +77792,7 @@ type Route53HostedZone struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.Route53HostedZoneDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -78022,7 +78025,7 @@ type Route53HealthCheck struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.Route53HealthCheckDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -78245,7 +78248,7 @@ type Route53ResolverResolverRule struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.Route53ResolverResolverRuleDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -78484,7 +78487,7 @@ type Route53ResolverEndpoint struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.Route53ResolverEndpointDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -78717,7 +78720,7 @@ type Route53Domain struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.Route53DomainDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -78968,7 +78971,7 @@ type Route53Record struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.Route53RecordDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -79199,7 +79202,7 @@ type Route53TrafficPolicy struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.Route53TrafficPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -79416,7 +79419,7 @@ type Route53TrafficPolicyInstance struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.Route53TrafficPolicyInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -79639,7 +79642,7 @@ type Route53QueryLog struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.Route53QueryLogDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -79850,7 +79853,7 @@ type Route53ResolverQueryLogConfig struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.Route53ResolverQueryLogConfigDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -80075,7 +80078,7 @@ type BatchComputeEnvironment struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.BatchComputeEnvironmentDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -80288,7 +80291,7 @@ type BatchJob struct {
 	PlatformID      string                  `json:"platform_id"`
 	Description     aws.BatchJobDescription `json:"description"`
 	Metadata        aws.Metadata            `json:"metadata"`
-	DescribedBy     int                     `json:"described_by"`
+	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
 	IntegrationType string                  `json:"integration_type"`
 	IntegrationID   string                  `json:"integration_id"`
@@ -80499,7 +80502,7 @@ type BatchJobQueue struct {
 	PlatformID      string                       `json:"platform_id"`
 	Description     aws.BatchJobQueueDescription `json:"description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
-	DescribedBy     int                          `json:"described_by"`
+	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
 	IntegrationType string                       `json:"integration_type"`
 	IntegrationID   string                       `json:"integration_id"`
@@ -80713,7 +80716,7 @@ type CodeArtifactRepository struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.CodeArtifactRepositoryDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -80942,7 +80945,7 @@ type CodeArtifactDomain struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.CodeArtifactDomainDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -81169,7 +81172,7 @@ type CodeDeployDeploymentGroup struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.CodeDeployDeploymentGroupDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -81422,7 +81425,7 @@ type CodeDeployApplication struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.CodeDeployApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -81643,7 +81646,7 @@ type CodeDeployDeploymentConfig struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.CodeDeployDeploymentConfigDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -81861,7 +81864,7 @@ type CodeStarProject struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.CodeStarProjectDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -82074,7 +82077,7 @@ type DirectConnectConnection struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.DirectConnectConnectionDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -82285,7 +82288,7 @@ type DirectConnectGateway struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.DirectConnectGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -82496,7 +82499,7 @@ type NetworkFirewallFirewall struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.NetworkFirewallFirewallDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -82730,7 +82733,7 @@ type NetworkFirewallFirewallPolicy struct {
 	PlatformID      string                                       `json:"platform_id"`
 	Description     aws.NetworkFirewallFirewallPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
-	DescribedBy     int                                          `json:"described_by"`
+	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
 	IntegrationType string                                       `json:"integration_type"`
 	IntegrationID   string                                       `json:"integration_id"`
@@ -82959,7 +82962,7 @@ type NetworkFirewallRuleGroup struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.NetworkFirewallRuleGroupDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -83190,7 +83193,7 @@ type OpsWorksCMServer struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.OpsWorksCMServerDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -83399,7 +83402,7 @@ type OrganizationsOrganization struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.OrganizationsOrganizationDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -83608,7 +83611,7 @@ type OrganizationsAccount struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.OrganizationsAccountDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -83831,7 +83834,7 @@ type OrganizationsPolicy struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.OrganizationsPolicyDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -84050,7 +84053,7 @@ type OrganizationsRoot struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.OrganizationsRootDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -84261,7 +84264,7 @@ type OrganizationsOrganizationalUnit struct {
 	PlatformID      string                                         `json:"platform_id"`
 	Description     aws.OrganizationsOrganizationalUnitDescription `json:"description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
-	DescribedBy     int                                            `json:"described_by"`
+	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
 	IntegrationType string                                         `json:"integration_type"`
 	IntegrationID   string                                         `json:"integration_id"`
@@ -84476,7 +84479,7 @@ type OrganizationsPolicyTarget struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.OrganizationsPolicyTargetDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -84695,7 +84698,7 @@ type PinPointApp struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.PinPointAppDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -84916,7 +84919,7 @@ type PipesPipe struct {
 	PlatformID      string                   `json:"platform_id"`
 	Description     aws.PipesPipeDescription `json:"description"`
 	Metadata        aws.Metadata             `json:"metadata"`
-	DescribedBy     int                      `json:"described_by"`
+	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
 	IntegrationType string                   `json:"integration_type"`
 	IntegrationID   string                   `json:"integration_id"`
@@ -85151,7 +85154,7 @@ type ResourceGroupsGroup struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.ResourceGroupsGroupDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -85360,7 +85363,7 @@ type OpenSearchServerlessCollection struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.OpenSearchServerlessCollectionDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -85571,7 +85574,7 @@ type TimestreamDatabase struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.TimestreamDatabaseDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -85782,7 +85785,7 @@ type ResourceExplorer2Index struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.ResourceExplorer2IndexDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -85991,7 +85994,7 @@ type ResourceExplorer2SupportedResourceType struct {
 	PlatformID      string                                                `json:"platform_id"`
 	Description     aws.ResourceExplorer2SupportedResourceTypeDescription `json:"description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
-	DescribedBy     int                                                   `json:"described_by"`
+	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
 	IntegrationType string                                                `json:"integration_type"`
 	IntegrationID   string                                                `json:"integration_id"`
@@ -86198,7 +86201,7 @@ type StepFunctionsStateMachine struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.StepFunctionsStateMachineDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -86423,7 +86426,7 @@ type StepFunctionsStateMachineExecutionHistories struct {
 	PlatformID      string                                                     `json:"platform_id"`
 	Description     aws.StepFunctionsStateMachineExecutionHistoriesDescription `json:"description"`
 	Metadata        aws.Metadata                                               `json:"metadata"`
-	DescribedBy     int                                                        `json:"described_by"`
+	DescribedBy     string                                                     `json:"described_by"`
 	ResourceType    string                                                     `json:"resource_type"`
 	IntegrationType string                                                     `json:"integration_type"`
 	IntegrationID   string                                                     `json:"integration_id"`
@@ -86704,7 +86707,7 @@ type StepFunctionsStateMachineExecution struct {
 	PlatformID      string                                            `json:"platform_id"`
 	Description     aws.StepFunctionsStateMachineExecutionDescription `json:"description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
-	DescribedBy     int                                               `json:"described_by"`
+	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
 	IntegrationType string                                            `json:"integration_type"`
 	IntegrationID   string                                            `json:"integration_id"`
@@ -86931,7 +86934,7 @@ type SimSpaceWeaverSimulation struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.SimSpaceWeaverSimulationDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
@@ -87160,7 +87163,7 @@ type ACMPCACertificateAuthority struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.ACMPCACertificateAuthorityDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -87397,7 +87400,7 @@ type ShieldProtectionGroup struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.ShieldProtectionGroupDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -87606,7 +87609,7 @@ type StorageGatewayStorageGateway struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.StorageGatewayStorageGatewayDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -87817,7 +87820,7 @@ type ImageBuilderImage struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.ImageBuilderImageDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -88028,7 +88031,7 @@ type AccountAlternateContact struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.AccountAlternateContactDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -88245,7 +88248,7 @@ type AccountContact struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.AccountContactDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -88476,7 +88479,7 @@ type AmplifyApp struct {
 	PlatformID      string                    `json:"platform_id"`
 	Description     aws.AmplifyAppDescription `json:"description"`
 	Metadata        aws.Metadata              `json:"metadata"`
-	DescribedBy     int                       `json:"described_by"`
+	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
 	IntegrationType string                    `json:"integration_type"`
 	IntegrationID   string                    `json:"integration_id"`
@@ -88727,7 +88730,7 @@ type AppConfigApplication struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.AppConfigApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -88940,7 +88943,7 @@ type AuditManagerAssessment struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.AuditManagerAssessmentDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -89178,7 +89181,7 @@ type AuditManagerControl struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.AuditManagerControlDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -89414,7 +89417,7 @@ type AuditManagerEvidence struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.AuditManagerEvidenceDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -89653,7 +89656,7 @@ type AuditManagerEvidenceFolder struct {
 	PlatformID      string                                    `json:"platform_id"`
 	Description     aws.AuditManagerEvidenceFolderDescription `json:"description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
-	DescribedBy     int                                       `json:"described_by"`
+	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
 	IntegrationType string                                    `json:"integration_type"`
 	IntegrationID   string                                    `json:"integration_id"`
@@ -89894,7 +89897,7 @@ type AuditManagerFramework struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.AuditManagerFrameworkDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -90132,7 +90135,7 @@ type CloudSearchDomain struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.CloudSearchDomainDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -90361,7 +90364,7 @@ type DLMLifecyclePolicy struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.DLMLifecyclePolicyDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -90589,7 +90592,7 @@ type DocDBCluster struct {
 	PlatformID      string                      `json:"platform_id"`
 	Description     aws.DocDBClusterDescription `json:"description"`
 	Metadata        aws.Metadata                `json:"metadata"`
-	DescribedBy     int                         `json:"described_by"`
+	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
 	IntegrationType string                      `json:"integration_type"`
 	IntegrationID   string                      `json:"integration_id"`
@@ -90860,7 +90863,7 @@ type DocDBClusterInstance struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.DocDBClusterInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -91133,7 +91136,7 @@ type DocDBClusterSnapshot struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.DocDBClusterSnapshotDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -91374,7 +91377,7 @@ type GlobalAcceleratorAccelerator struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.GlobalAcceleratorAcceleratorDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -91601,7 +91604,7 @@ type GlobalAcceleratorEndpointGroup struct {
 	PlatformID      string                                        `json:"platform_id"`
 	Description     aws.GlobalAcceleratorEndpointGroupDescription `json:"description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
-	DescribedBy     int                                           `json:"described_by"`
+	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
 	IntegrationType string                                        `json:"integration_type"`
 	IntegrationID   string                                        `json:"integration_id"`
@@ -91826,7 +91829,7 @@ type GlobalAcceleratorListener struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.GlobalAcceleratorListenerDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -92039,7 +92042,7 @@ type GlueCatalogDatabase struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.GlueCatalogDatabaseDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -92260,7 +92263,7 @@ type GlueCatalogTable struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.GlueCatalogTableDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -92505,7 +92508,7 @@ type GlueConnection struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.GlueConnectionDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -92728,7 +92731,7 @@ type GlueCrawler struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.GlueCrawlerDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -92971,7 +92974,7 @@ type GlueDataCatalogEncryptionSettings struct {
 	PlatformID      string                                           `json:"platform_id"`
 	Description     aws.GlueDataCatalogEncryptionSettingsDescription `json:"description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
-	DescribedBy     int                                              `json:"described_by"`
+	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
 	IntegrationType string                                           `json:"integration_type"`
 	IntegrationID   string                                           `json:"integration_id"`
@@ -93178,7 +93181,7 @@ type GlueDataQualityRuleset struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.GlueDataQualityRulesetDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -93403,7 +93406,7 @@ type GlueDevEndpoint struct {
 	PlatformID      string                         `json:"platform_id"`
 	Description     aws.GlueDevEndpointDescription `json:"description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
-	DescribedBy     int                            `json:"described_by"`
+	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
 	IntegrationType string                         `json:"integration_type"`
 	IntegrationID   string                         `json:"integration_id"`
@@ -93656,7 +93659,7 @@ type GlueJob struct {
 	PlatformID      string                 `json:"platform_id"`
 	Description     aws.GlueJobDescription `json:"description"`
 	Metadata        aws.Metadata           `json:"metadata"`
-	DescribedBy     int                    `json:"described_by"`
+	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
 	IntegrationType string                 `json:"integration_type"`
 	IntegrationID   string                 `json:"integration_id"`
@@ -93903,7 +93906,7 @@ type GlueSecurityConfiguration struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.GlueSecurityConfigurationDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -94118,7 +94121,7 @@ type HealthEvent struct {
 	PlatformID      string                     `json:"platform_id"`
 	Description     aws.HealthEventDescription `json:"description"`
 	Metadata        aws.Metadata               `json:"metadata"`
-	DescribedBy     int                        `json:"described_by"`
+	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
 	IntegrationType string                     `json:"integration_type"`
 	IntegrationID   string                     `json:"integration_id"`
@@ -94341,7 +94344,7 @@ type HealthAffectedEntity struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.HealthAffectedEntityDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -94558,7 +94561,7 @@ type IdentityStoreGroup struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.IdentityStoreGroupDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -94771,7 +94774,7 @@ type IdentityStoreUser struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.IdentityStoreUserDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -94988,7 +94991,7 @@ type IdentityStoreGroupMembership struct {
 	PlatformID      string                                      `json:"platform_id"`
 	Description     aws.IdentityStoreGroupMembershipDescription `json:"description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
-	DescribedBy     int                                         `json:"described_by"`
+	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
 	IntegrationType string                                      `json:"integration_type"`
 	IntegrationID   string                                      `json:"integration_id"`
@@ -95202,7 +95205,7 @@ type InspectorAssessmentRun struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.InspectorAssessmentRunDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -95437,7 +95440,7 @@ type InspectorAssessmentTarget struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.InspectorAssessmentTargetDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -95652,7 +95655,7 @@ type InspectorAssessmentTemplate struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.InspectorAssessmentTemplateDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -95879,7 +95882,7 @@ type InspectorExclusion struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.InspectorExclusionDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -96096,7 +96099,7 @@ type InspectorFinding struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.InspectorFindingDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -96341,7 +96344,7 @@ type Inspector2Coverage struct {
 	PlatformID      string                            `json:"platform_id"`
 	Description     aws.Inspector2CoverageDescription `json:"description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
-	DescribedBy     int                               `json:"described_by"`
+	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
 	IntegrationType string                            `json:"integration_type"`
 	IntegrationID   string                            `json:"integration_id"`
@@ -96579,7 +96582,7 @@ type Inspector2CoverageStatistic struct {
 	PlatformID      string                                     `json:"platform_id"`
 	Description     aws.Inspector2CoverageStatisticDescription `json:"description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
-	DescribedBy     int                                        `json:"described_by"`
+	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
 	IntegrationType string                                     `json:"integration_type"`
 	IntegrationID   string                                     `json:"integration_id"`
@@ -96786,7 +96789,7 @@ type Inspector2Member struct {
 	PlatformID      string                          `json:"platform_id"`
 	Description     aws.Inspector2MemberDescription `json:"description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
-	DescribedBy     int                             `json:"described_by"`
+	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
 	IntegrationType string                          `json:"integration_type"`
 	IntegrationID   string                          `json:"integration_id"`
@@ -96999,7 +97002,7 @@ type Inspector2Finding struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.Inspector2FindingDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -97300,7 +97303,7 @@ type FirehoseDeliveryStream struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.FirehoseDeliveryStreamDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -97531,7 +97534,7 @@ type LightsailInstance struct {
 	PlatformID      string                           `json:"platform_id"`
 	Description     aws.LightsailInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
-	DescribedBy     int                              `json:"described_by"`
+	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
 	IntegrationType string                           `json:"integration_type"`
 	IntegrationID   string                           `json:"integration_id"`
@@ -97780,7 +97783,7 @@ type Macie2ClassificationJob struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.Macie2ClassificationJobDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -98019,7 +98022,7 @@ type MediaStoreContainer struct {
 	PlatformID      string                             `json:"platform_id"`
 	Description     aws.MediaStoreContainerDescription `json:"description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
-	DescribedBy     int                                `json:"described_by"`
+	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
 	IntegrationType string                             `json:"integration_type"`
 	IntegrationID   string                             `json:"integration_id"`
@@ -98240,7 +98243,7 @@ type MgnApplication struct {
 	PlatformID      string                        `json:"platform_id"`
 	Description     aws.MgnApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
-	DescribedBy     int                           `json:"described_by"`
+	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
 	IntegrationType string                        `json:"integration_type"`
 	IntegrationID   string                        `json:"integration_id"`
@@ -98465,7 +98468,7 @@ type SecurityLakeDataLake struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.SecurityLakeDataLakeDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -98684,7 +98687,7 @@ type SecurityLakeSubscriber struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.SecurityLakeSubscriberDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -98918,7 +98921,7 @@ type RamPrincipalAssociation struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.RamPrincipalAssociationDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -99143,7 +99146,7 @@ type RamResourceAssociation struct {
 	PlatformID      string                                `json:"platform_id"`
 	Description     aws.RamResourceAssociationDescription `json:"description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
-	DescribedBy     int                                   `json:"described_by"`
+	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
 	IntegrationType string                                `json:"integration_type"`
 	IntegrationID   string                                `json:"integration_id"`
@@ -99368,7 +99371,7 @@ type ServerlessApplicationRepositoryApplication struct {
 	PlatformID      string                                                    `json:"platform_id"`
 	Description     aws.ServerlessApplicationRepositoryApplicationDescription `json:"description"`
 	Metadata        aws.Metadata                                              `json:"metadata"`
-	DescribedBy     int                                                       `json:"described_by"`
+	DescribedBy     string                                                    `json:"described_by"`
 	ResourceType    string                                                    `json:"resource_type"`
 	IntegrationType string                                                    `json:"integration_type"`
 	IntegrationID   string                                                    `json:"integration_id"`
@@ -99601,7 +99604,7 @@ type ServiceQuotasServiceQuotaChangeRequest struct {
 	PlatformID      string                                                `json:"platform_id"`
 	Description     aws.ServiceQuotasServiceQuotaChangeRequestDescription `json:"description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
-	DescribedBy     int                                                   `json:"described_by"`
+	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
 	IntegrationType string                                                `json:"integration_type"`
 	IntegrationID   string                                                `json:"integration_id"`
@@ -99836,7 +99839,7 @@ type ServiceQuotasService struct {
 	PlatformID      string                              `json:"platform_id"`
 	Description     aws.ServiceQuotasServiceDescription `json:"description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
-	DescribedBy     int                                 `json:"described_by"`
+	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
 	IntegrationType string                              `json:"integration_type"`
 	IntegrationID   string                              `json:"integration_id"`
@@ -100043,7 +100046,7 @@ type ServiceCatalogProduct struct {
 	PlatformID      string                               `json:"platform_id"`
 	Description     aws.ServiceCatalogProductDescription `json:"description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
-	DescribedBy     int                                  `json:"described_by"`
+	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
 	IntegrationType string                               `json:"integration_type"`
 	IntegrationID   string                               `json:"integration_id"`
@@ -100276,7 +100279,7 @@ type ServiceCatalogPortfolio struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.ServiceCatalogPortfolioDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -100501,7 +100504,7 @@ type ServiceDiscoveryService struct {
 	PlatformID      string                                 `json:"platform_id"`
 	Description     aws.ServiceDiscoveryServiceDescription `json:"description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
-	DescribedBy     int                                    `json:"described_by"`
+	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
 	IntegrationType string                                 `json:"integration_type"`
 	IntegrationID   string                                 `json:"integration_id"`
@@ -100734,7 +100737,7 @@ type ServiceDiscoveryNamespace struct {
 	PlatformID      string                                   `json:"platform_id"`
 	Description     aws.ServiceDiscoveryNamespaceDescription `json:"description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
-	DescribedBy     int                                      `json:"described_by"`
+	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
 	IntegrationType string                                   `json:"integration_type"`
 	IntegrationID   string                                   `json:"integration_id"`
@@ -100961,7 +100964,7 @@ type ServiceDiscoveryInstance struct {
 	PlatformID      string                                  `json:"platform_id"`
 	Description     aws.ServiceDiscoveryInstanceDescription `json:"description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
-	DescribedBy     int                                     `json:"described_by"`
+	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
 	IntegrationType string                                  `json:"integration_type"`
 	IntegrationID   string                                  `json:"integration_id"`
