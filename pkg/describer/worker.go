@@ -96,6 +96,9 @@ func doDescribe(
 	if err != nil {
 		return nil, fmt.Errorf(" account credentials: %w", err)
 	}
+	creds.CrossAccountRoleName = job.IntegrationLabels["CrossAccountRoleARN"]
+
+	logger.Info("Creds", zap.Any("creds", creds))
 
 	f := func(resource model.Resource) error {
 		if resource.Description == nil {
