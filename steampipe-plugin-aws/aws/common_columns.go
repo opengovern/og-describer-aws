@@ -125,7 +125,7 @@ func commonColumnsForRegionalResource() []*plugin.Column {
 		{
 			Name:        "region",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Region"),
 			Description: "The AWS Region in which the resource is located.",
 		},
 		{
@@ -192,9 +192,8 @@ func commonColumnsForGlobalRegionResource() []*plugin.Column {
 		{
 			Name:        "account_id",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
-			Transform:   transform.FromCamel(),
 		},
 	}
 }
