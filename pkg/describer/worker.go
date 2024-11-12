@@ -97,7 +97,9 @@ func doDescribe(
 		return nil, fmt.Errorf(" account credentials: %w", err)
 	}
 	crossAccountName := strings.Split(job.IntegrationLabels["CrossAccountRoleARN"], "/")
-	creds.CrossAccountRoleName = crossAccountName[1]
+	if len(crossAccountName) > 1 {
+		creds.CrossAccountRoleName = crossAccountName[1]
+	}
 	creds.AccountID = job.ProviderID
 
 	logger.Info("Creds", zap.Any("creds", creds))
