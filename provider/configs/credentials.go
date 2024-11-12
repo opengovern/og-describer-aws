@@ -4,4 +4,5 @@ import "github.com/opengovern/opengovernance/services/integration/integration-ty
 
 type IntegrationCredentials struct {
 	configs.IntegrationCredentials
+	AccountID string `json:"account_id"`
 }
