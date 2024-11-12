@@ -19,14 +19,13 @@ func commonColumnsForAccountResource() []*plugin.Column {
 		{
 			Name:        "partition",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Partition"),
 			Description: "The AWS partition in which the resource is located (aws, aws-cn, or aws-us-gov).",
 		},
 		{
 			Name:        "account_id",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
-			Transform:   transform.FromCamel(),
+			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
 		},
 	}
@@ -37,14 +36,13 @@ func commonKaytuColumnsForAccountResource() []*plugin.Column {
 		{
 			Name:        "partition",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Partition"),
 			Description: "The AWS partition in which the resource is located (aws, aws-cn, or aws-us-gov).",
 		},
 		{
 			Name:        "account_id",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
-			Transform:   transform.FromCamel(),
+			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
 		},
 		{
@@ -121,7 +119,7 @@ func commonColumnsForRegionalResource() []*plugin.Column {
 		{
 			Name:        "partition",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Partition"),
 			Description: "The AWS partition in which the resource is located (aws, aws-cn, or aws-us-gov).",
 		},
 		{
@@ -133,9 +131,8 @@ func commonColumnsForRegionalResource() []*plugin.Column {
 		{
 			Name:        "account_id",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
-			Transform:   transform.FromCamel(),
 		},
 	}
 }
@@ -182,7 +179,7 @@ func commonColumnsForGlobalRegionResource() []*plugin.Column {
 		{
 			Name:        "partition",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Partition"),
 			Description: "The AWS partition in which the resource is located (aws, aws-cn, or aws-us-gov).",
 		},
 		{
@@ -208,7 +205,7 @@ func commonKaytuColumnsForGlobalRegionResource() []*plugin.Column {
 		{
 			Name:        "partition",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.Partition"),
 			Description: "The AWS partition in which the resource is located (aws, aws-cn, or aws-us-gov).",
 		},
 		{
@@ -221,9 +218,8 @@ func commonKaytuColumnsForGlobalRegionResource() []*plugin.Column {
 		{
 			Name:        "account_id",
 			Type:        proto.ColumnType_STRING,
-			Hydrate:     getCommonColumns,
+			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
-			Transform:   transform.FromCamel(),
 		},
 		{
 			Name:        "og_account_id",
@@ -294,7 +290,19 @@ func commonAwsKaytuColumns() []*plugin.Column {
 
 // Append columns for account-level resource (e.g. aws_iam_access_key)
 func awsRegionalColumns(columns []*plugin.Column) []*plugin.Column {
-	return append(columns, commonColumnsForRegionalResource()...)
+	for _, c := range commonColumnsForRegionalResource() {
+		found := false
+		for _, col := range columns {
+			if col.Name == c.Name {
+				found = true
+				break
+			}
+		}
+		if !found {
+			columns = append(columns, c)
+		}
+	}
+	return columns
 }
 func awsKaytuRegionalColumns(columns []*plugin.Column) []*plugin.Column {
 	commonCols := commonAwsKaytuRegionalColumns()
