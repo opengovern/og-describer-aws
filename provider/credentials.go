@@ -95,8 +95,8 @@ func GetResourceMetadata(job describe.DescribeJob, resource model.Resource) (map
 	metadata := make(map[string]string)
 	awsMetadata := awsmodel.Metadata{
 		Name:         resource.Name,
-		AccountID:    job.IntegrationID,
-		SourceID:     job.ProviderID,
+		AccountID:    job.ProviderID,
+		SourceID:     job.IntegrationID,
 		Region:       resource.Region,
 		ResourceType: strings.ToLower(job.ResourceType),
 	}
