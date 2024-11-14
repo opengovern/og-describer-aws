@@ -142,7 +142,7 @@ require (
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/nats-io/nats.go v1.36.0
 	github.com/opengovern/og-aws-describer v0.60.0
-	github.com/opengovern/og-util v1.1.1
+	github.com/opengovern/og-util v1.1.5
 	github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0
 	github.com/spf13/cobra v1.8.1
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
