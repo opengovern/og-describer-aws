@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/go-errors/errors"
-	"github.com/google/uuid"
 	model "github.com/opengovern/og-describer-aws/pkg/sdk/models"
 	"github.com/opengovern/og-describer-aws/provider"
 	"github.com/opengovern/og-describer-aws/provider/configs"
@@ -154,7 +153,7 @@ func doDescribe(
 		}
 
 		rs.Send(&es.Resource{
-			PlatformID:      uuid.New().String(),
+			PlatformID:      fmt.Sprintf("%s:::%s:::%s", job.IntegrationID, job.ResourceType, resource.UniqueID()),
 			ResourceID:      resource.UniqueID(),
 			ResourceName:    resource.Name,
 			Description:     description,
