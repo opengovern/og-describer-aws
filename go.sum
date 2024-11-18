@@ -973,12 +973,6 @@ github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/opengovern/og-aws-describer v0.60.0 h1:Cl0a4KW8eV9gmtFyDbNRtfxR+jyRNkGBZUAEBgsRrKs=
 github.com/opengovern/og-aws-describer v0.60.0/go.mod h1:gHBFpQcnj1KAX/s6/PzitZxQ/5ockN7cjzaOdPoBYCs=
-github.com/opengovern/og-util v1.0.6-0.20241108102418-e20a35efc8ca h1:yeF0lhv15WWULbOb811lVAv/KTY5nfsA0dkzd4GODlk=
-github.com/opengovern/og-util v1.0.6-0.20241108102418-e20a35efc8ca/go.mod h1:7l7fNhK6uewIwA0cs7QagJuhjt/E6hEAC01SR8Y0kKk=
-github.com/opengovern/og-util v1.1.0 h1:bV2XKX8aIpJGC2CR4kh9CU/rJWPQed76gtVXM2zBDXM=
-github.com/opengovern/og-util v1.1.0/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
-github.com/opengovern/og-util v1.1.1 h1:SXnPCNuhR9WxxupEa1hCtIOIh2Sy+MF80qVdpoxc58k=
-github.com/opengovern/og-util v1.1.1/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
 github.com/opengovern/og-util v1.1.5 h1:D53Z669MsaKJJFHpIYnJe0iK0HX2jnYUTFTFkKd9lWg=
 github.com/opengovern/og-util v1.1.5/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
 github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0 h1:DYxFV9K4IGm9xe5TpXMi8HAVEdlb4sYDKbBkRTgZRms=
