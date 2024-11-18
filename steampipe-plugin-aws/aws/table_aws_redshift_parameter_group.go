@@ -25,7 +25,7 @@ func tableAwsRedshiftParameterGroup(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRedshiftClusterParameterGroup,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the cluster parameter group.",

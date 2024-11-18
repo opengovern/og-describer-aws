@@ -20,7 +20,7 @@ func tableAwsEc2Host(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2Host,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "host_id",
 				Description: "The id of the host.",

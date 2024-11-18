@@ -20,7 +20,7 @@ func tableAwsFsxStorageVirtualMachine(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListFSXStorageVirtualMachine,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "storage_virtual_machine_id",
 				Description: "The id of the storage virtual machine.",

@@ -43,7 +43,7 @@ func tableAwsEc2Ami(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the AMI that was provided during image creation.",

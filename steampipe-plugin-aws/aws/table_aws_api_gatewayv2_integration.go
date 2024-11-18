@@ -26,7 +26,7 @@ func tableAwsAPIGatewayV2Integration(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListApiGatewayV2Integration,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "integration_id",
 				Description: "Represents the identifier of an integration.",

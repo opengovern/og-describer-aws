@@ -20,7 +20,7 @@ func tableAwsServiceQuotasService(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListServiceQuotasService,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "service_name",
 				Description: "Specifies the service name.",

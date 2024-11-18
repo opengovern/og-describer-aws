@@ -20,7 +20,7 @@ func tableAwsOrganizationsOrganization(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOrganizationsOrganization,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The id of the organization.",

@@ -36,7 +36,7 @@ func tableAwsS3MultiRegionAccessPoint(_ context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"NoSuchMultiRegionAccessPoint", "InvalidParameter", "InvalidRequest"}),
 			},
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the Multi-Region Access Point.",

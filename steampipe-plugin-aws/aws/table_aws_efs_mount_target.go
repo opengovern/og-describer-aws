@@ -27,7 +27,7 @@ func tableAwsEfsMountTarget(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListEFSMountTarget,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "mount_target_id",
 				Description: "The ID of the mount target.",

@@ -22,7 +22,7 @@ func tableAwsS3Object(_ context.Context) *plugin.Table {
 				{Name: "prefix", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuAccountColumns([]*plugin.Column{
+		Columns: awsOgAccountColumns([]*plugin.Column{
 			{
 				Name:        "key",
 				Description: "The name that you assign to an object. You use the object key to retrieve the object.",

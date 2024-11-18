@@ -32,7 +32,7 @@ func tableAwsRedshiftSnapshot(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "snapshot_identifier",
 				Description: "The unique identifier of the cluster.",

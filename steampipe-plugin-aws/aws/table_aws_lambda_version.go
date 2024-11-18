@@ -27,7 +27,7 @@ func tableAwsLambdaVersion(_ context.Context) *plugin.Table {
 				{Name: "function_name", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "version",
 				Description: "The version of the Lambda function.",

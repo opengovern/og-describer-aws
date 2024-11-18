@@ -22,7 +22,7 @@ func tableAwsOpenSearchDomain(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOpenSearchDomain,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "domain_id",
 				Description: "The id of the domain.",

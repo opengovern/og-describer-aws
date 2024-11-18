@@ -32,7 +32,7 @@ func tableAwsVpcPeeringConnection(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The ID of the VPC peering connection.",

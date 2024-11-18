@@ -34,7 +34,7 @@ func tableAwsVpcFlowlog(_ context.Context) *plugin.Table {
 				{Name: "traffic_type", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "flow_log_id",
 				Description: "The ID of the flow log.",

@@ -37,7 +37,7 @@ func tableAwsAppAutoScalingTarget(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "service_namespace",
 				Description: "The namespace of the AWS service that provides the resource, or a custom-resource.",

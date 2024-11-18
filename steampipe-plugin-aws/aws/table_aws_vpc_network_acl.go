@@ -28,7 +28,7 @@ func tableAwsVpcNetworkACL(_ context.Context) *plugin.Table {
 				{Name: "vpc_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "network_acl_id",
 				Description: "The ID of the network ACL.",

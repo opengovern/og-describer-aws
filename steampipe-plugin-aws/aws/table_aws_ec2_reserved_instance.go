@@ -40,7 +40,7 @@ func tableAwsEc2ReservedInstance(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "reserved_instance_id",
 				Description: "The ID of the Reserved instance.",

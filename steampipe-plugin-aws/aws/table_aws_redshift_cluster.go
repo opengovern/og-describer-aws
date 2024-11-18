@@ -26,7 +26,7 @@ func tableAwsRedshiftCluster(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRedshiftCluster,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cluster_identifier",
 				Description: "The unique identifier of the cluster.",

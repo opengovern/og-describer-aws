@@ -34,7 +34,7 @@ func tableAwsCloudFormationStack(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "Unique identifier of the stack.",

@@ -19,7 +19,7 @@ func tableAWSResourceExplorerSupportedResourceType(_ context.Context) *plugin.Ta
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListResourceExplorer2SupportedResourceType,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "resource_type",
 				Description: "The unique identifier of the resource type.",

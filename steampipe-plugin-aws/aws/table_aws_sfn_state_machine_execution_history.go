@@ -16,7 +16,7 @@ func tableAwsStepFunctionsStateMachineExecutionHistory(_ context.Context) *plugi
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListStepFunctionsStateMachineExecutionHistories,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The id of the event.",

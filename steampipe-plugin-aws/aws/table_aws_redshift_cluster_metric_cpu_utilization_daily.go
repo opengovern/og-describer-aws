@@ -2,6 +2,7 @@ package aws
 
 import (
 	"context"
+
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -16,7 +17,7 @@ func tableAwsRedshiftClusterMetricCpuUtilizationDaily(_ context.Context) *plugin
 		Description:       "AWS Redshift Cluster Cloudwatch Metrics - CPU Utilization (Daily)",
 		List:              &plugin.ListConfig{},
 		GetMatrixItemFunc: CloudWatchRegionsMatrix,
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cluster_identifier",

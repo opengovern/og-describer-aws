@@ -20,7 +20,7 @@ func tableAwsEC2Ipam(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2Ipam,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "ipam_id",
 				Description: "The id of the ipam.",

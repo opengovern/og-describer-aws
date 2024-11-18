@@ -25,7 +25,7 @@ func tableAwsCloudFrontDistribution(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCloudFrontDistribution,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The identifier for the Distribution.",

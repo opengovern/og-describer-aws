@@ -65,7 +65,7 @@ func tableAwsEBSSnapshot(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "snapshot_id",
 				Description: "The ID of the snapshot. Each snapshot receives a unique identifier when it is created.",

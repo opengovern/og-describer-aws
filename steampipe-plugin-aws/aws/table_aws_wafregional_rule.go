@@ -26,7 +26,7 @@ func tableAwsWAFRegionalRule(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListWAFRegionalRule,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "rule_id",
 				Description: "The id of the rule.",

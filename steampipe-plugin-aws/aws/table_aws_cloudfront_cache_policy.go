@@ -25,7 +25,7 @@ func tableAwsCloudFrontCachePolicy(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCloudFrontCachePolicy,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "A unique name to identify the cache policy.",

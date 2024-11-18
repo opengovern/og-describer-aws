@@ -23,7 +23,7 @@ func tableAwsVpcEipAddressTransfer(_ context.Context) *plugin.Table {
 				{Name: "allocation_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "allocation_id",
 				Description: "The allocation ID of an Elastic IP address.",

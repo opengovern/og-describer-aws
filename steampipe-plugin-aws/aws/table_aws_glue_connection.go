@@ -30,7 +30,7 @@ func tableAwsGlueConnection(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGlueConnection,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the connection definition.",

@@ -26,7 +26,7 @@ func tableAwsEmrCluster(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEMRCluster,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the cluster.",

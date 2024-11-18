@@ -20,7 +20,7 @@ func tableAwsDynamodbGlobalSecondaryIndex(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListDynamoDbGlobalSecondaryIndex,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "index_name",
 				Description: "The name of the global secondary index.",

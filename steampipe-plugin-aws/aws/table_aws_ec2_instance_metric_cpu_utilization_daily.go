@@ -20,7 +20,7 @@ func tableAwsEc2InstanceMetricCpuUtilizationDaily(_ context.Context) *plugin.Tab
 			Hydrate:       listEc2InstanceMetricCpuUtilizationDaily,
 		},
 
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "instance_id",

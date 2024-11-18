@@ -32,7 +32,7 @@ func tableAwsEc2TargetGroup(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "target_group_name",
 				Description: "The name of the target group.",

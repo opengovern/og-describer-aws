@@ -30,7 +30,7 @@ func tableAwsRDSDBCluster(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_cluster_identifier",
 				Description: "The friendly name to identify the DB Cluster.",

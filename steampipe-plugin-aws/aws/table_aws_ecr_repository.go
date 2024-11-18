@@ -27,7 +27,7 @@ func tableAwsEcrRepository(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListECRRepository,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "repository_name",
 				Description: "The name of the repository.",

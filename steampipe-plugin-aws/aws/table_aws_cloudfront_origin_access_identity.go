@@ -25,7 +25,7 @@ func tableAwsCloudFrontOriginAccessIdentity(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCloudFrontOriginAccessIdentity,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The ID for the origin access identity.",

@@ -28,7 +28,7 @@ func tableAwsEc2SpotPrice(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{Name: "availability_zone", Description: "The Availability Zone.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Description.SpotPrice.AvailabilityZone")},
 			{Name: "instance_type", Description: "The instance type.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Description.SpotPrice.InstanceType")},
 			{Name: "product_description", Description: "A general description of the AMI.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Description.SpotPrice.ProductDescription")},

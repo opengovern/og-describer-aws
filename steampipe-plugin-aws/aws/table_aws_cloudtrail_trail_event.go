@@ -25,7 +25,7 @@ func tableAwsCloudtrailTrailEvent(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			// Top columns
 			{Name: "filter",
 				Type:        proto.ColumnType_STRING,

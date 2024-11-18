@@ -23,7 +23,7 @@ func tableAwsRoute53TrafficPolicy(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRoute53TrafficPolicy,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name that you specified when traffic policy was created.",

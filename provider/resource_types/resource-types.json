@@ -74,7 +74,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Route53RouteTable.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Route53RouteTable.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2RouteTable)",
@@ -115,7 +115,7 @@
     "Tags": {
       "category": ["Management \u0026 Governance"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/IdentityAccessManagementRole.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/IdentityAccessManagementRole.svg"
       ]
     },
     "ListDescriber": "SequentialDescribeGlobal(describer.IAMRole)",
@@ -219,7 +219,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/InternetGateway.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/InternetGateway.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2InternetGateway)",
@@ -260,7 +260,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ApiGateway.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ApiGateway.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ApiGatewayRestAPI)",
@@ -280,7 +280,7 @@
     "Tags": {
       "category": ["Compute"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2AutoScaling.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AutoScaling.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.AutoScalingAutoScalingGroup)",
@@ -307,7 +307,7 @@
     "Tags": {
       "category": ["Storage"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticFileSystem.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticFileSystem.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EFSFileSystem)",
@@ -320,7 +320,7 @@
     "Tags": {
       "category": ["PaaS"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ManagedStreamingForKafka.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ManagedStreamingForKafka.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.KafkaCluster)",
@@ -536,7 +536,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElastiCache.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElastiCache.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ElastiCacheCluster)",
@@ -556,7 +556,7 @@
     "Tags": {
       "category": ["Storage"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/SimpleStorageBucket.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/SimpleStorageBucket.svg"
       ]
     },
     "ListDescriber": "SequentialDescribeGlobal(describer.S3Bucket)",
@@ -611,7 +611,7 @@
     "Tags": {
       "category": ["Storage"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticBlockStoreVolume.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreVolume.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Volume)",
@@ -687,7 +687,7 @@
     "Tags": {
       "category": ["Serverless"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Lambda.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Lambda.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.LambdaFunction)",
@@ -1099,7 +1099,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Rds.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Rds.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.RDSDBInstance)",
@@ -1326,7 +1326,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/CloudFront.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/CloudFront.svg"
       ]
     },
     "ListDescriber": "SequentialDescribeGlobal(describer.CloudFrontDistribution)",
@@ -1734,7 +1734,7 @@
     "Tags": {
       "category": ["Compute"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2Instance.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2Instance)",
@@ -1747,7 +1747,7 @@
     "Tags": {
       "category": ["Compute"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2Instance.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.Ec2InstanceMetricCpuUtilizationHourly)",
@@ -1781,7 +1781,7 @@
     "Tags": {
       "category": ["Containers"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ECRRepository)",
@@ -1794,7 +1794,7 @@
     "Tags": {
       "category": ["Containers"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ECRRegistry)",
@@ -1944,7 +1944,7 @@
     "Tags": {
       "category": ["Compute"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2AmiResource.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AmiResource.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2AMI)",
@@ -1988,7 +1988,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DocumentDb.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.DocDBCluster)",
@@ -2001,7 +2001,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DocumentDb.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.DocDBClusterSnapshot)",
@@ -2105,7 +2105,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Neptune.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Neptune.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.NeptuneDatabase)",
@@ -2328,7 +2328,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcCustomerGateway.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcCustomerGateway.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2CustomerGateway)",
@@ -2369,7 +2369,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcVpnGateway.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcVpnGateway.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPNGateway)",
@@ -2547,7 +2547,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcNatGateway.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcNatGateway.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2NatGateway)",
@@ -2623,7 +2623,7 @@
     "Tags": {
       "category": ["Storage"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticBlockStoreSnapshot.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreSnapshot.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VolumeSnapshot)",
@@ -2671,7 +2671,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticLoadBalancingClassicLoadBalancer.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticLoadBalancingClassicLoadBalancer.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.ElasticLoadBalancingLoadBalancer)",
@@ -2712,7 +2712,7 @@
     "Tags": {
       "category": ["Networking"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Vpc.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Vpc.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.EC2VPC)",
@@ -2816,7 +2816,7 @@
     "Tags": {
       "category": ["Database"],
       "logo_uri": [
-        "https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DynamoDbTable.svg"
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DynamoDbTable.svg"
       ]
     },
     "ListDescriber": "ParallelDescribeRegional(describer.DynamoDbTable)",

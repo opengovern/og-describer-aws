@@ -19,7 +19,7 @@ func tableAwsRDSDBRecommendation(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRDSDBRecommendation,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "recommendation_id",
 				Description: "The unique identifier for the recommendation.",

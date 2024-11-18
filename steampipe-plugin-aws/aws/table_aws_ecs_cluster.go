@@ -28,7 +28,7 @@ func tableAwsEcsCluster(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListECSCluster,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cluster_arn",
 				Description: "The Amazon Resource Name (ARN) that identifies the cluster.",

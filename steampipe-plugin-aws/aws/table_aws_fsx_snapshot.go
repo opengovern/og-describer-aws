@@ -20,7 +20,7 @@ func tableAwsFsxSnapshot(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListFSXSnapshot,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "snapshot_id",
 				Description: "The id of the snapshot.",

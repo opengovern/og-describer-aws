@@ -26,7 +26,7 @@ func tableAwsAuditManagerEvidenceFolder(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAuditManagerEvidenceFolder,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the specified evidence folder.",

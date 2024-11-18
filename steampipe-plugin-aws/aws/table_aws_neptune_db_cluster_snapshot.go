@@ -22,7 +22,7 @@ func tableAwsNeptuneDBClusterSnapshot(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListNeptuneDatabaseClusterSnapshot,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_cluster_snapshot_identifier",
 				Description: "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.",

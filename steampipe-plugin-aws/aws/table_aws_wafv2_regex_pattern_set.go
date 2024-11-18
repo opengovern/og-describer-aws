@@ -26,7 +26,7 @@ func tableAwsWafv2RegexPatternSet(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListWAFv2RegexPatternSet,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the Regex Pattern set.",

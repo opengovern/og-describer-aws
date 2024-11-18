@@ -20,7 +20,7 @@ func tableAwsStorageGatewayStorageGateway(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListStorageGatewayStorageGateway,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "gateway_id",
 				Description: "The id of the storage gateway.",

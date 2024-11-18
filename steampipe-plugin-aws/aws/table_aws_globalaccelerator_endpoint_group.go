@@ -28,7 +28,7 @@ func tableAwsGlobalAcceleratorEndpointGroup(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListGlobalAcceleratorEndpointGroup,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the endpoint group.",

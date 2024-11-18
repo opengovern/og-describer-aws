@@ -27,7 +27,7 @@ func tableAwsDocDBClusterSnapshot(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListDocDBClusterSnapshot,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_cluster_snapshot_identifier",
 				Description: "The friendly name to identify the cluster snapshot.",

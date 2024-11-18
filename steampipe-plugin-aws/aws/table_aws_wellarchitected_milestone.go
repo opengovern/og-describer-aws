@@ -34,7 +34,7 @@ func tableAwsWellArchitectedMilestone(_ context.Context) *plugin.Table {
 				{Name: "workload_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "milestone_name",
 				Description: "The name of the milestone in a workload. Milestone names must be unique within a workload.",

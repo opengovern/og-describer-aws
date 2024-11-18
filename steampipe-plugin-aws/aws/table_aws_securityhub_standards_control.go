@@ -21,7 +21,7 @@ func tableAwsSecurityHubStandardsControl(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListSecurityHubStandardsControl,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "control_id",
 				Description: "The identifier of the security standard control.",

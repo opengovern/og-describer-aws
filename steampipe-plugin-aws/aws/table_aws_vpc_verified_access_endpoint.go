@@ -39,7 +39,7 @@ func tableAwsVpcVerifiedAccessEndpoint(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "verified_access_endpoint_id",
 				Description: "The ID of the AWS verified access endpoint.",

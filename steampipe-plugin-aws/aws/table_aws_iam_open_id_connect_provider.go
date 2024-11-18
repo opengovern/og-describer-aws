@@ -27,7 +27,7 @@ func tableAwsIamOpenIdConnectProvider(ctx context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"NoSuchEntity", "InvalidInput"}),
 			},
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) specifying the OIDC provider resource.",

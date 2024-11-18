@@ -23,7 +23,7 @@ func tableAwsCloudSearchDomain(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListCloudSearchDomain,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "domain_name",
 				Description: "A string that represents the name of a domain.",

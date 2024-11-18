@@ -18,7 +18,7 @@ func tableAwsEbsVolumeMetricReadOpsHourly(_ context.Context) *plugin.Table {
 			//Hydrate: opengovernance.ListEbsVolumeMetricReadOpsHourly,
 		},
 
-		Columns: awsKaytuRegionalColumns(kaytuCwMetricColumns(
+		Columns: awsOgRegionalColumns(ogCwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "volume_id",

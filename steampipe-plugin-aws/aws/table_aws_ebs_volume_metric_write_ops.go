@@ -18,7 +18,7 @@ func tableAwsEbsVolumeMetricWriteOps(_ context.Context) *plugin.Table {
 			//Hydrate: opengovernance.ListEbsVolumeMetricWriteOps,
 		},
 
-		Columns: awsKaytuRegionalColumns(kaytuCwMetricColumns(
+		Columns: awsOgRegionalColumns(ogCwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "volume_id",

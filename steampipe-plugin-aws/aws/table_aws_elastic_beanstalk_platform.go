@@ -19,7 +19,7 @@ func tableAwsElasticBeanstalkPlatform(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			//Hydrate: opengovernance.ListElasticBeanstalkPlatform,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "platform_name",
 				Description: "The name of the platform.",

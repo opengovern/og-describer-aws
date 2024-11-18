@@ -37,7 +37,7 @@ func tableAwsVpcVpnConnection(_ context.Context) *plugin.Table {
 				{Name: "transit_gateway_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "vpn_connection_id",
 				Description: "The ID of the VPN connection.",

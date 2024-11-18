@@ -21,7 +21,7 @@ func tableAwsSSMInventoryEntry(_ context.Context) *plugin.Table {
 				{Name: "type_name", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "instance_id",
 				Description: "The managed node ID targeted by the request to query inventory information.",

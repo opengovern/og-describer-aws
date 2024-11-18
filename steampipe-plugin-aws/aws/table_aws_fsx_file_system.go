@@ -26,7 +26,7 @@ func tableAwsFsxFileSystem(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListFSXFileSystem,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "file_system_id",
 				Description: "The system-generated, unique 17-digit ID of the file system.",

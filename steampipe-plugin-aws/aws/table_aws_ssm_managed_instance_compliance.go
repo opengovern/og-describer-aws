@@ -23,7 +23,7 @@ func tableAwsSSMManagedInstanceCompliance(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListSSMManagedInstanceCompliance,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "An ID for the compliance item.",

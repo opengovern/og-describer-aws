@@ -43,7 +43,7 @@ func tableAwsDmsReplicationInstance(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "replication_instance_identifier",
 				Description: "The identifier of the replication instance.",

@@ -23,7 +23,7 @@ func tableAwsElasticBeanstalkApplicationVersion(_ context.Context) *plugin.Table
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListElasticBeanstalkApplicationVersion,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "application_name",
 				Description: "The name of the application to which the application version belongs.",

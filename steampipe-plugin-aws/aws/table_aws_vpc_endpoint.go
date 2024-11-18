@@ -29,7 +29,7 @@ func tableAwsVpcEndpoint(_ context.Context) *plugin.Table {
 				{Name: "state", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "vpc_endpoint_id",
 				Description: "The ID of the VPC endpoint.",

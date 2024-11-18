@@ -30,7 +30,7 @@ func tableAwsVpcCustomerGateway(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "customer_gateway_id",
 				Description: "The ID of the customer gateway.",

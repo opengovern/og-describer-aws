@@ -23,7 +23,7 @@ func tableAwsCodeDeployApplication(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCodeDeployApplication,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "application_id",
 				Description: "The application ID.",

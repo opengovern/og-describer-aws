@@ -16,8 +16,8 @@ func tableAwsCostByRecordTypeMonthly(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCostExplorerByRecordTypeMonthly,
 		},
-		Columns: awsKaytuColumns(
-			kaytuCostExplorerColumns([]*plugin.Column{
+		Columns: awsOgColumns(
+			ogCostExplorerColumns([]*plugin.Column{
 				{
 					Name:        "linked_account_id",
 					Description: "The linked AWS Account ID.",

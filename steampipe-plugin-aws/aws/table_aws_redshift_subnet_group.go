@@ -26,7 +26,7 @@ func tableAwsRedshiftSubnetGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRedshiftSubnetGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cluster_subnet_group_name",
 				Description: "The name of the cluster subnet group.",

@@ -31,7 +31,7 @@ func commonColumnsForAccountResource() []*plugin.Column {
 	}
 }
 
-func commonKaytuColumnsForAccountResource() []*plugin.Column {
+func commonOgColumnsForAccountResource() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "partition",
@@ -66,7 +66,7 @@ func commonKaytuColumnsForAccountResource() []*plugin.Column {
 	}
 }
 
-func commonAwsKaytuRegionalColumns() []*plugin.Column {
+func commonAwsOgRegionalColumns() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "partition",
@@ -138,7 +138,7 @@ func commonColumnsForRegionalResource() []*plugin.Column {
 }
 
 // column definitions for the common columns
-func commonKaytuColumns() []*plugin.Column {
+func commonOgColumns() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "partition",
@@ -199,7 +199,7 @@ func commonColumnsForGlobalRegionResource() []*plugin.Column {
 }
 
 // Columns defined on every global-region-level resource (e.g. aws_waf_rule)
-func commonKaytuColumnsForGlobalRegionResource() []*plugin.Column {
+func commonOgColumnsForGlobalRegionResource() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "partition",
@@ -240,7 +240,7 @@ func commonKaytuColumnsForGlobalRegionResource() []*plugin.Column {
 		},
 	}
 }
-func commonAwsKaytuColumns() []*plugin.Column {
+func commonAwsOgColumns() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "partition",
@@ -303,8 +303,8 @@ func awsRegionalColumns(columns []*plugin.Column) []*plugin.Column {
 	}
 	return columns
 }
-func awsKaytuRegionalColumns(columns []*plugin.Column) []*plugin.Column {
-	commonCols := commonAwsKaytuRegionalColumns()
+func awsOgRegionalColumns(columns []*plugin.Column) []*plugin.Column {
+	commonCols := commonAwsOgRegionalColumns()
 	filteredCommonCols := make([]*plugin.Column, 0)
 	for _, col := range commonCols {
 		found := false
@@ -325,12 +325,12 @@ func awsKaytuRegionalColumns(columns []*plugin.Column) []*plugin.Column {
 func awsGlobalRegionColumns(columns []*plugin.Column) []*plugin.Column {
 	return append(columns, commonColumnsForGlobalRegionResource()...)
 }
-func awsKaytuGlobalRegionColumns(columns []*plugin.Column) []*plugin.Column {
-	return append(columns, commonKaytuColumnsForGlobalRegionResource()...)
+func awsOgGlobalRegionColumns(columns []*plugin.Column) []*plugin.Column {
+	return append(columns, commonOgColumnsForGlobalRegionResource()...)
 }
 
-func awsKaytuColumns(columns []*plugin.Column) []*plugin.Column {
-	commonCols := commonAwsKaytuColumns()
+func awsOgColumns(columns []*plugin.Column) []*plugin.Column {
+	commonCols := commonAwsOgColumns()
 	filteredCommonCols := make([]*plugin.Column, 0)
 	for _, col := range commonCols {
 		found := false
@@ -352,8 +352,8 @@ func awsAccountColumns(columns []*plugin.Column) []*plugin.Column {
 	return append(columns, commonColumnsForAccountResource()...)
 }
 
-func awsKaytuAccountColumns(columns []*plugin.Column) []*plugin.Column {
-	commonCols := commonKaytuColumnsForAccountResource()
+func awsOgAccountColumns(columns []*plugin.Column) []*plugin.Column {
+	commonCols := commonOgColumnsForAccountResource()
 	filteredCommonCols := make([]*plugin.Column, 0)
 	for _, col := range commonCols {
 		found := false
@@ -370,8 +370,8 @@ func awsKaytuAccountColumns(columns []*plugin.Column) []*plugin.Column {
 	return append(columns, filteredCommonCols...)
 }
 
-func awsKaytuDefaultColumns(columns []*plugin.Column) []*plugin.Column {
-	commonCols := commonKaytuColumns()
+func awsOgDefaultColumns(columns []*plugin.Column) []*plugin.Column {
+	commonCols := commonOgColumns()
 	filteredCommonCols := make([]*plugin.Column, 0)
 	for _, col := range commonCols {
 		found := false

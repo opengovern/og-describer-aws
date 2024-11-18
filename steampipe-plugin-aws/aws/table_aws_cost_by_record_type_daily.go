@@ -16,8 +16,8 @@ func tableAwsCostByRecordTypeDaily(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCostExplorerByRecordTypeDaily,
 		},
-		Columns: awsKaytuColumns(
-			kaytuCostExplorerColumns([]*plugin.Column{
+		Columns: awsOgColumns(
+			ogCostExplorerColumns([]*plugin.Column{
 
 				{
 					Name:        "linked_account_id",

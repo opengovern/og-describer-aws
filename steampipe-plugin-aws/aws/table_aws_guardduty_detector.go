@@ -34,7 +34,7 @@ func tableAwsGuardDutyDetector(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGuardDutyDetector,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "detector_id",
 				Description: "The ID of the detector.",

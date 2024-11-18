@@ -53,7 +53,7 @@ func tableAwsEc2LaunchTemplateVersion(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "launch_template_name",
 				Description: "The name of the launch template.",

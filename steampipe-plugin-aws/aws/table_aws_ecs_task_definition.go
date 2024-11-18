@@ -28,7 +28,7 @@ func tableAwsEcsTaskDefinition(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListECSTaskDefinition,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "task_definition_arn",
 				Description: "The Amazon Resource Name (ARN) that identifies the task definition.",

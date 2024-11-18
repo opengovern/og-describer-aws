@@ -23,7 +23,7 @@ func tableAwsDmsReplicationTask(_ context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"InvalidParameterValueException", "ResourceNotFoundFault"}),
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "replication_task_identifier",
 				Description: "The user-assigned replication task identifier or name.",

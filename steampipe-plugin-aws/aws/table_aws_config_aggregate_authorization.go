@@ -17,7 +17,7 @@ func tableAwsConfigAggregateAuthorization(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListConfigAggregationAuthorization,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the aggregation object.",

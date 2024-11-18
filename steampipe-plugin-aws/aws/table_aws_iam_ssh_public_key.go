@@ -19,7 +19,7 @@ func tableAwsIamSshPublicKey(_ context.Context) *plugin.Table {
 				{Name: "user_name", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "ssh_public_key_id",
 				Description: "The ID for this ssh public key key.",

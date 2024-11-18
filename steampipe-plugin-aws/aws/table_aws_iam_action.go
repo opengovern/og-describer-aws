@@ -26,7 +26,7 @@ func tableAwsIamAction(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listIamActions,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			// "Key" Columns
 			{
 				Name:        "action",

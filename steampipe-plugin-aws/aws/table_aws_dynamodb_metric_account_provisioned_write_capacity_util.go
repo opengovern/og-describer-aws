@@ -16,6 +16,6 @@ func tableAwsDynamoDBMetricAccountProvisionedWriteCapacityUtilization(_ context.
 			//Hydrate: opengovernance.ListDynamoDBMetricAccountProvisionedWriteCapacityUtilization,
 		},
 
-		Columns: awsKaytuRegionalColumns(kaytuCwMetricColumns([]*plugin.Column{})),
+		Columns: awsOgRegionalColumns(ogCwMetricColumns([]*plugin.Column{})),
 	}
 }

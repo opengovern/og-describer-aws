@@ -25,7 +25,7 @@ func tableAwsElastiCacheReplicationGroup(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListElastiCacheReplicationGroup,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "replication_group_id",
 				Description: "The identifier for the replication group.",

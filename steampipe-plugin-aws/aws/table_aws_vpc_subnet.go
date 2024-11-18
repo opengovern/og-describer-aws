@@ -37,7 +37,7 @@ func tableAwsVpcSubnet(_ context.Context) *plugin.Table {
 				{Name: "vpc_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "subnet_id",
 				Description: "Contains the unique ID to specify a subnet.",

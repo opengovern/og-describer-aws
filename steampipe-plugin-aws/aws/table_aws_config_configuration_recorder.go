@@ -30,7 +30,7 @@ func tableAwsConfigConfigurationRecorder(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the recorder. By default, AWS Config automatically assigns the name default when creating the configuration recorder.",

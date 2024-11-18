@@ -21,7 +21,7 @@ func tableAwsOrganizationsPolicy(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOrganizationsPolicy,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name of the policy.",

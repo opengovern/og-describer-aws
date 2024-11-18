@@ -24,7 +24,7 @@ func tableAwsSecurityHubMember(_ context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"InvalidInputException", "BadRequestException"}),
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "member_account_id",
 				Description: "The Amazon Web Services account ID of the member account.",

@@ -19,7 +19,7 @@ func tableAwsEmrBlockPublicAccessConfiguration(_ context.Context) *plugin.Table 
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEMRBlockPublicAccessConfiguration,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "block_public_security_group_rules",
 				Description: "Indicates whether Amazon EMR block public access is enabled (true) or disabled (false).",

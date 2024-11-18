@@ -25,7 +25,7 @@ func tableAwsGlobalAcceleratorAccelerator(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListGlobalAcceleratorAccelerator,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the accelerator.",

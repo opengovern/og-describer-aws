@@ -26,7 +26,7 @@ func tableAwsGlueSecurityConfiguration(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGlueSecurityConfiguration,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the security configuration.",

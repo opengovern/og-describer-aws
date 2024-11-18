@@ -16,7 +16,7 @@ func tableAwsCostForecastDaily(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCostExplorerForcastDaily,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "period_start",
 				Description: "Start timestamp for this cost metric",

@@ -20,7 +20,7 @@ func tableAwsEc2InstanceMetricCpuUtilizationHourly(_ context.Context) *plugin.Ta
 			Hydrate: opengovernance.ListEC2InstanceMetricCpuUtilizationHourly,
 		},
 
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "instance_id",
 				Description: "The ID of the instance.",

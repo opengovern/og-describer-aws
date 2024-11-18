@@ -2,11 +2,12 @@ package aws
 
 import (
 	"context"
+	"strings"
+
 	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
-	"strings"
 )
 
 //// TABLE DEFINITION
@@ -19,7 +20,7 @@ func tableAwsEcsClusterMetricCpuUtilizationHourly(_ context.Context) *plugin.Tab
 			ParentHydrate: opengovernance.ListECSCluster,
 			Hydrate:       listEcsClusterMetricCpuUtilizationHourly,
 		},
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cluster_name",

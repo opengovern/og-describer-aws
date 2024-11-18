@@ -36,7 +36,7 @@ func tableAwsRoute53ResolverEndpoint(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name that you assigned to the Resolver endpoint when you submitted a CreateResolverEndpoint.",

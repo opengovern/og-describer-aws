@@ -26,7 +26,7 @@ func tableAwsPinpointApp(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListPinPointApp,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The unique identifier for the application.",

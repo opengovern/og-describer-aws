@@ -26,7 +26,7 @@ func tableAwsSecurityHub(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListSecurityHubHub,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "hub_arn",
 				Description: "The ARN of the Hub resource that was retrieved.",

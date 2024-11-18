@@ -26,7 +26,7 @@ func tableAwsBackupSelection(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListBackupSelection,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "selection_name",
 				Description: "The display name of a resource selection document.",

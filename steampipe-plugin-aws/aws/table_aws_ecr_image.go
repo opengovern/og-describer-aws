@@ -23,7 +23,7 @@ func tableAwsEcrImage(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "repository_name",
 				Description: "The name of the repository.",

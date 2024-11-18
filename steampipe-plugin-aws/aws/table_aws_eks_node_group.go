@@ -30,7 +30,7 @@ func tableAwsEksNodeGroup(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "nodegroup_name",
 				Description: "The name associated with an Amazon EKS managed node group.",

@@ -21,7 +21,7 @@ func tableAwsDRSRecoveryInstance(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			//Hydrate: opengovernance.ListDRSRecoveryInstance,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "recovery_instance_id",
 				Description: "The id of the recovery instance.",

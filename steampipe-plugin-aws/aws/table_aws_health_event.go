@@ -28,7 +28,7 @@ func tableAwsHealthEvent(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the HealthEvent.",

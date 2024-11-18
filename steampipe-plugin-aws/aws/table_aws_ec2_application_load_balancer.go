@@ -38,7 +38,7 @@ func tableAwsEc2ApplicationLoadBalancer(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name of the Load Balancer that was provided during resource creation.",

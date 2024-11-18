@@ -36,7 +36,7 @@ func tableAwsEBSVolume(_ context.Context) *plugin.Table {
 				{Name: "volume_type", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "volume_id",
 				Description: "The ID of the volume.",

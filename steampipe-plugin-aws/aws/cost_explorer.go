@@ -2,8 +2,9 @@ package aws
 
 import (
 	"context"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 	"time"
+
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
@@ -128,7 +129,7 @@ func costExplorerColumns(columns []*plugin.Column) []*plugin.Column {
 	return append(columns, costExplorerColumnDefs...)
 }
 
-var kaytuCostExplorerColumnDefs = []*plugin.Column{
+var ogCostExplorerColumnDefs = []*plugin.Column{
 
 	{
 		Name:        "period_start",
@@ -241,8 +242,8 @@ var kaytuCostExplorerColumnDefs = []*plugin.Column{
 }
 
 // append the common aws cost explorer columns onto the column list
-func kaytuCostExplorerColumns(columns []*plugin.Column) []*plugin.Column {
-	return append(columns, kaytuCostExplorerColumnDefs...)
+func ogCostExplorerColumns(columns []*plugin.Column) []*plugin.Column {
+	return append(columns, ogCostExplorerColumnDefs...)
 }
 
 //// LIST FUNCTION

@@ -16,8 +16,8 @@ func tableAwsCostByServiceMonthly(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCostExplorerByServiceMonthly,
 		},
-		Columns: awsKaytuColumns(
-			kaytuCostExplorerColumns([]*plugin.Column{
+		Columns: awsOgColumns(
+			ogCostExplorerColumns([]*plugin.Column{
 				{
 					Name:        "service",
 					Description: "The name of the AWS service.",

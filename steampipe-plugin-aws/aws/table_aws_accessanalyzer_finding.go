@@ -36,7 +36,7 @@ func tableAwsAccessAnalyzerFinding(_ context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"ResourceNotFoundException", "ValidationException"}),
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "access_analyzer_arn",
 				Description: "The Amazon Resource Name (ARN) of the analyzer that generated the finding.",

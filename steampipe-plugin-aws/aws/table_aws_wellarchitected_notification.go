@@ -25,7 +25,7 @@ func tableAwsWellArchitectedNotification(_ context.Context) *plugin.Table {
 				{Name: "workload_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "current_lens_version",
 				Description: "The current version of the lens.",

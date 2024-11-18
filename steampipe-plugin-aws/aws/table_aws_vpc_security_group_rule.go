@@ -33,7 +33,7 @@ func tableAwsVpcSecurityGroupRule(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "security_group_rule_id",
 				Description: "The ID of the security group rule.",

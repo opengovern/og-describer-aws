@@ -24,7 +24,7 @@ func tableAwsDynamoDBTableExport(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListDynamoDbTableExport,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the export.",

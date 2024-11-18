@@ -34,7 +34,7 @@ func tableAwsRDSDBInstanceAutomatedBackup(_ context.Context) *plugin.Table {
 				{Name: "status", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_instance_identifier",
 				Description: "The friendly name to identify the DB Instance.",

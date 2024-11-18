@@ -32,7 +32,7 @@ func tableAwsCloudFormationStackResource(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "logical_resource_id",
 				Description: "The logical name of the resource specified in the template.",

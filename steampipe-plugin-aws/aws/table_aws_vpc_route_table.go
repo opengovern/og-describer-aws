@@ -29,7 +29,7 @@ func tableAwsVpcRouteTable(_ context.Context) *plugin.Table {
 				{Name: "vpc_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "route_table_id",
 				Description: "Contains the ID of the route table.",

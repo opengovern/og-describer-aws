@@ -22,7 +22,7 @@ func tableAwsIdentityStoreGroupMembership(_ context.Context) *plugin.Table {
 			},
 		},
 		GetMatrixItemFunc: SupportedRegionMatrix(identitystorev1.EndpointsID),
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "membership_id",
 				Description: "The identifier for a GroupMembership object in an identity store.",

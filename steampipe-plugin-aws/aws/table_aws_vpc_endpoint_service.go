@@ -25,7 +25,7 @@ func tableAwsVpcEndpointService(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListEC2VPCEndpointService,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "service_name",
 				Description: "The Amazon Resource Name (ARN) of the service.",

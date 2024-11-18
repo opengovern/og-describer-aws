@@ -42,7 +42,7 @@ func tableAwsEc2TransitGateway(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "transit_gateway_id",
 				Description: "The ID of the transit gateway.",

@@ -26,7 +26,7 @@ func tableAwsAPIGatewayV2Stage(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListApiGatewayV2Stage,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "stage_name",
 				Description: "The name of the stage",

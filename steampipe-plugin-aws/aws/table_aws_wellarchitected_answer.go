@@ -41,7 +41,7 @@ func tableAwsWellArchitectedAnswer(_ context.Context) *plugin.Table {
 				{Name: "milestone_number", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "question_id",
 				Description: "The ID of the question.",

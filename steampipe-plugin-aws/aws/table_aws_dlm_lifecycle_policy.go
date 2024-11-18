@@ -26,7 +26,7 @@ func tableAwsDLMLifecyclePolicy(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListDLMLifecyclePolicy,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "policy_id",
 				Description: "The identifier of the lifecycle policy.",

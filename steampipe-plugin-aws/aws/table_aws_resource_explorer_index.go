@@ -28,7 +28,7 @@ func tableAWSResourceExplorerIndex(_ context.Context) *plugin.Table {
 				{Name: "region", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuDefaultColumns([]*plugin.Column{
+		Columns: awsOgDefaultColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon resource name (ARN) of the index.",

@@ -33,7 +33,7 @@ func tableAwsAppAutoScalingPolicy(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "policy_arn",
 				Description: "The Amazon Resource Name (ARN) of the appautoscaling policy.",

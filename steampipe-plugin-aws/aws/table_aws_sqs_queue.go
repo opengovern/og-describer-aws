@@ -27,7 +27,7 @@ func tableAwsSqsQueue(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListSQSQueue,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "queue_url",
 				Description: "The URL of the Amazon SQS queue.",

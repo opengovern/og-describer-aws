@@ -41,7 +41,7 @@ func tableAwsEcsTask(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "task_arn",
 				Description: "The Amazon Resource Name (ARN) of the task.",

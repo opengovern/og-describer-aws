@@ -20,7 +20,7 @@ func tableAwsEcsClusterMetricCpuUtilizationDaily(_ context.Context) *plugin.Tabl
 			ParentHydrate: opengovernance.ListECSCluster,
 			Hydrate:       listEcsClusterMetricCpuUtilizationDaily,
 		},
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cluster_name",

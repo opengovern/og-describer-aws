@@ -20,7 +20,7 @@ func tableAwsEc2Fleet(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2Fleet,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "fleet_id",
 				Description: "The id of the fleet.",

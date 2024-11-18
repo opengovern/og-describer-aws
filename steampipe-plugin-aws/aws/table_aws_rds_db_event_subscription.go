@@ -29,7 +29,7 @@ func tableAwsRDSDBEventSubscription(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRDSDBEventSubscription,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cust_subscription_id",
 				Description: "The RDS event notification subscription Id.",

@@ -34,7 +34,7 @@ func tableAwsIamPolicy(_ context.Context) *plugin.Table {
 				// {Name: "path", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name that identifies the iam policy.",

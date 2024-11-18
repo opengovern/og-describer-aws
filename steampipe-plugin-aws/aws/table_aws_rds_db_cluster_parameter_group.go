@@ -26,7 +26,7 @@ func tableAwsRDSDBClusterParameterGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRDSDBClusterParameterGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name to identify the DB cluster parameter group.",

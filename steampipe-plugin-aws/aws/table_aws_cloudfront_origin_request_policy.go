@@ -25,7 +25,7 @@ func tableAwsCloudFrontOriginRequestPolicy(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCloudFrontOriginRequestPolicy,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "A unique name to identify the origin request policy.",

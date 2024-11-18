@@ -20,7 +20,7 @@ func tableAwsRDSGlobalCluster(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRDSGlobalCluster,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "global_cluster_identifier",
 				Description: "The id of the global cluster.",

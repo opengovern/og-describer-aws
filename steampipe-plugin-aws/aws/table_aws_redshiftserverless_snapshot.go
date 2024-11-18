@@ -20,7 +20,7 @@ func tableAwsRedshiftServerlessSnapshot(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRedshiftServerlessSnapshot,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "snapshot_name",
 				Description: "The name of the snapshot.",

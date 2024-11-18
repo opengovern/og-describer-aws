@@ -20,7 +20,7 @@ func tableAwsNeptuneDatabase(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListNeptuneDatabase,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_instance_identifier",
 				Description: "The id of the database.",

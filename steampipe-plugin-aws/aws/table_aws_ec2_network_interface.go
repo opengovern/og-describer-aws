@@ -48,7 +48,7 @@ func tableAwsEc2NetworkInterface(_ context.Context) *plugin.Table {
 				{Name: "status", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "network_interface_id",
 				Description: "The ID of the network interface.",

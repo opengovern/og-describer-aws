@@ -21,7 +21,7 @@ func tableAwsCodeCommitRepository(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListCodeCommitRepository,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "repository_name",
 				Description: "The repository's name.",

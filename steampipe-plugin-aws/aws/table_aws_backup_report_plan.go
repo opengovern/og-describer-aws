@@ -26,7 +26,7 @@ func tableAwsBackupReportPlan(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListBackupReportPlan,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "An Amazon Resource Name (ARN) that uniquely identifies a resource.",

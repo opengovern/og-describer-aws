@@ -32,7 +32,7 @@ func tableAwsWellArchitectedLens(_ context.Context) *plugin.Table {
 				{Name: "lens_type", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "lens_name",
 				Description: "The full name of the lens.",

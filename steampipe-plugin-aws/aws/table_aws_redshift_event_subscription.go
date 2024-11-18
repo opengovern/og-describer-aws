@@ -26,7 +26,7 @@ func tableAwsRedshiftEventSubscription(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRedshiftEventSubscription,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cust_subscription_id",
 				Description: "The name of the Amazon Redshift event notification subscription.",

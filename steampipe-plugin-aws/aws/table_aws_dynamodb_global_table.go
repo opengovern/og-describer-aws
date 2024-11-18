@@ -30,7 +30,7 @@ func tableAwsDynamoDBGlobalTable(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "global_table_name",
 				Description: "The global table name.",

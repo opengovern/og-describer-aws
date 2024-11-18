@@ -36,7 +36,7 @@ func tableAwsVpcVerifiedAccessGroup(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "verified_access_group_id",
 				Description: "The ID of the verified access group.",

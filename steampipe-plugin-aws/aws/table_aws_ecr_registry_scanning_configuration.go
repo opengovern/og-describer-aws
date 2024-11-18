@@ -22,7 +22,7 @@ func tableAwsEcrRegistryScanningConfiguration(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.GetECRRegistryScanningConfiguration,
 		},
 		GetMatrixItemFunc: SupportedRegionMatrix(ecrv1.EndpointsID),
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "registry_id",
 				Description: "The ID of the registry.",

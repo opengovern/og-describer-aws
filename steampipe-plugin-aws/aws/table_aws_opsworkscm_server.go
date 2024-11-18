@@ -20,7 +20,7 @@ func tableAwsOpsWorksCMServer(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOpsWorksCMServer,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "server_name",
 				Description: "The name of the server.",

@@ -20,7 +20,7 @@ func tableAwsGlueDataCatalogEncryptionSettings(_ context.Context) *plugin.Table 
 			Hydrate: opengovernance.ListGlueDataCatalogEncryptionSettings,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "encryption_at_rest",
 				Description: "A list of public keys to be used by the DataCatalogEncryptionSettingss for authentication.",

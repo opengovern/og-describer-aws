@@ -29,7 +29,7 @@ func tableAwsEksFargateProfile(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "fargate_profile_name",
 				Description: "The name of the Fargate profile.",

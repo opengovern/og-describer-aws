@@ -22,7 +22,7 @@ func tableAwsEksAddonVersion(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "addon_name",
 				Description: "The name of the add-on.",

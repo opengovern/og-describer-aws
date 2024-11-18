@@ -33,7 +33,7 @@ func tableAwsServiceQuotasDefaultServiceQuota(_ context.Context) *plugin.Table {
 				{Name: "service_code", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "quota_name",
 				Description: "The quota name.",

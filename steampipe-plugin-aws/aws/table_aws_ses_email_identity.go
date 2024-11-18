@@ -18,7 +18,7 @@ func tableAwsSESEmailIdentity(_ context.Context) *plugin.Table {
 			Hydrate: ListSESEmailIdentities,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "identity",
 				Description: "The email identity.",

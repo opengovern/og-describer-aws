@@ -20,7 +20,7 @@ func tableAwsElasticacheRedisMetricGetTypeCmdsHourly(_ context.Context) *plugin.
 			Hydrate:       listElastiCacheMetricGetTypeCmdsHourly,
 		},
 
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cache_cluster_id",

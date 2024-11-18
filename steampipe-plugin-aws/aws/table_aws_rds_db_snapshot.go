@@ -31,7 +31,7 @@ func tableAwsRDSDBSnapshot(_ context.Context) *plugin.Table {
 				{Name: "type", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_snapshot_identifier",
 				Description: "The friendly name to identify the DB snapshot.",

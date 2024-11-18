@@ -19,7 +19,7 @@ func tableAwsFMSPolicy(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			//Hydrate: opengovernance.ListFMSPolicy,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The id of the policy.",

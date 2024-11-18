@@ -30,7 +30,7 @@ func tableAwsAPIGatewayRestAPI(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListApiGatewayRestAPI,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The API's name",

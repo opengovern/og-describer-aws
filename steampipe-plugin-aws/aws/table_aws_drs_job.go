@@ -2,6 +2,7 @@ package aws
 
 import (
 	"context"
+
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -25,7 +26,7 @@ func tableAwsDRSJob(_ context.Context) *plugin.Table {
 			//Hydrate: opengovernance.ListDRSJob,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "job_id",
 				Description: "The ID of the job.",

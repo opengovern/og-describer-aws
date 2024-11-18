@@ -20,7 +20,7 @@ func tableAwsKeyspacesTable(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListKeyspacesTable,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "table_name",
 				Description: "The name of the table.",

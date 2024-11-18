@@ -20,8 +20,8 @@ func tableAwsCostByServiceUsageTypeMonthly(_ context.Context) *plugin.Table {
 				{Name: "usage_type", Operators: []string{"=", "<>"}, Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuColumns(
-			kaytuCostExplorerColumns([]*plugin.Column{
+		Columns: awsOgColumns(
+			ogCostExplorerColumns([]*plugin.Column{
 				{
 					Name:        "service",
 					Description: "The name of the AWS service.",

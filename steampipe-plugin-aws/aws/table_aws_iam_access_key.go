@@ -19,7 +19,7 @@ func tableAwsIamAccessKey(_ context.Context) *plugin.Table {
 				{Name: "user_name", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "access_key_id",
 				Description: "The ID for this access key.",

@@ -18,7 +18,7 @@ func tableAwsEc2ApplicationLoadBalancerMetricRequestCount(_ context.Context) *pl
 			//Hydrate: opengovernance.ListApplicationLoadBalancerMetricRequestCount,
 		},
 
-		Columns: awsKaytuRegionalColumns(kaytuCwMetricColumns(
+		Columns: awsOgRegionalColumns(ogCwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "name",

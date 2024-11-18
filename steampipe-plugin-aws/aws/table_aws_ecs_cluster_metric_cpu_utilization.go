@@ -21,7 +21,7 @@ func tableAwsEcsClusterMetricCpuUtilization(_ context.Context) *plugin.Table {
 			Hydrate:       listEcsClusterMetricCpuUtilization,
 		},
 
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cluster_name",

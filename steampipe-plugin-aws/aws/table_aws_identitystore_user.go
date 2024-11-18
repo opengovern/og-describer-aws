@@ -22,7 +22,7 @@ func tableAwsIdentityStoreUser(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "identity_store_id",
 				Description: "The globally unique identifier for the identity store.",

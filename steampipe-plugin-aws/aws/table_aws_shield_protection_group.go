@@ -20,7 +20,7 @@ func tableAwsShieldProtectionGroup(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListShieldProtectionGroup,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "protection_group_id",
 				Description: "The id of the protection group.",

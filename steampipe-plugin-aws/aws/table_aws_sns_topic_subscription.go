@@ -27,7 +27,7 @@ func tableAwsSnsTopicSubscription(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListSNSSubscription,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "subscription_arn",
 				Description: "Amazon Resource Name of the subscription.",

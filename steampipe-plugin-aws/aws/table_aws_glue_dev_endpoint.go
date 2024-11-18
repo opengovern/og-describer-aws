@@ -26,7 +26,7 @@ func tableAwsGlueDevEndpoint(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGlueDevEndpoint,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "endpoint_name",
 				Description: "The name of the DevEndpoint.",

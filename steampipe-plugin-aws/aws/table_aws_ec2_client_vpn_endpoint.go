@@ -31,7 +31,7 @@ func tableAwsEC2ClientVPNEndpoint(_ context.Context) *plugin.Table {
 				{Name: "transport_protocol", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "client_vpn_endpoint_id",
 				Description: "The ID of the client VPN endpoint.",

@@ -23,7 +23,7 @@ func tableAwsDmsEndpoint(_ context.Context) *plugin.Table {
 				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"ResourceNotFoundFault", "InvalidParameterValueException"}),
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "endpoint_identifier",
 				Description: "The database endpoint identifier.",

@@ -26,7 +26,7 @@ func tableAwsDRSRecoverySnapshot(_ context.Context) *plugin.Table {
 			//Hydrate: opengovernance.ListDRSRecoverySnapshot,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "snapshot_id",
 				Description: "The ID of the snapshot.",

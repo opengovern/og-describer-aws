@@ -33,7 +33,7 @@ func tableAwsAccountAlternateContact(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name associated with this alternate contact.",

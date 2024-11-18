@@ -17,7 +17,7 @@ func tableAwsCloudwatchLogResourcePolicy(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListCloudWatchLogResourcePolicy,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "policy_name",
 				Description: "The name of the resource policy.",

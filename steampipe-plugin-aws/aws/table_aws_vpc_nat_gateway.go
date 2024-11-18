@@ -29,7 +29,7 @@ func tableAwsVpcNatGateway(_ context.Context) *plugin.Table {
 				{Name: "vpc_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "nat_gateway_id",
 				Description: "The ID of the NAT gateway.",

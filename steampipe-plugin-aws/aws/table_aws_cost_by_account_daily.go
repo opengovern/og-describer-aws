@@ -16,8 +16,8 @@ func tableAwsCostByLinkedAccountDaily(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListCostExplorerByAccountDaily,
 		},
-		Columns: awsKaytuColumns(
-			kaytuCostExplorerColumns([]*plugin.Column{
+		Columns: awsOgColumns(
+			ogCostExplorerColumns([]*plugin.Column{
 				{
 					Name:        "linked_account_id",
 					Description: "The AWS Account ID.",

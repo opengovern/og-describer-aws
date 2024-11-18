@@ -18,7 +18,7 @@ func tableAwsEc2RegionalSettings(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2RegionalSettings,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "default_ebs_encryption_enabled",
 				Description: "Indicates whether encryption by default is enabled.",

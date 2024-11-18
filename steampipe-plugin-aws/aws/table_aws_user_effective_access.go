@@ -18,7 +18,7 @@ func tableAwsUserEffectiveAccess(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListUserEffectiveAccess,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "Contains ID to identify a role assignment uniquely.",

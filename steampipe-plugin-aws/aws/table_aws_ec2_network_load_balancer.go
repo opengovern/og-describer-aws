@@ -25,7 +25,7 @@ func tableAwsEc2NetworkLoadBalancer(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listELBV2LoadBalancer(string(elbv2types.LoadBalancerTypeEnumNetwork)),
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name of the Load Balancer",

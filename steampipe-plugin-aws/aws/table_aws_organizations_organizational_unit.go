@@ -20,7 +20,7 @@ func tableAwsOrganizationsOrganizationalUnit(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOrganizationsOrganizationalUnit,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name of this OU.",

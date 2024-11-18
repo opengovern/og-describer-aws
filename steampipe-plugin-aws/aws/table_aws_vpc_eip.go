@@ -34,7 +34,7 @@ func tableAwsVpcEip(_ context.Context) *plugin.Table {
 				{Name: "public_ip", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "allocation_id",
 				Description: "Contains the ID representing the allocation of the address for use with EC2-VPC.",

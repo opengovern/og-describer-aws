@@ -23,7 +23,7 @@ func tableAwsOAMLink(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListOAMLink,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The random ID string that Amazon Web Service generates as part of the link ARN.",

@@ -26,7 +26,7 @@ func tableAwsBackupLegalHold(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListBackupLegalHold,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "legal_hold_id",
 				Description: "ID of specific legal hold on one or more recovery points.",

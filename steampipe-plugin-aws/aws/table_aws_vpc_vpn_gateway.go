@@ -30,7 +30,7 @@ func tableAwsVpcVpnGateway(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "vpn_gateway_id",
 				Description: "The ID of the virtual private gateway.",

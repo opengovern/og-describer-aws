@@ -27,7 +27,7 @@ func tableAwsElastiCacheParameterGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListElastiCacheParameterGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cache_parameter_group_name",
 				Description: "The name of the cache parameter group.",

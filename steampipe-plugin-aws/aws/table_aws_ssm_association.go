@@ -32,7 +32,7 @@ func tableAwsSSMAssociation(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "association_id",
 				Description: "The ID created by the system when you create an association.",

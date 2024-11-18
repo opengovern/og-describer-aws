@@ -40,7 +40,7 @@ func tableAwsVpcFlowLogEvent(_ context.Context) *plugin.Table {
 			KeyColumns: tableAwsVpcFlowLogEventListKeyColumns(),
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			// Top columns
 			{Name: "log_group_name", Type: proto.ColumnType_STRING, Transform: transform.FromQual("log_group_name"), Description: "The name of the log group to which this event belongs."},
 			{Name: "log_stream_name", Type: proto.ColumnType_STRING, Description: "The name of the log stream to which this event belongs.", Transform: transform.FromField("Description.LogEvent.LogStreamName")},

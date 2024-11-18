@@ -28,7 +28,7 @@ func tableAwsVpcRoute(_ context.Context) *plugin.Table {
 			ParentHydrate: opengovernance.ListEC2RouteTable,
 			Hydrate:       listAwsVpcRoute,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "route_table_id",
 				Description: "The ID of the route table containing the route.",

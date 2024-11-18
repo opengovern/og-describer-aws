@@ -24,7 +24,7 @@ func tableAwsServerlessApplicationRepositoryApplication(_ context.Context) *plug
 			Hydrate: opengovernance.ListServerlessApplicationRepositoryApplication,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the application.",

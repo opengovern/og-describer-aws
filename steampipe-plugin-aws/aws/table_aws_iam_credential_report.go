@@ -17,7 +17,7 @@ func tableAwsIamCredentialReport(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListIAMCredentialReport,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "user_name",
 				Description: "The friendly name of the user.",

@@ -25,7 +25,7 @@ func tableAwsEc2GatewayLoadBalancer(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listELBV2LoadBalancer(string(elbv2types.LoadBalancerTypeEnumGateway)),
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the load balancer.",

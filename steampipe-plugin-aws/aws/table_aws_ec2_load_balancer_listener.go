@@ -27,7 +27,7 @@ func tableAwsEc2ApplicationLoadBalancerListener(_ context.Context) *plugin.Table
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListElasticLoadBalancingV2Listener,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the listener.",

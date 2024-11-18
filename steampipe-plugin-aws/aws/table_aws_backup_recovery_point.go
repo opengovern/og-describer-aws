@@ -40,7 +40,7 @@ func tableAwsBackupRecoveryPoint(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "backup_vault_name",
 				Description: "The name of a logical container where backups are stored.",

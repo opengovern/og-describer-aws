@@ -27,7 +27,7 @@ func tableAwsKinesisStream(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListKinesisStream,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "stream_name",
 				Description: "The name of the stream being described.",

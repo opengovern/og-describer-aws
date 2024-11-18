@@ -13,7 +13,7 @@ import (
 )
 
 // Embed the JSON file containing resource types
-//
+
 //go:embed resource-types.json
 var ResourceTypes string
 

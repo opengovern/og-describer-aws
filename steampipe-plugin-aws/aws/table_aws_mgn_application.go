@@ -27,7 +27,7 @@ func tableAwsMGNApplication(_ context.Context) *plugin.Table {
 				{Name: "is_archived", Require: plugin.Optional, Operators: []string{"=", "<>"}},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "Application name.",

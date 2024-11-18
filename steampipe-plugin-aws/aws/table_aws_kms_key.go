@@ -26,7 +26,7 @@ func tableAwsKmsKey(ctx context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListKMSKey,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "Unique identifier of the key.",

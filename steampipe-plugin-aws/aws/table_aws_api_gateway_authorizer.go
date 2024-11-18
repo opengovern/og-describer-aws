@@ -27,7 +27,7 @@ func tableAwsAPIGatewayAuthorizer(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListApiGatewayAuthorizer,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The identifier for the authorizer resource",

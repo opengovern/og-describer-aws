@@ -32,7 +32,7 @@ func tableAwsCodeArtifactDomain(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListCodeArtifactDomain,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the domain.",

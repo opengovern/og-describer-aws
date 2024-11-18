@@ -63,5 +63,5 @@
 	<tr><td>account_id</td><td>The AWS Account ID in which the resource is located.</td></tr>
 	<tr><td>og_account_id</td><td>The Platform Account ID in which the resource is located.</td></tr>
 	<tr><td>og_resource_id</td><td>The unique ID of the resource in opengovernance.</td></tr>
-	<tr><td>kaytu_metadata</td><td>Platform Metadata of the AWS resource.</td></tr>
+	<tr><td>og_metadata</td><td>Platform Metadata of the AWS resource.</td></tr>
 </table>

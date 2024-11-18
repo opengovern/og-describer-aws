@@ -28,7 +28,7 @@ func tableAwsSSMManagedInstance(_ context.Context) *plugin.Table {
 				{Name: "association_status", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance.",

@@ -27,7 +27,7 @@ func tableAwsKinesisAnalyticsV2Application(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListKinesisAnalyticsV2Application,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "application_name",
 				Description: "The name of the application.",

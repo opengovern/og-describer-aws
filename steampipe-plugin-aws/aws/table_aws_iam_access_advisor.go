@@ -17,7 +17,7 @@ func tableAwsIamAccessAdvisor(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListIAMAccessAdvisor,
 		},
-		Columns: awsKaytuGlobalRegionColumns([]*plugin.Column{
+		Columns: awsOgGlobalRegionColumns([]*plugin.Column{
 			{
 				Name:        "principal_arn",
 				Description: "The ARN of the IAM resource (user, group, role, or managed policy) used to generate information about when the resource was last used in an attempt to access an AWS service.",

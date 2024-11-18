@@ -26,7 +26,7 @@ func tableAwsGlacierVault(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGlacierVault,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "vault_name",
 				Description: "The name of the vault.",

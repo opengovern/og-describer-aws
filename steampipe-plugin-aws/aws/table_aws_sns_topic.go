@@ -26,7 +26,7 @@ func tableAwsSnsTopic(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListSNSTopic,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "topic_arn",
 				Description: "Amazon Resource Name (ARN) of the Topic.",

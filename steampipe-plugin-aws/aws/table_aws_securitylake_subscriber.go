@@ -26,7 +26,7 @@ func tableAwsSecurityLakeSubscriber(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListSecurityLakeSubscriber,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "subscriber_name",
 				Description: "The name of your Amazon Security Lake subscriber account.",

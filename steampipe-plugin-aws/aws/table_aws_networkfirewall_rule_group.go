@@ -23,7 +23,7 @@ func tableAwsNetworkFirewallRuleGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListNetworkFirewallRuleGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "rule_group_name",
 				Description: "The descriptive name of the rule group.",

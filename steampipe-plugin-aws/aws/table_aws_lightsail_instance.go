@@ -29,7 +29,7 @@ func tableAwsLightsailInstance(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListLightsailInstance,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the instance.",

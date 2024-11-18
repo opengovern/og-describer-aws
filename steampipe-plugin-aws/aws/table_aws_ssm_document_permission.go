@@ -20,7 +20,7 @@ func tableAwsSSMDocumentPermission(_ context.Context) *plugin.Table {
 				{Name: "document_name", Require: plugin.Required},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "document_name",
 				Description: "The name of the Systems Manager document.",

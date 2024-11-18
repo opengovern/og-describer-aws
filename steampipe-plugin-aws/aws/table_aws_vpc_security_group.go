@@ -29,7 +29,7 @@ func tableAwsVpcSecurityGroup(_ context.Context) *plugin.Table {
 				{Name: "vpc_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "group_name",
 				Description: "The friendly name that identifies the security group.",

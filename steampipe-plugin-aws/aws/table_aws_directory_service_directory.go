@@ -32,7 +32,7 @@ func tableAwsDirectoryServiceDirectory(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The fully qualified name of the directory.",

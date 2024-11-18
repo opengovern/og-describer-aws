@@ -18,7 +18,7 @@ func tableAwsEc2NetworkLoadBalancerMetricNetFlowCountDaily(_ context.Context) *p
 			//Hydrate: opengovernance.ListNetworkLoadBalancerMetricNetFlowCountDaily,
 		},
 
-		Columns: awsKaytuRegionalColumns(kaytuCwMetricColumns(
+		Columns: awsOgRegionalColumns(ogCwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "name",

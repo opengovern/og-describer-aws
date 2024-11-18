@@ -20,7 +20,7 @@ func tableAwsAMPWorkspace(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListAMPWorkspace,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "workspace_id",
 				Description: "The id of the workspace.",

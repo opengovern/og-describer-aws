@@ -23,7 +23,7 @@ func tableAwsAppConfigApplication(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAppConfigApplication,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The application ID.",

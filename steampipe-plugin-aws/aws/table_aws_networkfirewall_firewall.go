@@ -29,7 +29,7 @@ func tableAwsNetworkFirewallFirewall(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListNetworkFirewallFirewall,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the firewall",

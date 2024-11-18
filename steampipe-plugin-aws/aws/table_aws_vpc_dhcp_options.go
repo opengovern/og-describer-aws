@@ -30,7 +30,7 @@ func tableAwsVpcDhcpOptions(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "dhcp_options_id",
 				Description: "The ID of the set of DHCP options.",

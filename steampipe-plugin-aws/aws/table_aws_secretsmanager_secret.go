@@ -28,7 +28,7 @@ func tableAwsSecretsManagerSecret(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListSecretsManagerSecret,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The friendly name of the secret.",

@@ -18,7 +18,7 @@ func tableAwsSecurityLakeDataLake(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.GetSecurityLakeDataLake,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "kms_key_id",
 				Description: "The id of KMS encryption key used by Amazon Security Lake to encrypt the Security Lake object.",

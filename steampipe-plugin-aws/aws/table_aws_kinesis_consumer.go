@@ -27,7 +27,7 @@ func tableAwsKinesisConsumer(_ context.Context) *plugin.Table {
 			ParentHydrate: opengovernance.ListKinesisStream,
 			Hydrate:       opengovernance.ListKinesisConsumer,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "consumer_name",
 				Description: "The name of the consumer.",

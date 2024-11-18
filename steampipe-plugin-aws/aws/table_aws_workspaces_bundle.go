@@ -20,7 +20,7 @@ func tableAwsWorkspacesBundle(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListWorkspacesBundle,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "bundle_id",
 				Description: "The id of the bundle.",

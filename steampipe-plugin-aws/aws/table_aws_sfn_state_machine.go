@@ -24,7 +24,7 @@ func tableAwsStepFunctionsStateMachine(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListStepFunctionsStateMachine,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the state machine.",

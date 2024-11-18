@@ -26,7 +26,7 @@ func tableAwsServicecatalogPortfolio(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListServiceCatalogPortfolio,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "display_name",
 				Description: "The name to use for display purposes.",

@@ -17,7 +17,7 @@ func tableAwsRAMResourceAssociation(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRamResourceAssociation,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "resource_share_name",
 				Description: "The name of the resource share.",

@@ -23,7 +23,7 @@ func tableAwsElasticsearchDomain(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListESDomain,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "domain_name",
 				Description: "The name of the domain.",

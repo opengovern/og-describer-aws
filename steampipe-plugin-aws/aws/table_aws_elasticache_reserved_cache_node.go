@@ -32,7 +32,7 @@ func tableAwsElastiCacheReservedCacheNode(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "reserved_cache_node_id",
 				Description: "The unique identifier for the reservation.",

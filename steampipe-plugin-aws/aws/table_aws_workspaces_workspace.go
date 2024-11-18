@@ -31,7 +31,7 @@ func tableAwsWorkspace(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "workspace_id",
 				Description: "The id of the WorkSpace.",

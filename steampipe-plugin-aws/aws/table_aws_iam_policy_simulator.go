@@ -2,6 +2,7 @@ package aws
 
 import (
 	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -18,7 +19,7 @@ func tableAwsIamPolicySimulator(_ context.Context) *plugin.Table {
 			KeyColumns: plugin.AllColumns([]string{"principal_arn", "action", "resource_arn"}),
 			Hydrate:    listIamPolicySimulation,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			// "Key" Columns
 			{
 				Name:        "principal_arn",

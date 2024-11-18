@@ -26,7 +26,7 @@ func tableAwsAPIGatewayV2Route(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListApiGatewayV2Route,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "route_key",
 				Description: "The route key for the route.",

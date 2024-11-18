@@ -24,7 +24,7 @@ func tableAwsLambdaFunction(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListLambdaFunction,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the function.",

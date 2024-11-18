@@ -26,7 +26,7 @@ func tableAwsCodepipelinePipeline(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListCodePipelinePipeline,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the pipeline.",

@@ -26,7 +26,7 @@ func tableAwsDocDBCluster(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListDocDBCluster,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_cluster_identifier",
 				Description: "Contains a user-supplied cluster identifier. This identifier is the unique key that identifies a cluster.",

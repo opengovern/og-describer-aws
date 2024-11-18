@@ -25,7 +25,7 @@ func tableAwsAPIGatewayV2DomainName(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListApiGatewayV2DomainName,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "domain_name",
 				Description: "The name of the DomainName resource",

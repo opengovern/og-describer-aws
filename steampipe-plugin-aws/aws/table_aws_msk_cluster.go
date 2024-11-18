@@ -2,6 +2,7 @@ package aws
 
 import (
 	"context"
+
 	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -26,7 +27,7 @@ func tableAwsMSKCluster(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListKafkaCluster,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) that uniquely identifies the Cluster.",

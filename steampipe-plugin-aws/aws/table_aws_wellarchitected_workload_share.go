@@ -29,7 +29,7 @@ func tableAwsWellArchitectedWorkloadShare(_ context.Context) *plugin.Table {
 				{Name: "status", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "workload_id",
 				Description: "The ID assigned to the workload.",

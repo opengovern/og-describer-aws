@@ -17,7 +17,7 @@ func tableAwsSESDomainIdentity(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: ListSESDomainIdentities,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "identity",
 				Description: "The domain identity.",

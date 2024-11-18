@@ -37,7 +37,7 @@ func tableAwsRDSReservedDBInstance(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "reserved_db_instance_id",
 				Description: "The unique identifier for the reservation.",

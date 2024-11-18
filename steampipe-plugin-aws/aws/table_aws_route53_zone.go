@@ -24,7 +24,7 @@ func tableAwsRoute53Zone(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRoute53HostedZone,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the domain. For public hosted zones, this is the name that is registered with your DNS registrar.",

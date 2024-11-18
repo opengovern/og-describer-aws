@@ -26,7 +26,7 @@ func tableAwsEcrRegistry(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListECRRegistry,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "registry_id",
 				Description: "The Registry ID.",

@@ -26,7 +26,7 @@ func tableAwsRegion(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2Region,
 		},
-		Columns: awsKaytuDefaultColumns([]*plugin.Column{
+		Columns: awsOgDefaultColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the region",
@@ -61,7 +61,7 @@ func tableAwsRegion(_ context.Context) *plugin.Table {
 				Name:        "region",
 				Description: "The AWS Region in which the resource is located.",
 				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Description.Region.RegionName"), // Can't use awskaytuRegionalColumn function because of this
+				Transform:   transform.FromField("Description.Region.RegionName"), // Can't use awsogRegionalColumn function because of this
 			},
 		}),
 	}

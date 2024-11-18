@@ -23,7 +23,7 @@ func tableAwsRoute53TrafficPolicyInstance(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRoute53TrafficPolicyInstance,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The DNS name for which Amazon Route 53 responds to queries.",

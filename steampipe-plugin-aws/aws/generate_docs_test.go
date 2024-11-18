@@ -72,7 +72,7 @@ func TestGenerateTableList(t *testing.T) {
 
 	plg := Plugin(context.Background())
 
-	awsResourceType, err := os.ReadFile("../../../kaytu-deploy/kaytu/inventory-data/aws-resource-types.json")
+	awsResourceType, err := os.ReadFile("../../../og-deploy/og/inventory-data/aws-resource-types.json")
 	if err != nil {
 		panic(err)
 	}

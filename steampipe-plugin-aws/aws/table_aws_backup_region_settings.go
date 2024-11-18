@@ -24,7 +24,7 @@ func tableAwsBackupRegionSetting(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListBackupRegionSetting,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "resource_type_management_preference",
 				Description: "Resource Type Management Preference.",

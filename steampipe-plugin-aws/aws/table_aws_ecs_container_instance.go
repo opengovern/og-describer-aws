@@ -17,7 +17,7 @@ func tableAwsEcsContainerInstance(_ context.Context) *plugin.Table {
 			ParentHydrate: opengovernance.ListECSCluster,
 			Hydrate:       opengovernance.ListECSContainerInstance,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The namespace Amazon Resource Name (ARN) of the container instance.",

@@ -30,7 +30,7 @@ func tableAwsElasticBeanstalkEnvironment(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "environment_name",
 				Description: "The name of this environment.",

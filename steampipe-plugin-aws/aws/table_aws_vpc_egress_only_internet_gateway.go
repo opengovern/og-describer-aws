@@ -25,7 +25,7 @@ func tableAwsVpcEgressOnlyIGW(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListEC2EgressOnlyInternetGateway,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The ID of the egress-only internet gateway.",

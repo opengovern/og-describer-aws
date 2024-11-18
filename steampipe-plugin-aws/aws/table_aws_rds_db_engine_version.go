@@ -21,7 +21,7 @@ func tableAwsRDSDBEngineVersion(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRDSDBEngineVersion,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "engine",
 				Description: "The name of the database engine.",

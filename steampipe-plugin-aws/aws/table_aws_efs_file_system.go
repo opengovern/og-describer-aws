@@ -28,7 +28,7 @@ func tableAwsElasticFileSystem(_ context.Context) *plugin.Table {
 				{Name: "creation_token", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "Name of the file system provided by the user.",

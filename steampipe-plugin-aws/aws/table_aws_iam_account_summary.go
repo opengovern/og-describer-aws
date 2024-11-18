@@ -20,7 +20,7 @@ func tableAwsIamAccountSummary(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListIAMAccountSummary,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "access_keys_per_user_quota",
 				Description: "Specifies the allowed quota of access keys per user.",

@@ -28,7 +28,7 @@ func tableAwsLambdaLayerVersion(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "layer_name",
 				Description: "The name of the layer.",

@@ -28,7 +28,7 @@ func tableAwsCloudFormationStackSet(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "stack_set_id",
 				Description: "The ID of the stack set.",

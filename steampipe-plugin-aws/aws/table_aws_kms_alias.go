@@ -18,7 +18,7 @@ func tableAwsKmsAlias(ctx context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListKMSAlias,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "alias_name",
 				Description: "String that contains the alias. This value begins with alias/.",

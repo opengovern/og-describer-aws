@@ -28,7 +28,7 @@ func tableAwsRedshiftServerlessWorkgroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListRedshiftServerlessWorkgroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "workgroup_name",
 				Description: "The name of the workgroup.",

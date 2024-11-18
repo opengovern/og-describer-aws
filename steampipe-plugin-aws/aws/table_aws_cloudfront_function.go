@@ -26,7 +26,7 @@ func tableAwsCloudFrontFunction(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListCloudFrontFunction,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the CloudFront function.",

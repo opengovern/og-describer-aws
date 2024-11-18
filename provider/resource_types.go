@@ -113,7 +113,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::RouteTable",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Route53RouteTable.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Route53RouteTable.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -166,7 +166,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::IAM::Role",
 		Tags: map[string][]string{
 			"category": {"Management & Governance"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/IdentityAccessManagementRole.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/IdentityAccessManagementRole.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -309,7 +309,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::InternetGateway",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/InternetGateway.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/InternetGateway.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -362,7 +362,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::ApiGateway::RestApi",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ApiGateway.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ApiGateway.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -385,7 +385,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::AutoScaling::AutoScalingGroup",
 		Tags: map[string][]string{
 			"category": {"Compute"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2AutoScaling.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AutoScaling.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -418,7 +418,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EFS::FileSystem",
 		Tags: map[string][]string{
 			"category": {"Storage"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticFileSystem.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticFileSystem.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -431,7 +431,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::Kafka::Cluster",
 		Tags: map[string][]string{
 			"category": {"PaaS"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ManagedStreamingForKafka.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ManagedStreamingForKafka.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -734,7 +734,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::ElastiCache::Cluster",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElastiCache.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElastiCache.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -757,7 +757,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::S3::Bucket",
 		Tags: map[string][]string{
 			"category": {"Storage"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/SimpleStorageBucket.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/SimpleStorageBucket.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -830,7 +830,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::Volume",
 		Tags: map[string][]string{
 			"category": {"Storage"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticBlockStoreVolume.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreVolume.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -933,7 +933,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::Lambda::Function",
 		Tags: map[string][]string{
 			"category": {"Serverless"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Lambda.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Lambda.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -1516,7 +1516,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::RDS::DBInstance",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Rds.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Rds.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -1832,7 +1832,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::CloudFront::Distribution",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/CloudFront.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/CloudFront.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2407,7 +2407,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::Instance",
 		Tags: map[string][]string{
 			"category": {"Compute"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2Instance.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2420,7 +2420,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::InstanceMetricCpuUtilizationHourly",
 		Tags: map[string][]string{
 			"category": {"Compute"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2Instance.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2463,7 +2463,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::ECR::Repository",
 		Tags: map[string][]string{
 			"category": {"Containers"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2476,7 +2476,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::ECR::Registry",
 		Tags: map[string][]string{
 			"category": {"Containers"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2682,7 +2682,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::Image",
 		Tags: map[string][]string{
 			"category": {"Compute"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Ec2AmiResource.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AmiResource.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2737,7 +2737,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::DocDB::Cluster",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DocumentDb.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2750,7 +2750,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::DocDB::ClusterSnapshot",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DocumentDb.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -2893,7 +2893,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::Neptune::Database",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Neptune.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Neptune.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3206,7 +3206,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::CustomerGateway",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcCustomerGateway.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcCustomerGateway.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3259,7 +3259,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::VPNGateway",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcVpnGateway.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcVpnGateway.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3502,7 +3502,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::NatGateway",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/VpcNatGateway.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcNatGateway.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3605,7 +3605,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::VolumeSnapshot",
 		Tags: map[string][]string{
 			"category": {"Storage"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticBlockStoreSnapshot.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreSnapshot.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3668,7 +3668,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::ElasticLoadBalancing::LoadBalancer",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/ElasticLoadBalancingClassicLoadBalancer.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticLoadBalancingClassicLoadBalancer.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3721,7 +3721,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::EC2::VPC",
 		Tags: map[string][]string{
 			"category": {"Networking"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/Vpc.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Vpc.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},
@@ -3864,7 +3864,7 @@ var ResourceTypes = map[string]model.ResourceType{
 		ResourceName:    "AWS::DynamoDb::Table",
 		Tags: map[string][]string{
 			"category": {"Database"},
-			"logo_uri": {"https://raw.githubusercontent.com/kaytu-io/awsicons/master/svg-export/icons/DynamoDbTable.svg"},
+			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DynamoDbTable.svg"},
 		},
 		Labels:        map[string]string{},
 		Annotations:   map[string]string{},

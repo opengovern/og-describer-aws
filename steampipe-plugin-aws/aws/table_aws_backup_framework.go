@@ -25,7 +25,7 @@ func tableAwsBackupFramework(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListBackupFramework,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "framework_name",
 				Description: "The unique name of a backup framework.",

@@ -31,7 +31,7 @@ func tableAwsDaxCluster(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cluster_name",
 				Description: "The name of the DAX cluster.",

@@ -41,7 +41,7 @@ func tableAwsEc2CapacityReservation(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "capacity_reservation_id",
 				Description: "The ID of the capacity reservation.",

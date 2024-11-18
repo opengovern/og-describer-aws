@@ -23,7 +23,7 @@ func tableAwsRoute53Domain(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRoute53Domain,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "domain_name",
 				Description: "The name of the domain.",

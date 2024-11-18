@@ -18,7 +18,7 @@ func tableAwsVpcNatGatewayMetricBytesOutToDestination(_ context.Context) *plugin
 			//ParentHydrate: listVpcNatGateways,
 			//Hydrate:       listVpcNatGatewayMetricBytesOutToDestination,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "nat_gateway_id",
 				Description: "The ID of the NAT gateway.",

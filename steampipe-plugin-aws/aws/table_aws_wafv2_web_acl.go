@@ -26,7 +26,7 @@ func tableAwsWafv2WebAcl(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListWAFv2WebACL,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the Web ACL. You cannot change the name of a Web ACL after you create it.",

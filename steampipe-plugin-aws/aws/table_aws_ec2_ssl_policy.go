@@ -26,7 +26,7 @@ func tableAwsEc2SslPolicy(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListElasticLoadBalancingV2SslPolicy,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the policy.",

@@ -29,7 +29,7 @@ func tableAwsWellArchitectedShareInvitation(_ context.Context) *plugin.Table {
 				{Name: "share_resource_type", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "lens_arn",
 				Description: "The ARN for the lens.",

@@ -30,7 +30,7 @@ func tableAwsMacie2ClassificationJob(_ context.Context) *plugin.Table {
 				{Name: "job_type", Require: plugin.Optional, Operators: []string{"=", "<>"}},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The custom name of the job.",

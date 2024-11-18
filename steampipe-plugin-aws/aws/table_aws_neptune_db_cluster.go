@@ -28,7 +28,7 @@ func tableAwsNeptuneDBCluster(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListNeptuneDatabaseCluster,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_cluster_identifier",
 				Description: "Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster.",

@@ -26,7 +26,7 @@ func tableAwsAuditManagerControl(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAuditManagerControl,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the specified control.",

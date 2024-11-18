@@ -17,7 +17,7 @@ func tableAwsSsoAdminInstance(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListSSOAdminInstance,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The ARN of the SSO instance under which the operation will be executed.",

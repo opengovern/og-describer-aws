@@ -25,7 +25,7 @@ func tableAwsIamServerCertificate(_ context.Context) *plugin.Table {
 			Hydrate:    opengovernance.GetIAMServerCertificate,
 			KeyColumns: plugin.AllColumns([]string{"name"}),
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name that identifies the server certificate.",

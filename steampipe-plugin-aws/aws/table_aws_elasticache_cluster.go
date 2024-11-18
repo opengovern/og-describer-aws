@@ -27,7 +27,7 @@ func tableAwsElastiCacheCluster(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListElastiCacheCluster,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cache_cluster_id",
 				Description: "An unique identifier for ElastiCache cluster.",

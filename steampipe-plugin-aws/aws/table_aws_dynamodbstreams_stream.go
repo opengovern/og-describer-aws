@@ -20,7 +20,7 @@ func tableAwsDynamodbstreamsStream(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListDynamoDbStream,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "stream_label",
 				Description: "The label of the stream.",

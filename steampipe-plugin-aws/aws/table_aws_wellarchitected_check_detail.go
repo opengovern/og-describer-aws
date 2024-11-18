@@ -36,7 +36,7 @@ func tableAwsWellArchitectedCheckDetail(_ context.Context) *plugin.Table {
 				{Name: "question_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "Trusted Advisor check ID.",

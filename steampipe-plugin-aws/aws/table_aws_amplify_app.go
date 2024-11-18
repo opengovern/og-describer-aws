@@ -26,7 +26,7 @@ func tableAwsAmplifyApp(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAmplifyApp,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "app_id",
 				Description: "The unique ID of the Amplify app.",

@@ -30,7 +30,7 @@ func tableAwsSageMakerNotebookInstance(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the notebook instance.",
@@ -150,7 +150,7 @@ func tableAwsSageMakerNotebookInstance(_ context.Context) *plugin.Table {
 				Name:        "tags",
 				Description: resourceInterfaceDescription("tags"),
 				Type:        proto.ColumnType_JSON,
-				Transform:   transform.From(kaytuSageMakerNotebookInstanceTurbotTags),
+				Transform:   transform.From(ogSageMakerNotebookInstanceTurbotTags),
 			},
 			{
 				Name:        "akas",
@@ -168,7 +168,7 @@ func tableAwsSageMakerNotebookInstance(_ context.Context) *plugin.Table {
 
 //// TRANSFORM FUNCTION
 
-func kaytuSageMakerNotebookInstanceTurbotTags(_ context.Context, d *transform.TransformData) (interface{},
+func ogSageMakerNotebookInstanceTurbotTags(_ context.Context, d *transform.TransformData) (interface{},
 	error) {
 	tags := d.HydrateItem.(opengovernance.SageMakerNotebookInstance).Description.Tags
 

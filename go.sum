@@ -973,10 +973,10 @@ github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/opengovern/og-aws-describer v0.60.0 h1:Cl0a4KW8eV9gmtFyDbNRtfxR+jyRNkGBZUAEBgsRrKs=
 github.com/opengovern/og-aws-describer v0.60.0/go.mod h1:gHBFpQcnj1KAX/s6/PzitZxQ/5ockN7cjzaOdPoBYCs=
-github.com/opengovern/og-util v1.1.5 h1:D53Z669MsaKJJFHpIYnJe0iK0HX2jnYUTFTFkKd9lWg=
-github.com/opengovern/og-util v1.1.5/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
-github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0 h1:DYxFV9K4IGm9xe5TpXMi8HAVEdlb4sYDKbBkRTgZRms=
-github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0/go.mod h1:ozdf1nCN4iXbHT+CzmgboQLd6aPE1coa09Ze599g9SE=
+github.com/opengovern/og-util v1.1.7 h1:hfa1GLRItvwR+s2u5YMjrrgLxDEWGX6h4bk8IRAqCQQ=
+github.com/opengovern/og-util v1.1.7/go.mod h1:dyn8rhmxq59o1jnbgGfmcUvW7iB/eN6OxoTUUx6jEHA=
+github.com/opengovern/opengovernance v0.465.11 h1:SyXxLDMokM0JNXarWrqrc990zdZG5v4xTVuDVSYbrqc=
+github.com/opengovern/opengovernance v0.465.11/go.mod h1:FRn+nQAdUmwiLD/kSpD43pBikU4c20r/73907gLwS04=
 github.com/opensearch-project/opensearch-go/v2 v2.3.0 h1:nQIEMr+A92CkhHrZgUhcfsrZjibvB3APXf2a1VwCmMQ=
 github.com/opensearch-project/opensearch-go/v2 v2.3.0/go.mod h1:8LDr9FCgUTVoT+5ESjc2+iaZuldqE+23Iq0r1XeNue8=
 github.com/pganalyze/pg_query_go/v4 v4.2.3 h1:cNLqyiVMasV7YGWyYV+fkXyHp32gDfXVNCqoHztEGNk=
@@ -1274,8 +1274,8 @@ golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094/go.mod h1:h4gKUeWbJ4rQPri
 golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1/go.mod h1:h4gKUeWbJ4rQPri7E0u6Gs4e9Ri2zaLxzw5DI5XGrYg=
 golang.org/x/oauth2 v0.0.0-20221014153046-6fdb5e3db783/go.mod h1:h4gKUeWbJ4rQPri7E0u6Gs4e9Ri2zaLxzw5DI5XGrYg=
 golang.org/x/oauth2 v0.1.0/go.mod h1:G9FE4dLTsbXUu90h/Pf85g4w1D+SSAgR+q46nJZ8M4A=
-golang.org/x/oauth2 v0.22.0 h1:BzDx2FehcG7jJwgWLELCdmLuxk2i+x9UDpSiss2u0ZA=
-golang.org/x/oauth2 v0.22.0/go.mod h1:XYTD2NtWslqkgxebSiOHnXEap4TF09sJSc7H1sXbhtI=
+golang.org/x/oauth2 v0.23.0 h1:PbgcYx2W7i4LvjJWEbf0ngHV6qJYr86PkAV3bXdLEbs=
+golang.org/x/oauth2 v0.23.0/go.mod h1:XYTD2NtWslqkgxebSiOHnXEap4TF09sJSc7H1sXbhtI=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181108010431-42b317875d0f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=

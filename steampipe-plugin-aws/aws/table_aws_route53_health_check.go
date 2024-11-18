@@ -26,7 +26,7 @@ func tableAwsRoute53HealthCheck(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRoute53HealthCheck,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The identifier that Amazon Route 53 assigned to the health check.",

@@ -30,7 +30,7 @@ func tableAwsKinesisFirehoseDeliveryStream(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "delivery_stream_name",
 				Description: "The name of the delivery stream.",

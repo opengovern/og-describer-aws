@@ -18,7 +18,7 @@ func tableAwsSsoAdminAccountAssignment(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListSSOAdminAccountAssignment,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "target_account_id",
 				Description: "The identifier of the AWS account from which to list the assignments.",

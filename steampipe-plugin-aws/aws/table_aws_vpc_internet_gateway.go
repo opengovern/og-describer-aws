@@ -27,7 +27,7 @@ func tableAwsVpcInternetGateway(_ context.Context) *plugin.Table {
 				{Name: "owner_id", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "internet_gateway_id",
 				Description: "The ID of the internet gateway.",

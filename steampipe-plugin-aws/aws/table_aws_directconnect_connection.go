@@ -20,7 +20,7 @@ func tableAwsDirectConnectConnection(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListDirectConnectConnection,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "connection_id",
 				Description: "The id of the connection.",

@@ -28,7 +28,7 @@ func tableAwsGlobalAcceleratorListener(_ context.Context) *plugin.Table {
 			},
 			Hydrate: opengovernance.ListGlobalAcceleratorListener,
 		},
-		Columns: awsKaytuColumns([]*plugin.Column{
+		Columns: awsOgColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the listener.",

@@ -28,7 +28,7 @@ func tableAwsDaxParameterGroup(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "parameter_group_name",
 				Description: "The name of the parameter group.",

@@ -27,7 +27,7 @@ func tableAwsEc2TransitGatewayRouteTable(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListEC2TransitGatewayRouteTable,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "transit_gateway_route_table_id",
 				Description: "The ID of the transit gateway route table.",

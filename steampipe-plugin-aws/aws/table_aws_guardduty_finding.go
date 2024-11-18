@@ -24,7 +24,7 @@ func tableAwsGuardDutyFinding(_ context.Context) *plugin.Table {
 				{Name: "type", Require: plugin.Optional, Operators: []string{"=", "<>"}},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The title of the finding.",

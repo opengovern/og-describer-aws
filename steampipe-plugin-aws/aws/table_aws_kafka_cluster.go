@@ -2,6 +2,7 @@ package aws
 
 import (
 	"context"
+
 	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -20,7 +21,7 @@ func tableAwsKafkaCluster(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListKafkaCluster,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cluster_name",
 				Description: "The name of the cluster.",

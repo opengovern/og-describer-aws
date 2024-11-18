@@ -17,7 +17,7 @@ func tableAwsLambdaLayer(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListLambdaLayer,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "layer_name",
 				Description: "The name of the layer.",

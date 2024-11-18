@@ -19,8 +19,8 @@ func cwMetricColumns(columns []*plugin.Column) []*plugin.Column {
 	return append(columns, commonCwMetricColumns()...)
 }
 
-func kaytuCwMetricColumns(columns []*plugin.Column) []*plugin.Column {
-	return append(columns, kaytuCommonCwMetricColumns()...)
+func ogCwMetricColumns(columns []*plugin.Column) []*plugin.Column {
+	return append(columns, ogCommonCwMetricColumns()...)
 }
 
 func commonCwMetricColumns() []*plugin.Column {
@@ -73,7 +73,7 @@ func commonCwMetricColumns() []*plugin.Column {
 	}
 }
 
-func kaytuCommonCwMetricColumns() []*plugin.Column {
+func ogCommonCwMetricColumns() []*plugin.Column {
 	return []*plugin.Column{
 		{
 			Name:        "metric_name",

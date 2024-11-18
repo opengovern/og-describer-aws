@@ -35,7 +35,7 @@ func tableAwsWellArchitectedLensShare(_ context.Context) *plugin.Table {
 				{Name: "status", Require: plugin.Optional},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "lens_alias",
 				Description: "The alias of the lens.",

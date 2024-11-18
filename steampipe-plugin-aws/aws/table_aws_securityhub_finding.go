@@ -45,7 +45,7 @@ func tableAwsSecurityHubFinding(_ context.Context) *plugin.Table {
 			},
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The security findings provider-specific identifier for a finding.",

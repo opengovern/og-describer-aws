@@ -26,7 +26,7 @@ func tableAwsElastiCacheSubnetGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListElastiCacheSubnetGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "cache_subnet_group_name",
 				Description: "The name of the cache subnet group.",

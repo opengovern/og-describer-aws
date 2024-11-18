@@ -27,7 +27,7 @@ func tableAwsAuditManagerEvidence(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAuditManagerEvidence,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Description: "The identifier for the evidence.",

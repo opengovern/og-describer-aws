@@ -33,7 +33,7 @@ func tableAwsDocDBClusterInstance(_ context.Context) *plugin.Table {
 			//	{Name: "db_instance_arn", Require: plugin.Optional},
 			//},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "db_instance_identifier",
 				Description: "Contains a user-provided database identifier. This identifier is the unique key that identifies an instance.",

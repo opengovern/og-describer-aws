@@ -28,7 +28,7 @@ func tableAwsDirectoryServiceLogSubscription(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "directory_id",
 				Description: "Identifier (ID) of the directory that you want to associate with the log subscription.",

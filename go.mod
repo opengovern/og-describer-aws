@@ -141,13 +141,13 @@ require (
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/nats-io/nats.go v1.36.0
 	github.com/opengovern/og-aws-describer v0.60.0
-	github.com/opengovern/og-util v1.1.5
-	github.com/opengovern/opengovernance v0.434.62-feat-integrations-service.0
+	github.com/opengovern/og-util v1.1.7
+	github.com/opengovern/opengovernance v0.465.11
 	github.com/spf13/cobra v1.8.1
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
 	go.uber.org/zap v1.26.0
 	golang.org/x/net v0.29.0
-	golang.org/x/oauth2 v0.22.0
+	golang.org/x/oauth2 v0.23.0
 	google.golang.org/grpc v1.67.0
 	google.golang.org/protobuf v1.34.2
 )

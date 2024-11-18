@@ -27,7 +27,7 @@ func tableAwsAuditManagerFramework(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListAuditManagerFramework,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the specified framework.",

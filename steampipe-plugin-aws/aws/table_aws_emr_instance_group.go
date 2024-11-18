@@ -19,7 +19,7 @@ func tableAwsEmrInstanceGroup(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListEMRInstanceGroup,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the instance group.",

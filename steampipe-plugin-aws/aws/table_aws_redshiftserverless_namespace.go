@@ -23,7 +23,7 @@ func tableAwsRedshiftServerlessNamespace(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListRedshiftServerlessNamespace,
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "namespace_id",
 				Description: "The id of the namespace.",

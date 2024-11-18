@@ -20,7 +20,7 @@ func tableAwsElasticacheRedisMetricCurrConnectionsHourly(_ context.Context) *plu
 			Hydrate:       listElastiCacheMetricCurrConnectionsHourly,
 		},
 
-		Columns: awsKaytuRegionalColumns(cwMetricColumns(
+		Columns: awsOgRegionalColumns(cwMetricColumns(
 			[]*plugin.Column{
 				{
 					Name:        "cache_cluster_id",

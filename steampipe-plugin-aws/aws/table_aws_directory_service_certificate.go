@@ -37,7 +37,7 @@ func tableAwsDirectoryServiceCertificate(_ context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "directory_id",
 				Description: "The directory identifier.",

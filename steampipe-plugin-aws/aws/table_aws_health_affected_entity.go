@@ -27,7 +27,7 @@ func tableAwsHealthAffectedEntity(_ context.Context) *plugin.Table {
 				{Name: "last_updated_time", Require: plugin.Optional, Operators: []string{">", ">=", "<", "<=", "="}},
 			},
 		},
-		Columns: awsKaytuGlobalRegionColumns([]*plugin.Column{
+		Columns: awsOgGlobalRegionColumns([]*plugin.Column{
 			{
 				Name:        "arn",
 				Description: "The Amazon Resource Name (ARN) of the health entity.",

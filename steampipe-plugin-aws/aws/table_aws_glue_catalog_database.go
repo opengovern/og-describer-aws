@@ -26,7 +26,7 @@ func tableAwsGlueCatalogDatabase(_ context.Context) *plugin.Table {
 			Hydrate: opengovernance.ListGlueCatalogDatabase,
 		},
 
-		Columns: awsKaytuRegionalColumns([]*plugin.Column{
+		Columns: awsOgRegionalColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Description: "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
