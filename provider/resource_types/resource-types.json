@@ -1742,19 +1742,7 @@
     "SteampipeTable": "aws_ec2_instance",
     "Model": "EC2Instance"
   },
-  {
-    "ResourceName": "AWS::EC2::InstanceMetricCpuUtilizationHourly",
-    "Tags": {
-      "category": ["Compute"],
-      "logo_uri": [
-        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"
-      ]
-    },
-    "ListDescriber": "ParallelDescribeRegional(describer.Ec2InstanceMetricCpuUtilizationHourly)",
-    "GetDescriber": "nil",
-    "SteampipeTable": "aws_ec2_instance_metric_cpu_utilization_hourly",
-    "Model": "EC2InstanceMetricCpuUtilizationHourly"
-  },
+ 
   {
     "ResourceName": "AWS::EC2::InstanceAvailability",
     "ListDescriber": "ParallelDescribeRegional(describer.EC2InstanceAvailability)",

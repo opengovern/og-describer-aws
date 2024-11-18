@@ -2415,18 +2415,6 @@ var ResourceTypes = map[string]model.ResourceType{
 		GetDescriber:  nil,
 	},
 
-	"AWS::EC2::InstanceMetricCpuUtilizationHourly": {
-		IntegrationType: configs.IntegrationName,
-		ResourceName:    "AWS::EC2::InstanceMetricCpuUtilizationHourly",
-		Tags: map[string][]string{
-			"category": {"Compute"},
-			"logo_uri": {"https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"},
-		},
-		Labels:        map[string]string{},
-		Annotations:   map[string]string{},
-		ListDescriber: ParallelDescribeRegional(describer.Ec2InstanceMetricCpuUtilizationHourly),
-		GetDescriber:  nil,
-	},
 
 	"AWS::EC2::InstanceAvailability": {
 		IntegrationType: configs.IntegrationName,
