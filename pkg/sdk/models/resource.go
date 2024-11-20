@@ -18,5 +18,11 @@ type Resource struct {
 }
 
 func (r Resource) UniqueID() string {
-	return r.ID
+	if r.ID != "" {
+		return r.ID
+	}
+	if r.ARN != "" {
+		return r.ARN
+	}
+	return r.Name
 }
