@@ -1,7 +1,7 @@
 package configs
 
 import (
-	"github.com/opengovern/opengovernance/services/integration/integration-type/aws-account/configs"
+	"github.com/opengovern/opencomply/services/integration/integration-type/aws-account/configs"
 )
 
 const (
