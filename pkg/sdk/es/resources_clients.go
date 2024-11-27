@@ -101,7 +101,7 @@ var listAccessAnalyzerAnalyzerFilters = map[string]string{
 	"last_resource_analyzed":    "Description.Analyzer.LastResourceAnalyzed",
 	"last_resource_analyzed_at": "Description.Analyzer.LastResourceAnalyzedAt",
 	"name":                      "Description.Analyzer.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"status":                    "Description.Analyzer.Status",
 	"status_reason":             "Description.Analyzer.StatusReason",
 	"tags":                      "Description.Analyzer.Tags",
@@ -176,7 +176,7 @@ var getAccessAnalyzerAnalyzerFilters = map[string]string{
 	"last_resource_analyzed":    "Description.Analyzer.LastResourceAnalyzed",
 	"last_resource_analyzed_at": "Description.Analyzer.LastResourceAnalyzedAt",
 	"name":                      "description.Analyzer.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"status":                    "Description.Analyzer.Status",
 	"status_reason":             "Description.Analyzer.StatusReason",
 	"tags":                      "Description.Analyzer.Tags",
@@ -567,7 +567,7 @@ var listApiGatewayStageFilters = map[string]string{
 	"last_updated_date":     "Description.Stage.LastUpdatedDate",
 	"method_settings":       "Description.Stage.MethodSettings",
 	"name":                  "Description.Stage.StageName",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"rest_api_id":           "Description.RestApiId",
 	"tags":                  "Description.Stage.Tags",
 	"title":                 "Description.Stage.StageName",
@@ -651,7 +651,7 @@ var getApiGatewayStageFilters = map[string]string{
 	"last_updated_date":     "Description.Stage.LastUpdatedDate",
 	"method_settings":       "Description.Stage.MethodSettings",
 	"name":                  "description.Stage.StageName",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"rest_api_id":           "description.RestApiId",
 	"tags":                  "Description.Stage.Tags",
 	"title":                 "Description.Stage.StageName",
@@ -811,7 +811,7 @@ var listApiGatewayV2StageFilters = map[string]string{
 	"description":                            "Description.Stage.Description",
 	"last_deployment_status_message":         "Description.Stage.LastDeploymentStatusMessage",
 	"last_updated_date":                      "Description.Stage.LastUpdatedDate",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"stage_name":                             "Description.Stage.StageName",
 	"stage_variables":                        "Description.Stage.StageVariables",
 	"tags":                                   "Description.Stage.Tags",
@@ -895,7 +895,7 @@ var getApiGatewayV2StageFilters = map[string]string{
 	"last_deployment_status_message":         "Description.Stage.LastDeploymentStatusMessage",
 	"last_updated_date":                      "Description.Stage.LastUpdatedDate",
 	"name":                                   "description.Stage.StageName",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"stage_name":                             "Description.Stage.StageName",
 	"stage_variables":                        "Description.Stage.StageVariables",
 	"tags":                                   "Description.Stage.Tags",
@@ -1047,7 +1047,7 @@ var listApiGatewayRestAPIFilters = map[string]string{
 	"endpoint_configuration_vpc_endpoint_ids": "Description.RestAPI.EndpointConfiguration.VpcEndpointIds",
 	"minimum_compression_size":                "Description.RestAPI.MinimumCompressionSize",
 	"name":                                    "Description.RestAPI.Name",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"tags":                                    "Description.RestAPI.Tags",
 	"title":                                   "Description.RestAPI.Name",
 	"version":                                 "Description.RestAPI.Version",
@@ -1124,7 +1124,7 @@ var getApiGatewayRestAPIFilters = map[string]string{
 	"endpoint_configuration_vpc_endpoint_ids": "Description.RestAPI.EndpointConfiguration.VpcEndpointIds",
 	"minimum_compression_size":                "Description.RestAPI.MinimumCompressionSize",
 	"name":                                    "Description.RestAPI.Name",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"tags":                                    "Description.RestAPI.Tags",
 	"title":                                   "Description.RestAPI.Name",
 	"version":                                 "Description.RestAPI.Version",
@@ -1267,17 +1267,17 @@ func (p ApiGatewayApiKeyPaginator) NextPage(ctx context.Context) ([]ApiGatewayAp
 }
 
 var listApiGatewayApiKeyFilters = map[string]string{
-	"created_date":      "Description.ApiKey.CreatedDate",
-	"customer_id":       "description.ApiKey.CustomerId",
-	"description":       "Description.ApiKey.Description",
-	"enabled":           "Description.ApiKey.Enabled",
-	"id":                "Description.ApiKey.Id",
-	"last_updated_date": "Description.ApiKey.LastUpdatedDate",
-	"name":              "Description.ApiKey.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"tags_src":          "Tags",
-	"title":             "Name",
-	"value":             "Description.ApiKey.Value",
+	"created_date":        "Description.ApiKey.CreatedDate",
+	"customer_id":         "description.ApiKey.CustomerId",
+	"description":         "Description.ApiKey.Description",
+	"enabled":             "Description.ApiKey.Enabled",
+	"id":                  "Description.ApiKey.Id",
+	"last_updated_date":   "Description.ApiKey.LastUpdatedDate",
+	"name":                "Description.ApiKey.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Tags",
+	"title":               "Name",
+	"value":               "Description.ApiKey.Value",
 }
 
 func ListApiGatewayApiKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -1341,17 +1341,17 @@ func ListApiGatewayApiKey(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getApiGatewayApiKeyFilters = map[string]string{
-	"created_date":      "Description.ApiKey.CreatedDate",
-	"customer_id":       "Description.ApiKey.CustomerId",
-	"description":       "Description.ApiKey.Description",
-	"enabled":           "Description.ApiKey.Enabled",
-	"id":                "description.ApiKey.Id",
-	"last_updated_date": "Description.ApiKey.LastUpdatedDate",
-	"name":              "Description.ApiKey.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"tags_src":          "Tags",
-	"title":             "Name",
-	"value":             "Description.ApiKey.Value",
+	"created_date":        "Description.ApiKey.CreatedDate",
+	"customer_id":         "Description.ApiKey.CustomerId",
+	"description":         "Description.ApiKey.Description",
+	"enabled":             "Description.ApiKey.Enabled",
+	"id":                  "description.ApiKey.Id",
+	"last_updated_date":   "Description.ApiKey.LastUpdatedDate",
+	"name":                "Description.ApiKey.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Tags",
+	"title":               "Name",
+	"value":               "Description.ApiKey.Value",
 }
 
 func GetApiGatewayApiKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -1490,16 +1490,16 @@ func (p ApiGatewayUsagePlanPaginator) NextPage(ctx context.Context) ([]ApiGatewa
 }
 
 var listApiGatewayUsagePlanFilters = map[string]string{
-	"api_stages":    "Description.UsagePlan.ApiStages",
-	"description":   "Description.UsagePlan.Description",
-	"id":            "Description.UsagePlan.Id",
-	"name":          "Description.UsagePlan.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"product_code":  "Description.UsagePlan.ProductCode",
-	"quota":         "Description.UsagePlan.Quota",
-	"tags":          "Description.UsagePlan.Tags",
-	"throttle":      "Description.UsagePlan.Throttle",
-	"title":         "Description.UsagePlan.Name",
+	"api_stages":          "Description.UsagePlan.ApiStages",
+	"description":         "Description.UsagePlan.Description",
+	"id":                  "Description.UsagePlan.Id",
+	"name":                "Description.UsagePlan.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"product_code":        "Description.UsagePlan.ProductCode",
+	"quota":               "Description.UsagePlan.Quota",
+	"tags":                "Description.UsagePlan.Tags",
+	"throttle":            "Description.UsagePlan.Throttle",
+	"title":               "Description.UsagePlan.Name",
 }
 
 func ListApiGatewayUsagePlan(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -1563,16 +1563,16 @@ func ListApiGatewayUsagePlan(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getApiGatewayUsagePlanFilters = map[string]string{
-	"api_stages":    "Description.UsagePlan.ApiStages",
-	"description":   "Description.UsagePlan.Description",
-	"id":            "description.UsagePlan.Id",
-	"name":          "Description.UsagePlan.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"product_code":  "Description.UsagePlan.ProductCode",
-	"quota":         "Description.UsagePlan.Quota",
-	"tags":          "Description.UsagePlan.Tags",
-	"throttle":      "Description.UsagePlan.Throttle",
-	"title":         "Description.UsagePlan.Name",
+	"api_stages":          "Description.UsagePlan.ApiStages",
+	"description":         "Description.UsagePlan.Description",
+	"id":                  "description.UsagePlan.Id",
+	"name":                "Description.UsagePlan.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"product_code":        "Description.UsagePlan.ProductCode",
+	"quota":               "Description.UsagePlan.Quota",
+	"tags":                "Description.UsagePlan.Tags",
+	"throttle":            "Description.UsagePlan.Throttle",
+	"title":               "Description.UsagePlan.Name",
 }
 
 func GetApiGatewayUsagePlan(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -1718,7 +1718,7 @@ var listApiGatewayAuthorizerFilters = map[string]string{
 	"identity_source":                "Description.Authorizer.IdentitySource",
 	"identity_validation_expression": "Description.Authorizer.IdentityValidationExpression",
 	"name":                           "Description.Authorizer.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"provider_arns":                  "Description.Authorizer.ProviderARNs",
 	"rest_api_id":                    "Description.RestApiId",
 	"title":                          "Description.Authorizer.Name",
@@ -1792,7 +1792,7 @@ var getApiGatewayAuthorizerFilters = map[string]string{
 	"identity_source":                "Description.Authorizer.IdentitySource",
 	"identity_validation_expression": "Description.Authorizer.IdentityValidationExpression",
 	"name":                           "Description.Authorizer.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"provider_arns":                  "Description.Authorizer.ProviderARNs",
 	"rest_api_id":                    "description.RestApiId",
 	"title":                          "Description.Authorizer.Name",
@@ -1940,7 +1940,7 @@ var listApiGatewayV2APIFilters = map[string]string{
 	"created_date":                 "Description.API.CreatedDate",
 	"disable_execute_api_endpoint": "Description.API.DisableExecuteApiEndpoint",
 	"name":                         "Description.API.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"protocol_type":                "Description.API.ProtocolType",
 	"route_selection_expression":   "Description.API.RouteSelectionExpression",
 	"tags":                         "Description.API.Tags",
@@ -2014,7 +2014,7 @@ var getApiGatewayV2APIFilters = map[string]string{
 	"created_date":                 "Description.API.CreatedDate",
 	"disable_execute_api_endpoint": "Description.API.DisableExecuteApiEndpoint",
 	"name":                         "Description.API.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"protocol_type":                "Description.API.ProtocolType",
 	"route_selection_expression":   "Description.API.RouteSelectionExpression",
 	"tags":                         "Description.API.Tags",
@@ -2161,7 +2161,7 @@ var listApiGatewayV2DomainNameFilters = map[string]string{
 	"domain_name":                      "Description.DomainName.DomainName",
 	"domain_name_configurations":       "Description.DomainName.DomainNameConfigurations",
 	"mutual_tls_authentication":        "Description.DomainName.MutualTlsAuthentication",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"tags":                             "Description.DomainName.Tags",
 	"title":                            "Description.DomainName.DomainName",
 }
@@ -2231,7 +2231,7 @@ var getApiGatewayV2DomainNameFilters = map[string]string{
 	"domain_name":                      "description.DomainName.DomainName",
 	"domain_name_configurations":       "Description.DomainName.DomainNameConfigurations",
 	"mutual_tls_authentication":        "Description.DomainName.MutualTlsAuthentication",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"tags":                             "Description.DomainName.Tags",
 	"title":                            "Description.DomainName.DomainName",
 }
@@ -2372,8 +2372,8 @@ func (p ApiGatewayDomainNamePaginator) NextPage(ctx context.Context) ([]ApiGatew
 }
 
 var listApiGatewayDomainNameFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "DomainName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "DomainName",
 }
 
 func ListApiGatewayDomainName(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -2437,9 +2437,9 @@ func ListApiGatewayDomainName(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getApiGatewayDomainNameFilters = map[string]string{
-	"domain_name":   "description.DomainName.DomainName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "DomainName",
+	"domain_name":         "description.DomainName.DomainName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "DomainName",
 }
 
 func GetApiGatewayDomainName(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -2584,7 +2584,7 @@ var listApiGatewayV2RouteFilters = map[string]string{
 	"authorization_type":                  "Description.Route.AuthorizationType",
 	"authorizer_id":                       "Description.Route.AuthorizerId",
 	"model_selection_expression":          "Description.Route.ModelSelectionExpression",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"operation_name":                      "Description.Route.OperationName",
 	"request_models":                      "Description.Route.RequestModels",
 	"request_parameters":                  "Description.Route.RequestParameters",
@@ -2663,7 +2663,7 @@ var getApiGatewayV2RouteFilters = map[string]string{
 	"authorizer_id":                       "Description.Route.AuthorizerId",
 	"domain_name":                         "description.DomainName.DomainName",
 	"model_selection_expression":          "Description.Route.ModelSelectionExpression",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"operation_name":                      "Description.Route.OperationName",
 	"request_models":                      "Description.Route.RequestModels",
 	"request_parameters":                  "Description.Route.RequestParameters",
@@ -2823,7 +2823,7 @@ var listApiGatewayV2IntegrationFilters = map[string]string{
 	"integration_subtype":                       "Description.Integration.IntegrationSubtype",
 	"integration_type":                          "Description.Integration.IntegrationType",
 	"integration_uri":                           "Description.Integration.IntegrationUri",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"passthrough_behavior":                      "Description.Integration.PassthroughBehavior",
 	"payload_format_version":                    "Description.Integration.PayloadFormatVersion",
 	"request_parameters":                        "Description.Integration.RequestParameters",
@@ -2909,7 +2909,7 @@ var getApiGatewayV2IntegrationFilters = map[string]string{
 	"integration_subtype":                       "Description.Integration.IntegrationSubtype",
 	"integration_type":                          "Description.Integration.IntegrationType",
 	"integration_uri":                           "Description.Integration.IntegrationUri",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"passthrough_behavior":                      "Description.Integration.PassthroughBehavior",
 	"payload_format_version":                    "Description.Integration.PayloadFormatVersion",
 	"request_parameters":                        "Description.Integration.RequestParameters",
@@ -3072,7 +3072,7 @@ var listElasticBeanstalkEnvironmentFilters = map[string]string{
 	"health":                          "Description.EnvironmentDescription.Health",
 	"health_status":                   "Description.EnvironmentDescription.HealthStatus",
 	"managed_actions":                 "Description.ManagedAction",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"operations_role":                 "Description.EnvironmentDescription.OperationsRole",
 	"platform_arn":                    "Description.EnvironmentDescription.PlatformArn",
 	"resources":                       "Description.EnvironmentDescription.Resources",
@@ -3161,7 +3161,7 @@ var getElasticBeanstalkEnvironmentFilters = map[string]string{
 	"health":                          "Description.EnvironmentDescription.Health",
 	"health_status":                   "Description.EnvironmentDescription.HealthStatus",
 	"managed_actions":                 "Description.ManagedAction",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"operations_role":                 "Description.EnvironmentDescription.OperationsRole",
 	"platform_arn":                    "Description.EnvironmentDescription.PlatformArn",
 	"resources":                       "Description.EnvironmentDescription.Resources",
@@ -3316,7 +3316,7 @@ var listElasticBeanstalkApplicationFilters = map[string]string{
 	"date_updated":              "Description.Application.DateUpdated",
 	"description":               "Description.Application.Description",
 	"name":                      "Description.Application.ApplicationName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_lifecycle_config": "Description.Application.ResourceLifecycleConfig",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.Application.ApplicationName",
@@ -3390,7 +3390,7 @@ var getElasticBeanstalkApplicationFilters = map[string]string{
 	"date_updated":              "Description.Application.DateUpdated",
 	"description":               "Description.Application.Description",
 	"name":                      "description.Application.ApplicationName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_lifecycle_config": "Description.Application.ResourceLifecycleConfig",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.Application.ApplicationName",
@@ -3773,7 +3773,7 @@ var listElastiCacheReplicationGroupFilters = map[string]string{
 	"member_clusters_outpost_arns":  "Description.ReplicationGroup.MemberClustersOutpostArns",
 	"multi_az":                      "Description.ReplicationGroup.MultiAZ",
 	"node_groups":                   "Description.ReplicationGroup.NodeGroups",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"pending_modified_values":       "Description.ReplicationGroup.PendingModifiedValues",
 	"replication_group_id":          "Description.ReplicationGroup.ReplicationGroupId",
 	"snapshot_retention_limit":      "Description.ReplicationGroup.SnapshotRetentionLimit",
@@ -3861,7 +3861,7 @@ var getElastiCacheReplicationGroupFilters = map[string]string{
 	"member_clusters_outpost_arns":  "Description.ReplicationGroup.MemberClustersOutpostArns",
 	"multi_az":                      "Description.ReplicationGroup.MultiAZ",
 	"node_groups":                   "Description.ReplicationGroup.NodeGroups",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"pending_modified_values":       "Description.ReplicationGroup.PendingModifiedValues",
 	"replication_group_id":          "description.ReplicationGroup.ReplicationGroupId",
 	"snapshot_retention_limit":      "Description.ReplicationGroup.SnapshotRetentionLimit",
@@ -4031,7 +4031,7 @@ var listElastiCacheClusterFilters = map[string]string{
 	"network_type":                           "Description.Cluster.NetworkType",
 	"notification_configuration":             "Description.Cluster.NotificationConfiguration",
 	"num_cache_nodes":                        "Description.Cluster.NumCacheNodes",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"pending_modified_values":                "Description.Cluster.PendingModifiedValues",
 	"preferred_availability_zone":            "Description.Cluster.PreferredAvailabilityZone",
 	"preferred_maintenance_window":           "Description.Cluster.PreferredMaintenanceWindow",
@@ -4130,7 +4130,7 @@ var getElastiCacheClusterFilters = map[string]string{
 	"network_type":                           "Description.Cluster.NetworkType",
 	"notification_configuration":             "Description.Cluster.NotificationConfiguration",
 	"num_cache_nodes":                        "Description.Cluster.NumCacheNodes",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"pending_modified_values":                "Description.Cluster.PendingModifiedValues",
 	"preferred_availability_zone":            "Description.Cluster.PreferredAvailabilityZone",
 	"preferred_maintenance_window":           "Description.Cluster.PreferredMaintenanceWindow",
@@ -4286,7 +4286,7 @@ var listElastiCacheParameterGroupFilters = map[string]string{
 	"cache_parameter_group_name":   "Description.ParameterGroup.CacheParameterGroupName",
 	"description":                  "Description.ParameterGroup.Description",
 	"is_global":                    "Description.ParameterGroup.IsGlobal",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"title":                        "Description.ParameterGroup.CacheParameterGroupName",
 }
 
@@ -4355,7 +4355,7 @@ var getElastiCacheParameterGroupFilters = map[string]string{
 	"cache_parameter_group_name":   "description.ParameterGroup.CacheParameterGroupName",
 	"description":                  "Description.ParameterGroup.Description",
 	"is_global":                    "Description.ParameterGroup.IsGlobal",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"title":                        "Description.ParameterGroup.CacheParameterGroupName",
 }
 
@@ -4501,7 +4501,7 @@ var listElastiCacheReservedCacheNodeFilters = map[string]string{
 	"duration":                         "description.ReservedCacheNode.Duration",
 	"fixed_price":                      "Description.ReservedCacheNode.FixedPrice",
 	"offering_type":                    "description.ReservedCacheNode.OfferingType",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"product_description":              "Description.ReservedCacheNode.ProductDescription",
 	"recurring_charges":                "Description.ReservedCacheNode.RecurringCharges",
 	"reserved_cache_node_id":           "Description.ReservedCacheNode.ReservedCacheNodeId",
@@ -4579,7 +4579,7 @@ var getElastiCacheReservedCacheNodeFilters = map[string]string{
 	"duration":                         "Description.ReservedCacheNode.Duration",
 	"fixed_price":                      "Description.ReservedCacheNode.FixedPrice",
 	"offering_type":                    "Description.ReservedCacheNode.OfferingType",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"product_description":              "Description.ReservedCacheNode.ProductDescription",
 	"recurring_charges":                "Description.ReservedCacheNode.RecurringCharges",
 	"reserved_cache_node_id":           "description.ReservedCacheNode.ReservedCacheNodeId",
@@ -4729,7 +4729,7 @@ var listElastiCacheSubnetGroupFilters = map[string]string{
 	"arn":                            "Description.SubnetGroup.ARN",
 	"cache_subnet_group_description": "Description.SubnetGroup.CacheSubnetGroupDescription",
 	"cache_subnet_group_name":        "Description.SubnetGroup.CacheSubnetGroupName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"subnets":                        "Description.SubnetGroup.Subnets",
 	"title":                          "Description.SubnetGroup.CacheSubnetGroupName",
 	"vpc_id":                         "Description.SubnetGroup.VpcId",
@@ -4799,7 +4799,7 @@ var getElastiCacheSubnetGroupFilters = map[string]string{
 	"arn":                            "Description.SubnetGroup.ARN",
 	"cache_subnet_group_description": "Description.SubnetGroup.CacheSubnetGroupDescription",
 	"cache_subnet_group_name":        "description.SubnetGroup.CacheSubnetGroupName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"subnets":                        "Description.SubnetGroup.Subnets",
 	"title":                          "Description.SubnetGroup.CacheSubnetGroupName",
 	"vpc_id":                         "Description.SubnetGroup.VpcId",
@@ -4960,7 +4960,7 @@ var listESDomainFilters = map[string]string{
 	"endpoint":                     "Description.Domain.Endpoint",
 	"endpoints":                    "Description.Domain.Endpoints",
 	"log_publishing_options":       "Description.Domain.LogPublishingOptions",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"processing":                   "Description.Domain.Processing",
 	"service_software_options":     "Description.Domain.ServiceSoftwareOptions",
 	"snapshot_options":             "Description.Domain.SnapshotOptions",
@@ -5050,7 +5050,7 @@ var getESDomainFilters = map[string]string{
 	"endpoint":                     "Description.Domain.Endpoint",
 	"endpoints":                    "Description.Domain.Endpoints",
 	"log_publishing_options":       "Description.Domain.LogPublishingOptions",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"processing":                   "Description.Domain.Processing",
 	"service_software_options":     "Description.Domain.ServiceSoftwareOptions",
 	"snapshot_options":             "Description.Domain.SnapshotOptions",
@@ -5212,7 +5212,7 @@ var listEMRClusterFilters = map[string]string{
 	"master_public_dns_name":    "Description.Cluster.MasterPublicDnsName",
 	"name":                      "Description.Cluster.Name",
 	"normalized_instance_hours": "Description.Cluster.NormalizedInstanceHours",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"outpost_arn":               "Description.Cluster.OutpostArn",
 	"placement_groups":          "Description.Cluster.PlacementGroups",
 	"release_label":             "Description.Cluster.ReleaseLabel",
@@ -5308,7 +5308,7 @@ var getEMRClusterFilters = map[string]string{
 	"master_public_dns_name":    "Description.Cluster.MasterPublicDnsName",
 	"name":                      "Description.Cluster.Name",
 	"normalized_instance_hours": "Description.Cluster.NormalizedInstanceHours",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"outpost_arn":               "Description.Cluster.OutpostArn",
 	"placement_groups":          "Description.Cluster.PlacementGroups",
 	"release_label":             "Description.Cluster.ReleaseLabel",
@@ -5471,7 +5471,7 @@ var listEMRInstanceFilters = map[string]string{
 	"instance_group_id":   "description.Instance.InstanceGroupId",
 	"instance_type":       "Description.Instance.InstanceType",
 	"market":              "Description.Instance.Market",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"private_dns_name":    "Description.Instance.PrivateDnsName",
 	"private_ip_address":  "Description.Instance.PrivateIpAddress",
 	"public_dns_name":     "Description.Instance.PublicDnsName",
@@ -5551,7 +5551,7 @@ var getEMRInstanceFilters = map[string]string{
 	"instance_group_id":   "Description.Instance.InstanceGroupId",
 	"instance_type":       "Description.Instance.InstanceType",
 	"market":              "Description.Instance.Market",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"private_dns_name":    "Description.Instance.PrivateDnsName",
 	"private_ip_address":  "Description.Instance.PrivateIpAddress",
 	"public_dns_name":     "Description.Instance.PublicDnsName",
@@ -5704,7 +5704,7 @@ var listEMRInstanceFleetFilters = map[string]string{
 	"instance_type_specifications":   "Description.InstanceFleet.InstanceTypeSpecifications",
 	"launch_specifications":          "Description.InstanceFleet.LaunchSpecifications",
 	"name":                           "Description.InstanceFleet.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"provisioned_on_demand_capacity": "Description.InstanceFleet.ProvisionedOnDemandCapacity",
 	"provisioned_spot_capacity":      "Description.InstanceFleet.ProvisionedSpotCapacity",
 	"state":                          "Description.InstanceFleet.Status.State",
@@ -5781,7 +5781,7 @@ var getEMRInstanceFleetFilters = map[string]string{
 	"instance_type_specifications":   "Description.InstanceFleet.InstanceTypeSpecifications",
 	"launch_specifications":          "Description.InstanceFleet.LaunchSpecifications",
 	"name":                           "Description.InstanceFleet.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"provisioned_on_demand_capacity": "Description.InstanceFleet.ProvisionedOnDemandCapacity",
 	"provisioned_spot_capacity":      "Description.InstanceFleet.ProvisionedSpotCapacity",
 	"state":                          "Description.InstanceFleet.Status.State",
@@ -5942,7 +5942,7 @@ var listEMRInstanceGroupFilters = map[string]string{
 	"last_successfully_applied_configurations_version": "Description.InstanceGroup.LastSuccessfullyAppliedConfigurationsVersion",
 	"market":                   "Description.InstanceGroup.Market",
 	"name":                     "Description.InstanceGroup.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"requested_instance_count": "Description.InstanceGroup.RequestedInstanceCount",
 	"running_instance_count":   "Description.InstanceGroup.RunningInstanceCount",
 	"shrink_policy":            "Description.InstanceGroup.ShrinkPolicy",
@@ -6027,7 +6027,7 @@ var getEMRInstanceGroupFilters = map[string]string{
 	"last_successfully_applied_configurations_version": "Description.InstanceGroup.LastSuccessfullyAppliedConfigurationsVersion",
 	"market":                   "Description.InstanceGroup.Market",
 	"name":                     "Description.InstanceGroup.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"requested_instance_count": "Description.InstanceGroup.RequestedInstanceCount",
 	"running_instance_count":   "Description.InstanceGroup.RunningInstanceCount",
 	"shrink_policy":            "Description.InstanceGroup.ShrinkPolicy",
@@ -6176,7 +6176,7 @@ var listEMRBlockPublicAccessConfigurationFilters = map[string]string{
 	"classification":                              "Description.Configuration.Classification",
 	"created_by_arn":                              "Description.ConfigurationMetadata.CreatedByArn",
 	"creation_date":                               "Description.ConfigurationMetadata.CreationDateTime",
-	"og_account_id":                               "metadata.IntegrationID",
+	"platform_account_id":                         "metadata.IntegrationID",
 	"permitted_public_security_group_rule_ranges": "Description.Configuration.PermittedPublicSecurityGroupRuleRanges",
 }
 
@@ -6245,7 +6245,7 @@ var getEMRBlockPublicAccessConfigurationFilters = map[string]string{
 	"classification":                              "Description.Configuration.Classification",
 	"created_by_arn":                              "Description.ConfigurationMetadata.CreatedByArn",
 	"creation_date":                               "Description.ConfigurationMetadata.CreationDateTime",
-	"og_account_id":                               "metadata.IntegrationID",
+	"platform_account_id":                         "metadata.IntegrationID",
 	"permitted_public_security_group_rule_ranges": "Description.Configuration.PermittedPublicSecurityGroupRuleRanges",
 }
 
@@ -6385,21 +6385,21 @@ func (p GuardDutyFindingPaginator) NextPage(ctx context.Context) ([]GuardDutyFin
 }
 
 var listGuardDutyFindingFilters = map[string]string{
-	"arn":            "Description.Finding.Arn",
-	"confidence":     "Description.Finding.Confidence",
-	"created_at":     "Description.Finding.CreatedAt",
-	"description":    "Description.Finding.Description",
-	"detector_id":    "Description.Finding.Service.DetectorId",
-	"id":             "Description.Finding.Id",
-	"name":           "Description.Finding.Title",
-	"og_account_id":  "metadata.IntegrationID",
-	"resource":       "Description.Finding.Resource",
-	"schema_version": "Description.Finding.SchemaVersion",
-	"service":        "Description.Finding.Service",
-	"severity":       "Description.Finding.Severity",
-	"title":          "Description.Finding.Title",
-	"type":           "Description.Finding.Type",
-	"updated_at":     "Description.Finding.UpdatedAt",
+	"arn":                 "Description.Finding.Arn",
+	"confidence":          "Description.Finding.Confidence",
+	"created_at":          "Description.Finding.CreatedAt",
+	"description":         "Description.Finding.Description",
+	"detector_id":         "Description.Finding.Service.DetectorId",
+	"id":                  "Description.Finding.Id",
+	"name":                "Description.Finding.Title",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource":            "Description.Finding.Resource",
+	"schema_version":      "Description.Finding.SchemaVersion",
+	"service":             "Description.Finding.Service",
+	"severity":            "Description.Finding.Severity",
+	"title":               "Description.Finding.Title",
+	"type":                "Description.Finding.Type",
+	"updated_at":          "Description.Finding.UpdatedAt",
 }
 
 func ListGuardDutyFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -6463,21 +6463,21 @@ func ListGuardDutyFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getGuardDutyFindingFilters = map[string]string{
-	"arn":            "Description.Finding.Arn",
-	"confidence":     "Description.Finding.Confidence",
-	"created_at":     "Description.Finding.CreatedAt",
-	"description":    "Description.Finding.Description",
-	"detector_id":    "Description.Finding.Service.DetectorId",
-	"id":             "Description.Finding.Id",
-	"name":           "Description.Finding.Title",
-	"og_account_id":  "metadata.IntegrationID",
-	"resource":       "Description.Finding.Resource",
-	"schema_version": "Description.Finding.SchemaVersion",
-	"service":        "Description.Finding.Service",
-	"severity":       "Description.Finding.Severity",
-	"title":          "Description.Finding.Title",
-	"type":           "Description.Finding.Type",
-	"updated_at":     "Description.Finding.UpdatedAt",
+	"arn":                 "Description.Finding.Arn",
+	"confidence":          "Description.Finding.Confidence",
+	"created_at":          "Description.Finding.CreatedAt",
+	"description":         "Description.Finding.Description",
+	"detector_id":         "Description.Finding.Service.DetectorId",
+	"id":                  "Description.Finding.Id",
+	"name":                "Description.Finding.Title",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource":            "Description.Finding.Resource",
+	"schema_version":      "Description.Finding.SchemaVersion",
+	"service":             "Description.Finding.Service",
+	"severity":            "Description.Finding.Severity",
+	"title":               "Description.Finding.Title",
+	"type":                "Description.Finding.Type",
+	"updated_at":          "Description.Finding.UpdatedAt",
 }
 
 func GetGuardDutyFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -6622,7 +6622,7 @@ var listGuardDutyDetectorFilters = map[string]string{
 	"detector_id":                  "Description.DetectorId",
 	"features":                     "Description.Detector.Features",
 	"finding_publishing_frequency": "Description.Detector.FindingPublishingFrequency",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"service_role":                 "Description.Detector.ServiceRole",
 	"status":                       "Description.Detector.Status",
 	"tags":                         "Description.Detector.Tags",
@@ -6697,7 +6697,7 @@ var getGuardDutyDetectorFilters = map[string]string{
 	"detector_id":                  "description.DetectorId",
 	"features":                     "Description.Detector.Features",
 	"finding_publishing_frequency": "Description.Detector.FindingPublishingFrequency",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"service_role":                 "Description.Detector.ServiceRole",
 	"status":                       "Description.Detector.Status",
 	"tags":                         "Description.Detector.Tags",
@@ -6841,15 +6841,15 @@ func (p GuardDutyFilterPaginator) NextPage(ctx context.Context) ([]GuardDutyFilt
 }
 
 var listGuardDutyFilterFilters = map[string]string{
-	"action":           "Description.Filter.Action",
-	"description":      "Description.Filter.Description",
-	"detector_id":      "description.DetectorId",
-	"finding_criteria": "Description.Filter.FindingCriteria",
-	"name":             "Description.Filter.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"rank":             "Description.Filter.Rank",
-	"tags":             "Description.Filter.Tags",
-	"title":            "Description.Filter.Name",
+	"action":              "Description.Filter.Action",
+	"description":         "Description.Filter.Description",
+	"detector_id":         "description.DetectorId",
+	"finding_criteria":    "Description.Filter.FindingCriteria",
+	"name":                "Description.Filter.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rank":                "Description.Filter.Rank",
+	"tags":                "Description.Filter.Tags",
+	"title":               "Description.Filter.Name",
 }
 
 func ListGuardDutyFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -6913,15 +6913,15 @@ func ListGuardDutyFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getGuardDutyFilterFilters = map[string]string{
-	"action":           "Description.Filter.Action",
-	"description":      "Description.Filter.Description",
-	"detector_id":      "description.DetectorId",
-	"finding_criteria": "Description.Filter.FindingCriteria",
-	"name":             "description.Filter.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"rank":             "Description.Filter.Rank",
-	"tags":             "Description.Filter.Tags",
-	"title":            "Description.Filter.Name",
+	"action":              "Description.Filter.Action",
+	"description":         "Description.Filter.Description",
+	"detector_id":         "description.DetectorId",
+	"finding_criteria":    "Description.Filter.FindingCriteria",
+	"name":                "description.Filter.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rank":                "Description.Filter.Rank",
+	"tags":                "Description.Filter.Tags",
+	"title":               "Description.Filter.Name",
 }
 
 func GetGuardDutyFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -7060,15 +7060,15 @@ func (p GuardDutyIPSetPaginator) NextPage(ctx context.Context) ([]GuardDutyIPSet
 }
 
 var listGuardDutyIPSetFilters = map[string]string{
-	"detector_id":   "description.DetectorId",
-	"format":        "Description.IPSet.Format",
-	"ipset_id":      "Description.IPSetId",
-	"location":      "Description.IPSet.Location",
-	"name":          "Description.IPSet.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.IPSet.Status",
-	"tags":          "Description.IPSet.Tags",
-	"title":         "Description.IPSet.Name",
+	"detector_id":         "description.DetectorId",
+	"format":              "Description.IPSet.Format",
+	"ipset_id":            "Description.IPSetId",
+	"location":            "Description.IPSet.Location",
+	"name":                "Description.IPSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.IPSet.Status",
+	"tags":                "Description.IPSet.Tags",
+	"title":               "Description.IPSet.Name",
 }
 
 func ListGuardDutyIPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -7132,15 +7132,15 @@ func ListGuardDutyIPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getGuardDutyIPSetFilters = map[string]string{
-	"detector_id":   "description.DetectorId",
-	"format":        "Description.IPSet.Format",
-	"ipset_id":      "description.IPSetId",
-	"location":      "Description.IPSet.Location",
-	"name":          "Description.IPSet.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.IPSet.Status",
-	"tags":          "Description.IPSet.Tags",
-	"title":         "Description.IPSet.Name",
+	"detector_id":         "description.DetectorId",
+	"format":              "Description.IPSet.Format",
+	"ipset_id":            "description.IPSetId",
+	"location":            "Description.IPSet.Location",
+	"name":                "Description.IPSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.IPSet.Status",
+	"tags":                "Description.IPSet.Tags",
+	"title":               "Description.IPSet.Name",
 }
 
 func GetGuardDutyIPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -7284,7 +7284,7 @@ var listGuardDutyMemberFilters = map[string]string{
 	"invited_at":          "Description.Member.InvitedAt",
 	"master_id":           "Description.Member.MasterId",
 	"member_account_id":   "Description.Member.AccountId",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"relationship_status": "Description.Member.RelationshipStatus",
 	"title":               "Description.Member.AccountId",
 	"updated_at":          "Description.Member.UpdatedAt",
@@ -7356,7 +7356,7 @@ var getGuardDutyMemberFilters = map[string]string{
 	"invited_at":          "Description.Member.InvitedAt",
 	"master_id":           "Description.Member.MasterId",
 	"member_account_id":   "description.Member.AccountId",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"relationship_status": "Description.Member.RelationshipStatus",
 	"title":               "Description.Member.AccountId",
 	"updated_at":          "Description.Member.UpdatedAt",
@@ -7498,14 +7498,14 @@ func (p GuardDutyPublishingDestinationPaginator) NextPage(ctx context.Context) (
 }
 
 var listGuardDutyPublishingDestinationFilters = map[string]string{
-	"destination_arn":  "Description.PublishingDestination.DestinationProperties.DestinationArn",
-	"destination_id":   "Description.PublishingDestination.DestinationId",
-	"destination_type": "Description.PublishingDestination.DestinationType",
-	"detector_id":      "description.DetectorId",
-	"kms_key_arn":      "Description.PublishingDestination.DestinationProperties.KmsKeyArn",
-	"og_account_id":    "metadata.IntegrationID",
-	"status":           "Description.PublishingDestination.Status",
-	"title":            "Description.PublishingDestination.DestinationId",
+	"destination_arn":     "Description.PublishingDestination.DestinationProperties.DestinationArn",
+	"destination_id":      "Description.PublishingDestination.DestinationId",
+	"destination_type":    "Description.PublishingDestination.DestinationType",
+	"detector_id":         "description.DetectorId",
+	"kms_key_arn":         "Description.PublishingDestination.DestinationProperties.KmsKeyArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.PublishingDestination.Status",
+	"title":               "Description.PublishingDestination.DestinationId",
 }
 
 func ListGuardDutyPublishingDestination(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -7569,14 +7569,14 @@ func ListGuardDutyPublishingDestination(ctx context.Context, d *plugin.QueryData
 }
 
 var getGuardDutyPublishingDestinationFilters = map[string]string{
-	"destination_arn":  "Description.PublishingDestination.DestinationProperties.DestinationArn",
-	"destination_id":   "description.PublishingDestination.DestinationId",
-	"destination_type": "Description.PublishingDestination.DestinationType",
-	"detector_id":      "description.DetectorId",
-	"kms_key_arn":      "Description.PublishingDestination.DestinationProperties.KmsKeyArn",
-	"og_account_id":    "metadata.IntegrationID",
-	"status":           "Description.PublishingDestination.Status",
-	"title":            "Description.PublishingDestination.DestinationId",
+	"destination_arn":     "Description.PublishingDestination.DestinationProperties.DestinationArn",
+	"destination_id":      "description.PublishingDestination.DestinationId",
+	"destination_type":    "Description.PublishingDestination.DestinationType",
+	"detector_id":         "description.DetectorId",
+	"kms_key_arn":         "Description.PublishingDestination.DestinationProperties.KmsKeyArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.PublishingDestination.Status",
+	"title":               "Description.PublishingDestination.DestinationId",
 }
 
 func GetGuardDutyPublishingDestination(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -7719,7 +7719,7 @@ var listGuardDutyThreatIntelSetFilters = map[string]string{
 	"format":              "Description.ThreatIntelSet.Format",
 	"location":            "Description.ThreatIntelSet.Location",
 	"name":                "Description.ThreatIntelSet.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"status":              "Description.ThreatIntelSet.Status",
 	"tags":                "Description.ThreatIntelSet.Tags",
 	"threat_intel_set_id": "Description.ThreatIntelSetID",
@@ -7791,7 +7791,7 @@ var getGuardDutyThreatIntelSetFilters = map[string]string{
 	"format":              "Description.ThreatIntelSet.Format",
 	"location":            "Description.ThreatIntelSet.Location",
 	"name":                "Description.ThreatIntelSet.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"status":              "Description.ThreatIntelSet.Status",
 	"tags":                "Description.ThreatIntelSet.Tags",
 	"threat_intel_set_id": "description.ThreatIntelSetID",
@@ -7943,7 +7943,7 @@ var listBackupPlanFilters = map[string]string{
 	"deletion_date":            "Description.BackupPlan.DeletionDate",
 	"last_execution_date":      "Description.BackupPlan.LastExecutionDate",
 	"name":                     "Description.BackupPlan.BackupPlanName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"rules":                    "Description.PlanDetails.Rules",
 	"title":                    "Description.BackupPlan.BackupPlanName",
 	"version_id":               "Description.BackupPlan.VersionId",
@@ -8019,7 +8019,7 @@ var getBackupPlanFilters = map[string]string{
 	"deletion_date":            "Description.BackupPlan.DeletionDate",
 	"last_execution_date":      "Description.BackupPlan.LastExecutionDate",
 	"name":                     "Description.BackupPlan.BackupPlanName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"rules":                    "Description.PlanDetails.Rules",
 	"title":                    "Description.BackupPlan.BackupPlanName",
 	"version_id":               "Description.BackupPlan.VersionId",
@@ -8161,17 +8161,17 @@ func (p BackupSelectionPaginator) NextPage(ctx context.Context) ([]BackupSelecti
 }
 
 var listBackupSelectionFilters = map[string]string{
-	"arn":                "ARN",
-	"backup_plan_id":     "Description.BackupSelection.BackupPlanId",
-	"creation_date":      "Description.BackupSelection.CreationDate",
-	"creator_request_id": "Description.BackupSelection.CreatorRequestId",
-	"iam_role_arn":       "Description.BackupSelection.IamRoleArn",
-	"list_of_tags":       "Description.ListOfTags",
-	"og_account_id":      "metadata.IntegrationID",
-	"resources":          "Description.Resources",
-	"selection_id":       "Description.BackupSelection.SelectionId",
-	"selection_name":     "Description.BackupSelection.SelectionName",
-	"title":              "Description.BackupSelection.SelectionName",
+	"arn":                 "ARN",
+	"backup_plan_id":      "Description.BackupSelection.BackupPlanId",
+	"creation_date":       "Description.BackupSelection.CreationDate",
+	"creator_request_id":  "Description.BackupSelection.CreatorRequestId",
+	"iam_role_arn":        "Description.BackupSelection.IamRoleArn",
+	"list_of_tags":        "Description.ListOfTags",
+	"platform_account_id": "metadata.IntegrationID",
+	"resources":           "Description.Resources",
+	"selection_id":        "Description.BackupSelection.SelectionId",
+	"selection_name":      "Description.BackupSelection.SelectionName",
+	"title":               "Description.BackupSelection.SelectionName",
 }
 
 func ListBackupSelection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -8235,17 +8235,17 @@ func ListBackupSelection(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getBackupSelectionFilters = map[string]string{
-	"arn":                "ARN",
-	"backup_plan_id":     "description.BackupSelection.BackupPlanId",
-	"creation_date":      "Description.BackupSelection.CreationDate",
-	"creator_request_id": "Description.BackupSelection.CreatorRequestId",
-	"iam_role_arn":       "Description.BackupSelection.IamRoleArn",
-	"list_of_tags":       "Description.ListOfTags",
-	"og_account_id":      "metadata.IntegrationID",
-	"resources":          "Description.Resources",
-	"selection_id":       "description.BackupSelection.SelectionId",
-	"selection_name":     "Description.BackupSelection.SelectionName",
-	"title":              "Description.BackupSelection.SelectionName",
+	"arn":                 "ARN",
+	"backup_plan_id":      "description.BackupSelection.BackupPlanId",
+	"creation_date":       "Description.BackupSelection.CreationDate",
+	"creator_request_id":  "Description.BackupSelection.CreatorRequestId",
+	"iam_role_arn":        "Description.BackupSelection.IamRoleArn",
+	"list_of_tags":        "Description.ListOfTags",
+	"platform_account_id": "metadata.IntegrationID",
+	"resources":           "Description.Resources",
+	"selection_id":        "description.BackupSelection.SelectionId",
+	"selection_name":      "Description.BackupSelection.SelectionName",
+	"title":               "Description.BackupSelection.SelectionName",
 }
 
 func GetBackupSelection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -8391,7 +8391,7 @@ var listBackupVaultFilters = map[string]string{
 	"encryption_key_arn":        "Description.BackupVault.EncryptionKeyArn",
 	"name":                      "Description.BackupVault.BackupVaultName",
 	"number_of_recovery_points": "Description.BackupVault.NumberOfRecoveryPoints",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"policy":                    "Description.Policy",
 	"sns_topic_arn":             "Description.SNSTopicArn",
 	"tags":                      "Description.Tags",
@@ -8466,7 +8466,7 @@ var getBackupVaultFilters = map[string]string{
 	"encryption_key_arn":        "Description.BackupVault.EncryptionKeyArn",
 	"name":                      "description.BackupVault.BackupVaultName",
 	"number_of_recovery_points": "Description.BackupVault.NumberOfRecoveryPoints",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"policy":                    "Description.Policy",
 	"sns_topic_arn":             "Description.SNSTopicArn",
 	"tags":                      "Description.Tags",
@@ -8621,7 +8621,7 @@ var listBackupRecoveryPointFilters = map[string]string{
 	"is_encrypted":            "Description.RecoveryPoint.IsEncrypted",
 	"last_restore_time":       "Description.RecoveryPoint.LastRestoreTime",
 	"lifecycle":               "Description.RecoveryPoint.Lifecycle",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"recovery_point_arn":      "description.RecoveryPoint.RecoveryPointArn",
 	"resource_arn":            "Description.RecoveryPoint.ResourceArn",
 	"resource_type":           "description.RecoveryPoint.ResourceType",
@@ -8705,7 +8705,7 @@ var getBackupRecoveryPointFilters = map[string]string{
 	"is_encrypted":            "Description.RecoveryPoint.IsEncrypted",
 	"last_restore_time":       "Description.RecoveryPoint.LastRestoreTime",
 	"lifecycle":               "Description.RecoveryPoint.Lifecycle",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"recovery_point_arn":      "description.RecoveryPoint.RecoveryPointArn",
 	"resource_arn":            "Description.RecoveryPoint.ResourceArn",
 	"resource_type":           "Description.RecoveryPoint.ResourceType",
@@ -8852,10 +8852,10 @@ func (p BackupProtectedResourcePaginator) NextPage(ctx context.Context) ([]Backu
 }
 
 var listBackupProtectedResourceFilters = map[string]string{
-	"last_backup_time": "Description.ProtectedResource.LastBackupTime",
-	"og_account_id":    "metadata.IntegrationID",
-	"resource_arn":     "Description.ProtectedResource.ResourceArn",
-	"resource_type":    "Description.ProtectedResource.ResourceType",
+	"last_backup_time":    "Description.ProtectedResource.LastBackupTime",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.ProtectedResource.ResourceArn",
+	"resource_type":       "Description.ProtectedResource.ResourceType",
 }
 
 func ListBackupProtectedResource(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -8919,10 +8919,10 @@ func ListBackupProtectedResource(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getBackupProtectedResourceFilters = map[string]string{
-	"last_backup_time": "Description.ProtectedResource.LastBackupTime",
-	"og_account_id":    "metadata.IntegrationID",
-	"resource_arn":     "description.ProtectedResource.ResourceArn",
-	"resource_type":    "Description.ProtectedResource.ResourceType",
+	"last_backup_time":    "Description.ProtectedResource.LastBackupTime",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "description.ProtectedResource.ResourceArn",
+	"resource_type":       "Description.ProtectedResource.ResourceType",
 }
 
 func GetBackupProtectedResource(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -9068,7 +9068,7 @@ var listBackupFrameworkFilters = map[string]string{
 	"framework_description": "Description.Framework.FrameworkDescription",
 	"framework_name":        "Description.Framework.FrameworkName",
 	"framework_status":      "Description.Framework.FrameworkStatus",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"tags":                  "Description.Tags",
 	"title":                 "Description.Framework.FrameworkName",
 }
@@ -9141,7 +9141,7 @@ var getBackupFrameworkFilters = map[string]string{
 	"framework_description": "Description.Framework.FrameworkDescription",
 	"framework_name":        "description.Framework.FrameworkName",
 	"framework_status":      "Description.Framework.FrameworkStatus",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"tags":                  "Description.Tags",
 	"title":                 "Description.Framework.FrameworkName",
 }
@@ -9287,7 +9287,7 @@ var listBackupLegalHoldFilters = map[string]string{
 	"creation_date":            "Description.LegalHold.CreationDate",
 	"description":              "Description.LegalHold.Description",
 	"legal_hold_id":            "Description.LegalHold.LegalHoldId",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"recovery_point_selection": "Description.LegalHold.RecoveryPointSelection",
 	"retain_record_until":      "Description.LegalHold.RetainRecordUntil",
 	"status":                   "Description.LegalHold.Status",
@@ -9360,7 +9360,7 @@ var getBackupLegalHoldFilters = map[string]string{
 	"creation_date":            "Description.LegalHold.CreationDate",
 	"description":              "Description.LegalHold.Description",
 	"legal_hold_id":            "description.Framework.LegalHoldId",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"recovery_point_selection": "Description.LegalHold.RecoveryPointSelection",
 	"retain_record_until":      "Description.LegalHold.RetainRecordUntil",
 	"status":                   "Description.LegalHold.Status",
@@ -9509,7 +9509,7 @@ var listBackupReportPlanFilters = map[string]string{
 	"description":                    "Description.ReportPlan.ReportPlanDescription",
 	"last_attempted_execution_time":  "Description.ReportPlan.LastAttemptedExecutionTime",
 	"last_successful_execution_time": "Description.ReportPlan.LastSuccessfulExecutionTime",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"report_delivery_channel":        "Description.ReportPlan.ReportDeliveryChannel",
 	"report_plan_name":               "Description.ReportPlan.ReportPlanName",
 	"report_setting":                 "Description.ReportPlan.ReportSetting",
@@ -9584,7 +9584,7 @@ var getBackupReportPlanFilters = map[string]string{
 	"framework_name":                 "description.Framework.FrameworkName",
 	"last_attempted_execution_time":  "Description.ReportPlan.LastAttemptedExecutionTime",
 	"last_successful_execution_time": "Description.ReportPlan.LastSuccessfulExecutionTime",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"report_delivery_channel":        "Description.ReportPlan.ReportDeliveryChannel",
 	"report_plan_name":               "Description.ReportPlan.ReportPlanName",
 	"report_setting":                 "Description.ReportPlan.ReportSetting",
@@ -9727,7 +9727,7 @@ func (p BackupRegionSettingPaginator) NextPage(ctx context.Context) ([]BackupReg
 }
 
 var listBackupRegionSettingFilters = map[string]string{
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"region":                              "Description.Region",
 	"resource_type_management_preference": "Description.ResourceTypeManagementPreference",
 	"resource_type_opt_in_preference":     "Description.ResourceTypeOptInPreference",
@@ -9795,7 +9795,7 @@ func ListBackupRegionSetting(ctx context.Context, d *plugin.QueryData, _ *plugin
 
 var getBackupRegionSettingFilters = map[string]string{
 	"framework_name":                      "description.Framework.FrameworkName",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"region":                              "Description.Region",
 	"resource_type_management_preference": "Description.ResourceTypeManagementPreference",
 	"resource_type_opt_in_preference":     "Description.ResourceTypeOptInPreference",
@@ -9957,7 +9957,7 @@ var listCloudFrontDistributionFilters = map[string]string{
 	"is_ipv6_enabled":                  "Description.Distribution.DistributionConfig.IsIPV6Enabled",
 	"last_modified_time":               "Description.Distribution.LastModifiedTime",
 	"logging":                          "Description.Distribution.DistributionConfig.Logging",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"origin_groups":                    "Description.Distribution.DistributionConfig.OriginGroups",
 	"origins":                          "Description.Distribution.DistributionConfig.Origins.Items",
 	"price_class":                      "Description.Distribution.DistributionConfig.PriceClass",
@@ -10050,7 +10050,7 @@ var getCloudFrontDistributionFilters = map[string]string{
 	"is_ipv6_enabled":                  "Description.Distribution.DistributionConfig.IsIPV6Enabled",
 	"last_modified_time":               "Description.Distribution.LastModifiedTime",
 	"logging":                          "Description.Distribution.DistributionConfig.Logging",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"origin_groups":                    "Description.Distribution.DistributionConfig.OriginGroups",
 	"origins":                          "Description.Distribution.DistributionConfig.Origins.Items",
 	"price_class":                      "Description.Distribution.DistributionConfig.PriceClass",
@@ -10198,12 +10198,12 @@ func (p CloudFrontStreamingDistributionPaginator) NextPage(ctx context.Context) 
 }
 
 var listCloudFrontStreamingDistributionFilters = map[string]string{
-	"arn":           "Description.StreamingDistribution.ARN",
-	"id":            "Description.StreamingDistribution.Id",
-	"name":          "Description.StreamingDistribution.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.StreamingDistribution.Tags",
-	"title":         "Description.StreamingDistribution.Name",
+	"arn":                 "Description.StreamingDistribution.ARN",
+	"id":                  "Description.StreamingDistribution.Id",
+	"name":                "Description.StreamingDistribution.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.StreamingDistribution.Tags",
+	"title":               "Description.StreamingDistribution.Name",
 }
 
 func ListCloudFrontStreamingDistribution(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -10267,12 +10267,12 @@ func ListCloudFrontStreamingDistribution(ctx context.Context, d *plugin.QueryDat
 }
 
 var getCloudFrontStreamingDistributionFilters = map[string]string{
-	"arn":           "Description.StreamingDistribution.ARN",
-	"id":            "Description.StreamingDistribution.Id",
-	"name":          "Description.StreamingDistribution.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.StreamingDistribution.Tags",
-	"title":         "Description.StreamingDistribution.Name",
+	"arn":                 "Description.StreamingDistribution.ARN",
+	"id":                  "Description.StreamingDistribution.Id",
+	"name":                "Description.StreamingDistribution.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.StreamingDistribution.Tags",
+	"title":               "Description.StreamingDistribution.Name",
 }
 
 func GetCloudFrontStreamingDistribution(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -10411,11 +10411,11 @@ func (p CloudFrontOriginAccessControlPaginator) NextPage(ctx context.Context) ([
 }
 
 var listCloudFrontOriginAccessControlFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "Description.OriginAccessControl.Id",
-	"name":          "Description.OriginAccessControl.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.OriginAccessControl.Name",
+	"arn":                 "ARN",
+	"id":                  "Description.OriginAccessControl.Id",
+	"name":                "Description.OriginAccessControl.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.OriginAccessControl.Name",
 }
 
 func ListCloudFrontOriginAccessControl(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -10479,11 +10479,11 @@ func ListCloudFrontOriginAccessControl(ctx context.Context, d *plugin.QueryData,
 }
 
 var getCloudFrontOriginAccessControlFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "description.OriginAccessControl.Id",
-	"name":          "Description.OriginAccessControl.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.OriginAccessControl.Name",
+	"arn":                 "ARN",
+	"id":                  "description.OriginAccessControl.Id",
+	"name":                "Description.OriginAccessControl.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.OriginAccessControl.Name",
 }
 
 func GetCloudFrontOriginAccessControl(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -10622,15 +10622,15 @@ func (p CloudFrontCachePolicyPaginator) NextPage(ctx context.Context) ([]CloudFr
 }
 
 var listCloudFrontCachePolicyFilters = map[string]string{
-	"comment":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.Comment",
-	"default_ttl":        "Description.CachePolicy.CachePolicy.CachePolicyConfig.DefaultTTL",
-	"etag":               "Description.CachePolicy.ETag",
-	"id":                 "Description.CachePolicy.CachePolicy.Id",
-	"last_modified_time": "Description.CachePolicy.CachePolicy.LastModifiedTime",
-	"max_ttl":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.MaxTTL",
-	"min_ttl":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.MinTTL",
-	"name":               "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
-	"og_account_id":      "metadata.IntegrationID",
+	"comment":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.Comment",
+	"default_ttl":         "Description.CachePolicy.CachePolicy.CachePolicyConfig.DefaultTTL",
+	"etag":                "Description.CachePolicy.ETag",
+	"id":                  "Description.CachePolicy.CachePolicy.Id",
+	"last_modified_time":  "Description.CachePolicy.CachePolicy.LastModifiedTime",
+	"max_ttl":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.MaxTTL",
+	"min_ttl":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.MinTTL",
+	"name":                "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
+	"platform_account_id": "metadata.IntegrationID",
 	"parameters_in_cache_key_and_forwarded_to_origin": "Description.CachePolicy.CachePolicy.CachePolicyConfig.ParametersInCacheKeyAndForwardedToOrigin",
 	"title": "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
 }
@@ -10696,15 +10696,15 @@ func ListCloudFrontCachePolicy(ctx context.Context, d *plugin.QueryData, _ *plug
 }
 
 var getCloudFrontCachePolicyFilters = map[string]string{
-	"comment":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.Comment",
-	"default_ttl":        "Description.CachePolicy.CachePolicy.CachePolicyConfig.DefaultTTL",
-	"etag":               "Description.CachePolicy.ETag",
-	"id":                 "description.CachePolicy.Id",
-	"last_modified_time": "Description.CachePolicy.CachePolicy.LastModifiedTime",
-	"max_ttl":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.MaxTTL",
-	"min_ttl":            "Description.CachePolicy.CachePolicy.CachePolicyConfig.MinTTL",
-	"name":               "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
-	"og_account_id":      "metadata.IntegrationID",
+	"comment":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.Comment",
+	"default_ttl":         "Description.CachePolicy.CachePolicy.CachePolicyConfig.DefaultTTL",
+	"etag":                "Description.CachePolicy.ETag",
+	"id":                  "description.CachePolicy.Id",
+	"last_modified_time":  "Description.CachePolicy.CachePolicy.LastModifiedTime",
+	"max_ttl":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.MaxTTL",
+	"min_ttl":             "Description.CachePolicy.CachePolicy.CachePolicyConfig.MinTTL",
+	"name":                "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
+	"platform_account_id": "metadata.IntegrationID",
 	"parameters_in_cache_key_and_forwarded_to_origin": "Description.CachePolicy.CachePolicy.CachePolicyConfig.ParametersInCacheKeyAndForwardedToOrigin",
 	"title": "Description.CachePolicy.CachePolicy.CachePolicyConfig.Name",
 }
@@ -10845,14 +10845,14 @@ func (p CloudFrontFunctionPaginator) NextPage(ctx context.Context) ([]CloudFront
 }
 
 var listCloudFrontFunctionFilters = map[string]string{
-	"arn":               "Description.Function.FunctionSummary.FunctionMetadata.FunctionARN",
-	"e_tag":             "Description.Function.ETag",
-	"function_config":   "Description.Function.FunctionSummary.FunctionConfig",
-	"function_metadata": "Description.Function.FunctionSummary.FunctionMetadata",
-	"name":              "Description.Function.FunctionSummary.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"status":            "Description.Function.FunctionSummary.Status",
-	"title":             "Description.Function.FunctionSummary.Name",
+	"arn":                 "Description.Function.FunctionSummary.FunctionMetadata.FunctionARN",
+	"e_tag":               "Description.Function.ETag",
+	"function_config":     "Description.Function.FunctionSummary.FunctionConfig",
+	"function_metadata":   "Description.Function.FunctionSummary.FunctionMetadata",
+	"name":                "Description.Function.FunctionSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.Function.FunctionSummary.Status",
+	"title":               "Description.Function.FunctionSummary.Name",
 }
 
 func ListCloudFrontFunction(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -10916,14 +10916,14 @@ func ListCloudFrontFunction(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getCloudFrontFunctionFilters = map[string]string{
-	"arn":               "Description.Function.FunctionSummary.FunctionMetadata.FunctionARN",
-	"e_tag":             "Description.Function.ETag",
-	"function_config":   "Description.Function.FunctionSummary.FunctionConfig",
-	"function_metadata": "Description.Function.FunctionSummary.FunctionMetadata",
-	"name":              "description.Function.FunctionSummary.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"status":            "Description.Function.FunctionSummary.Status",
-	"title":             "Description.Function.FunctionSummary.Name",
+	"arn":                 "Description.Function.FunctionSummary.FunctionMetadata.FunctionARN",
+	"e_tag":               "Description.Function.ETag",
+	"function_config":     "Description.Function.FunctionSummary.FunctionConfig",
+	"function_metadata":   "Description.Function.FunctionSummary.FunctionMetadata",
+	"name":                "description.Function.FunctionSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.Function.FunctionSummary.Status",
+	"title":               "Description.Function.FunctionSummary.Name",
 }
 
 func GetCloudFrontFunction(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -11066,7 +11066,7 @@ var listCloudFrontOriginAccessIdentityFilters = map[string]string{
 	"comment":              "Description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.CloudFrontOriginAccessIdentityConfig.Comment",
 	"etag":                 "Description.OriginAccessIdentity.ETag",
 	"id":                   "Description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.Id",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"s3_canonical_user_id": "Description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.S3CanonicalUserId",
 	"title":                "Description.OriginAccessIdentity.ResultMetadata",
 }
@@ -11136,7 +11136,7 @@ var getCloudFrontOriginAccessIdentityFilters = map[string]string{
 	"comment":              "Description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.CloudFrontOriginAccessIdentityConfig.Comment",
 	"etag":                 "Description.OriginAccessIdentity.ETag",
 	"id":                   "description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.Id",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"s3_canonical_user_id": "Description.OriginAccessIdentity.CloudFrontOriginAccessIdentity.S3CanonicalUserId",
 	"title":                "Description.OriginAccessIdentity.ResultMetadata",
 }
@@ -11284,7 +11284,7 @@ var listCloudFrontOriginRequestPolicyFilters = map[string]string{
 	"id":                   "Description.OriginRequestPolicy.OriginRequestPolicy.Id",
 	"last_modified_time":   "Description.OriginRequestPolicy.OriginRequestPolicy.LastModifiedTime",
 	"name":                 "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.Name",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"query_strings_config": "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.QueryStringsConfig",
 	"title":                "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.Name",
 }
@@ -11357,7 +11357,7 @@ var getCloudFrontOriginRequestPolicyFilters = map[string]string{
 	"id":                   "description.OriginRequestPolicy.OriginRequestPolicy.Id",
 	"last_modified_time":   "Description.OriginRequestPolicy.OriginRequestPolicy.LastModifiedTime",
 	"name":                 "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.Name",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"query_strings_config": "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.QueryStringsConfig",
 	"title":                "Description.OriginRequestPolicy.OriginRequestPolicy.OriginRequestPolicyConfig.Name",
 }
@@ -11502,7 +11502,7 @@ var listCloudFrontResponseHeadersPolicyFilters = map[string]string{
 	"id":                             "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.Id",
 	"last_modified_time":             "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.LastModifiedTime",
 	"name":                           "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"response_headers_policy_config": "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig",
 	"title":                          "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.Name",
 	"type":                           "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.SecurityHeadersConfig.ContentTypeOptions",
@@ -11573,7 +11573,7 @@ var getCloudFrontResponseHeadersPolicyFilters = map[string]string{
 	"id":                             "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.Id",
 	"last_modified_time":             "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.LastModifiedTime",
 	"name":                           "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"response_headers_policy_config": "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig",
 	"title":                          "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.Name",
 	"type":                           "Description.ResponseHeadersPolicy.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.SecurityHeadersConfig.ContentTypeOptions",
@@ -11731,7 +11731,7 @@ var listCloudWatchAlarmFilters = map[string]string{
 	"metrics":                               "Description.MetricAlarm.Metrics",
 	"name":                                  "description.MetricAlarm.AlarmName",
 	"namespace":                             "Description.MetricAlarm.Namespace",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"ok_actions":                            "Description.MetricAlarm.OKActions",
 	"period":                                "Description.MetricAlarm.EvaluationPeriods",
 	"state_reason":                          "Description.MetricAlarm.StateReason",
@@ -11824,7 +11824,7 @@ var getCloudWatchAlarmFilters = map[string]string{
 	"metrics":                               "Description.MetricAlarm.Metrics",
 	"name":                                  "description.MetricAlarm.AlarmName",
 	"namespace":                             "Description.MetricAlarm.Namespace",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"ok_actions":                            "Description.MetricAlarm.OKActions",
 	"period":                                "Description.MetricAlarm.EvaluationPeriods",
 	"state_reason":                          "Description.MetricAlarm.StateReason",
@@ -11976,11 +11976,11 @@ func (p CloudWatchLogEventPaginator) NextPage(ctx context.Context) ([]CloudWatch
 }
 
 var listCloudWatchLogEventFilters = map[string]string{
-	"event_id":        "Description.LogEvent.EventId",
-	"log_group_name":  "description.LogGroupName",
-	"log_stream_name": "description.LogEvent.LogStreamName",
-	"og_account_id":   "metadata.IntegrationID",
-	"timestamp":       "description.LogEvent.Timestamp",
+	"event_id":            "Description.LogEvent.EventId",
+	"log_group_name":      "description.LogGroupName",
+	"log_stream_name":     "description.LogEvent.LogStreamName",
+	"platform_account_id": "metadata.IntegrationID",
+	"timestamp":           "description.LogEvent.Timestamp",
 }
 
 func ListCloudWatchLogEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12044,10 +12044,10 @@ func ListCloudWatchLogEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getCloudWatchLogEventFilters = map[string]string{
-	"event_id":        "Description.LogEvent.EventId",
-	"log_group_name":  "Description.LogGroupName",
-	"log_stream_name": "Description.LogEvent.LogStreamName",
-	"og_account_id":   "metadata.IntegrationID",
+	"event_id":            "Description.LogEvent.EventId",
+	"log_group_name":      "Description.LogGroupName",
+	"log_stream_name":     "Description.LogEvent.LogStreamName",
+	"platform_account_id": "metadata.IntegrationID",
 }
 
 func GetCloudWatchLogEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12186,10 +12186,10 @@ func (p CloudWatchLogResourcePolicyPaginator) NextPage(ctx context.Context) ([]C
 }
 
 var listCloudWatchLogResourcePolicyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"policy":        "Description.ResourcePolicy.PolicyDocument",
-	"policy_name":   "Description.ResourcePolicy.PolicyName",
-	"title":         "Description.ResourcePolicy.PolicyName",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.ResourcePolicy.PolicyDocument",
+	"policy_name":         "Description.ResourcePolicy.PolicyName",
+	"title":               "Description.ResourcePolicy.PolicyName",
 }
 
 func ListCloudWatchLogResourcePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12253,10 +12253,10 @@ func ListCloudWatchLogResourcePolicy(ctx context.Context, d *plugin.QueryData, _
 }
 
 var getCloudWatchLogResourcePolicyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"policy":        "Description.ResourcePolicy.PolicyDocument",
-	"policy_name":   "Description.ResourcePolicy.PolicyName",
-	"title":         "Description.ResourcePolicy.PolicyName",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.ResourcePolicy.PolicyDocument",
+	"policy_name":         "Description.ResourcePolicy.PolicyName",
+	"title":               "Description.ResourcePolicy.PolicyName",
 }
 
 func GetCloudWatchLogResourcePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12398,7 +12398,7 @@ var listCloudWatchLogStreamFilters = map[string]string{
 	"arn":                   "Description.LogStream.Arn",
 	"log_group_name":        "Description.LogGroupName",
 	"name":                  "description.LogStream.LogStreamName",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"title":                 "Description.LogStream.LogStreamName",
 	"upload_sequence_token": "Description.LogStream.UploadSequenceToken",
 }
@@ -12467,7 +12467,7 @@ var getCloudWatchLogStreamFilters = map[string]string{
 	"arn":                   "Description.LogStream.Arn",
 	"log_group_name":        "Description.LogGroupName",
 	"name":                  "description.LogStream.LogStreamName",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"title":                 "Description.LogStream.LogStreamName",
 	"upload_sequence_token": "Description.LogStream.UploadSequenceToken",
 }
@@ -12608,14 +12608,14 @@ func (p CloudWatchLogSubscriptionFilterPaginator) NextPage(ctx context.Context) 
 }
 
 var listCloudWatchLogSubscriptionFilterFilters = map[string]string{
-	"destination_arn": "Description.SubscriptionFilter.DestinationArn",
-	"distribution":    "Description.SubscriptionFilter.Distribution",
-	"filter_pattern":  "Description.SubscriptionFilter.FilterPattern",
-	"log_group_name":  "description.SubscriptionFilter.LogGroupName",
-	"name":            "description.SubscriptionFilter.FilterName",
-	"og_account_id":   "metadata.IntegrationID",
-	"role_arn":        "Description.SubscriptionFilter.RoleArn",
-	"title":           "Description.SubscriptionFilter.FilterName",
+	"destination_arn":     "Description.SubscriptionFilter.DestinationArn",
+	"distribution":        "Description.SubscriptionFilter.Distribution",
+	"filter_pattern":      "Description.SubscriptionFilter.FilterPattern",
+	"log_group_name":      "description.SubscriptionFilter.LogGroupName",
+	"name":                "description.SubscriptionFilter.FilterName",
+	"platform_account_id": "metadata.IntegrationID",
+	"role_arn":            "Description.SubscriptionFilter.RoleArn",
+	"title":               "Description.SubscriptionFilter.FilterName",
 }
 
 func ListCloudWatchLogSubscriptionFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12679,14 +12679,14 @@ func ListCloudWatchLogSubscriptionFilter(ctx context.Context, d *plugin.QueryDat
 }
 
 var getCloudWatchLogSubscriptionFilterFilters = map[string]string{
-	"destination_arn": "Description.SubscriptionFilter.DestinationArn",
-	"distribution":    "Description.SubscriptionFilter.Distribution",
-	"filter_pattern":  "Description.SubscriptionFilter.FilterPattern",
-	"log_group_name":  "description.SubscriptionFilter.LogGroupName",
-	"name":            "description.SubscriptionFilter.FilterName",
-	"og_account_id":   "metadata.IntegrationID",
-	"role_arn":        "Description.SubscriptionFilter.RoleArn",
-	"title":           "Description.SubscriptionFilter.FilterName",
+	"destination_arn":     "Description.SubscriptionFilter.DestinationArn",
+	"distribution":        "Description.SubscriptionFilter.Distribution",
+	"filter_pattern":      "Description.SubscriptionFilter.FilterPattern",
+	"log_group_name":      "description.SubscriptionFilter.LogGroupName",
+	"name":                "description.SubscriptionFilter.FilterName",
+	"platform_account_id": "metadata.IntegrationID",
+	"role_arn":            "Description.SubscriptionFilter.RoleArn",
+	"title":               "Description.SubscriptionFilter.FilterName",
 }
 
 func GetCloudWatchLogSubscriptionFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12825,11 +12825,11 @@ func (p CloudWatchMetricPaginator) NextPage(ctx context.Context) ([]CloudWatchMe
 }
 
 var listCloudWatchMetricFilters = map[string]string{
-	"dimensions":    "Description.Metric.Dimensions",
-	"metric_name":   "description.Metric.MetricName",
-	"namespace":     "description.Metric.Namespace",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Metric.MetricName",
+	"dimensions":          "Description.Metric.Dimensions",
+	"metric_name":         "description.Metric.MetricName",
+	"namespace":           "description.Metric.Namespace",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Metric.MetricName",
 }
 
 func ListCloudWatchMetric(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -12893,11 +12893,11 @@ func ListCloudWatchMetric(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getCloudWatchMetricFilters = map[string]string{
-	"dimensions":    "Description.Metric.Dimensions",
-	"metric_name":   "Description.Metric.MetricName",
-	"namespace":     "Description.Metric.Namespace",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Metric.MetricName",
+	"dimensions":          "Description.Metric.Dimensions",
+	"metric_name":         "Description.Metric.MetricName",
+	"namespace":           "Description.Metric.Namespace",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Metric.MetricName",
 }
 
 func GetCloudWatchMetric(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -13042,7 +13042,7 @@ var listCloudWatchLogsLogGroupFilters = map[string]string{
 	"kms_key_id":             "Description.LogGroup.KmsKeyId",
 	"metric_filter_count":    "Description.LogGroup.MetricFilterCount",
 	"name":                   "description.LogGroup.LogGroupName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"retention_in_days":      "Description.LogGroup.RetentionInDays",
 	"stored_bytes":           "Description.LogGroup.StoredBytes",
 	"tags":                   "Description.Tags",
@@ -13116,7 +13116,7 @@ var getCloudWatchLogsLogGroupFilters = map[string]string{
 	"kms_key_id":             "Description.LogGroup.KmsKeyId",
 	"metric_filter_count":    "Description.LogGroup.MetricFilterCount",
 	"name":                   "description.LogGroup.LogGroupName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"retention_in_days":      "Description.LogGroup.RetentionInDays",
 	"stored_bytes":           "Description.LogGroup.StoredBytes",
 	"tags":                   "Description.Tags",
@@ -13264,7 +13264,7 @@ var listCloudWatchLogsMetricFilterFilters = map[string]string{
 	"metric_transformation_name":      "decsription.MetricFilter.MetricTransformations.MetricName",
 	"metric_transformation_namespace": "decsription.MetricFilter.MetricTransformations.MetricNamespace",
 	"name":                            "decsription.MetricFilter.FilterName",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"title":                           "Description.MetricFilter.FilterName",
 }
 
@@ -13329,11 +13329,11 @@ func ListCloudWatchLogsMetricFilter(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getCloudWatchLogsMetricFilterFilters = map[string]string{
-	"filter_pattern": "Description.MetricFilter.FilterPattern",
-	"log_group_name": "Description.MetricFilter.LogGroupName",
-	"name":           "decsription.MetricFilter.FilterName",
-	"og_account_id":  "metadata.IntegrationID",
-	"title":          "Description.MetricFilter.FilterName",
+	"filter_pattern":      "Description.MetricFilter.FilterPattern",
+	"log_group_name":      "Description.MetricFilter.LogGroupName",
+	"name":                "decsription.MetricFilter.FilterName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.MetricFilter.FilterName",
 }
 
 func GetCloudWatchLogsMetricFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -13486,7 +13486,7 @@ var listCodeBuildProjectFilters = map[string]string{
 	"last_modified":             "Description.Project.LastModified",
 	"logs_config":               "Description.Project.LogsConfig",
 	"name":                      "Description.Project.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"project_visibility":        "Description.Project.ProjectVisibility",
 	"queued_timeout_in_minutes": "Description.Project.QueuedTimeoutInMinutes",
 	"secondary_artifacts":       "Description.Project.SecondaryArtifacts",
@@ -13577,7 +13577,7 @@ var getCodeBuildProjectFilters = map[string]string{
 	"last_modified":             "Description.Project.LastModified",
 	"logs_config":               "Description.Project.LogsConfig",
 	"name":                      "description.Project.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"project_visibility":        "Description.Project.ProjectVisibility",
 	"queued_timeout_in_minutes": "Description.Project.QueuedTimeoutInMinutes",
 	"secondary_artifacts":       "Description.Project.SecondaryArtifacts",
@@ -13729,10 +13729,10 @@ func (p CodeBuildSourceCredentialPaginator) NextPage(ctx context.Context) ([]Cod
 }
 
 var listCodeBuildSourceCredentialFilters = map[string]string{
-	"arn":           "Description.SourceCredentialsInfo.Arn",
-	"auth_type":     "Description.SourceCredentialsInfo.AuthType",
-	"og_account_id": "metadata.IntegrationID",
-	"server_type":   "Description.SourceCredentialsInfo.ServerType",
+	"arn":                 "Description.SourceCredentialsInfo.Arn",
+	"auth_type":           "Description.SourceCredentialsInfo.AuthType",
+	"platform_account_id": "metadata.IntegrationID",
+	"server_type":         "Description.SourceCredentialsInfo.ServerType",
 }
 
 func ListCodeBuildSourceCredential(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -13796,10 +13796,10 @@ func ListCodeBuildSourceCredential(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getCodeBuildSourceCredentialFilters = map[string]string{
-	"arn":           "Description.SourceCredentialsInfo.Arn",
-	"auth_type":     "Description.SourceCredentialsInfo.AuthType",
-	"og_account_id": "metadata.IntegrationID",
-	"server_type":   "Description.SourceCredentialsInfo.ServerType",
+	"arn":                 "Description.SourceCredentialsInfo.Arn",
+	"auth_type":           "Description.SourceCredentialsInfo.AuthType",
+	"platform_account_id": "metadata.IntegrationID",
+	"server_type":         "Description.SourceCredentialsInfo.ServerType",
 }
 
 func GetCodeBuildSourceCredential(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -13956,7 +13956,7 @@ var listCodeBuildBuildFilters = map[string]string{
 	"initiator":                      "Description.Build.Initiator",
 	"logs":                           "Description.Build.Logs",
 	"network_interfaces":             "Description.Build.NetworkInterface",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"phases":                         "Description.Build.Phases",
 	"project_name":                   "Description.Build.ProjectName",
 	"queued_timeout_in_minutes":      "Description.Build.QueuedTimeoutInMinutes",
@@ -14052,7 +14052,7 @@ var getCodeBuildBuildFilters = map[string]string{
 	"initiator":                      "Description.Build.Initiator",
 	"logs":                           "Description.Build.Logs",
 	"network_interfaces":             "Description.Build.NetworkInterface",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"phases":                         "Description.Build.Phases",
 	"project_name":                   "Description.Build.ProjectName",
 	"queued_timeout_in_minutes":      "Description.Build.QueuedTimeoutInMinutes",
@@ -14205,14 +14205,14 @@ func (p ConfigConfigurationRecorderPaginator) NextPage(ctx context.Context) ([]C
 }
 
 var listConfigConfigurationRecorderFilters = map[string]string{
-	"arn":              "ARN",
-	"name":             "description.ConfigurationRecorder.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"recording_group":  "Description.ConfigurationRecorder.RecordingGroup",
-	"role_arn":         "Description.ConfigurationRecorder.RoleARN",
-	"status":           "Description.ConfigurationRecordersStatus",
-	"status_recording": "Description.ConfigurationRecordersStatus.Recording",
-	"title":            "Description.ConfigurationRecorder.Name",
+	"arn":                 "ARN",
+	"name":                "description.ConfigurationRecorder.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"recording_group":     "Description.ConfigurationRecorder.RecordingGroup",
+	"role_arn":            "Description.ConfigurationRecorder.RoleARN",
+	"status":              "Description.ConfigurationRecordersStatus",
+	"status_recording":    "Description.ConfigurationRecordersStatus.Recording",
+	"title":               "Description.ConfigurationRecorder.Name",
 }
 
 func ListConfigConfigurationRecorder(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -14276,14 +14276,14 @@ func ListConfigConfigurationRecorder(ctx context.Context, d *plugin.QueryData, _
 }
 
 var getConfigConfigurationRecorderFilters = map[string]string{
-	"arn":              "ARN",
-	"name":             "description.ConfigurationRecorder.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"recording_group":  "Description.ConfigurationRecorder.RecordingGroup",
-	"role_arn":         "Description.ConfigurationRecorder.RoleARN",
-	"status":           "Description.ConfigurationRecordersStatus",
-	"status_recording": "Description.ConfigurationRecordersStatus.Recording",
-	"title":            "Description.ConfigurationRecorder.Name",
+	"arn":                 "ARN",
+	"name":                "description.ConfigurationRecorder.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"recording_group":     "Description.ConfigurationRecorder.RecordingGroup",
+	"role_arn":            "Description.ConfigurationRecorder.RoleARN",
+	"status":              "Description.ConfigurationRecordersStatus",
+	"status_recording":    "Description.ConfigurationRecordersStatus.Recording",
+	"title":               "Description.ConfigurationRecorder.Name",
 }
 
 func GetConfigConfigurationRecorder(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -14426,7 +14426,7 @@ var listConfigAggregationAuthorizationFilters = map[string]string{
 	"authorized_account_id": "Description.AggregationAuthorization.AuthorizedAccountId",
 	"authorized_aws_region": "Description.AggregationAuthorization.AuthorizedAwsRegion",
 	"creation_time":         "Description.AggregationAuthorization.CreationTime",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"tags_src":              "Description.Tags",
 	"title":                 "Description.AggregationAuthorization.AggregationAuthorizationArn",
 }
@@ -14496,7 +14496,7 @@ var getConfigAggregationAuthorizationFilters = map[string]string{
 	"authorized_account_id": "Description.AggregationAuthorization.AuthorizedAccountId",
 	"authorized_aws_region": "Description.AggregationAuthorization.AuthorizedAwsRegion",
 	"creation_time":         "Description.AggregationAuthorization.CreationTime",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"tags_src":              "Description.Tags",
 	"title":                 "Description.AggregationAuthorization.AggregationAuthorizationArn",
 }
@@ -14645,7 +14645,7 @@ var listConfigConformancePackFilters = map[string]string{
 	"input_parameters":           "Description.ConformancePack.ConformancePackInputParameters",
 	"last_update_requested_time": "Description.ConformancePack.LastUpdateRequestedTime",
 	"name":                       "Description.ConformancePack.ConformancePackName",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"title":                      "Description.ConformancePack.ConformancePackName",
 }
 
@@ -14718,7 +14718,7 @@ var getConfigConformancePackFilters = map[string]string{
 	"input_parameters":           "Description.ConformancePack.ConformancePackInputParameters",
 	"last_update_requested_time": "Description.ConformancePack.LastUpdateRequestedTime",
 	"name":                       "description.ConformancePack.ConformancePackName",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"title":                      "Description.ConformancePack.ConformancePackName",
 }
 
@@ -14866,7 +14866,7 @@ var listConfigRuleFilters = map[string]string{
 	"input_parameters":            "Description.Rule.InputParameters",
 	"maximum_execution_frequency": "Description.Rule.MaximumExecutionFrequency",
 	"name":                        "Description.Rule.ConfigRuleName",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"rule_id":                     "Description.Rule.ConfigRuleId",
 	"rule_state":                  "Description.Rule.ConfigRuleState",
 	"scope":                       "Description.Rule.Scope",
@@ -14944,7 +14944,7 @@ var getConfigRuleFilters = map[string]string{
 	"input_parameters":            "Description.Rule.InputParameters",
 	"maximum_execution_frequency": "Description.Rule.MaximumExecutionFrequency",
 	"name":                        "description.Rule.ConfigRuleName",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"rule_id":                     "Description.Rule.ConfigRuleId",
 	"rule_state":                  "Description.Rule.ConfigRuleState",
 	"scope":                       "Description.Rule.Scope",
@@ -15090,7 +15090,7 @@ func (p ConfigRetentionConfigurationPaginator) NextPage(ctx context.Context) ([]
 
 var listConfigRetentionConfigurationFilters = map[string]string{
 	"name":                     "Description.RetentionConfiguration.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"retention_period_in_days": "Description.RetentionConfiguration.RetentionPeriodInDays",
 	"title":                    "Description.RetentionConfiguration.Name",
 }
@@ -15157,7 +15157,7 @@ func ListConfigRetentionConfiguration(ctx context.Context, d *plugin.QueryData, 
 
 var getConfigRetentionConfigurationFilters = map[string]string{
 	"name":                     "description.ConformancePack.ConformancePackName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"retention_period_in_days": "Description.RetentionConfiguration.RetentionPeriodInDays",
 	"title":                    "Description.RetentionConfiguration.Name",
 }
@@ -15308,7 +15308,7 @@ var listDAXClusterFilters = map[string]string{
 	"node_type":                    "Description.Cluster.NodeType",
 	"nodes":                        "Description.Cluster.Nodes",
 	"notification_configuration":   "Description.Cluster.NotificationConfiguration",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"parameter_group":              "Description.Cluster.ParameterGroup",
 	"preferred_maintenance_window": "Description.Cluster.PreferredMaintenanceWindow",
 	"security_groups":              "Description.Cluster.SecurityGroups",
@@ -15391,7 +15391,7 @@ var getDAXClusterFilters = map[string]string{
 	"node_type":                    "Description.Cluster.NodeType",
 	"nodes":                        "Description.Cluster.Nodes",
 	"notification_configuration":   "Description.Cluster.NotificationConfiguration",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"parameter_group":              "Description.Cluster.ParameterGroup",
 	"preferred_maintenance_window": "Description.Cluster.PreferredMaintenanceWindow",
 	"security_groups":              "Description.Cluster.SecurityGroups",
@@ -15540,7 +15540,7 @@ func (p DAXParameterGroupPaginator) NextPage(ctx context.Context) ([]DAXParamete
 
 var listDAXParameterGroupFilters = map[string]string{
 	"description":          "Description.ParameterGroup.Description",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"parameter_group_name": "description.ParameterGroup.ParameterGroupName",
 	"title":                "Description.ParameterGroup.ParameterGroupName",
 }
@@ -15607,7 +15607,7 @@ func ListDAXParameterGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 
 var getDAXParameterGroupFilters = map[string]string{
 	"description":          "Description.ParameterGroup.Description",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"parameter_group_name": "Description.ParameterGroup.ParameterGroupName",
 	"title":                "Description.ParameterGroup.ParameterGroupName",
 }
@@ -15753,7 +15753,7 @@ var listDAXParameterFilters = map[string]string{
 	"data_type":            "Description.Parameter.DataType",
 	"description":          "Description.Parameter.Description",
 	"is_modifiable":        "Description.Parameter.IsModifiable",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"parameter_group_name": "description.ParameterGroupName",
 	"parameter_name":       "Description.Parameter.ParameterName",
 	"parameter_type":       "Description.Parameter.ParameterType",
@@ -15828,7 +15828,7 @@ var getDAXParameterFilters = map[string]string{
 	"data_type":            "Description.Parameter.DataType",
 	"description":          "Description.Parameter.Description",
 	"is_modifiable":        "Description.Parameter.IsModifiable",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"parameter_group_name": "Description.ParameterGroupName",
 	"parameter_name":       "Description.Parameter.ParameterName",
 	"parameter_type":       "Description.Parameter.ParameterType",
@@ -15973,12 +15973,12 @@ func (p DAXSubnetGroupPaginator) NextPage(ctx context.Context) ([]DAXSubnetGroup
 }
 
 var listDAXSubnetGroupFilters = map[string]string{
-	"description":       "Description.SubnetGroup.Description",
-	"og_account_id":     "metadata.IntegrationID",
-	"subnet_group_name": "description.SubnetGroup.SubnetGroupName",
-	"subnets":           "Description.SubnetGroup.Subnets",
-	"title":             "Description.SubnetGroup.SubnetGroupName",
-	"vpc_id":            "Description.SubnetGroup.VpcId",
+	"description":         "Description.SubnetGroup.Description",
+	"platform_account_id": "metadata.IntegrationID",
+	"subnet_group_name":   "description.SubnetGroup.SubnetGroupName",
+	"subnets":             "Description.SubnetGroup.Subnets",
+	"title":               "Description.SubnetGroup.SubnetGroupName",
+	"vpc_id":              "Description.SubnetGroup.VpcId",
 }
 
 func ListDAXSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -16042,12 +16042,12 @@ func ListDAXSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getDAXSubnetGroupFilters = map[string]string{
-	"description":       "Description.SubnetGroup.Description",
-	"og_account_id":     "metadata.IntegrationID",
-	"subnet_group_name": "Description.SubnetGroup.SubnetGroupName",
-	"subnets":           "Description.SubnetGroup.Subnets",
-	"title":             "Description.SubnetGroup.SubnetGroupName",
-	"vpc_id":            "Description.SubnetGroup.VpcId",
+	"description":         "Description.SubnetGroup.Description",
+	"platform_account_id": "metadata.IntegrationID",
+	"subnet_group_name":   "Description.SubnetGroup.SubnetGroupName",
+	"subnets":             "Description.SubnetGroup.Subnets",
+	"title":               "Description.SubnetGroup.SubnetGroupName",
+	"vpc_id":              "Description.SubnetGroup.VpcId",
 }
 
 func GetDAXSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -16196,7 +16196,7 @@ var listDMSReplicationInstanceFilters = map[string]string{
 	"instance_create_time":                      "Description.ReplicationInstance.InstanceCreateTime",
 	"kms_key_id":                                "Description.ReplicationInstance.KmsKeyId",
 	"multi_az":                                  "Description.ReplicationInstance.MultiAZ",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"pending_modified_values":                   "Description.ReplicationInstance.PendingModifiedValues",
 	"preferred_maintenance_window":              "Description.ReplicationInstance.PreferredMaintenanceWindow",
 	"publicly_accessible":                       "Description.ReplicationInstance.PubliclyAccessible",
@@ -16285,7 +16285,7 @@ var getDMSReplicationInstanceFilters = map[string]string{
 	"instance_create_time":                      "Description.ReplicationInstance.InstanceCreateTime",
 	"kms_key_id":                                "Description.ReplicationInstance.KmsKeyId",
 	"multi_az":                                  "Description.ReplicationInstance.MultiAZ",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"pending_modified_values":                   "Description.ReplicationInstance.PendingModifiedValues",
 	"preferred_maintenance_window":              "Description.ReplicationInstance.PreferredMaintenanceWindow",
 	"publicly_accessible":                       "Description.ReplicationInstance.PubliclyAccessible",
@@ -16969,7 +16969,7 @@ var listDynamoDbTableFilters = map[string]string{
 	"latest_stream_arn":                  "Description.Table.LatestStreamArn",
 	"latest_stream_label":                "Description.Table.LatestStreamLabel",
 	"name":                               "description.Table.TableName",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"point_in_time_recovery_description": "Description.ContinuousBackup.PointInTimeRecoveryDescription",
 	"read_capacity":                      "Description.Table.ProvisionedThroughput.ReadCapacityUnits",
 	"sse_description":                    "Description.Table.SSEDescription",
@@ -17056,7 +17056,7 @@ var getDynamoDbTableFilters = map[string]string{
 	"latest_stream_arn":                  "Description.Table.LatestStreamArn",
 	"latest_stream_label":                "Description.Table.LatestStreamLabel",
 	"name":                               "description.Table.TableName",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"point_in_time_recovery_description": "Description.ContinuousBackup.PointInTimeRecoveryDescription",
 	"read_capacity":                      "Description.Table.ProvisionedThroughput.ReadCapacityUnits",
 	"sse_description":                    "Description.Table.SSEDescription",
@@ -17206,10 +17206,10 @@ func (p DynamoDbGlobalSecondaryIndexPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listDynamoDbGlobalSecondaryIndexFilters = map[string]string{
-	"index_arn":     "Description.GlobalSecondaryIndex.IndexArn",
-	"index_name":    "Description.GlobalSecondaryIndex.IndexName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.GlobalSecondaryIndex.IndexName",
+	"index_arn":           "Description.GlobalSecondaryIndex.IndexArn",
+	"index_name":          "Description.GlobalSecondaryIndex.IndexName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.GlobalSecondaryIndex.IndexName",
 }
 
 func ListDynamoDbGlobalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17273,10 +17273,10 @@ func ListDynamoDbGlobalSecondaryIndex(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getDynamoDbGlobalSecondaryIndexFilters = map[string]string{
-	"index_arn":     "description.GlobalSecondaryIndex.IndexArn",
-	"index_name":    "Description.GlobalSecondaryIndex.IndexName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.GlobalSecondaryIndex.IndexName",
+	"index_arn":           "description.GlobalSecondaryIndex.IndexArn",
+	"index_name":          "Description.GlobalSecondaryIndex.IndexName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.GlobalSecondaryIndex.IndexName",
 }
 
 func GetDynamoDbGlobalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17415,10 +17415,10 @@ func (p DynamoDbLocalSecondaryIndexPaginator) NextPage(ctx context.Context) ([]D
 }
 
 var listDynamoDbLocalSecondaryIndexFilters = map[string]string{
-	"index_arn":     "Description.LocalSecondaryIndex.IndexArn",
-	"index_name":    "Description.LocalSecondaryIndex.IndexName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.LocalSecondaryIndex.IndexName",
+	"index_arn":           "Description.LocalSecondaryIndex.IndexArn",
+	"index_name":          "Description.LocalSecondaryIndex.IndexName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.LocalSecondaryIndex.IndexName",
 }
 
 func ListDynamoDbLocalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17482,10 +17482,10 @@ func ListDynamoDbLocalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _
 }
 
 var getDynamoDbLocalSecondaryIndexFilters = map[string]string{
-	"index_arn":     "description.LocalSecondaryIndex.IndexArn",
-	"index_name":    "Description.LocalSecondaryIndex.IndexName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.LocalSecondaryIndex.IndexName",
+	"index_arn":           "description.LocalSecondaryIndex.IndexArn",
+	"index_name":          "Description.LocalSecondaryIndex.IndexName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.LocalSecondaryIndex.IndexName",
 }
 
 func GetDynamoDbLocalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17624,10 +17624,10 @@ func (p DynamoDbStreamPaginator) NextPage(ctx context.Context) ([]DynamoDbStream
 }
 
 var listDynamoDbStreamFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"stream_arn":    "Description.Stream.StreamArn",
-	"stream_label":  "Description.Stream.StreamLabel",
-	"title":         "Description.Stream.StreamLabel",
+	"platform_account_id": "metadata.IntegrationID",
+	"stream_arn":          "Description.Stream.StreamArn",
+	"stream_label":        "Description.Stream.StreamLabel",
+	"title":               "Description.Stream.StreamLabel",
 }
 
 func ListDynamoDbStream(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17691,10 +17691,10 @@ func ListDynamoDbStream(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getDynamoDbStreamFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"stream_arn":    "description.Stream.StreamArn",
-	"stream_label":  "Description.Stream.StreamLabel",
-	"title":         "Description.Stream.StreamLabel",
+	"platform_account_id": "metadata.IntegrationID",
+	"stream_arn":          "description.Stream.StreamArn",
+	"stream_label":        "Description.Stream.StreamLabel",
+	"title":               "Description.Stream.StreamLabel",
 }
 
 func GetDynamoDbStream(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -17840,7 +17840,7 @@ var listDynamoDbBackupFilters = map[string]string{
 	"backup_status":            "Description.Backup.BackupStatus",
 	"backup_type":              "description.Backup.BackupType",
 	"name":                     "Description.Backup.BackupName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"table_arn":                "Description.Backup.TableArn",
 	"table_id":                 "Description.Backup.TableId",
 	"table_name":               "description.Backup.TableName",
@@ -17915,7 +17915,7 @@ var getDynamoDbBackupFilters = map[string]string{
 	"backup_status":            "Description.Backup.BackupStatus",
 	"backup_type":              "Description.Backup.BackupType",
 	"name":                     "Description.Backup.BackupName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"table_arn":                "Description.Backup.TableArn",
 	"table_id":                 "Description.Backup.TableId",
 	"table_name":               "Description.Backup.TableName",
@@ -18062,7 +18062,7 @@ var listDynamoDbGlobalTableFilters = map[string]string{
 	"global_table_arn":    "Description.GlobalTable.GlobalTableArn",
 	"global_table_name":   "description.GlobalTable.GlobalTableName",
 	"global_table_status": "Description.GlobalTable.GlobalTableStatus",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"replication_group":   "Description.GlobalTable.ReplicationGroup",
 	"title":               "Description.GlobalTable.GlobalTableName",
 }
@@ -18132,7 +18132,7 @@ var getDynamoDbGlobalTableFilters = map[string]string{
 	"global_table_arn":    "Description.GlobalTable.GlobalTableArn",
 	"global_table_name":   "description.GlobalTable.GlobalTableName",
 	"global_table_status": "Description.GlobalTable.GlobalTableStatus",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"replication_group":   "Description.GlobalTable.ReplicationGroup",
 	"title":               "Description.GlobalTable.GlobalTableName",
 }
@@ -18273,26 +18273,26 @@ func (p DynamoDbTableExportPaginator) NextPage(ctx context.Context) ([]DynamoDbT
 }
 
 var listDynamoDbTableExportFilters = map[string]string{
-	"arn":               "description.Export.ExportArn",
-	"billed_size_bytes": "Description.Export.BilledSizeBytes",
-	"client_token":      "Description.Export.ClientToken",
-	"end_time":          "Description.Export.EndTime",
-	"export_format":     "Description.Export.ExportFormat",
-	"export_manifest":   "Description.Export.ExportManifest",
-	"export_status":     "Description.Export.ExportStatus",
-	"export_time":       "Description.Export.ExportTime",
-	"failure_code":      "Description.Export.FailureCode",
-	"failure_message":   "Description.Export.FailureMessage",
-	"item_count":        "Description.Export.ItemCount",
-	"og_account_id":     "metadata.IntegrationID",
-	"s3_bucket":         "Description.Export.S3Bucket",
-	"s3_bucket_owner":   "Description.Export.S3BucketOwner",
-	"s3_prefix":         "Description.Export.S3Prefix",
-	"s3_sse_algorithm":  "Description.Export.S3SseAlgorithm",
-	"s3_sse_kms_key_id": "Description.Export.S3SseKmsKeyId",
-	"start_time":        "Description.Export.StartTime",
-	"table_arn":         "Description.Export.TableArn",
-	"table_id":          "Description.Export.TableId",
+	"arn":                 "description.Export.ExportArn",
+	"billed_size_bytes":   "Description.Export.BilledSizeBytes",
+	"client_token":        "Description.Export.ClientToken",
+	"end_time":            "Description.Export.EndTime",
+	"export_format":       "Description.Export.ExportFormat",
+	"export_manifest":     "Description.Export.ExportManifest",
+	"export_status":       "Description.Export.ExportStatus",
+	"export_time":         "Description.Export.ExportTime",
+	"failure_code":        "Description.Export.FailureCode",
+	"failure_message":     "Description.Export.FailureMessage",
+	"item_count":          "Description.Export.ItemCount",
+	"platform_account_id": "metadata.IntegrationID",
+	"s3_bucket":           "Description.Export.S3Bucket",
+	"s3_bucket_owner":     "Description.Export.S3BucketOwner",
+	"s3_prefix":           "Description.Export.S3Prefix",
+	"s3_sse_algorithm":    "Description.Export.S3SseAlgorithm",
+	"s3_sse_kms_key_id":   "Description.Export.S3SseKmsKeyId",
+	"start_time":          "Description.Export.StartTime",
+	"table_arn":           "Description.Export.TableArn",
+	"table_id":            "Description.Export.TableId",
 }
 
 func ListDynamoDbTableExport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18356,26 +18356,26 @@ func ListDynamoDbTableExport(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getDynamoDbTableExportFilters = map[string]string{
-	"arn":               "description.Export.ExportArn",
-	"billed_size_bytes": "Description.Export.BilledSizeBytes",
-	"client_token":      "Description.Export.ClientToken",
-	"end_time":          "Description.Export.EndTime",
-	"export_format":     "Description.Export.ExportFormat",
-	"export_manifest":   "Description.Export.ExportManifest",
-	"export_status":     "Description.Export.ExportStatus",
-	"export_time":       "Description.Export.ExportTime",
-	"failure_code":      "Description.Export.FailureCode",
-	"failure_message":   "Description.Export.FailureMessage",
-	"item_count":        "Description.Export.ItemCount",
-	"og_account_id":     "metadata.IntegrationID",
-	"s3_bucket":         "Description.Export.S3Bucket",
-	"s3_bucket_owner":   "Description.Export.S3BucketOwner",
-	"s3_prefix":         "Description.Export.S3Prefix",
-	"s3_sse_algorithm":  "Description.Export.S3SseAlgorithm",
-	"s3_sse_kms_key_id": "Description.Export.S3SseKmsKeyId",
-	"start_time":        "Description.Export.StartTime",
-	"table_arn":         "Description.Export.TableArn",
-	"table_id":          "Description.Export.TableId",
+	"arn":                 "description.Export.ExportArn",
+	"billed_size_bytes":   "Description.Export.BilledSizeBytes",
+	"client_token":        "Description.Export.ClientToken",
+	"end_time":            "Description.Export.EndTime",
+	"export_format":       "Description.Export.ExportFormat",
+	"export_manifest":     "Description.Export.ExportManifest",
+	"export_status":       "Description.Export.ExportStatus",
+	"export_time":         "Description.Export.ExportTime",
+	"failure_code":        "Description.Export.FailureCode",
+	"failure_message":     "Description.Export.FailureMessage",
+	"item_count":          "Description.Export.ItemCount",
+	"platform_account_id": "metadata.IntegrationID",
+	"s3_bucket":           "Description.Export.S3Bucket",
+	"s3_bucket_owner":     "Description.Export.S3BucketOwner",
+	"s3_prefix":           "Description.Export.S3Prefix",
+	"s3_sse_algorithm":    "Description.Export.S3SseAlgorithm",
+	"s3_sse_kms_key_id":   "Description.Export.S3SseKmsKeyId",
+	"start_time":          "Description.Export.StartTime",
+	"table_arn":           "Description.Export.TableArn",
+	"table_id":            "Description.Export.TableId",
 }
 
 func GetDynamoDbTableExport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18514,15 +18514,15 @@ func (p OAMLinkPaginator) NextPage(ctx context.Context) ([]OAMLink, error) {
 }
 
 var listOAMLinkFilters = map[string]string{
-	"arn":            "Description.Link.Arn",
-	"id":             "Description.Link.Id",
-	"label":          "Description.Link.Label",
-	"label_template": "Description.Link.LabelTemplate",
-	"og_account_id":  "metadata.IntegrationID",
-	"resource_types": "Description.Link.ResourceTypes",
-	"sink_arn":       "Description.Link.SinkArn",
-	"tags":           "Description.Link.Tags",
-	"title":          "Description.Link.Label",
+	"arn":                 "Description.Link.Arn",
+	"id":                  "Description.Link.Id",
+	"label":               "Description.Link.Label",
+	"label_template":      "Description.Link.LabelTemplate",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_types":      "Description.Link.ResourceTypes",
+	"sink_arn":            "Description.Link.SinkArn",
+	"tags":                "Description.Link.Tags",
+	"title":               "Description.Link.Label",
 }
 
 func ListOAMLink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18586,15 +18586,15 @@ func ListOAMLink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getOAMLinkFilters = map[string]string{
-	"arn":            "description.Link.Arn",
-	"id":             "Description.Link.Id",
-	"label":          "Description.Link.Label",
-	"label_template": "Description.Link.LabelTemplate",
-	"og_account_id":  "metadata.IntegrationID",
-	"resource_types": "Description.Link.ResourceTypes",
-	"sink_arn":       "Description.Link.SinkArn",
-	"tags":           "Description.Link.Tags",
-	"title":          "Description.Link.Label",
+	"arn":                 "description.Link.Arn",
+	"id":                  "Description.Link.Id",
+	"label":               "Description.Link.Label",
+	"label_template":      "Description.Link.LabelTemplate",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_types":      "Description.Link.ResourceTypes",
+	"sink_arn":            "Description.Link.SinkArn",
+	"tags":                "Description.Link.Tags",
+	"title":               "Description.Link.Label",
 }
 
 func GetOAMLink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18733,12 +18733,12 @@ func (p OAMSinkPaginator) NextPage(ctx context.Context) ([]OAMSink, error) {
 }
 
 var listOAMSinkFilters = map[string]string{
-	"arn":           "Description.Sink.Arn",
-	"id":            "Description.Sink.Id",
-	"name":          "Description.Sink.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Sink.Name",
+	"arn":                 "Description.Sink.Arn",
+	"id":                  "Description.Sink.Id",
+	"name":                "Description.Sink.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Sink.Name",
 }
 
 func ListOAMSink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18802,12 +18802,12 @@ func ListOAMSink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getOAMSinkFilters = map[string]string{
-	"arn":           "description.Sink.Arn",
-	"id":            "Description.Sink.Id",
-	"name":          "Description.Sink.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Sink.Name",
+	"arn":                 "description.Sink.Arn",
+	"id":                  "Description.Sink.Id",
+	"name":                "Description.Sink.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Sink.Name",
 }
 
 func GetOAMSink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -18952,7 +18952,7 @@ var listEC2VolumeSnapshotFilters = map[string]string{
 	"description":               "description.Snapshot.Description",
 	"encrypted":                 "description.Snapshot.Encrypted",
 	"kms_key_id":                "Description.Snapshot.KmsKeyId",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owner_alias":               "description.Snapshot.OwnerAlias",
 	"owner_id":                  "description.Snapshot.OwnerId",
 	"progress":                  "description.Snapshot.Progress",
@@ -19033,7 +19033,7 @@ var getEC2VolumeSnapshotFilters = map[string]string{
 	"description":               "Description.Snapshot.Description",
 	"encrypted":                 "Description.Snapshot.Encrypted",
 	"kms_key_id":                "Description.Snapshot.KmsKeyId",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owner_alias":               "Description.Snapshot.OwnerAlias",
 	"owner_id":                  "Description.Snapshot.OwnerId",
 	"progress":                  "Description.Snapshot.Progress",
@@ -19183,9 +19183,9 @@ func (p EC2ElasticIPPaginator) NextPage(ctx context.Context) ([]EC2ElasticIP, er
 }
 
 var listEC2ElasticIPFilters = map[string]string{
-	"id":            "Description.Address.AllocationId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Address.AllocationId",
+	"id":                  "Description.Address.AllocationId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Address.AllocationId",
 }
 
 func ListEC2ElasticIP(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -19249,9 +19249,9 @@ func ListEC2ElasticIP(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getEC2ElasticIPFilters = map[string]string{
-	"id":            "Description.Address.AllocationId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Address.AllocationId",
+	"id":                  "Description.Address.AllocationId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Address.AllocationId",
 }
 
 func GetEC2ElasticIP(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -19396,7 +19396,7 @@ var listEC2CustomerGatewayFilters = map[string]string{
 	"customer_gateway_id": "Description.CustomerGateway.CustomerGatewayId",
 	"device_name":         "Description.CustomerGateway.DeviceName",
 	"ip_address":          "description.CustomerGateway.IpAddress",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"state":               "description.CustomerGateway.State",
 	"tags_src":            "Description.CustomerGateway.Tags",
 	"type":                "description.CustomerGateway.Type",
@@ -19469,7 +19469,7 @@ var getEC2CustomerGatewayFilters = map[string]string{
 	"customer_gateway_id": "description.CustomerGateway.CustomerGatewayId",
 	"device_name":         "Description.CustomerGateway.DeviceName",
 	"ip_address":          "Description.CustomerGateway.IpAddress",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"state":               "Description.CustomerGateway.State",
 	"tags_src":            "Description.CustomerGateway.Tags",
 	"type":                "Description.CustomerGateway.Type",
@@ -19614,7 +19614,7 @@ var listEC2VerifiedAccessInstanceFilters = map[string]string{
 	"creation_time":                   "Description.VerifiedAccountInstance.CreationTime",
 	"description":                     "Description.VerifiedAccountInstance.Description",
 	"last_updated_time":               "Description.VerifiedAccountInstance.LastUpdatedTime",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"tags_src":                        "Description.VerifiedAccountInstance.Tags",
 	"verified_access_instance_id":     "description.VerifiedAccountInstance.VerifiedAccessInstanceId",
 	"verified_access_trust_providers": "Description.VerifiedAccountInstance.VerifiedAccessTrustProviders",
@@ -19684,7 +19684,7 @@ var getEC2VerifiedAccessInstanceFilters = map[string]string{
 	"creation_time":                   "Description.VerifiedAccountInstance.CreationTime",
 	"description":                     "Description.VerifiedAccountInstance.Description",
 	"last_updated_time":               "Description.VerifiedAccountInstance.LastUpdatedTime",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"tags_src":                        "Description.VerifiedAccountInstance.Tags",
 	"verified_access_instance_id":     "Description.VerifiedAccountInstance.VerifiedAccessInstanceId",
 	"verified_access_trust_providers": "Description.VerifiedAccountInstance.VerifiedAccessTrustProviders",
@@ -19838,7 +19838,7 @@ var listEC2VerifiedAccessEndpointFilters = map[string]string{
 	"last_updated_time":           "Description.VerifiedAccountEndpoint.LastUpdatedTime",
 	"load_balancer_options":       "Description.VerifiedAccountEndpoint.LoadBalancerOptions",
 	"network_interface_options":   "Description.VerifiedAccountEndpoint.NetworkInterfaceOptions",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"status":                      "Description.VerifiedAccountEndpoint.Status",
 	"status_code":                 "Description.VerifiedAccountEndpoint.Status.Code",
 	"tags_src":                    "Description.VerifiedAccountEndpoint.Tags",
@@ -19920,7 +19920,7 @@ var getEC2VerifiedAccessEndpointFilters = map[string]string{
 	"last_updated_time":           "Description.VerifiedAccountEndpoint.LastUpdatedTime",
 	"load_balancer_options":       "Description.VerifiedAccountEndpoint.LoadBalancerOptions",
 	"network_interface_options":   "Description.VerifiedAccountEndpoint.NetworkInterfaceOptions",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"status":                      "Description.VerifiedAccountEndpoint.Status",
 	"status_code":                 "Description.VerifiedAccountEndpoint.Status.Code",
 	"tags_src":                    "Description.VerifiedAccountEndpoint.Tags",
@@ -20070,7 +20070,7 @@ var listEC2VerifiedAccessGroupFilters = map[string]string{
 	"deletion_time":               "Description.VerifiedAccountGroup.DeletionTime",
 	"description":                 "Description.VerifiedAccountGroup.Description",
 	"last_updated_time":           "Description.VerifiedAccountGroup.LastUpdatedTime",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"owner":                       "Description.VerifiedAccountGroup.Owner",
 	"tags_src":                    "Description.VerifiedAccountGroup.Tags",
 	"verified_access_group_id":    "Description.VerifiedAccountGroup.VerifiedAccessGroupId",
@@ -20143,7 +20143,7 @@ var getEC2VerifiedAccessGroupFilters = map[string]string{
 	"deletion_time":               "Description.VerifiedAccountGroup.DeletionTime",
 	"description":                 "Description.VerifiedAccountGroup.Description",
 	"last_updated_time":           "Description.VerifiedAccountGroup.LastUpdatedTime",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"owner":                       "Description.VerifiedAccountGroup.Owner",
 	"tags_src":                    "Description.VerifiedAccountGroup.Tags",
 	"verified_access_group_id":    "description.VerifiedAccountEndpoint.VerifiedAccessGroupId",
@@ -20290,7 +20290,7 @@ var listEC2VerifiedAccessTrustProviderFilters = map[string]string{
 	"description":                       "Description.VerifiedAccountGroup.Description",
 	"device_trust_provider_type":        "Description.VerifiedAccountGroup.DeviceTrustProviderType",
 	"last_updated_time":                 "Description.VerifiedAccountGroup.LastUpdatedTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"oidc_options":                      "Description.VerifiedAccountGroup.OidcOptions",
 	"policy_reference_name":             "Description.VerifiedAccountGroup.PolicyReferenceName",
 	"tags_src":                          "Description.VerifiedAccountGroup.Tags",
@@ -20364,7 +20364,7 @@ var getEC2VerifiedAccessTrustProviderFilters = map[string]string{
 	"description":                       "Description.VerifiedAccountGroup.Description",
 	"device_trust_provider_type":        "Description.VerifiedAccountGroup.DeviceTrustProviderType",
 	"last_updated_time":                 "Description.VerifiedAccountGroup.LastUpdatedTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"oidc_options":                      "Description.VerifiedAccountGroup.OidcOptions",
 	"policy_reference_name":             "Description.VerifiedAccountGroup.PolicyReferenceName",
 	"tags_src":                          "Description.VerifiedAccountGroup.Tags",
@@ -20509,14 +20509,14 @@ func (p EC2VPNGatewayPaginator) NextPage(ctx context.Context) ([]EC2VPNGateway, 
 }
 
 var listEC2VPNGatewayFilters = map[string]string{
-	"amazon_side_asn":   "description.VPNGateway.AmazonSideAsn",
-	"availability_zone": "description.VPNGateway.AvailabilityZone",
-	"og_account_id":     "metadata.IntegrationID",
-	"state":             "description.VPNGateway.State",
-	"tags_src":          "Description.VPNGateway.Tags",
-	"type":              "description.VPNGateway.Type",
-	"vpc_attachments":   "Description.VPNGateway.VpcAttachments",
-	"vpn_gateway_id":    "Description.VPNGateway.VpnGatewayId",
+	"amazon_side_asn":     "description.VPNGateway.AmazonSideAsn",
+	"availability_zone":   "description.VPNGateway.AvailabilityZone",
+	"platform_account_id": "metadata.IntegrationID",
+	"state":               "description.VPNGateway.State",
+	"tags_src":            "Description.VPNGateway.Tags",
+	"type":                "description.VPNGateway.Type",
+	"vpc_attachments":     "Description.VPNGateway.VpcAttachments",
+	"vpn_gateway_id":      "Description.VPNGateway.VpnGatewayId",
 }
 
 func ListEC2VPNGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -20580,14 +20580,14 @@ func ListEC2VPNGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 }
 
 var getEC2VPNGatewayFilters = map[string]string{
-	"amazon_side_asn":   "Description.VPNGateway.AmazonSideAsn",
-	"availability_zone": "Description.VPNGateway.AvailabilityZone",
-	"og_account_id":     "metadata.IntegrationID",
-	"state":             "Description.VPNGateway.State",
-	"tags_src":          "Description.VPNGateway.Tags",
-	"type":              "Description.VPNGateway.Type",
-	"vpc_attachments":   "Description.VPNGateway.VpcAttachments",
-	"vpn_gateway_id":    "description.VPNGateway.VpnGatewayId",
+	"amazon_side_asn":     "Description.VPNGateway.AmazonSideAsn",
+	"availability_zone":   "Description.VPNGateway.AvailabilityZone",
+	"platform_account_id": "metadata.IntegrationID",
+	"state":               "Description.VPNGateway.State",
+	"tags_src":            "Description.VPNGateway.Tags",
+	"type":                "Description.VPNGateway.Type",
+	"vpc_attachments":     "Description.VPNGateway.VpcAttachments",
+	"vpn_gateway_id":      "description.VPNGateway.VpnGatewayId",
 }
 
 func GetEC2VPNGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -20736,7 +20736,7 @@ var listEC2VolumeFilters = map[string]string{
 	"iops":                 "Description.Volume.Iops",
 	"kms_key_id":           "Description.Volume.KmsKeyId",
 	"multi_attach_enabled": "Description.Volume.MultiAttachEnabled",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"outpost_arn":          "Description.Volume.OutpostArn",
 	"product_codes":        "Description.Attributes.ProductCodes",
 	"size":                 "Description.Volume.Size",
@@ -20818,7 +20818,7 @@ var getEC2VolumeFilters = map[string]string{
 	"iops":                 "Description.Volume.Iops",
 	"kms_key_id":           "Description.Volume.KmsKeyId",
 	"multi_attach_enabled": "Description.Volume.MultiAttachEnabled",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"outpost_arn":          "Description.Volume.OutpostArn",
 	"product_codes":        "Description.Attributes.ProductCodes",
 	"size":                 "Description.Volume.Size",
@@ -20976,7 +20976,7 @@ var listEC2ClientVpnEndpointFilters = map[string]string{
 	"description":                 "Description.ClientVpnEndpoint.Description",
 	"dns_name":                    "Description.ClientVpnEndpoint.DnsName",
 	"dns_servers":                 "Description.ClientVpnEndpoint.DnsServers",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"security_group_ids":          "Description.ClientVpnEndpoint.SecurityGroupIds",
 	"self_service_portal_url":     "Description.ClientVpnEndpoint.SelfServicePortalUrl",
 	"server_certificate_arn":      "Description.ClientVpnEndpoint.ServerCertificateArn",
@@ -21062,7 +21062,7 @@ var getEC2ClientVpnEndpointFilters = map[string]string{
 	"description":                 "Description.ClientVpnEndpoint.Description",
 	"dns_name":                    "Description.ClientVpnEndpoint.DnsName",
 	"dns_servers":                 "Description.ClientVpnEndpoint.DnsServers",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"security_group_ids":          "Description.ClientVpnEndpoint.SecurityGroupIds",
 	"self_service_portal_url":     "Description.ClientVpnEndpoint.SelfServicePortalUrl",
 	"server_certificate_arn":      "Description.ClientVpnEndpoint.ServerCertificateArn",
@@ -21249,7 +21249,7 @@ var listEC2InstanceFilters = map[string]string{
 	"metadata_options":                           "Description.Instance.MetadataOptions",
 	"monitoring_state":                           "description.Instance.Monitoring.State",
 	"network_interfaces":                         "Description.Instance.NetworkInterfaces",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"outpost_arn":                                "description.Instance.OutpostArn",
 	"placement_affinity":                         "Description.Instance.Placement.Affinity",
 	"placement_availability_zone":                "description.Instance.Placement.AvailabilityZone",
@@ -21382,7 +21382,7 @@ var getEC2InstanceFilters = map[string]string{
 	"metadata_options":                           "Description.Instance.MetadataOptions",
 	"monitoring_state":                           "Description.Instance.Monitoring.State",
 	"network_interfaces":                         "Description.Instance.NetworkInterfaces",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"outpost_arn":                                "Description.Instance.OutpostArn",
 	"placement_affinity":                         "Description.Instance.Placement.Affinity",
 	"placement_availability_zone":                "Description.Instance.Placement.AvailabilityZone",
@@ -21561,7 +21561,7 @@ var listEC2VpcFilters = map[string]string{
 	"instance_tenancy":                "Description.Vpc.InstanceTenancy",
 	"ipv6_cidr_block_association_set": "Description.Vpc.Ipv6CidrBlockAssociationSet",
 	"is_default":                      "Description.Vpc.IsDefault",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"owner_id":                        "Description.Vpc.OwnerId",
 	"state":                           "Description.Vpc.State",
 	"tags_src":                        "Description.Vpc.Tags",
@@ -21636,7 +21636,7 @@ var getEC2VpcFilters = map[string]string{
 	"instance_tenancy":                "Description.Vpc.InstanceTenancy",
 	"ipv6_cidr_block_association_set": "Description.Vpc.Ipv6CidrBlockAssociationSet",
 	"is_default":                      "Description.Vpc.IsDefault",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"owner_id":                        "Description.Vpc.OwnerId",
 	"state":                           "Description.Vpc.State",
 	"tags_src":                        "Description.Vpc.Tags",
@@ -21800,7 +21800,7 @@ var listEC2NetworkInterfaceFilters = map[string]string{
 	"ipv6_addresses":                 "Description.NetworkInterface.Ipv6Addresses",
 	"mac_address":                    "Description.NetworkInterface.MacAddress",
 	"network_interface_id":           "Description.NetworkInterface.NetworkInterfaceId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"outpost_arn":                    "Description.NetworkInterface.OutpostArn",
 	"owner_id":                       "Description.NetworkInterface.OwnerId",
 	"private_dns_name":               "Description.NetworkInterface.PrivateDnsName",
@@ -21898,7 +21898,7 @@ var getEC2NetworkInterfaceFilters = map[string]string{
 	"ipv6_addresses":                 "Description.NetworkInterface.Ipv6Addresses",
 	"mac_address":                    "Description.NetworkInterface.MacAddress",
 	"network_interface_id":           "description.NetworkInterface.NetworkInterfaceId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"outpost_arn":                    "Description.NetworkInterface.OutpostArn",
 	"owner_id":                       "Description.NetworkInterface.OwnerId",
 	"private_dns_name":               "Description.NetworkInterface.PrivateDnsName",
@@ -22052,7 +22052,7 @@ func (p EC2RegionalSettingsPaginator) NextPage(ctx context.Context) ([]EC2Region
 var listEC2RegionalSettingsFilters = map[string]string{
 	"default_ebs_encryption_enabled":     "Description.EbsEncryptionByDefault",
 	"default_ebs_encryption_key":         "Description.KmsKeyId",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"snapshot_block_public_access_state": "Description.SnapshotBlockPublicAccessState",
 }
 
@@ -22119,7 +22119,7 @@ func ListEC2RegionalSettings(ctx context.Context, d *plugin.QueryData, _ *plugin
 var getEC2RegionalSettingsFilters = map[string]string{
 	"default_ebs_encryption_enabled":     "Description.EbsEncryptionByDefault",
 	"default_ebs_encryption_key":         "Description.KmsKeyId",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"snapshot_block_public_access_state": "Description.SnapshotBlockPublicAccessState",
 }
 
@@ -22269,7 +22269,7 @@ var listEC2SubnetFilters = map[string]string{
 	"ipv6_cidr_block_association_set": "Description.Subnet.Ipv6CidrBlockAssociationSet",
 	"map_customer_owned_ip_on_launch": "Description.Subnet.MapCustomerOwnedIpOnLaunch",
 	"map_public_ip_on_launch":         "Description.Subnet.MapPublicIpOnLaunch",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"outpost_arn":                     "Description.Subnet.OutpostArn",
 	"owner_id":                        "Description.Subnet.OwnerId",
 	"state":                           "Description.Subnet.State",
@@ -22350,7 +22350,7 @@ var getEC2SubnetFilters = map[string]string{
 	"ipv6_cidr_block_association_set": "Description.Subnet.Ipv6CidrBlockAssociationSet",
 	"map_customer_owned_ip_on_launch": "Description.Subnet.MapCustomerOwnedIpOnLaunch",
 	"map_public_ip_on_launch":         "Description.Subnet.MapPublicIpOnLaunch",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"outpost_arn":                     "Description.Subnet.OutpostArn",
 	"owner_id":                        "Description.Subnet.OwnerId",
 	"state":                           "Description.Subnet.State",
@@ -22500,7 +22500,7 @@ var listEC2VPCEndpointFilters = map[string]string{
 	"dns_entries":           "Description.VpcEndpoint.DnsEntries",
 	"groups":                "Description.VpcEndpoint.Groups",
 	"network_interface_ids": "Description.VpcEndpoint.NetworkInterfaceIds",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.VpcEndpoint.OwnerId",
 	"private_dns_enabled":   "Description.VpcEndpoint.PrivateDnsEnabled",
 	"requester_managed":     "Description.VpcEndpoint.RequesterManaged",
@@ -22579,7 +22579,7 @@ var getEC2VPCEndpointFilters = map[string]string{
 	"dns_entries":           "Description.VpcEndpoint.DnsEntries",
 	"groups":                "Description.VpcEndpoint.Groups",
 	"network_interface_ids": "Description.VpcEndpoint.NetworkInterfaceIds",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.VpcEndpoint.OwnerId",
 	"private_dns_enabled":   "Description.VpcEndpoint.PrivateDnsEnabled",
 	"requester_managed":     "Description.VpcEndpoint.RequesterManaged",
@@ -22735,7 +22735,7 @@ var listEC2SecurityGroupFilters = map[string]string{
 	"group_name":            "Description.SecurityGroup.GroupName",
 	"ip_permissions":        "Description.SecurityGroup.IpPermissions",
 	"ip_permissions_egress": "Description.SecurityGroup.IpPermissionsEgress",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.SecurityGroup.OwnerId",
 	"tags_src":              "Description.SecurityGroup.Tags",
 	"title":                 "Description.SecurityGroup.GroupName",
@@ -22809,7 +22809,7 @@ var getEC2SecurityGroupFilters = map[string]string{
 	"group_name":            "Description.SecurityGroup.GroupName",
 	"ip_permissions":        "Description.SecurityGroup.IpPermissions",
 	"ip_permissions_egress": "Description.SecurityGroup.IpPermissionsEgress",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.SecurityGroup.OwnerId",
 	"tags_src":              "Description.SecurityGroup.Tags",
 	"title":                 "Description.SecurityGroup.GroupName",
@@ -22963,7 +22963,7 @@ var listEC2EIPFilters = map[string]string{
 	"network_border_group":       "Description.Address.NetworkBorderGroup",
 	"network_interface_id":       "Description.Address.NetworkInterfaceId",
 	"network_interface_owner_id": "Description.Address.NetworkInterfaceOwnerId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"private_ip_address":         "Description.Address.PrivateIpAddress",
 	"public_ip":                  "Description.Address.PublicIp",
 	"public_ipv4_pool":           "Description.Address.PublicIpv4Pool",
@@ -23043,7 +23043,7 @@ var getEC2EIPFilters = map[string]string{
 	"network_border_group":       "Description.Address.NetworkBorderGroup",
 	"network_interface_id":       "Description.Address.NetworkInterfaceId",
 	"network_interface_owner_id": "Description.Address.NetworkInterfaceOwnerId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"private_ip_address":         "Description.Address.PrivateIpAddress",
 	"public_ip":                  "Description.Address.PublicIp",
 	"public_ipv4_pool":           "Description.Address.PublicIpv4Pool",
@@ -23189,7 +23189,7 @@ func (p EC2InternetGatewayPaginator) NextPage(ctx context.Context) ([]EC2Interne
 var listEC2InternetGatewayFilters = map[string]string{
 	"attachments":         "Description.InternetGateway.Attachments",
 	"internet_gateway_id": "Description.InternetGateway.InternetGatewayId",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"owner_id":            "Description.InternetGateway.OwnerId",
 	"tags_src":            "Description.InternetGateway.Tags",
 }
@@ -23257,7 +23257,7 @@ func ListEC2InternetGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.
 var getEC2InternetGatewayFilters = map[string]string{
 	"attachments":         "Description.InternetGateway.Attachments",
 	"internet_gateway_id": "description.InternetGateway.InternetGatewayId",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"owner_id":            "Description.InternetGateway.OwnerId",
 	"tags_src":            "Description.InternetGateway.Tags",
 }
@@ -23398,15 +23398,15 @@ func (p EC2NetworkAclPaginator) NextPage(ctx context.Context) ([]EC2NetworkAcl, 
 }
 
 var listEC2NetworkAclFilters = map[string]string{
-	"arn":            "ARN",
-	"associations":   "Description.NetworkAcl.Associations",
-	"entries":        "Description.NetworkAcl.Entries",
-	"is_default":     "Description.NetworkAcl.IsDefault",
-	"network_acl_id": "Description.NetworkAcl.NetworkAclId",
-	"og_account_id":  "metadata.IntegrationID",
-	"owner_id":       "Description.NetworkAcl.OwnerId",
-	"tags_src":       "Description.NetworkAcl.Tags",
-	"vpc_id":         "Description.NetworkAcl.VpcId",
+	"arn":                 "ARN",
+	"associations":        "Description.NetworkAcl.Associations",
+	"entries":             "Description.NetworkAcl.Entries",
+	"is_default":          "Description.NetworkAcl.IsDefault",
+	"network_acl_id":      "Description.NetworkAcl.NetworkAclId",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.NetworkAcl.OwnerId",
+	"tags_src":            "Description.NetworkAcl.Tags",
+	"vpc_id":              "Description.NetworkAcl.VpcId",
 }
 
 func ListEC2NetworkAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -23470,15 +23470,15 @@ func ListEC2NetworkAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 }
 
 var getEC2NetworkAclFilters = map[string]string{
-	"arn":            "ARN",
-	"associations":   "Description.NetworkAcl.Associations",
-	"entries":        "Description.NetworkAcl.Entries",
-	"is_default":     "Description.NetworkAcl.IsDefault",
-	"network_acl_id": "description.NetworkAcl.NetworkAclId",
-	"og_account_id":  "metadata.IntegrationID",
-	"owner_id":       "Description.NetworkAcl.OwnerId",
-	"tags_src":       "Description.NetworkAcl.Tags",
-	"vpc_id":         "Description.NetworkAcl.VpcId",
+	"arn":                 "ARN",
+	"associations":        "Description.NetworkAcl.Associations",
+	"entries":             "Description.NetworkAcl.Entries",
+	"is_default":          "Description.NetworkAcl.IsDefault",
+	"network_acl_id":      "description.NetworkAcl.NetworkAclId",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.NetworkAcl.OwnerId",
+	"tags_src":            "Description.NetworkAcl.Tags",
+	"vpc_id":              "Description.NetworkAcl.VpcId",
 }
 
 func GetEC2NetworkAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -23621,7 +23621,7 @@ var listEC2VPNConnectionFilters = map[string]string{
 	"category":                       "Description.VpnConnection.Category",
 	"customer_gateway_configuration": "Description.VpnConnection.CustomerGatewayConfiguration",
 	"customer_gateway_id":            "Description.VpnConnection.CustomerGatewayId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"options":                        "Description.VpnConnection.Options",
 	"routes":                         "Description.VpnConnection.Routes",
 	"state":                          "Description.VpnConnection.State",
@@ -23698,7 +23698,7 @@ var getEC2VPNConnectionFilters = map[string]string{
 	"category":                       "Description.VpnConnection.Category",
 	"customer_gateway_configuration": "Description.VpnConnection.CustomerGatewayConfiguration",
 	"customer_gateway_id":            "Description.VpnConnection.CustomerGatewayId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"options":                        "Description.VpnConnection.Options",
 	"routes":                         "Description.VpnConnection.Routes",
 	"state":                          "Description.VpnConnection.State",
@@ -23846,15 +23846,15 @@ func (p EC2RouteTablePaginator) NextPage(ctx context.Context) ([]EC2RouteTable, 
 }
 
 var listEC2RouteTableFilters = map[string]string{
-	"associations":     "Description.RouteTable.Associations",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner_id":         "Description.RouteTable.OwnerId",
-	"propagating_vgws": "Description.RouteTable.PropagatingVgws",
-	"route_table_id":   "Description.RouteTable.RouteTableId",
-	"routes":           "Description.RouteTable.Routes",
-	"tags_src":         "Description.RouteTable.Tags",
-	"title":            "Description.RouteTable.RouteTableId",
-	"vpc_id":           "Description.RouteTable.VpcId",
+	"associations":        "Description.RouteTable.Associations",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.RouteTable.OwnerId",
+	"propagating_vgws":    "Description.RouteTable.PropagatingVgws",
+	"route_table_id":      "Description.RouteTable.RouteTableId",
+	"routes":              "Description.RouteTable.Routes",
+	"tags_src":            "Description.RouteTable.Tags",
+	"title":               "Description.RouteTable.RouteTableId",
+	"vpc_id":              "Description.RouteTable.VpcId",
 }
 
 func ListEC2RouteTable(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -23918,15 +23918,15 @@ func ListEC2RouteTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 }
 
 var getEC2RouteTableFilters = map[string]string{
-	"associations":     "Description.RouteTable.Associations",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner_id":         "Description.RouteTable.OwnerId",
-	"propagating_vgws": "Description.RouteTable.PropagatingVgws",
-	"route_table_id":   "description.RouteTable.RouteTableId",
-	"routes":           "Description.RouteTable.Routes",
-	"tags_src":         "Description.RouteTable.Tags",
-	"title":            "Description.RouteTable.RouteTableId",
-	"vpc_id":           "Description.RouteTable.VpcId",
+	"associations":        "Description.RouteTable.Associations",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.RouteTable.OwnerId",
+	"propagating_vgws":    "Description.RouteTable.PropagatingVgws",
+	"route_table_id":      "description.RouteTable.RouteTableId",
+	"routes":              "Description.RouteTable.Routes",
+	"tags_src":            "Description.RouteTable.Tags",
+	"title":               "Description.RouteTable.RouteTableId",
+	"vpc_id":              "Description.RouteTable.VpcId",
 }
 
 func GetEC2RouteTable(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24072,7 +24072,7 @@ var listEC2NatGatewayFilters = map[string]string{
 	"failure_message":       "Description.NatGateway.FailureMessage",
 	"nat_gateway_addresses": "Description.NatGateway.NatGatewayAddresses",
 	"nat_gateway_id":        "Description.NatGateway.NatGatewayId",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"provisioned_bandwidth": "Description.NatGateway.ProvisionedBandwidth",
 	"state":                 "Description.NatGateway.State",
 	"subnet_id":             "Description.NatGateway.SubnetId",
@@ -24148,7 +24148,7 @@ var getEC2NatGatewayFilters = map[string]string{
 	"failure_message":       "Description.NatGateway.FailureMessage",
 	"nat_gateway_addresses": "Description.NatGateway.NatGatewayAddresses",
 	"nat_gateway_id":        "description.NatGateway.NatGatewayId",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"provisioned_bandwidth": "Description.NatGateway.ProvisionedBandwidth",
 	"state":                 "Description.NatGateway.State",
 	"subnet_id":             "Description.NatGateway.SubnetId",
@@ -24292,10 +24292,10 @@ func (p EC2LocalGatewayPaginator) NextPage(ctx context.Context) ([]EC2LocalGatew
 }
 
 var listEC2LocalGatewayFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "Description.LocalGateway.LocalGatewayId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.LocalGateway.LocalGatewayId",
+	"arn":                 "ARN",
+	"id":                  "Description.LocalGateway.LocalGatewayId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.LocalGateway.LocalGatewayId",
 }
 
 func ListEC2LocalGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24359,10 +24359,10 @@ func ListEC2LocalGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getEC2LocalGatewayFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "description.LocalGateway.LocalGatewayId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.LocalGateway.LocalGatewayId",
+	"arn":                 "ARN",
+	"id":                  "description.LocalGateway.LocalGatewayId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.LocalGateway.LocalGatewayId",
 }
 
 func GetEC2LocalGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24501,12 +24501,12 @@ func (p EC2RegionPaginator) NextPage(ctx context.Context) ([]EC2Region, error) {
 }
 
 var listEC2RegionFilters = map[string]string{
-	"name":          "Description.Region.RegionName",
-	"og_account_id": "metadata.IntegrationID",
-	"opt_in_status": "Description.Region.OptInStatus",
-	"partition":     "Metadata.Partition",
-	"region":        "Description.Region.RegionName",
-	"title":         "Description.Region.RegionName",
+	"name":                "Description.Region.RegionName",
+	"platform_account_id": "metadata.IntegrationID",
+	"opt_in_status":       "Description.Region.OptInStatus",
+	"partition":           "Metadata.Partition",
+	"region":              "Description.Region.RegionName",
+	"title":               "Description.Region.RegionName",
 }
 
 func ListEC2Region(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24570,12 +24570,12 @@ func ListEC2Region(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 }
 
 var getEC2RegionFilters = map[string]string{
-	"name":          "description.Region.RegionName",
-	"og_account_id": "metadata.IntegrationID",
-	"opt_in_status": "Description.Region.OptInStatus",
-	"partition":     "Metadata.Partition",
-	"region":        "Description.Region.RegionName",
-	"title":         "Description.Region.RegionName",
+	"name":                "description.Region.RegionName",
+	"platform_account_id": "metadata.IntegrationID",
+	"opt_in_status":       "Description.Region.OptInStatus",
+	"partition":           "Metadata.Partition",
+	"region":              "Description.Region.RegionName",
+	"title":               "Description.Region.RegionName",
 }
 
 func GetEC2Region(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24714,17 +24714,17 @@ func (p EC2AvailabilityZonePaginator) NextPage(ctx context.Context) ([]EC2Availa
 }
 
 var listEC2AvailabilityZoneFilters = map[string]string{
-	"group_name":       "Description.AvailabilityZone.GroupName",
-	"messages":         "Description.AvailabilityZone.Messages",
-	"name":             "description.AvailabilityZone.ZoneName",
-	"og_account_id":    "metadata.IntegrationID",
-	"opt_in_status":    "Description.AvailabilityZone.OptInStatus",
-	"parent_zone_id":   "Description.AvailabilityZone.ParentZoneId",
-	"parent_zone_name": "Description.AvailabilityZone.ParentZoneName",
-	"region_name":      "Description.AvailabilityZone.RegionName",
-	"title":            "Description.AvailabilityZone.ZoneName",
-	"zone_id":          "description.AvailabilityZone.ZoneId",
-	"zone_type":        "Description.AvailabilityZone.ZoneType",
+	"group_name":          "Description.AvailabilityZone.GroupName",
+	"messages":            "Description.AvailabilityZone.Messages",
+	"name":                "description.AvailabilityZone.ZoneName",
+	"platform_account_id": "metadata.IntegrationID",
+	"opt_in_status":       "Description.AvailabilityZone.OptInStatus",
+	"parent_zone_id":      "Description.AvailabilityZone.ParentZoneId",
+	"parent_zone_name":    "Description.AvailabilityZone.ParentZoneName",
+	"region_name":         "Description.AvailabilityZone.RegionName",
+	"title":               "Description.AvailabilityZone.ZoneName",
+	"zone_id":             "description.AvailabilityZone.ZoneId",
+	"zone_type":           "Description.AvailabilityZone.ZoneType",
 }
 
 func ListEC2AvailabilityZone(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24788,17 +24788,17 @@ func ListEC2AvailabilityZone(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getEC2AvailabilityZoneFilters = map[string]string{
-	"group_name":       "Description.AvailabilityZone.GroupName",
-	"messages":         "Description.AvailabilityZone.Messages",
-	"name":             "description.AvailabilityZone.ZoneName",
-	"og_account_id":    "metadata.IntegrationID",
-	"opt_in_status":    "Description.AvailabilityZone.OptInStatus",
-	"parent_zone_id":   "Description.AvailabilityZone.ParentZoneId",
-	"parent_zone_name": "Description.AvailabilityZone.ParentZoneName",
-	"region_name":      "description.AvailabilityZone.RegionName",
-	"title":            "Description.AvailabilityZone.ZoneName",
-	"zone_id":          "Description.AvailabilityZone.ZoneId",
-	"zone_type":        "Description.AvailabilityZone.ZoneType",
+	"group_name":          "Description.AvailabilityZone.GroupName",
+	"messages":            "Description.AvailabilityZone.Messages",
+	"name":                "description.AvailabilityZone.ZoneName",
+	"platform_account_id": "metadata.IntegrationID",
+	"opt_in_status":       "Description.AvailabilityZone.OptInStatus",
+	"parent_zone_id":      "Description.AvailabilityZone.ParentZoneId",
+	"parent_zone_name":    "Description.AvailabilityZone.ParentZoneName",
+	"region_name":         "description.AvailabilityZone.RegionName",
+	"title":               "Description.AvailabilityZone.ZoneName",
+	"zone_id":             "Description.AvailabilityZone.ZoneId",
+	"zone_type":           "Description.AvailabilityZone.ZoneType",
 }
 
 func GetEC2AvailabilityZone(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -24948,7 +24948,7 @@ var listEC2FlowLogFilters = map[string]string{
 	"log_format":                  "Description.FlowLog.LogFormat",
 	"log_group_name":              "Description.FlowLog.LogGroupName",
 	"max_aggregation_interval":    "Description.FlowLog.MaxAggregationInterval",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"resource_id":                 "Description.FlowLog.ResourceId",
 	"tags_src":                    "Description.FlowLog.Tags",
 	"traffic_type":                "Description.FlowLog.TrafficType",
@@ -25026,7 +25026,7 @@ var getEC2FlowLogFilters = map[string]string{
 	"log_format":                  "Description.FlowLog.LogFormat",
 	"log_group_name":              "Description.FlowLog.LogGroupName",
 	"max_aggregation_interval":    "Description.FlowLog.MaxAggregationInterval",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"resource_id":                 "Description.FlowLog.ResourceId",
 	"tags_src":                    "Description.FlowLog.Tags",
 	"traffic_type":                "Description.FlowLog.TrafficType",
@@ -25181,7 +25181,7 @@ var listEC2CapacityReservationFilters = map[string]string{
 	"instance_match_criteria":  "Description.CapacityReservation.InstanceMatchCriteria",
 	"instance_platform":        "Description.CapacityReservation.InstancePlatform",
 	"instance_type":            "Description.CapacityReservation.InstanceType",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"owner_id":                 "Description.CapacityReservation.OwnerId",
 	"start_date":               "Description.CapacityReservation.StartDate",
 	"state":                    "Description.CapacityReservation.State",
@@ -25265,7 +25265,7 @@ var getEC2CapacityReservationFilters = map[string]string{
 	"instance_match_criteria":  "Description.CapacityReservation.InstanceMatchCriteria",
 	"instance_platform":        "Description.CapacityReservation.InstancePlatform",
 	"instance_type":            "Description.CapacityReservation.InstanceType",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"owner_id":                 "Description.CapacityReservation.OwnerId",
 	"start_date":               "Description.CapacityReservation.StartDate",
 	"state":                    "Description.CapacityReservation.State",
@@ -25411,13 +25411,13 @@ func (p EC2KeyPairPaginator) NextPage(ctx context.Context) ([]EC2KeyPair, error)
 }
 
 var listEC2KeyPairFilters = map[string]string{
-	"create_time":     "Description.KeyPair.CreateTime",
-	"key_fingerprint": "Description.KeyPair.KeyFingerprint",
-	"key_name":        "Description.KeyPair.KeyName",
-	"key_pair_id":     "Description.KeyPair.KeyPairId",
-	"og_account_id":   "metadata.IntegrationID",
-	"tags_src":        "Description.KeyPair.Tags",
-	"title":           "Description.KeyPair.KeyName",
+	"create_time":         "Description.KeyPair.CreateTime",
+	"key_fingerprint":     "Description.KeyPair.KeyFingerprint",
+	"key_name":            "Description.KeyPair.KeyName",
+	"key_pair_id":         "Description.KeyPair.KeyPairId",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.KeyPair.Tags",
+	"title":               "Description.KeyPair.KeyName",
 }
 
 func ListEC2KeyPair(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -25481,13 +25481,13 @@ func ListEC2KeyPair(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 }
 
 var getEC2KeyPairFilters = map[string]string{
-	"create_time":     "Description.KeyPair.CreateTime",
-	"key_fingerprint": "Description.KeyPair.KeyFingerprint",
-	"key_name":        "description.KeyPair.KeyName",
-	"key_pair_id":     "Description.KeyPair.KeyPairId",
-	"og_account_id":   "metadata.IntegrationID",
-	"tags_src":        "Description.KeyPair.Tags",
-	"title":           "Description.KeyPair.KeyName",
+	"create_time":         "Description.KeyPair.CreateTime",
+	"key_fingerprint":     "Description.KeyPair.KeyFingerprint",
+	"key_name":            "description.KeyPair.KeyName",
+	"key_pair_id":         "Description.KeyPair.KeyPairId",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.KeyPair.Tags",
+	"title":               "Description.KeyPair.KeyName",
 }
 
 func GetEC2KeyPair(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -25640,7 +25640,7 @@ var listEC2AMIFilters = map[string]string{
 	"kernel_id":             "Description.AMI.KernelId",
 	"launch_permissions":    "Description.LaunchPermissions",
 	"name":                  "Description.AMI.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.AMI.OwnerId",
 	"platform":              "Description.AMI.Platform",
 	"platform_details":      "Description.AMI.PlatformDetails",
@@ -25731,7 +25731,7 @@ var getEC2AMIFilters = map[string]string{
 	"kernel_id":             "Description.AMI.KernelId",
 	"launch_permissions":    "Description.LaunchPermissions",
 	"name":                  "Description.AMI.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"owner_id":              "Description.AMI.OwnerId",
 	"platform":              "Description.AMI.Platform",
 	"platform_details":      "Description.AMI.PlatformDetails",
@@ -25895,7 +25895,7 @@ var listEC2ReservedInstancesFilters = map[string]string{
 	"instance_type":                    "Description.ReservedInstances.InstanceType",
 	"offering_class":                   "Description.ReservedInstances.OfferingClass",
 	"offering_type":                    "Description.ReservedInstances.OfferingType",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"product_description":              "Description.ReservedInstances.ProductDescription",
 	"reserved_instance_id":             "Description.ReservedInstances.ReservedInstancesId",
 	"reserved_instances_modifications": "Description.ModificationDetails",
@@ -25979,7 +25979,7 @@ var getEC2ReservedInstancesFilters = map[string]string{
 	"instance_type":                    "Description.ReservedInstances.InstanceType",
 	"offering_class":                   "Description.ReservedInstances.OfferingClass",
 	"offering_type":                    "Description.ReservedInstances.OfferingType",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"product_description":              "Description.ReservedInstances.ProductDescription",
 	"reserved_instance_id":             "description.ReservedInstance.ReservedInstancesId",
 	"reserved_instances_modifications": "Description.ModificationDetails",
@@ -26128,7 +26128,7 @@ func (p EC2CapacityReservationFleetPaginator) NextPage(ctx context.Context) ([]E
 var listEC2CapacityReservationFleetFilters = map[string]string{
 	"capacity_reservation_fleet_arn": "Description.CapacityReservationFleet.CapacityReservationFleetArn",
 	"capacity_reservation_fleet_id":  "Description.CapacityReservationFleet.CapacityReservationFleetId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"title":                          "Description.CapacityReservationFleet.CapacityReservationFleetId",
 }
 
@@ -26195,7 +26195,7 @@ func ListEC2CapacityReservationFleet(ctx context.Context, d *plugin.QueryData, _
 var getEC2CapacityReservationFleetFilters = map[string]string{
 	"capacity_reservation_fleet_arn": "Description.CapacityReservationFleet.CapacityReservationFleetArn",
 	"capacity_reservation_fleet_id":  "description.CapacityReservationFleet.CapacityReservationFleetId",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"title":                          "Description.CapacityReservationFleet.CapacityReservationFleetId",
 }
 
@@ -26335,10 +26335,10 @@ func (p EC2FleetPaginator) NextPage(ctx context.Context) ([]EC2Fleet, error) {
 }
 
 var listEC2FleetFilters = map[string]string{
-	"fleet_arn":     "ARN",
-	"fleet_id":      "Description.Fleet.FleetId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Fleet.FleetId",
+	"fleet_arn":           "ARN",
+	"fleet_id":            "Description.Fleet.FleetId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Fleet.FleetId",
 }
 
 func ListEC2Fleet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26402,10 +26402,10 @@ func ListEC2Fleet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 }
 
 var getEC2FleetFilters = map[string]string{
-	"fleet_arn":     "ARN",
-	"fleet_id":      "description.Fleet.FleetId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Fleet.FleetId",
+	"fleet_arn":           "ARN",
+	"fleet_id":            "description.Fleet.FleetId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Fleet.FleetId",
 }
 
 func GetEC2Fleet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26544,10 +26544,10 @@ func (p EC2HostPaginator) NextPage(ctx context.Context) ([]EC2Host, error) {
 }
 
 var listEC2HostFilters = map[string]string{
-	"host_arn":      "ARN",
-	"host_id":       "Description.Host.HostId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Host.HostId",
+	"host_arn":            "ARN",
+	"host_id":             "Description.Host.HostId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Host.HostId",
 }
 
 func ListEC2Host(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26611,10 +26611,10 @@ func ListEC2Host(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getEC2HostFilters = map[string]string{
-	"host_arn":      "ARN",
-	"host_id":       "description.Host.HostId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Host.HostId",
+	"host_arn":            "ARN",
+	"host_id":             "description.Host.HostId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Host.HostId",
 }
 
 func GetEC2Host(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26753,11 +26753,11 @@ func (p EC2PlacementGroupPaginator) NextPage(ctx context.Context) ([]EC2Placemen
 }
 
 var listEC2PlacementGroupFilters = map[string]string{
-	"arn":           "ARN",
-	"group_id":      "Description.PlacementGroup.GroupId",
-	"group_name":    "Description.PlacementGroup.GroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.PlacementGroup.GroupName",
+	"arn":                 "ARN",
+	"group_id":            "Description.PlacementGroup.GroupId",
+	"group_name":          "Description.PlacementGroup.GroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.PlacementGroup.GroupName",
 }
 
 func ListEC2PlacementGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26821,11 +26821,11 @@ func ListEC2PlacementGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getEC2PlacementGroupFilters = map[string]string{
-	"arn":           "ARN",
-	"group_id":      "Description.PlacementGroup.GroupId",
-	"group_name":    "description.PlacementGroup.GroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.PlacementGroup.GroupName",
+	"arn":                 "ARN",
+	"group_id":            "Description.PlacementGroup.GroupId",
+	"group_name":          "description.PlacementGroup.GroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.PlacementGroup.GroupName",
 }
 
 func GetEC2PlacementGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -26974,7 +26974,7 @@ var listEC2TransitGatewayFilters = map[string]string{
 	"description":                        "Description.TransitGateway.Description",
 	"dns_support":                        "Description.TransitGateway.Options.DnsSupport",
 	"multicast_support":                  "Description.TransitGateway.Options.MulticastSupport",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"owner_id":                           "Description.TransitGateway.OwnerId",
 	"propagation_default_route_table_id": "Description.TransitGateway.Options.PropagationDefaultRouteTableId",
 	"state":                              "Description.TransitGateway.State",
@@ -27055,7 +27055,7 @@ var getEC2TransitGatewayFilters = map[string]string{
 	"description":                        "Description.TransitGateway.Description",
 	"dns_support":                        "Description.TransitGateway.Options.DnsSupport",
 	"multicast_support":                  "Description.TransitGateway.Options.MulticastSupport",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"owner_id":                           "Description.TransitGateway.OwnerId",
 	"propagation_default_route_table_id": "Description.TransitGateway.Options.PropagationDefaultRouteTableId",
 	"state":                              "Description.TransitGateway.State",
@@ -27204,7 +27204,7 @@ var listEC2TransitGatewayRouteTableFilters = map[string]string{
 	"creation_time":                   "Description.TransitGatewayRouteTable.CreationTime",
 	"default_association_route_table": "Description.TransitGatewayRouteTable.DefaultAssociationRouteTable",
 	"default_propagation_route_table": "Description.TransitGatewayRouteTable.DefaultPropagationRouteTable",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"state":                           "Description.TransitGatewayRouteTable.State",
 	"tags_src":                        "Description.TransitGatewayRouteTable.Tags",
 	"transit_gateway_id":              "Description.TransitGatewayRouteTable.TransitGatewayId",
@@ -27275,7 +27275,7 @@ var getEC2TransitGatewayRouteTableFilters = map[string]string{
 	"creation_time":                   "Description.TransitGatewayRouteTable.CreationTime",
 	"default_association_route_table": "Description.TransitGatewayRouteTable.DefaultAssociationRouteTable",
 	"default_propagation_route_table": "Description.TransitGatewayRouteTable.DefaultPropagationRouteTable",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"state":                           "Description.TransitGatewayRouteTable.State",
 	"tags_src":                        "Description.TransitGatewayRouteTable.Tags",
 	"transit_gateway_id":              "Description.TransitGatewayRouteTable.TransitGatewayId",
@@ -27424,7 +27424,7 @@ var listEC2DhcpOptionsFilters = map[string]string{
 	"netbios_name_servers": "Description.DhcpOptions.DhcpConfigurations",
 	"netbios_node_type":    "Description.DhcpOptions.DhcpConfigurations",
 	"ntp_servers":          "Description.DhcpOptions.DhcpConfigurations",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"owner_id":             "Description.DhcpOptions.OwnerId",
 	"tags_src":             "Description.DhcpOptions.Tags",
 }
@@ -27496,7 +27496,7 @@ var getEC2DhcpOptionsFilters = map[string]string{
 	"netbios_name_servers": "Description.DhcpOptions.DhcpConfigurations",
 	"netbios_node_type":    "Description.DhcpOptions.DhcpConfigurations",
 	"ntp_servers":          "Description.DhcpOptions.DhcpConfigurations",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"owner_id":             "Description.DhcpOptions.OwnerId",
 	"tags_src":             "Description.DhcpOptions.Tags",
 }
@@ -27637,10 +27637,10 @@ func (p EC2EgressOnlyInternetGatewayPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listEC2EgressOnlyInternetGatewayFilters = map[string]string{
-	"attachments":   "Description.EgressOnlyInternetGateway.Attachments",
-	"id":            "Description.EgressOnlyInternetGateway.EgressOnlyInternetGatewayId",
-	"og_account_id": "metadata.IntegrationID",
-	"tags_src":      "Description.EgressOnlyInternetGateway.Tags",
+	"attachments":         "Description.EgressOnlyInternetGateway.Attachments",
+	"id":                  "Description.EgressOnlyInternetGateway.EgressOnlyInternetGatewayId",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.EgressOnlyInternetGateway.Tags",
 }
 
 func ListEC2EgressOnlyInternetGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -27704,10 +27704,10 @@ func ListEC2EgressOnlyInternetGateway(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getEC2EgressOnlyInternetGatewayFilters = map[string]string{
-	"attachments":   "Description.EgressOnlyInternetGateway.Attachments",
-	"id":            "description.EgressOnlyInternetGateway.EgressOnlyInternetGatewayId",
-	"og_account_id": "metadata.IntegrationID",
-	"tags_src":      "Description.EgressOnlyInternetGateway.Tags",
+	"attachments":         "Description.EgressOnlyInternetGateway.Attachments",
+	"id":                  "description.EgressOnlyInternetGateway.EgressOnlyInternetGatewayId",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.EgressOnlyInternetGateway.Tags",
 }
 
 func GetEC2EgressOnlyInternetGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -27855,7 +27855,7 @@ var listEC2VpcPeeringConnectionFilters = map[string]string{
 	"accepter_vpc_id":               "Description.VpcPeeringConnection.AccepterVpcInfo.VpcId",
 	"expiration_time":               "Description.VpcPeeringConnection.ExpirationTime",
 	"id":                            "Description.VpcPeeringConnection.VpcPeeringConnectionId",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"requester_cidr_block":          "Description.VpcPeeringConnection.RequesterVpcInfo.CidrBlock",
 	"requester_cidr_block_set":      "Description.VpcPeeringConnection.RequesterVpcInfo.CidrBlockSet",
 	"requester_ipv6_cidr_block_set": "Description.VpcPeeringConnection.RequesterVpcInfo.Ipv6CidrBlockSet",
@@ -27939,7 +27939,7 @@ var getEC2VpcPeeringConnectionFilters = map[string]string{
 	"accepter_vpc_id":               "Description.VpcPeeringConnection.AccepterVpcInfo.VpcId",
 	"expiration_time":               "Description.VpcPeeringConnection.ExpirationTime",
 	"id":                            "Description.VpcPeeringConnection.VpcPeeringConnectionId",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"requester_cidr_block":          "Description.VpcPeeringConnection.RequesterVpcInfo.CidrBlock",
 	"requester_cidr_block_set":      "Description.VpcPeeringConnection.RequesterVpcInfo.CidrBlockSet",
 	"requester_ipv6_cidr_block_set": "Description.VpcPeeringConnection.RequesterVpcInfo.Ipv6CidrBlockSet",
@@ -28097,7 +28097,7 @@ var listEC2SecurityGroupRuleFilters = map[string]string{
 	"group_id":                             "Description.Group.GroupId",
 	"group_name":                           "Description.Group.GroupName",
 	"ip_protocol":                          "Description.Permission.IpProtocol",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"owner_id":                             "Description.Group.OwnerId",
 	"pair_group_id":                        "Description.UserIDGroupPair.GroupId",
 	"pair_group_name":                      "Description.UserIDGroupPair.GroupName",
@@ -28186,7 +28186,7 @@ var getEC2SecurityGroupRuleFilters = map[string]string{
 	"group_id":                             "Description.Group.GroupId",
 	"group_name":                           "Description.Group.GroupName",
 	"ip_protocol":                          "Description.Permission.IpProtocol",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"owner_id":                             "Description.Group.OwnerId",
 	"pair_group_id":                        "Description.UserIDGroupPair.GroupId",
 	"pair_group_name":                      "Description.UserIDGroupPair.GroupName",
@@ -28342,10 +28342,10 @@ func (p EC2IpamPoolPaginator) NextPage(ctx context.Context) ([]EC2IpamPool, erro
 }
 
 var listEC2IpamPoolFilters = map[string]string{
-	"arn":           "Description.IpamPool.IpamPoolArn",
-	"ipam_pool_id":  "Description.IpamPool.IpamPoolId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.IpamPool.IpamPoolId",
+	"arn":                 "Description.IpamPool.IpamPoolArn",
+	"ipam_pool_id":        "Description.IpamPool.IpamPoolId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.IpamPool.IpamPoolId",
 }
 
 func ListEC2IpamPool(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -28409,10 +28409,10 @@ func ListEC2IpamPool(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getEC2IpamPoolFilters = map[string]string{
-	"arn":           "Description.IpamPool.IpamPoolArn",
-	"ipam_pool_id":  "description.IpamPool.IpamPoolId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.IpamPool.IpamPoolId",
+	"arn":                 "Description.IpamPool.IpamPoolArn",
+	"ipam_pool_id":        "description.IpamPool.IpamPoolId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.IpamPool.IpamPoolId",
 }
 
 func GetEC2IpamPool(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -28551,10 +28551,10 @@ func (p EC2IpamPaginator) NextPage(ctx context.Context) ([]EC2Ipam, error) {
 }
 
 var listEC2IpamFilters = map[string]string{
-	"arn":           "Description.Ipam.IpamArn",
-	"ipam_id":       "Description.Ipam.IpamId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Ipam.IpamId",
+	"arn":                 "Description.Ipam.IpamArn",
+	"ipam_id":             "Description.Ipam.IpamId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Ipam.IpamId",
 }
 
 func ListEC2Ipam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -28618,10 +28618,10 @@ func ListEC2Ipam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getEC2IpamFilters = map[string]string{
-	"arn":           "Description.Ipam.IpamArn",
-	"ipam_id":       "description.Ipam.IpamId",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Ipam.IpamId",
+	"arn":                 "Description.Ipam.IpamArn",
+	"ipam_id":             "description.Ipam.IpamId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Ipam.IpamId",
 }
 
 func GetEC2Ipam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -28764,7 +28764,7 @@ var listEC2VPCEndpointServiceFilters = map[string]string{
 	"availability_zones":                  "Description.VpcEndpointService.AvailabilityZones",
 	"base_endpoint_dns_names":             "Description.VpcEndpointService.BaseEndpointDnsNames",
 	"manages_vpc_endpoints":               "Description.VpcEndpointService.ManagesVpcEndpoints",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner":                               "Description.VpcEndpointService.Owner",
 	"private_dns_name":                    "Description.VpcEndpointService.PrivateDnsName",
 	"private_dns_name_verification_state": "Description.VpcEndpointService.PrivateDnsNameVerificationState",
@@ -28843,7 +28843,7 @@ var getEC2VPCEndpointServiceFilters = map[string]string{
 	"availability_zones":                  "Description.VpcEndpointService.AvailabilityZones",
 	"base_endpoint_dns_names":             "Description.VpcEndpointService.BaseEndpointDnsNames",
 	"manages_vpc_endpoints":               "Description.VpcEndpointService.ManagesVpcEndpoints",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner":                               "Description.VpcEndpointService.Owner",
 	"private_dns_name":                    "Description.VpcEndpointService.PrivateDnsName",
 	"private_dns_name_verification_state": "Description.VpcEndpointService.PrivateDnsNameVerificationState",
@@ -28993,11 +28993,11 @@ func (p EC2InstanceAvailabilityPaginator) NextPage(ctx context.Context) ([]EC2In
 }
 
 var listEC2InstanceAvailabilityFilters = map[string]string{
-	"instance_type": "description.InstanceAvailability.InstanceType",
-	"location":      "Description.InstanceAvailability.Location",
-	"location_type": "Description.InstanceAvailability.LocationType",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.InstanceAvailability.InstanceType",
+	"instance_type":       "description.InstanceAvailability.InstanceType",
+	"location":            "Description.InstanceAvailability.Location",
+	"location_type":       "Description.InstanceAvailability.LocationType",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.InstanceAvailability.InstanceType",
 }
 
 func ListEC2InstanceAvailability(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29061,11 +29061,11 @@ func ListEC2InstanceAvailability(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getEC2InstanceAvailabilityFilters = map[string]string{
-	"instance_type": "Description.InstanceAvailability.InstanceType",
-	"location":      "Description.InstanceAvailability.Location",
-	"location_type": "Description.InstanceAvailability.LocationType",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.InstanceAvailability.InstanceType",
+	"instance_type":       "Description.InstanceAvailability.InstanceType",
+	"location":            "Description.InstanceAvailability.Location",
+	"location_type":       "Description.InstanceAvailability.LocationType",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.InstanceAvailability.InstanceType",
 }
 
 func GetEC2InstanceAvailability(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29218,7 +29218,7 @@ var listEC2InstanceTypeFilters = map[string]string{
 	"instance_type":                   "Description.InstanceType.InstanceType",
 	"memory_info":                     "Description.InstanceType.MemoryInfo",
 	"network_info":                    "Description.InstanceType.NetworkInfo",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"placement_group_info":            "Description.InstanceType.PlacementGroupInfo",
 	"processor_info":                  "Description.InstanceType.ProcessorInfo",
 	"supported_root_device_types":     "Description.InstanceType.SupportedRootDeviceTypes",
@@ -29303,7 +29303,7 @@ var getEC2InstanceTypeFilters = map[string]string{
 	"instance_type":                   "description.InstanceType.InstanceType",
 	"memory_info":                     "Description.InstanceType.MemoryInfo",
 	"network_info":                    "Description.InstanceType.NetworkInfo",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"placement_group_info":            "Description.InstanceType.PlacementGroupInfo",
 	"processor_info":                  "Description.InstanceType.ProcessorInfo",
 	"supported_root_device_types":     "Description.InstanceType.SupportedRootDeviceTypes",
@@ -29449,18 +29449,18 @@ func (p EC2ManagedPrefixListPaginator) NextPage(ctx context.Context) ([]EC2Manag
 }
 
 var listEC2ManagedPrefixListFilters = map[string]string{
-	"address_family": "Description.ManagedPrefixList.AddressFamily",
-	"arn":            "Description.ManagedPrefixList.PrefixListArn",
-	"id":             "description.ManagedPrefixList.PrefixListId",
-	"max_entries":    "Description.ManagedPrefixList.MaxEntries",
-	"name":           "description.ManagedPrefixList.PrefixListName",
-	"og_account_id":  "metadata.IntegrationID",
-	"owner_id":       "description.ManagedPrefixList.OwnerId",
-	"state":          "Description.ManagedPrefixList.State",
-	"state_message":  "Description.ManagedPrefixList.StateMessage",
-	"tags_src":       "Description.ManagedPrefixList.Tags",
-	"title":          "Description.ManagedPrefixList.PrefixListName",
-	"version":        "Description.ManagedPrefixList.Version",
+	"address_family":      "Description.ManagedPrefixList.AddressFamily",
+	"arn":                 "Description.ManagedPrefixList.PrefixListArn",
+	"id":                  "description.ManagedPrefixList.PrefixListId",
+	"max_entries":         "Description.ManagedPrefixList.MaxEntries",
+	"name":                "description.ManagedPrefixList.PrefixListName",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "description.ManagedPrefixList.OwnerId",
+	"state":               "Description.ManagedPrefixList.State",
+	"state_message":       "Description.ManagedPrefixList.StateMessage",
+	"tags_src":            "Description.ManagedPrefixList.Tags",
+	"title":               "Description.ManagedPrefixList.PrefixListName",
+	"version":             "Description.ManagedPrefixList.Version",
 }
 
 func ListEC2ManagedPrefixList(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29524,18 +29524,18 @@ func ListEC2ManagedPrefixList(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getEC2ManagedPrefixListFilters = map[string]string{
-	"address_family": "Description.ManagedPrefixList.AddressFamily",
-	"arn":            "Description.ManagedPrefixList.PrefixListArn",
-	"id":             "Description.ManagedPrefixList.PrefixListId",
-	"max_entries":    "Description.ManagedPrefixList.MaxEntries",
-	"name":           "Description.ManagedPrefixList.PrefixListName",
-	"og_account_id":  "metadata.IntegrationID",
-	"owner_id":       "Description.ManagedPrefixList.OwnerId",
-	"state":          "Description.ManagedPrefixList.State",
-	"state_message":  "Description.ManagedPrefixList.StateMessage",
-	"tags_src":       "Description.ManagedPrefixList.Tags",
-	"title":          "Description.ManagedPrefixList.PrefixListName",
-	"version":        "Description.ManagedPrefixList.Version",
+	"address_family":      "Description.ManagedPrefixList.AddressFamily",
+	"arn":                 "Description.ManagedPrefixList.PrefixListArn",
+	"id":                  "Description.ManagedPrefixList.PrefixListId",
+	"max_entries":         "Description.ManagedPrefixList.MaxEntries",
+	"name":                "Description.ManagedPrefixList.PrefixListName",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.ManagedPrefixList.OwnerId",
+	"state":               "Description.ManagedPrefixList.State",
+	"state_message":       "Description.ManagedPrefixList.StateMessage",
+	"tags_src":            "Description.ManagedPrefixList.Tags",
+	"title":               "Description.ManagedPrefixList.PrefixListName",
+	"version":             "Description.ManagedPrefixList.Version",
 }
 
 func GetEC2ManagedPrefixList(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29674,9 +29674,9 @@ func (p EC2ManagedPrefixListEntryPaginator) NextPage(ctx context.Context) ([]EC2
 }
 
 var listEC2ManagedPrefixListEntryFilters = map[string]string{
-	"og_account_id":  "metadata.IntegrationID",
-	"prefix_list_id": "Description.LaunchTemplateVersion.LaunchTemplateName",
-	"title":          "Cidr",
+	"platform_account_id": "metadata.IntegrationID",
+	"prefix_list_id":      "Description.LaunchTemplateVersion.LaunchTemplateName",
+	"title":               "Cidr",
 }
 
 func ListEC2ManagedPrefixListEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29740,9 +29740,9 @@ func ListEC2ManagedPrefixListEntry(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getEC2ManagedPrefixListEntryFilters = map[string]string{
-	"og_account_id":  "metadata.IntegrationID",
-	"prefix_list_id": "Description.LaunchTemplateVersion.LaunchTemplateName",
-	"title":          "Cidr",
+	"platform_account_id": "metadata.IntegrationID",
+	"prefix_list_id":      "Description.LaunchTemplateVersion.LaunchTemplateName",
+	"title":               "Cidr",
 }
 
 func GetEC2ManagedPrefixListEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -29882,7 +29882,7 @@ func (p EC2TransitGatewayRoutePaginator) NextPage(ctx context.Context) ([]EC2Tra
 
 var listEC2TransitGatewayRouteFilters = map[string]string{
 	"destination_cidr_block":         "Description.TransitGatewayRoute.DestinationCidrBlock",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"prefix_list_id":                 "description.TransitGatewayRoute.PrefixListId",
 	"state":                          "description.TransitGatewayRoute.State",
 	"title":                          "Description.TransitGatewayRoute.DestinationCidrBlock",
@@ -29953,7 +29953,7 @@ func ListEC2TransitGatewayRoute(ctx context.Context, d *plugin.QueryData, _ *plu
 
 var getEC2TransitGatewayRouteFilters = map[string]string{
 	"destination_cidr_block":         "Description.TransitGatewayRoute.DestinationCidrBlock",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"prefix_list_id":                 "Description.TransitGatewayRoute.PrefixListId",
 	"state":                          "Description.TransitGatewayRoute.State",
 	"title":                          "Description.TransitGatewayRoute.DestinationCidrBlock",
@@ -30101,7 +30101,7 @@ var listEC2TransitGatewayAttachmentFilters = map[string]string{
 	"association_state":                          "description.TransitGatewayAttachment.Association.State",
 	"association_transit_gateway_route_table_id": "description.TransitGatewayAttachment.Association.TransitGatewayRouteTableId",
 	"creation_time":                              "Description.TransitGatewayAttachment.CreationTime",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"resource_id":                                "description.TransitGatewayAttachment.ResourceId",
 	"resource_owner_id":                          "description.TransitGatewayAttachment.ResourceOwnerId",
 	"resource_type":                              "description.TransitGatewayAttachment.ResourceType",
@@ -30176,7 +30176,7 @@ var getEC2TransitGatewayAttachmentFilters = map[string]string{
 	"association_state":                          "Description.TransitGatewayAttachment.Association.State",
 	"association_transit_gateway_route_table_id": "Description.TransitGatewayAttachment.Association.TransitGatewayRouteTableId",
 	"creation_time":                              "Description.TransitGatewayAttachment.CreationTime",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"resource_id":                                "Description.TransitGatewayAttachment.ResourceId",
 	"resource_owner_id":                          "Description.TransitGatewayAttachment.ResourceOwnerId",
 	"resource_type":                              "Description.TransitGatewayAttachment.ResourceType",
@@ -30704,11 +30704,6 @@ func GetEC2LaunchTemplateVersion(ctx context.Context, d *plugin.QueryData, _ *pl
 
 // ==========================  START: EC2InstanceMetricCpuUtilizationHourly =============================
 
-
-
-
-
-
 type EC2InstanceMetricCpuUtilizationHourlyPaginator struct {
 	paginator *essdk.BaseESPaginator
 }
@@ -30734,7 +30729,6 @@ func (p EC2InstanceMetricCpuUtilizationHourlyPaginator) Close(ctx context.Contex
 	return p.paginator.Deallocate(ctx)
 }
 
-
 var listEC2InstanceMetricCpuUtilizationHourlyFilters = map[string]string{
 	"account_id":   "Account",
 	"average":      "Description.Average",
@@ -30746,8 +30740,6 @@ var listEC2InstanceMetricCpuUtilizationHourlyFilters = map[string]string{
 	"timestamp":    "Description.Timestamp",
 }
 
-
-
 var getEC2InstanceMetricCpuUtilizationHourlyFilters = map[string]string{
 	"account_id":   "Account",
 	"average":      "Description.Average",
@@ -30758,7 +30750,6 @@ var getEC2InstanceMetricCpuUtilizationHourlyFilters = map[string]string{
 	"sum":          "Description.Sum",
 	"timestamp":    "Description.Timestamp",
 }
-
 
 // ==========================  END: EC2InstanceMetricCpuUtilizationHourly =============================
 
@@ -30843,11 +30834,11 @@ func (p ElasticLoadBalancingV2SslPolicyPaginator) NextPage(ctx context.Context) 
 }
 
 var listElasticLoadBalancingV2SslPolicyFilters = map[string]string{
-	"ciphers":       "Description.SslPolicy.Ciphers",
-	"name":          "Description.SslPolicy.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"ssl_protocols": "Description.SslPolicy.SslProtocols",
-	"title":         "Description.SslPolicy.Name",
+	"ciphers":             "Description.SslPolicy.Ciphers",
+	"name":                "Description.SslPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"ssl_protocols":       "Description.SslPolicy.SslProtocols",
+	"title":               "Description.SslPolicy.Name",
 }
 
 func ListElasticLoadBalancingV2SslPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -30911,12 +30902,12 @@ func ListElasticLoadBalancingV2SslPolicy(ctx context.Context, d *plugin.QueryDat
 }
 
 var getElasticLoadBalancingV2SslPolicyFilters = map[string]string{
-	"ciphers":       "Description.SslPolicy.Ciphers",
-	"name":          "description.SslPolicy.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"region":        "metadata.Region",
-	"ssl_protocols": "Description.SslPolicy.SslProtocols",
-	"title":         "Description.SslPolicy.Name",
+	"ciphers":             "Description.SslPolicy.Ciphers",
+	"name":                "description.SslPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"region":              "metadata.Region",
+	"ssl_protocols":       "Description.SslPolicy.SslProtocols",
+	"title":               "Description.SslPolicy.Name",
 }
 
 func GetElasticLoadBalancingV2SslPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -31065,7 +31056,7 @@ var listElasticLoadBalancingV2TargetGroupFilters = map[string]string{
 	"load_balancer_arns":            "Description.TargetGroup.LoadBalancerArns",
 	"matcher_grpc_code":             "Description.TargetGroup.Matcher.GrpcCode",
 	"matcher_http_code":             "Description.TargetGroup.Matcher.HttpCode",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"port":                          "Description.TargetGroup.Port",
 	"protocol":                      "Description.TargetGroup.Protocol",
 	"tags_src":                      "Description.Tags",
@@ -31149,7 +31140,7 @@ var getElasticLoadBalancingV2TargetGroupFilters = map[string]string{
 	"load_balancer_arns":            "Description.TargetGroup.LoadBalancerArns",
 	"matcher_grpc_code":             "Description.TargetGroup.Matcher.GrpcCode",
 	"matcher_http_code":             "Description.TargetGroup.Matcher.HttpCode",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"port":                          "Description.TargetGroup.Port",
 	"protocol":                      "Description.TargetGroup.Protocol",
 	"tags_src":                      "Description.Tags",
@@ -31307,7 +31298,7 @@ var listElasticLoadBalancingV2LoadBalancerFilters = map[string]string{
 	"ip_address_type":          "Description.LoadBalancer.IpAddressType",
 	"load_balancer_attributes": "Description.Attributes",
 	"name":                     "Description.LoadBalancer.LoadBalancerName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"scheme":                   "Description.LoadBalancer.Scheme",
 	"security_groups":          "Description.LoadBalancer.SecurityGroups",
 	"state_code":               "Description.LoadBalancer.State.Code",
@@ -31388,7 +31379,7 @@ var getElasticLoadBalancingV2LoadBalancerFilters = map[string]string{
 	"ip_address_type":          "Description.LoadBalancer.IpAddressType",
 	"load_balancer_attributes": "Description.Attributes",
 	"name":                     "Description.LoadBalancer.LoadBalancerName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"scheme":                   "Description.LoadBalancer.Scheme",
 	"security_groups":          "Description.LoadBalancer.SecurityGroups",
 	"state_code":               "Description.LoadBalancer.State.Code",
@@ -31560,7 +31551,7 @@ var listElasticLoadBalancingLoadBalancerFilters = map[string]string{
 	"lb_cookie_stickiness_policies":     "Description.LoadBalancer.Policies.LBCookieStickinessPolicies",
 	"listener_descriptions":             "Description.LoadBalancer.ListenerDescriptions",
 	"name":                              "Description.LoadBalancer.LoadBalancerName",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"other_policies":                    "Description.LoadBalancer.Policies.OtherPolicies",
 	"scheme":                            "Description.LoadBalancer.Scheme",
 	"security_groups":                   "Description.LoadBalancer.SecurityGroups",
@@ -31659,7 +31650,7 @@ var getElasticLoadBalancingLoadBalancerFilters = map[string]string{
 	"lb_cookie_stickiness_policies":     "Description.LoadBalancer.Policies.LBCookieStickinessPolicies",
 	"listener_descriptions":             "Description.LoadBalancer.ListenerDescriptions",
 	"name":                              "description.LoadBalancer.LoadBalancerName",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"other_policies":                    "Description.LoadBalancer.Policies.OtherPolicies",
 	"scheme":                            "Description.LoadBalancer.Scheme",
 	"security_groups":                   "Description.LoadBalancer.SecurityGroups",
@@ -31808,15 +31799,15 @@ func (p ElasticLoadBalancingV2ListenerPaginator) NextPage(ctx context.Context) (
 }
 
 var listElasticLoadBalancingV2ListenerFilters = map[string]string{
-	"alpn_policy":       "Description.Listener.AlpnPolicy",
-	"arn":               "Description.Listener.ListenerArn",
-	"certificates":      "Description.Listener.Certificates",
-	"default_actions":   "Description.Listener.DefaultActions",
-	"load_balancer_arn": "Description.Listener.LoadBalancerArn",
-	"og_account_id":     "metadata.IntegrationID",
-	"port":              "Description.Listener.Port",
-	"protocol":          "Description.Listener.Protocol",
-	"ssl_policy":        "Description.Listener.SslPolicy",
+	"alpn_policy":         "Description.Listener.AlpnPolicy",
+	"arn":                 "Description.Listener.ListenerArn",
+	"certificates":        "Description.Listener.Certificates",
+	"default_actions":     "Description.Listener.DefaultActions",
+	"load_balancer_arn":   "Description.Listener.LoadBalancerArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"port":                "Description.Listener.Port",
+	"protocol":            "Description.Listener.Protocol",
+	"ssl_policy":          "Description.Listener.SslPolicy",
 }
 
 func ListElasticLoadBalancingV2Listener(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -31880,15 +31871,15 @@ func ListElasticLoadBalancingV2Listener(ctx context.Context, d *plugin.QueryData
 }
 
 var getElasticLoadBalancingV2ListenerFilters = map[string]string{
-	"alpn_policy":       "Description.Listener.AlpnPolicy",
-	"arn":               "description.Listener.ListenerArn",
-	"certificates":      "Description.Listener.Certificates",
-	"default_actions":   "Description.Listener.DefaultActions",
-	"load_balancer_arn": "Description.Listener.LoadBalancerArn",
-	"og_account_id":     "metadata.IntegrationID",
-	"port":              "Description.Listener.Port",
-	"protocol":          "Description.Listener.Protocol",
-	"ssl_policy":        "Description.Listener.SslPolicy",
+	"alpn_policy":         "Description.Listener.AlpnPolicy",
+	"arn":                 "description.Listener.ListenerArn",
+	"certificates":        "Description.Listener.Certificates",
+	"default_actions":     "Description.Listener.DefaultActions",
+	"load_balancer_arn":   "Description.Listener.LoadBalancerArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"port":                "Description.Listener.Port",
+	"protocol":            "Description.Listener.Protocol",
+	"ssl_policy":          "Description.Listener.SslPolicy",
 }
 
 func GetElasticLoadBalancingV2Listener(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32027,9 +32018,9 @@ func (p ElasticLoadBalancingV2RulePaginator) NextPage(ctx context.Context) ([]El
 }
 
 var listElasticLoadBalancingV2RuleFilters = map[string]string{
-	"arn":           "Description.Rule.RuleArn",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Rule.RuleArn",
+	"arn":                 "Description.Rule.RuleArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Rule.RuleArn",
 }
 
 func ListElasticLoadBalancingV2Rule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32093,9 +32084,9 @@ func ListElasticLoadBalancingV2Rule(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getElasticLoadBalancingV2RuleFilters = map[string]string{
-	"arn":           "description.Rule.RuleArn",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Rule.RuleArn",
+	"arn":                 "description.Rule.RuleArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Rule.RuleArn",
 }
 
 func GetElasticLoadBalancingV2Rule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32246,7 +32237,7 @@ var listFSXFileSystemFilters = map[string]string{
 	"lifecycle":                "Description.FileSystem.Lifecycle",
 	"lustre_configuration":     "Description.FileSystem.LustreConfiguration",
 	"network_interface_ids":    "Description.FileSystem.NetworkInterfaceIds",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"ontap_configuration":      "Description.FileSystem.OntapConfiguration",
 	"open_zfs_configuration":   "Description.FileSystem.OpenZFSConfiguration",
 	"owner_id":                 "Description.FileSystem.OwnerId",
@@ -32331,7 +32322,7 @@ var getFSXFileSystemFilters = map[string]string{
 	"lifecycle":                "Description.FileSystem.Lifecycle",
 	"lustre_configuration":     "Description.FileSystem.LustreConfiguration",
 	"network_interface_ids":    "Description.FileSystem.NetworkInterfaceIds",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"ontap_configuration":      "Description.FileSystem.OntapConfiguration",
 	"open_zfs_configuration":   "Description.FileSystem.OpenZFSConfiguration",
 	"owner_id":                 "Description.FileSystem.OwnerId",
@@ -32480,7 +32471,7 @@ func (p FSXStorageVirtualMachinePaginator) NextPage(ctx context.Context) ([]FSXS
 
 var listFSXStorageVirtualMachineFilters = map[string]string{
 	"name":                       "Description.StorageVirtualMachine.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"resource_arn":               "Description.StorageVirtualMachine.ResourceARN",
 	"storage_virtual_machine_id": "Description.StorageVirtualMachine.StorageVirtualMachineId",
 	"title":                      "Description.StorageVirtualMachine.StorageVirtualMachineId",
@@ -32548,7 +32539,7 @@ func ListFSXStorageVirtualMachine(ctx context.Context, d *plugin.QueryData, _ *p
 
 var getFSXStorageVirtualMachineFilters = map[string]string{
 	"name":                       "Description.StorageVirtualMachine.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"resource_arn":               "Description.StorageVirtualMachine.ResourceARN",
 	"storage_virtual_machine_id": "description.StorageVirtualMachine.StorageVirtualMachineId",
 	"title":                      "Description.StorageVirtualMachine.StorageVirtualMachineId",
@@ -32690,10 +32681,10 @@ func (p FSXTaskPaginator) NextPage(ctx context.Context) ([]FSXTask, error) {
 }
 
 var listFSXTaskFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Task.ResourceARN",
-	"task_id":       "Description.Task.TaskId",
-	"title":         "Description.Task.TaskId",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Task.ResourceARN",
+	"task_id":             "Description.Task.TaskId",
+	"title":               "Description.Task.TaskId",
 }
 
 func ListFSXTask(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32757,10 +32748,10 @@ func ListFSXTask(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getFSXTaskFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Task.ResourceARN",
-	"task_id":       "description.Task.TaskId",
-	"title":         "Description.Task.TaskId",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Task.ResourceARN",
+	"task_id":             "description.Task.TaskId",
+	"title":               "Description.Task.TaskId",
 }
 
 func GetFSXTask(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32899,11 +32890,11 @@ func (p FSXVolumePaginator) NextPage(ctx context.Context) ([]FSXVolume, error) {
 }
 
 var listFSXVolumeFilters = map[string]string{
-	"name":          "Description.Volume.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Volume.ResourceARN",
-	"title":         "Description.Volume.VolumeId",
-	"volume_id":     "Description.Volume.VolumeId",
+	"name":                "Description.Volume.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Volume.ResourceARN",
+	"title":               "Description.Volume.VolumeId",
+	"volume_id":           "Description.Volume.VolumeId",
 }
 
 func ListFSXVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -32967,11 +32958,11 @@ func ListFSXVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 }
 
 var getFSXVolumeFilters = map[string]string{
-	"name":          "Description.Volume.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Volume.ResourceARN",
-	"title":         "Description.Volume.VolumeId",
-	"volume_id":     "description.Volume.VolumeId",
+	"name":                "Description.Volume.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Volume.ResourceARN",
+	"title":               "Description.Volume.VolumeId",
+	"volume_id":           "description.Volume.VolumeId",
 }
 
 func GetFSXVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -33110,11 +33101,11 @@ func (p FSXSnapshotPaginator) NextPage(ctx context.Context) ([]FSXSnapshot, erro
 }
 
 var listFSXSnapshotFilters = map[string]string{
-	"name":          "Description.Snapshot.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Snapshot.ResourceARN",
-	"snapshot_id":   "Description.Snapshot.SnapshotId",
-	"title":         "Description.Snapshot.SnapshotId",
+	"name":                "Description.Snapshot.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Snapshot.ResourceARN",
+	"snapshot_id":         "Description.Snapshot.SnapshotId",
+	"title":               "Description.Snapshot.SnapshotId",
 }
 
 func ListFSXSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -33178,11 +33169,11 @@ func ListFSXSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getFSXSnapshotFilters = map[string]string{
-	"name":          "Description.Snapshot.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Snapshot.ResourceARN",
-	"snapshot_id":   "description.Snapshot.SnapshotId",
-	"title":         "Description.Snapshot.SnapshotId",
+	"name":                "Description.Snapshot.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Snapshot.ResourceARN",
+	"snapshot_id":         "description.Snapshot.SnapshotId",
+	"title":               "Description.Snapshot.SnapshotId",
 }
 
 func GetFSXSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -33321,16 +33312,16 @@ func (p ApplicationAutoScalingTargetPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listApplicationAutoScalingTargetFilters = map[string]string{
-	"creation_time":      "Description.ScalableTarget.CreationTime",
-	"max_capacity":       "Description.ScalableTarget.MaxCapacity",
-	"min_capacity":       "Description.ScalableTarget.MinCapacity",
-	"og_account_id":      "metadata.IntegrationID",
-	"resource_id":        "description.ScalableTarget.ResourceId",
-	"role_arn":           "Description.ScalableTarget.RoleARN",
-	"scalable_dimension": "description.ScalableTarget.ScalableDimension",
-	"service_namespace":  "description.ScalableTarget.ServiceNamespace",
-	"suspended_state":    "Description.ScalableTarget.SuspendedState",
-	"title":              "Description.ScalableTarget.ResourceId",
+	"creation_time":       "Description.ScalableTarget.CreationTime",
+	"max_capacity":        "Description.ScalableTarget.MaxCapacity",
+	"min_capacity":        "Description.ScalableTarget.MinCapacity",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_id":         "description.ScalableTarget.ResourceId",
+	"role_arn":            "Description.ScalableTarget.RoleARN",
+	"scalable_dimension":  "description.ScalableTarget.ScalableDimension",
+	"service_namespace":   "description.ScalableTarget.ServiceNamespace",
+	"suspended_state":     "Description.ScalableTarget.SuspendedState",
+	"title":               "Description.ScalableTarget.ResourceId",
 }
 
 func ListApplicationAutoScalingTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -33394,16 +33385,16 @@ func ListApplicationAutoScalingTarget(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getApplicationAutoScalingTargetFilters = map[string]string{
-	"creation_time":      "Description.ScalableTarget.CreationTime",
-	"max_capacity":       "Description.ScalableTarget.MaxCapacity",
-	"min_capacity":       "Description.ScalableTarget.MinCapacity",
-	"og_account_id":      "metadata.IntegrationID",
-	"resource_id":        "description.ScalableTarget.ResourceId",
-	"role_arn":           "Description.ScalableTarget.RoleARN",
-	"scalable_dimension": "Description.ScalableTarget.ScalableDimension",
-	"service_namespace":  "description.ScalableTarget.ServiceNamespace",
-	"suspended_state":    "Description.ScalableTarget.SuspendedState",
-	"title":              "Description.ScalableTarget.ResourceId",
+	"creation_time":       "Description.ScalableTarget.CreationTime",
+	"max_capacity":        "Description.ScalableTarget.MaxCapacity",
+	"min_capacity":        "Description.ScalableTarget.MinCapacity",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_id":         "description.ScalableTarget.ResourceId",
+	"role_arn":            "Description.ScalableTarget.RoleARN",
+	"scalable_dimension":  "Description.ScalableTarget.ScalableDimension",
+	"service_namespace":   "description.ScalableTarget.ServiceNamespace",
+	"suspended_state":     "Description.ScalableTarget.SuspendedState",
+	"title":               "Description.ScalableTarget.ResourceId",
 }
 
 func GetApplicationAutoScalingTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -33544,7 +33535,7 @@ func (p ApplicationAutoScalingPolicyPaginator) NextPage(ctx context.Context) ([]
 var listApplicationAutoScalingPolicyFilters = map[string]string{
 	"alarms":                            "Description.ScalablePolicy.Alarms",
 	"creation_time":                     "Description.ScalablePolicy.CreationTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"policy_arn":                        "Description.ScalablePolicy.PolicyARN",
 	"policy_name":                       "Description.ScalablePolicy.PolicyARN",
 	"policy_type":                       "Description.ScalablePolicy.PolicyType",
@@ -33619,7 +33610,7 @@ func ListApplicationAutoScalingPolicy(ctx context.Context, d *plugin.QueryData, 
 var getApplicationAutoScalingPolicyFilters = map[string]string{
 	"alarms":                            "Description.ScalablePolicy.Alarms",
 	"creation_time":                     "Description.ScalablePolicy.CreationTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"policy_arn":                        "Description.ScalablePolicy.PolicyARN",
 	"policy_name":                       "Description.ScalablePolicy.PolicyARN",
 	"policy_type":                       "Description.ScalablePolicy.PolicyType",
@@ -33790,7 +33781,7 @@ var listAutoScalingGroupFilters = map[string]string{
 	"mixed_instances_policy_launch_template_version":   "Description.AutoScalingGroup.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.Version",
 	"name":                                     "Description.AutoScalingGroup.AutoScalingGroupName",
 	"new_instances_protected_from_scale_in":    "Description.AutoScalingGroup.NewInstancesProtectedFromScaleIn",
-	"og_account_id":                            "metadata.IntegrationID",
+	"platform_account_id":                      "metadata.IntegrationID",
 	"on_demand_allocation_strategy":            "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandAllocationStrategy",
 	"on_demand_base_capacity":                  "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandBaseCapacity",
 	"on_demand_percentage_above_base_capacity": "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandPercentageAboveBaseCapacity",
@@ -33893,7 +33884,7 @@ var getAutoScalingGroupFilters = map[string]string{
 	"mixed_instances_policy_launch_template_version":   "Description.AutoScalingGroup.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.Version",
 	"name":                                     "description.AutoScalingGroup.AutoScalingGroupName",
 	"new_instances_protected_from_scale_in":    "Description.AutoScalingGroup.NewInstancesProtectedFromScaleIn",
-	"og_account_id":                            "metadata.IntegrationID",
+	"platform_account_id":                      "metadata.IntegrationID",
 	"on_demand_allocation_strategy":            "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandAllocationStrategy",
 	"on_demand_base_capacity":                  "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandBaseCapacity",
 	"on_demand_percentage_above_base_capacity": "Description.AutoScalingGroup.MixedInstancesPolicy.InstancesDistribution.OnDemandPercentageAboveBaseCapacity",
@@ -34064,13 +34055,13 @@ var listAutoScalingLaunchConfigurationFilters = map[string]string{
 	"metadata_options_http_endpoint":          "Description.LaunchConfiguration.MetadataOptions.HttpEndpoint",
 	"metadata_options_http_tokens":            "Description.LaunchConfiguration.MetadataOptions.HttpTokens",
 	"metadata_options_put_response_hop_limit": "Description.LaunchConfiguration.MetadataOptions.HttpPutResponseHopLimit",
-	"name":              "Description.LaunchConfiguration.LaunchConfigurationName",
-	"og_account_id":     "metadata.IntegrationID",
-	"placement_tenancy": "Description.LaunchConfiguration.PlacementTenancy",
-	"ramdisk_id":        "Description.LaunchConfiguration.RamdiskId",
-	"security_groups":   "Description.LaunchConfiguration.SecurityGroups",
-	"spot_price":        "Description.LaunchConfiguration.SpotPrice",
-	"title":             "Description.LaunchConfiguration.LaunchConfigurationName",
+	"name":                "Description.LaunchConfiguration.LaunchConfigurationName",
+	"platform_account_id": "metadata.IntegrationID",
+	"placement_tenancy":   "Description.LaunchConfiguration.PlacementTenancy",
+	"ramdisk_id":          "Description.LaunchConfiguration.RamdiskId",
+	"security_groups":     "Description.LaunchConfiguration.SecurityGroups",
+	"spot_price":          "Description.LaunchConfiguration.SpotPrice",
+	"title":               "Description.LaunchConfiguration.LaunchConfigurationName",
 }
 
 func ListAutoScalingLaunchConfiguration(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -34150,13 +34141,13 @@ var getAutoScalingLaunchConfigurationFilters = map[string]string{
 	"metadata_options_http_endpoint":          "Description.LaunchConfiguration.MetadataOptions.HttpEndpoint",
 	"metadata_options_http_tokens":            "Description.LaunchConfiguration.MetadataOptions.HttpTokens",
 	"metadata_options_put_response_hop_limit": "Description.LaunchConfiguration.MetadataOptions.HttpPutResponseHopLimit",
-	"name":              "description.LaunchConfiguration.LaunchConfigurationName",
-	"og_account_id":     "metadata.IntegrationID",
-	"placement_tenancy": "Description.LaunchConfiguration.PlacementTenancy",
-	"ramdisk_id":        "Description.LaunchConfiguration.RamdiskId",
-	"security_groups":   "Description.LaunchConfiguration.SecurityGroups",
-	"spot_price":        "Description.LaunchConfiguration.SpotPrice",
-	"title":             "Description.LaunchConfiguration.LaunchConfigurationName",
+	"name":                "description.LaunchConfiguration.LaunchConfigurationName",
+	"platform_account_id": "metadata.IntegrationID",
+	"placement_tenancy":   "Description.LaunchConfiguration.PlacementTenancy",
+	"ramdisk_id":          "Description.LaunchConfiguration.RamdiskId",
+	"security_groups":     "Description.LaunchConfiguration.SecurityGroups",
+	"spot_price":          "Description.LaunchConfiguration.SpotPrice",
+	"title":               "Description.LaunchConfiguration.LaunchConfigurationName",
 }
 
 func GetAutoScalingLaunchConfiguration(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -34311,7 +34302,7 @@ var listCertificateManagerCertificateFilters = map[string]string{
 	"key_algorithm":             "Description.Certificate.KeyAlgorithm",
 	"not_after":                 "Description.Certificate.NotAfter",
 	"not_before":                "Description.Certificate.NotBefore",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"renewal_eligibility":       "Description.Certificate.RenewalEligibility",
 	"revocation_reason":         "Description.Certificate.RevocationReason",
 	"revoked_at":                "Description.Certificate.RevokedAt",
@@ -34401,7 +34392,7 @@ var getCertificateManagerCertificateFilters = map[string]string{
 	"key_algorithm":             "Description.Certificate.KeyAlgorithm",
 	"not_after":                 "Description.Certificate.NotAfter",
 	"not_before":                "Description.Certificate.NotBefore",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"renewal_eligibility":       "Description.Certificate.RenewalEligibility",
 	"revocation_reason":         "Description.Certificate.RevocationReason",
 	"revoked_at":                "Description.Certificate.RevokedAt",
@@ -34574,7 +34565,7 @@ var listCloudTrailTrailFilters = map[string]string{
 	"log_file_validation_enabled":           "Description.Trail.LogFileValidationEnabled",
 	"log_group_arn":                         "Description.Trail.CloudWatchLogsLogGroupArn",
 	"name":                                  "Description.Trail.Name",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"s3_bucket_name":                        "Description.Trail.S3BucketName",
 	"s3_key_prefix":                         "Description.Trail.S3KeyPrefix",
 	"sns_topic_arn":                         "Description.Trail.SnsTopicARN",
@@ -34669,7 +34660,7 @@ var getCloudTrailTrailFilters = map[string]string{
 	"log_file_validation_enabled":           "Description.Trail.LogFileValidationEnabled",
 	"log_group_arn":                         "Description.Trail.CloudWatchLogsLogGroupArn",
 	"name":                                  "description.Trail.Name",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"s3_bucket_name":                        "Description.Trail.S3BucketName",
 	"s3_key_prefix":                         "Description.Trail.S3KeyPrefix",
 	"sns_topic_arn":                         "Description.Trail.SnsTopicARN",
@@ -34820,7 +34811,7 @@ var listCloudTrailChannelFilters = map[string]string{
 	"arn":                      "Description.Channel.ChannelArn",
 	"destinations":             "Description.Channel.Destinations",
 	"name":                     "Description.Channel.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"source":                   "Description.Channel.Source",
 	"source_config":            "Description.Channel.SourceConfig",
 	"title":                    "Description.Channel.Name",
@@ -34892,7 +34883,7 @@ var getCloudTrailChannelFilters = map[string]string{
 	"arn":                      "description.Channel.ChannelArn",
 	"destinations":             "Description.Channel.Destinations",
 	"name":                     "Description.Channel.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"source":                   "Description.Channel.Source",
 	"source_config":            "Description.Channel.SourceConfig",
 	"title":                    "Description.Channel.Name",
@@ -35039,7 +35030,7 @@ var listCloudTrailEventDataStoreFilters = map[string]string{
 	"created_timestamp":              "Description.EventDataStore.CreatedTimestamp",
 	"multi_region_enabled":           "Description.EventDataStore.MultiRegionEnabled",
 	"name":                           "Description.EventDataStore.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"organization_enabled":           "Description.EventDataStore.OrganizationEnabled",
 	"retention_period":               "Description.EventDataStore.RetentionPeriod",
 	"status":                         "Description.EventDataStore.Status",
@@ -35114,7 +35105,7 @@ var getCloudTrailEventDataStoreFilters = map[string]string{
 	"created_timestamp":              "Description.EventDataStore.CreatedTimestamp",
 	"multi_region_enabled":           "Description.EventDataStore.MultiRegionEnabled",
 	"name":                           "Description.EventDataStore.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"organization_enabled":           "Description.EventDataStore.OrganizationEnabled",
 	"retention_period":               "Description.EventDataStore.RetentionPeriod",
 	"status":                         "Description.EventDataStore.Status",
@@ -35259,17 +35250,17 @@ func (p CloudTrailImportPaginator) NextPage(ctx context.Context) ([]CloudTrailIm
 }
 
 var listCloudTrailImportFilters = map[string]string{
-	"created_timestamp": "Description.Import.CreatedTimestamp",
-	"destinations":      "Description.Import.Destinations",
-	"end_event_time":    "Description.Import.EndEventTime",
-	"import_id":         "Description.Import.ImportId",
-	"import_source":     "Description.Import.ImportSource",
-	"import_statistics": "Description.Import.ImportStatistics",
-	"import_status":     "description.Import.ImportStatus",
-	"og_account_id":     "metadata.IntegrationID",
-	"start_event_time":  "Description.Import.StartEventTime",
-	"title":             "Description.Import.ImportId",
-	"updated_timestamp": "Description.Import.UpdatedTimestamp",
+	"created_timestamp":   "Description.Import.CreatedTimestamp",
+	"destinations":        "Description.Import.Destinations",
+	"end_event_time":      "Description.Import.EndEventTime",
+	"import_id":           "Description.Import.ImportId",
+	"import_source":       "Description.Import.ImportSource",
+	"import_statistics":   "Description.Import.ImportStatistics",
+	"import_status":       "description.Import.ImportStatus",
+	"platform_account_id": "metadata.IntegrationID",
+	"start_event_time":    "Description.Import.StartEventTime",
+	"title":               "Description.Import.ImportId",
+	"updated_timestamp":   "Description.Import.UpdatedTimestamp",
 }
 
 func ListCloudTrailImport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -35333,17 +35324,17 @@ func ListCloudTrailImport(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getCloudTrailImportFilters = map[string]string{
-	"created_timestamp": "Description.Import.CreatedTimestamp",
-	"destinations":      "Description.Import.Destinations",
-	"end_event_time":    "Description.Import.EndEventTime",
-	"import_id":         "description.Import.ImportId",
-	"import_source":     "Description.Import.ImportSource",
-	"import_statistics": "Description.Import.ImportStatistics",
-	"import_status":     "Description.Import.ImportStatus",
-	"og_account_id":     "metadata.IntegrationID",
-	"start_event_time":  "Description.Import.StartEventTime",
-	"title":             "Description.Import.ImportId",
-	"updated_timestamp": "Description.Import.UpdatedTimestamp",
+	"created_timestamp":   "Description.Import.CreatedTimestamp",
+	"destinations":        "Description.Import.Destinations",
+	"end_event_time":      "Description.Import.EndEventTime",
+	"import_id":           "description.Import.ImportId",
+	"import_source":       "Description.Import.ImportSource",
+	"import_statistics":   "Description.Import.ImportStatistics",
+	"import_status":       "Description.Import.ImportStatus",
+	"platform_account_id": "metadata.IntegrationID",
+	"start_event_time":    "Description.Import.StartEventTime",
+	"title":               "Description.Import.ImportId",
+	"updated_timestamp":   "Description.Import.UpdatedTimestamp",
 }
 
 func GetCloudTrailImport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -35491,7 +35482,7 @@ var listCloudTrailQueryFilters = map[string]string{
 	"events_matched":           "Description.Query.QueryStatistics.EventsMatched",
 	"events_scanned":           "Description.Query.QueryStatistics.EventsScanned",
 	"execution_time_in_millis": "Description.Query.QueryStatistics.ExecutionTimeInMillis",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"query_id":                 "Description.Query.QueryId",
 	"query_status":             "description.Query.QueryStatus",
 	"query_string":             "Description.Query.QueryString",
@@ -35568,7 +35559,7 @@ var getCloudTrailQueryFilters = map[string]string{
 	"events_matched":           "Description.Query.QueryStatistics.EventsMatched",
 	"events_scanned":           "Description.Query.QueryStatistics.EventsScanned",
 	"execution_time_in_millis": "Description.Query.QueryStatistics.ExecutionTimeInMillis",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"query_id":                 "description.Query.QueryId",
 	"query_status":             "Description.Query.QueryStatus",
 	"query_string":             "Description.Query.QueryString",
@@ -35711,15 +35702,15 @@ func (p CloudTrailTrailEventPaginator) NextPage(ctx context.Context) ([]CloudTra
 }
 
 var listCloudTrailTrailEventFilters = map[string]string{
-	"access_key_id":   "UserIdentity.AccessKeyId",
-	"log_group_name":  "Description.LogGroupName",
-	"log_stream_name": "description.TrailEvent.LogStreamName",
-	"og_account_id":   "metadata.IntegrationID",
-	"timestamp":       "description.TrailEvent.Timestamp",
-	"timestamp_ms":    "Description.TrailEvent.Timestamp",
-	"user_identifier": "UserIdentity.Arn",
-	"user_type":       "UserIdentity.Type",
-	"username":        "UserIdentity.Username",
+	"access_key_id":       "UserIdentity.AccessKeyId",
+	"log_group_name":      "Description.LogGroupName",
+	"log_stream_name":     "description.TrailEvent.LogStreamName",
+	"platform_account_id": "metadata.IntegrationID",
+	"timestamp":           "description.TrailEvent.Timestamp",
+	"timestamp_ms":        "Description.TrailEvent.Timestamp",
+	"user_identifier":     "UserIdentity.Arn",
+	"user_type":           "UserIdentity.Type",
+	"username":            "UserIdentity.Username",
 }
 
 func ListCloudTrailTrailEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -35783,14 +35774,14 @@ func ListCloudTrailTrailEvent(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getCloudTrailTrailEventFilters = map[string]string{
-	"access_key_id":   "UserIdentity.AccessKeyId",
-	"log_group_name":  "Description.LogGroupName",
-	"log_stream_name": "Description.TrailEvent.LogStreamName",
-	"og_account_id":   "metadata.IntegrationID",
-	"timestamp_ms":    "Description.TrailEvent.Timestamp",
-	"user_identifier": "UserIdentity.Arn",
-	"user_type":       "UserIdentity.Type",
-	"username":        "UserIdentity.Username",
+	"access_key_id":       "UserIdentity.AccessKeyId",
+	"log_group_name":      "Description.LogGroupName",
+	"log_stream_name":     "Description.TrailEvent.LogStreamName",
+	"platform_account_id": "metadata.IntegrationID",
+	"timestamp_ms":        "Description.TrailEvent.Timestamp",
+	"user_identifier":     "UserIdentity.Arn",
+	"user_type":           "UserIdentity.Type",
+	"username":            "UserIdentity.Username",
 }
 
 func GetCloudTrailTrailEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -35935,7 +35926,7 @@ var listIAMAccountFilters = map[string]string{
 	"account_status":                      "Description.Account.Status",
 	"arn":                                 "Description.Account.Arn",
 	"name":                                "Description.Account.Name",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"organization_arn":                    "Description.Organization.Arn",
 	"organization_available_policy_types": "Description.Organization.AvailablePolicyTypes",
 	"organization_feature_set":            "Description.Organization.FeatureSet",
@@ -36013,7 +36004,7 @@ var getIAMAccountFilters = map[string]string{
 	"account_status":                      "Description.Account.Status",
 	"arn":                                 "Description.Account.Arn",
 	"name":                                "Description.Account.Name",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"organization_arn":                    "Description.Organization.Arn",
 	"organization_available_policy_types": "Description.Organization.AvailablePolicyTypes",
 	"organization_feature_set":            "Description.Organization.FeatureSet",
@@ -36163,7 +36154,7 @@ var listIAMAccessAdvisorFilters = map[string]string{
 	"last_authenticated":            "Description.ServiceLastAccessed.LastAuthenticated",
 	"last_authenticated_entity":     "Description.ServiceLastAccessed.LastAuthenticatedEntity",
 	"last_authenticated_region":     "Description.ServiceLastAccessed.LastAuthenticatedRegion",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"principal_arn":                 "Description.PrincipalArn",
 	"service_name":                  "Description.ServiceLastAccessed.ServiceName",
 	"service_namespace":             "Description.ServiceLastAccessed.ServiceNamespace",
@@ -36235,7 +36226,7 @@ var getIAMAccessAdvisorFilters = map[string]string{
 	"last_authenticated":            "Description.ServiceLastAccessed.LastAuthenticated",
 	"last_authenticated_entity":     "Description.ServiceLastAccessed.LastAuthenticatedEntity",
 	"last_authenticated_region":     "Description.ServiceLastAccessed.LastAuthenticatedRegion",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"principal_arn":                 "Description.PrincipalArn",
 	"service_name":                  "Description.ServiceLastAccessed.ServiceName",
 	"service_namespace":             "Description.ServiceLastAccessed.ServiceNamespace",
@@ -36395,7 +36386,7 @@ var listIAMAccountSummaryFilters = map[string]string{
 	"instance_profiles_quota":              "Description.AccountSummary.InstanceProfilesQuota",
 	"mfa_devices":                          "Description.AccountSummary.MFADevices",
 	"mfa_devices_in_use":                   "Description.AccountSummary.MFADevicesInUse",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"policies":                             "Description.AccountSummary.Policies",
 	"policies_quota":                       "Description.AccountSummary.PoliciesQuota",
 	"policy_size_quota":                    "Description.AccountSummary.PolicySizeQuota",
@@ -36491,7 +36482,7 @@ var getIAMAccountSummaryFilters = map[string]string{
 	"instance_profiles_quota":              "Description.AccountSummary.InstanceProfilesQuota",
 	"mfa_devices":                          "Description.AccountSummary.MFADevices",
 	"mfa_devices_in_use":                   "Description.AccountSummary.MFADevicesInUse",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"policies":                             "Description.AccountSummary.Policies",
 	"policies_quota":                       "Description.AccountSummary.PoliciesQuota",
 	"policy_size_quota":                    "Description.AccountSummary.PolicySizeQuota",
@@ -36651,7 +36642,7 @@ var listIAMAccessKeyFilters = map[string]string{
 	"access_key_last_used_region":  "Description.AccessKeyLastUsed.Region",
 	"access_key_last_used_service": "Description.AccessKeyLastUsed.ServiceName",
 	"create_date":                  "Description.AccessKey.CreateDate",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"status":                       "Description.AccessKey.Status",
 	"title":                        "Description.AccessKey.AccessKeyId",
 	"user_name":                    "Description.AccessKey.UserName",
@@ -36723,7 +36714,7 @@ var getIAMAccessKeyFilters = map[string]string{
 	"access_key_last_used_region":  "Description.AccessKeyLastUsed.Region",
 	"access_key_last_used_service": "Description.AccessKeyLastUsed.ServiceName",
 	"create_date":                  "Description.AccessKey.CreateDate",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"status":                       "Description.AccessKey.Status",
 	"title":                        "Description.AccessKey.AccessKeyId",
 	"user_name":                    "Description.AccessKey.UserName",
@@ -36865,12 +36856,12 @@ func (p IAMSSHPublicKeyPaginator) NextPage(ctx context.Context) ([]IAMSSHPublicK
 }
 
 var listIAMSSHPublicKeyFilters = map[string]string{
-	"og_account_id":     "metadata.IntegrationID",
-	"ssh_public_key_id": "Description.SSHPublicKeyKey.SSHPublicKeyId",
-	"status":            "Description.SSHPublicKeyKey.Status",
-	"title":             "Description.SSHPublicKeyKey.SSHPublicKeyId",
-	"update_date":       "Description.SSHPublicKeyKey.UploadDate",
-	"user_name":         "Description.SSHPublicKeyKey.UserName",
+	"platform_account_id": "metadata.IntegrationID",
+	"ssh_public_key_id":   "Description.SSHPublicKeyKey.SSHPublicKeyId",
+	"status":              "Description.SSHPublicKeyKey.Status",
+	"title":               "Description.SSHPublicKeyKey.SSHPublicKeyId",
+	"update_date":         "Description.SSHPublicKeyKey.UploadDate",
+	"user_name":           "Description.SSHPublicKeyKey.UserName",
 }
 
 func ListIAMSSHPublicKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -36934,12 +36925,12 @@ func ListIAMSSHPublicKey(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getIAMSSHPublicKeyFilters = map[string]string{
-	"og_account_id":     "metadata.IntegrationID",
-	"ssh_public_key_id": "Description.SSHPublicKeyKey.SSHPublicKeyId",
-	"status":            "Description.SSHPublicKeyKey.Status",
-	"title":             "Description.SSHPublicKeyKey.SSHPublicKeyId",
-	"update_date":       "Description.SSHPublicKeyKey.UploadDate",
-	"user_name":         "Description.SSHPublicKeyKey.UserName",
+	"platform_account_id": "metadata.IntegrationID",
+	"ssh_public_key_id":   "Description.SSHPublicKeyKey.SSHPublicKeyId",
+	"status":              "Description.SSHPublicKeyKey.Status",
+	"title":               "Description.SSHPublicKeyKey.SSHPublicKeyId",
+	"update_date":         "Description.SSHPublicKeyKey.UploadDate",
+	"user_name":           "Description.SSHPublicKeyKey.UserName",
 }
 
 func GetIAMSSHPublicKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -37083,7 +37074,7 @@ var listIAMAccountPasswordPolicyFilters = map[string]string{
 	"hard_expiry":                    "Description.PasswordPolicy.HardExpiry",
 	"max_password_age":               "Description.PasswordPolicy.MaxPasswordAge",
 	"minimum_password_length":        "Description.PasswordPolicy.MinimumPasswordLength",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"password_reuse_prevention":      "Description.PasswordPolicy.PasswordReusePrevention",
 	"require_lowercase_characters":   "Description.PasswordPolicy.RequireLowercaseCharacters",
 	"require_numbers":                "Description.PasswordPolicy.RequireNumbers",
@@ -37157,7 +37148,7 @@ var getIAMAccountPasswordPolicyFilters = map[string]string{
 	"hard_expiry":                    "Description.PasswordPolicy.HardExpiry",
 	"max_password_age":               "Description.PasswordPolicy.MaxPasswordAge",
 	"minimum_password_length":        "Description.PasswordPolicy.MinimumPasswordLength",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"password_reuse_prevention":      "Description.PasswordPolicy.PasswordReusePrevention",
 	"require_lowercase_characters":   "Description.PasswordPolicy.RequireLowercaseCharacters",
 	"require_numbers":                "Description.PasswordPolicy.RequireNumbers",
@@ -37309,7 +37300,7 @@ var listIAMUserFilters = map[string]string{
 	"login_profile":             "Description.LoginProfile",
 	"mfa_devices":               "Description.MFADevices",
 	"name":                      "Description.User.UserName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"password_last_used":        "Description.User.PasswordLastUsed",
 	"path":                      "Description.User.Path",
 	"permissions_boundary_arn":  "Description.User.PermissionsBoundary.PermissionsBoundaryArn",
@@ -37388,7 +37379,7 @@ var getIAMUserFilters = map[string]string{
 	"login_profile":             "Description.LoginProfile",
 	"mfa_devices":               "Description.MFADevices",
 	"name":                      "description.User.UserName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"password_last_used":        "Description.User.PasswordLastUsed",
 	"path":                      "Description.User.Path",
 	"permissions_boundary_arn":  "Description.User.PermissionsBoundary.PermissionsBoundaryArn",
@@ -37540,7 +37531,7 @@ var listIAMGroupFilters = map[string]string{
 	"group_id":             "Description.Group.GroupId",
 	"inline_policies":      "Description.InlinePolicies",
 	"name":                 "Description.Group.GroupName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"path":                 "Description.Group.Path",
 	"title":                "Description.Group.GroupName",
 	"users":                "Description.Users",
@@ -37613,7 +37604,7 @@ var getIAMGroupFilters = map[string]string{
 	"group_id":             "Description.Group.GroupId",
 	"inline_policies":      "Description.InlinePolicies",
 	"name":                 "description.Group.GroupName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"path":                 "Description.Group.Path",
 	"title":                "Description.Group.GroupName",
 	"users":                "Description.Users",
@@ -37763,7 +37754,7 @@ var listIAMRoleFilters = map[string]string{
 	"instance_profile_arns":     "Description.InstanceProfileArns",
 	"max_session_duration":      "Description.Role.MaxSessionDuration",
 	"name":                      "Description.Role.RoleName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"path":                      "Description.Role.Path",
 	"permissions_boundary_arn":  "Description.Role.PermissionsBoundary.PermissionsBoundaryArn",
 	"permissions_boundary_type": "Description.Role.PermissionsBoundary.PermissionsBoundaryType",
@@ -37843,7 +37834,7 @@ var getIAMRoleFilters = map[string]string{
 	"instance_profile_arns":     "Description.InstanceProfileArns",
 	"max_session_duration":      "Description.Role.MaxSessionDuration",
 	"name":                      "description.Role.RoleName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"path":                      "Description.Role.Path",
 	"permissions_boundary_arn":  "Description.Role.PermissionsBoundary.PermissionsBoundaryArn",
 	"permissions_boundary_type": "Description.Role.PermissionsBoundary.PermissionsBoundaryType",
@@ -37996,7 +37987,7 @@ var listIAMServerCertificateFilters = map[string]string{
 	"certificate_chain":       "Description.ServerCertificate.CertificateChain",
 	"expiration":              "Description.ServerCertificate.ServerCertificateMetadata.Expiration",
 	"name":                    "Description.ServerCertificate.ServerCertificateMetadata.ServerCertificateName",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"path":                    "Description.ServerCertificate.ServerCertificateMetadata.Path",
 	"server_certificate_id":   "Description.ServerCertificate.ServerCertificateMetadata.ServerCertificateId",
 	"tags":                    "Description.ServerCertificate.Tags",
@@ -38072,7 +38063,7 @@ var getIAMServerCertificateFilters = map[string]string{
 	"certificate_chain":       "Description.ServerCertificate.CertificateChain",
 	"expiration":              "Description.ServerCertificate.ServerCertificateMetadata.Expiration",
 	"name":                    "description.ServerCertificate.ServerCertificateMetadata.ServerCertificateName",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"path":                    "Description.ServerCertificate.ServerCertificateMetadata.Path",
 	"server_certificate_id":   "Description.ServerCertificate.ServerCertificateMetadata.ServerCertificateId",
 	"tags":                    "Description.ServerCertificate.Tags",
@@ -38223,7 +38214,7 @@ var listIAMPolicyFilters = map[string]string{
 	"default_version_id":               "Description.Policy.DefaultVersionId",
 	"is_attachable":                    "Description.Policy.IsAttachable",
 	"name":                             "Description.Policy.PolicyName",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"path":                             "Description.Policy.Path",
 	"permissions_boundary_usage_count": "Description.Policy.PermissionsBoundaryUsageCount",
 	"policy_id":                        "Description.Policy.PolicyId",
@@ -38299,7 +38290,7 @@ var getIAMPolicyFilters = map[string]string{
 	"default_version_id":               "Description.Policy.DefaultVersionId",
 	"is_attachable":                    "Description.Policy.IsAttachable",
 	"name":                             "Description.Policy.PolicyName",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"path":                             "Description.Policy.Path",
 	"permissions_boundary_usage_count": "Description.Policy.PermissionsBoundaryUsageCount",
 	"policy_id":                        "Description.Policy.PolicyId",
@@ -38460,7 +38451,7 @@ var listIAMCredentialReportFilters = map[string]string{
 	"cert_2_last_rotated":            "Description.CredentialReport.Cert2LastRotated",
 	"generated_time":                 "Description.CredentialReport.GeneratedTime",
 	"mfa_active":                     "Description.CredentialReport.MFAActive",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"password_last_changed":          "Description.CredentialReport.PasswordLastChanged",
 	"password_last_used":             "Description.CredentialReport.PasswordLastUsed",
 	"password_next_rotation":         "Description.CredentialReport.PasswordNextRotation",
@@ -38546,7 +38537,7 @@ var getIAMCredentialReportFilters = map[string]string{
 	"cert_2_last_rotated":            "Description.CredentialReport.Cert2LastRotated",
 	"generated_time":                 "Description.CredentialReport.GeneratedTime",
 	"mfa_active":                     "Description.CredentialReport.MFAActive",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"password_last_changed":          "Description.CredentialReport.PasswordLastChanged",
 	"password_last_used":             "Description.CredentialReport.PasswordLastUsed",
 	"password_next_rotation":         "Description.CredentialReport.PasswordNextRotation",
@@ -38691,14 +38682,14 @@ func (p IAMVirtualMFADevicePaginator) NextPage(ctx context.Context) ([]IAMVirtua
 }
 
 var listIAMVirtualMFADeviceFilters = map[string]string{
-	"enable_date":   "Description.VirtualMFADevice.EnableDate",
-	"og_account_id": "metadata.IntegrationID",
-	"serial_number": "Description.VirtualMFADevice.SerialNumber",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.VirtualMFADevice.SerialNumber",
-	"user":          "Description.VirtualMFADevice.User",
-	"user_id":       "Description.VirtualMFADevice.User.UserId",
-	"user_name":     "Description.VirtualMFADevice.User.UserName",
+	"enable_date":         "Description.VirtualMFADevice.EnableDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"serial_number":       "Description.VirtualMFADevice.SerialNumber",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.VirtualMFADevice.SerialNumber",
+	"user":                "Description.VirtualMFADevice.User",
+	"user_id":             "Description.VirtualMFADevice.User.UserId",
+	"user_name":           "Description.VirtualMFADevice.User.UserName",
 }
 
 func ListIAMVirtualMFADevice(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -38762,14 +38753,14 @@ func ListIAMVirtualMFADevice(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getIAMVirtualMFADeviceFilters = map[string]string{
-	"enable_date":   "Description.VirtualMFADevice.EnableDate",
-	"og_account_id": "metadata.IntegrationID",
-	"serial_number": "Description.VirtualMFADevice.SerialNumber",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.VirtualMFADevice.SerialNumber",
-	"user":          "Description.VirtualMFADevice.User",
-	"user_id":       "Description.VirtualMFADevice.User.UserId",
-	"user_name":     "Description.VirtualMFADevice.User.UserName",
+	"enable_date":         "Description.VirtualMFADevice.EnableDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"serial_number":       "Description.VirtualMFADevice.SerialNumber",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.VirtualMFADevice.SerialNumber",
+	"user":                "Description.VirtualMFADevice.User",
+	"user_id":             "Description.VirtualMFADevice.User.UserId",
+	"user_name":           "Description.VirtualMFADevice.User.UserName",
 }
 
 func GetIAMVirtualMFADevice(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -38908,11 +38899,11 @@ func (p IAMPolicyAttachmentPaginator) NextPage(ctx context.Context) ([]IAMPolicy
 }
 
 var listIAMPolicyAttachmentFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"policy_arn":    "Description.PolicyArn",
-	"policy_groups": "Description.PolicyGroups",
-	"policy_roles":  "Description.PolicyRoles",
-	"policy_users":  "Description.PolicyUsers",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy_arn":          "Description.PolicyArn",
+	"policy_groups":       "Description.PolicyGroups",
+	"policy_roles":        "Description.PolicyRoles",
+	"policy_users":        "Description.PolicyUsers",
 }
 
 func ListIAMPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -38976,12 +38967,12 @@ func ListIAMPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getIAMPolicyAttachmentFilters = map[string]string{
-	"is_attached":   "description.IsAttached",
-	"og_account_id": "metadata.IntegrationID",
-	"policy_arn":    "Description.PolicyArn",
-	"policy_groups": "Description.PolicyGroups",
-	"policy_roles":  "Description.PolicyRoles",
-	"policy_users":  "Description.PolicyUsers",
+	"is_attached":         "description.IsAttached",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy_arn":          "Description.PolicyArn",
+	"policy_groups":       "Description.PolicyGroups",
+	"policy_roles":        "Description.PolicyRoles",
+	"policy_users":        "Description.PolicyUsers",
 }
 
 func GetIAMPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -39122,7 +39113,7 @@ func (p IAMSamlProviderPaginator) NextPage(ctx context.Context) ([]IAMSamlProvid
 var listIAMSamlProviderFilters = map[string]string{
 	"arn":                    "ARN",
 	"create_date":            "Description.SamlProvider.CreateDate",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"saml_metadata_document": "Description.SamlProvider.SAMLMetadataDocument",
 	"tags_src":               "Description.SamlProvider.Tags",
 	"valid_until":            "Description.SamlProvider.ValidUntil",
@@ -39191,7 +39182,7 @@ func ListIAMSamlProvider(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 var getIAMSamlProviderFilters = map[string]string{
 	"arn":                    "ARN",
 	"create_date":            "Description.SamlProvider.CreateDate",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"saml_metadata_document": "Description.SamlProvider.SAMLMetadataDocument",
 	"tags_src":               "Description.SamlProvider.Tags",
 	"valid_until":            "Description.SamlProvider.ValidUntil",
@@ -39334,7 +39325,7 @@ func (p IAMServiceSpecificCredentialPaginator) NextPage(ctx context.Context) ([]
 
 var listIAMServiceSpecificCredentialFilters = map[string]string{
 	"create_date":                    "Description.ServiceSpecificCredential.CreateDate",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"service_name":                   "description.ServiceSpecificCredential.ServiceName",
 	"service_specific_credential_id": "Description.ServiceSpecificCredential.ServiceSpecificCredentialId",
 	"service_user_name":              "Description.ServiceSpecificCredential.ServiceUserName",
@@ -39405,7 +39396,7 @@ func ListIAMServiceSpecificCredential(ctx context.Context, d *plugin.QueryData, 
 
 var getIAMServiceSpecificCredentialFilters = map[string]string{
 	"create_date":                    "Description.ServiceSpecificCredential.CreateDate",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"service_name":                   "Description.ServiceSpecificCredential.ServiceName",
 	"service_specific_credential_id": "Description.ServiceSpecificCredential.ServiceSpecificCredentialId",
 	"service_user_name":              "Description.ServiceSpecificCredential.ServiceUserName",
@@ -39550,12 +39541,12 @@ func (p IAMOpenIdConnectProviderPaginator) NextPage(ctx context.Context) ([]IAMO
 }
 
 var listIAMOpenIdConnectProviderFilters = map[string]string{
-	"client_id_list":  "Description.ClientIDList",
-	"create_date":     "Description.CreateDate",
-	"og_account_id":   "metadata.IntegrationID",
-	"tags_src":        "Description.Tags",
-	"thumbprint_list": "Description.ThumbprintList",
-	"url":             "Description.URL",
+	"client_id_list":      "Description.ClientIDList",
+	"create_date":         "Description.CreateDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.Tags",
+	"thumbprint_list":     "Description.ThumbprintList",
+	"url":                 "Description.URL",
 }
 
 func ListIAMOpenIdConnectProvider(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -39619,12 +39610,12 @@ func ListIAMOpenIdConnectProvider(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getIAMOpenIdConnectProviderFilters = map[string]string{
-	"client_id_list":  "Description.ClientIDList",
-	"create_date":     "Description.CreateDate",
-	"og_account_id":   "metadata.IntegrationID",
-	"tags_src":        "Description.Tags",
-	"thumbprint_list": "Description.ThumbprintList",
-	"url":             "Description.URL",
+	"client_id_list":      "Description.ClientIDList",
+	"create_date":         "Description.CreateDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags_src":            "Description.Tags",
+	"thumbprint_list":     "Description.ThumbprintList",
+	"url":                 "Description.URL",
 }
 
 func GetIAMOpenIdConnectProvider(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -39805,7 +39796,7 @@ var listRDSDBClusterFilters = map[string]string{
 	"master_user_name":                    "Description.DBCluster.MasterUsername",
 	"members":                             "Description.DBCluster.DBClusterMembers",
 	"multi_az":                            "Description.DBCluster.MultiAZ",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"option_group_memberships":            "Description.DBCluster.DBClusterOptionGroupMemberships",
 	"pending_maintenance_actions":         "Description.PendingMaintenanceActions",
 	"percent_progress":                    "Description.DBCluster.PercentProgress",
@@ -39925,7 +39916,7 @@ var getRDSDBClusterFilters = map[string]string{
 	"master_user_name":                    "Description.DBCluster.MasterUsername",
 	"members":                             "Description.DBCluster.DBClusterMembers",
 	"multi_az":                            "Description.DBCluster.MultiAZ",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"option_group_memberships":            "Description.DBCluster.DBClusterOptionGroupMemberships",
 	"pending_maintenance_actions":         "Description.PendingMaintenanceActions",
 	"percent_progress":                    "Description.DBCluster.PercentProgress",
@@ -40082,7 +40073,7 @@ var listRDSDBClusterParameterGroupFilters = map[string]string{
 	"db_parameter_group_family": "Description.DBClusterParameterGroup.DBParameterGroupFamily",
 	"description":               "Description.DBClusterParameterGroup.Description",
 	"name":                      "Description.DBClusterParameterGroup.DBClusterParameterGroupName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"parameters":                "Description.Parameters",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.DBClusterParameterGroup.DBClusterParameterGroupName",
@@ -40153,7 +40144,7 @@ var getRDSDBClusterParameterGroupFilters = map[string]string{
 	"db_parameter_group_family": "Description.DBClusterParameterGroup.DBParameterGroupFamily",
 	"description":               "Description.DBClusterParameterGroup.Description",
 	"name":                      "description.DBClusterParameterGroup.DBClusterParameterGroupName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"parameters":                "Description.Parameters",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.DBClusterParameterGroup.DBClusterParameterGroupName",
@@ -40301,7 +40292,7 @@ var listRDSOptionGroupFilters = map[string]string{
 	"engine_name":          "description.OptionGroup.EngineName",
 	"major_engine_version": "description.OptionGroup.MajorEngineVersion",
 	"name":                 "Description.OptionGroup.OptionGroupName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"options":              "Description.OptionGroup.Options",
 	"tags_src":             "Description.Tags.TagList",
 	"title":                "Description.OptionGroup.OptionGroupName",
@@ -40375,7 +40366,7 @@ var getRDSOptionGroupFilters = map[string]string{
 	"engine_name":          "Description.OptionGroup.EngineName",
 	"major_engine_version": "Description.OptionGroup.MajorEngineVersion",
 	"name":                 "description.OptionGroup.OptionGroupName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"options":              "Description.OptionGroup.Options",
 	"tags_src":             "Description.Tags.TagList",
 	"title":                "Description.OptionGroup.OptionGroupName",
@@ -40522,7 +40513,7 @@ var listRDSDBParameterGroupFilters = map[string]string{
 	"db_parameter_group_family": "Description.DBParameterGroup.DBParameterGroupFamily",
 	"description":               "Description.DBParameterGroup.Description",
 	"name":                      "Description.DBParameterGroup.DBParameterGroupName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"parameters":                "Description.Parameters",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.DBParameterGroup.DBParameterGroupName",
@@ -40593,7 +40584,7 @@ var getRDSDBParameterGroupFilters = map[string]string{
 	"db_parameter_group_family": "Description.DBParameterGroup.DBParameterGroupFamily",
 	"description":               "Description.DBParameterGroup.Description",
 	"name":                      "description.DBParameterGroup.DBParameterGroupName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"parameters":                "Description.Parameters",
 	"tags_src":                  "Description.Tags",
 	"title":                     "Description.DBParameterGroup.DBParameterGroupName",
@@ -40743,7 +40734,7 @@ var listRDSDBProxyFilters = map[string]string{
 	"endpoint":               "Description.DBProxy.Endpoint",
 	"engine_family":          "Description.DBProxy.EngineFamily",
 	"idle_client_timeout":    "Description.DBProxy.IdleClientTimeout",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"require_tls":            "Description.DBProxy.RequireTLS",
 	"role_arn":               "Description.DBProxy.RoleArn",
 	"status":                 "Description.DBProxy.Status",
@@ -40824,7 +40815,7 @@ var getRDSDBProxyFilters = map[string]string{
 	"endpoint":               "Description.DBProxy.Endpoint",
 	"engine_family":          "Description.DBProxy.EngineFamily",
 	"idle_client_timeout":    "Description.DBProxy.IdleClientTimeout",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"require_tls":            "Description.DBProxy.RequireTLS",
 	"role_arn":               "Description.DBProxy.RoleArn",
 	"status":                 "Description.DBProxy.Status",
@@ -40972,15 +40963,15 @@ func (p RDSDBSubnetGroupPaginator) NextPage(ctx context.Context) ([]RDSDBSubnetG
 }
 
 var listRDSDBSubnetGroupFilters = map[string]string{
-	"arn":           "Description.DBSubnetGroup.DBSubnetGroupArn",
-	"description":   "Description.DBSubnetGroup.DBSubnetGroupDescription",
-	"name":          "Description.DBSubnetGroup.DBSubnetGroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.DBSubnetGroup.SubnetGroupStatus",
-	"subnets":       "Description.DBSubnetGroup.Subnets",
-	"tags_src":      "Description.Tags.TagList",
-	"title":         "Description.DBSubnetGroup.DBSubnetGroupName",
-	"vpc_id":        "Description.DBSubnetGroup.VpcId",
+	"arn":                 "Description.DBSubnetGroup.DBSubnetGroupArn",
+	"description":         "Description.DBSubnetGroup.DBSubnetGroupDescription",
+	"name":                "Description.DBSubnetGroup.DBSubnetGroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.DBSubnetGroup.SubnetGroupStatus",
+	"subnets":             "Description.DBSubnetGroup.Subnets",
+	"tags_src":            "Description.Tags.TagList",
+	"title":               "Description.DBSubnetGroup.DBSubnetGroupName",
+	"vpc_id":              "Description.DBSubnetGroup.VpcId",
 }
 
 func ListRDSDBSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -41044,15 +41035,15 @@ func ListRDSDBSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getRDSDBSubnetGroupFilters = map[string]string{
-	"arn":           "Description.DBSubnetGroup.DBSubnetGroupArn",
-	"description":   "Description.DBSubnetGroup.DBSubnetGroupDescription",
-	"name":          "description.DBSubnetGroup.DBSubnetGroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.DBSubnetGroup.SubnetGroupStatus",
-	"subnets":       "Description.DBSubnetGroup.Subnets",
-	"tags_src":      "Description.Tags.TagList",
-	"title":         "Description.DBSubnetGroup.DBSubnetGroupName",
-	"vpc_id":        "Description.DBSubnetGroup.VpcId",
+	"arn":                 "Description.DBSubnetGroup.DBSubnetGroupArn",
+	"description":         "Description.DBSubnetGroup.DBSubnetGroupDescription",
+	"name":                "description.DBSubnetGroup.DBSubnetGroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.DBSubnetGroup.SubnetGroupStatus",
+	"subnets":             "Description.DBSubnetGroup.Subnets",
+	"tags_src":            "Description.Tags.TagList",
+	"title":               "Description.DBSubnetGroup.DBSubnetGroupName",
+	"vpc_id":              "Description.DBSubnetGroup.VpcId",
 }
 
 func GetRDSDBSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -41205,7 +41196,7 @@ var listRDSDBClusterSnapshotFilters = map[string]string{
 	"kms_key_id":                          "Description.DBClusterSnapshot.KmsKeyId",
 	"license_model":                       "Description.DBClusterSnapshot.LicenseModel",
 	"master_user_name":                    "Description.DBClusterSnapshot.MasterUsername",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"percent_progress":                    "Description.DBClusterSnapshot.PercentProgress",
 	"port":                                "Description.DBClusterSnapshot.Port",
 	"source_db_cluster_snapshot_arn":      "Description.DBClusterSnapshot.SourceDBClusterSnapshotArn",
@@ -41292,7 +41283,7 @@ var getRDSDBClusterSnapshotFilters = map[string]string{
 	"kms_key_id":                          "Description.DBClusterSnapshot.KmsKeyId",
 	"license_model":                       "Description.DBClusterSnapshot.LicenseModel",
 	"master_user_name":                    "Description.DBClusterSnapshot.MasterUsername",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"percent_progress":                    "Description.DBClusterSnapshot.PercentProgress",
 	"port":                                "Description.DBClusterSnapshot.Port",
 	"source_db_cluster_snapshot_arn":      "Description.DBClusterSnapshot.SourceDBClusterSnapshotArn",
@@ -41445,7 +41436,7 @@ var listRDSDBEventSubscriptionFilters = map[string]string{
 	"customer_aws_id":       "Description.EventSubscription.CustomerAwsId",
 	"enabled":               "Description.EventSubscription.Enabled",
 	"event_categories_list": "Description.EventSubscription.EventCategoriesList",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"sns_topic_arn":         "Description.EventSubscription.SnsTopicArn",
 	"source_ids_list":       "Description.EventSubscription.SourceIdsList",
 	"source_type":           "Description.EventSubscription.SourceType",
@@ -41519,7 +41510,7 @@ var getRDSDBEventSubscriptionFilters = map[string]string{
 	"customer_aws_id":       "Description.EventSubscription.CustomerAwsId",
 	"enabled":               "Description.EventSubscription.Enabled",
 	"event_categories_list": "Description.EventSubscription.EventCategoriesList",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"sns_topic_arn":         "Description.EventSubscription.SnsTopicArn",
 	"source_ids_list":       "Description.EventSubscription.SourceIdsList",
 	"source_type":           "Description.EventSubscription.SourceType",
@@ -41705,7 +41696,7 @@ var listRDSDBInstanceFilters = map[string]string{
 	"monitoring_role_arn":                        "Description.DBInstance.MonitoringRoleArn",
 	"multi_az":                                   "Description.DBInstance.MultiAZ",
 	"nchar_character_set_name":                   "Description.DBInstance.NcharCharacterSetName",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"option_group_memberships":                   "Description.DBInstance.OptionGroupMemberships",
 	"pending_maintenance_actions":                "Description.PendingMaintenance",
 	"performance_insights_enabled":               "Description.DBInstance.PerformanceInsightsEnabled",
@@ -41840,7 +41831,7 @@ var getRDSDBInstanceFilters = map[string]string{
 	"monitoring_role_arn":                        "Description.DBInstance.MonitoringRoleArn",
 	"multi_az":                                   "Description.DBInstance.MultiAZ",
 	"nchar_character_set_name":                   "Description.DBInstance.NcharCharacterSetName",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"option_group_memberships":                   "Description.DBInstance.OptionGroupMemberships",
 	"pending_maintenance_actions":                "Description.PendingMaintenance",
 	"performance_insights_enabled":               "Description.DBInstance.PerformanceInsightsEnabled",
@@ -42025,7 +42016,7 @@ var listRDSDBSnapshotFilters = map[string]string{
 	"kms_key_id":                          "Description.DBSnapshot.KmsKeyId",
 	"license_model":                       "Description.DBSnapshot.LicenseModel",
 	"master_user_name":                    "Description.DBSnapshot.MasterUsername",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"option_group_name":                   "Description.DBSnapshot.OptionGroupName",
 	"percent_progress":                    "Description.DBSnapshot.PercentProgress",
 	"port":                                "Description.DBSnapshot.Port",
@@ -42120,7 +42111,7 @@ var getRDSDBSnapshotFilters = map[string]string{
 	"kms_key_id":                          "Description.DBSnapshot.KmsKeyId",
 	"license_model":                       "Description.DBSnapshot.LicenseModel",
 	"master_user_name":                    "Description.DBSnapshot.MasterUsername",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"option_group_name":                   "Description.DBSnapshot.OptionGroupName",
 	"percent_progress":                    "Description.DBSnapshot.PercentProgress",
 	"port":                                "Description.DBSnapshot.Port",
@@ -42275,7 +42266,7 @@ func (p RDSGlobalClusterPaginator) NextPage(ctx context.Context) ([]RDSGlobalClu
 var listRDSGlobalClusterFilters = map[string]string{
 	"global_cluster_arn":        "Description.GlobalCluster.GlobalClusterArn",
 	"global_cluster_identifier": "Description.GlobalCluster.GlobalClusterIdentifier",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"title":                     "Description.GlobalCluster.GlobalClusterIdentifier",
 }
 
@@ -42342,7 +42333,7 @@ func ListRDSGlobalCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 var getRDSGlobalClusterFilters = map[string]string{
 	"global_cluster_arn":        "Description.GlobalCluster.GlobalClusterArn",
 	"global_cluster_identifier": "description.DBGlobalCluster.GlobalClusterIdentifier",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"title":                     "Description.GlobalCluster.GlobalClusterIdentifier",
 }
 
@@ -42491,7 +42482,7 @@ var listRDSReservedDBInstanceFilters = map[string]string{
 	"lease_id":                          "description.ReservedDBInstance.LeaseId",
 	"multi_az":                          "description.ReservedDBInstance.MultiAZ",
 	"offering_type":                     "description.ReservedDBInstance.OfferingType",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"product_description":               "Description.ReservedDBInstance.ProductDescription",
 	"recurring_charges":                 "Description.ReservedDBInstance.RecurringCharges",
 	"reserved_db_instance_id":           "Description.ReservedDBInstance.ReservedDBInstanceId",
@@ -42572,7 +42563,7 @@ var getRDSReservedDBInstanceFilters = map[string]string{
 	"lease_id":                          "Description.ReservedDBInstance.LeaseId",
 	"multi_az":                          "Description.ReservedDBInstance.MultiAZ",
 	"offering_type":                     "Description.ReservedDBInstance.OfferingType",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"product_description":               "Description.ReservedDBInstance.ProductDescription",
 	"recurring_charges":                 "Description.ReservedDBInstance.RecurringCharges",
 	"reserved_db_instance_id":           "description.ReservedDBInstance.ReservedDBInstanceId",
@@ -42737,7 +42728,7 @@ var listRDSDBInstanceAutomatedBackupFilters = map[string]string{
 	"kms_key_id":                                 "Description.InstanceAutomatedBackup.KmsKeyId",
 	"license_model":                              "Description.InstanceAutomatedBackup.LicenseModel",
 	"master_username":                            "Description.InstanceAutomatedBackup.MasterUsername",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"option_group_name":                          "Description.InstanceAutomatedBackup.OptionGroupName",
 	"port":                                       "Description.InstanceAutomatedBackup.Port",
 	"restore_window":                             "Description.InstanceAutomatedBackup.RestoreWindow",
@@ -42829,7 +42820,7 @@ var getRDSDBInstanceAutomatedBackupFilters = map[string]string{
 	"kms_key_id":                                 "Description.InstanceAutomatedBackup.KmsKeyId",
 	"license_model":                              "Description.InstanceAutomatedBackup.LicenseModel",
 	"master_username":                            "Description.InstanceAutomatedBackup.MasterUsername",
-	"og_account_id":                              "metadata.IntegrationID",
+	"platform_account_id":                        "metadata.IntegrationID",
 	"option_group_name":                          "Description.InstanceAutomatedBackup.OptionGroupName",
 	"port":                                       "Description.InstanceAutomatedBackup.Port",
 	"restore_window":                             "Description.InstanceAutomatedBackup.RestoreWindow",
@@ -43516,7 +43507,7 @@ var listRedshiftClusterFilters = map[string]string{
 	"next_maintenance_window_start_time":          "Description.Cluster.NextMaintenanceWindowStartTime",
 	"node_type":                                   "Description.Cluster.NodeType",
 	"number_of_nodes":                             "Description.Cluster.NumberOfNodes",
-	"og_account_id":                               "metadata.IntegrationID",
+	"platform_account_id":                         "metadata.IntegrationID",
 	"pending_actions":                             "Description.Cluster.PendingActions",
 	"pending_modified_values":                     "Description.Cluster.PendingModifiedValues",
 	"preferred_maintenance_window":                "Description.Cluster.PreferredMaintenanceWindow",
@@ -43632,7 +43623,7 @@ var getRedshiftClusterFilters = map[string]string{
 	"next_maintenance_window_start_time":          "Description.Cluster.NextMaintenanceWindowStartTime",
 	"node_type":                                   "Description.Cluster.NodeType",
 	"number_of_nodes":                             "Description.Cluster.NumberOfNodes",
-	"og_account_id":                               "metadata.IntegrationID",
+	"platform_account_id":                         "metadata.IntegrationID",
 	"pending_actions":                             "Description.Cluster.PendingActions",
 	"pending_modified_values":                     "Description.Cluster.PendingModifiedValues",
 	"preferred_maintenance_window":                "Description.Cluster.PreferredMaintenanceWindow",
@@ -43788,7 +43779,7 @@ var listRedshiftEventSubscriptionFilters = map[string]string{
 	"customer_aws_id":            "Description.EventSubscription.CustomerAwsId",
 	"enabled":                    "Description.EventSubscription.Enabled",
 	"event_categories_list":      "Description.EventSubscription.EventCategoriesList",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"severity":                   "Description.EventSubscription.Severity",
 	"sns_topic_arn":              "Description.EventSubscription.SnsTopicArn",
 	"source_ids_list":            "Description.EventSubscription.SourceIdsList",
@@ -43864,7 +43855,7 @@ var getRedshiftEventSubscriptionFilters = map[string]string{
 	"customer_aws_id":            "Description.EventSubscription.CustomerAwsId",
 	"enabled":                    "Description.EventSubscription.Enabled",
 	"event_categories_list":      "Description.EventSubscription.EventCategoriesList",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"severity":                   "Description.EventSubscription.Severity",
 	"sns_topic_arn":              "Description.EventSubscription.SnsTopicArn",
 	"source_ids_list":            "Description.EventSubscription.SourceIdsList",
@@ -44017,7 +44008,7 @@ var listRedshiftServerlessWorkgroupFilters = map[string]string{
 	"endpoint":             "Description.Workgroup.Endpoint",
 	"enhanced_vpc_routing": "Description.Workgroup.EnhancedVpcRouting",
 	"namespace_name":       "Description.Workgroup.NamespaceName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"publicly_accessible":  "Description.Workgroup.PubliclyAccessible",
 	"security_group_ids":   "Description.Workgroup.SecurityGroupIds",
 	"status":               "Description.Workgroup.Status",
@@ -44096,7 +44087,7 @@ var getRedshiftServerlessWorkgroupFilters = map[string]string{
 	"endpoint":             "Description.Workgroup.Endpoint",
 	"enhanced_vpc_routing": "Description.Workgroup.EnhancedVpcRouting",
 	"namespace_name":       "Description.Workgroup.NamespaceName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"publicly_accessible":  "Description.Workgroup.PubliclyAccessible",
 	"security_group_ids":   "Description.Workgroup.SecurityGroupIds",
 	"status":               "Description.Workgroup.Status",
@@ -44244,13 +44235,13 @@ func (p RedshiftClusterParameterGroupPaginator) NextPage(ctx context.Context) ([
 }
 
 var listRedshiftClusterParameterGroupFilters = map[string]string{
-	"description":   "Description.ClusterParameterGroup.Description",
-	"family":        "Description.ClusterParameterGroup.ParameterGroupFamily",
-	"name":          "Description.ClusterParameterGroup.ParameterGroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"parameters":    "Description.Parameters",
-	"tags_src":      "Description.ClusterParameterGroup.Tags",
-	"title":         "Description.ClusterParameterGroup.ParameterGroupName",
+	"description":         "Description.ClusterParameterGroup.Description",
+	"family":              "Description.ClusterParameterGroup.ParameterGroupFamily",
+	"name":                "Description.ClusterParameterGroup.ParameterGroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"parameters":          "Description.Parameters",
+	"tags_src":            "Description.ClusterParameterGroup.Tags",
+	"title":               "Description.ClusterParameterGroup.ParameterGroupName",
 }
 
 func ListRedshiftClusterParameterGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -44314,13 +44305,13 @@ func ListRedshiftClusterParameterGroup(ctx context.Context, d *plugin.QueryData,
 }
 
 var getRedshiftClusterParameterGroupFilters = map[string]string{
-	"description":   "Description.ClusterParameterGroup.Description",
-	"family":        "Description.ClusterParameterGroup.ParameterGroupFamily",
-	"name":          "description.ClusterParameterGroup.ParameterGroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"parameters":    "Description.Parameters",
-	"tags_src":      "Description.ClusterParameterGroup.Tags",
-	"title":         "Description.ClusterParameterGroup.ParameterGroupName",
+	"description":         "Description.ClusterParameterGroup.Description",
+	"family":              "Description.ClusterParameterGroup.ParameterGroupFamily",
+	"name":                "description.ClusterParameterGroup.ParameterGroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"parameters":          "Description.Parameters",
+	"tags_src":            "Description.ClusterParameterGroup.Tags",
+	"title":               "Description.ClusterParameterGroup.ParameterGroupName",
 }
 
 func GetRedshiftClusterParameterGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -44481,7 +44472,7 @@ var listRedshiftSnapshotFilters = map[string]string{
 	"master_username":                  "Description.Snapshot.MasterUsername",
 	"node_type":                        "Description.Snapshot.NodeType",
 	"number_of_nodes":                  "Description.Snapshot.NumberOfNodes",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"owner_account":                    "Description.Snapshot.OwnerAccount",
 	"port":                             "Description.Snapshot.Port",
 	"restorable_node_types":            "Description.Snapshot.RestorableNodeTypes",
@@ -44580,7 +44571,7 @@ var getRedshiftSnapshotFilters = map[string]string{
 	"master_username":                  "Description.Snapshot.MasterUsername",
 	"node_type":                        "Description.Snapshot.NodeType",
 	"number_of_nodes":                  "Description.Snapshot.NumberOfNodes",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"owner_account":                    "Description.Snapshot.OwnerAccount",
 	"port":                             "Description.Snapshot.Port",
 	"restorable_node_types":            "Description.Snapshot.RestorableNodeTypes",
@@ -44742,7 +44733,7 @@ var listRedshiftServerlessNamespaceFilters = map[string]string{
 	"namespace_arn":        "Description.Namespace.NamespaceArn",
 	"namespace_id":         "Description.Namespace.NamespaceId",
 	"namespace_name":       "Description.Namespace.NamespaceName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"status":               "Description.Namespace.Status",
 	"tags_src":             "Description.Tags",
 	"title":                "Description.Namespace.NamespaceName",
@@ -44819,7 +44810,7 @@ var getRedshiftServerlessNamespaceFilters = map[string]string{
 	"namespace_arn":        "Description.Namespace.NamespaceArn",
 	"namespace_id":         "Description.Namespace.NamespaceId",
 	"namespace_name":       "description.Namespace.NamespaceName",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"status":               "Description.Namespace.Status",
 	"tags_src":             "Description.Tags",
 	"title":                "Description.Namespace.NamespaceName",
@@ -44961,10 +44952,10 @@ func (p RedshiftServerlessSnapshotPaginator) NextPage(ctx context.Context) ([]Re
 }
 
 var listRedshiftServerlessSnapshotFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"snapshot_arn":  "Description.Snapshot.SnapshotArn",
-	"snapshot_name": "Description.Snapshot.SnapshotName",
-	"title":         "Description.Snapshot.SnapshotName",
+	"platform_account_id": "metadata.IntegrationID",
+	"snapshot_arn":        "Description.Snapshot.SnapshotArn",
+	"snapshot_name":       "Description.Snapshot.SnapshotName",
+	"title":               "Description.Snapshot.SnapshotName",
 }
 
 func ListRedshiftServerlessSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -45028,10 +45019,10 @@ func ListRedshiftServerlessSnapshot(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getRedshiftServerlessSnapshotFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"snapshot_arn":  "Description.Snapshot.SnapshotArn",
-	"snapshot_name": "description.Snapshot.SnapshotName",
-	"title":         "Description.Snapshot.SnapshotName",
+	"platform_account_id": "metadata.IntegrationID",
+	"snapshot_arn":        "Description.Snapshot.SnapshotArn",
+	"snapshot_name":       "description.Snapshot.SnapshotName",
+	"title":               "Description.Snapshot.SnapshotName",
 }
 
 func GetRedshiftServerlessSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -45172,7 +45163,7 @@ func (p RedshiftSubnetGroupPaginator) NextPage(ctx context.Context) ([]RedshiftS
 var listRedshiftSubnetGroupFilters = map[string]string{
 	"cluster_subnet_group_name": "Description.ClusterSubnetGroup.ClusterSubnetGroupName",
 	"description":               "Description.ClusterSubnetGroup.Description",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"subnet_group_status":       "Description.ClusterSubnetGroup.SubnetGroupStatus",
 	"subnets":                   "Description.ClusterSubnetGroup.Subnets",
 	"tags_src":                  "Description.ClusterSubnetGroup.Tags",
@@ -45243,7 +45234,7 @@ func ListRedshiftSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin
 var getRedshiftSubnetGroupFilters = map[string]string{
 	"cluster_subnet_group_name": "description.ClusterSubnetGroup.ClusterSubnetGroupName",
 	"description":               "Description.ClusterSubnetGroup.Description",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"subnet_group_status":       "Description.ClusterSubnetGroup.SubnetGroupStatus",
 	"subnets":                   "Description.ClusterSubnetGroup.Subnets",
 	"tags_src":                  "Description.ClusterSubnetGroup.Tags",
@@ -45401,7 +45392,7 @@ var listSNSTopicFilters = map[string]string{
 	"lambda_failure_feedback_role_arn":      "Description.Attributes.LambdaFailureFeedbackRoleArn",
 	"lambda_success_feedback_role_arn":      "Description.Attributes.LambdaSuccessFeedbackRoleArn",
 	"lambda_success_feedback_sample_rate":   "Description.Attributes.LambdaSuccessFeedbackSampleRate",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"owner":                                 "Description.Attributes.Owner",
 	"sqs_failure_feedback_role_arn":         "Description.Attributes.SQSFailureFeedbackRoleArn",
 	"sqs_success_feedback_role_arn":         "Description.Attributes.SQSSuccessFeedbackRoleArn",
@@ -45488,7 +45479,7 @@ var getSNSTopicFilters = map[string]string{
 	"lambda_failure_feedback_role_arn":      "Description.Attributes.LambdaFailureFeedbackRoleArn",
 	"lambda_success_feedback_role_arn":      "Description.Attributes.LambdaSuccessFeedbackRoleArn",
 	"lambda_success_feedback_sample_rate":   "Description.Attributes.LambdaSuccessFeedbackSampleRate",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"owner":                                 "Description.Attributes.Owner",
 	"sqs_failure_feedback_role_arn":         "Description.Attributes.SQSFailureFeedbackRoleArn",
 	"sqs_success_feedback_role_arn":         "Description.Attributes.SQSSuccessFeedbackRoleArn",
@@ -45638,7 +45629,7 @@ func (p SNSSubscriptionPaginator) NextPage(ctx context.Context) ([]SNSSubscripti
 var listSNSSubscriptionFilters = map[string]string{
 	"confirmation_was_authenticated": "Description.Attributes.ConfirmationWasAuthenticated",
 	"endpoint":                       "Description.Subscription.Endpoint",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"owner":                          "Description.Subscription.Owner",
 	"pending_confirmation":           "Description.Attributes.PendingConfirmation",
 	"protocol":                       "Description.Subscription.Protocol",
@@ -45710,7 +45701,7 @@ func ListSNSSubscription(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 var getSNSSubscriptionFilters = map[string]string{
 	"confirmation_was_authenticated": "Description.Attributes.ConfirmationWasAuthenticated",
 	"endpoint":                       "Description.Subscription.Endpoint",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"owner":                          "Description.Subscription.Owner",
 	"pending_confirmation":           "Description.Attributes.PendingConfirmation",
 	"protocol":                       "Description.Subscription.Protocol",
@@ -45863,7 +45854,7 @@ var listSQSQueueFilters = map[string]string{
 	"kms_master_key_id":           "Description.Attributes.KmsMasterKeyId",
 	"max_message_size":            "Description.Attributes.MaximumMessageSize",
 	"message_retention_seconds":   "Description.Attributes.MessageRetentionPeriod",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"queue_arn":                   "Description.Attributes.QueueArn",
 	"queue_url":                   "Description.Attributes.QueueUrl",
 	"receive_wait_time_seconds":   "Description.Attributes.ReceiveMessageWaitTimeSeconds",
@@ -45941,7 +45932,7 @@ var getSQSQueueFilters = map[string]string{
 	"kms_master_key_id":           "Description.Attributes.KmsMasterKeyId",
 	"max_message_size":            "Description.Attributes.MaximumMessageSize",
 	"message_retention_seconds":   "Description.Attributes.MessageRetentionPeriod",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"queue_arn":                   "Description.Attributes.QueueArn",
 	"queue_url":                   "description.Attributes.QueueUrl",
 	"receive_wait_time_seconds":   "Description.Attributes.ReceiveMessageWaitTimeSeconds",
@@ -46098,7 +46089,7 @@ var listS3BucketFilters = map[string]string{
 	"name":                                 "Description.Bucket.Name",
 	"object_lock_configuration":            "Description.ObjectLockConfiguration",
 	"object_ownership_controls":            "Description.BucketOwnershipControls.OwnershipControls",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"policy":                               "Description.Policy",
 	"region":                               "Description.Region",
 	"replication":                          "Description.ReplicationConfiguration",
@@ -46182,7 +46173,7 @@ var getS3BucketFilters = map[string]string{
 	"name":                                 "description.Bucket.Name",
 	"object_lock_configuration":            "Description.ObjectLockConfiguration",
 	"object_ownership_controls":            "Description.BucketOwnershipControls.OwnershipControls",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"policy":                               "Description.Policy",
 	"region":                               "Description.Region",
 	"replication":                          "Description.ReplicationConfiguration",
@@ -46332,7 +46323,7 @@ var listS3AccountSettingFilters = map[string]string{
 	"block_public_acls":       "Description.PublicAccessBlockConfiguration.BlockPublicAcls",
 	"block_public_policy":     "Description.PublicAccessBlockConfiguration.BlockPublicPolicy",
 	"ignore_public_acls":      "Description.PublicAccessBlockConfiguration.IgnorePublicAcls",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"restrict_public_buckets": "Description.PublicAccessBlockConfiguration.RestrictPublicBuckets",
 }
 
@@ -46400,7 +46391,7 @@ var getS3AccountSettingFilters = map[string]string{
 	"block_public_acls":       "Description.PublicAccessBlockConfiguration.BlockPublicAcls",
 	"block_public_policy":     "Description.PublicAccessBlockConfiguration.BlockPublicPolicy",
 	"ignore_public_acls":      "Description.PublicAccessBlockConfiguration.IgnorePublicAcls",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"restrict_public_buckets": "Description.PublicAccessBlockConfiguration.RestrictPublicBuckets",
 }
 
@@ -46568,7 +46559,7 @@ var listS3ObjectFilters = map[string]string{
 	"object_lock_mode":              "Description.Object.ObjectLockMode",
 	"object_lock_retain_until_date": "Description.Object.ObjectLockRetainUntilDate",
 	"object_parts":                  "Description.ObjectAttributes.ObjectParts",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"owner":                         "Description.ObjectSummary.Owner",
 	"parts_count":                   "Description.Object.PartsCount",
 	"replication_status":            "escription.Object.ReplicationStatus",
@@ -46677,7 +46668,7 @@ var getS3ObjectFilters = map[string]string{
 	"object_lock_mode":              "Description.Object.ObjectLockMode",
 	"object_lock_retain_until_date": "Description.Object.ObjectLockRetainUntilDate",
 	"object_parts":                  "Description.ObjectAttributes.ObjectParts",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"owner":                         "Description.ObjectSummary.Owner",
 	"parts_count":                   "Description.Object.PartsCount",
 	"replication_status":            "escription.Object.ReplicationStatus",
@@ -46833,13 +46824,13 @@ func (p S3BucketIntelligentTieringConfigurationPaginator) NextPage(ctx context.C
 }
 
 var listS3BucketIntelligentTieringConfigurationFilters = map[string]string{
-	"bucket_name":   "Description.BucketName",
-	"filter":        "Description.IntelligentTieringConfiguration.Filter",
-	"id":            "Description.IntelligentTieringConfiguration.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.IntelligentTieringConfiguration.Status",
-	"tierings":      "Description.IntelligentTieringConfiguration.Tierings",
-	"title":         "Description.IntelligentTieringConfiguration.Id",
+	"bucket_name":         "Description.BucketName",
+	"filter":              "Description.IntelligentTieringConfiguration.Filter",
+	"id":                  "Description.IntelligentTieringConfiguration.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.IntelligentTieringConfiguration.Status",
+	"tierings":            "Description.IntelligentTieringConfiguration.Tierings",
+	"title":               "Description.IntelligentTieringConfiguration.Id",
 }
 
 func ListS3BucketIntelligentTieringConfiguration(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -46903,13 +46894,13 @@ func ListS3BucketIntelligentTieringConfiguration(ctx context.Context, d *plugin.
 }
 
 var getS3BucketIntelligentTieringConfigurationFilters = map[string]string{
-	"bucket_name":   "Description.BucketName",
-	"filter":        "Description.IntelligentTieringConfiguration.Filter",
-	"id":            "Description.IntelligentTieringConfiguration.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"status":        "Description.IntelligentTieringConfiguration.Status",
-	"tierings":      "Description.IntelligentTieringConfiguration.Tierings",
-	"title":         "Description.IntelligentTieringConfiguration.Id",
+	"bucket_name":         "Description.BucketName",
+	"filter":              "Description.IntelligentTieringConfiguration.Filter",
+	"id":                  "Description.IntelligentTieringConfiguration.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"status":              "Description.IntelligentTieringConfiguration.Status",
+	"tierings":            "Description.IntelligentTieringConfiguration.Tierings",
+	"title":               "Description.IntelligentTieringConfiguration.Id",
 }
 
 func GetS3BucketIntelligentTieringConfiguration(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -47051,7 +47042,7 @@ var listS3MultiRegionAccessPointFilters = map[string]string{
 	"alias":               "Description.Report.Alias",
 	"created_at":          "Description.Report.CreatedAt",
 	"name":                "Description.Report.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"public_access_block": "Description.Report.PublicAccessBlock",
 	"regions":             "Description.Report.Regions",
 	"status":              "Description.Report.Status",
@@ -47122,7 +47113,7 @@ var getS3MultiRegionAccessPointFilters = map[string]string{
 	"alias":               "Description.Report.Alias",
 	"created_at":          "Description.Report.CreatedAt",
 	"name":                "Description.Report.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"public_access_block": "Description.Report.PublicAccessBlock",
 	"regions":             "Description.Report.Regions",
 	"status":              "Description.Report.Status",
@@ -47270,7 +47261,7 @@ var listSageMakerEndpointConfigurationFilters = map[string]string{
 	"data_capture_config": "Description.EndpointConfig.DataCaptureConfig",
 	"kms_key_id":          "Description.EndpointConfig.KmsKeyId",
 	"name":                "Description.EndpointConfig.EndpointConfigName",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"production_variants": "Description.EndpointConfig.ProductionVariants",
 	"tags_src":            "Description.Tags",
 	"title":               "Description.EndpointConfig.EndpointConfigName",
@@ -47342,7 +47333,7 @@ var getSageMakerEndpointConfigurationFilters = map[string]string{
 	"data_capture_config": "Description.EndpointConfig.DataCaptureConfig",
 	"kms_key_id":          "Description.EndpointConfig.KmsKeyId",
 	"name":                "description.EndpointConfig.EndpointConfigName",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"production_variants": "Description.EndpointConfig.ProductionVariants",
 	"tags_src":            "Description.Tags",
 	"title":               "Description.EndpointConfig.EndpointConfigName",
@@ -47492,7 +47483,7 @@ var listSageMakerAppFilters = map[string]string{
 	"last_health_check_timestamp":  "Description.DescribeAppOutput.LastHealthCheckTimestamp",
 	"last_user_activity_timestamp": "Description.DescribeAppOutput.LastUserActivityTimestamp",
 	"name":                         "Description.AppDetails.AppName",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"resource_spec":                "Description.DescribeAppOutput.ResourceSpec",
 	"status":                       "Description.AppDetails.Status",
 	"title":                        "Description.AppDetails.AppName",
@@ -47568,7 +47559,7 @@ var getSageMakerAppFilters = map[string]string{
 	"last_health_check_timestamp":  "Description.DescribeAppOutput.LastHealthCheckTimestamp",
 	"last_user_activity_timestamp": "Description.DescribeAppOutput.LastUserActivityTimestamp",
 	"name":                         "description.DescribeAppOutput.AppName",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"resource_spec":                "Description.DescribeAppOutput.ResourceSpec",
 	"status":                       "Description.AppDetails.Status",
 	"title":                        "Description.AppDetails.AppName",
@@ -47724,7 +47715,7 @@ var listSageMakerDomainFilters = map[string]string{
 	"kms_key_id":                            "Description.Domain.KmsKeyId",
 	"last_modified_time":                    "Description.Domain.LastModifiedTime",
 	"name":                                  "Description.Domain.DomainName",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"security_group_id_for_domain_boundary": "Description.Domain.SecurityGroupIdForDomainBoundary",
 	"single_sign_on_managed_application_instance_id": "Description.Domain.SingleSignOnManagedApplicationInstanceId",
 	"status":     "Description.Domain.Status",
@@ -47808,7 +47799,7 @@ var getSageMakerDomainFilters = map[string]string{
 	"kms_key_id":                            "Description.Domain.KmsKeyId",
 	"last_modified_time":                    "Description.Domain.LastModifiedTime",
 	"name":                                  "Description.Domain.DomainName",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"security_group_id_for_domain_boundary": "Description.Domain.SecurityGroupIdForDomainBoundary",
 	"single_sign_on_managed_application_instance_id": "Description.Domain.SingleSignOnManagedApplicationInstanceId",
 	"status":     "Description.Domain.Status",
@@ -47968,7 +47959,7 @@ var listSageMakerNotebookInstanceFilters = map[string]string{
 	"network_interface_id":         "Description.NotebookInstance.NetworkInterfaceId",
 	"notebook_instance_lifecycle_config_name": "Description.NotebookInstance.NotebookInstanceLifecycleConfigName",
 	"notebook_instance_status":                "Description.NotebookInstance.NotebookInstanceStatus",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"role_arn":                                "Description.NotebookInstance.RoleArn",
 	"root_access":                             "Description.NotebookInstance.RootAccess",
 	"security_groups":                         "Description.NotebookInstance.SecurityGroups",
@@ -48054,7 +48045,7 @@ var getSageMakerNotebookInstanceFilters = map[string]string{
 	"network_interface_id":         "Description.NotebookInstance.NetworkInterfaceId",
 	"notebook_instance_lifecycle_config_name": "Description.NotebookInstance.NotebookInstanceLifecycleConfigName",
 	"notebook_instance_status":                "Description.NotebookInstance.NotebookInstanceStatus",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"role_arn":                                "Description.NotebookInstance.RoleArn",
 	"root_access":                             "Description.NotebookInstance.RootAccess",
 	"security_groups":                         "Description.NotebookInstance.SecurityGroups",
@@ -48208,7 +48199,7 @@ var listSageMakerModelFilters = map[string]string{
 	"execution_role_arn":         "Description.Model.ExecutionRoleArn",
 	"inference_execution_config": "Description.Model.InferenceExecutionConfig",
 	"name":                       "Description.Model.ModelName",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"primary_container":          "Description.Model.PrimaryContainer",
 	"tags_src":                   "Description.Tags",
 	"title":                      "Description.Model.ModelName",
@@ -48283,7 +48274,7 @@ var getSageMakerModelFilters = map[string]string{
 	"execution_role_arn":         "Description.Model.ExecutionRoleArn",
 	"inference_execution_config": "Description.Model.InferenceExecutionConfig",
 	"name":                       "description.Model.ModelName",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"primary_container":          "Description.Model.PrimaryContainer",
 	"tags_src":                   "Description.Tags",
 	"title":                      "Description.Model.ModelName",
@@ -48448,7 +48439,7 @@ var listSageMakerTrainingJobFilters = map[string]string{
 	"last_modified_time":                        "description.TrainingJob.LastModifiedTime",
 	"model_artifacts":                           "Description.TrainingJob.ModelArtifacts",
 	"name":                                      "Description.TrainingJob.TrainingJobName",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"output_data_config":                        "Description.TrainingJob.OutputDataConfig",
 	"profiler_config":                           "Description.TrainingJob.ProfilerConfig",
 	"profiler_rule_configurations":              "Description.TrainingJob.ProfilerRuleConfigurations",
@@ -48553,7 +48544,7 @@ var getSageMakerTrainingJobFilters = map[string]string{
 	"last_modified_time":                        "Description.TrainingJob.LastModifiedTime",
 	"model_artifacts":                           "Description.TrainingJob.ModelArtifacts",
 	"name":                                      "description.TrainingJob.Name",
-	"og_account_id":                             "metadata.IntegrationID",
+	"platform_account_id":                       "metadata.IntegrationID",
 	"output_data_config":                        "Description.TrainingJob.OutputDataConfig",
 	"profiler_config":                           "Description.TrainingJob.ProfilerConfig",
 	"profiler_rule_configurations":              "Description.TrainingJob.ProfilerRuleConfigurations",
@@ -48720,7 +48711,7 @@ var listSecretsManagerSecretFilters = map[string]string{
 	"last_changed_date":         "Description.Secret.LastChangedDate",
 	"last_rotated_date":         "Description.Secret.LastRotatedDate",
 	"name":                      "Description.Secret.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owning_service":            "Description.Secret.OwningService",
 	"policy":                    "Description.ResourcePolicy",
 	"primary_region":            "Description.Secret.PrimaryRegion",
@@ -48803,7 +48794,7 @@ var getSecretsManagerSecretFilters = map[string]string{
 	"last_changed_date":         "Description.Secret.LastChangedDate",
 	"last_rotated_date":         "Description.Secret.LastRotatedDate",
 	"name":                      "Description.Secret.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owning_service":            "Description.Secret.OwningService",
 	"policy":                    "Description.ResourcePolicy",
 	"primary_region":            "Description.Secret.PrimaryRegion",
@@ -48955,7 +48946,7 @@ var listSecurityHubHubFilters = map[string]string{
 	"administrator_account": "Description.AdministratorAccount",
 	"auto_enable_controls":  "Description.Hub.AutoEnableControls",
 	"hub_arn":               "Description.Hub.HubArn",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"subscribed_at":         "Description.Hub.SubscribedAt",
 	"tags":                  "Description.Tags",
 }
@@ -49024,7 +49015,7 @@ var getSecurityHubHubFilters = map[string]string{
 	"administrator_account": "Description.AdministratorAccount",
 	"auto_enable_controls":  "Description.Hub.AutoEnableControls",
 	"hub_arn":               "description.Hub.HubArn",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"subscribed_at":         "Description.Hub.SubscribedAt",
 	"tags":                  "Description.Tags",
 }
@@ -49165,11 +49156,11 @@ func (p SecurityHubActionTargetPaginator) NextPage(ctx context.Context) ([]Secur
 }
 
 var listSecurityHubActionTargetFilters = map[string]string{
-	"arn":           "Description.ActionTarget.ActionTargetArn",
-	"description":   "Description.ActionTarget.Description",
-	"name":          "Description.ActionTarget.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.ActionTarget.Name",
+	"arn":                 "Description.ActionTarget.ActionTargetArn",
+	"description":         "Description.ActionTarget.Description",
+	"name":                "Description.ActionTarget.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.ActionTarget.Name",
 }
 
 func ListSecurityHubActionTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -49233,11 +49224,11 @@ func ListSecurityHubActionTarget(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getSecurityHubActionTargetFilters = map[string]string{
-	"arn":           "description.ActionTarget.ActionTargetArn",
-	"description":   "Description.ActionTarget.Description",
-	"name":          "Description.ActionTarget.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.ActionTarget.Name",
+	"arn":                 "description.ActionTarget.ActionTargetArn",
+	"description":         "Description.ActionTarget.Description",
+	"name":                "Description.ActionTarget.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.ActionTarget.Name",
 }
 
 func GetSecurityHubActionTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -49394,7 +49385,7 @@ var listSecurityHubFindingFilters = map[string]string{
 	"network":                 "Description.Finding.Network",
 	"network_path":            "Description.Finding.NetworkPath",
 	"note":                    "Description.Finding.Note",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"patch_summary":           "Description.Finding.PatchSummary",
 	"process":                 "Description.Finding.Process",
 	"product_arn":             "description.Finding.ProductArn",
@@ -49496,7 +49487,7 @@ var getSecurityHubFindingFilters = map[string]string{
 	"network":                 "Description.Finding.Network",
 	"network_path":            "Description.Finding.NetworkPath",
 	"note":                    "Description.Finding.Note",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"patch_summary":           "Description.Finding.PatchSummary",
 	"process":                 "Description.Finding.Process",
 	"product_arn":             "Description.Finding.ProductArn",
@@ -49657,7 +49648,7 @@ func (p SecurityHubFindingAggregatorPaginator) NextPage(ctx context.Context) ([]
 var listSecurityHubFindingAggregatorFilters = map[string]string{
 	"arn":                        "Description.FindingAggregator.FindingAggregatorArn",
 	"finding_aggregation_region": "Description.FindingAggregator.FindingAggregationRegion",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"region_linking_mode":        "Description.FindingAggregator.RegionLinkingMode",
 	"regions":                    "Description.FindingAggregator.Regions",
 }
@@ -49725,7 +49716,7 @@ func ListSecurityHubFindingAggregator(ctx context.Context, d *plugin.QueryData, 
 var getSecurityHubFindingAggregatorFilters = map[string]string{
 	"arn":                        "description.FindingAggregator.FindingAggregatorArn",
 	"finding_aggregation_region": "Description.FindingAggregator.FindingAggregationRegion",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"region_linking_mode":        "Description.FindingAggregator.RegionLinkingMode",
 	"regions":                    "Description.FindingAggregator.Regions",
 }
@@ -49866,12 +49857,12 @@ func (p SecurityHubInsightPaginator) NextPage(ctx context.Context) ([]SecurityHu
 }
 
 var listSecurityHubInsightFilters = map[string]string{
-	"arn":                "Description.Insight.InsightArn",
-	"filters":            "Description.Insight.Filters",
-	"group_by_attribute": "Description.Insight.GroupByAttribute",
-	"name":               "Description.Insight.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"title":              "Description.Insight.Name",
+	"arn":                 "Description.Insight.InsightArn",
+	"filters":             "Description.Insight.Filters",
+	"group_by_attribute":  "Description.Insight.GroupByAttribute",
+	"name":                "Description.Insight.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Insight.Name",
 }
 
 func ListSecurityHubInsight(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -49935,12 +49926,12 @@ func ListSecurityHubInsight(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getSecurityHubInsightFilters = map[string]string{
-	"arn":                "description.Insight.InsightArn",
-	"filters":            "Description.Insight.Filters",
-	"group_by_attribute": "Description.Insight.GroupByAttribute",
-	"name":               "Description.Insight.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"title":              "Description.Insight.Name",
+	"arn":                 "description.Insight.InsightArn",
+	"filters":             "Description.Insight.Filters",
+	"group_by_attribute":  "Description.Insight.GroupByAttribute",
+	"name":                "Description.Insight.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Insight.Name",
 }
 
 func GetSecurityHubInsight(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -50079,15 +50070,15 @@ func (p SecurityHubMemberPaginator) NextPage(ctx context.Context) ([]SecurityHub
 }
 
 var listSecurityHubMemberFilters = map[string]string{
-	"administrator_id":  "Description.Member.AdministratorId",
-	"email":             "Description.Member.Email",
-	"invited_at":        "Description.Member.InvitedAt",
-	"master_id":         "Description.Member.MasterId",
-	"member_account_id": "Description.Member.AccountId",
-	"member_status":     "Description.Member.MemberStatus",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Member.AccountId",
-	"updated_at":        "Description.Member.UpdatedAt",
+	"administrator_id":    "Description.Member.AdministratorId",
+	"email":               "Description.Member.Email",
+	"invited_at":          "Description.Member.InvitedAt",
+	"master_id":           "Description.Member.MasterId",
+	"member_account_id":   "Description.Member.AccountId",
+	"member_status":       "Description.Member.MemberStatus",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Member.AccountId",
+	"updated_at":          "Description.Member.UpdatedAt",
 }
 
 func ListSecurityHubMember(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -50151,15 +50142,15 @@ func ListSecurityHubMember(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getSecurityHubMemberFilters = map[string]string{
-	"administrator_id":  "Description.Member.AdministratorId",
-	"email":             "Description.Member.Email",
-	"invited_at":        "Description.Member.InvitedAt",
-	"master_id":         "Description.Member.MasterId",
-	"member_account_id": "Description.Member.AccountId",
-	"member_status":     "Description.Member.MemberStatus",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Member.AccountId",
-	"updated_at":        "Description.Member.UpdatedAt",
+	"administrator_id":    "Description.Member.AdministratorId",
+	"email":               "Description.Member.Email",
+	"invited_at":          "Description.Member.InvitedAt",
+	"master_id":           "Description.Member.MasterId",
+	"member_account_id":   "Description.Member.AccountId",
+	"member_status":       "Description.Member.MemberStatus",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Member.AccountId",
+	"updated_at":          "Description.Member.UpdatedAt",
 }
 
 func GetSecurityHubMember(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -50305,7 +50296,7 @@ var listSecurityHubProductFilters = map[string]string{
 	"integration_types":                    "Description.Product.IntegrationTypes",
 	"marketplace_url":                      "Description.Product.MarketplaceUrl",
 	"name":                                 "Description.Product.ProductName",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"product_arn":                          "Description.Product.ProductArn",
 	"product_subscription_resource_policy": "Description.Product.ProductSubscriptionResourcePolicy",
 	"title":                                "Description.Product.ProductName",
@@ -50379,7 +50370,7 @@ var getSecurityHubProductFilters = map[string]string{
 	"integration_types":                    "Description.Product.IntegrationTypes",
 	"marketplace_url":                      "Description.Product.MarketplaceUrl",
 	"name":                                 "Description.Product.ProductName",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"product_arn":                          "description.Product.ProductArn",
 	"product_subscription_resource_policy": "Description.Product.ProductSubscriptionResourcePolicy",
 	"title":                                "Description.Product.ProductName",
@@ -50527,7 +50518,7 @@ var listSecurityHubStandardsControlFilters = map[string]string{
 	"control_status_updated_at": "Description.StandardsControl.ControlStatusUpdatedAt",
 	"description":               "Description.StandardsControl.Description",
 	"disabled_reason":           "Description.StandardsControl.DisabledReason",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"related_requirements":      "Description.StandardsControl.RelatedRequirements",
 	"remediation_url":           "Description.StandardsControl.RemediationUrl",
 	"severity_rating":           "Description.StandardsControl.SeverityRating",
@@ -50601,7 +50592,7 @@ var getSecurityHubStandardsControlFilters = map[string]string{
 	"control_status_updated_at": "Description.StandardsControl.ControlStatusUpdatedAt",
 	"description":               "Description.StandardsControl.Description",
 	"disabled_reason":           "Description.StandardsControl.DisabledReason",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"related_requirements":      "Description.StandardsControl.RelatedRequirements",
 	"remediation_url":           "Description.StandardsControl.RemediationUrl",
 	"severity_rating":           "Description.StandardsControl.SeverityRating",
@@ -50747,7 +50738,7 @@ var listSecurityHubStandardsSubscriptionFilters = map[string]string{
 	"description":                  "Description.Standard.Description",
 	"enabled_by_default":           "Description.Standard.EnabledByDefault",
 	"name":                         "Description.Standard.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"standards_arn":                "Description.Standard.StandardsArn",
 	"standards_input":              "Description.StandardsSubscription.StandardsInput",
 	"standards_managed_by":         "Description.Standard.StandardsManagedBy",
@@ -50821,7 +50812,7 @@ var getSecurityHubStandardsSubscriptionFilters = map[string]string{
 	"description":                  "Description.Standard.Description",
 	"enabled_by_default":           "Description.Standard.EnabledByDefault",
 	"name":                         "Description.Standard.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"standards_arn":                "Description.Standard.StandardsArn",
 	"standards_input":              "Description.StandardsSubscription.StandardsInput",
 	"standards_managed_by":         "Description.Standard.StandardsManagedBy",
@@ -50979,15 +50970,15 @@ var listSSMManagedInstanceFilters = map[string]string{
 	"last_association_execution_date": "Description.InstanceInformation.LastAssociationExecutionDate",
 	"last_ping_date_time":             "Description.InstanceInformation.LastPingDateTime",
 	"last_successful_association_execution_date": "Description.InstanceInformation.LastSuccessfulAssociationExecutionDate",
-	"name":              "Description.InstanceInformation.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"ping_status":       "Description.InstanceInformation.PingStatus",
-	"platform_name":     "Description.InstanceInformation.PlatformName",
-	"platform_type":     "Description.InstanceInformation.PlatformType",
-	"platform_version":  "Description.InstanceInformation.PlatformVersion",
-	"registration_date": "Description.InstanceInformation.RegistrationDate",
-	"resource_type":     "Description.InstanceInformation.ResourceType",
-	"title":             "Description.InstanceInformation.InstanceId",
+	"name":                "Description.InstanceInformation.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"ping_status":         "Description.InstanceInformation.PingStatus",
+	"platform_name":       "Description.InstanceInformation.PlatformName",
+	"platform_type":       "Description.InstanceInformation.PlatformType",
+	"platform_version":    "Description.InstanceInformation.PlatformVersion",
+	"registration_date":   "Description.InstanceInformation.RegistrationDate",
+	"resource_type":       "Description.InstanceInformation.ResourceType",
+	"title":               "Description.InstanceInformation.InstanceId",
 }
 
 func ListSSMManagedInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -51063,15 +51054,15 @@ var getSSMManagedInstanceFilters = map[string]string{
 	"last_association_execution_date": "Description.InstanceInformation.LastAssociationExecutionDate",
 	"last_ping_date_time":             "Description.InstanceInformation.LastPingDateTime",
 	"last_successful_association_execution_date": "Description.InstanceInformation.LastSuccessfulAssociationExecutionDate",
-	"name":              "Description.InstanceInformation.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"ping_status":       "Description.InstanceInformation.PingStatus",
-	"platform_name":     "Description.InstanceInformation.PlatformName",
-	"platform_type":     "Description.InstanceInformation.PlatformType",
-	"platform_version":  "Description.InstanceInformation.PlatformVersion",
-	"registration_date": "Description.InstanceInformation.RegistrationDate",
-	"resource_type":     "Description.InstanceInformation.ResourceType",
-	"title":             "Description.InstanceInformation.InstanceId",
+	"name":                "Description.InstanceInformation.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"ping_status":         "Description.InstanceInformation.PingStatus",
+	"platform_name":       "Description.InstanceInformation.PlatformName",
+	"platform_type":       "Description.InstanceInformation.PlatformType",
+	"platform_version":    "Description.InstanceInformation.PlatformVersion",
+	"registration_date":   "Description.InstanceInformation.RegistrationDate",
+	"resource_type":       "Description.InstanceInformation.ResourceType",
+	"title":               "Description.InstanceInformation.InstanceId",
 }
 
 func GetSSMManagedInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -51226,7 +51217,7 @@ var listSSMAssociationFilters = map[string]string{
 	"last_update_association_date":     "Description.Association.AssociationDescription.LastUpdateAssociationDate",
 	"max_concurrency":                  "Description.Association.AssociationDescription.MaxConcurrency",
 	"max_errors":                       "Description.Association.AssociationDescription.MaxErrors",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"output_location":                  "Description.Association.AssociationDescription.OutputLocation",
 	"overview":                         "Description.AssociationItem.Overview",
 	"parameters":                       "Description.Association.AssociationDescription.Parameters",
@@ -51315,7 +51306,7 @@ var getSSMAssociationFilters = map[string]string{
 	"last_update_association_date":     "Description.Association.AssociationDescription.LastUpdateAssociationDate",
 	"max_concurrency":                  "Description.Association.AssociationDescription.MaxConcurrency",
 	"max_errors":                       "Description.Association.AssociationDescription.MaxErrors",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"output_location":                  "Description.Association.AssociationDescription.OutputLocation",
 	"overview":                         "Description.AssociationItem.Overview",
 	"parameters":                       "Description.Association.AssociationDescription.Parameters",
@@ -51479,7 +51470,7 @@ var listSSMDocumentFilters = map[string]string{
 	"hash_type":                 "Description.Document.Document.HashType",
 	"latest_version":            "Description.Document.Document.LatestVersion",
 	"name":                      "Description.Document.Document.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owner":                     "Description.Document.Document.Owner",
 	"owner_type":                "description.DocumentIdentifier.Owner",
 	"parameters":                "Description.Document.Document.Parameters",
@@ -51575,7 +51566,7 @@ var getSSMDocumentFilters = map[string]string{
 	"hash_type":                 "Description.Document.Document.HashType",
 	"latest_version":            "Description.Document.Document.LatestVersion",
 	"name":                      "description.DocumentIdentifier.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"owner":                     "Description.Document.Document.Owner",
 	"parameters":                "Description.Document.Document.Parameters",
 	"pending_review_version":    "Description.Document.Document.PendingReviewVersion",
@@ -51731,7 +51722,7 @@ func (p SSMDocumentPermissionPaginator) NextPage(ctx context.Context) ([]SSMDocu
 var listSSMDocumentPermissionFilters = map[string]string{
 	"account_ids":             "Description.Permissions.AccountIds",
 	"document_name":           "Description.Document.Document.Name",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"shared_account_id":       "Description.Permissions.AccountSharingInfoList.AccountId",
 	"shared_document_version": "Description.Permissions.AccountSharingInfoList.SharedDocumentVersion",
 	"title":                   "Description.Permissions.AccountSharingInfoList.SharedDocumentVersion",
@@ -51800,7 +51791,7 @@ func ListSSMDocumentPermission(ctx context.Context, d *plugin.QueryData, _ *plug
 var getSSMDocumentPermissionFilters = map[string]string{
 	"account_ids":             "Description.Permissions.AccountIds",
 	"document_name":           "Description.Document.Document.Name",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"shared_account_id":       "Description.Permissions.AccountSharingInfoList.AccountId",
 	"shared_document_version": "Description.Permissions.AccountSharingInfoList.SharedDocumentVersion",
 	"title":                   "Description.Permissions.AccountSharingInfoList.SharedDocumentVersion",
@@ -51942,14 +51933,14 @@ func (p SSMInventoryPaginator) NextPage(ctx context.Context) ([]SSMInventory, er
 }
 
 var listSSMInventoryFilters = map[string]string{
-	"capture_time":   "Description.CaptureTime",
-	"content":        "Description.Content",
-	"id":             "description.Id",
-	"og_account_id":  "metadata.IntegrationID",
-	"schema":         "Description.Schemas",
-	"schema_version": "Description.SchemaVersion",
-	"title":          "Description.Id",
-	"type_name":      "description.TypeName",
+	"capture_time":        "Description.CaptureTime",
+	"content":             "Description.Content",
+	"id":                  "description.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"schema":              "Description.Schemas",
+	"schema_version":      "Description.SchemaVersion",
+	"title":               "Description.Id",
+	"type_name":           "description.TypeName",
 }
 
 func ListSSMInventory(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52013,14 +52004,14 @@ func ListSSMInventory(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getSSMInventoryFilters = map[string]string{
-	"capture_time":   "Description.CaptureTime",
-	"content":        "Description.Content",
-	"id":             "Description.Id",
-	"og_account_id":  "metadata.IntegrationID",
-	"schema":         "Description.Schemas",
-	"schema_version": "Description.SchemaVersion",
-	"title":          "Description.Id",
-	"type_name":      "Description.TypeName",
+	"capture_time":        "Description.CaptureTime",
+	"content":             "Description.Content",
+	"id":                  "Description.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"schema":              "Description.Schemas",
+	"schema_version":      "Description.SchemaVersion",
+	"title":               "Description.Id",
+	"type_name":           "Description.TypeName",
 }
 
 func GetSSMInventory(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52159,13 +52150,13 @@ func (p SSMInventoryEntryPaginator) NextPage(ctx context.Context) ([]SSMInventor
 }
 
 var listSSMInventoryEntryFilters = map[string]string{
-	"capture_time":   "Description.CaptureTime",
-	"entries":        "Description.Entries",
-	"instance_id":    "description.InstanceId",
-	"og_account_id":  "metadata.IntegrationID",
-	"schema_version": "Description.SchemaVersion",
-	"title":          "Description.InstanceId",
-	"type_name":      "description.TypeName",
+	"capture_time":        "Description.CaptureTime",
+	"entries":             "Description.Entries",
+	"instance_id":         "description.InstanceId",
+	"platform_account_id": "metadata.IntegrationID",
+	"schema_version":      "Description.SchemaVersion",
+	"title":               "Description.InstanceId",
+	"type_name":           "description.TypeName",
 }
 
 func ListSSMInventoryEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52229,13 +52220,13 @@ func ListSSMInventoryEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getSSMInventoryEntryFilters = map[string]string{
-	"capture_time":   "Description.CaptureTime",
-	"entries":        "Description.Entries",
-	"instance_id":    "Description.InstanceId",
-	"og_account_id":  "metadata.IntegrationID",
-	"schema_version": "Description.SchemaVersion",
-	"title":          "Description.InstanceId",
-	"type_name":      "Description.TypeName",
+	"capture_time":        "Description.CaptureTime",
+	"entries":             "Description.Entries",
+	"instance_id":         "Description.InstanceId",
+	"platform_account_id": "metadata.IntegrationID",
+	"schema_version":      "Description.SchemaVersion",
+	"title":               "Description.InstanceId",
+	"type_name":           "Description.TypeName",
 }
 
 func GetSSMInventoryEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52385,7 +52376,7 @@ var listSSMMaintenanceWindowFilters = map[string]string{
 	"modified_date":              "Description.MaintenanceWindow.ModifiedDate",
 	"name":                       "description.MaintenanceWindowIdentity.Name",
 	"next_execution_time":        "Description.MaintenanceWindow.NextExecutionTime",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"schedule":                   "Description.MaintenanceWindow.Schedule",
 	"schedule_offset":            "Description.MaintenanceWindow.ScheduleOffset",
 	"schedule_timezone":          "Description.MaintenanceWindow.ScheduleTimezone",
@@ -52469,7 +52460,7 @@ var getSSMMaintenanceWindowFilters = map[string]string{
 	"modified_date":              "Description.MaintenanceWindow.ModifiedDate",
 	"name":                       "Description.MaintenanceWindow.Name",
 	"next_execution_time":        "Description.MaintenanceWindow.NextExecutionTime",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"schedule":                   "Description.MaintenanceWindow.Schedule",
 	"schedule_offset":            "Description.MaintenanceWindow.ScheduleOffset",
 	"schedule_timezone":          "Description.MaintenanceWindow.ScheduleTimezone",
@@ -52617,22 +52608,22 @@ func (p SSMParameterPaginator) NextPage(ctx context.Context) ([]SSMParameter, er
 }
 
 var listSSMParameterFilters = map[string]string{
-	"arn":                "Description.Parameter.ARN",
-	"data_type":          "description.ParameterMetadata.DataType",
-	"key_id":             "description.ParameterMetadata.KeyId",
-	"last_modified_date": "Description.Parameter.LastModifiedDate",
-	"last_modified_user": "Description.ParameterMetadata.LastModifiedUser",
-	"name":               "Description.Parameter.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"policies":           "Description.ParameterMetadata.Policies",
-	"selector":           "Description.Parameter.Selector",
-	"source_result":      "Description.Parameter.SourceResult",
-	"tags_src":           "Description.Tags",
-	"tier":               "description.ParameterMetadata.Tier",
-	"title":              "Description.Parameter.Name",
-	"type":               "description.ParameterMetadata.Type",
-	"value":              "Description.Parameter.Value",
-	"version":            "Description.Parameter.Version",
+	"arn":                 "Description.Parameter.ARN",
+	"data_type":           "description.ParameterMetadata.DataType",
+	"key_id":              "description.ParameterMetadata.KeyId",
+	"last_modified_date":  "Description.Parameter.LastModifiedDate",
+	"last_modified_user":  "Description.ParameterMetadata.LastModifiedUser",
+	"name":                "Description.Parameter.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policies":            "Description.ParameterMetadata.Policies",
+	"selector":            "Description.Parameter.Selector",
+	"source_result":       "Description.Parameter.SourceResult",
+	"tags_src":            "Description.Tags",
+	"tier":                "description.ParameterMetadata.Tier",
+	"title":               "Description.Parameter.Name",
+	"type":                "description.ParameterMetadata.Type",
+	"value":               "Description.Parameter.Value",
+	"version":             "Description.Parameter.Version",
 }
 
 func ListSSMParameter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52696,22 +52687,22 @@ func ListSSMParameter(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getSSMParameterFilters = map[string]string{
-	"arn":                "Description.Parameter.ARN",
-	"data_type":          "Description.Parameter.DataType",
-	"key_id":             "Description.ParameterMetadata.KeyId",
-	"last_modified_date": "Description.Parameter.LastModifiedDate",
-	"last_modified_user": "Description.ParameterMetadata.LastModifiedUser",
-	"name":               "description.ParameterMetadata.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"policies":           "Description.ParameterMetadata.Policies",
-	"selector":           "Description.Parameter.Selector",
-	"source_result":      "Description.Parameter.SourceResult",
-	"tags_src":           "Description.Tags",
-	"tier":               "Description.ParameterMetadata.Tier",
-	"title":              "Description.Parameter.Name",
-	"type":               "Description.Parameter.Type",
-	"value":              "Description.Parameter.Value",
-	"version":            "Description.Parameter.Version",
+	"arn":                 "Description.Parameter.ARN",
+	"data_type":           "Description.Parameter.DataType",
+	"key_id":              "Description.ParameterMetadata.KeyId",
+	"last_modified_date":  "Description.Parameter.LastModifiedDate",
+	"last_modified_user":  "Description.ParameterMetadata.LastModifiedUser",
+	"name":                "description.ParameterMetadata.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policies":            "Description.ParameterMetadata.Policies",
+	"selector":            "Description.Parameter.Selector",
+	"source_result":       "Description.Parameter.SourceResult",
+	"tags_src":            "Description.Tags",
+	"tier":                "Description.ParameterMetadata.Tier",
+	"title":               "Description.Parameter.Name",
+	"type":                "Description.Parameter.Type",
+	"value":               "Description.Parameter.Value",
+	"version":             "Description.Parameter.Version",
 }
 
 func GetSSMParameter(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -52860,7 +52851,7 @@ var listSSMPatchBaselineFilters = map[string]string{
 	"global_filters":                       "Description.PatchBaseline.GlobalFilters",
 	"modified_date":                        "Description.PatchBaseline.ModifiedDate",
 	"name":                                 "description.ParameterMetadata.Type",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"operating_system":                     "description.ParameterMetadata.KeyId",
 	"patch_groups":                         "Description.PatchBaseline.PatchGroups",
 	"rejected_patches":                     "Description.PatchBaseline.RejectedPatches",
@@ -52942,7 +52933,7 @@ var getSSMPatchBaselineFilters = map[string]string{
 	"global_filters":                       "Description.PatchBaseline.GlobalFilters",
 	"modified_date":                        "Description.PatchBaseline.ModifiedDate",
 	"name":                                 "Description.PatchBaselineIdentity.BaselineName",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"operating_system":                     "Description.PatchBaseline.OperatingSystem",
 	"patch_groups":                         "Description.PatchBaseline.PatchGroups",
 	"rejected_patches":                     "Description.PatchBaseline.RejectedPatches",
@@ -53088,16 +53079,16 @@ func (p SSMManagedInstanceCompliancePaginator) NextPage(ctx context.Context) ([]
 }
 
 var listSSMManagedInstanceComplianceFilters = map[string]string{
-	"compliance_type":   "Description.ComplianceItem.ComplianceType",
-	"details":           "Description.ComplianceItem.Details",
-	"execution_summary": "Description.ComplianceItem.ExecutionSummary",
-	"id":                "Description.ComplianceItem.Id",
-	"name":              "Description.ComplianceItem.Title",
-	"og_account_id":     "metadata.IntegrationID",
-	"resource_id":       "description.ComplianceItem.ResourceId",
-	"resource_type":     "Description.ComplianceItem.ResourceType",
-	"severity":          "Description.ComplianceItem.Severity",
-	"status":            "Description.ComplianceItem.Status",
+	"compliance_type":     "Description.ComplianceItem.ComplianceType",
+	"details":             "Description.ComplianceItem.Details",
+	"execution_summary":   "Description.ComplianceItem.ExecutionSummary",
+	"id":                  "Description.ComplianceItem.Id",
+	"name":                "Description.ComplianceItem.Title",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_id":         "description.ComplianceItem.ResourceId",
+	"resource_type":       "Description.ComplianceItem.ResourceType",
+	"severity":            "Description.ComplianceItem.Severity",
+	"status":              "Description.ComplianceItem.Status",
 }
 
 func ListSSMManagedInstanceCompliance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -53161,16 +53152,16 @@ func ListSSMManagedInstanceCompliance(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getSSMManagedInstanceComplianceFilters = map[string]string{
-	"compliance_type":   "Description.ComplianceItem.ComplianceType",
-	"details":           "Description.ComplianceItem.Details",
-	"execution_summary": "Description.ComplianceItem.ExecutionSummary",
-	"id":                "Description.ComplianceItem.Id",
-	"name":              "Description.ComplianceItem.Title",
-	"og_account_id":     "metadata.IntegrationID",
-	"resource_id":       "Description.ComplianceItem.ResourceId",
-	"resource_type":     "Description.ComplianceItem.ResourceType",
-	"severity":          "Description.ComplianceItem.Severity",
-	"status":            "Description.ComplianceItem.Status",
+	"compliance_type":     "Description.ComplianceItem.ComplianceType",
+	"details":             "Description.ComplianceItem.Details",
+	"execution_summary":   "Description.ComplianceItem.ExecutionSummary",
+	"id":                  "Description.ComplianceItem.Id",
+	"name":                "Description.ComplianceItem.Title",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_id":         "Description.ComplianceItem.ResourceId",
+	"resource_type":       "Description.ComplianceItem.ResourceType",
+	"severity":            "Description.ComplianceItem.Severity",
+	"status":              "Description.ComplianceItem.Status",
 }
 
 func GetSSMManagedInstanceCompliance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -53320,7 +53311,7 @@ var listSSMManagedInstancePatchStateFilters = map[string]string{
 	"last_no_reboot_install_operation_time": "Description.PatchState.LastNoRebootInstallOperationTime",
 	"missing_count":                         "Description.PatchState.MissingCount",
 	"not_applicable_count":                  "Description.PatchState.NotApplicableCount",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"operation":                             "Description.PatchState.Operation",
 	"operation_end_time":                    "Description.PatchState.OperationEndTime",
 	"operation_start_time":                  "Description.PatchState.OperationStartTime",
@@ -53406,7 +53397,7 @@ var getSSMManagedInstancePatchStateFilters = map[string]string{
 	"last_no_reboot_install_operation_time": "Description.PatchState.LastNoRebootInstallOperationTime",
 	"missing_count":                         "Description.PatchState.MissingCount",
 	"not_applicable_count":                  "Description.PatchState.NotApplicableCount",
-	"og_account_id":                         "metadata.IntegrationID",
+	"platform_account_id":                   "metadata.IntegrationID",
 	"operation":                             "Description.PatchState.Operation",
 	"operation_end_time":                    "Description.PatchState.OperationEndTime",
 	"operation_start_time":                  "Description.PatchState.OperationStartTime",
@@ -53565,7 +53556,7 @@ var listECSTaskDefinitionFilters = map[string]string{
 	"ipc_mode":                 "Description.TaskDefinition.IpcMode",
 	"memory":                   "Description.TaskDefinition.Memory",
 	"network_mode":             "Description.TaskDefinition.NetworkMode",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"pid_mode":                 "Description.TaskDefinition.PidMode",
 	"placement_constraints":    "Description.TaskDefinition.PlacementConstraints",
 	"proxy_configuration":      "Description.TaskDefinition.ProxyConfiguration",
@@ -53651,7 +53642,7 @@ var getECSTaskDefinitionFilters = map[string]string{
 	"ipc_mode":                 "Description.TaskDefinition.IpcMode",
 	"memory":                   "Description.TaskDefinition.Memory",
 	"network_mode":             "Description.TaskDefinition.NetworkMode",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"pid_mode":                 "Description.TaskDefinition.PidMode",
 	"placement_constraints":    "Description.TaskDefinition.PlacementConstraints",
 	"proxy_configuration":      "Description.TaskDefinition.ProxyConfiguration",
@@ -53810,7 +53801,7 @@ var listECSClusterFilters = map[string]string{
 	"cluster_arn":                          "Description.Cluster.ClusterArn",
 	"cluster_name":                         "Description.Cluster.ClusterName",
 	"default_capacity_provider_strategy":   "Description.Cluster.DefaultCapacityProviderStrategy",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"pending_tasks_count":                  "Description.Cluster.PendingTasksCount",
 	"registered_container_instances_count": "Description.Cluster.RegisteredContainerInstancesCount",
 	"running_tasks_count":                  "Description.Cluster.RunningTasksCount",
@@ -53889,7 +53880,7 @@ var getECSClusterFilters = map[string]string{
 	"cluster_arn":                          "description.Cluster.ClusterArn",
 	"cluster_name":                         "Description.Cluster.ClusterName",
 	"default_capacity_provider_strategy":   "Description.Cluster.DefaultCapacityProviderStrategy",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"pending_tasks_count":                  "Description.Cluster.PendingTasksCount",
 	"registered_container_instances_count": "Description.Cluster.RegisteredContainerInstancesCount",
 	"running_tasks_count":                  "Description.Cluster.RunningTasksCount",
@@ -54052,7 +54043,7 @@ var listECSServiceFilters = map[string]string{
 	"launch_type":                       "Description.Service.LaunchType",
 	"load_balancers":                    "Description.Service.LoadBalancers",
 	"network_configuration":             "Description.Service.NetworkConfiguration",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"pending_count":                     "Description.Service.PendingCount",
 	"placement_constraints":             "Description.Service.PlacementConstraints",
 	"placement_strategy":                "Description.Service.PlacementStrategy",
@@ -54148,7 +54139,7 @@ var getECSServiceFilters = map[string]string{
 	"launch_type":                       "Description.Service.LaunchType",
 	"load_balancers":                    "Description.Service.LoadBalancers",
 	"network_configuration":             "Description.Service.NetworkConfiguration",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"pending_count":                     "Description.Service.PendingCount",
 	"placement_constraints":             "Description.Service.PlacementConstraints",
 	"placement_strategy":                "Description.Service.PlacementStrategy",
@@ -54311,7 +54302,7 @@ var listECSContainerInstanceFilters = map[string]string{
 	"capacity_provider_name": "Description.ContainerInstance.CapacityProviderName",
 	"cluster_arn":            "Description.Cluster.ClusterArn",
 	"ec2_instance_id":        "Description.ContainerInstance.Ec2InstanceId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"pending_tasks_count":    "Description.ContainerInstance.PendingTasksCount",
 	"registered_at":          "Description.ContainerInstance.RegisteredAt",
 	"registered_resources":   "Description.ContainerInstance.RegisteredResources",
@@ -54393,7 +54384,7 @@ var getECSContainerInstanceFilters = map[string]string{
 	"capacity_provider_name": "Description.ContainerInstance.CapacityProviderName",
 	"cluster_arn":            "Description.Cluster.ClusterArn",
 	"ec2_instance_id":        "Description.ContainerInstance.Ec2InstanceId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"pending_tasks_count":    "Description.ContainerInstance.PendingTasksCount",
 	"registered_at":          "Description.ContainerInstance.RegisteredAt",
 	"registered_resources":   "Description.ContainerInstance.RegisteredResources",
@@ -54542,10 +54533,10 @@ func (p ECSTaskSetPaginator) NextPage(ctx context.Context) ([]ECSTaskSet, error)
 }
 
 var listECSTaskSetFilters = map[string]string{
-	"id":            "Description.TaskSet.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"task_set_arn":  "Description.TaskSet.TaskSetArn",
-	"title":         "Description.TaskSet.Id",
+	"id":                  "Description.TaskSet.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"task_set_arn":        "Description.TaskSet.TaskSetArn",
+	"title":               "Description.TaskSet.Id",
 }
 
 func ListECSTaskSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -54609,10 +54600,10 @@ func ListECSTaskSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 }
 
 var getECSTaskSetFilters = map[string]string{
-	"id":            "description.TaskSet.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"task_set_arn":  "Description.TaskSet.TaskSetArn",
-	"title":         "Description.TaskSet.Id",
+	"id":                  "description.TaskSet.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"task_set_arn":        "Description.TaskSet.TaskSetArn",
+	"title":               "Description.TaskSet.Id",
 }
 
 func GetECSTaskSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -54772,7 +54763,7 @@ var listECSTaskFilters = map[string]string{
 	"last_status":            "Description.Task.LastStatus",
 	"launch_type":            "description.Task.LaunchType",
 	"memory":                 "Description.Task.Memory",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"overrides":              "Description.Task.Overrides",
 	"platform_version":       "Description.Task.PlatformVersion",
 	"protection":             "Description.TaskProtection",
@@ -54873,7 +54864,7 @@ var getECSTaskFilters = map[string]string{
 	"last_status":            "Description.Task.LastStatus",
 	"launch_type":            "Description.Task.LaunchType",
 	"memory":                 "Description.Task.Memory",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"overrides":              "Description.Task.Overrides",
 	"platform_version":       "Description.Task.PlatformVersion",
 	"protection":             "Description.TaskProtection",
@@ -55036,7 +55027,7 @@ var listEFSFileSystemFilters = map[string]string{
 	"life_cycle_state":                "Description.FileSystem.LifeCycleState",
 	"name":                            "Description.FileSystem.Name",
 	"number_of_mount_targets":         "Description.FileSystem.NumberOfMountTargets",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"owner_id":                        "Description.FileSystem.OwnerId",
 	"performance_mode":                "Description.FileSystem.PerformanceMode",
 	"policy":                          "Description.Policy",
@@ -55117,7 +55108,7 @@ var getEFSFileSystemFilters = map[string]string{
 	"life_cycle_state":                "Description.FileSystem.LifeCycleState",
 	"name":                            "Description.FileSystem.Name",
 	"number_of_mount_targets":         "Description.FileSystem.NumberOfMountTargets",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"owner_id":                        "Description.FileSystem.OwnerId",
 	"performance_mode":                "Description.FileSystem.PerformanceMode",
 	"policy":                          "Description.Policy",
@@ -55263,17 +55254,17 @@ func (p EFSAccessPointPaginator) NextPage(ctx context.Context) ([]EFSAccessPoint
 }
 
 var listEFSAccessPointFilters = map[string]string{
-	"access_point_arn": "Description.AccessPoint.AccessPointArn",
-	"access_point_id":  "Description.AccessPoint.AccessPointId",
-	"client_token":     "Description.AccessPoint.ClientToken",
-	"file_system_id":   "description.AccessPoint.FileSystemId",
-	"life_cycle_state": "Description.AccessPoint.LifeCycleState",
-	"name":             "Description.AccessPoint.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner_id":         "Description.AccessPoint.OwnerId",
-	"posix_user":       "Description.AccessPoint.PosixUser",
-	"root_directory":   "Description.AccessPoint.RootDirectory",
-	"tags_src":         "Description.AccessPoint.Tags",
+	"access_point_arn":    "Description.AccessPoint.AccessPointArn",
+	"access_point_id":     "Description.AccessPoint.AccessPointId",
+	"client_token":        "Description.AccessPoint.ClientToken",
+	"file_system_id":      "description.AccessPoint.FileSystemId",
+	"life_cycle_state":    "Description.AccessPoint.LifeCycleState",
+	"name":                "Description.AccessPoint.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.AccessPoint.OwnerId",
+	"posix_user":          "Description.AccessPoint.PosixUser",
+	"root_directory":      "Description.AccessPoint.RootDirectory",
+	"tags_src":            "Description.AccessPoint.Tags",
 }
 
 func ListEFSAccessPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -55337,17 +55328,17 @@ func ListEFSAccessPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getEFSAccessPointFilters = map[string]string{
-	"access_point_arn": "Description.AccessPoint.AccessPointArn",
-	"access_point_id":  "description.AccessPoint.AccessPointId",
-	"client_token":     "Description.AccessPoint.ClientToken",
-	"file_system_id":   "Description.AccessPoint.FileSystemId",
-	"life_cycle_state": "Description.AccessPoint.LifeCycleState",
-	"name":             "Description.AccessPoint.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner_id":         "Description.AccessPoint.OwnerId",
-	"posix_user":       "Description.AccessPoint.PosixUser",
-	"root_directory":   "Description.AccessPoint.RootDirectory",
-	"tags_src":         "Description.AccessPoint.Tags",
+	"access_point_arn":    "Description.AccessPoint.AccessPointArn",
+	"access_point_id":     "description.AccessPoint.AccessPointId",
+	"client_token":        "Description.AccessPoint.ClientToken",
+	"file_system_id":      "Description.AccessPoint.FileSystemId",
+	"life_cycle_state":    "Description.AccessPoint.LifeCycleState",
+	"name":                "Description.AccessPoint.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.AccessPoint.OwnerId",
+	"posix_user":          "Description.AccessPoint.PosixUser",
+	"root_directory":      "Description.AccessPoint.RootDirectory",
+	"tags_src":            "Description.AccessPoint.Tags",
 }
 
 func GetEFSAccessPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -55493,7 +55484,7 @@ var listEFSMountTargetFilters = map[string]string{
 	"life_cycle_state":       "Description.MountTarget.LifeCycleState",
 	"mount_target_id":        "Description.MountTarget.MountTargetId",
 	"network_interface_id":   "Description.MountTarget.NetworkInterfaceId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"owner_id":               "Description.MountTarget.OwnerId",
 	"security_groups":        "Description.SecurityGroups",
 	"subnet_id":              "Description.MountTarget.SubnetId",
@@ -55569,7 +55560,7 @@ var getEFSMountTargetFilters = map[string]string{
 	"life_cycle_state":       "Description.MountTarget.LifeCycleState",
 	"mount_target_id":        "description.MountTarget.MountTargetId",
 	"network_interface_id":   "Description.MountTarget.NetworkInterfaceId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"owner_id":               "Description.MountTarget.OwnerId",
 	"security_groups":        "Description.SecurityGroups",
 	"subnet_id":              "Description.MountTarget.SubnetId",
@@ -55722,7 +55713,7 @@ var listEKSClusterFilters = map[string]string{
 	"kubernetes_network_config": "Description.Cluster.KubernetesNetworkConfig",
 	"logging":                   "Description.Cluster.Logging",
 	"name":                      "Description.Cluster.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"platform_version":          "Description.Cluster.PlatformVersion",
 	"resources_vpc_config":      "Description.Cluster.ResourcesVpcConfig",
 	"role_arn":                  "Description.Cluster.RoleArn",
@@ -55802,7 +55793,7 @@ var getEKSClusterFilters = map[string]string{
 	"kubernetes_network_config": "Description.Cluster.KubernetesNetworkConfig",
 	"logging":                   "Description.Cluster.Logging",
 	"name":                      "description.Cluster.Name",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"platform_version":          "Description.Cluster.PlatformVersion",
 	"resources_vpc_config":      "Description.Cluster.ResourcesVpcConfig",
 	"role_arn":                  "Description.Cluster.RoleArn",
@@ -55955,7 +55946,7 @@ var listEKSAddonFilters = map[string]string{
 	"created_at":               "Description.Addon.CreatedAt",
 	"health_issues":            "Description.Addon.Health.Issues",
 	"modified_at":              "Description.Addon.ModifiedAt",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"service_account_role_arn": "Description.Addon.ServiceAccountRoleArn",
 	"status":                   "Description.Addon.Status",
 	"tags":                     "Description.Addon.Tags",
@@ -56030,7 +56021,7 @@ var getEKSAddonFilters = map[string]string{
 	"created_at":               "Description.Addon.CreatedAt",
 	"health_issues":            "Description.Addon.Health.Issues",
 	"modified_at":              "Description.Addon.ModifiedAt",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"service_account_role_arn": "Description.Addon.ServiceAccountRoleArn",
 	"status":                   "Description.Addon.Status",
 	"tags":                     "Description.Addon.Tags",
@@ -56173,31 +56164,31 @@ func (p EKSNodegroupPaginator) NextPage(ctx context.Context) ([]EKSNodegroup, er
 }
 
 var listEKSNodegroupFilters = map[string]string{
-	"ami_type":        "Description.Nodegroup.AmiType",
-	"arn":             "Description.Nodegroup.NodegroupArn",
-	"capacity_type":   "Description.Nodegroup.CapacityType",
-	"cluster_name":    "description.Nodegroup.ClusterName",
-	"created_at":      "Description.Nodegroup.CreatedAt",
-	"disk_size":       "Description.Nodegroup.DiskSize",
-	"health":          "Description.Nodegroup.Health",
-	"instance_types":  "Description.Nodegroup.InstanceTypes",
-	"labels":          "Description.Nodegroup.Labels",
-	"launch_template": "Description.Nodegroup.LaunchTemplate",
-	"modified_at":     "Description.Nodegroup.ModifiedAt",
-	"node_role":       "Description.Nodegroup.NodeRole",
-	"nodegroup_name":  "Description.Nodegroup.NodegroupName",
-	"og_account_id":   "metadata.IntegrationID",
-	"release_version": "Description.Nodegroup.ReleaseVersion",
-	"remote_access":   "Description.Nodegroup.RemoteAccess",
-	"resources":       "Description.Nodegroup.Resources",
-	"scaling_config":  "Description.Nodegroup.ScalingConfig",
-	"status":          "Description.Nodegroup.Status",
-	"subnets":         "Description.Nodegroup.Subnets",
-	"tags":            "Description.Nodegroup.Tags",
-	"taints":          "Description.Nodegroup.Taints",
-	"title":           "Description.Nodegroup.NodegroupName",
-	"update_config":   "Description.Nodegroup.UpdateConfig",
-	"version":         "Description.Nodegroup.Version",
+	"ami_type":            "Description.Nodegroup.AmiType",
+	"arn":                 "Description.Nodegroup.NodegroupArn",
+	"capacity_type":       "Description.Nodegroup.CapacityType",
+	"cluster_name":        "description.Nodegroup.ClusterName",
+	"created_at":          "Description.Nodegroup.CreatedAt",
+	"disk_size":           "Description.Nodegroup.DiskSize",
+	"health":              "Description.Nodegroup.Health",
+	"instance_types":      "Description.Nodegroup.InstanceTypes",
+	"labels":              "Description.Nodegroup.Labels",
+	"launch_template":     "Description.Nodegroup.LaunchTemplate",
+	"modified_at":         "Description.Nodegroup.ModifiedAt",
+	"node_role":           "Description.Nodegroup.NodeRole",
+	"nodegroup_name":      "Description.Nodegroup.NodegroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"release_version":     "Description.Nodegroup.ReleaseVersion",
+	"remote_access":       "Description.Nodegroup.RemoteAccess",
+	"resources":           "Description.Nodegroup.Resources",
+	"scaling_config":      "Description.Nodegroup.ScalingConfig",
+	"status":              "Description.Nodegroup.Status",
+	"subnets":             "Description.Nodegroup.Subnets",
+	"tags":                "Description.Nodegroup.Tags",
+	"taints":              "Description.Nodegroup.Taints",
+	"title":               "Description.Nodegroup.NodegroupName",
+	"update_config":       "Description.Nodegroup.UpdateConfig",
+	"version":             "Description.Nodegroup.Version",
 }
 
 func ListEKSNodegroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -56261,31 +56252,31 @@ func ListEKSNodegroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getEKSNodegroupFilters = map[string]string{
-	"ami_type":        "Description.Nodegroup.AmiType",
-	"arn":             "Description.Nodegroup.NodegroupArn",
-	"capacity_type":   "Description.Nodegroup.CapacityType",
-	"cluster_name":    "description.Nodegroup.ClusterName",
-	"created_at":      "Description.Nodegroup.CreatedAt",
-	"disk_size":       "Description.Nodegroup.DiskSize",
-	"health":          "Description.Nodegroup.Health",
-	"instance_types":  "Description.Nodegroup.InstanceTypes",
-	"labels":          "Description.Nodegroup.Labels",
-	"launch_template": "Description.Nodegroup.LaunchTemplate",
-	"modified_at":     "Description.Nodegroup.ModifiedAt",
-	"node_role":       "Description.Nodegroup.NodeRole",
-	"nodegroup_name":  "description.Nodegroup.NodegroupName",
-	"og_account_id":   "metadata.IntegrationID",
-	"release_version": "Description.Nodegroup.ReleaseVersion",
-	"remote_access":   "Description.Nodegroup.RemoteAccess",
-	"resources":       "Description.Nodegroup.Resources",
-	"scaling_config":  "Description.Nodegroup.ScalingConfig",
-	"status":          "Description.Nodegroup.Status",
-	"subnets":         "Description.Nodegroup.Subnets",
-	"tags":            "Description.Nodegroup.Tags",
-	"taints":          "Description.Nodegroup.Taints",
-	"title":           "Description.Nodegroup.NodegroupName",
-	"update_config":   "Description.Nodegroup.UpdateConfig",
-	"version":         "Description.Nodegroup.Version",
+	"ami_type":            "Description.Nodegroup.AmiType",
+	"arn":                 "Description.Nodegroup.NodegroupArn",
+	"capacity_type":       "Description.Nodegroup.CapacityType",
+	"cluster_name":        "description.Nodegroup.ClusterName",
+	"created_at":          "Description.Nodegroup.CreatedAt",
+	"disk_size":           "Description.Nodegroup.DiskSize",
+	"health":              "Description.Nodegroup.Health",
+	"instance_types":      "Description.Nodegroup.InstanceTypes",
+	"labels":              "Description.Nodegroup.Labels",
+	"launch_template":     "Description.Nodegroup.LaunchTemplate",
+	"modified_at":         "Description.Nodegroup.ModifiedAt",
+	"node_role":           "Description.Nodegroup.NodeRole",
+	"nodegroup_name":      "description.Nodegroup.NodegroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"release_version":     "Description.Nodegroup.ReleaseVersion",
+	"remote_access":       "Description.Nodegroup.RemoteAccess",
+	"resources":           "Description.Nodegroup.Resources",
+	"scaling_config":      "Description.Nodegroup.ScalingConfig",
+	"status":              "Description.Nodegroup.Status",
+	"subnets":             "Description.Nodegroup.Subnets",
+	"tags":                "Description.Nodegroup.Tags",
+	"taints":              "Description.Nodegroup.Taints",
+	"title":               "Description.Nodegroup.NodegroupName",
+	"update_config":       "Description.Nodegroup.UpdateConfig",
+	"version":             "Description.Nodegroup.Version",
 }
 
 func GetEKSNodegroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -56429,7 +56420,7 @@ var listEKSAddonVersionFilters = map[string]string{
 	"addon_version":       "Description.AddonVersion.AddonVersion",
 	"architecture":        "Description.AddonVersion.Architecture",
 	"compatibilities":     "Description.AddonVersion.Compatibilities",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"title":               "Description.AddonVersion.AddonVersion",
 	"type":                "Description.AddonType",
 }
@@ -56500,7 +56491,7 @@ var getEKSAddonVersionFilters = map[string]string{
 	"addon_version":       "Description.AddonVersion.AddonVersion",
 	"architecture":        "Description.AddonVersion.Architecture",
 	"compatibilities":     "Description.AddonVersion.Compatibilities",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"title":               "Description.AddonVersion.AddonVersion",
 	"type":                "Description.AddonType",
 }
@@ -56645,7 +56636,7 @@ var listEKSFargateProfileFilters = map[string]string{
 	"created_at":             "Description.FargateProfile.CreatedAt",
 	"fargate_profile_arn":    "Description.FargateProfile.FargateProfileArn",
 	"fargate_profile_name":   "Description.FargateProfile.FargateProfileName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"pod_execution_role_arn": "Description.FargateProfile.PodExecutionRoleArn",
 	"selectors":              "Description.FargateProfile.Selectors",
 	"status":                 "Description.FargateProfile.Status",
@@ -56719,7 +56710,7 @@ var getEKSFargateProfileFilters = map[string]string{
 	"created_at":             "Description.FargateProfile.CreatedAt",
 	"fargate_profile_arn":    "Description.FargateProfile.FargateProfileArn",
 	"fargate_profile_name":   "description.Fargate.FargateProfileName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"pod_execution_role_arn": "Description.FargateProfile.PodExecutionRoleArn",
 	"selectors":              "Description.FargateProfile.Selectors",
 	"status":                 "Description.FargateProfile.Status",
@@ -56874,7 +56865,7 @@ var listWAFv2WebACLFilters = map[string]string{
 	"logging_configuration":       "Description.LoggingConfiguration",
 	"managed_by_firewall_manager": "Description.WebACL.ManagedByFirewallManager",
 	"name":                        "Description.WebACL.Name",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"post_process_firewall_manager_rule_groups": "Description.WebACL.PostProcessFirewallManagerRuleGroups",
 	"pre_process_firewall_manager_rule_groups":  "Description.WebACL.PreProcessFirewallManagerRuleGroups",
 	"rules":             "Description.WebACL.Rules",
@@ -56954,7 +56945,7 @@ var getWAFv2WebACLFilters = map[string]string{
 	"logging_configuration":       "Description.LoggingConfiguration",
 	"managed_by_firewall_manager": "Description.WebACL.ManagedByFirewallManager",
 	"name":                        "description.WebACL.Name",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"post_process_firewall_manager_rule_groups": "Description.WebACL.PostProcessFirewallManagerRuleGroups",
 	"pre_process_firewall_manager_rule_groups":  "Description.WebACL.PreProcessFirewallManagerRuleGroups",
 	"rules":             "Description.WebACL.Rules",
@@ -57100,18 +57091,18 @@ func (p WAFv2IPSetPaginator) NextPage(ctx context.Context) ([]WAFv2IPSet, error)
 }
 
 var listWAFv2IPSetFilters = map[string]string{
-	"account_id":         "Metadata.AccountID",
-	"addresses":          "Description.IPSet.Addresses",
-	"arn":                "Description.IPSet.ARN",
-	"description":        "Description.IPSet.Description",
-	"id":                 "Description.IPSet.Id",
-	"ip_address_version": "Description.IPSet.IPAddressVersion",
-	"lock_token":         "Description.IPSetSummary.LockToken",
-	"name":               "Description.IPSet.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"partition":          "Metadata.Partition",
-	"tags_src":           "Description.Tags",
-	"title":              "Description.IPSet.Name",
+	"account_id":          "Metadata.AccountID",
+	"addresses":           "Description.IPSet.Addresses",
+	"arn":                 "Description.IPSet.ARN",
+	"description":         "Description.IPSet.Description",
+	"id":                  "Description.IPSet.Id",
+	"ip_address_version":  "Description.IPSet.IPAddressVersion",
+	"lock_token":          "Description.IPSetSummary.LockToken",
+	"name":                "Description.IPSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.IPSet.Name",
 }
 
 func ListWAFv2IPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57175,19 +57166,19 @@ func ListWAFv2IPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 }
 
 var getWAFv2IPSetFilters = map[string]string{
-	"account_id":         "Metadata.AccountID",
-	"addresses":          "Description.IPSet.Addresses",
-	"arn":                "Description.IPSet.ARN",
-	"description":        "Description.IPSet.Description",
-	"id":                 "description.IPSetSummary.Id",
-	"ip_address_version": "Description.IPSet.IPAddressVersion",
-	"lock_token":         "Description.IPSetSummary.LockToken",
-	"name":               "description.IPSetSummary.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"partition":          "Metadata.Partition",
-	"scope":              "description.IPSetSummary.Scope",
-	"tags_src":           "Description.Tags",
-	"title":              "Description.IPSet.Name",
+	"account_id":          "Metadata.AccountID",
+	"addresses":           "Description.IPSet.Addresses",
+	"arn":                 "Description.IPSet.ARN",
+	"description":         "Description.IPSet.Description",
+	"id":                  "description.IPSetSummary.Id",
+	"ip_address_version":  "Description.IPSet.IPAddressVersion",
+	"lock_token":          "Description.IPSetSummary.LockToken",
+	"name":                "description.IPSetSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"scope":               "description.IPSetSummary.Scope",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.IPSet.Name",
 }
 
 func GetWAFv2IPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57326,16 +57317,16 @@ func (p WAFv2RegexPatternSetPaginator) NextPage(ctx context.Context) ([]WAFv2Reg
 }
 
 var listWAFv2RegexPatternSetFilters = map[string]string{
-	"account_id":    "Metadata.AccountID",
-	"arn":           "Description.RegexPatternSet.ARN",
-	"description":   "Description.RegexPatternSet.Description",
-	"id":            "Description.RegexPatternSet.Id",
-	"lock_token":    "Description.RegexPatternSetSummary.LockToken",
-	"name":          "Description.RegexPatternSet.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"partition":     "Metadata.Partition",
-	"tags_src":      "Description.Tags.TagInfoForResource.TagList",
-	"title":         "Description.RegexPatternSet.Name",
+	"account_id":          "Metadata.AccountID",
+	"arn":                 "Description.RegexPatternSet.ARN",
+	"description":         "Description.RegexPatternSet.Description",
+	"id":                  "Description.RegexPatternSet.Id",
+	"lock_token":          "Description.RegexPatternSetSummary.LockToken",
+	"name":                "Description.RegexPatternSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"tags_src":            "Description.Tags.TagInfoForResource.TagList",
+	"title":               "Description.RegexPatternSet.Name",
 }
 
 func ListWAFv2RegexPatternSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57399,17 +57390,17 @@ func ListWAFv2RegexPatternSet(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getWAFv2RegexPatternSetFilters = map[string]string{
-	"account_id":    "Metadata.AccountID",
-	"arn":           "Description.RegexPatternSet.ARN",
-	"description":   "Description.RegexPatternSet.Description",
-	"id":            "description.IPSetSummary.Id",
-	"lock_token":    "Description.RegexPatternSetSummary.LockToken",
-	"name":          "description.IPSetSummary.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"partition":     "Metadata.Partition",
-	"scope":         "description.IPSetSummary.Scope",
-	"tags_src":      "Description.Tags.TagInfoForResource.TagList",
-	"title":         "Description.RegexPatternSet.Name",
+	"account_id":          "Metadata.AccountID",
+	"arn":                 "Description.RegexPatternSet.ARN",
+	"description":         "Description.RegexPatternSet.Description",
+	"id":                  "description.IPSetSummary.Id",
+	"lock_token":          "Description.RegexPatternSetSummary.LockToken",
+	"name":                "description.IPSetSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"scope":               "description.IPSetSummary.Scope",
+	"tags_src":            "Description.Tags.TagInfoForResource.TagList",
+	"title":               "Description.RegexPatternSet.Name",
 }
 
 func GetWAFv2RegexPatternSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57548,19 +57539,19 @@ func (p WAFv2RuleGroupPaginator) NextPage(ctx context.Context) ([]WAFv2RuleGroup
 }
 
 var listWAFv2RuleGroupFilters = map[string]string{
-	"account_id":        "Metadata.AccountID",
-	"arn":               "Description.RuleGroup.ARN",
-	"capacity":          "Description.RuleGroup.Capacity",
-	"description":       "Description.RuleGroup.Description",
-	"id":                "Description.RuleGroup.Id",
-	"lock_token":        "Description.RuleGroupSummary.LockToken",
-	"name":              "Description.RuleGroup.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"partition":         "Metadata.Partition",
-	"rules":             "Description.RuleGroup.Rules",
-	"tags_src":          "Description.Tags.TagInfoForResource.TagList",
-	"title":             "Description.RuleGroup.Name",
-	"visibility_config": "Description.RuleGroup.VisibilityConfig",
+	"account_id":          "Metadata.AccountID",
+	"arn":                 "Description.RuleGroup.ARN",
+	"capacity":            "Description.RuleGroup.Capacity",
+	"description":         "Description.RuleGroup.Description",
+	"id":                  "Description.RuleGroup.Id",
+	"lock_token":          "Description.RuleGroupSummary.LockToken",
+	"name":                "Description.RuleGroup.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"rules":               "Description.RuleGroup.Rules",
+	"tags_src":            "Description.Tags.TagInfoForResource.TagList",
+	"title":               "Description.RuleGroup.Name",
+	"visibility_config":   "Description.RuleGroup.VisibilityConfig",
 }
 
 func ListWAFv2RuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57624,20 +57615,20 @@ func ListWAFv2RuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getWAFv2RuleGroupFilters = map[string]string{
-	"account_id":        "Metadata.AccountID",
-	"arn":               "Description.RuleGroup.ARN",
-	"capacity":          "Description.RuleGroup.Capacity",
-	"description":       "Description.RuleGroup.Description",
-	"id":                "description.RuleGroup.Id",
-	"lock_token":        "Description.RuleGroupSummary.LockToken",
-	"name":              "description.RuleGroup.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"partition":         "Metadata.Partition",
-	"rules":             "Description.RuleGroup.Rules",
-	"scope":             "description.Tags",
-	"tags_src":          "Description.Tags.TagInfoForResource.TagList",
-	"title":             "Description.RuleGroup.Name",
-	"visibility_config": "Description.RuleGroup.VisibilityConfig",
+	"account_id":          "Metadata.AccountID",
+	"arn":                 "Description.RuleGroup.ARN",
+	"capacity":            "Description.RuleGroup.Capacity",
+	"description":         "Description.RuleGroup.Description",
+	"id":                  "description.RuleGroup.Id",
+	"lock_token":          "Description.RuleGroupSummary.LockToken",
+	"name":                "description.RuleGroup.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"partition":           "Metadata.Partition",
+	"rules":               "Description.RuleGroup.Rules",
+	"scope":               "description.Tags",
+	"tags_src":            "Description.Tags.TagInfoForResource.TagList",
+	"title":               "Description.RuleGroup.Name",
+	"visibility_config":   "Description.RuleGroup.VisibilityConfig",
 }
 
 func GetWAFv2RuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -57789,7 +57780,7 @@ var listKMSKeyFilters = map[string]string{
 	"key_rotation_enabled":     "Description.KeyRotationEnabled",
 	"key_state":                "Description.Metadata.KeyState",
 	"key_usage":                "Description.Metadata.KeyUsage",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"origin":                   "Description.Metadata.Origin",
 	"tags":                     "Description.Tags",
 	"tags_src":                 "Description.Tags",
@@ -57871,7 +57862,7 @@ var getKMSKeyFilters = map[string]string{
 	"key_rotation_enabled":     "Description.KeyRotationEnabled",
 	"key_state":                "Description.Metadata.KeyState",
 	"key_usage":                "Description.Metadata.KeyUsage",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"origin":                   "Description.Metadata.Origin",
 	"tags":                     "Description.Tags",
 	"tags_src":                 "Description.Tags",
@@ -58226,13 +58217,13 @@ func (p KMSAliasPaginator) NextPage(ctx context.Context) ([]KMSAlias, error) {
 }
 
 var listKMSAliasFilters = map[string]string{
-	"alias_name":        "Description.Alias.AliasName",
-	"arn":               "Description.Alias.AliasArn",
-	"creation_date":     "Description.Alias.CreationDate",
-	"last_updated_date": "Description.Alias.LastUpdatedDate",
-	"og_account_id":     "metadata.IntegrationID",
-	"target_key_id":     "Description.Alias.TargetKeyId",
-	"title":             "Description.Alias.AliasName",
+	"alias_name":          "Description.Alias.AliasName",
+	"arn":                 "Description.Alias.AliasArn",
+	"creation_date":       "Description.Alias.CreationDate",
+	"last_updated_date":   "Description.Alias.LastUpdatedDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"target_key_id":       "Description.Alias.TargetKeyId",
+	"title":               "Description.Alias.AliasName",
 }
 
 func ListKMSAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -58296,13 +58287,13 @@ func ListKMSAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 }
 
 var getKMSAliasFilters = map[string]string{
-	"alias_name":        "Description.Alias.AliasName",
-	"arn":               "Description.Alias.AliasArn",
-	"creation_date":     "Description.Alias.CreationDate",
-	"last_updated_date": "Description.Alias.LastUpdatedDate",
-	"og_account_id":     "metadata.IntegrationID",
-	"target_key_id":     "Description.Alias.TargetKeyId",
-	"title":             "Description.Alias.AliasName",
+	"alias_name":          "Description.Alias.AliasName",
+	"arn":                 "Description.Alias.AliasArn",
+	"creation_date":       "Description.Alias.CreationDate",
+	"last_updated_date":   "Description.Alias.LastUpdatedDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"target_key_id":       "Description.Alias.TargetKeyId",
+	"title":               "Description.Alias.AliasName",
 }
 
 func GetKMSAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -58460,7 +58451,7 @@ var listLambdaFunctionFilters = map[string]string{
 	"master_arn":                     "Description.Function.Configuration.MasterArn",
 	"memory_size":                    "Description.Function.Configuration.MemorySize",
 	"name":                           "Description.Function.Configuration.FunctionName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"package_type":                   "Description.Function.Configuration.PackageType",
 	"policy":                         "Description.Policy.Policy",
 	"reserved_concurrent_executions": "Description.Function.Concurrency.ReservedConcurrentExecutions",
@@ -58562,7 +58553,7 @@ var getLambdaFunctionFilters = map[string]string{
 	"master_arn":                     "Description.Function.Configuration.MasterArn",
 	"memory_size":                    "Description.Function.Configuration.MemorySize",
 	"name":                           "description.Function.Configuration.FunctionName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"package_type":                   "Description.Function.Configuration.PackageType",
 	"policy":                         "Description.Policy.Policy",
 	"reserved_concurrent_executions": "Description.Function.Concurrency.ReservedConcurrentExecutions",
@@ -58741,7 +58732,7 @@ var listLambdaFunctionVersionFilters = map[string]string{
 	"logging_config":                 "Description.FunctionVersion.LoggingConfig",
 	"master_arn":                     "Description.FunctionVersion.MasterArn",
 	"memory_size":                    "Description.FunctionVersion.MemorySize",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"policy":                         "Description.Policy",
 	"revision_id":                    "Description.Policy.RevisionId",
 	"role":                           "Description.FunctionVersion.Role",
@@ -58844,7 +58835,7 @@ var getLambdaFunctionVersionFilters = map[string]string{
 	"logging_config":                 "Description.FunctionVersion.LoggingConfig",
 	"master_arn":                     "Description.FunctionVersion.MasterArn",
 	"memory_size":                    "Description.FunctionVersion.MemorySize",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"policy":                         "Description.Policy",
 	"revision_id":                    "Description.Policy.RevisionId",
 	"role":                           "Description.FunctionVersion.Role",
@@ -59001,16 +58992,16 @@ func (p LambdaAliasPaginator) NextPage(ctx context.Context) ([]LambdaAlias, erro
 }
 
 var listLambdaAliasFilters = map[string]string{
-	"alias_arn":        "Description.Alias.AliasArn",
-	"description":      "Description.Alias.Description",
-	"function_name":    "description.FunctionName",
-	"function_version": "description.Alias.FunctionVersion",
-	"name":             "Description.Alias.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"policy":           "Description.Policy",
-	"revision_id":      "Description.Alias.RevisionId",
-	"title":            "Description.Alias.Name",
-	"url_config":       "Description.UrlConfig",
+	"alias_arn":           "Description.Alias.AliasArn",
+	"description":         "Description.Alias.Description",
+	"function_name":       "description.FunctionName",
+	"function_version":    "description.Alias.FunctionVersion",
+	"name":                "Description.Alias.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Policy",
+	"revision_id":         "Description.Alias.RevisionId",
+	"title":               "Description.Alias.Name",
+	"url_config":          "Description.UrlConfig",
 }
 
 func ListLambdaAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -59074,17 +59065,17 @@ func ListLambdaAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getLambdaAliasFilters = map[string]string{
-	"alias_arn":        "Description.Alias.AliasArn",
-	"description":      "Description.Alias.Description",
-	"function_name":    "description.FunctionName",
-	"function_version": "Description.Alias.FunctionVersion",
-	"name":             "description.Alias.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"policy":           "Description.Policy",
-	"region":           "description.Alias.AliasName",
-	"revision_id":      "Description.Alias.RevisionId",
-	"title":            "Description.Alias.Name",
-	"url_config":       "Description.UrlConfig",
+	"alias_arn":           "Description.Alias.AliasArn",
+	"description":         "Description.Alias.Description",
+	"function_name":       "description.FunctionName",
+	"function_version":    "Description.Alias.FunctionVersion",
+	"name":                "description.Alias.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Policy",
+	"region":              "description.Alias.AliasName",
+	"revision_id":         "Description.Alias.RevisionId",
+	"title":               "Description.Alias.Name",
+	"url_config":          "Description.UrlConfig",
 }
 
 func GetLambdaAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -59231,7 +59222,7 @@ var listLambdaLayerFilters = map[string]string{
 	"layer_name":               "Description.Layer.LayerName",
 	"layer_version_arn":        "Description.Layer.LatestMatchingVersion.LayerVersionArn",
 	"license_info":             "Description.Layer.LatestMatchingVersion.LicenseInfo",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"title":                    "Description.Layer.LayerName",
 	"version":                  "Description.Layer.LatestMatchingVersion.Version",
 }
@@ -59305,7 +59296,7 @@ var getLambdaLayerFilters = map[string]string{
 	"layer_name":               "Description.Layer.LayerName",
 	"layer_version_arn":        "Description.Layer.LatestMatchingVersion.LayerVersionArn",
 	"license_info":             "Description.Layer.LatestMatchingVersion.LicenseInfo",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"title":                    "Description.Layer.LayerName",
 	"version":                  "Description.Layer.LatestMatchingVersion.Version",
 }
@@ -59455,7 +59446,7 @@ var listLambdaLayerVersionFilters = map[string]string{
 	"layer_name":               "description.LayerName",
 	"layer_version_arn":        "Description.LayerVersion.LayerVersionArn",
 	"license_info":             "Description.LayerVersion.LicenseInfo",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"policy":                   "Description.Policy",
 	"revision_id":              "Description.Policy.RevisionId",
 	"title":                    "Description.LayerName",
@@ -59532,7 +59523,7 @@ var getLambdaLayerVersionFilters = map[string]string{
 	"layer_name":               "description.LayerName",
 	"layer_version_arn":        "Description.LayerVersion.LayerVersionArn",
 	"license_info":             "Description.LayerVersion.LicenseInfo",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"policy":                   "Description.Policy",
 	"revision_id":              "Description.Policy.RevisionId",
 	"title":                    "Description.LayerName",
@@ -59684,7 +59675,7 @@ var listS3AccessPointFilters = map[string]string{
 	"ignore_public_acls":            "Description.AccessPoint.PublicAccessBlockConfiguration.IgnorePublicAcls",
 	"name":                          "Description.AccessPoint.Name",
 	"network_origin":                "Description.AccessPoint.NetworkOrigin",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"restrict_public_buckets":       "Description.AccessPoint.PublicAccessBlockConfiguration.RestrictPublicBuckets",
 	"title":                         "Description.AccessPoint.Name",
 	"vpc_id":                        "Description.AccessPoint.VpcConfiguration.VpcId",
@@ -59760,7 +59751,7 @@ var getS3AccessPointFilters = map[string]string{
 	"ignore_public_acls":            "Description.AccessPoint.PublicAccessBlockConfiguration.IgnorePublicAcls",
 	"name":                          "description.AccessPoint.Name",
 	"network_origin":                "Description.AccessPoint.NetworkOrigin",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"region":                        "metadata.region",
 	"restrict_public_buckets":       "Description.AccessPoint.PublicAccessBlockConfiguration.RestrictPublicBuckets",
 	"title":                         "Description.AccessPoint.Name",
@@ -59903,8 +59894,8 @@ func (p CostExplorerByAccountMonthlyPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listCostExplorerByAccountMonthlyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
 }
 
 func ListCostExplorerByAccountMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -59968,8 +59959,8 @@ func ListCostExplorerByAccountMonthly(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getCostExplorerByAccountMonthlyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
 }
 
 func GetCostExplorerByAccountMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60108,8 +60099,8 @@ func (p CostExplorerByServiceMonthlyPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listCostExplorerByServiceMonthlyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Description.Dimension1",
 }
 
 func ListCostExplorerByServiceMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60173,8 +60164,8 @@ func ListCostExplorerByServiceMonthly(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getCostExplorerByServiceMonthlyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Description.Dimension1",
 }
 
 func GetCostExplorerByServiceMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60313,9 +60304,9 @@ func (p CostExplorerByRecordTypeMonthlyPaginator) NextPage(ctx context.Context) 
 }
 
 var listCostExplorerByRecordTypeMonthlyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
-	"record_type":       "Description.Dimension2",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"record_type":         "Description.Dimension2",
 }
 
 func ListCostExplorerByRecordTypeMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60379,9 +60370,9 @@ func ListCostExplorerByRecordTypeMonthly(ctx context.Context, d *plugin.QueryDat
 }
 
 var getCostExplorerByRecordTypeMonthlyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
-	"record_type":       "Description.Dimension2",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"record_type":         "Description.Dimension2",
 }
 
 func GetCostExplorerByRecordTypeMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60520,9 +60511,9 @@ func (p CostExplorerByServiceUsageTypeMonthlyPaginator) NextPage(ctx context.Con
 }
 
 var listCostExplorerByServiceUsageTypeMonthlyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Dimension1",
-	"usage_type":    "Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Dimension1",
+	"usage_type":          "Dimension2",
 }
 
 func ListCostExplorerByServiceUsageTypeMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60586,9 +60577,9 @@ func ListCostExplorerByServiceUsageTypeMonthly(ctx context.Context, d *plugin.Qu
 }
 
 var getCostExplorerByServiceUsageTypeMonthlyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Dimension1",
-	"usage_type":    "Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Dimension1",
+	"usage_type":          "Dimension2",
 }
 
 func GetCostExplorerByServiceUsageTypeMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60727,10 +60718,10 @@ func (p CostExplorerForcastMonthlyPaginator) NextPage(ctx context.Context) ([]Co
 }
 
 var listCostExplorerForcastMonthlyFilters = map[string]string{
-	"mean_value":    "Description.MeanValue",
-	"og_account_id": "metadata.IntegrationID",
-	"period_end":    "Description.PeriodEnd",
-	"period_start":  "Description.PeriodStart",
+	"mean_value":          "Description.MeanValue",
+	"platform_account_id": "metadata.IntegrationID",
+	"period_end":          "Description.PeriodEnd",
+	"period_start":        "Description.PeriodStart",
 }
 
 func ListCostExplorerForcastMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60794,10 +60785,10 @@ func ListCostExplorerForcastMonthly(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getCostExplorerForcastMonthlyFilters = map[string]string{
-	"mean_value":    "Description.MeanValue",
-	"og_account_id": "metadata.IntegrationID",
-	"period_end":    "Description.PeriodEnd",
-	"period_start":  "Description.PeriodStart",
+	"mean_value":          "Description.MeanValue",
+	"platform_account_id": "metadata.IntegrationID",
+	"period_end":          "Description.PeriodEnd",
+	"period_start":        "Description.PeriodStart",
 }
 
 func GetCostExplorerForcastMonthly(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -60936,8 +60927,8 @@ func (p CostExplorerByAccountDailyPaginator) NextPage(ctx context.Context) ([]Co
 }
 
 var listCostExplorerByAccountDailyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
 }
 
 func ListCostExplorerByAccountDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61001,8 +60992,8 @@ func ListCostExplorerByAccountDaily(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getCostExplorerByAccountDailyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
 }
 
 func GetCostExplorerByAccountDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61141,9 +61132,9 @@ func (p CostExplorerByServiceDailyPaginator) NextPage(ctx context.Context) ([]Co
 }
 
 var listCostExplorerByServiceDailyFilters = map[string]string{
-	"cost_source":   "description.Dimension2",
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "description.Dimension1",
+	"cost_source":         "description.Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "description.Dimension1",
 }
 
 func ListCostExplorerByServiceDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61207,9 +61198,9 @@ func ListCostExplorerByServiceDaily(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getCostExplorerByServiceDailyFilters = map[string]string{
-	"cost_source":   "Description.Dimension2",
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Description.Dimension1",
+	"cost_source":         "Description.Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Description.Dimension1",
 }
 
 func GetCostExplorerByServiceDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61348,9 +61339,9 @@ func (p CostExplorerByRecordTypeDailyPaginator) NextPage(ctx context.Context) ([
 }
 
 var listCostExplorerByRecordTypeDailyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
-	"record_type":       "Description.Dimension2",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"record_type":         "Description.Dimension2",
 }
 
 func ListCostExplorerByRecordTypeDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61414,9 +61405,9 @@ func ListCostExplorerByRecordTypeDaily(ctx context.Context, d *plugin.QueryData,
 }
 
 var getCostExplorerByRecordTypeDailyFilters = map[string]string{
-	"linked_account_id": "Description.Dimension1",
-	"og_account_id":     "metadata.IntegrationID",
-	"record_type":       "Description.Dimension2",
+	"linked_account_id":   "Description.Dimension1",
+	"platform_account_id": "metadata.IntegrationID",
+	"record_type":         "Description.Dimension2",
 }
 
 func GetCostExplorerByRecordTypeDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61555,9 +61546,9 @@ func (p CostExplorerByServiceUsageTypeDailyPaginator) NextPage(ctx context.Conte
 }
 
 var listCostExplorerByServiceUsageTypeDailyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Dimension1",
-	"usage_type":    "Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Dimension1",
+	"usage_type":          "Dimension2",
 }
 
 func ListCostExplorerByServiceUsageTypeDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61621,9 +61612,9 @@ func ListCostExplorerByServiceUsageTypeDaily(ctx context.Context, d *plugin.Quer
 }
 
 var getCostExplorerByServiceUsageTypeDailyFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"service":       "Dimension1",
-	"usage_type":    "Dimension2",
+	"platform_account_id": "metadata.IntegrationID",
+	"service":             "Dimension1",
+	"usage_type":          "Dimension2",
 }
 
 func GetCostExplorerByServiceUsageTypeDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61762,10 +61753,10 @@ func (p CostExplorerForcastDailyPaginator) NextPage(ctx context.Context) ([]Cost
 }
 
 var listCostExplorerForcastDailyFilters = map[string]string{
-	"mean_value":    "Description.MeanValue",
-	"og_account_id": "metadata.IntegrationID",
-	"period_end":    "Description.PeriodEnd",
-	"period_start":  "Description.PeriodStart",
+	"mean_value":          "Description.MeanValue",
+	"platform_account_id": "metadata.IntegrationID",
+	"period_end":          "Description.PeriodEnd",
+	"period_start":        "Description.PeriodStart",
 }
 
 func ListCostExplorerForcastDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61829,10 +61820,10 @@ func ListCostExplorerForcastDaily(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getCostExplorerForcastDailyFilters = map[string]string{
-	"mean_value":    "Description.MeanValue",
-	"og_account_id": "metadata.IntegrationID",
-	"period_end":    "Description.PeriodEnd",
-	"period_start":  "Description.PeriodStart",
+	"mean_value":          "Description.MeanValue",
+	"platform_account_id": "metadata.IntegrationID",
+	"period_end":          "Description.PeriodEnd",
+	"period_start":        "Description.PeriodStart",
 }
 
 func GetCostExplorerForcastDaily(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -61980,7 +61971,7 @@ var listECRRepositoryFilters = map[string]string{
 	"image_tag_mutability":              "Description.Repository.ImageTagMutability",
 	"last_evaluated_at":                 "Description.LifecyclePolicy.LastEvaluatedAt",
 	"lifecycle_policy":                  "Description.LifecyclePolicy.LifecyclePolicyText",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"policy":                            "Description.Policy.PolicyText",
 	"registry_id":                       "Description.Repository.RegistryId",
 	"repository_name":                   "Description.Repository.RepositoryName",
@@ -62060,7 +62051,7 @@ var getECRRepositoryFilters = map[string]string{
 	"image_tag_mutability":              "Description.Repository.ImageTagMutability",
 	"last_evaluated_at":                 "Description.LifecyclePolicy.LastEvaluatedAt",
 	"lifecycle_policy":                  "Description.LifecyclePolicy.LifecyclePolicyText",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"policy":                            "Description.Policy.PolicyText",
 	"registry_id":                       "Description.Repository.RegistryId",
 	"repository_name":                   "description.Repository.RepositoryName",
@@ -62216,7 +62207,7 @@ var listECRImageFilters = map[string]string{
 	"image_tags":                  "Description.Image.ImageTags",
 	"image_uri":                   "Description.ImageUri",
 	"last_recorded_pull_time":     "Description.Image.LastRecordedPullTime",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"registry_id":                 "description.Image.RegistryId",
 	"repository_name":             "description.Image.RepositoryName",
 }
@@ -62292,7 +62283,7 @@ var getECRImageFilters = map[string]string{
 	"image_tags":                  "Description.Image.ImageTags",
 	"image_uri":                   "Description.ImageUri",
 	"last_recorded_pull_time":     "Description.Image.LastRecordedPullTime",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"registry_id":                 "Description.Image.RegistryId",
 	"repository_name":             "Description.Image.RepositoryName",
 }
@@ -62433,16 +62424,16 @@ func (p ECRPublicRepositoryPaginator) NextPage(ctx context.Context) ([]ECRPublic
 }
 
 var listECRPublicRepositoryFilters = map[string]string{
-	"arn":             "Description.PublicRepository.RepositoryArn",
-	"created_at":      "Description.PublicRepository.CreatedAt",
-	"image_details":   "Description.ImageDetails",
-	"og_account_id":   "metadata.IntegrationID",
-	"policy":          "Description.Policy.PolicyText",
-	"registry_id":     "Description.PublicRepository.RegistryId",
-	"repository_name": "Description.PublicRepository.RepositoryName",
-	"repository_uri":  "Description.PublicRepository.RepositoryUri",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.PublicRepository.RepositoryName",
+	"arn":                 "Description.PublicRepository.RepositoryArn",
+	"created_at":          "Description.PublicRepository.CreatedAt",
+	"image_details":       "Description.ImageDetails",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Policy.PolicyText",
+	"registry_id":         "Description.PublicRepository.RegistryId",
+	"repository_name":     "Description.PublicRepository.RepositoryName",
+	"repository_uri":      "Description.PublicRepository.RepositoryUri",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.PublicRepository.RepositoryName",
 }
 
 func ListECRPublicRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -62506,16 +62497,16 @@ func ListECRPublicRepository(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getECRPublicRepositoryFilters = map[string]string{
-	"arn":             "Description.PublicRepository.RepositoryArn",
-	"created_at":      "Description.PublicRepository.CreatedAt",
-	"image_details":   "Description.ImageDetails",
-	"og_account_id":   "metadata.IntegrationID",
-	"policy":          "Description.Policy.PolicyText",
-	"registry_id":     "Description.PublicRepository.RegistryId",
-	"repository_name": "description.PublicRepository.RepositoryName",
-	"repository_uri":  "Description.PublicRepository.RepositoryUri",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.PublicRepository.RepositoryName",
+	"arn":                 "Description.PublicRepository.RepositoryArn",
+	"created_at":          "Description.PublicRepository.CreatedAt",
+	"image_details":       "Description.ImageDetails",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Policy.PolicyText",
+	"registry_id":         "Description.PublicRepository.RegistryId",
+	"repository_name":     "description.PublicRepository.RepositoryName",
+	"repository_uri":      "Description.PublicRepository.RepositoryUri",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.PublicRepository.RepositoryName",
 }
 
 func GetECRPublicRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -62654,10 +62645,10 @@ func (p ECRPublicRegistryPaginator) NextPage(ctx context.Context) ([]ECRPublicRe
 }
 
 var listECRPublicRegistryFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"registry_arn":  "Description.PublicRegistry.RegistryArn",
-	"registry_id":   "Description.PublicRegistry.RegistryId",
-	"title":         "Description.PublicRegistry.RegistryId",
+	"platform_account_id": "metadata.IntegrationID",
+	"registry_arn":        "Description.PublicRegistry.RegistryArn",
+	"registry_id":         "Description.PublicRegistry.RegistryId",
+	"title":               "Description.PublicRegistry.RegistryId",
 }
 
 func ListECRPublicRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -62721,10 +62712,10 @@ func ListECRPublicRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getECRPublicRegistryFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"registry_arn":  "Description.PublicRegistry.RegistryArn",
-	"registry_id":   "description.PublicRegistry.RegistryId",
-	"title":         "Description.PublicRegistry.RegistryId",
+	"platform_account_id": "metadata.IntegrationID",
+	"registry_arn":        "Description.PublicRegistry.RegistryArn",
+	"registry_id":         "description.PublicRegistry.RegistryId",
+	"title":               "Description.PublicRegistry.RegistryId",
 }
 
 func GetECRPublicRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -62863,10 +62854,10 @@ func (p ECRRegistryPaginator) NextPage(ctx context.Context) ([]ECRRegistry, erro
 }
 
 var listECRRegistryFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"registry_id":   "Description.RegistryId",
-	"rules":         "Description.ReplicationRules",
-	"title":         "Description.RegistryId",
+	"platform_account_id": "metadata.IntegrationID",
+	"registry_id":         "Description.RegistryId",
+	"rules":               "Description.ReplicationRules",
+	"title":               "Description.RegistryId",
 }
 
 func ListECRRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -62930,10 +62921,10 @@ func ListECRRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getECRRegistryFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"registry_id":   "description.Registry.RegistryId",
-	"rules":         "Description.ReplicationRules",
-	"title":         "Description.RegistryId",
+	"platform_account_id": "metadata.IntegrationID",
+	"registry_id":         "description.Registry.RegistryId",
+	"rules":               "Description.ReplicationRules",
+	"title":               "Description.RegistryId",
 }
 
 func GetECRRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63275,12 +63266,12 @@ func (p EventBridgeBusPaginator) NextPage(ctx context.Context) ([]EventBridgeBus
 }
 
 var listEventBridgeBusFilters = map[string]string{
-	"arn":           "Description.Bus.Arn",
-	"name":          "Description.Bus.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"policy":        "Description.Bus.Policy",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.Bus.Name",
+	"arn":                 "Description.Bus.Arn",
+	"name":                "Description.Bus.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Bus.Policy",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Bus.Name",
 }
 
 func ListEventBridgeBus(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63344,12 +63335,12 @@ func ListEventBridgeBus(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getEventBridgeBusFilters = map[string]string{
-	"arn":           "description.Bus.Arn",
-	"name":          "Description.Bus.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"policy":        "Description.Bus.Policy",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.Bus.Name",
+	"arn":                 "description.Bus.Arn",
+	"name":                "Description.Bus.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy":              "Description.Bus.Policy",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Bus.Name",
 }
 
 func GetEventBridgeBus(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63488,19 +63479,19 @@ func (p EventBridgeRulePaginator) NextPage(ctx context.Context) ([]EventBridgeRu
 }
 
 var listEventBridgeRuleFilters = map[string]string{
-	"arn":            "Description.Rule.Arn",
-	"created_by":     "Description.Rule.CreatedBy",
-	"description":    "Description.Rule.Description",
-	"event_bus_name": "description.Rule.EventBusName",
-	"event_pattern":  "Description.Rule.EventPattern",
-	"managed_by":     "Description.Rule.ManagedBy",
-	"name":           "Description.Rule.Name",
-	"name_prefix":    "description.Rule.Name",
-	"og_account_id":  "metadata.IntegrationID",
-	"state":          "Description.Rule.State",
-	"tags_src":       "Description.Tags",
-	"targets":        "Description.Targets",
-	"title":          "Description.Rule.Name",
+	"arn":                 "Description.Rule.Arn",
+	"created_by":          "Description.Rule.CreatedBy",
+	"description":         "Description.Rule.Description",
+	"event_bus_name":      "description.Rule.EventBusName",
+	"event_pattern":       "Description.Rule.EventPattern",
+	"managed_by":          "Description.Rule.ManagedBy",
+	"name":                "Description.Rule.Name",
+	"name_prefix":         "description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"state":               "Description.Rule.State",
+	"tags_src":            "Description.Tags",
+	"targets":             "Description.Targets",
+	"title":               "Description.Rule.Name",
 }
 
 func ListEventBridgeRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63564,19 +63555,19 @@ func ListEventBridgeRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getEventBridgeRuleFilters = map[string]string{
-	"arn":            "Description.Rule.Arn",
-	"created_by":     "Description.Rule.CreatedBy",
-	"description":    "Description.Rule.Description",
-	"event_bus_name": "Description.Rule.EventBusName",
-	"event_pattern":  "Description.Rule.EventPattern",
-	"managed_by":     "Description.Rule.ManagedBy",
-	"name":           "description.Rule.Name",
-	"name_prefix":    "Description.Rule.Name",
-	"og_account_id":  "metadata.IntegrationID",
-	"state":          "Description.Rule.State",
-	"tags_src":       "Description.Tags",
-	"targets":        "Description.Targets",
-	"title":          "Description.Rule.Name",
+	"arn":                 "Description.Rule.Arn",
+	"created_by":          "Description.Rule.CreatedBy",
+	"description":         "Description.Rule.Description",
+	"event_bus_name":      "Description.Rule.EventBusName",
+	"event_pattern":       "Description.Rule.EventPattern",
+	"managed_by":          "Description.Rule.ManagedBy",
+	"name":                "description.Rule.Name",
+	"name_prefix":         "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"state":               "Description.Rule.State",
+	"tags_src":            "Description.Tags",
+	"targets":             "Description.Targets",
+	"title":               "Description.Rule.Name",
 }
 
 func GetEventBridgeRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63715,11 +63706,11 @@ func (p AppStreamApplicationPaginator) NextPage(ctx context.Context) ([]AppStrea
 }
 
 var listAppStreamApplicationFilters = map[string]string{
-	"arn":           "Description.Application.Arn",
-	"name":          "Description.Application.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Application.Name",
+	"arn":                 "Description.Application.Arn",
+	"name":                "Description.Application.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Application.Name",
 }
 
 func ListAppStreamApplication(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63783,11 +63774,11 @@ func ListAppStreamApplication(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getAppStreamApplicationFilters = map[string]string{
-	"arn":           "Description.Application.Arn",
-	"name":          "description.Application.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Application.Name",
+	"arn":                 "Description.Application.Arn",
+	"name":                "description.Application.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Application.Name",
 }
 
 func GetAppStreamApplication(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63926,11 +63917,11 @@ func (p AppStreamStackPaginator) NextPage(ctx context.Context) ([]AppStreamStack
 }
 
 var listAppStreamStackFilters = map[string]string{
-	"arn":           "Description.Stack.Arn",
-	"name":          "Description.Stack.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Stack.Name",
+	"arn":                 "Description.Stack.Arn",
+	"name":                "Description.Stack.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Stack.Name",
 }
 
 func ListAppStreamStack(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -63994,11 +63985,11 @@ func ListAppStreamStack(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getAppStreamStackFilters = map[string]string{
-	"arn":           "Description.Stack.Arn",
-	"name":          "description.Stack.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Stack.Name",
+	"arn":                 "Description.Stack.Arn",
+	"name":                "description.Stack.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Stack.Name",
 }
 
 func GetAppStreamStack(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -64155,7 +64146,7 @@ var listAppStreamFleetFilters = map[string]string{
 	"max_concurrent_sessions":                "Description.Fleet.MaxConcurrentSessions",
 	"max_user_duration_in_seconds":           "Description.Fleet.MaxUserDurationInSeconds",
 	"name":                                   "Description.Fleet.Name",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"organizational_unit_distinguished_name": "Description.Fleet.DomainJoinInfo.OrganizationalUnitDistinguishedName",
 	"platform":                               "Description.Fleet.Platform",
 	"session_script_s3_location":             "Description.Fleet.SessionScriptS3Location",
@@ -64246,7 +64237,7 @@ var getAppStreamFleetFilters = map[string]string{
 	"max_concurrent_sessions":                "Description.Fleet.MaxConcurrentSessions",
 	"max_user_duration_in_seconds":           "Description.Fleet.MaxUserDurationInSeconds",
 	"name":                                   "description.Fleet.Name",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"organizational_unit_distinguished_name": "Description.Fleet.DomainJoinInfo.OrganizationalUnitDistinguishedName",
 	"platform":                               "Description.Fleet.Platform",
 	"session_script_s3_location":             "Description.Fleet.SessionScriptS3Location",
@@ -64406,7 +64397,7 @@ var listAppStreamImageFilters = map[string]string{
 	"image_errors":                    "Description.Image.ImageErrors",
 	"image_permissions":               "Description.Image.ImagePermissions",
 	"name":                            "Description.Image.Name",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"platform":                        "Description.Image.Platform",
 	"public_base_image_released_date": "Description.Image.PublicBaseImageReleasedDate",
 	"state":                           "Description.Image.State",
@@ -64489,7 +64480,7 @@ var getAppStreamImageFilters = map[string]string{
 	"image_errors":                    "Description.Image.ImageErrors",
 	"image_permissions":               "Description.Image.ImagePermissions",
 	"name":                            "description.Image.Name",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"platform":                        "Description.Image.Platform",
 	"public_base_image_released_date": "Description.Image.PublicBaseImageReleasedDate",
 	"state":                           "Description.Image.State",
@@ -64646,7 +64637,7 @@ var listAthenaWorkGroupFilters = map[string]string{
 	"execution_role":                     "Description.WorkGroup.Configuration.ExecutionRole",
 	"expected_bucket_owner":              "Description.WorkGroup.Configuration.ResultConfiguration.ExpectedBucketOwner",
 	"name":                               "Description.WorkGroup.Name",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"output_location":                    "Description.WorkGroup.Configuration.ResultConfiguration.OutputLocation",
 	"publish_cloudwatch_metrics_enabled": "Description.WorkGroup.Configuration.PublishCloudWatchMetricsEnabled",
 	"requester_pays_enabled":             "Description.WorkGroup.Configuration.RequesterPaysEnabled",
@@ -64727,7 +64718,7 @@ var getAthenaWorkGroupFilters = map[string]string{
 	"execution_role":                     "Description.WorkGroup.Configuration.ExecutionRole",
 	"expected_bucket_owner":              "Description.WorkGroup.Configuration.ResultConfiguration.ExpectedBucketOwner",
 	"name":                               "description.WorkGroup.Name",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"output_location":                    "Description.WorkGroup.Configuration.ResultConfiguration.OutputLocation",
 	"publish_cloudwatch_metrics_enabled": "Description.WorkGroup.Configuration.PublishCloudWatchMetricsEnabled",
 	"requester_pays_enabled":             "Description.WorkGroup.Configuration.RequesterPaysEnabled",
@@ -64887,7 +64878,7 @@ var listAthenaQueryExecutionFilters = map[string]string{
 	"expected_bucket_owner":                  "Description.QueryExecution.ResultConfiguration.ExpectedBucketOwner",
 	"id":                                     "Description.QueryExecution.QueryExecutionId",
 	"kms_key":                                "Description.QueryExecution.ResultConfiguration.EncryptionConfiguration.KmsKey",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"output_location":                        "Description.QueryExecution.ResultConfiguration.OutputLocation",
 	"query":                                  "Description.QueryExecution.Query",
 	"query_planning_time_in_millis":          "Description.QueryExecution.Statistics.QueryPlanningTimeInMillis",
@@ -64985,7 +64976,7 @@ var getAthenaQueryExecutionFilters = map[string]string{
 	"id":                                     "Description.QueryExecution.QueryExecutionId",
 	"kms_key":                                "Description.QueryExecution.ResultConfiguration.EncryptionConfiguration.KmsKey",
 	"name":                                   "description.QueryExecution.Query",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"output_location":                        "Description.QueryExecution.ResultConfiguration.OutputLocation",
 	"query":                                  "Description.QueryExecution.Query",
 	"query_planning_time_in_millis":          "Description.QueryExecution.Statistics.QueryPlanningTimeInMillis",
@@ -65147,7 +65138,7 @@ var listKinesisStreamFilters = map[string]string{
 	"enhanced_monitoring":       "Description.Stream.EnhancedMonitoring",
 	"has_more_shards":           "Description.Stream.HasMoreShards",
 	"key_id":                    "Description.Stream.KeyId",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"open_shard_count":          "Description.DescriptionSummary.OpenShardCount",
 	"retention_period_hours":    "Description.Stream.RetentionPeriodHours",
 	"shards":                    "Description.Stream.Shards",
@@ -65225,7 +65216,7 @@ var getKinesisStreamFilters = map[string]string{
 	"enhanced_monitoring":       "Description.Stream.EnhancedMonitoring",
 	"has_more_shards":           "Description.Stream.HasMoreShards",
 	"key_id":                    "Description.Stream.KeyId",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"open_shard_count":          "Description.DescriptionSummary.OpenShardCount",
 	"retention_period_hours":    "Description.Stream.RetentionPeriodHours",
 	"shards":                    "Description.Stream.Shards",
@@ -65378,7 +65369,7 @@ var listKinesisVideoStreamFilters = map[string]string{
 	"device_name":             "Description.Stream.DeviceName",
 	"kms_key_id":              "Description.Stream.KmsKeyId",
 	"media_type":              "Description.Stream.MediaType",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"status":                  "Description.Stream.Status",
 	"stream_arn":              "Description.Stream.StreamARN",
 	"stream_name":             "Description.Stream.StreamName",
@@ -65453,7 +65444,7 @@ var getKinesisVideoStreamFilters = map[string]string{
 	"device_name":             "Description.Stream.DeviceName",
 	"kms_key_id":              "Description.Stream.KmsKeyId",
 	"media_type":              "Description.Stream.MediaType",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"status":                  "Description.Stream.Status",
 	"stream_arn":              "Description.Stream.StreamARN",
 	"stream_name":             "description.Stream.StreamName",
@@ -65602,7 +65593,7 @@ var listKinesisConsumerFilters = map[string]string{
 	"consumer_creation_timestamp": "Description.Consumer.ConsumerCreationTimestamp",
 	"consumer_name":               "Description.Consumer.ConsumerName",
 	"consumer_status":             "Description.Consumer.ConsumerStatus",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"stream_arn":                  "Description.StreamARN",
 	"title":                       "Description.Consumer.ConsumerName",
 }
@@ -65672,7 +65663,7 @@ var getKinesisConsumerFilters = map[string]string{
 	"consumer_creation_timestamp": "Description.Consumer.ConsumerCreationTimestamp",
 	"consumer_name":               "Description.Consumer.ConsumerName",
 	"consumer_status":             "Description.Consumer.ConsumerStatus",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"stream_arn":                  "Description.StreamARN",
 	"title":                       "Description.Consumer.ConsumerName",
 }
@@ -65822,7 +65813,7 @@ var listKinesisAnalyticsV2ApplicationFilters = map[string]string{
 	"cloud_watch_logging_option_descriptions": "Description.Application.CloudWatchLoggingOptionDescriptions",
 	"create_timestamp":                        "Description.Application.CreateTimestamp",
 	"last_update_timestamp":                   "Description.Application.LastUpdateTimestamp",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"runtime_environment":                     "Description.Application.RuntimeEnvironment",
 	"service_execution_role":                  "Description.Application.ServiceExecutionRole",
 	"tags_src":                                "Description.Tags",
@@ -65899,7 +65890,7 @@ var getKinesisAnalyticsV2ApplicationFilters = map[string]string{
 	"cloud_watch_logging_option_descriptions": "Description.Application.CloudWatchLoggingOptionDescriptions",
 	"create_timestamp":                        "Description.Application.CreateTimestamp",
 	"last_update_timestamp":                   "Description.Application.LastUpdateTimestamp",
-	"og_account_id":                           "metadata.IntegrationID",
+	"platform_account_id":                     "metadata.IntegrationID",
 	"runtime_environment":                     "Description.Application.RuntimeEnvironment",
 	"service_execution_role":                  "Description.Application.ServiceExecutionRole",
 	"tags_src":                                "Description.Tags",
@@ -66045,7 +66036,7 @@ var listGlacierVaultFilters = map[string]string{
 	"creation_date":             "Description.Vault.CreationDate",
 	"last_inventory_date":       "Description.Vault.LastInventoryDate",
 	"number_of_archives":        "Description.Vault.NumberOfArchives",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"policy":                    "Description.AccessPolicy.Policy",
 	"size_in_bytes":             "Description.Vault.SizeInBytes",
 	"tags":                      "Description.Tags",
@@ -66121,7 +66112,7 @@ var getGlacierVaultFilters = map[string]string{
 	"creation_date":             "Description.Vault.CreationDate",
 	"last_inventory_date":       "Description.Vault.LastInventoryDate",
 	"number_of_archives":        "Description.Vault.NumberOfArchives",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"policy":                    "Description.AccessPolicy.Policy",
 	"size_in_bytes":             "Description.Vault.SizeInBytes",
 	"tags":                      "Description.Tags",
@@ -66277,7 +66268,7 @@ var listWorkspacesWorkspaceFilters = map[string]string{
 	"ip_address":                     "Description.Workspace.IpAddress",
 	"modification_states":            "Description.Workspace.ModificationStates",
 	"name":                           "Description.Workspace.ComputerName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"root_volume_encryption_enabled": "Description.Workspace.RootVolumeEncryptionEnabled",
 	"state":                          "Description.Workspace.State",
 	"subnet_id":                      "Description.Workspace.SubnetId",
@@ -66359,7 +66350,7 @@ var getWorkspacesWorkspaceFilters = map[string]string{
 	"ip_address":                     "Description.Workspace.IpAddress",
 	"modification_states":            "Description.Workspace.ModificationStates",
 	"name":                           "Description.Workspace.ComputerName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"root_volume_encryption_enabled": "Description.Workspace.RootVolumeEncryptionEnabled",
 	"state":                          "Description.Workspace.State",
 	"subnet_id":                      "Description.Workspace.SubnetId",
@@ -66508,11 +66499,11 @@ func (p WorkspacesBundlePaginator) NextPage(ctx context.Context) ([]WorkspacesBu
 }
 
 var listWorkspacesBundleFilters = map[string]string{
-	"arn":           "ARN",
-	"bundle_id":     "Description.Bundle.BundleId",
-	"name":          "Description.Bundle.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Bundle.Name",
+	"arn":                 "ARN",
+	"bundle_id":           "Description.Bundle.BundleId",
+	"name":                "Description.Bundle.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Bundle.Name",
 }
 
 func ListWorkspacesBundle(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -66576,11 +66567,11 @@ func ListWorkspacesBundle(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getWorkspacesBundleFilters = map[string]string{
-	"arn":           "ARN",
-	"bundle_id":     "description.Bundle.BundleId",
-	"name":          "Description.Bundle.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Bundle.Name",
+	"arn":                 "ARN",
+	"bundle_id":           "description.Bundle.BundleId",
+	"name":                "Description.Bundle.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Bundle.Name",
 }
 
 func GetWorkspacesBundle(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -66719,10 +66710,10 @@ func (p KeyspacesKeyspacePaginator) NextPage(ctx context.Context) ([]KeyspacesKe
 }
 
 var listKeyspacesKeyspaceFilters = map[string]string{
-	"keyspace_name": "Description.Keyspace.KeyspaceName",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Keyspace.ResourceArn",
-	"title":         "Description.Keyspace.KeyspaceName",
+	"keyspace_name":       "Description.Keyspace.KeyspaceName",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Keyspace.ResourceArn",
+	"title":               "Description.Keyspace.KeyspaceName",
 }
 
 func ListKeyspacesKeyspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -66786,10 +66777,10 @@ func ListKeyspacesKeyspace(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getKeyspacesKeyspaceFilters = map[string]string{
-	"keyspace_name": "description.Keyspace.KeyspaceName",
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Keyspace.ResourceArn",
-	"title":         "Description.Keyspace.KeyspaceName",
+	"keyspace_name":       "description.Keyspace.KeyspaceName",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Keyspace.ResourceArn",
+	"title":               "Description.Keyspace.KeyspaceName",
 }
 
 func GetKeyspacesKeyspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -66928,10 +66919,10 @@ func (p KeyspacesTablePaginator) NextPage(ctx context.Context) ([]KeyspacesTable
 }
 
 var listKeyspacesTableFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Table.ResourceArn",
-	"table_name":    "Description.Table.TableName",
-	"title":         "Description.Table.TableName",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Table.ResourceArn",
+	"table_name":          "Description.Table.TableName",
+	"title":               "Description.Table.TableName",
 }
 
 func ListKeyspacesTable(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -66995,10 +66986,10 @@ func ListKeyspacesTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getKeyspacesTableFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_arn":  "Description.Table.ResourceArn",
-	"table_name":    "description.Table.TableName",
-	"title":         "Description.Table.TableName",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_arn":        "Description.Table.ResourceArn",
+	"table_name":          "description.Table.TableName",
+	"title":               "Description.Table.TableName",
 }
 
 func GetKeyspacesTable(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67137,12 +67128,12 @@ func (p GrafanaWorkspacePaginator) NextPage(ctx context.Context) ([]GrafanaWorks
 }
 
 var listGrafanaWorkspaceFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "Description.Workspace.Id",
-	"name":          "Description.Workspace.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Workspace.Tags",
-	"title":         "Description.Workspace.Name",
+	"arn":                 "ARN",
+	"id":                  "Description.Workspace.Id",
+	"name":                "Description.Workspace.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Workspace.Tags",
+	"title":               "Description.Workspace.Name",
 }
 
 func ListGrafanaWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67206,12 +67197,12 @@ func ListGrafanaWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getGrafanaWorkspaceFilters = map[string]string{
-	"arn":           "ARN",
-	"id":            "description.Workspace.Id",
-	"name":          "Description.Workspace.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Workspace.Tags",
-	"title":         "Description.Workspace.Name",
+	"arn":                 "ARN",
+	"id":                  "description.Workspace.Id",
+	"name":                "Description.Workspace.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Workspace.Tags",
+	"title":               "Description.Workspace.Name",
 }
 
 func GetGrafanaWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67350,11 +67341,11 @@ func (p AMPWorkspacePaginator) NextPage(ctx context.Context) ([]AMPWorkspace, er
 }
 
 var listAMPWorkspaceFilters = map[string]string{
-	"arn":           "Description.Workspace.Arn",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Workspace.Tags",
-	"title":         "Description.Workspace.WorkspaceId",
-	"workspace_id":  "Description.Workspace.WorkspaceId",
+	"arn":                 "Description.Workspace.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Workspace.Tags",
+	"title":               "Description.Workspace.WorkspaceId",
+	"workspace_id":        "Description.Workspace.WorkspaceId",
 }
 
 func ListAMPWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67418,11 +67409,11 @@ func ListAMPWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getAMPWorkspaceFilters = map[string]string{
-	"arn":           "Description.Workspace.Arn",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Workspace.Tags",
-	"title":         "Description.Workspace.WorkspaceId",
-	"workspace_id":  "description.Workspace.WorkspaceId",
+	"arn":                 "Description.Workspace.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Workspace.Tags",
+	"title":               "Description.Workspace.WorkspaceId",
+	"workspace_id":        "description.Workspace.WorkspaceId",
 }
 
 func GetAMPWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67561,11 +67552,11 @@ func (p KafkaClusterPaginator) NextPage(ctx context.Context) ([]KafkaCluster, er
 }
 
 var listKafkaClusterFilters = map[string]string{
-	"arn":           "Description.Cluster.ClusterArn",
-	"cluster_name":  "Description.Cluster.ClusterName",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Cluster.Tags",
-	"title":         "Description.Cluster.ClusterName",
+	"arn":                 "Description.Cluster.ClusterArn",
+	"cluster_name":        "Description.Cluster.ClusterName",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Cluster.Tags",
+	"title":               "Description.Cluster.ClusterName",
 }
 
 func ListKafkaCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67629,11 +67620,11 @@ func ListKafkaCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getKafkaClusterFilters = map[string]string{
-	"arn":           "Description.Cluster.ClusterArn",
-	"cluster_name":  "description.Cluster.ClusterName",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Cluster.Tags",
-	"title":         "Description.Cluster.ClusterName",
+	"arn":                 "Description.Cluster.ClusterArn",
+	"cluster_name":        "description.Cluster.ClusterName",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Cluster.Tags",
+	"title":               "Description.Cluster.ClusterName",
 }
 
 func GetKafkaCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67772,11 +67763,11 @@ func (p MWAAEnvironmentPaginator) NextPage(ctx context.Context) ([]MWAAEnvironme
 }
 
 var listMWAAEnvironmentFilters = map[string]string{
-	"arn":           "Description.Environment.Arn",
-	"name":          "Description.Environment.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Environment.Tags",
-	"title":         "Description.Environment.Name",
+	"arn":                 "Description.Environment.Arn",
+	"name":                "Description.Environment.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Environment.Tags",
+	"title":               "Description.Environment.Name",
 }
 
 func ListMWAAEnvironment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67840,11 +67831,11 @@ func ListMWAAEnvironment(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getMWAAEnvironmentFilters = map[string]string{
-	"arn":           "Description.Environment.Arn",
-	"name":          "description.Environment.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Environment.Tags",
-	"title":         "Description.Environment.Name",
+	"arn":                 "Description.Environment.Arn",
+	"name":                "description.Environment.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Environment.Tags",
+	"title":               "Description.Environment.Name",
 }
 
 func GetMWAAEnvironment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -67983,10 +67974,10 @@ func (p MemoryDbClusterPaginator) NextPage(ctx context.Context) ([]MemoryDbClust
 }
 
 var listMemoryDbClusterFilters = map[string]string{
-	"arn":           "Description.Cluster.ARN",
-	"name":          "Description.Cluster.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Cluster.Name",
+	"arn":                 "Description.Cluster.ARN",
+	"name":                "Description.Cluster.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Cluster.Name",
 }
 
 func ListMemoryDbCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -68050,10 +68041,10 @@ func ListMemoryDbCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getMemoryDbClusterFilters = map[string]string{
-	"arn":           "Description.Cluster.ARN",
-	"name":          "description.Cluster.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Cluster.Name",
+	"arn":                 "Description.Cluster.ARN",
+	"name":                "description.Cluster.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Cluster.Name",
 }
 
 func GetMemoryDbCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -68212,7 +68203,7 @@ var listMQBrokerFilters = map[string]string{
 	"ldap_server_metadata":              "Description.BrokerDescription.LdapServerMetadata",
 	"logs":                              "Description.BrokerDescription.Logs",
 	"maintenance_window_start_time":     "Description.BrokerDescription.MaintenanceWindowStartTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"pending_authentication_strategy":   "Description.BrokerDescription.PendingAuthenticationStrategy",
 	"pending_data_replication_metadata": "Description.BrokerDescription.PendingDataReplicationMetadata",
 	"pending_data_replication_mode":     "Description.BrokerDescription.PendingDataReplicationMode",
@@ -68310,7 +68301,7 @@ var getMQBrokerFilters = map[string]string{
 	"ldap_server_metadata":              "Description.BrokerDescription.LdapServerMetadata",
 	"logs":                              "Description.BrokerDescription.Logs",
 	"maintenance_window_start_time":     "Description.BrokerDescription.MaintenanceWindowStartTime",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"pending_authentication_strategy":   "Description.BrokerDescription.PendingAuthenticationStrategy",
 	"pending_data_replication_metadata": "Description.BrokerDescription.PendingDataReplicationMetadata",
 	"pending_data_replication_mode":     "Description.BrokerDescription.PendingDataReplicationMode",
@@ -68466,7 +68457,7 @@ var listNeptuneDatabaseFilters = map[string]string{
 	"db_instance_arn":        "Description.Database.DBInstanceArn",
 	"db_instance_identifier": "Description.Database.DBInstanceIdentifier",
 	"db_name":                "Description.Database.DBName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"title":                  "Description.Database.DBName",
 }
 
@@ -68534,7 +68525,7 @@ var getNeptuneDatabaseFilters = map[string]string{
 	"db_instance_arn":        "Description.Database.DBInstanceArn",
 	"db_instance_identifier": "description.Database.DBInstanceIdentifier",
 	"db_name":                "Description.Database.DBName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"title":                  "Description.Database.DBName",
 }
 
@@ -68701,7 +68692,7 @@ var listNeptuneDatabaseClusterFilters = map[string]string{
 	"kms_key_id":                          "Description.Cluster.KmsKeyId",
 	"latest_restorable_time":              "Description.Cluster.LatestRestorableTime",
 	"multi_az":                            "Description.Cluster.MultiAZ",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"percent_progress":                    "Description.Cluster.PercentProgress",
 	"port":                                "Description.Cluster.Port",
 	"preferred_backup_window":             "Description.Cluster.PreferredBackupWindow",
@@ -68804,7 +68795,7 @@ var getNeptuneDatabaseClusterFilters = map[string]string{
 	"kms_key_id":                          "Description.Cluster.KmsKeyId",
 	"latest_restorable_time":              "Description.Cluster.LatestRestorableTime",
 	"multi_az":                            "Description.Cluster.MultiAZ",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"percent_progress":                    "Description.Cluster.PercentProgress",
 	"port":                                "Description.Cluster.Port",
 	"preferred_backup_window":             "Description.Cluster.PreferredBackupWindow",
@@ -69218,14 +69209,14 @@ var listOpenSearchDomainFilters = map[string]string{
 	"engine_version":             "Description.Domain.EngineVersion",
 	"log_publishing_options":     "Description.Domain.LogPublishingOptions",
 	"node_to_node_encryption_options_enabled": "Description.Domain.NodeToNodeEncryptionOptions.Enabled",
-	"og_account_id":            "metadata.IntegrationID",
-	"processing":               "Description.Domain.Processing",
-	"service_software_options": "Description.Domain.ServiceSoftwareOptions",
-	"snapshot_options":         "Description.Domain.SnapshotOptions",
-	"tags_src":                 "Description.Tags",
-	"title":                    "Description.Domain.DomainName",
-	"upgrade_processing":       "Description.Domain.UpgradeProcessing",
-	"vpc_options":              "Description.Domain.VPCOptions",
+	"platform_account_id":                     "metadata.IntegrationID",
+	"processing":                              "Description.Domain.Processing",
+	"service_software_options":                "Description.Domain.ServiceSoftwareOptions",
+	"snapshot_options":                        "Description.Domain.SnapshotOptions",
+	"tags_src":                                "Description.Tags",
+	"title":                                   "Description.Domain.DomainName",
+	"upgrade_processing":                      "Description.Domain.UpgradeProcessing",
+	"vpc_options":                             "Description.Domain.VPCOptions",
 }
 
 func ListOpenSearchDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -69308,14 +69299,14 @@ var getOpenSearchDomainFilters = map[string]string{
 	"engine_version":             "Description.Domain.EngineVersion",
 	"log_publishing_options":     "Description.Domain.LogPublishingOptions",
 	"node_to_node_encryption_options_enabled": "Description.Domain.NodeToNodeEncryptionOptions.Enabled",
-	"og_account_id":            "metadata.IntegrationID",
-	"processing":               "Description.Domain.Processing",
-	"service_software_options": "Description.Domain.ServiceSoftwareOptions",
-	"snapshot_options":         "Description.Domain.SnapshotOptions",
-	"tags_src":                 "Description.Tags",
-	"title":                    "Description.Domain.DomainName",
-	"upgrade_processing":       "Description.Domain.UpgradeProcessing",
-	"vpc_options":              "Description.Domain.VPCOptions",
+	"platform_account_id":                     "metadata.IntegrationID",
+	"processing":                              "Description.Domain.Processing",
+	"service_software_options":                "Description.Domain.ServiceSoftwareOptions",
+	"snapshot_options":                        "Description.Domain.SnapshotOptions",
+	"tags_src":                                "Description.Tags",
+	"title":                                   "Description.Domain.DomainName",
+	"upgrade_processing":                      "Description.Domain.UpgradeProcessing",
+	"vpc_options":                             "Description.Domain.VPCOptions",
 }
 
 func GetOpenSearchDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -69454,10 +69445,10 @@ func (p SESConfigurationSetPaginator) NextPage(ctx context.Context) ([]SESConfig
 }
 
 var listSESConfigurationSetFilters = map[string]string{
-	"arn":           "ARN",
-	"name":          "Description.ConfigurationSet.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.ConfigurationSet.Name",
+	"arn":                 "ARN",
+	"name":                "Description.ConfigurationSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.ConfigurationSet.Name",
 }
 
 func ListSESConfigurationSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -69521,10 +69512,10 @@ func ListSESConfigurationSet(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getSESConfigurationSetFilters = map[string]string{
-	"arn":           "ARN",
-	"name":          "description.ConfigurationSet.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.ConfigurationSet.Name",
+	"arn":                 "ARN",
+	"name":                "description.ConfigurationSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.ConfigurationSet.Name",
 }
 
 func GetSESConfigurationSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -69663,11 +69654,11 @@ func (p SESIdentityPaginator) NextPage(ctx context.Context) ([]SESIdentity, erro
 }
 
 var listSESIdentityFilters = map[string]string{
-	"arn":           "ARN",
-	"identity_name": "Description.Identity.Name",
-	"identity_type": "description.Identity.IdentityType",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Identity.Name",
+	"arn":                 "ARN",
+	"identity_name":       "Description.Identity.Name",
+	"identity_type":       "description.Identity.IdentityType",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Identity.Name",
 }
 
 func ListSESIdentity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -69731,10 +69722,10 @@ func ListSESIdentity(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getSESIdentityFilters = map[string]string{
-	"arn":           "ARN",
-	"identity_name": "description.Identity.IdentityName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Identity.Name",
+	"arn":                 "ARN",
+	"identity_name":       "description.Identity.IdentityName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Identity.Name",
 }
 
 func GetSESIdentity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -70091,7 +70082,7 @@ var listCloudFormationStackFilters = map[string]string{
 	"last_updated_time":             "Description.Stack.LastUpdatedTime",
 	"name":                          "description.Stack.StackName",
 	"notification_arns":             "Description.Stack.NotificationARNs",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"outputs":                       "Description.Stack.Outputs",
 	"parameters":                    "Description.Stack.Parameters",
 	"parent_id":                     "Description.Stack.ParentId",
@@ -70176,7 +70167,7 @@ var getCloudFormationStackFilters = map[string]string{
 	"last_updated_time":             "Description.Stack.LastUpdatedTime",
 	"name":                          "description.Stack.StackName",
 	"notification_arns":             "Description.Stack.NotificationARNs",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"outputs":                       "Description.Stack.Outputs",
 	"parameters":                    "Description.Stack.Parameters",
 	"parent_id":                     "Description.Stack.ParentId",
@@ -70336,7 +70327,7 @@ var listCloudFormationStackSetFilters = map[string]string{
 	"execution_role_name":               "Description.StackSet.ExecutionRoleName",
 	"last_drift_check_timestamp":        "Description.StackSet.StackSetDriftDetectionDetails.LastDriftCheckTimestamp",
 	"managed_execution":                 "Description.StackSet.ManagedExecution",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"organizational_unit_ids":           "Description.StackSet.OrganizationalUnitIds",
 	"parameters":                        "Description.StackSet.Parameters",
 	"permission_model":                  "Description.StackSet.PermissionModel",
@@ -70419,7 +70410,7 @@ var getCloudFormationStackSetFilters = map[string]string{
 	"execution_role_name":               "Description.StackSet.ExecutionRoleName",
 	"last_drift_check_timestamp":        "Description.StackSet.StackSetDriftDetectionDetails.LastDriftCheckTimestamp",
 	"managed_execution":                 "Description.StackSet.ManagedExecution",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"organizational_unit_ids":           "Description.StackSet.OrganizationalUnitIds",
 	"parameters":                        "Description.StackSet.Parameters",
 	"permission_model":                  "Description.StackSet.PermissionModel",
@@ -70574,7 +70565,7 @@ var listCloudFormationStackResourceFilters = map[string]string{
 	"logical_resource_id":    "Description.StackResource.LogicalResourceId",
 	"module_info":            "Description.StackResource.ModuleInfo",
 	"name":                   "description.StackResource.StackName",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"physical_resource_id":   "Description.StackResource.PhysicalResourceId",
 	"resource_status_reason": "Description.StackResource.ResourceStatusReason",
 	"resource_type":          "Description.StackResource.ResourceType",
@@ -70649,7 +70640,7 @@ var getCloudFormationStackResourceFilters = map[string]string{
 	"last_updated_timestamp": "Description.StackResource.LastUpdatedTimestamp",
 	"logical_resource_id":    "Description.StackResource.LogicalResourceId",
 	"module_info":            "Description.StackResource.ModuleInfo",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"physical_resource_id":   "Description.StackResource.PhysicalResourceId",
 	"resource_status_reason": "Description.StackResource.ResourceStatusReason",
 	"resource_type":          "Description.StackResource.ResourceType",
@@ -70794,18 +70785,18 @@ func (p CodeCommitRepositoryPaginator) NextPage(ctx context.Context) ([]CodeComm
 }
 
 var listCodeCommitRepositoryFilters = map[string]string{
-	"arn":                "Description.Repository.Arn",
-	"clone_url_http":     "Description.Repository.CloneUrlHttp",
-	"clone_url_ssh":      "Description.Repository.CloneUrlSsh",
-	"creation_date":      "Description.Repository.CreationDate",
-	"default_branch":     "Description.Repository.DefaultBranch",
-	"description":        "Description.Repository.RepositoryDescription",
-	"last_modified_date": "Description.Repository.LastModifiedDate",
-	"og_account_id":      "metadata.IntegrationID",
-	"repository_id":      "Description.Repository.RepositoryId",
-	"repository_name":    "Description.Repository.RepositoryName",
-	"tags":               "Description.Tags",
-	"title":              "Description.Repository.RepositoryName",
+	"arn":                 "Description.Repository.Arn",
+	"clone_url_http":      "Description.Repository.CloneUrlHttp",
+	"clone_url_ssh":       "Description.Repository.CloneUrlSsh",
+	"creation_date":       "Description.Repository.CreationDate",
+	"default_branch":      "Description.Repository.DefaultBranch",
+	"description":         "Description.Repository.RepositoryDescription",
+	"last_modified_date":  "Description.Repository.LastModifiedDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"repository_id":       "Description.Repository.RepositoryId",
+	"repository_name":     "Description.Repository.RepositoryName",
+	"tags":                "Description.Tags",
+	"title":               "Description.Repository.RepositoryName",
 }
 
 func ListCodeCommitRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -70869,18 +70860,18 @@ func ListCodeCommitRepository(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getCodeCommitRepositoryFilters = map[string]string{
-	"arn":                "Description.Repository.Arn",
-	"clone_url_http":     "Description.Repository.CloneUrlHttp",
-	"clone_url_ssh":      "Description.Repository.CloneUrlSsh",
-	"creation_date":      "Description.Repository.CreationDate",
-	"default_branch":     "Description.Repository.DefaultBranch",
-	"description":        "Description.Repository.RepositoryDescription",
-	"last_modified_date": "Description.Repository.LastModifiedDate",
-	"og_account_id":      "metadata.IntegrationID",
-	"repository_id":      "Description.Repository.RepositoryId",
-	"repository_name":    "Description.Repository.RepositoryName",
-	"tags":               "Description.Tags",
-	"title":              "Description.Repository.RepositoryName",
+	"arn":                 "Description.Repository.Arn",
+	"clone_url_http":      "Description.Repository.CloneUrlHttp",
+	"clone_url_ssh":       "Description.Repository.CloneUrlSsh",
+	"creation_date":       "Description.Repository.CreationDate",
+	"default_branch":      "Description.Repository.DefaultBranch",
+	"description":         "Description.Repository.RepositoryDescription",
+	"last_modified_date":  "Description.Repository.LastModifiedDate",
+	"platform_account_id": "metadata.IntegrationID",
+	"repository_id":       "Description.Repository.RepositoryId",
+	"repository_name":     "Description.Repository.RepositoryName",
+	"tags":                "Description.Tags",
+	"title":               "Description.Repository.RepositoryName",
 }
 
 func GetCodeCommitRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -71019,18 +71010,18 @@ func (p CodePipelinePipelinePaginator) NextPage(ctx context.Context) ([]CodePipe
 }
 
 var listCodePipelinePipelineFilters = map[string]string{
-	"arn":             "Description.Metadata.PipelineArn",
-	"artifact_stores": "Description.Pipeline.ArtifactStores",
-	"created_at":      "Description.Metadata.Created",
-	"encryption_key":  "Description.Pipeline.ArtifactStore.EncryptionKey",
-	"name":            "Description.Pipeline.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"role_arn":        "Description.Pipeline.RoleArn",
-	"stages":          "Description.Pipeline.Stages",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.Pipeline.Name",
-	"updated_at":      "Description.Metadata.Updated",
-	"version":         "Description.Pipeline.Version",
+	"arn":                 "Description.Metadata.PipelineArn",
+	"artifact_stores":     "Description.Pipeline.ArtifactStores",
+	"created_at":          "Description.Metadata.Created",
+	"encryption_key":      "Description.Pipeline.ArtifactStore.EncryptionKey",
+	"name":                "Description.Pipeline.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"role_arn":            "Description.Pipeline.RoleArn",
+	"stages":              "Description.Pipeline.Stages",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Pipeline.Name",
+	"updated_at":          "Description.Metadata.Updated",
+	"version":             "Description.Pipeline.Version",
 }
 
 func ListCodePipelinePipeline(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -71094,18 +71085,18 @@ func ListCodePipelinePipeline(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getCodePipelinePipelineFilters = map[string]string{
-	"arn":             "Description.Metadata.PipelineArn",
-	"artifact_stores": "Description.Pipeline.ArtifactStores",
-	"created_at":      "Description.Metadata.Created",
-	"encryption_key":  "Description.Pipeline.ArtifactStore.EncryptionKey",
-	"name":            "description.Pipeline.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"role_arn":        "Description.Pipeline.RoleArn",
-	"stages":          "Description.Pipeline.Stages",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.Pipeline.Name",
-	"updated_at":      "Description.Metadata.Updated",
-	"version":         "Description.Pipeline.Version",
+	"arn":                 "Description.Metadata.PipelineArn",
+	"artifact_stores":     "Description.Pipeline.ArtifactStores",
+	"created_at":          "Description.Metadata.Created",
+	"encryption_key":      "Description.Pipeline.ArtifactStore.EncryptionKey",
+	"name":                "description.Pipeline.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"role_arn":            "Description.Pipeline.RoleArn",
+	"stages":              "Description.Pipeline.Stages",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Pipeline.Name",
+	"updated_at":          "Description.Metadata.Updated",
+	"version":             "Description.Pipeline.Version",
 }
 
 func GetCodePipelinePipeline(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -71256,7 +71247,7 @@ var listDirectoryServiceDirectoryFilters = map[string]string{
 	"event_topics":                         "Description.EventTopics",
 	"launch_time":                          "Description.Directory.LaunchTime",
 	"name":                                 "Description.Directory.Name",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"owner_directory_description":          "Description.Directory.OwnerDirectoryDescription",
 	"radius_settings":                      "Description.Directory.RadiusSettings",
 	"radius_status":                        "Description.Directory.RadiusStatus",
@@ -71351,7 +71342,7 @@ var getDirectoryServiceDirectoryFilters = map[string]string{
 	"event_topics":                         "Description.EventTopics",
 	"launch_time":                          "Description.Directory.LaunchTime",
 	"name":                                 "description.Directory.DirectoryId",
-	"og_account_id":                        "metadata.IntegrationID",
+	"platform_account_id":                  "metadata.IntegrationID",
 	"owner_directory_description":          "Description.Directory.OwnerDirectoryDescription",
 	"radius_settings":                      "Description.Directory.RadiusSettings",
 	"radius_status":                        "Description.Directory.RadiusStatus",
@@ -71514,7 +71505,7 @@ var listDirectoryServiceCertificateFilters = map[string]string{
 	"common_name":               "Description.Certificate.CommonName",
 	"directory_id":              "Description.DirectoryId",
 	"expiry_date_time":          "Description.Certificate.ExpiryDateTime",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"registered_date_time":      "Description.Certificate.RegisteredDateTime",
 	"state":                     "Description.Certificate.State",
 	"state_reason":              "Description.Certificate.StateReason",
@@ -71589,7 +71580,7 @@ var getDirectoryServiceCertificateFilters = map[string]string{
 	"directory_id":              "Description.DirectoryId",
 	"expiry_date_time":          "Description.Certificate.ExpiryDateTime",
 	"name":                      "description.Certificate.CertificateId",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"registered_date_time":      "Description.Certificate.RegisteredDateTime",
 	"state":                     "Description.Certificate.State",
 	"state_reason":              "Description.Certificate.StateReason",
@@ -71735,7 +71726,7 @@ func (p DirectoryServiceLogSubscriptionPaginator) NextPage(ctx context.Context) 
 var listDirectoryServiceLogSubscriptionFilters = map[string]string{
 	"directory_id":                   "Description.LogSubscription.DirectoryId",
 	"log_group_name":                 "Description.LogSubscription.LogGroupName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"subscription_created_date_time": "Description.LogSubscription.SubscriptionCreatedDateTime",
 	"title":                          "Description.LogSubscription.LogGroupName",
 }
@@ -71803,7 +71794,7 @@ func ListDirectoryServiceLogSubscription(ctx context.Context, d *plugin.QueryDat
 var getDirectoryServiceLogSubscriptionFilters = map[string]string{
 	"directory_id":                   "Description.LogSubscription.DirectoryId",
 	"log_group_name":                 "Description.LogSubscription.LogGroupName",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"subscription_created_date_time": "Description.LogSubscription.SubscriptionCreatedDateTime",
 	"title":                          "Description.LogSubscription.LogGroupName",
 }
@@ -71944,10 +71935,10 @@ func (p SSOAdminInstancePaginator) NextPage(ctx context.Context) ([]SSOAdminInst
 }
 
 var listSSOAdminInstanceFilters = map[string]string{
-	"arn":               "Description.Instance.InstanceArn",
-	"identity_store_id": "Description.Instance.IdentityStoreId",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Instance.InstanceArn",
+	"arn":                 "Description.Instance.InstanceArn",
+	"identity_store_id":   "Description.Instance.IdentityStoreId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Instance.InstanceArn",
 }
 
 func ListSSOAdminInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72011,10 +72002,10 @@ func ListSSOAdminInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getSSOAdminInstanceFilters = map[string]string{
-	"arn":               "Description.Instance.InstanceArn",
-	"identity_store_id": "Description.Instance.IdentityStoreId",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Instance.InstanceArn",
+	"arn":                 "Description.Instance.InstanceArn",
+	"identity_store_id":   "Description.Instance.IdentityStoreId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Instance.InstanceArn",
 }
 
 func GetSSOAdminInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72153,12 +72144,12 @@ func (p SSOAdminAccountAssignmentPaginator) NextPage(ctx context.Context) ([]SSO
 }
 
 var listSSOAdminAccountAssignmentFilters = map[string]string{
-	"instance_arn":       "Description.Instance.InstanceArn",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.AccountAssignment.PermissionSetArn",
-	"principal_id":       "Description.AccountAssignment.PrincipalId",
-	"principal_type":     "Description.AccountAssignment.PrincipalType",
-	"target_account_id":  "Description.AccountAssignment.AccountId",
+	"instance_arn":        "Description.Instance.InstanceArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.AccountAssignment.PermissionSetArn",
+	"principal_id":        "Description.AccountAssignment.PrincipalId",
+	"principal_type":      "Description.AccountAssignment.PrincipalType",
+	"target_account_id":   "Description.AccountAssignment.AccountId",
 }
 
 func ListSSOAdminAccountAssignment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72222,12 +72213,12 @@ func ListSSOAdminAccountAssignment(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getSSOAdminAccountAssignmentFilters = map[string]string{
-	"instance_arn":       "Description.Instance.InstanceArn",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.AccountAssignment.PermissionSetArn",
-	"principal_id":       "Description.AccountAssignment.PrincipalId",
-	"principal_type":     "Description.AccountAssignment.PrincipalType",
-	"target_account_id":  "Description.AccountAssignment.AccountId",
+	"instance_arn":        "Description.Instance.InstanceArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.AccountAssignment.PermissionSetArn",
+	"principal_id":        "Description.AccountAssignment.PrincipalId",
+	"principal_type":      "Description.AccountAssignment.PrincipalType",
+	"target_account_id":   "Description.AccountAssignment.AccountId",
 }
 
 func GetSSOAdminAccountAssignment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72366,17 +72357,17 @@ func (p SSOAdminPermissionSetPaginator) NextPage(ctx context.Context) ([]SSOAdmi
 }
 
 var listSSOAdminPermissionSetFilters = map[string]string{
-	"arn":              "Description.PermissionSet.PermissionSetArn",
-	"created_date":     "Description.PermissionSet.CreatedDate",
-	"description":      "Description.PermissionSet.Description",
-	"instance_arn":     "Description.InstanceArn",
-	"name":             "Description.PermissionSet.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"relay_state":      "Description.PermissionSet.RelayState",
-	"session_duration": "Description.PermissionSet.SessionDuration",
-	"tags":             "Description.Tags",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.PermissionSet.Name",
+	"arn":                 "Description.PermissionSet.PermissionSetArn",
+	"created_date":        "Description.PermissionSet.CreatedDate",
+	"description":         "Description.PermissionSet.Description",
+	"instance_arn":        "Description.InstanceArn",
+	"name":                "Description.PermissionSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"relay_state":         "Description.PermissionSet.RelayState",
+	"session_duration":    "Description.PermissionSet.SessionDuration",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.PermissionSet.Name",
 }
 
 func ListSSOAdminPermissionSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72440,17 +72431,17 @@ func ListSSOAdminPermissionSet(ctx context.Context, d *plugin.QueryData, _ *plug
 }
 
 var getSSOAdminPermissionSetFilters = map[string]string{
-	"arn":              "Description.PermissionSet.PermissionSetArn",
-	"created_date":     "Description.PermissionSet.CreatedDate",
-	"description":      "Description.PermissionSet.Description",
-	"instance_arn":     "Description.InstanceArn",
-	"name":             "Description.PermissionSet.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"relay_state":      "Description.PermissionSet.RelayState",
-	"session_duration": "Description.PermissionSet.SessionDuration",
-	"tags":             "Description.Tags",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.PermissionSet.Name",
+	"arn":                 "Description.PermissionSet.PermissionSetArn",
+	"created_date":        "Description.PermissionSet.CreatedDate",
+	"description":         "Description.PermissionSet.Description",
+	"instance_arn":        "Description.InstanceArn",
+	"name":                "Description.PermissionSet.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"relay_state":         "Description.PermissionSet.RelayState",
+	"session_duration":    "Description.PermissionSet.SessionDuration",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.PermissionSet.Name",
 }
 
 func GetSSOAdminPermissionSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72589,12 +72580,12 @@ func (p SSOAdminPolicyAttachmentPaginator) NextPage(ctx context.Context) ([]SSOA
 }
 
 var listSSOAdminPolicyAttachmentFilters = map[string]string{
-	"instance_arn":       "Description.InstanceArn",
-	"managed_policy_arn": "Description.AttachedManagedPolicy.Arn",
-	"name":               "Description.AttachedManagedPolicy.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.PermissionSetArn",
-	"title":              "Description.AttachedManagedPolicy.Name",
+	"instance_arn":        "Description.InstanceArn",
+	"managed_policy_arn":  "Description.AttachedManagedPolicy.Arn",
+	"name":                "Description.AttachedManagedPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.PermissionSetArn",
+	"title":               "Description.AttachedManagedPolicy.Name",
 }
 
 func ListSSOAdminPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72658,12 +72649,12 @@ func ListSSOAdminPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getSSOAdminPolicyAttachmentFilters = map[string]string{
-	"instance_arn":       "Description.InstanceArn",
-	"managed_policy_arn": "Description.AttachedManagedPolicy.Arn",
-	"name":               "Description.AttachedManagedPolicy.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.PermissionSetArn",
-	"title":              "Description.AttachedManagedPolicy.Name",
+	"instance_arn":        "Description.InstanceArn",
+	"managed_policy_arn":  "Description.AttachedManagedPolicy.Arn",
+	"name":                "Description.AttachedManagedPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.PermissionSetArn",
+	"title":               "Description.AttachedManagedPolicy.Name",
 }
 
 func GetSSOAdminPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72802,13 +72793,13 @@ func (p UserEffectiveAccessPaginator) NextPage(ctx context.Context) ([]UserEffec
 }
 
 var listUserEffectiveAccessFilters = map[string]string{
-	"id":                 "ID",
-	"instance_arn":       "Description.Instance.InstanceArn",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.AccountAssignment.PermissionSetArn",
-	"target_account_id":  "Description.AccountAssignment.AccountId",
-	"user_id":            "Description.UserId",
-	"user_name":          "Description.User.UserName",
+	"id":                  "ID",
+	"instance_arn":        "Description.Instance.InstanceArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.AccountAssignment.PermissionSetArn",
+	"target_account_id":   "Description.AccountAssignment.AccountId",
+	"user_id":             "Description.UserId",
+	"user_name":           "Description.User.UserName",
 }
 
 func ListUserEffectiveAccess(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -72872,13 +72863,13 @@ func ListUserEffectiveAccess(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getUserEffectiveAccessFilters = map[string]string{
-	"id":                 "ID",
-	"instance_arn":       "Description.Instance.InstanceArn",
-	"og_account_id":      "metadata.IntegrationID",
-	"permission_set_arn": "Description.AccountAssignment.PermissionSetArn",
-	"target_account_id":  "Description.AccountAssignment.AccountId",
-	"user_id":            "Description.UserId",
-	"user_name":          "Description.User.UserName",
+	"id":                  "ID",
+	"instance_arn":        "Description.Instance.InstanceArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_set_arn":  "Description.AccountAssignment.PermissionSetArn",
+	"target_account_id":   "Description.AccountAssignment.AccountId",
+	"user_id":             "Description.UserId",
+	"user_name":           "Description.User.UserName",
 }
 
 func GetUserEffectiveAccess(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73017,13 +73008,13 @@ func (p WAFRulePaginator) NextPage(ctx context.Context) ([]WAFRule, error) {
 }
 
 var listWAFRuleFilters = map[string]string{
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.Predicates",
-	"rule_id":       "Description.Rule.RuleId",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.Rule.Name",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.Predicates",
+	"rule_id":             "Description.Rule.RuleId",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Rule.Name",
 }
 
 func ListWAFRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73087,13 +73078,13 @@ func ListWAFRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 }
 
 var getWAFRuleFilters = map[string]string{
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.Predicates",
-	"rule_id":       "description.Rule.RuleId",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.Rule.Name",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.Predicates",
+	"rule_id":             "description.Rule.RuleId",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Rule.Name",
 }
 
 func GetWAFRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73232,13 +73223,13 @@ func (p WAFRegionalRulePaginator) NextPage(ctx context.Context) ([]WAFRegionalRu
 }
 
 var listWAFRegionalRuleFilters = map[string]string{
-	"arn":           "ARN",
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.Predicates",
-	"rule_id":       "Description.Rule.RuleId",
-	"title":         "Description.Rule.Name",
+	"arn":                 "ARN",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.Predicates",
+	"rule_id":             "Description.Rule.RuleId",
+	"title":               "Description.Rule.Name",
 }
 
 func ListWAFRegionalRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73302,13 +73293,13 @@ func ListWAFRegionalRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getWAFRegionalRuleFilters = map[string]string{
-	"arn":           "ARN",
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.Predicates",
-	"rule_id":       "description.Rule.RuleId",
-	"title":         "Description.Rule.Name",
+	"arn":                 "ARN",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.Predicates",
+	"rule_id":             "description.Rule.RuleId",
+	"title":               "Description.Rule.Name",
 }
 
 func GetWAFRegionalRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73447,16 +73438,16 @@ func (p WAFRateBasedRulePaginator) NextPage(ctx context.Context) ([]WAFRateBased
 }
 
 var listWAFRateBasedRuleFilters = map[string]string{
-	"akas":          "Description.ARN",
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.MatchPredicates",
-	"rate_key":      "Description.Rule.RateKey",
-	"rate_limit":    "Description.Rule.RateLimit",
-	"rule_id":       "Description.Rule.RuleId",
-	"tags_src":      "Description.Tags.TagList",
-	"title":         "Description.Rule.Name",
+	"akas":                "Description.ARN",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.MatchPredicates",
+	"rate_key":            "Description.Rule.RateKey",
+	"rate_limit":          "Description.Rule.RateLimit",
+	"rule_id":             "Description.Rule.RuleId",
+	"tags_src":            "Description.Tags.TagList",
+	"title":               "Description.Rule.Name",
 }
 
 func ListWAFRateBasedRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73520,16 +73511,16 @@ func ListWAFRateBasedRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getWAFRateBasedRuleFilters = map[string]string{
-	"akas":          "Description.ARN",
-	"metric_name":   "Description.Rule.MetricName",
-	"name":          "Description.Rule.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"predicates":    "Description.Rule.MatchPredicates",
-	"rate_key":      "Description.Rule.RateKey",
-	"rate_limit":    "Description.Rule.RateLimit",
-	"rule_id":       "description.Rule.RuleId",
-	"tags_src":      "Description.Tags.TagList",
-	"title":         "Description.Rule.Name",
+	"akas":                "Description.ARN",
+	"metric_name":         "Description.Rule.MetricName",
+	"name":                "Description.Rule.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"predicates":          "Description.Rule.MatchPredicates",
+	"rate_key":            "Description.Rule.RateKey",
+	"rate_limit":          "Description.Rule.RateLimit",
+	"rule_id":             "description.Rule.RuleId",
+	"tags_src":            "Description.Tags.TagList",
+	"title":               "Description.Rule.Name",
 }
 
 func GetWAFRateBasedRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73668,14 +73659,14 @@ func (p WAFRuleGroupPaginator) NextPage(ctx context.Context) ([]WAFRuleGroup, er
 }
 
 var listWAFRuleGroupFilters = map[string]string{
-	"activated_rules": "Description.ActivatedRules",
-	"arn":             "Description.ARN",
-	"metric_name":     "Description.RuleGroup.RuleGroup.MetricName",
-	"name":            "Description.RuleGroupSummary.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"rule_group_id":   "Description.RuleGroupSummary.RuleGroupId",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.RuleGroupSummary.Name",
+	"activated_rules":     "Description.ActivatedRules",
+	"arn":                 "Description.ARN",
+	"metric_name":         "Description.RuleGroup.RuleGroup.MetricName",
+	"name":                "Description.RuleGroupSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rule_group_id":       "Description.RuleGroupSummary.RuleGroupId",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.RuleGroupSummary.Name",
 }
 
 func ListWAFRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73739,14 +73730,14 @@ func ListWAFRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 }
 
 var getWAFRuleGroupFilters = map[string]string{
-	"activated_rules": "Description.ActivatedRules",
-	"arn":             "Description.ARN",
-	"metric_name":     "Description.RuleGroup.RuleGroup.MetricName",
-	"name":            "Description.RuleGroupSummary.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"rule_group_id":   "description.Rule.RuleId",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.RuleGroupSummary.Name",
+	"activated_rules":     "Description.ActivatedRules",
+	"arn":                 "Description.ARN",
+	"metric_name":         "Description.RuleGroup.RuleGroup.MetricName",
+	"name":                "Description.RuleGroupSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rule_group_id":       "description.Rule.RuleId",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.RuleGroupSummary.Name",
 }
 
 func GetWAFRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -73890,7 +73881,7 @@ var listWAFWebAclFilters = map[string]string{
 	"logging_configuration": "Description.LoggingConfiguration",
 	"metric_name":           "Description.WebACL.MetricName",
 	"name":                  "Description.WebACL.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"rules":                 "Description.WebACL.Rules",
 	"tags_src":              "Description.Tags.TagList",
 	"title":                 "Description.WebACL.Name",
@@ -73963,7 +73954,7 @@ var getWAFWebAclFilters = map[string]string{
 	"logging_configuration": "Description.LoggingConfiguration",
 	"metric_name":           "Description.WebACL.MetricName",
 	"name":                  "Description.WebACL.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"rules":                 "Description.WebACL.Rules",
 	"tags_src":              "Description.Tags.TagList",
 	"title":                 "Description.WebACL.Name",
@@ -74118,7 +74109,7 @@ var listWellArchitectedWorkloadFilters = map[string]string{
 	"lenses":                              "Description.Workload.Lenses",
 	"non_aws_regions":                     "Description.Workload.NonAwsRegions",
 	"notes":                               "Description.Workload.Notes",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner":                               "Description.Workload.Owner",
 	"pillar_priorities":                   "Description.Workload.PillarPriorities",
 	"review_owner":                        "Description.Workload.ReviewOwner",
@@ -74206,7 +74197,7 @@ var getWellArchitectedWorkloadFilters = map[string]string{
 	"lenses":                              "Description.Workload.Lenses",
 	"non_aws_regions":                     "Description.Workload.NonAwsRegions",
 	"notes":                               "Description.Workload.Notes",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner":                               "Description.Workload.Owner",
 	"pillar_priorities":                   "Description.Workload.PillarPriorities",
 	"review_owner":                        "Description.Workload.ReviewOwner",
@@ -74367,7 +74358,7 @@ var listWellArchitectedAnswerFilters = map[string]string{
 	"lens_arn":                      "Description.LensArn",
 	"milestone_number":              "Description.MilestoneNumber",
 	"notes":                         "Description.Answer.Notes",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"pillar_id":                     "Description.Answer.PillarId",
 	"question_description":          "Description.Answer.QuestionDescription",
 	"question_id":                   "Description.Answer.QuestionId",
@@ -74450,7 +74441,7 @@ var getWellArchitectedAnswerFilters = map[string]string{
 	"lens_arn":                      "Description.LensArn",
 	"milestone_number":              "Description.MilestoneNumber",
 	"notes":                         "Description.Answer.Notes",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"pillar_id":                     "Description.Answer.PillarId",
 	"question_description":          "Description.Answer.QuestionDescription",
 	"question_id":                   "Description.Answer.QuestionId",
@@ -74598,22 +74589,22 @@ func (p WellArchitectedCheckDetailPaginator) NextPage(ctx context.Context) ([]We
 }
 
 var listWellArchitectedCheckDetailFilters = map[string]string{
-	"choice_id":         "Description.CheckDetail.ChoiceId",
-	"description":       "Description.CheckDetail.Description",
-	"flagged_resources": "Description.CheckDetail.FlaggedResources",
-	"id":                "Description.CheckDetail.Id",
-	"lens_arn":          "Description.CheckDetail.LensArn",
-	"name":              "Description.CheckDetail.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"owner_account_id":  "Description.CheckDetail.AccountId",
-	"pillar_id":         "Description.CheckDetail.PillarId",
-	"provider":          "Description.CheckDetail.Provider",
-	"question_id":       "Description.CheckDetail.QuestionId",
-	"reason":            "Description.CheckDetail.Reason",
-	"status":            "Description.CheckDetail.Status",
-	"title":             "Description.CheckDetail.Name",
-	"updated_at":        "Description.CheckDetail.UpdatedAt",
-	"workload_id":       "Description.WorkloadId",
+	"choice_id":           "Description.CheckDetail.ChoiceId",
+	"description":         "Description.CheckDetail.Description",
+	"flagged_resources":   "Description.CheckDetail.FlaggedResources",
+	"id":                  "Description.CheckDetail.Id",
+	"lens_arn":            "Description.CheckDetail.LensArn",
+	"name":                "Description.CheckDetail.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_account_id":    "Description.CheckDetail.AccountId",
+	"pillar_id":           "Description.CheckDetail.PillarId",
+	"provider":            "Description.CheckDetail.Provider",
+	"question_id":         "Description.CheckDetail.QuestionId",
+	"reason":              "Description.CheckDetail.Reason",
+	"status":              "Description.CheckDetail.Status",
+	"title":               "Description.CheckDetail.Name",
+	"updated_at":          "Description.CheckDetail.UpdatedAt",
+	"workload_id":         "Description.WorkloadId",
 }
 
 func ListWellArchitectedCheckDetail(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -74677,22 +74668,22 @@ func ListWellArchitectedCheckDetail(ctx context.Context, d *plugin.QueryData, _ 
 }
 
 var getWellArchitectedCheckDetailFilters = map[string]string{
-	"choice_id":         "Description.CheckDetail.ChoiceId",
-	"description":       "Description.CheckDetail.Description",
-	"flagged_resources": "Description.CheckDetail.FlaggedResources",
-	"id":                "Description.CheckDetail.Id",
-	"lens_arn":          "Description.CheckDetail.LensArn",
-	"name":              "Description.CheckDetail.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"owner_account_id":  "Description.CheckDetail.AccountId",
-	"pillar_id":         "Description.CheckDetail.PillarId",
-	"provider":          "Description.CheckDetail.Provider",
-	"question_id":       "Description.CheckDetail.QuestionId",
-	"reason":            "Description.CheckDetail.Reason",
-	"status":            "Description.CheckDetail.Status",
-	"title":             "Description.CheckDetail.Name",
-	"updated_at":        "Description.CheckDetail.UpdatedAt",
-	"workload_id":       "description.WorkloadId",
+	"choice_id":           "Description.CheckDetail.ChoiceId",
+	"description":         "Description.CheckDetail.Description",
+	"flagged_resources":   "Description.CheckDetail.FlaggedResources",
+	"id":                  "Description.CheckDetail.Id",
+	"lens_arn":            "Description.CheckDetail.LensArn",
+	"name":                "Description.CheckDetail.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_account_id":    "Description.CheckDetail.AccountId",
+	"pillar_id":           "Description.CheckDetail.PillarId",
+	"provider":            "Description.CheckDetail.Provider",
+	"question_id":         "Description.CheckDetail.QuestionId",
+	"reason":              "Description.CheckDetail.Reason",
+	"status":              "Description.CheckDetail.Status",
+	"title":               "Description.CheckDetail.Name",
+	"updated_at":          "Description.CheckDetail.UpdatedAt",
+	"workload_id":         "description.WorkloadId",
 }
 
 func GetWellArchitectedCheckDetail(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -74831,20 +74822,20 @@ func (p WellArchitectedCheckSummaryPaginator) NextPage(ctx context.Context) ([]W
 }
 
 var listWellArchitectedCheckSummaryFilters = map[string]string{
-	"account_summary": "Description.CheckSummary.AccountSummary",
-	"choice_id":       "Description.CheckSummary.ChoiceId",
-	"description":     "Description.CheckSummary.Description",
-	"id":              "Description.CheckSummary.ChoiceId",
-	"lens_arn":        "Description.CheckSummary.LensArn",
-	"name":            "Description.CheckSummary.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"pillar_id":       "Description.CheckSummary.PillarId",
-	"provider":        "Description.CheckSummary.Provider",
-	"question_id":     "Description.CheckSummary.QuestionId",
-	"status":          "Description.CheckSummary.Status",
-	"title":           "Name",
-	"updated_at":      "Description.CheckSummary.UpdatedAt",
-	"workload_id":     "Description.WorkloadId",
+	"account_summary":     "Description.CheckSummary.AccountSummary",
+	"choice_id":           "Description.CheckSummary.ChoiceId",
+	"description":         "Description.CheckSummary.Description",
+	"id":                  "Description.CheckSummary.ChoiceId",
+	"lens_arn":            "Description.CheckSummary.LensArn",
+	"name":                "Description.CheckSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"pillar_id":           "Description.CheckSummary.PillarId",
+	"provider":            "Description.CheckSummary.Provider",
+	"question_id":         "Description.CheckSummary.QuestionId",
+	"status":              "Description.CheckSummary.Status",
+	"title":               "Name",
+	"updated_at":          "Description.CheckSummary.UpdatedAt",
+	"workload_id":         "Description.WorkloadId",
 }
 
 func ListWellArchitectedCheckSummary(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -74908,20 +74899,20 @@ func ListWellArchitectedCheckSummary(ctx context.Context, d *plugin.QueryData, _
 }
 
 var getWellArchitectedCheckSummaryFilters = map[string]string{
-	"account_summary": "Description.CheckSummary.AccountSummary",
-	"choice_id":       "Description.CheckSummary.ChoiceId",
-	"description":     "Description.CheckSummary.Description",
-	"id":              "Description.CheckSummary.ChoiceId",
-	"lens_arn":        "Description.CheckSummary.LensArn",
-	"name":            "Description.CheckSummary.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"pillar_id":       "Description.CheckSummary.PillarId",
-	"provider":        "Description.CheckSummary.Provider",
-	"question_id":     "Description.CheckSummary.QuestionId",
-	"status":          "Description.CheckSummary.Status",
-	"title":           "Name",
-	"updated_at":      "Description.CheckSummary.UpdatedAt",
-	"workload_id":     "description.WorkloadId",
+	"account_summary":     "Description.CheckSummary.AccountSummary",
+	"choice_id":           "Description.CheckSummary.ChoiceId",
+	"description":         "Description.CheckSummary.Description",
+	"id":                  "Description.CheckSummary.ChoiceId",
+	"lens_arn":            "Description.CheckSummary.LensArn",
+	"name":                "Description.CheckSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"pillar_id":           "Description.CheckSummary.PillarId",
+	"provider":            "Description.CheckSummary.Provider",
+	"question_id":         "Description.CheckSummary.QuestionId",
+	"status":              "Description.CheckSummary.Status",
+	"title":               "Name",
+	"updated_at":          "Description.CheckSummary.UpdatedAt",
+	"workload_id":         "description.WorkloadId",
 }
 
 func GetWellArchitectedCheckSummary(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -75065,7 +75056,7 @@ var listWellArchitectedCheckConsolidatedReportFilters = map[string]string{
 	"lenses":                   "Description.ConsolidateReport.Lenses",
 	"lenses_applied_count":     "Description.ConsolidateReport.LensesAppliedCount",
 	"metric_type":              "Description.ConsolidateReport.MetricType",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"risk_counts":              "Description.ConsolidateReport.RiskCounts",
 	"updated_at":               "Description.ConsolidateReport.UpdatedAt",
 	"workload_arn":             "Description.ConsolidateReport.WorkloadArn",
@@ -75139,7 +75130,7 @@ var getWellArchitectedCheckConsolidatedReportFilters = map[string]string{
 	"lenses":                   "Description.ConsolidateReport.Lenses",
 	"lenses_applied_count":     "Description.ConsolidateReport.LensesAppliedCount",
 	"metric_type":              "Description.ConsolidateReport.MetricType",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"risk_counts":              "Description.ConsolidateReport.RiskCounts",
 	"updated_at":               "Description.ConsolidateReport.UpdatedAt",
 	"workload_arn":             "Description.ConsolidateReport.WorkloadArn",
@@ -75290,7 +75281,7 @@ var listWellArchitectedLensFilters = map[string]string{
 	"lens_name":           "Description.LensSummary.LensName",
 	"lens_status":         "Description.LensSummary.LensStatus",
 	"lens_version":        "Description.LensSummary.LensVersion",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"owner":               "Description.LensSummary.Owner",
 	"share_invitation_id": "Description.Lens.ShareInvitationId",
 	"tags":                "Description.Lens.Tags",
@@ -75366,7 +75357,7 @@ var getWellArchitectedLensFilters = map[string]string{
 	"lens_name":           "Description.LensSummary.LensName",
 	"lens_status":         "Description.LensSummary.LensStatus",
 	"lens_version":        "Description.LensSummary.LensVersion",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"owner":               "Description.LensSummary.Owner",
 	"share_invitation_id": "Description.Lens.ShareInvitationId",
 	"tags":                "Description.Lens.Tags",
@@ -75516,7 +75507,7 @@ var listWellArchitectedLensReviewFilters = map[string]string{
 	"lens_status":             "Description.LensReview.LensStatus",
 	"lens_version":            "Description.LensReview.LensVersion",
 	"notes":                   "Description.LensReview.Notes",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"pillar_review_summaries": "Description.LensReview.PillarReviewSummaries",
 	"risk_counts":             "Description.LensReview.RiskCounts",
 	"title":                   "Description.LensReview.LensName",
@@ -75590,7 +75581,7 @@ var getWellArchitectedLensReviewFilters = map[string]string{
 	"lens_status":             "Description.LensReview.LensStatus",
 	"lens_version":            "Description.LensReview.LensVersion",
 	"notes":                   "Description.LensReview.Notes",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"pillar_review_summaries": "Description.LensReview.PillarReviewSummaries",
 	"risk_counts":             "Description.LensReview.RiskCounts",
 	"title":                   "Description.LensReview.LensName",
@@ -75738,7 +75729,7 @@ var listWellArchitectedLensReviewImprovementFilters = map[string]string{
 	"lens_alias":           "Description.LensAlias",
 	"lens_arn":             "Description.LensArn",
 	"milestone_number":     "Description.MilestoneNumber",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"pillar_id":            "Description.ImprovementSummary.PillarId",
 	"question_id":          "Description.ImprovementSummary.QuestionId",
 	"question_title":       "Description.ImprovementSummary.QuestionTitle",
@@ -75813,7 +75804,7 @@ var getWellArchitectedLensReviewImprovementFilters = map[string]string{
 	"lens_alias":           "Description.LensAlias",
 	"lens_arn":             "Description.LensArn",
 	"milestone_number":     "Description.MilestoneNumber",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"pillar_id":            "Description.ImprovementSummary.PillarId",
 	"question_id":          "Description.ImprovementSummary.QuestionId",
 	"question_title":       "Description.ImprovementSummary.QuestionTitle",
@@ -75958,12 +75949,12 @@ func (p WellArchitectedLensReviewReportPaginator) NextPage(ctx context.Context) 
 }
 
 var listWellArchitectedLensReviewReportFilters = map[string]string{
-	"base64_string":    "Description.Report.Base64String",
-	"lens_alias":       "Description.Report.LensAlias",
-	"lens_arn":         "Description.Report.LensArn",
-	"milestone_number": "Description.MilestoneNumber",
-	"og_account_id":    "metadata.IntegrationID",
-	"workload_id":      "Description.WorkloadId",
+	"base64_string":       "Description.Report.Base64String",
+	"lens_alias":          "Description.Report.LensAlias",
+	"lens_arn":            "Description.Report.LensArn",
+	"milestone_number":    "Description.MilestoneNumber",
+	"platform_account_id": "metadata.IntegrationID",
+	"workload_id":         "Description.WorkloadId",
 }
 
 func ListWellArchitectedLensReviewReport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76027,12 +76018,12 @@ func ListWellArchitectedLensReviewReport(ctx context.Context, d *plugin.QueryDat
 }
 
 var getWellArchitectedLensReviewReportFilters = map[string]string{
-	"base64_string":    "Description.Report.Base64String",
-	"lens_alias":       "Description.Report.LensAlias",
-	"lens_arn":         "Description.Report.LensArn",
-	"milestone_number": "Description.MilestoneNumber",
-	"og_account_id":    "metadata.IntegrationID",
-	"workload_id":      "description.WorkloadId",
+	"base64_string":       "Description.Report.Base64String",
+	"lens_alias":          "Description.Report.LensAlias",
+	"lens_arn":            "Description.Report.LensArn",
+	"milestone_number":    "Description.MilestoneNumber",
+	"platform_account_id": "metadata.IntegrationID",
+	"workload_id":         "description.WorkloadId",
 }
 
 func GetWellArchitectedLensReviewReport(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76171,15 +76162,15 @@ func (p WellArchitectedLensSharePaginator) NextPage(ctx context.Context) ([]Well
 }
 
 var listWellArchitectedLensShareFilters = map[string]string{
-	"lens_alias":     "Description.Lens.LensAlias",
-	"lens_arn":       "Description.Lens.LensArn",
-	"lens_name":      "Description.Lens.Name",
-	"og_account_id":  "metadata.IntegrationID",
-	"share_id":       "Description.Share.ShareId",
-	"shared_with":    "Description.Share.SharedWith",
-	"status":         "Description.Share.Status",
-	"status_message": "Description.Share.StatusMessage",
-	"title":          "Description.Share.ShareId",
+	"lens_alias":          "Description.Lens.LensAlias",
+	"lens_arn":            "Description.Lens.LensArn",
+	"lens_name":           "Description.Lens.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"share_id":            "Description.Share.ShareId",
+	"shared_with":         "Description.Share.SharedWith",
+	"status":              "Description.Share.Status",
+	"status_message":      "Description.Share.StatusMessage",
+	"title":               "Description.Share.ShareId",
 }
 
 func ListWellArchitectedLensShare(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76243,15 +76234,15 @@ func ListWellArchitectedLensShare(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getWellArchitectedLensShareFilters = map[string]string{
-	"lens_alias":     "Description.Lens.LensAlias",
-	"lens_arn":       "Description.Lens.LensArn",
-	"lens_name":      "Description.Lens.Name",
-	"og_account_id":  "metadata.IntegrationID",
-	"share_id":       "Description.Share.ShareId",
-	"shared_with":    "Description.Share.SharedWith",
-	"status":         "Description.Share.Status",
-	"status_message": "Description.Share.StatusMessage",
-	"title":          "Description.Share.ShareId",
+	"lens_alias":          "Description.Lens.LensAlias",
+	"lens_arn":            "Description.Lens.LensArn",
+	"lens_name":           "Description.Lens.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"share_id":            "Description.Share.ShareId",
+	"shared_with":         "Description.Share.SharedWith",
+	"status":              "Description.Share.Status",
+	"status_message":      "Description.Share.StatusMessage",
+	"title":               "Description.Share.ShareId",
 }
 
 func GetWellArchitectedLensShare(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76390,12 +76381,12 @@ func (p WellArchitectedMilestonePaginator) NextPage(ctx context.Context) ([]Well
 }
 
 var listWellArchitectedMilestoneFilters = map[string]string{
-	"milestone_name":   "Description.Milestone.MilestoneName",
-	"milestone_number": "Description.Milestone.MilestoneNumber",
-	"og_account_id":    "metadata.IntegrationID",
-	"recorded_at":      "Description.Milestone.RecordedAt",
-	"workload":         "Description.Milestone.Workload",
-	"workload_id":      "Description.Milestone.Workload.WorkloadId",
+	"milestone_name":      "Description.Milestone.MilestoneName",
+	"milestone_number":    "Description.Milestone.MilestoneNumber",
+	"platform_account_id": "metadata.IntegrationID",
+	"recorded_at":         "Description.Milestone.RecordedAt",
+	"workload":            "Description.Milestone.Workload",
+	"workload_id":         "Description.Milestone.Workload.WorkloadId",
 }
 
 func ListWellArchitectedMilestone(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76459,12 +76450,12 @@ func ListWellArchitectedMilestone(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getWellArchitectedMilestoneFilters = map[string]string{
-	"milestone_name":   "Description.Milestone.MilestoneName",
-	"milestone_number": "Description.Milestone.MilestoneNumber",
-	"og_account_id":    "metadata.IntegrationID",
-	"recorded_at":      "Description.Milestone.RecordedAt",
-	"workload":         "Description.Milestone.Workload",
-	"workload_id":      "Description.Milestone.Workload.WorkloadId",
+	"milestone_name":      "Description.Milestone.MilestoneName",
+	"milestone_number":    "Description.Milestone.MilestoneNumber",
+	"platform_account_id": "metadata.IntegrationID",
+	"recorded_at":         "Description.Milestone.RecordedAt",
+	"workload":            "Description.Milestone.Workload",
+	"workload_id":         "Description.Milestone.Workload.WorkloadId",
 }
 
 func GetWellArchitectedMilestone(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -76607,7 +76598,7 @@ var listWellArchitectedNotificationFilters = map[string]string{
 	"latest_lens_version":  "Description.Notification.LensUpgradeSummary.LatestLensVersion",
 	"lens_alias":           "Description.Notification.LensUpgradeSummary.LensAlias",
 	"lens_arn":             "Description.Notification.LensUpgradeSummary.LensArn",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"type":                 "Description.Notification.Type",
 	"workload_id":          "Description.Notification.LensUpgradeSummary.WorkloadId",
 	"workload_name":        "Description.Notification.LensUpgradeSummary.WorkloadName",
@@ -76678,7 +76669,7 @@ var getWellArchitectedNotificationFilters = map[string]string{
 	"latest_lens_version":  "Description.Notification.LensUpgradeSummary.LatestLensVersion",
 	"lens_alias":           "Description.Notification.LensUpgradeSummary.LensAlias",
 	"lens_arn":             "Description.Notification.LensUpgradeSummary.LensArn",
-	"og_account_id":        "metadata.IntegrationID",
+	"platform_account_id":  "metadata.IntegrationID",
 	"type":                 "Description.Notification.Type",
 	"workload_id":          "Description.Notification.LensUpgradeSummary.WorkloadId",
 	"workload_name":        "Description.Notification.LensUpgradeSummary.WorkloadName",
@@ -76822,7 +76813,7 @@ func (p WellArchitectedShareInvitationPaginator) NextPage(ctx context.Context) (
 var listWellArchitectedShareInvitationFilters = map[string]string{
 	"lens_arn":            "Description.ShareInvitation.LensArn",
 	"lens_name":           "Description.ShareInvitation.LensName",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"permission_type":     "Description.ShareInvitation.PermissionType",
 	"share_invitation_id": "Description.ShareInvitation.ShareInvitationId",
 	"shared_by":           "Description.ShareInvitation.SharedBy",
@@ -76895,7 +76886,7 @@ func ListWellArchitectedShareInvitation(ctx context.Context, d *plugin.QueryData
 var getWellArchitectedShareInvitationFilters = map[string]string{
 	"lens_arn":            "Description.ShareInvitation.LensArn",
 	"lens_name":           "Description.ShareInvitation.LensName",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"permission_type":     "Description.ShareInvitation.PermissionType",
 	"share_invitation_id": "Description.ShareInvitation.ShareInvitationId",
 	"shared_by":           "Description.ShareInvitation.SharedBy",
@@ -77041,15 +77032,15 @@ func (p WellArchitectedWorkloadSharePaginator) NextPage(ctx context.Context) ([]
 }
 
 var listWellArchitectedWorkloadShareFilters = map[string]string{
-	"akas":            "Description.Arn",
-	"og_account_id":   "metadata.IntegrationID",
-	"permission_type": "Description.Share.PermissionType",
-	"share_id":        "Description.Share.ShareId",
-	"shared_with":     "Description.Share.SharedWith",
-	"status":          "Description.Share.Status",
-	"status_message":  "Description.Share.StatusMessage",
-	"title":           "Description.Share.ShareId",
-	"workload_id":     "Description.WorkloadId",
+	"akas":                "Description.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_type":     "Description.Share.PermissionType",
+	"share_id":            "Description.Share.ShareId",
+	"shared_with":         "Description.Share.SharedWith",
+	"status":              "Description.Share.Status",
+	"status_message":      "Description.Share.StatusMessage",
+	"title":               "Description.Share.ShareId",
+	"workload_id":         "Description.WorkloadId",
 }
 
 func ListWellArchitectedWorkloadShare(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -77113,15 +77104,15 @@ func ListWellArchitectedWorkloadShare(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getWellArchitectedWorkloadShareFilters = map[string]string{
-	"akas":            "Description.Arn",
-	"og_account_id":   "metadata.IntegrationID",
-	"permission_type": "Description.Share.PermissionType",
-	"share_id":        "Description.Share.ShareId",
-	"shared_with":     "Description.Share.SharedWith",
-	"status":          "Description.Share.Status",
-	"status_message":  "Description.Share.StatusMessage",
-	"title":           "Description.Share.ShareId",
-	"workload_id":     "Description.WorkloadId",
+	"akas":                "Description.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"permission_type":     "Description.Share.PermissionType",
+	"share_id":            "Description.Share.ShareId",
+	"shared_with":         "Description.Share.SharedWith",
+	"status":              "Description.Share.Status",
+	"status_message":      "Description.Share.StatusMessage",
+	"title":               "Description.Share.ShareId",
+	"workload_id":         "Description.WorkloadId",
 }
 
 func GetWellArchitectedWorkloadShare(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -77265,7 +77256,7 @@ var listWAFRegionalWebAclFilters = map[string]string{
 	"logging_configuration": "Description.LoggingConfiguration",
 	"metric_name":           "Description.WebACL.MetricName",
 	"name":                  "Description.WebACL.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"resources":             "Description.AssociatedResources",
 	"rules":                 "Description.WebACL.Rules",
 	"tags":                  "Description.Tags",
@@ -77340,7 +77331,7 @@ var getWAFRegionalWebAclFilters = map[string]string{
 	"logging_configuration": "Description.LoggingConfiguration",
 	"metric_name":           "Description.WebACL.MetricName",
 	"name":                  "Description.WebACL.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"resources":             "Description.AssociatedResources",
 	"rules":                 "Description.WebACL.Rules",
 	"tags":                  "Description.Tags",
@@ -77485,16 +77476,16 @@ func (p WAFRegionalRuleGroupPaginator) NextPage(ctx context.Context) ([]WAFRegio
 }
 
 var listWAFRegionalRuleGroupFilters = map[string]string{
-	"activated_rules": "Description.ActivatedRules",
-	"akas":            "Description.ARN",
-	"arn":             "Description.ARN",
-	"metric_name":     "Description.RuleGroup.MetricName",
-	"name":            "Description.RuleGroup.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"rule_group_id":   "Description.RuleGroup.RuleGroupId",
-	"tags":            "Description.Tags",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.RuleGroup.Name",
+	"activated_rules":     "Description.ActivatedRules",
+	"akas":                "Description.ARN",
+	"arn":                 "Description.ARN",
+	"metric_name":         "Description.RuleGroup.MetricName",
+	"name":                "Description.RuleGroup.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rule_group_id":       "Description.RuleGroup.RuleGroupId",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.RuleGroup.Name",
 }
 
 func ListWAFRegionalRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -77558,16 +77549,16 @@ func ListWAFRegionalRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getWAFRegionalRuleGroupFilters = map[string]string{
-	"activated_rules": "Description.ActivatedRules",
-	"akas":            "Description.ARN",
-	"arn":             "Description.ARN",
-	"metric_name":     "Description.RuleGroup.MetricName",
-	"name":            "Description.RuleGroup.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"rule_group_id":   "description.Rule.RuleId",
-	"tags":            "Description.Tags",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.RuleGroup.Name",
+	"activated_rules":     "Description.ActivatedRules",
+	"akas":                "Description.ARN",
+	"arn":                 "Description.ARN",
+	"metric_name":         "Description.RuleGroup.MetricName",
+	"name":                "Description.RuleGroup.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"rule_group_id":       "description.Rule.RuleId",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.RuleGroup.Name",
 }
 
 func GetWAFRegionalRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -77714,7 +77705,7 @@ var listRoute53HostedZoneFilters = map[string]string{
 	"linked_service_description": "Description.HostedZone.LinkedService.Description",
 	"linked_service_principal":   "Description.HostedZone.LinkedService.ServicePrincipal",
 	"name":                       "Description.HostedZone.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"private_zone":               "Description.HostedZone.Config.PrivateZone",
 	"query_logging_configs":      "Description.QueryLoggingConfigs",
 	"resource_record_set_count":  "Description.HostedZone.ResourceRecordSetCount",
@@ -77793,7 +77784,7 @@ var getRoute53HostedZoneFilters = map[string]string{
 	"linked_service_description": "Description.HostedZone.LinkedService.Description",
 	"linked_service_principal":   "Description.HostedZone.LinkedService.ServicePrincipal",
 	"name":                       "Description.HostedZone.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"private_zone":               "Description.HostedZone.Config.PrivateZone",
 	"query_logging_configs":      "Description.QueryLoggingConfigs",
 	"resource_record_set_count":  "Description.HostedZone.ResourceRecordSetCount",
@@ -77947,7 +77938,7 @@ var listRoute53HealthCheckFilters = map[string]string{
 	"id":                              "Description.HealthCheck.Id",
 	"linked_service_description":      "Description.HealthCheck.LinkedService.Description",
 	"linked_service_principal":        "Description.HealthCheck.LinkedService.ServicePrincipal",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"tags_src":                        "Description.Tags.ResourceTagSet.Tags",
 	"title":                           "Description.HealthCheck.Id",
 }
@@ -78021,7 +78012,7 @@ var getRoute53HealthCheckFilters = map[string]string{
 	"id":                              "description.HealthCheck.Id",
 	"linked_service_description":      "Description.HealthCheck.LinkedService.Description",
 	"linked_service_principal":        "Description.HealthCheck.LinkedService.ServicePrincipal",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"tags_src":                        "Description.Tags.ResourceTagSet.Tags",
 	"title":                           "Description.HealthCheck.Id",
 }
@@ -78170,7 +78161,7 @@ var listRoute53ResolverResolverRuleFilters = map[string]string{
 	"id":                         "Description.ResolverRole.Id",
 	"modification_time":          "Description.ResolverRole.ModificationTime",
 	"name":                       "description.ResolverRole.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"owner_id":                   "Description.ResolverRole.OwnerId",
 	"resolver_endpoint_id":       "description.ResolverRole.ResolverEndpointId",
 	"resolver_rule_associations": "Description.RuleAssociations.ResolverRuleAssociations",
@@ -78252,7 +78243,7 @@ var getRoute53ResolverResolverRuleFilters = map[string]string{
 	"id":                         "description.ResolverRole.Id",
 	"modification_time":          "Description.ResolverRole.ModificationTime",
 	"name":                       "Description.ResolverRole.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"owner_id":                   "Description.ResolverRole.OwnerId",
 	"resolver_endpoint_id":       "Description.ResolverRole.ResolverEndpointId",
 	"resolver_rule_associations": "Description.RuleAssociations.ResolverRuleAssociations",
@@ -78401,22 +78392,22 @@ func (p Route53ResolverEndpointPaginator) NextPage(ctx context.Context) ([]Route
 }
 
 var listRoute53ResolverEndpointFilters = map[string]string{
-	"arn":                "Description.ResolverEndpoint.Arn",
-	"creation_time":      "Description.ResolverEndpoint.CreationTime",
-	"creator_request_id": "description.ResolverEndpoint.CreatorRequestId",
-	"direction":          "description.ResolverEndpoint.Direction",
-	"host_vpc_id":        "description.ResolverEndpoint.HostVPCId",
-	"id":                 "Description.ResolverEndpoint.Id",
-	"ip_address_count":   "description.ResolverEndpoint.IpAddressCount",
-	"ip_addresses":       "Description.IpAddresses",
-	"modification_time":  "Description.ResolverEndpoint.ModificationTime",
-	"name":               "description.ResolverEndpoint.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"security_group_ids": "Description.ResolverEndpoint.SecurityGroupIds",
-	"status":             "description.ResolverEndpoint.Status",
-	"status_message":     "Description.ResolverEndpoint.StatusMessage",
-	"tags_src":           "Description.Tags",
-	"title":              "Description.ResolverEndpoint.Name",
+	"arn":                 "Description.ResolverEndpoint.Arn",
+	"creation_time":       "Description.ResolverEndpoint.CreationTime",
+	"creator_request_id":  "description.ResolverEndpoint.CreatorRequestId",
+	"direction":           "description.ResolverEndpoint.Direction",
+	"host_vpc_id":         "description.ResolverEndpoint.HostVPCId",
+	"id":                  "Description.ResolverEndpoint.Id",
+	"ip_address_count":    "description.ResolverEndpoint.IpAddressCount",
+	"ip_addresses":        "Description.IpAddresses",
+	"modification_time":   "Description.ResolverEndpoint.ModificationTime",
+	"name":                "description.ResolverEndpoint.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"security_group_ids":  "Description.ResolverEndpoint.SecurityGroupIds",
+	"status":              "description.ResolverEndpoint.Status",
+	"status_message":      "Description.ResolverEndpoint.StatusMessage",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.ResolverEndpoint.Name",
 }
 
 func ListRoute53ResolverEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -78480,22 +78471,22 @@ func ListRoute53ResolverEndpoint(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getRoute53ResolverEndpointFilters = map[string]string{
-	"arn":                "Description.ResolverEndpoint.Arn",
-	"creation_time":      "Description.ResolverEndpoint.CreationTime",
-	"creator_request_id": "Description.ResolverEndpoint.CreatorRequestId",
-	"direction":          "Description.ResolverEndpoint.Direction",
-	"host_vpc_id":        "Description.ResolverEndpoint.HostVPCId",
-	"id":                 "description.ResolverEndpoint.Id",
-	"ip_address_count":   "Description.ResolverEndpoint.IpAddressCount",
-	"ip_addresses":       "Description.IpAddresses",
-	"modification_time":  "Description.ResolverEndpoint.ModificationTime",
-	"name":               "Description.ResolverEndpoint.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"security_group_ids": "Description.ResolverEndpoint.SecurityGroupIds",
-	"status":             "Description.ResolverEndpoint.Status",
-	"status_message":     "Description.ResolverEndpoint.StatusMessage",
-	"tags_src":           "Description.Tags",
-	"title":              "Description.ResolverEndpoint.Name",
+	"arn":                 "Description.ResolverEndpoint.Arn",
+	"creation_time":       "Description.ResolverEndpoint.CreationTime",
+	"creator_request_id":  "Description.ResolverEndpoint.CreatorRequestId",
+	"direction":           "Description.ResolverEndpoint.Direction",
+	"host_vpc_id":         "Description.ResolverEndpoint.HostVPCId",
+	"id":                  "description.ResolverEndpoint.Id",
+	"ip_address_count":    "Description.ResolverEndpoint.IpAddressCount",
+	"ip_addresses":        "Description.IpAddresses",
+	"modification_time":   "Description.ResolverEndpoint.ModificationTime",
+	"name":                "Description.ResolverEndpoint.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"security_group_ids":  "Description.ResolverEndpoint.SecurityGroupIds",
+	"status":              "Description.ResolverEndpoint.Status",
+	"status_message":      "Description.ResolverEndpoint.StatusMessage",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.ResolverEndpoint.Name",
 }
 
 func GetRoute53ResolverEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -78644,7 +78635,7 @@ var listRoute53DomainFilters = map[string]string{
 	"domain_name":         "Description.Domain.DomainName",
 	"expiration_date":     "Description.Domain.ExpirationDate",
 	"nameservers":         "Description.Domain.Nameservers",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"registrant_contact":  "Description.Domain.RegistrantContact",
 	"registrant_privacy":  "Description.Domain.RegistrantPrivacy",
 	"registrar_name":      "Description.Domain.RegistrarName",
@@ -78732,7 +78723,7 @@ var getRoute53DomainFilters = map[string]string{
 	"domain_name":         "description.Domain.DomainName",
 	"expiration_date":     "Description.Domain.ExpirationDate",
 	"nameservers":         "Description.Domain.Nameservers",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"registrant_contact":  "Description.Domain.RegistrantContact",
 	"registrant_privacy":  "Description.Domain.RegistrantPrivacy",
 	"registrar_name":      "Description.Domain.RegistrarName",
@@ -78892,7 +78883,7 @@ var listRoute53RecordFilters = map[string]string{
 	"latency_region":             "Description.Record.Region",
 	"multi_value_answer":         "Description.Record.MultiValueAnswer",
 	"name":                       "description.Record.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"set_identifier":             "description.Record.SetIdentifier",
 	"title":                      "Description.Record.Name",
 	"traffic_policy_instance_id": "Description.Record.TrafficPolicyInstanceId",
@@ -78970,7 +78961,7 @@ var getRoute53RecordFilters = map[string]string{
 	"latency_region":             "Description.Record.Region",
 	"multi_value_answer":         "Description.Record.MultiValueAnswer",
 	"name":                       "Description.Record.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"set_identifier":             "Description.Record.SetIdentifier",
 	"title":                      "Description.Record.Name",
 	"traffic_policy_instance_id": "Description.Record.TrafficPolicyInstanceId",
@@ -79116,14 +79107,14 @@ func (p Route53TrafficPolicyPaginator) NextPage(ctx context.Context) ([]Route53T
 }
 
 var listRoute53TrafficPolicyFilters = map[string]string{
-	"comment":       "Description.TrafficPolicy.Comment",
-	"document":      "Description.TrafficPolicy.Document",
-	"id":            "Description.TrafficPolicy.Id",
-	"name":          "Description.TrafficPolicy.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.TrafficPolicy.Name",
-	"type":          "Description.TrafficPolicy.Type",
-	"version":       "Description.TrafficPolicy.Version",
+	"comment":             "Description.TrafficPolicy.Comment",
+	"document":            "Description.TrafficPolicy.Document",
+	"id":                  "Description.TrafficPolicy.Id",
+	"name":                "Description.TrafficPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.TrafficPolicy.Name",
+	"type":                "Description.TrafficPolicy.Type",
+	"version":             "Description.TrafficPolicy.Version",
 }
 
 func ListRoute53TrafficPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -79187,14 +79178,14 @@ func ListRoute53TrafficPolicy(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getRoute53TrafficPolicyFilters = map[string]string{
-	"comment":       "Description.TrafficPolicy.Comment",
-	"document":      "Description.TrafficPolicy.Document",
-	"id":            "description.TrafficPolicy.Id",
-	"name":          "Description.TrafficPolicy.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.TrafficPolicy.Name",
-	"type":          "Description.TrafficPolicy.Type",
-	"version":       "description.TrafficPolicy.Version",
+	"comment":             "Description.TrafficPolicy.Comment",
+	"document":            "Description.TrafficPolicy.Document",
+	"id":                  "description.TrafficPolicy.Id",
+	"name":                "Description.TrafficPolicy.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.TrafficPolicy.Name",
+	"type":                "Description.TrafficPolicy.Type",
+	"version":             "description.TrafficPolicy.Version",
 }
 
 func GetRoute53TrafficPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -79337,7 +79328,7 @@ var listRoute53TrafficPolicyInstanceFilters = map[string]string{
 	"id":                     "Description.TrafficPolicyInstance.Id",
 	"message":                "Description.TrafficPolicyInstance.Message",
 	"name":                   "Description.TrafficPolicyInstance.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"state":                  "Description.TrafficPolicyInstance.State",
 	"title":                  "Description.TrafficPolicyInstance.Name",
 	"traffic_policy_id":      "Description.TrafficPolicyInstance.TrafficPolicyId",
@@ -79411,7 +79402,7 @@ var getRoute53TrafficPolicyInstanceFilters = map[string]string{
 	"id":                     "description.TrafficPolicyInstance.Id",
 	"message":                "Description.TrafficPolicyInstance.Message",
 	"name":                   "Description.TrafficPolicyInstance.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"state":                  "Description.TrafficPolicyInstance.State",
 	"title":                  "Description.TrafficPolicyInstance.Name",
 	"traffic_policy_id":      "Description.TrafficPolicyInstance.TrafficPolicyId",
@@ -79559,7 +79550,7 @@ var listRoute53QueryLogFilters = map[string]string{
 	"cloud_watch_logs_log_group_arn": "Description.QueryConfig.CloudWatchLogsLogGroupArn",
 	"hosted_zone_id":                 "Description.QueryConfig.HostedZoneId",
 	"id":                             "Description.QueryConfig.Id",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"title":                          "Description.QueryConfig.Id",
 }
 
@@ -79627,7 +79618,7 @@ var getRoute53QueryLogFilters = map[string]string{
 	"cloud_watch_logs_log_group_arn": "Description.QueryConfig.CloudWatchLogsLogGroupArn",
 	"hosted_zone_id":                 "Description.QueryConfig.HostedZoneId",
 	"id":                             "description.TrafficPolicyInstance.Id",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"title":                          "Description.QueryConfig.Id",
 }
 
@@ -79767,18 +79758,18 @@ func (p Route53ResolverQueryLogConfigPaginator) NextPage(ctx context.Context) ([
 }
 
 var listRoute53ResolverQueryLogConfigFilters = map[string]string{
-	"arn":                "Description.QueryConfig.Arn",
-	"association_count":  "Description.QueryConfig.AssociationCount",
-	"creation_time":      "Description.QueryConfig.CreationTime",
-	"creator_request_id": "Description.QueryConfig.CreatorRequestId",
-	"destination_arn":    "Description.QueryConfig.DestinationArn",
-	"id":                 "Description.QueryConfig.Id",
-	"name":               "Description.QueryConfig.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"owner_id":           "Description.QueryConfig.OwnerId",
-	"share_status":       "Description.QueryConfig.ShareStatus",
-	"status":             "Description.QueryConfig.Status",
-	"title":              "Description.QueryConfig.Name",
+	"arn":                 "Description.QueryConfig.Arn",
+	"association_count":   "Description.QueryConfig.AssociationCount",
+	"creation_time":       "Description.QueryConfig.CreationTime",
+	"creator_request_id":  "Description.QueryConfig.CreatorRequestId",
+	"destination_arn":     "Description.QueryConfig.DestinationArn",
+	"id":                  "Description.QueryConfig.Id",
+	"name":                "Description.QueryConfig.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.QueryConfig.OwnerId",
+	"share_status":        "Description.QueryConfig.ShareStatus",
+	"status":              "Description.QueryConfig.Status",
+	"title":               "Description.QueryConfig.Name",
 }
 
 func ListRoute53ResolverQueryLogConfig(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -79842,18 +79833,18 @@ func ListRoute53ResolverQueryLogConfig(ctx context.Context, d *plugin.QueryData,
 }
 
 var getRoute53ResolverQueryLogConfigFilters = map[string]string{
-	"arn":                "Description.QueryConfig.Arn",
-	"association_count":  "Description.QueryConfig.AssociationCount",
-	"creation_time":      "Description.QueryConfig.CreationTime",
-	"creator_request_id": "Description.QueryConfig.CreatorRequestId",
-	"destination_arn":    "Description.QueryConfig.DestinationArn",
-	"id":                 "description.TrafficPolicyInstance.Id",
-	"name":               "Description.QueryConfig.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"owner_id":           "Description.QueryConfig.OwnerId",
-	"share_status":       "Description.QueryConfig.ShareStatus",
-	"status":             "Description.QueryConfig.Status",
-	"title":              "Description.QueryConfig.Name",
+	"arn":                 "Description.QueryConfig.Arn",
+	"association_count":   "Description.QueryConfig.AssociationCount",
+	"creation_time":       "Description.QueryConfig.CreationTime",
+	"creator_request_id":  "Description.QueryConfig.CreatorRequestId",
+	"destination_arn":     "Description.QueryConfig.DestinationArn",
+	"id":                  "description.TrafficPolicyInstance.Id",
+	"name":                "Description.QueryConfig.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner_id":            "Description.QueryConfig.OwnerId",
+	"share_status":        "Description.QueryConfig.ShareStatus",
+	"status":              "Description.QueryConfig.Status",
+	"title":               "Description.QueryConfig.Name",
 }
 
 func GetRoute53ResolverQueryLogConfig(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -79995,7 +79986,7 @@ var listBatchComputeEnvironmentFilters = map[string]string{
 	"arn":                      "Description.ComputeEnvironment.ComputeEnvironmentArn",
 	"compute_environment_name": "Description.ComputeEnvironment.ComputeEnvironmentName",
 	"id":                       "Description.ComputeEnvironment.Uuid",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"tags":                     "Description.ComputeEnvironment.Tags",
 	"title":                    "Description.ComputeEnvironment.ComputeEnvironmentName",
 }
@@ -80064,7 +80055,7 @@ var getBatchComputeEnvironmentFilters = map[string]string{
 	"arn":                      "Description.ComputeEnvironment.ComputeEnvironmentArn",
 	"compute_environment_name": "description.ComputeEnvironment.ComputeEnvironmentName",
 	"id":                       "Description.ComputeEnvironment.Uuid",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"tags":                     "Description.ComputeEnvironment.Tags",
 	"title":                    "Description.ComputeEnvironment.ComputeEnvironmentName",
 }
@@ -80205,11 +80196,11 @@ func (p BatchJobPaginator) NextPage(ctx context.Context) ([]BatchJob, error) {
 }
 
 var listBatchJobFilters = map[string]string{
-	"arn":           "Description.Job.JobArn",
-	"id":            "Description.Job.JobId",
-	"job_name":      "Description.Job.JobName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Job.JobName",
+	"arn":                 "Description.Job.JobArn",
+	"id":                  "Description.Job.JobId",
+	"job_name":            "Description.Job.JobName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Job.JobName",
 }
 
 func ListBatchJob(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -80273,11 +80264,11 @@ func ListBatchJob(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 }
 
 var getBatchJobFilters = map[string]string{
-	"arn":           "Description.Job.JobArn",
-	"id":            "Description.Job.JobId",
-	"job_name":      "description.Job.JobName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Job.JobName",
+	"arn":                 "Description.Job.JobArn",
+	"id":                  "Description.Job.JobId",
+	"job_name":            "description.Job.JobName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Job.JobName",
 }
 
 func GetBatchJob(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -80416,12 +80407,12 @@ func (p BatchJobQueuePaginator) NextPage(ctx context.Context) ([]BatchJobQueue, 
 }
 
 var listBatchJobQueueFilters = map[string]string{
-	"arn":           "Description.Queue.ARN",
-	"id":            "Description.Queue.Id",
-	"name":          "Description.Queue.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Queue.Tags",
-	"title":         "Description.Queue.Name",
+	"arn":                 "Description.Queue.ARN",
+	"id":                  "Description.Queue.Id",
+	"name":                "Description.Queue.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Queue.Tags",
+	"title":               "Description.Queue.Name",
 }
 
 func ListBatchJobQueue(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -80485,13 +80476,13 @@ func ListBatchJobQueue(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 }
 
 var getBatchJobQueueFilters = map[string]string{
-	"arn":            "Description.Queue.ARN",
-	"id":             "Description.Queue.Id",
-	"job_queue_name": "description.JobQueue.JobQueueName",
-	"name":           "Description.Queue.Name",
-	"og_account_id":  "metadata.IntegrationID",
-	"tags":           "Description.Queue.Tags",
-	"title":          "Description.Queue.Name",
+	"arn":                 "Description.Queue.ARN",
+	"id":                  "Description.Queue.Id",
+	"job_queue_name":      "description.JobQueue.JobQueueName",
+	"name":                "Description.Queue.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Queue.Tags",
+	"title":               "Description.Queue.Name",
 }
 
 func GetBatchJobQueue(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -80637,7 +80628,7 @@ var listCodeArtifactRepositoryFilters = map[string]string{
 	"domain_owner":          "Description.Repository.DomainOwner",
 	"external_connections":  "Description.Description.ExternalConnections",
 	"name":                  "Description.Repository.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"policy":                "Description.Policy.ResourceArn",
 	"policy_std":            "Description.Policy",
 	"repository_endpoint":   "Description.Endpoints",
@@ -80714,7 +80705,7 @@ var getCodeArtifactRepositoryFilters = map[string]string{
 	"domain_owner":          "Description.Repository.DomainOwner",
 	"external_connections":  "Description.Description.ExternalConnections",
 	"name":                  "description.Repository.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"policy":                "Description.Policy.ResourceArn",
 	"policy_std":            "Description.Policy",
 	"repository_endpoint":   "Description.Endpoints",
@@ -80859,19 +80850,19 @@ func (p CodeArtifactDomainPaginator) NextPage(ctx context.Context) ([]CodeArtifa
 }
 
 var listCodeArtifactDomainFilters = map[string]string{
-	"arn":              "Description.Domain.Arn",
-	"asset_size_bytes": "Description.Domain.AssetSizeBytes",
-	"created_time":     "Description.Domain.CreatedTime",
-	"encryption_key":   "Description.Domain.EncryptionKey",
-	"name":             "Description.Domain.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner":            "Description.Domain.Owner",
-	"policy":           "Description.Policy",
-	"repository_count": "Description.Domain.RepositoryCount",
-	"s3_bucket_arn":    "Description.Domain.S3BucketArn",
-	"status":           "Description.Domain.Status",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.Domain.Name",
+	"arn":                 "Description.Domain.Arn",
+	"asset_size_bytes":    "Description.Domain.AssetSizeBytes",
+	"created_time":        "Description.Domain.CreatedTime",
+	"encryption_key":      "Description.Domain.EncryptionKey",
+	"name":                "Description.Domain.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner":               "Description.Domain.Owner",
+	"policy":              "Description.Policy",
+	"repository_count":    "Description.Domain.RepositoryCount",
+	"s3_bucket_arn":       "Description.Domain.S3BucketArn",
+	"status":              "Description.Domain.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Domain.Name",
 }
 
 func ListCodeArtifactDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -80935,19 +80926,19 @@ func ListCodeArtifactDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getCodeArtifactDomainFilters = map[string]string{
-	"arn":              "Description.Domain.Arn",
-	"asset_size_bytes": "Description.Domain.AssetSizeBytes",
-	"created_time":     "Description.Domain.CreatedTime",
-	"encryption_key":   "Description.Domain.EncryptionKey",
-	"name":             "description.Domain.Owner",
-	"og_account_id":    "metadata.IntegrationID",
-	"owner":            "Description.Domain.Owner",
-	"policy":           "Description.Policy",
-	"repository_count": "Description.Domain.RepositoryCount",
-	"s3_bucket_arn":    "Description.Domain.S3BucketArn",
-	"status":           "Description.Domain.Status",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.Domain.Name",
+	"arn":                 "Description.Domain.Arn",
+	"asset_size_bytes":    "Description.Domain.AssetSizeBytes",
+	"created_time":        "Description.Domain.CreatedTime",
+	"encryption_key":      "Description.Domain.EncryptionKey",
+	"name":                "description.Domain.Owner",
+	"platform_account_id": "metadata.IntegrationID",
+	"owner":               "Description.Domain.Owner",
+	"policy":              "Description.Policy",
+	"repository_count":    "Description.Domain.RepositoryCount",
+	"s3_bucket_arn":       "Description.Domain.S3BucketArn",
+	"status":              "Description.Domain.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Domain.Name",
 }
 
 func GetCodeArtifactDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -81103,7 +81094,7 @@ var listCodeDeployDeploymentGroupFilters = map[string]string{
 	"last_attempted_deployment":           "Description.DeploymentGroup.LastAttemptedDeployment",
 	"last_successful_deployment":          "Description.DeploymentGroup.LastSuccessfulDeployment",
 	"load_balancer_info":                  "Description.DeploymentGroup.LoadBalancerInfo",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"on_premises_instance_tag_filters":    "Description.DeploymentGroup.OnPremisesInstanceTagFilters",
 	"on_premises_tag_set":                 "Description.DeploymentGroup.OnPremisesTagSet",
 	"outdated_instances_strategy":         "Description.DeploymentGroup.OutdatedInstancesStrategy",
@@ -81192,7 +81183,7 @@ var getCodeDeployDeploymentGroupFilters = map[string]string{
 	"last_attempted_deployment":           "Description.DeploymentGroup.LastAttemptedDeployment",
 	"last_successful_deployment":          "Description.DeploymentGroup.LastSuccessfulDeployment",
 	"load_balancer_info":                  "Description.DeploymentGroup.LoadBalancerInfo",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"on_premises_instance_tag_filters":    "Description.DeploymentGroup.OnPremisesInstanceTagFilters",
 	"on_premises_tag_set":                 "Description.DeploymentGroup.OnPremisesTagSet",
 	"outdated_instances_strategy":         "Description.DeploymentGroup.OutdatedInstancesStrategy",
@@ -81346,7 +81337,7 @@ var listCodeDeployApplicationFilters = map[string]string{
 	"create_time":         "Description.Application.CreateTime",
 	"github_account_name": "Description.Application.GitHubAccountName",
 	"linked_to_github":    "Description.Application.LinkedToGitHub",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"tags_src":            "Description.Tags",
 	"title":               "Description.Application.ApplicationName",
 }
@@ -81419,7 +81410,7 @@ var getCodeDeployApplicationFilters = map[string]string{
 	"create_time":         "Description.Application.CreateTime",
 	"github_account_name": "Description.Application.GitHubAccountName",
 	"linked_to_github":    "Description.Application.LinkedToGitHub",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"tags_src":            "Description.Tags",
 	"title":               "Description.Application.ApplicationName",
 }
@@ -81565,7 +81556,7 @@ var listCodeDeployDeploymentConfigFilters = map[string]string{
 	"deployment_config_id":   "Description.Config.DeploymentConfigId",
 	"deployment_config_name": "Description.Config.DeploymentConfigName",
 	"minimum_healthy_hosts":  "Description.Config.MinimumHealthyHosts",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"title":                  "Description.Config.DeploymentConfigName",
 	"traffic_routing_config": "Description.Config.TrafficRoutingConfig",
 }
@@ -81637,7 +81628,7 @@ var getCodeDeployDeploymentConfigFilters = map[string]string{
 	"deployment_config_id":   "Description.Config.DeploymentConfigId",
 	"deployment_config_name": "Description.Config.DeploymentConfigName",
 	"minimum_healthy_hosts":  "Description.Config.MinimumHealthyHosts",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"title":                  "Description.Config.DeploymentConfigName",
 	"traffic_routing_config": "Description.Config.TrafficRoutingConfig",
 }
@@ -81778,12 +81769,12 @@ func (p CodeStarProjectPaginator) NextPage(ctx context.Context) ([]CodeStarProje
 }
 
 var listCodeStarProjectFilters = map[string]string{
-	"arn":           "Description.Project.Arn",
-	"id":            "Description.Project.Id",
-	"name":          "Description.Project.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Project.Name",
+	"arn":                 "Description.Project.Arn",
+	"id":                  "Description.Project.Id",
+	"name":                "Description.Project.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Project.Name",
 }
 
 func ListCodeStarProject(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -81847,12 +81838,12 @@ func ListCodeStarProject(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 }
 
 var getCodeStarProjectFilters = map[string]string{
-	"arn":           "Description.Project.Arn",
-	"id":            "description.Project.Id",
-	"name":          "Description.Project.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Project.Name",
+	"arn":                 "Description.Project.Arn",
+	"id":                  "description.Project.Id",
+	"name":                "Description.Project.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Project.Name",
 }
 
 func GetCodeStarProject(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -81991,11 +81982,11 @@ func (p DirectConnectConnectionPaginator) NextPage(ctx context.Context) ([]Direc
 }
 
 var listDirectConnectConnectionFilters = map[string]string{
-	"arn":           "ARN",
-	"connection_id": "Description.Connection.ConnectionId",
-	"name":          "Description.Connection.ConnectionName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Connection.ConnectionName",
+	"arn":                 "ARN",
+	"connection_id":       "Description.Connection.ConnectionId",
+	"name":                "Description.Connection.ConnectionName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Connection.ConnectionName",
 }
 
 func ListDirectConnectConnection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -82059,11 +82050,11 @@ func ListDirectConnectConnection(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getDirectConnectConnectionFilters = map[string]string{
-	"arn":           "ARN",
-	"connection_id": "description.Connection.ConnectionId",
-	"name":          "Description.Connection.ConnectionName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Connection.ConnectionName",
+	"arn":                 "ARN",
+	"connection_id":       "description.Connection.ConnectionId",
+	"name":                "Description.Connection.ConnectionName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Connection.ConnectionName",
 }
 
 func GetDirectConnectConnection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -82205,7 +82196,7 @@ var listDirectConnectGatewayFilters = map[string]string{
 	"arn":                       "ARN",
 	"direct_connect_gateway_id": "Description.Gateway.DirectConnectGatewayId",
 	"name":                      "Description.Gateway.DirectConnectGatewayName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"title":                     "Description.Gateway.DirectConnectGatewayName",
 }
 
@@ -82273,7 +82264,7 @@ var getDirectConnectGatewayFilters = map[string]string{
 	"arn":                       "ARN",
 	"direct_connect_gateway_id": "description.Gateway.DirectConnectGatewayId",
 	"name":                      "Description.Gateway.DirectConnectGatewayName",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"title":                     "Description.Gateway.DirectConnectGatewayName",
 }
 
@@ -82421,7 +82412,7 @@ var listNetworkFirewallFirewallFilters = map[string]string{
 	"id":                       "Description.Firewall.FirewallId",
 	"logging_configuration":    "Description.LoggingConfiguration",
 	"name":                     "Description.Firewall.FirewallName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"policy_arn":               "Description.Firewall.FirewallPolicyArn",
 	"policy_change_protection": "Description.Firewall.FirewallPolicyChangeProtection",
 	"subnet_change_protection": "Description.Firewall.SubnetChangeProtection",
@@ -82501,7 +82492,7 @@ var getNetworkFirewallFirewallFilters = map[string]string{
 	"id":                       "Description.Firewall.FirewallId",
 	"logging_configuration":    "Description.LoggingConfiguration",
 	"name":                     "Description.Firewall.FirewallName",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"policy_arn":               "Description.Firewall.FirewallPolicyArn",
 	"policy_change_protection": "Description.Firewall.FirewallPolicyChangeProtection",
 	"subnet_change_protection": "Description.Firewall.SubnetChangeProtection",
@@ -82658,7 +82649,7 @@ var listNetworkFirewallFirewallPolicyFilters = map[string]string{
 	"last_modified_time":               "Description.FirewallPolicyResponse.LastModifiedTime",
 	"name":                             "Description.FirewallPolicyResponse.FirewallPolicyName",
 	"number_of_associations":           "Description.FirewallPolicyResponse.NumberOfAssociations",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"tags_src":                         "Description.FirewallPolicyResponse.Tags",
 	"title":                            "Description.FirewallPolicyResponse.FirewallPolicyName",
 }
@@ -82735,7 +82726,7 @@ var getNetworkFirewallFirewallPolicyFilters = map[string]string{
 	"last_modified_time":               "Description.FirewallPolicyResponse.LastModifiedTime",
 	"name":                             "description.FirewallPolicyResponse.FirewallPolicyName",
 	"number_of_associations":           "Description.FirewallPolicyResponse.NumberOfAssociations",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"tags_src":                         "Description.FirewallPolicyResponse.Tags",
 	"title":                            "Description.FirewallPolicyResponse.FirewallPolicyName",
 }
@@ -82881,7 +82872,7 @@ var listNetworkFirewallRuleGroupFilters = map[string]string{
 	"consumed_capacity":      "Description.RuleGroupResponse.ConsumedCapacity",
 	"description":            "Description.RuleGroupResponse.Description",
 	"number_of_associations": "Description.RuleGroupResponse.NumberOfAssociations",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"rule_group_id":          "Description.RuleGroupResponse.RuleGroupId",
 	"rule_group_name":        "Description.RuleGroupResponse.RuleGroupName",
 	"rule_group_status":      "Description.RuleGroupResponse.RuleGroupStatus",
@@ -82959,7 +82950,7 @@ var getNetworkFirewallRuleGroupFilters = map[string]string{
 	"consumed_capacity":      "Description.RuleGroupResponse.ConsumedCapacity",
 	"description":            "Description.RuleGroupResponse.Description",
 	"number_of_associations": "Description.RuleGroupResponse.NumberOfAssociations",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"rule_group_id":          "Description.RuleGroupResponse.RuleGroupId",
 	"rule_group_name":        "description.RuleGroupResponse.RuleGroupName",
 	"rule_group_status":      "Description.RuleGroupResponse.RuleGroupStatus",
@@ -83107,10 +83098,10 @@ func (p OpsWorksCMServerPaginator) NextPage(ctx context.Context) ([]OpsWorksCMSe
 }
 
 var listOpsWorksCMServerFilters = map[string]string{
-	"arn":           "Description.Server.ServerArn",
-	"og_account_id": "metadata.IntegrationID",
-	"server_name":   "Description.Server.ServerName",
-	"title":         "Description.Server.ServerName",
+	"arn":                 "Description.Server.ServerArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"server_name":         "Description.Server.ServerName",
+	"title":               "Description.Server.ServerName",
 }
 
 func ListOpsWorksCMServer(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83174,10 +83165,10 @@ func ListOpsWorksCMServer(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 }
 
 var getOpsWorksCMServerFilters = map[string]string{
-	"arn":           "Description.Server.ServerArn",
-	"og_account_id": "metadata.IntegrationID",
-	"server_name":   "description.Server.ServerName",
-	"title":         "Description.Server.ServerName",
+	"arn":                 "Description.Server.ServerArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"server_name":         "description.Server.ServerName",
+	"title":               "Description.Server.ServerName",
 }
 
 func GetOpsWorksCMServer(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83316,10 +83307,10 @@ func (p OrganizationsOrganizationPaginator) NextPage(ctx context.Context) ([]Org
 }
 
 var listOrganizationsOrganizationFilters = map[string]string{
-	"arn":           "Description.Organization.Arn",
-	"id":            "Description.Organization.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Organization.Id",
+	"arn":                 "Description.Organization.Arn",
+	"id":                  "Description.Organization.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Organization.Id",
 }
 
 func ListOrganizationsOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83383,10 +83374,10 @@ func ListOrganizationsOrganization(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getOrganizationsOrganizationFilters = map[string]string{
-	"arn":           "Description.Organization.Arn",
-	"id":            "description.Organization.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Organization.Id",
+	"arn":                 "Description.Organization.Arn",
+	"id":                  "description.Organization.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Organization.Id",
 }
 
 func GetOrganizationsOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83525,17 +83516,17 @@ func (p OrganizationsAccountPaginator) NextPage(ctx context.Context) ([]Organiza
 }
 
 var listOrganizationsAccountFilters = map[string]string{
-	"arn":              "Description.Account.Arn",
-	"email":            "Description.Account.Email",
-	"id":               "Description.Account.Id",
-	"joined_method":    "Description.Account.JoinedMethod",
-	"joined_timestamp": "Description.Account.JoinedTimestamp",
-	"name":             "Description.Account.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"parent_id":        "Description.ParentID",
-	"status":           "Description.Account.Status",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.Account.Name",
+	"arn":                 "Description.Account.Arn",
+	"email":               "Description.Account.Email",
+	"id":                  "Description.Account.Id",
+	"joined_method":       "Description.Account.JoinedMethod",
+	"joined_timestamp":    "Description.Account.JoinedTimestamp",
+	"name":                "Description.Account.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"parent_id":           "Description.ParentID",
+	"status":              "Description.Account.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Account.Name",
 }
 
 func ListOrganizationsAccount(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83599,17 +83590,17 @@ func ListOrganizationsAccount(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getOrganizationsAccountFilters = map[string]string{
-	"arn":              "Description.Account.Arn",
-	"email":            "Description.Account.Email",
-	"id":               "description.Account.Id",
-	"joined_method":    "Description.Account.JoinedMethod",
-	"joined_timestamp": "Description.Account.JoinedTimestamp",
-	"name":             "Description.Account.Name",
-	"og_account_id":    "metadata.IntegrationID",
-	"parent_id":        "Description.ParentID",
-	"status":           "Description.Account.Status",
-	"tags_src":         "Description.Tags",
-	"title":            "Description.Account.Name",
+	"arn":                 "Description.Account.Arn",
+	"email":               "Description.Account.Email",
+	"id":                  "description.Account.Id",
+	"joined_method":       "Description.Account.JoinedMethod",
+	"joined_timestamp":    "Description.Account.JoinedTimestamp",
+	"name":                "Description.Account.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"parent_id":           "Description.ParentID",
+	"status":              "Description.Account.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Account.Name",
 }
 
 func GetOrganizationsAccount(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83748,15 +83739,15 @@ func (p OrganizationsPolicyPaginator) NextPage(ctx context.Context) ([]Organizat
 }
 
 var listOrganizationsPolicyFilters = map[string]string{
-	"arn":           "Description.Policy.PolicySummary.Arn",
-	"aws_managed":   "Description.Policy.PolicySummary.AwsManaged",
-	"content":       "Description.Policy.Content",
-	"description":   "Description.Policy.PolicySummary.Description",
-	"id":            "Description.Policy.PolicySummary.Id",
-	"name":          "Description.Policy.PolicySummary.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Policy.PolicySummary.Name",
-	"type":          "Description.Policy.PolicySummary.Type",
+	"arn":                 "Description.Policy.PolicySummary.Arn",
+	"aws_managed":         "Description.Policy.PolicySummary.AwsManaged",
+	"content":             "Description.Policy.Content",
+	"description":         "Description.Policy.PolicySummary.Description",
+	"id":                  "Description.Policy.PolicySummary.Id",
+	"name":                "Description.Policy.PolicySummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Policy.PolicySummary.Name",
+	"type":                "Description.Policy.PolicySummary.Type",
 }
 
 func ListOrganizationsPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -83820,15 +83811,15 @@ func ListOrganizationsPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getOrganizationsPolicyFilters = map[string]string{
-	"arn":           "Description.Policy.PolicySummary.Arn",
-	"aws_managed":   "Description.Policy.PolicySummary.AwsManaged",
-	"content":       "Description.Policy.Content",
-	"description":   "Description.Policy.PolicySummary.Description",
-	"id":            "description.Policy.PolicySummary.Id",
-	"name":          "Description.Policy.PolicySummary.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.Policy.PolicySummary.Name",
-	"type":          "Description.Policy.PolicySummary.Type",
+	"arn":                 "Description.Policy.PolicySummary.Arn",
+	"aws_managed":         "Description.Policy.PolicySummary.AwsManaged",
+	"content":             "Description.Policy.Content",
+	"description":         "Description.Policy.PolicySummary.Description",
+	"id":                  "description.Policy.PolicySummary.Id",
+	"name":                "Description.Policy.PolicySummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Policy.PolicySummary.Name",
+	"type":                "Description.Policy.PolicySummary.Type",
 }
 
 func GetOrganizationsPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -84612,16 +84603,16 @@ func (p PinPointAppPaginator) NextPage(ctx context.Context) ([]PinPointApp, erro
 }
 
 var listPinPointAppFilters = map[string]string{
-	"arn":                "Description.App.Arn",
-	"campaign_hook":      "Description.Settings.CampaignHook",
-	"id":                 "Description.App.Id",
-	"last_modified_date": "Description.Settings.LastModifiedDate",
-	"limits":             "Description.Settings.Limits",
-	"name":               "Description.App.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"quiet_time":         "Description.Settings.QuietTime",
-	"tags":               "Description.App.Tags",
-	"title":              "Description.App.Name",
+	"arn":                 "Description.App.Arn",
+	"campaign_hook":       "Description.Settings.CampaignHook",
+	"id":                  "Description.App.Id",
+	"last_modified_date":  "Description.Settings.LastModifiedDate",
+	"limits":              "Description.Settings.Limits",
+	"name":                "Description.App.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"quiet_time":          "Description.Settings.QuietTime",
+	"tags":                "Description.App.Tags",
+	"title":               "Description.App.Name",
 }
 
 func ListPinPointApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -84685,16 +84676,16 @@ func ListPinPointApp(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 }
 
 var getPinPointAppFilters = map[string]string{
-	"arn":                "Description.App.Arn",
-	"campaign_hook":      "Description.Settings.CampaignHook",
-	"id":                 "description.App.Id",
-	"last_modified_date": "Description.Settings.LastModifiedDate",
-	"limits":             "Description.Settings.Limits",
-	"name":               "Description.App.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"quiet_time":         "Description.Settings.QuietTime",
-	"tags":               "Description.App.Tags",
-	"title":              "Description.App.Name",
+	"arn":                 "Description.App.Arn",
+	"campaign_hook":       "Description.Settings.CampaignHook",
+	"id":                  "description.App.Id",
+	"last_modified_date":  "Description.Settings.LastModifiedDate",
+	"limits":              "Description.Settings.Limits",
+	"name":                "Description.App.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"quiet_time":          "Description.Settings.QuietTime",
+	"tags":                "Description.App.Tags",
+	"title":               "Description.App.Name",
 }
 
 func GetPinPointApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -84842,7 +84833,7 @@ var listPipesPipeFilters = map[string]string{
 	"enrichment_parameters": "Description.PipeOutput.EnrichmentParameters",
 	"last_modified_time":    "Description.Pipe.LastModifiedTime",
 	"name":                  "Description.Pipe.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.PipeOutput.RoleArn",
 	"source":                "Description.Pipe.Source",
 	"state_reason":          "Description.Pipe.StateReason",
@@ -84922,7 +84913,7 @@ var getPipesPipeFilters = map[string]string{
 	"enrichment_parameters": "Description.PipeOutput.EnrichmentParameters",
 	"last_modified_time":    "Description.Pipe.LastModifiedTime",
 	"name":                  "description.PipeOutput.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.PipeOutput.RoleArn",
 	"source":                "Description.Pipe.Source",
 	"state_reason":          "Description.Pipe.StateReason",
@@ -85068,10 +85059,10 @@ func (p ResourceGroupsGroupPaginator) NextPage(ctx context.Context) ([]ResourceG
 }
 
 var listResourceGroupsGroupFilters = map[string]string{
-	"arn":           "Description.GroupIdentifier.GroupArn",
-	"name":          "Description.GroupIdentifier.GroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.GroupIdentifier.GroupName",
+	"arn":                 "Description.GroupIdentifier.GroupArn",
+	"name":                "Description.GroupIdentifier.GroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.GroupIdentifier.GroupName",
 }
 
 func ListResourceGroupsGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85135,10 +85126,10 @@ func ListResourceGroupsGroup(ctx context.Context, d *plugin.QueryData, _ *plugin
 }
 
 var getResourceGroupsGroupFilters = map[string]string{
-	"arn":           "Description.GroupIdentifier.GroupArn",
-	"name":          "description.GroupIdentifier.GroupName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.GroupIdentifier.GroupName",
+	"arn":                 "Description.GroupIdentifier.GroupArn",
+	"name":                "description.GroupIdentifier.GroupName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.GroupIdentifier.GroupName",
 }
 
 func GetResourceGroupsGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85277,11 +85268,11 @@ func (p OpenSearchServerlessCollectionPaginator) NextPage(ctx context.Context) (
 }
 
 var listOpenSearchServerlessCollectionFilters = map[string]string{
-	"arn":           "Description.CollectionSummary.Arn",
-	"name":          "Description.Collection.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Collection.Tags",
-	"title":         "Description.CollectionSummary.Name",
+	"arn":                 "Description.CollectionSummary.Arn",
+	"name":                "Description.Collection.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Collection.Tags",
+	"title":               "Description.CollectionSummary.Name",
 }
 
 func ListOpenSearchServerlessCollection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85345,11 +85336,11 @@ func ListOpenSearchServerlessCollection(ctx context.Context, d *plugin.QueryData
 }
 
 var getOpenSearchServerlessCollectionFilters = map[string]string{
-	"arn":           "Description.CollectionSummary.Arn",
-	"name":          "description.CollectionSummary.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Collection.Tags",
-	"title":         "Description.CollectionSummary.Name",
+	"arn":                 "Description.CollectionSummary.Arn",
+	"name":                "description.CollectionSummary.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Collection.Tags",
+	"title":               "Description.CollectionSummary.Name",
 }
 
 func GetOpenSearchServerlessCollection(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85488,11 +85479,11 @@ func (p TimestreamDatabasePaginator) NextPage(ctx context.Context) ([]Timestream
 }
 
 var listTimestreamDatabaseFilters = map[string]string{
-	"arn":           "Description.Database.Arn",
-	"name":          "Description.Database.DatabaseName",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Database.DatabaseName",
+	"arn":                 "Description.Database.Arn",
+	"name":                "Description.Database.DatabaseName",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Database.DatabaseName",
 }
 
 func ListTimestreamDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85556,11 +85547,11 @@ func ListTimestreamDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getTimestreamDatabaseFilters = map[string]string{
-	"arn":           "description.Database.Arn",
-	"name":          "description.Database.DatabaseName",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Database.DatabaseName",
+	"arn":                 "description.Database.Arn",
+	"name":                "description.Database.DatabaseName",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Database.DatabaseName",
 }
 
 func GetTimestreamDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85699,10 +85690,10 @@ func (p ResourceExplorer2IndexPaginator) NextPage(ctx context.Context) ([]Resour
 }
 
 var listResourceExplorer2IndexFilters = map[string]string{
-	"arn":           "Description.Index.Arn",
-	"og_account_id": "metadata.IntegrationID",
-	"region":        "description.Index.Region",
-	"type":          "description.Index.Type",
+	"arn":                 "Description.Index.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"region":              "description.Index.Region",
+	"type":                "description.Index.Type",
 }
 
 func ListResourceExplorer2Index(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85766,10 +85757,10 @@ func ListResourceExplorer2Index(ctx context.Context, d *plugin.QueryData, _ *plu
 }
 
 var getResourceExplorer2IndexFilters = map[string]string{
-	"arn":           "Description.Index.Arn",
-	"og_account_id": "metadata.IntegrationID",
-	"region":        "Description.Index.Region",
-	"type":          "Description.Index.Type",
+	"arn":                 "Description.Index.Arn",
+	"platform_account_id": "metadata.IntegrationID",
+	"region":              "Description.Index.Region",
+	"type":                "Description.Index.Type",
 }
 
 func GetResourceExplorer2Index(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85908,9 +85899,9 @@ func (p ResourceExplorer2SupportedResourceTypePaginator) NextPage(ctx context.Co
 }
 
 var listResourceExplorer2SupportedResourceTypeFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_type": "Description.SupportedResourceType.ResourceType",
-	"service":       "Description.SupportedResourceType.Service",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_type":       "Description.SupportedResourceType.ResourceType",
+	"service":             "Description.SupportedResourceType.Service",
 }
 
 func ListResourceExplorer2SupportedResourceType(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -85974,9 +85965,9 @@ func ListResourceExplorer2SupportedResourceType(ctx context.Context, d *plugin.Q
 }
 
 var getResourceExplorer2SupportedResourceTypeFilters = map[string]string{
-	"og_account_id": "metadata.IntegrationID",
-	"resource_type": "Description.SupportedResourceType.ResourceType",
-	"service":       "Description.SupportedResourceType.Service",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_type":       "Description.SupportedResourceType.ResourceType",
+	"service":             "Description.SupportedResourceType.Service",
 }
 
 func GetResourceExplorer2SupportedResourceType(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -86120,7 +86111,7 @@ var listStepFunctionsStateMachineFilters = map[string]string{
 	"definition":            "Description.StateMachine.Definition",
 	"logging_configuration": "Description.StateMachine.LoggingConfiguration",
 	"name":                  "Description.StateMachine.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.StateMachine.RoleArn",
 	"status":                "Description.StateMachine.Status",
 	"tags_src":              "Description.Tags",
@@ -86195,7 +86186,7 @@ var getStepFunctionsStateMachineFilters = map[string]string{
 	"definition":            "Description.StateMachine.Definition",
 	"logging_configuration": "Description.StateMachine.LoggingConfiguration",
 	"name":                  "Description.StateMachine.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.StateMachine.RoleArn",
 	"status":                "Description.StateMachine.Status",
 	"tags_src":              "Description.Tags",
@@ -86365,7 +86356,7 @@ var listStepFunctionsStateMachineExecutionHistoriesFilters = map[string]string{
 	"map_iteration_started_event_details":           "Description.ExecutionHistory.MapIterationStartedEventDetails",
 	"map_iteration_succeeded_event_details":         "Description.ExecutionHistory.MapIterationSucceededEventDetails",
 	"map_state_started_event_details":               "Description.ExecutionHistory.MapStateStartedEventDetails",
-	"og_account_id":                                 "metadata.IntegrationID",
+	"platform_account_id":                           "metadata.IntegrationID",
 	"previous_event_id":                             "Description.ExecutionHistory.PreviousEventId",
 	"state_entered_event_details":                   "Description.ExecutionHistory.StateEnteredEventDetails",
 	"state_exited_event_details":                    "Description.ExecutionHistory.StateExitedEventDetails",
@@ -86468,7 +86459,7 @@ var getStepFunctionsStateMachineExecutionHistoriesFilters = map[string]string{
 	"map_iteration_started_event_details":           "Description.ExecutionHistory.MapIterationStartedEventDetails",
 	"map_iteration_succeeded_event_details":         "Description.ExecutionHistory.MapIterationSucceededEventDetails",
 	"map_state_started_event_details":               "Description.ExecutionHistory.MapStateStartedEventDetails",
-	"og_account_id":                                 "metadata.IntegrationID",
+	"platform_account_id":                           "metadata.IntegrationID",
 	"previous_event_id":                             "Description.ExecutionHistory.PreviousEventId",
 	"state_entered_event_details":                   "Description.ExecutionHistory.StateEnteredEventDetails",
 	"state_exited_event_details":                    "Description.ExecutionHistory.StateExitedEventDetails",
@@ -86621,19 +86612,19 @@ func (p StepFunctionsStateMachineExecutionPaginator) NextPage(ctx context.Contex
 }
 
 var listStepFunctionsStateMachineExecutionFilters = map[string]string{
-	"execution_arn":     "Description.Execution.ExecutionArn",
-	"input":             "Description.Execution.Input",
-	"input_details":     "Description.Execution.InputDetails",
-	"name":              "Description.Execution.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"output":            "Description.Execution.Output",
-	"output_details":    "Description.Execution.OutputDetails",
-	"start_date":        "Description.Execution.StartDate",
-	"state_machine_arn": "description.ExecutionItem.StateMachineArn",
-	"status":            "description.ExecutionItem.Status",
-	"stop_date":         "Description.Execution.StopDate",
-	"title":             "Description.Execution.Name",
-	"trace_header":      "Description.Execution.TraceHeader",
+	"execution_arn":       "Description.Execution.ExecutionArn",
+	"input":               "Description.Execution.Input",
+	"input_details":       "Description.Execution.InputDetails",
+	"name":                "Description.Execution.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"output":              "Description.Execution.Output",
+	"output_details":      "Description.Execution.OutputDetails",
+	"start_date":          "Description.Execution.StartDate",
+	"state_machine_arn":   "description.ExecutionItem.StateMachineArn",
+	"status":              "description.ExecutionItem.Status",
+	"stop_date":           "Description.Execution.StopDate",
+	"title":               "Description.Execution.Name",
+	"trace_header":        "Description.Execution.TraceHeader",
 }
 
 func ListStepFunctionsStateMachineExecution(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -86697,19 +86688,19 @@ func ListStepFunctionsStateMachineExecution(ctx context.Context, d *plugin.Query
 }
 
 var getStepFunctionsStateMachineExecutionFilters = map[string]string{
-	"execution_arn":     "description.ExecutionItem.ExecutionArn",
-	"input":             "Description.Execution.Input",
-	"input_details":     "Description.Execution.InputDetails",
-	"name":              "Description.Execution.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"output":            "Description.Execution.Output",
-	"output_details":    "Description.Execution.OutputDetails",
-	"start_date":        "Description.Execution.StartDate",
-	"state_machine_arn": "Description.Execution.StateMachineArn",
-	"status":            "Description.Execution.Status",
-	"stop_date":         "Description.Execution.StopDate",
-	"title":             "Description.Execution.Name",
-	"trace_header":      "Description.Execution.TraceHeader",
+	"execution_arn":       "description.ExecutionItem.ExecutionArn",
+	"input":               "Description.Execution.Input",
+	"input_details":       "Description.Execution.InputDetails",
+	"name":                "Description.Execution.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"output":              "Description.Execution.Output",
+	"output_details":      "Description.Execution.OutputDetails",
+	"start_date":          "Description.Execution.StartDate",
+	"state_machine_arn":   "Description.Execution.StateMachineArn",
+	"status":              "Description.Execution.Status",
+	"stop_date":           "Description.Execution.StopDate",
+	"title":               "Description.Execution.Name",
+	"trace_header":        "Description.Execution.TraceHeader",
 }
 
 func GetStepFunctionsStateMachineExecution(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -86855,7 +86846,7 @@ var listSimSpaceWeaverSimulationFilters = map[string]string{
 	"logging_configuration": "Description.SimulationItem.LoggingConfiguration",
 	"maximum_duration":      "Description.SimulationItem.MaximumDuration",
 	"name":                  "Description.Simulation.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.SimulationItem.RoleArn",
 	"schema_error":          "Description.SimulationItem.SchemaError",
 	"schema_s3_location":    "Description.SimulationItem.SchemaS3Location",
@@ -86932,7 +86923,7 @@ var getSimSpaceWeaverSimulationFilters = map[string]string{
 	"logging_configuration": "Description.SimulationItem.LoggingConfiguration",
 	"maximum_duration":      "Description.SimulationItem.MaximumDuration",
 	"name":                  "description.Simulation.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"role_arn":              "Description.SimulationItem.RoleArn",
 	"schema_error":          "Description.SimulationItem.SchemaError",
 	"schema_s3_location":    "Description.SimulationItem.SchemaS3Location",
@@ -87085,7 +87076,7 @@ var listACMPCACertificateAuthorityFilters = map[string]string{
 	"last_state_change_at":                "Description.CertificateAuthority.LastStateChangeAt",
 	"not_after":                           "Description.CertificateAuthority.NotAfter",
 	"not_before":                          "Description.CertificateAuthority.NotBefore",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner_account":                       "Description.CertificateAuthority.OwnerAccount",
 	"restorable_until":                    "Description.CertificateAuthority.RestorableUntil",
 	"revocation_configuration":            "Description.CertificateAuthority.RevocationConfiguration",
@@ -87166,7 +87157,7 @@ var getACMPCACertificateAuthorityFilters = map[string]string{
 	"last_state_change_at":                "Description.CertificateAuthority.LastStateChangeAt",
 	"not_after":                           "Description.CertificateAuthority.NotAfter",
 	"not_before":                          "Description.CertificateAuthority.NotBefore",
-	"og_account_id":                       "metadata.IntegrationID",
+	"platform_account_id":                 "metadata.IntegrationID",
 	"owner_account":                       "Description.CertificateAuthority.OwnerAccount",
 	"restorable_until":                    "Description.CertificateAuthority.RestorableUntil",
 	"revocation_configuration":            "Description.CertificateAuthority.RevocationConfiguration",
@@ -87315,7 +87306,7 @@ func (p ShieldProtectionGroupPaginator) NextPage(ctx context.Context) ([]ShieldP
 
 var listShieldProtectionGroupFilters = map[string]string{
 	"arn":                 "Description.ProtectionGroup.ProtectionGroupArn",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"protection_group_id": "Description.ProtectionGroup.ProtectionGroupId",
 	"title":               "Description.ProtectionGroup.ProtectionGroupId",
 }
@@ -87382,7 +87373,7 @@ func ListShieldProtectionGroup(ctx context.Context, d *plugin.QueryData, _ *plug
 
 var getShieldProtectionGroupFilters = map[string]string{
 	"arn":                 "Description.ProtectionGroup.ProtectionGroupArn",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"protection_group_id": "description.ProtectionGroup.ProtectionGroupId",
 	"title":               "Description.ProtectionGroup.ProtectionGroupId",
 }
@@ -87523,11 +87514,11 @@ func (p StorageGatewayStorageGatewayPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listStorageGatewayStorageGatewayFilters = map[string]string{
-	"arn":           "Description.StorageGateway.GatewayARN",
-	"gateway_id":    "Description.StorageGateway.GatewayId",
-	"name":          "Description.StorageGateway.GatewayName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.StorageGateway.GatewayName",
+	"arn":                 "Description.StorageGateway.GatewayARN",
+	"gateway_id":          "Description.StorageGateway.GatewayId",
+	"name":                "Description.StorageGateway.GatewayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.StorageGateway.GatewayName",
 }
 
 func ListStorageGatewayStorageGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -87591,11 +87582,11 @@ func ListStorageGatewayStorageGateway(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getStorageGatewayStorageGatewayFilters = map[string]string{
-	"arn":           "Description.StorageGateway.GatewayARN",
-	"gateway_id":    "description.StorageGateway.GatewayId",
-	"name":          "Description.StorageGateway.GatewayName",
-	"og_account_id": "metadata.IntegrationID",
-	"title":         "Description.StorageGateway.GatewayName",
+	"arn":                 "Description.StorageGateway.GatewayARN",
+	"gateway_id":          "description.StorageGateway.GatewayId",
+	"name":                "Description.StorageGateway.GatewayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.StorageGateway.GatewayName",
 }
 
 func GetStorageGatewayStorageGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -87734,11 +87725,11 @@ func (p ImageBuilderImagePaginator) NextPage(ctx context.Context) ([]ImageBuilde
 }
 
 var listImageBuilderImageFilters = map[string]string{
-	"arn":           "Description.Image.Arn",
-	"name":          "Description.Image.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Image.Tags",
-	"title":         "Description.Image.Name",
+	"arn":                 "Description.Image.Arn",
+	"name":                "Description.Image.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Image.Tags",
+	"title":               "Description.Image.Name",
 }
 
 func ListImageBuilderImage(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -87802,11 +87793,11 @@ func ListImageBuilderImage(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getImageBuilderImageFilters = map[string]string{
-	"arn":           "Description.Image.Arn",
-	"name":          "description.Image.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Image.Tags",
-	"title":         "Description.Image.Name",
+	"arn":                 "Description.Image.Arn",
+	"name":                "description.Image.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Image.Tags",
+	"title":               "Description.Image.Name",
 }
 
 func GetImageBuilderImage(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -87945,14 +87936,14 @@ func (p AccountAlternateContactPaginator) NextPage(ctx context.Context) ([]Accou
 }
 
 var listAccountAlternateContactFilters = map[string]string{
-	"contact_title":     "Description.AlternateContact.Title",
-	"contact_type":      "description.AlternateContact.AlternateContactType",
-	"email_address":     "Description.AlternateContact.EmailAddress",
-	"linked_account_id": "description.LinkedAccountID",
-	"name":              "Description.AlternateContact.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"phone_number":      "Description.AlternateContact.PhoneNumber",
-	"title":             "Description.AlternateContact.Name",
+	"contact_title":       "Description.AlternateContact.Title",
+	"contact_type":        "description.AlternateContact.AlternateContactType",
+	"email_address":       "Description.AlternateContact.EmailAddress",
+	"linked_account_id":   "description.LinkedAccountID",
+	"name":                "Description.AlternateContact.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"phone_number":        "Description.AlternateContact.PhoneNumber",
+	"title":               "Description.AlternateContact.Name",
 }
 
 func ListAccountAlternateContact(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88016,14 +88007,14 @@ func ListAccountAlternateContact(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getAccountAlternateContactFilters = map[string]string{
-	"contact_title":     "Description.AlternateContact.Title",
-	"contact_type":      "Description.AlternateContact.AlternateContactType",
-	"email_address":     "Description.AlternateContact.EmailAddress",
-	"linked_account_id": "Description.LinkedAccountID",
-	"name":              "Description.AlternateContact.Name",
-	"og_account_id":     "metadata.IntegrationID",
-	"phone_number":      "Description.AlternateContact.PhoneNumber",
-	"title":             "Description.AlternateContact.Name",
+	"contact_title":       "Description.AlternateContact.Title",
+	"contact_type":        "Description.AlternateContact.AlternateContactType",
+	"email_address":       "Description.AlternateContact.EmailAddress",
+	"linked_account_id":   "Description.LinkedAccountID",
+	"name":                "Description.AlternateContact.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"phone_number":        "Description.AlternateContact.PhoneNumber",
+	"title":               "Description.AlternateContact.Name",
 }
 
 func GetAccountAlternateContact(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88162,21 +88153,21 @@ func (p AccountContactPaginator) NextPage(ctx context.Context) ([]AccountContact
 }
 
 var listAccountContactFilters = map[string]string{
-	"address_line_1":     "Description.AlternateContact.AddressLine1",
-	"address_line_2":     "Description.AlternateContact.AddressLine2",
-	"address_line_3":     "Description.AlternateContact.AddressLine3",
-	"city":               "Description.AlternateContact.City",
-	"company_name":       "Description.AlternateContact.CompanyName",
-	"country_code":       "Description.AlternateContact.CountryCode",
-	"district_or_county": "Description.AlternateContact.DistrictOrCounty",
-	"full_name":          "Description.AlternateContact.FullName",
-	"linked_account_id":  "description.LinkedAccountID",
-	"og_account_id":      "metadata.IntegrationID",
-	"phone_number":       "Description.AlternateContact.PhoneNumber",
-	"postal_code":        "Description.AlternateContact.PostalCode",
-	"state_or_region":    "Description.AlternateContact.StateOrRegion",
-	"title":              "Description.AlternateContact.FullName",
-	"website_url":        "Description.AlternateContact.WebsiteUrl",
+	"address_line_1":      "Description.AlternateContact.AddressLine1",
+	"address_line_2":      "Description.AlternateContact.AddressLine2",
+	"address_line_3":      "Description.AlternateContact.AddressLine3",
+	"city":                "Description.AlternateContact.City",
+	"company_name":        "Description.AlternateContact.CompanyName",
+	"country_code":        "Description.AlternateContact.CountryCode",
+	"district_or_county":  "Description.AlternateContact.DistrictOrCounty",
+	"full_name":           "Description.AlternateContact.FullName",
+	"linked_account_id":   "description.LinkedAccountID",
+	"platform_account_id": "metadata.IntegrationID",
+	"phone_number":        "Description.AlternateContact.PhoneNumber",
+	"postal_code":         "Description.AlternateContact.PostalCode",
+	"state_or_region":     "Description.AlternateContact.StateOrRegion",
+	"title":               "Description.AlternateContact.FullName",
+	"website_url":         "Description.AlternateContact.WebsiteUrl",
 }
 
 func ListAccountContact(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88240,21 +88231,21 @@ func ListAccountContact(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 }
 
 var getAccountContactFilters = map[string]string{
-	"address_line_1":     "Description.AlternateContact.AddressLine1",
-	"address_line_2":     "Description.AlternateContact.AddressLine2",
-	"address_line_3":     "Description.AlternateContact.AddressLine3",
-	"city":               "Description.AlternateContact.City",
-	"company_name":       "Description.AlternateContact.CompanyName",
-	"country_code":       "Description.AlternateContact.CountryCode",
-	"district_or_county": "Description.AlternateContact.DistrictOrCounty",
-	"full_name":          "Description.AlternateContact.FullName",
-	"linked_account_id":  "Description.LinkedAccountID",
-	"og_account_id":      "metadata.IntegrationID",
-	"phone_number":       "Description.AlternateContact.PhoneNumber",
-	"postal_code":        "Description.AlternateContact.PostalCode",
-	"state_or_region":    "Description.AlternateContact.StateOrRegion",
-	"title":              "Description.AlternateContact.FullName",
-	"website_url":        "Description.AlternateContact.WebsiteUrl",
+	"address_line_1":      "Description.AlternateContact.AddressLine1",
+	"address_line_2":      "Description.AlternateContact.AddressLine2",
+	"address_line_3":      "Description.AlternateContact.AddressLine3",
+	"city":                "Description.AlternateContact.City",
+	"company_name":        "Description.AlternateContact.CompanyName",
+	"country_code":        "Description.AlternateContact.CountryCode",
+	"district_or_county":  "Description.AlternateContact.DistrictOrCounty",
+	"full_name":           "Description.AlternateContact.FullName",
+	"linked_account_id":   "Description.LinkedAccountID",
+	"platform_account_id": "metadata.IntegrationID",
+	"phone_number":        "Description.AlternateContact.PhoneNumber",
+	"postal_code":         "Description.AlternateContact.PostalCode",
+	"state_or_region":     "Description.AlternateContact.StateOrRegion",
+	"title":               "Description.AlternateContact.FullName",
+	"website_url":         "Description.AlternateContact.WebsiteUrl",
 }
 
 func GetAccountContact(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88410,7 +88401,7 @@ var listAmplifyAppFilters = map[string]string{
 	"environment_variables":         "Description.App.EnvironmentVariables",
 	"iam_service_role_arn":          "Description.App.IamServiceRoleArn",
 	"name":                          "Description.App.Name",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"platform":                      "Description.App.Platform",
 	"production_branch":             "Description.App.ProductionBranch",
 	"repository":                    "Description.App.Repository",
@@ -88498,7 +88489,7 @@ var getAmplifyAppFilters = map[string]string{
 	"environment_variables":         "Description.App.EnvironmentVariables",
 	"iam_service_role_arn":          "Description.App.IamServiceRoleArn",
 	"name":                          "Description.App.Name",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"platform":                      "Description.App.Platform",
 	"production_branch":             "Description.App.ProductionBranch",
 	"repository":                    "Description.App.Repository",
@@ -88644,12 +88635,12 @@ func (p AppConfigApplicationPaginator) NextPage(ctx context.Context) ([]AppConfi
 }
 
 var listAppConfigApplicationFilters = map[string]string{
-	"description":   "Description.Application.Description",
-	"id":            "Description.Application.Id",
-	"name":          "Description.Application.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Application.Name",
+	"description":         "Description.Application.Description",
+	"id":                  "Description.Application.Id",
+	"name":                "Description.Application.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Application.Name",
 }
 
 func ListAppConfigApplication(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88713,12 +88704,12 @@ func ListAppConfigApplication(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getAppConfigApplicationFilters = map[string]string{
-	"description":   "Description.Application.Description",
-	"id":            "description.Application.Id",
-	"name":          "Description.Application.Name",
-	"og_account_id": "metadata.IntegrationID",
-	"tags":          "Description.Tags",
-	"title":         "Description.Application.Name",
+	"description":         "Description.Application.Description",
+	"id":                  "description.Application.Id",
+	"name":                "Description.Application.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Tags",
+	"title":               "Description.Application.Name",
 }
 
 func GetAppConfigApplication(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -88869,7 +88860,7 @@ var listAuditManagerAssessmentFilters = map[string]string{
 	"id":                                 "Description.Assessment.Metadata.Id",
 	"last_updated":                       "Description.Assessment.Metadata.LastUpdated",
 	"name":                               "Description.Assessment.Metadata.Name",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"roles":                              "Description.Assessment.Metadata.Roles",
 	"scope":                              "Description.Assessment.Metadata.Scope",
 	"status":                             "Description.Assessment.Metadata.Status",
@@ -88951,7 +88942,7 @@ var getAuditManagerAssessmentFilters = map[string]string{
 	"id":                                 "Description.Assessment.Metadata.Id",
 	"last_updated":                       "Description.Assessment.Metadata.LastUpdated",
 	"name":                               "Description.Assessment.Metadata.Name",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"roles":                              "Description.Assessment.Metadata.Roles",
 	"scope":                              "Description.Assessment.Metadata.Scope",
 	"status":                             "Description.Assessment.Metadata.Status",
@@ -89107,7 +89098,7 @@ var listAuditManagerControlFilters = map[string]string{
 	"last_updated_at":          "Description.Control.LastUpdatedAt",
 	"last_updated_by":          "Description.Control.LastUpdatedBy",
 	"name":                     "Description.Control.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"tags":                     "Description.Control.Tags",
 	"testing_information":      "Description.Control.TestingInformation",
 	"title":                    "Description.Control.Name",
@@ -89188,7 +89179,7 @@ var getAuditManagerControlFilters = map[string]string{
 	"last_updated_at":          "Description.Control.LastUpdatedAt",
 	"last_updated_by":          "Description.Control.LastUpdatedBy",
 	"name":                     "Description.Control.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"tags":                     "Description.Control.Tags",
 	"testing_information":      "Description.Control.TestingInformation",
 	"title":                    "Description.Control.Name",
@@ -89346,7 +89337,7 @@ var listAuditManagerEvidenceFilters = map[string]string{
 	"evidence_folder_id":          "Description.Evidence.EvidenceFolderId",
 	"iam_id":                      "Description.Evidence.IamId",
 	"id":                          "Description.Evidence.Id",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"resources_included":          "Description.Evidence.ResourcesIncluded",
 	"time":                        "Description.Evidence.Time",
 	"title":                       "Description.Evidence.Id",
@@ -89428,7 +89419,7 @@ var getAuditManagerEvidenceFilters = map[string]string{
 	"evidence_folder_id":          "description.Evidence.EvidenceFolderId",
 	"iam_id":                      "Description.Evidence.IamId",
 	"id":                          "description.Evidence.Id",
-	"og_account_id":               "metadata.IntegrationID",
+	"platform_account_id":         "metadata.IntegrationID",
 	"resources_included":          "Description.Evidence.ResourcesIncluded",
 	"time":                        "Description.Evidence.Time",
 	"title":                       "Description.Evidence.Id",
@@ -89587,7 +89578,7 @@ var listAuditManagerEvidenceFolderFilters = map[string]string{
 	"evidence_resources_included_count":              "Description.EvidenceFolder.EvidenceResourcesIncludedCount",
 	"id":                                             "Description.EvidenceFolder.Id",
 	"name":                                           "Description.EvidenceFolder.Name",
-	"og_account_id":                                  "metadata.IntegrationID",
+	"platform_account_id":                            "metadata.IntegrationID",
 	"title":                                          "Description.EvidenceFolder.Name",
 	"total_evidence":                                 "Description.EvidenceFolder.TotalEvidence",
 }
@@ -89670,7 +89661,7 @@ var getAuditManagerEvidenceFolderFilters = map[string]string{
 	"evidence_resources_included_count":              "Description.EvidenceFolder.EvidenceResourcesIncludedCount",
 	"id":                                             "description.EvidenceFolder.Id",
 	"name":                                           "Description.EvidenceFolder.Name",
-	"og_account_id":                                  "metadata.IntegrationID",
+	"platform_account_id":                            "metadata.IntegrationID",
 	"title":                                          "Description.EvidenceFolder.Name",
 	"total_evidence":                                 "Description.EvidenceFolder.TotalEvidence",
 }
@@ -89811,24 +89802,24 @@ func (p AuditManagerFrameworkPaginator) NextPage(ctx context.Context) ([]AuditMa
 }
 
 var listAuditManagerFrameworkFilters = map[string]string{
-	"arn":                "Description.Framework.Arn",
-	"compliance_type":    "Description.Framework.ComplianceType",
-	"control_sets":       "Description.Framework.ControlSets",
-	"control_sets_count": "Description.Framework.ControlSources",
-	"control_sources":    "Description.Framework.ControlSources",
-	"controls_count":     "Description.Framework.ControlSources",
-	"created_at":         "Description.Framework.CreatedAt",
-	"created_by":         "Description.Framework.CreatedBy",
-	"description":        "Description.Framework.Description",
-	"id":                 "Description.Framework.Id",
-	"last_updated_at":    "Description.Framework.LastUpdatedAt",
-	"last_updated_by":    "Description.Framework.LastUpdatedBy",
-	"logo":               "Description.Framework.Logo",
-	"name":               "Description.Framework.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"tags":               "Description.Framework.Tags",
-	"title":              "Description.Framework.Name",
-	"type":               "Description.Framework.Type",
+	"arn":                 "Description.Framework.Arn",
+	"compliance_type":     "Description.Framework.ComplianceType",
+	"control_sets":        "Description.Framework.ControlSets",
+	"control_sets_count":  "Description.Framework.ControlSources",
+	"control_sources":     "Description.Framework.ControlSources",
+	"controls_count":      "Description.Framework.ControlSources",
+	"created_at":          "Description.Framework.CreatedAt",
+	"created_by":          "Description.Framework.CreatedBy",
+	"description":         "Description.Framework.Description",
+	"id":                  "Description.Framework.Id",
+	"last_updated_at":     "Description.Framework.LastUpdatedAt",
+	"last_updated_by":     "Description.Framework.LastUpdatedBy",
+	"logo":                "Description.Framework.Logo",
+	"name":                "Description.Framework.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"tags":                "Description.Framework.Tags",
+	"title":               "Description.Framework.Name",
+	"type":                "Description.Framework.Type",
 }
 
 func ListAuditManagerFramework(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -89892,25 +89883,25 @@ func ListAuditManagerFramework(ctx context.Context, d *plugin.QueryData, _ *plug
 }
 
 var getAuditManagerFrameworkFilters = map[string]string{
-	"arn":                "Description.Framework.Arn",
-	"compliance_type":    "Description.Framework.ComplianceType",
-	"control_sets":       "Description.Framework.ControlSets",
-	"control_sets_count": "Description.Framework.ControlSources",
-	"control_sources":    "Description.Framework.ControlSources",
-	"controls_count":     "Description.Framework.ControlSources",
-	"created_at":         "Description.Framework.CreatedAt",
-	"created_by":         "Description.Framework.CreatedBy",
-	"description":        "Description.Framework.Description",
-	"id":                 "description.Framework.Id",
-	"last_updated_at":    "Description.Framework.LastUpdatedAt",
-	"last_updated_by":    "Description.Framework.LastUpdatedBy",
-	"logo":               "Description.Framework.Logo",
-	"name":               "Description.Framework.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"region":             "metadata.Region",
-	"tags":               "Description.Framework.Tags",
-	"title":              "Description.Framework.Name",
-	"type":               "Description.Framework.Type",
+	"arn":                 "Description.Framework.Arn",
+	"compliance_type":     "Description.Framework.ComplianceType",
+	"control_sets":        "Description.Framework.ControlSets",
+	"control_sets_count":  "Description.Framework.ControlSources",
+	"control_sources":     "Description.Framework.ControlSources",
+	"controls_count":      "Description.Framework.ControlSources",
+	"created_at":          "Description.Framework.CreatedAt",
+	"created_by":          "Description.Framework.CreatedBy",
+	"description":         "Description.Framework.Description",
+	"id":                  "description.Framework.Id",
+	"last_updated_at":     "Description.Framework.LastUpdatedAt",
+	"last_updated_by":     "Description.Framework.LastUpdatedBy",
+	"logo":                "Description.Framework.Logo",
+	"name":                "Description.Framework.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"region":              "metadata.Region",
+	"tags":                "Description.Framework.Tags",
+	"title":               "Description.Framework.Name",
+	"type":                "Description.Framework.Type",
 }
 
 func GetAuditManagerFramework(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -90055,7 +90046,7 @@ var listCloudSearchDomainFilters = map[string]string{
 	"domain_id":                "Description.DomainStatus.DomainId",
 	"domain_name":              "Description.DomainStatus.DomainName",
 	"limits":                   "Description.DomainStatus.Limits",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"processing":               "Description.DomainStatus.Processing",
 	"requires_index_documents": "Description.DomainStatus.RequiresIndexDocuments",
 	"search_instance_count":    "Description.DomainStatus.SearchInstanceCount",
@@ -90132,7 +90123,7 @@ var getCloudSearchDomainFilters = map[string]string{
 	"domain_id":                "Description.DomainStatus.DomainId",
 	"domain_name":              "description.DomainStatus.DomainName",
 	"limits":                   "Description.DomainStatus.Limits",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"processing":               "Description.DomainStatus.Processing",
 	"requires_index_documents": "Description.DomainStatus.RequiresIndexDocuments",
 	"search_instance_count":    "Description.DomainStatus.SearchInstanceCount",
@@ -90278,19 +90269,19 @@ func (p DLMLifecyclePolicyPaginator) NextPage(ctx context.Context) ([]DLMLifecyc
 }
 
 var listDLMLifecyclePolicyFilters = map[string]string{
-	"arn":                "Description.LifecyclePolicy.PolicyArn",
-	"date_created":       "Description.LifecyclePolicy.DateCreated",
-	"date_modified":      "Description.LifecyclePolicy.DateModified",
-	"description":        "Description.LifecyclePolicy.Description",
-	"execution_role_arn": "Description.LifecyclePolicy.ExecutionRoleArn",
-	"og_account_id":      "metadata.IntegrationID",
-	"policy_details":     "Description.LifecyclePolicy.PolicyDetails",
-	"policy_id":          "Description.LifecyclePolicy.PolicyId",
-	"policy_type":        "Description.LifecyclePolicy.PolicyDetails.PolicyType",
-	"state":              "Description.LifecyclePolicy.State",
-	"status_message":     "Description.LifecyclePolicy.StatusMessage",
-	"tags":               "Description.LifecyclePolicy.Tags",
-	"title":              "Description.LifecyclePolicy.PolicyId",
+	"arn":                 "Description.LifecyclePolicy.PolicyArn",
+	"date_created":        "Description.LifecyclePolicy.DateCreated",
+	"date_modified":       "Description.LifecyclePolicy.DateModified",
+	"description":         "Description.LifecyclePolicy.Description",
+	"execution_role_arn":  "Description.LifecyclePolicy.ExecutionRoleArn",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy_details":      "Description.LifecyclePolicy.PolicyDetails",
+	"policy_id":           "Description.LifecyclePolicy.PolicyId",
+	"policy_type":         "Description.LifecyclePolicy.PolicyDetails.PolicyType",
+	"state":               "Description.LifecyclePolicy.State",
+	"status_message":      "Description.LifecyclePolicy.StatusMessage",
+	"tags":                "Description.LifecyclePolicy.Tags",
+	"title":               "Description.LifecyclePolicy.PolicyId",
 }
 
 func ListDLMLifecyclePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -90354,20 +90345,20 @@ func ListDLMLifecyclePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getDLMLifecyclePolicyFilters = map[string]string{
-	"arn":                "Description.LifecyclePolicy.PolicyArn",
-	"date_created":       "Description.LifecyclePolicy.DateCreated",
-	"date_modified":      "Description.LifecyclePolicy.DateModified",
-	"description":        "Description.LifecyclePolicy.Description",
-	"execution_role_arn": "Description.LifecyclePolicy.ExecutionRoleArn",
-	"id":                 "description.LifecyclePolicy.PolicyId",
-	"og_account_id":      "metadata.IntegrationID",
-	"policy_details":     "Description.LifecyclePolicy.PolicyDetails",
-	"policy_id":          "Description.LifecyclePolicy.PolicyId",
-	"policy_type":        "Description.LifecyclePolicy.PolicyDetails.PolicyType",
-	"state":              "Description.LifecyclePolicy.State",
-	"status_message":     "Description.LifecyclePolicy.StatusMessage",
-	"tags":               "Description.LifecyclePolicy.Tags",
-	"title":              "Description.LifecyclePolicy.PolicyId",
+	"arn":                 "Description.LifecyclePolicy.PolicyArn",
+	"date_created":        "Description.LifecyclePolicy.DateCreated",
+	"date_modified":       "Description.LifecyclePolicy.DateModified",
+	"description":         "Description.LifecyclePolicy.Description",
+	"execution_role_arn":  "Description.LifecyclePolicy.ExecutionRoleArn",
+	"id":                  "description.LifecyclePolicy.PolicyId",
+	"platform_account_id": "metadata.IntegrationID",
+	"policy_details":      "Description.LifecyclePolicy.PolicyDetails",
+	"policy_id":           "Description.LifecyclePolicy.PolicyId",
+	"policy_type":         "Description.LifecyclePolicy.PolicyDetails.PolicyType",
+	"state":               "Description.LifecyclePolicy.State",
+	"status_message":      "Description.LifecyclePolicy.StatusMessage",
+	"tags":                "Description.LifecyclePolicy.Tags",
+	"title":               "Description.LifecyclePolicy.PolicyId",
 }
 
 func GetDLMLifecyclePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -90528,7 +90519,7 @@ var listDocDBClusterFilters = map[string]string{
 	"master_user_name":                "Description.DBCluster.MasterUsername",
 	"members":                         "Description.DBCluster.DBClusterMembers",
 	"multi_az":                        "Description.DBCluster.MultiAZ",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"percent_progress":                "Description.DBCluster.PercentProgress",
 	"port":                            "Description.DBCluster.Port",
 	"preferred_backup_window":         "Description.DBCluster.PreferredBackupWindow",
@@ -90626,7 +90617,7 @@ var getDocDBClusterFilters = map[string]string{
 	"master_user_name":                "Description.DBCluster.MasterUsername",
 	"members":                         "Description.DBCluster.DBClusterMembers",
 	"multi_az":                        "Description.DBCluster.MultiAZ",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"percent_progress":                "Description.DBCluster.PercentProgress",
 	"port":                            "Description.DBCluster.Port",
 	"preferred_backup_window":         "Description.DBCluster.PreferredBackupWindow",
@@ -90800,7 +90791,7 @@ var listDocDBClusterInstanceFilters = map[string]string{
 	"instance_create_time":            "Description.DBInstance.InstanceCreateTime",
 	"kms_key_id":                      "Description.DBInstance.KmsKeyId",
 	"latest_restorable_time":          "Description.DBInstance.LatestRestorableTime",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"pending_modified_values":         "Description.DBInstance.PendingModifiedValues",
 	"preferred_backup_window":         "Description.DBInstance.PreferredBackupWindow",
 	"preferred_maintenance_window":    "Description.DBInstance.PreferredMaintenanceWindow",
@@ -90899,7 +90890,7 @@ var getDocDBClusterInstanceFilters = map[string]string{
 	"instance_create_time":            "Description.DBInstance.InstanceCreateTime",
 	"kms_key_id":                      "Description.DBInstance.KmsKeyId",
 	"latest_restorable_time":          "Description.DBInstance.LatestRestorableTime",
-	"og_account_id":                   "metadata.IntegrationID",
+	"platform_account_id":             "metadata.IntegrationID",
 	"pending_modified_values":         "Description.DBInstance.PendingModifiedValues",
 	"preferred_backup_window":         "Description.DBInstance.PreferredBackupWindow",
 	"preferred_maintenance_window":    "Description.DBInstance.PreferredMaintenanceWindow",
@@ -91300,7 +91291,7 @@ var listGlobalAcceleratorAcceleratorFilters = map[string]string{
 	"ip_sets":                "Description.Accelerator.IpSets",
 	"last_modified_time":     "Description.Accelerator.LastModifiedTime",
 	"name":                   "Description.Accelerator.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"status":                 "Description.Accelerator.Status",
 	"tags_src":               "Description.Tags",
 	"title":                  "Description.Accelerator.Name",
@@ -91376,7 +91367,7 @@ var getGlobalAcceleratorAcceleratorFilters = map[string]string{
 	"ip_sets":                "Description.Accelerator.IpSets",
 	"last_modified_time":     "Description.Accelerator.LastModifiedTime",
 	"name":                   "Description.Accelerator.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"status":                 "Description.Accelerator.Status",
 	"tags_src":               "Description.Tags",
 	"title":                  "Description.Accelerator.Name",
@@ -91526,7 +91517,7 @@ var listGlobalAcceleratorEndpointGroupFilters = map[string]string{
 	"health_check_port":             "Description.EndpointGroup.HealthCheckPort",
 	"health_check_protocol":         "Description.EndpointGroup.HealthCheckProtocol",
 	"listener_arn":                  "description.ListenerArn",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"port_overrides":                "Description.EndpointGroup.PortOverrides",
 	"threshold_count":               "Description.EndpointGroup.ThresholdCount",
 	"traffic_dial_percentage":       "Description.EndpointGroup.TrafficDialPercentage",
@@ -91601,7 +91592,7 @@ var getGlobalAcceleratorEndpointGroupFilters = map[string]string{
 	"health_check_port":             "Description.EndpointGroup.HealthCheckPort",
 	"health_check_protocol":         "Description.EndpointGroup.HealthCheckProtocol",
 	"listener_arn":                  "Description.ListenerArn",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"port_overrides":                "Description.EndpointGroup.PortOverrides",
 	"threshold_count":               "Description.EndpointGroup.ThresholdCount",
 	"traffic_dial_percentage":       "Description.EndpointGroup.TrafficDialPercentage",
@@ -91743,12 +91734,12 @@ func (p GlobalAcceleratorListenerPaginator) NextPage(ctx context.Context) ([]Glo
 }
 
 var listGlobalAcceleratorListenerFilters = map[string]string{
-	"accelerator_arn": "description.AcceleratorArn",
-	"arn":             "Description.Listener.ListenerArn",
-	"client_affinity": "Description.Listener.ClientAffinity",
-	"og_account_id":   "metadata.IntegrationID",
-	"port_ranges":     "Description.Listener.PortRanges",
-	"protocol":        "Description.Listener.Protocol",
+	"accelerator_arn":     "description.AcceleratorArn",
+	"arn":                 "Description.Listener.ListenerArn",
+	"client_affinity":     "Description.Listener.ClientAffinity",
+	"platform_account_id": "metadata.IntegrationID",
+	"port_ranges":         "Description.Listener.PortRanges",
+	"protocol":            "Description.Listener.Protocol",
 }
 
 func ListGlobalAcceleratorListener(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -91812,12 +91803,12 @@ func ListGlobalAcceleratorListener(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getGlobalAcceleratorListenerFilters = map[string]string{
-	"accelerator_arn": "Description.AcceleratorArn",
-	"arn":             "description.Listener.ListenerArn",
-	"client_affinity": "Description.Listener.ClientAffinity",
-	"og_account_id":   "metadata.IntegrationID",
-	"port_ranges":     "Description.Listener.PortRanges",
-	"protocol":        "Description.Listener.Protocol",
+	"accelerator_arn":     "Description.AcceleratorArn",
+	"arn":                 "description.Listener.ListenerArn",
+	"client_affinity":     "Description.Listener.ClientAffinity",
+	"platform_account_id": "metadata.IntegrationID",
+	"port_ranges":         "Description.Listener.PortRanges",
+	"protocol":            "Description.Listener.Protocol",
 }
 
 func GetGlobalAcceleratorListener(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -91962,7 +91953,7 @@ var listGlueCatalogDatabaseFilters = map[string]string{
 	"description":                      "Description.Database.Description",
 	"location_uri":                     "Description.Database.LocationUri",
 	"name":                             "Description.Database.Name",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"parameters":                       "Description.Database.Parameters",
 	"target_database":                  "Description.Database.TargetDatabase",
 	"title":                            "Description.Database.Name",
@@ -92035,7 +92026,7 @@ var getGlueCatalogDatabaseFilters = map[string]string{
 	"description":                      "Description.Database.Description",
 	"location_uri":                     "Description.Database.LocationUri",
 	"name":                             "description.Database.Name",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"parameters":                       "Description.Database.Parameters",
 	"target_database":                  "Description.Database.TargetDatabase",
 	"title":                            "Description.Database.Name",
@@ -92187,7 +92178,7 @@ var listGlueCatalogTableFilters = map[string]string{
 	"last_analyzed_time":                "Description.Table.LastAnalyzedTime",
 	"lf_tags":                           "Description.LfTags",
 	"name":                              "Description.Table.Name",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"owner":                             "Description.Table.Owner",
 	"parameters":                        "Description.Table.Parameters",
 	"partition_keys":                    "Description.Table.PartitionKeys",
@@ -92272,7 +92263,7 @@ var getGlueCatalogTableFilters = map[string]string{
 	"last_analyzed_time":                "Description.Table.LastAnalyzedTime",
 	"lf_tags":                           "Description.LfTags",
 	"name":                              "description.Table.Name",
-	"og_account_id":                     "metadata.IntegrationID",
+	"platform_account_id":               "metadata.IntegrationID",
 	"owner":                             "Description.Table.Owner",
 	"parameters":                        "Description.Table.Parameters",
 	"partition_keys":                    "Description.Table.PartitionKeys",
@@ -92430,7 +92421,7 @@ var listGlueConnectionFilters = map[string]string{
 	"last_updated_time":                "Description.Connection.LastUpdatedTime",
 	"match_criteria":                   "Description.Connection.MatchCriteria",
 	"name":                             "Description.Connection.Name",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"physical_connection_requirements": "Description.Connection.PhysicalConnectionRequirements",
 	"title":                            "Description.Connection.Name",
 }
@@ -92504,7 +92495,7 @@ var getGlueConnectionFilters = map[string]string{
 	"last_updated_time":                "Description.Connection.LastUpdatedTime",
 	"match_criteria":                   "Description.Connection.MatchCriteria",
 	"name":                             "description.Connection.Name",
-	"og_account_id":                    "metadata.IntegrationID",
+	"platform_account_id":              "metadata.IntegrationID",
 	"physical_connection_requirements": "Description.Connection.PhysicalConnectionRequirements",
 	"title":                            "Description.Connection.Name",
 }
@@ -92656,7 +92647,7 @@ var listGlueCrawlerFilters = map[string]string{
 	"last_crawl":                     "Description.Crawler.LastCrawl",
 	"last_updated":                   "Description.Crawler.LastUpdated",
 	"name":                           "Description.Crawler.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"recrawl_behavior":               "Description.Crawler.RecrawlPolicy.RecrawlBehavior",
 	"role":                           "Description.Crawler.Role",
 	"schedule":                       "Description.Crawler.Schedule",
@@ -92740,7 +92731,7 @@ var getGlueCrawlerFilters = map[string]string{
 	"last_crawl":                     "Description.Crawler.LastCrawl",
 	"last_updated":                   "Description.Crawler.LastUpdated",
 	"name":                           "description.Crawler.Name",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 	"recrawl_behavior":               "Description.Crawler.RecrawlPolicy.RecrawlBehavior",
 	"role":                           "Description.Crawler.Role",
 	"schedule":                       "Description.Crawler.Schedule",
@@ -92890,7 +92881,7 @@ func (p GlueDataCatalogEncryptionSettingsPaginator) NextPage(ctx context.Context
 var listGlueDataCatalogEncryptionSettingsFilters = map[string]string{
 	"connection_password_encryption": "Description.DataCatalogEncryptionSettings.ConnectionPasswordEncryption",
 	"encryption_at_rest":             "Description.DataCatalogEncryptionSettings.EncryptionAtRest",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 }
 
 func ListGlueDataCatalogEncryptionSettings(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -92956,7 +92947,7 @@ func ListGlueDataCatalogEncryptionSettings(ctx context.Context, d *plugin.QueryD
 var getGlueDataCatalogEncryptionSettingsFilters = map[string]string{
 	"connection_password_encryption": "Description.DataCatalogEncryptionSettings.ConnectionPasswordEncryption",
 	"encryption_at_rest":             "Description.DataCatalogEncryptionSettings.EncryptionAtRest",
-	"og_account_id":                  "metadata.IntegrationID",
+	"platform_account_id":            "metadata.IntegrationID",
 }
 
 func GetGlueDataCatalogEncryptionSettings(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -93100,7 +93091,7 @@ var listGlueDataQualityRulesetFilters = map[string]string{
 	"description":           "Description.DataQualityRuleset.Description",
 	"last_modified_on":      "description.DataQualityRuleset.LastModifiedOn",
 	"name":                  "Description.DataQualityRuleset.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"recommendation_run_id": "Description.DataQualityRuleset.RecommendationRunId",
 	"rule_count":            "Description.RulesetRuleCount",
 	"rule_set":              "Description.DataQualityRuleset.Ruleset",
@@ -93175,7 +93166,7 @@ var getGlueDataQualityRulesetFilters = map[string]string{
 	"description":           "Description.DataQualityRuleset.Description",
 	"last_modified_on":      "Description.DataQualityRuleset.LastModifiedOn",
 	"name":                  "description.DataQualityRuleset.Name",
-	"og_account_id":         "metadata.IntegrationID",
+	"platform_account_id":   "metadata.IntegrationID",
 	"recommendation_run_id": "Description.DataQualityRuleset.RecommendationRunId",
 	"rule_count":            "Description.RulesetRuleCount",
 	"rule_set":              "Description.DataQualityRuleset.Ruleset",
@@ -93331,7 +93322,7 @@ var listGlueDevEndpointFilters = map[string]string{
 	"last_update_status":                     "Description.DevEndpoint.LastUpdateStatus",
 	"number_of_nodes":                        "Description.DevEndpoint.NumberOfNodes",
 	"number_of_workers":                      "Description.DevEndpoint.NumberOfWorkers",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"private_address":                        "Description.DevEndpoint.PrivateAddress",
 	"public_address":                         "Description.DevEndpoint.PublicAddress",
 	"public_key":                             "Description.DevEndpoint.PublicKey",
@@ -93420,7 +93411,7 @@ var getGlueDevEndpointFilters = map[string]string{
 	"last_update_status":                     "Description.DevEndpoint.LastUpdateStatus",
 	"number_of_nodes":                        "Description.DevEndpoint.NumberOfNodes",
 	"number_of_workers":                      "Description.DevEndpoint.NumberOfWorkers",
-	"og_account_id":                          "metadata.IntegrationID",
+	"platform_account_id":                    "metadata.IntegrationID",
 	"private_address":                        "Description.DevEndpoint.PrivateAddress",
 	"public_address":                         "Description.DevEndpoint.PublicAddress",
 	"public_key":                             "Description.DevEndpoint.PublicKey",
@@ -93590,7 +93581,7 @@ var listGlueJobFilters = map[string]string{
 	"non_overridable_arguments": "Description.Job.NonOverridableArguments",
 	"notification_property":     "Description.Job.NotificationProperty",
 	"number_of_workers":         "Description.Job.NumberOfWorkers",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"role":                      "Description.Job.Role",
 	"security_configuration":    "Description.Job.SecurityConfiguration",
 	"timeout":                   "Description.Job.Timeout",
@@ -93676,7 +93667,7 @@ var getGlueJobFilters = map[string]string{
 	"non_overridable_arguments": "Description.Job.NonOverridableArguments",
 	"notification_property":     "Description.Job.NotificationProperty",
 	"number_of_workers":         "Description.Job.NumberOfWorkers",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"role":                      "Description.Job.Role",
 	"security_configuration":    "Description.Job.SecurityConfiguration",
 	"timeout":                   "Description.Job.Timeout",
@@ -93824,7 +93815,7 @@ var listGlueSecurityConfigurationFilters = map[string]string{
 	"created_time_stamp":       "Description.SecurityConfiguration.CreatedTimeStamp",
 	"job_bookmarks_encryption": "Description.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption",
 	"name":                     "Description.SecurityConfiguration.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"s3_encryption":            "Description.SecurityConfiguration.EncryptionConfiguration.S3Encryption",
 	"title":                    "Description.SecurityConfiguration.Name",
 }
@@ -93894,7 +93885,7 @@ var getGlueSecurityConfigurationFilters = map[string]string{
 	"created_time_stamp":       "Description.SecurityConfiguration.CreatedTimeStamp",
 	"job_bookmarks_encryption": "Description.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption",
 	"name":                     "description.SecurityConfiguration.Name",
-	"og_account_id":            "metadata.IntegrationID",
+	"platform_account_id":      "metadata.IntegrationID",
 	"s3_encryption":            "Description.SecurityConfiguration.EncryptionConfiguration.S3Encryption",
 	"title":                    "Description.SecurityConfiguration.Name",
 }
@@ -94042,7 +94033,7 @@ var listHealthEventFilters = map[string]string{
 	"event_type_category": "description.Event.EventTypeCategory",
 	"event_type_code":     "description.Event.EventTypeCode",
 	"last_updated_time":   "description.Event.LastUpdatedTime",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"service":             "description.Event.Service",
 	"start_time":          "description.Event.StartTime",
 	"status_code":         "description.Event.StatusCode",
@@ -94116,7 +94107,7 @@ var getHealthEventFilters = map[string]string{
 	"event_type_category": "Description.Event.EventTypeCategory",
 	"event_type_code":     "Description.Event.EventTypeCode",
 	"last_updated_time":   "Description.Event.LastUpdatedTime",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"service":             "Description.Event.Service",
 	"start_time":          "Description.Event.StartTime",
 	"status_code":         "Description.Event.StatusCode",
@@ -94258,14 +94249,14 @@ func (p HealthAffectedEntityPaginator) NextPage(ctx context.Context) ([]HealthAf
 }
 
 var listHealthAffectedEntityFilters = map[string]string{
-	"arn":               "Description.Entity.EntityArn",
-	"entity_url":        "Description.Entity.EntityUrl",
-	"entity_value":      "Description.Entity.EntityValue",
-	"event_arn":         "Description.Entity.EntityArn",
-	"last_updated_time": "Description.Entity.LastUpdatedTime",
-	"og_account_id":     "metadata.IntegrationID",
-	"status_code":       "Description.Entity.StatusCode",
-	"tags":              "Description.Entity.Tags",
+	"arn":                 "Description.Entity.EntityArn",
+	"entity_url":          "Description.Entity.EntityUrl",
+	"entity_value":        "Description.Entity.EntityValue",
+	"event_arn":           "Description.Entity.EntityArn",
+	"last_updated_time":   "Description.Entity.LastUpdatedTime",
+	"platform_account_id": "metadata.IntegrationID",
+	"status_code":         "Description.Entity.StatusCode",
+	"tags":                "Description.Entity.Tags",
 }
 
 func ListHealthAffectedEntity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94329,14 +94320,14 @@ func ListHealthAffectedEntity(ctx context.Context, d *plugin.QueryData, _ *plugi
 }
 
 var getHealthAffectedEntityFilters = map[string]string{
-	"arn":               "Description.Entity.EntityArn",
-	"entity_url":        "Description.Entity.EntityUrl",
-	"entity_value":      "Description.Entity.EntityValue",
-	"event_arn":         "Description.Entity.EntityArn",
-	"last_updated_time": "Description.Entity.LastUpdatedTime",
-	"og_account_id":     "metadata.IntegrationID",
-	"status_code":       "Description.Entity.StatusCode",
-	"tags":              "Description.Entity.Tags",
+	"arn":                 "Description.Entity.EntityArn",
+	"entity_url":          "Description.Entity.EntityUrl",
+	"entity_value":        "Description.Entity.EntityValue",
+	"event_arn":           "Description.Entity.EntityArn",
+	"last_updated_time":   "Description.Entity.LastUpdatedTime",
+	"platform_account_id": "metadata.IntegrationID",
+	"status_code":         "Description.Entity.StatusCode",
+	"tags":                "Description.Entity.Tags",
 }
 
 func GetHealthAffectedEntity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94475,12 +94466,12 @@ func (p IdentityStoreGroupPaginator) NextPage(ctx context.Context) ([]IdentitySt
 }
 
 var listIdentityStoreGroupFilters = map[string]string{
-	"external_ids":      "Description.Group.ExternalIds",
-	"id":                "Description.Group.GroupId",
-	"identity_store_id": "description.Group.IdentityStoreId",
-	"name":              "Description.Group.DisplayName",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Group.DisplayName",
+	"external_ids":        "Description.Group.ExternalIds",
+	"id":                  "Description.Group.GroupId",
+	"identity_store_id":   "description.Group.IdentityStoreId",
+	"name":                "Description.Group.DisplayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Group.DisplayName",
 }
 
 func ListIdentityStoreGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94544,12 +94535,12 @@ func ListIdentityStoreGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getIdentityStoreGroupFilters = map[string]string{
-	"external_ids":      "Description.Group.ExternalIds",
-	"id":                "description.Group.GroupId",
-	"identity_store_id": "description.Group.IdentityStoreId",
-	"name":              "Description.Group.DisplayName",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.Group.DisplayName",
+	"external_ids":        "Description.Group.ExternalIds",
+	"id":                  "description.Group.GroupId",
+	"identity_store_id":   "description.Group.IdentityStoreId",
+	"name":                "Description.Group.DisplayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.Group.DisplayName",
 }
 
 func GetIdentityStoreGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94688,14 +94679,14 @@ func (p IdentityStoreUserPaginator) NextPage(ctx context.Context) ([]IdentitySto
 }
 
 var listIdentityStoreUserFilters = map[string]string{
-	"email":             "Description.PrimaryEmail",
-	"external_ids":      "Description.User.ExternalIds",
-	"id":                "Description.User.UserId",
-	"identity_store_id": "description.User.IdentityStoreId",
-	"name":              "Description.User.DisplayName",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.User.Title",
-	"user_name":         "Description.User.UserName",
+	"email":               "Description.PrimaryEmail",
+	"external_ids":        "Description.User.ExternalIds",
+	"id":                  "Description.User.UserId",
+	"identity_store_id":   "description.User.IdentityStoreId",
+	"name":                "Description.User.DisplayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.User.Title",
+	"user_name":           "Description.User.UserName",
 }
 
 func ListIdentityStoreUser(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94759,14 +94750,14 @@ func ListIdentityStoreUser(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getIdentityStoreUserFilters = map[string]string{
-	"email":             "Description.PrimaryEmail",
-	"external_ids":      "Description.User.ExternalIds",
-	"id":                "description.User.UserId",
-	"identity_store_id": "description.User.IdentityStoreId",
-	"name":              "Description.User.DisplayName",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.User.Title",
-	"user_name":         "Description.User.UserName",
+	"email":               "Description.PrimaryEmail",
+	"external_ids":        "Description.User.ExternalIds",
+	"id":                  "description.User.UserId",
+	"identity_store_id":   "description.User.IdentityStoreId",
+	"name":                "Description.User.DisplayName",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.User.Title",
+	"user_name":           "Description.User.UserName",
 }
 
 func GetIdentityStoreUser(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94905,12 +94896,12 @@ func (p IdentityStoreGroupMembershipPaginator) NextPage(ctx context.Context) ([]
 }
 
 var listIdentityStoreGroupMembershipFilters = map[string]string{
-	"group_id":          "Description.GroupId",
-	"identity_store_id": "description.Group.IdentityStoreId",
-	"member_id":         "Description.MemberId.Value",
-	"membership_id":     "Description.MembershipId",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.MembershipId",
+	"group_id":            "Description.GroupId",
+	"identity_store_id":   "description.Group.IdentityStoreId",
+	"member_id":           "Description.MemberId.Value",
+	"membership_id":       "Description.MembershipId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.MembershipId",
 }
 
 func ListIdentityStoreGroupMembership(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -94974,13 +94965,13 @@ func ListIdentityStoreGroupMembership(ctx context.Context, d *plugin.QueryData, 
 }
 
 var getIdentityStoreGroupMembershipFilters = map[string]string{
-	"group_id":          "Description.GroupId",
-	"id":                "description.Group.GroupId",
-	"identity_store_id": "description.Group.IdentityStoreId",
-	"member_id":         "Description.MemberId.Value",
-	"membership_id":     "Description.MembershipId",
-	"og_account_id":     "metadata.IntegrationID",
-	"title":             "Description.MembershipId",
+	"group_id":            "Description.GroupId",
+	"id":                  "description.Group.GroupId",
+	"identity_store_id":   "description.Group.IdentityStoreId",
+	"member_id":           "Description.MemberId.Value",
+	"membership_id":       "Description.MembershipId",
+	"platform_account_id": "metadata.IntegrationID",
+	"title":               "Description.MembershipId",
 }
 
 func GetIdentityStoreGroupMembership(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -95128,7 +95119,7 @@ var listInspectorAssessmentRunFilters = map[string]string{
 	"finding_counts":               "Description.AssessmentRun.FindingCounts",
 	"name":                         "description.AssessmentRun.Name",
 	"notifications":                "Description.AssessmentRun.Notifications",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"rules_package_arns":           "Description.AssessmentRun.RulesPackageArns",
 	"started_at":                   "Description.AssessmentRun.StartedAt",
 	"state":                        "description.AssessmentRun.State",
@@ -95208,7 +95199,7 @@ var getInspectorAssessmentRunFilters = map[string]string{
 	"finding_counts":               "Description.AssessmentRun.FindingCounts",
 	"name":                         "Description.AssessmentRun.Name",
 	"notifications":                "Description.AssessmentRun.Notifications",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"rules_package_arns":           "Description.AssessmentRun.RulesPackageArns",
 	"started_at":                   "Description.AssessmentRun.StartedAt",
 	"state":                        "Description.AssessmentRun.State",
@@ -95354,13 +95345,13 @@ func (p InspectorAssessmentTargetPaginator) NextPage(ctx context.Context) ([]Ins
 }
 
 var listInspectorAssessmentTargetFilters = map[string]string{
-	"arn":                "Description.AssessmentTarget.Arn",
-	"created_at":         "Description.AssessmentTarget.CreatedAt",
-	"name":               "Description.AssessmentTarget.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"resource_group_arn": "Description.AssessmentTarget.ResourceGroupArn",
-	"title":              "Description.AssessmentTarget.Name",
-	"updated_at":         "Description.AssessmentTarget.UpdatedAt",
+	"arn":                 "Description.AssessmentTarget.Arn",
+	"created_at":          "Description.AssessmentTarget.CreatedAt",
+	"name":                "Description.AssessmentTarget.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_group_arn":  "Description.AssessmentTarget.ResourceGroupArn",
+	"title":               "Description.AssessmentTarget.Name",
+	"updated_at":          "Description.AssessmentTarget.UpdatedAt",
 }
 
 func ListInspectorAssessmentTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -95424,13 +95415,13 @@ func ListInspectorAssessmentTarget(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getInspectorAssessmentTargetFilters = map[string]string{
-	"arn":                "description.AssessmentTarget.Arn",
-	"created_at":         "Description.AssessmentTarget.CreatedAt",
-	"name":               "Description.AssessmentTarget.Name",
-	"og_account_id":      "metadata.IntegrationID",
-	"resource_group_arn": "Description.AssessmentTarget.ResourceGroupArn",
-	"title":              "Description.AssessmentTarget.Name",
-	"updated_at":         "Description.AssessmentTarget.UpdatedAt",
+	"arn":                 "description.AssessmentTarget.Arn",
+	"created_at":          "Description.AssessmentTarget.CreatedAt",
+	"name":                "Description.AssessmentTarget.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"resource_group_arn":  "Description.AssessmentTarget.ResourceGroupArn",
+	"title":               "Description.AssessmentTarget.Name",
+	"updated_at":          "Description.AssessmentTarget.UpdatedAt",
 }
 
 func GetInspectorAssessmentTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -95577,7 +95568,7 @@ var listInspectorAssessmentTemplateFilters = map[string]string{
 	"event_subscriptions":          "Description.EventSubscriptions",
 	"last_assessment_run_arn":      "Description.AssessmentTemplate.LastAssessmentRunArn",
 	"name":                         "description.AssessmentTemplate.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"rules_package_arns":           "Description.AssessmentTemplate.RulesPackageArns",
 	"tags_src":                     "Description.Tags",
 	"title":                        "Description.AssessmentTemplate.Name",
@@ -95653,7 +95644,7 @@ var getInspectorAssessmentTemplateFilters = map[string]string{
 	"event_subscriptions":          "Description.EventSubscriptions",
 	"last_assessment_run_arn":      "Description.AssessmentTemplate.LastAssessmentRunArn",
 	"name":                         "Description.AssessmentTemplate.Name",
-	"og_account_id":                "metadata.IntegrationID",
+	"platform_account_id":          "metadata.IntegrationID",
 	"rules_package_arns":           "Description.AssessmentTemplate.RulesPackageArns",
 	"tags_src":                     "Description.Tags",
 	"title":                        "Description.AssessmentTemplate.Name",
@@ -95796,14 +95787,14 @@ func (p InspectorExclusionPaginator) NextPage(ctx context.Context) ([]InspectorE
 }
 
 var listInspectorExclusionFilters = map[string]string{
-	"arn":                "Description.Exclusion.Arn",
-	"assessment_run_arn": "description.Exclusion.Arn",
-	"attributes":         "Description.Exclusion.Attributes",
-	"description":        "Description.Exclusion.Description",
-	"og_account_id":      "metadata.IntegrationID",
-	"recommendation":     "Description.Exclusion.Recommendation",
-	"scopes":             "Description.Exclusion.Scopes",
-	"title":              "Description.Exclusion.Title",
+	"arn":                 "Description.Exclusion.Arn",
+	"assessment_run_arn":  "description.Exclusion.Arn",
+	"attributes":          "Description.Exclusion.Attributes",
+	"description":         "Description.Exclusion.Description",
+	"platform_account_id": "metadata.IntegrationID",
+	"recommendation":      "Description.Exclusion.Recommendation",
+	"scopes":              "Description.Exclusion.Scopes",
+	"title":               "Description.Exclusion.Title",
 }
 
 func ListInspectorExclusion(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -95867,14 +95858,14 @@ func ListInspectorExclusion(ctx context.Context, d *plugin.QueryData, _ *plugin.
 }
 
 var getInspectorExclusionFilters = map[string]string{
-	"arn":                "Description.Exclusion.Arn",
-	"assessment_run_arn": "Description.AssessmentRunArn",
-	"attributes":         "Description.Exclusion.Attributes",
-	"description":        "Description.Exclusion.Description",
-	"og_account_id":      "metadata.IntegrationID",
-	"recommendation":     "Description.Exclusion.Recommendation",
-	"scopes":             "Description.Exclusion.Scopes",
-	"title":              "Description.Exclusion.Title",
+	"arn":                 "Description.Exclusion.Arn",
+	"assessment_run_arn":  "Description.AssessmentRunArn",
+	"attributes":          "Description.Exclusion.Attributes",
+	"description":         "Description.Exclusion.Description",
+	"platform_account_id": "metadata.IntegrationID",
+	"recommendation":      "Description.Exclusion.Recommendation",
+	"scopes":              "Description.Exclusion.Scopes",
+	"title":               "Description.Exclusion.Title",
 }
 
 func GetInspectorExclusion(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -96026,7 +96017,7 @@ var listInspectorFindingFilters = map[string]string{
 	"id":                      "Description.Finding.Id",
 	"indicator_of_compromise": "Description.Finding.IndicatorOfCompromise",
 	"numeric_severity":        "Description.Finding.NumericSeverity",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"recommendation":          "Description.Finding.Recommendation",
 	"schema_version":          "Description.Finding.SchemaVersion",
 	"service":                 "Description.Finding.Service",
@@ -96111,7 +96102,7 @@ var getInspectorFindingFilters = map[string]string{
 	"id":                      "Description.Finding.Id",
 	"indicator_of_compromise": "Description.Finding.IndicatorOfCompromise",
 	"numeric_severity":        "Description.Finding.NumericSeverity",
-	"og_account_id":           "metadata.IntegrationID",
+	"platform_account_id":     "metadata.IntegrationID",
 	"recommendation":          "Description.Finding.Recommendation",
 	"schema_version":          "Description.Finding.SchemaVersion",
 	"service":                 "Description.Finding.Service",
@@ -96270,7 +96261,7 @@ var listInspector2CoverageFilters = map[string]string{
 	"lambda_function_name":          "Description.CoveredResource.ResourceMetadata.LambdaFunction.FunctionName",
 	"lambda_function_runtime":       "Description.CoveredResource.ResourceMetadata.LambdaFunction.Runtime",
 	"lambda_function_tags":          "Description.CoveredResource.ResourceMetadata.LambdaFunction.FunctionTags",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"resource_id":                   "Description.CoveredResource.ResourceId",
 	"resource_type":                 "Description.CoveredResource.ResourceType",
 	"scan_status_code":              "Description.CoveredResource.ScanStatus.StatusCode",
@@ -96351,7 +96342,7 @@ var getInspector2CoverageFilters = map[string]string{
 	"lambda_function_name":          "Description.CoveredResource.ResourceMetadata.LambdaFunction.FunctionName",
 	"lambda_function_runtime":       "Description.CoveredResource.ResourceMetadata.LambdaFunction.Runtime",
 	"lambda_function_tags":          "Description.CoveredResource.ResourceMetadata.LambdaFunction.FunctionTags",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"resource_id":                   "description.CoveredResource.ResourceId",
 	"resource_type":                 "Description.CoveredResource.ResourceType",
 	"scan_status_code":              "Description.CoveredResource.ScanStatus.StatusCode",
@@ -96496,9 +96487,9 @@ func (p Inspector2CoverageStatisticPaginator) NextPage(ctx context.Context) ([]I
 }
 
 var listInspector2CoverageStatisticFilters = map[string]string{
-	"counts_by_group": "Description.Counts",
-	"og_account_id":   "metadata.IntegrationID",
-	"total_counts":    "Description.TotalCounts",
+	"counts_by_group":     "Description.Counts",
+	"platform_account_id": "metadata.IntegrationID",
+	"total_counts":        "Description.TotalCounts",
 }
 
 func ListInspector2CoverageStatistic(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -96562,9 +96553,9 @@ func ListInspector2CoverageStatistic(ctx context.Context, d *plugin.QueryData, _
 }
 
 var getInspector2CoverageStatisticFilters = map[string]string{
-	"counts_by_group": "Description.Counts",
-	"og_account_id":   "metadata.IntegrationID",
-	"total_counts":    "Description.TotalCounts",
+	"counts_by_group":     "Description.Counts",
+	"platform_account_id": "metadata.IntegrationID",
+	"total_counts":        "Description.TotalCounts",
 }
 
 func GetInspector2CoverageStatistic(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -96705,7 +96696,7 @@ func (p Inspector2MemberPaginator) NextPage(ctx context.Context) ([]Inspector2Me
 var listInspector2MemberFilters = map[string]string{
 	"delegated_admin_account_id": "Description.Member.DelegatedAdminAccountId",
 	"member_account_id":          "Description.Member.AccountId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"relationship_status":        "Description.Member.RelationshipStatus",
 	"title":                      "Description.Member.AccountId",
 	"updated_at":                 "Description.Member.UpdatedAt",
@@ -96774,7 +96765,7 @@ func ListInspector2Member(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 var getInspector2MemberFilters = map[string]string{
 	"delegated_admin_account_id": "Description.Member.DelegatedAdminAccountId",
 	"member_account_id":          "Description.Member.AccountId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"relationship_status":        "Description.Member.RelationshipStatus",
 	"title":                      "Description.Member.AccountId",
 	"updated_at":                 "Description.Member.UpdatedAt",
@@ -96942,7 +96933,7 @@ var listInspector2FindingFilters = map[string]string{
 	"last_observed_at":                   "Description.Finding.LastObservedAt",
 	"network_protocol":                   "Description.Finding.NetworkReachabilityDetails.Protocol",
 	"network_reachability_details":       "Description.Finding.NetworkReachabilityDetails",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"package_vulnerability_details":      "Description.Finding.PackageVulnerabilityDetails",
 	"reference_urls":                     "Description.Finding.PackageVulnerabilityDetails.ReferenceUrls",
 	"related_vulnerabilitie":             "Description.Finding.PackageVulnerabilityDetails.VulnerabilityId",
@@ -97055,7 +97046,7 @@ var getInspector2FindingFilters = map[string]string{
 	"last_observed_at":                   "Description.Finding.LastObservedAt",
 	"network_protocol":                   "Description.Finding.NetworkReachabilityDetails.Protocol",
 	"network_reachability_details":       "Description.Finding.NetworkReachabilityDetails",
-	"og_account_id":                      "metadata.IntegrationID",
+	"platform_account_id":                "metadata.IntegrationID",
 	"package_vulnerability_details":      "Description.Finding.PackageVulnerabilityDetails",
 	"reference_urls":                     "Description.Finding.PackageVulnerabilityDetails.ReferenceUrls",
 	"related_vulnerabilitie":             "Description.Finding.PackageVulnerabilityDetails.VulnerabilityId",
@@ -97227,7 +97218,7 @@ var listFirehoseDeliveryStreamFilters = map[string]string{
 	"failure_description":                      "Description.DeliveryStream.FailureDescription",
 	"has_more_destinations":                    "Description.DeliveryStream.HasMoreDestinations",
 	"last_update_timestamp":                    "Description.DeliveryStream.LastUpdateTimestamp",
-	"og_account_id":                            "metadata.IntegrationID",
+	"platform_account_id":                      "metadata.IntegrationID",
 	"source":                                   "Description.DeliveryStream.Source",
 	"tags_src":                                 "Description.Tags",
 	"title":                                    "Description.DeliveryStream.DeliveryStreamName",
@@ -97305,7 +97296,7 @@ var getFirehoseDeliveryStreamFilters = map[string]string{
 	"failure_description":                      "Description.DeliveryStream.FailureDescription",
 	"has_more_destinations":                    "Description.DeliveryStream.HasMoreDestinations",
 	"last_update_timestamp":                    "Description.DeliveryStream.LastUpdateTimestamp",
-	"og_account_id":                            "metadata.IntegrationID",
+	"platform_account_id":                      "metadata.IntegrationID",
 	"source":                                   "Description.DeliveryStream.Source",
 	"tags_src":                                 "Description.Tags",
 	"title":                                    "Description.DeliveryStream.DeliveryStreamName",
@@ -97448,30 +97439,30 @@ func (p LightsailInstancePaginator) NextPage(ctx context.Context) ([]LightsailIn
 }
 
 var listLightsailInstanceFilters = map[string]string{
-	"arn":                "Description.Instance.Arn",
-	"availability_zone":  "Description.Instance.Location.AvailabilityZone",
-	"blueprint_id":       "Description.Instance.BlueprintId",
-	"blueprint_name":     "Description.Instance.BlueprintName",
-	"bundle_id":          "Description.Instance.BundleId",
-	"created_at":         "Description.Instance.CreatedAt",
-	"hardware":           "Description.Instance.Hardware",
-	"ip_address_type":    "Description.Instance.IpAddressType",
-	"ip_v6_addresses":    "Description.Instance.Ipv6Addresses",
-	"is_static_ip":       "Description.Instance.IsStaticIp",
-	"metadata_options":   "Description.Instance.MetadataOptions",
-	"name":               "Description.Instance.Name",
-	"networking":         "Description.Instance.Networking",
-	"og_account_id":      "metadata.IntegrationID",
-	"private_ip_address": "Description.Instance.PrivateIpAddress",
-	"public_ip_address":  "Description.Instance.PublicIpAddress",
-	"resource_type":      "Description.Instance.ResourceType",
-	"ssh_key_name":       "Description.Instance.SshKeyName",
-	"state_code":         "Description.Instance.State.Code",
-	"state_name":         "Description.Instance.State.Name",
-	"support_code":       "Description.Instance.SupportCode",
-	"tags_src":           "Description.Instance.Tags",
-	"title":              "Description.Instance.Name",
-	"username":           "Description.Instance.Username",
+	"arn":                 "Description.Instance.Arn",
+	"availability_zone":   "Description.Instance.Location.AvailabilityZone",
+	"blueprint_id":        "Description.Instance.BlueprintId",
+	"blueprint_name":      "Description.Instance.BlueprintName",
+	"bundle_id":           "Description.Instance.BundleId",
+	"created_at":          "Description.Instance.CreatedAt",
+	"hardware":            "Description.Instance.Hardware",
+	"ip_address_type":     "Description.Instance.IpAddressType",
+	"ip_v6_addresses":     "Description.Instance.Ipv6Addresses",
+	"is_static_ip":        "Description.Instance.IsStaticIp",
+	"metadata_options":    "Description.Instance.MetadataOptions",
+	"name":                "Description.Instance.Name",
+	"networking":          "Description.Instance.Networking",
+	"platform_account_id": "metadata.IntegrationID",
+	"private_ip_address":  "Description.Instance.PrivateIpAddress",
+	"public_ip_address":   "Description.Instance.PublicIpAddress",
+	"resource_type":       "Description.Instance.ResourceType",
+	"ssh_key_name":        "Description.Instance.SshKeyName",
+	"state_code":          "Description.Instance.State.Code",
+	"state_name":          "Description.Instance.State.Name",
+	"support_code":        "Description.Instance.SupportCode",
+	"tags_src":            "Description.Instance.Tags",
+	"title":               "Description.Instance.Name",
+	"username":            "Description.Instance.Username",
 }
 
 func ListLightsailInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -97535,30 +97526,30 @@ func ListLightsailInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 }
 
 var getLightsailInstanceFilters = map[string]string{
-	"arn":                "Description.Instance.Arn",
-	"availability_zone":  "Description.Instance.Location.AvailabilityZone",
-	"blueprint_id":       "Description.Instance.BlueprintId",
-	"blueprint_name":     "Description.Instance.BlueprintName",
-	"bundle_id":          "Description.Instance.BundleId",
-	"created_at":         "Description.Instance.CreatedAt",
-	"hardware":           "Description.Instance.Hardware",
-	"ip_address_type":    "Description.Instance.IpAddressType",
-	"ip_v6_addresses":    "Description.Instance.Ipv6Addresses",
-	"is_static_ip":       "Description.Instance.IsStaticIp",
-	"metadata_options":   "Description.Instance.MetadataOptions",
-	"name":               "description.Instance.",
-	"networking":         "Description.Instance.Networking",
-	"og_account_id":      "metadata.IntegrationID",
-	"private_ip_address": "Description.Instance.PrivateIpAddress",
-	"public_ip_address":  "Description.Instance.PublicIpAddress",
-	"resource_type":      "Description.Instance.ResourceType",
-	"ssh_key_name":       "Description.Instance.SshKeyName",
-	"state_code":         "Description.Instance.State.Code",
-	"state_name":         "Description.Instance.State.Name",
-	"support_code":       "Description.Instance.SupportCode",
-	"tags_src":           "Description.Instance.Tags",
-	"title":              "Description.Instance.Name",
-	"username":           "Description.Instance.Username",
+	"arn":                 "Description.Instance.Arn",
+	"availability_zone":   "Description.Instance.Location.AvailabilityZone",
+	"blueprint_id":        "Description.Instance.BlueprintId",
+	"blueprint_name":      "Description.Instance.BlueprintName",
+	"bundle_id":           "Description.Instance.BundleId",
+	"created_at":          "Description.Instance.CreatedAt",
+	"hardware":            "Description.Instance.Hardware",
+	"ip_address_type":     "Description.Instance.IpAddressType",
+	"ip_v6_addresses":     "Description.Instance.Ipv6Addresses",
+	"is_static_ip":        "Description.Instance.IsStaticIp",
+	"metadata_options":    "Description.Instance.MetadataOptions",
+	"name":                "description.Instance.",
+	"networking":          "Description.Instance.Networking",
+	"platform_account_id": "metadata.IntegrationID",
+	"private_ip_address":  "Description.Instance.PrivateIpAddress",
+	"public_ip_address":   "Description.Instance.PublicIpAddress",
+	"resource_type":       "Description.Instance.ResourceType",
+	"ssh_key_name":        "Description.Instance.SshKeyName",
+	"state_code":          "Description.Instance.State.Code",
+	"state_name":          "Description.Instance.State.Name",
+	"support_code":        "Description.Instance.SupportCode",
+	"tags_src":            "Description.Instance.Tags",
+	"title":               "Description.Instance.Name",
+	"username":            "Description.Instance.Username",
 }
 
 func GetLightsailInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -97708,7 +97699,7 @@ var listMacie2ClassificationJobFilters = map[string]string{
 	"last_run_error_status":      "Description.ClassificationJob.LastRunErrorStatus",
 	"last_run_time":              "Description.ClassificationJob.LastRunTime",
 	"name":                       "description.ClassificationJob.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"s3_job_definition":          "Description.ClassificationJob.S3JobDefinition",
 	"sampling_percentage":        "Description.ClassificationJob.SamplingPercentage",
 	"schedule_frequency":         "Description.ClassificationJob.ScheduleFrequency",
@@ -97790,7 +97781,7 @@ var getMacie2ClassificationJobFilters = map[string]string{
 	"last_run_error_status":      "Description.ClassificationJob.LastRunErrorStatus",
 	"last_run_time":              "Description.ClassificationJob.LastRunTime",
 	"name":                       "Description.ClassificationJob.Name",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"s3_job_definition":          "Description.ClassificationJob.S3JobDefinition",
 	"sampling_percentage":        "Description.ClassificationJob.SamplingPercentage",
 	"schedule_frequency":         "Description.ClassificationJob.ScheduleFrequency",
@@ -97941,7 +97932,7 @@ var listMediaStoreContainerFilters = map[string]string{
 	"creation_time":          "Description.Container.CreationTime",
 	"endpoint":               "Description.Container.Endpoint",
 	"name":                   "Description.Container.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"policy":                 "Description.Policy",
 	"status":                 "Description.Container.Status",
 	"tags_src":               "Description.Tags",
@@ -98014,7 +98005,7 @@ var getMediaStoreContainerFilters = map[string]string{
 	"creation_time":          "Description.Container.CreationTime",
 	"endpoint":               "Description.Container.Endpoint",
 	"name":                   "description.Container.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"policy":                 "Description.Policy",
 	"status":                 "Description.Container.Status",
 	"tags_src":               "Description.Tags",
@@ -98165,7 +98156,7 @@ var listMgnApplicationFilters = map[string]string{
 	"is_archived":                   "description.Application.IsArchived",
 	"last_modified_date_time":       "Description.Application.LastModifiedDateTime",
 	"name":                          "Description.Application.Name",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"tags":                          "Description.Application.Tags",
 	"title":                         "Description.Application.Name",
 	"wave_id":                       "description.Application.WaveID",
@@ -98240,7 +98231,7 @@ var getMgnApplicationFilters = map[string]string{
 	"is_archived":                   "Description.Application.IsArchived",
 	"last_modified_date_time":       "Description.Application.LastModifiedDateTime",
 	"name":                          "Description.Application.Name",
-	"og_account_id":                 "metadata.IntegrationID",
+	"platform_account_id":           "metadata.IntegrationID",
 	"tags":                          "Description.Application.Tags",
 	"title":                         "Description.Application.Name",
 	"wave_id":                       "Description.Application.WaveID",
@@ -98386,7 +98377,7 @@ var listSecurityLakeDataLakeFilters = map[string]string{
 	"create_status":             "Description.DataLake.CreateStatus",
 	"kms_key_id":                "Description.DataLake.EncryptionConfiguration.KmsKeyId",
 	"lifecycle_configuration":   "Description.DataLake.LifecycleConfiguration",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"replication_configuration": "Description.DataLake.ReplicationConfiguration",
 	"replication_role_arn":      "Description.DataLake.ReplicationConfiguration.RoleArn",
 	"s3_bucket_arn":             "Description.DataLake.ReplicationConfiguration.S3BucketArn",
@@ -98458,7 +98449,7 @@ var getSecurityLakeDataLakeFilters = map[string]string{
 	"create_status":             "Description.DataLake.CreateStatus",
 	"kms_key_id":                "Description.DataLake.EncryptionConfiguration.KmsKeyId",
 	"lifecycle_configuration":   "Description.DataLake.LifecycleConfiguration",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"replication_configuration": "Description.DataLake.ReplicationConfiguration",
 	"replication_role_arn":      "Description.DataLake.ReplicationConfiguration.RoleArn",
 	"s3_bucket_arn":             "Description.DataLake.ReplicationConfiguration.S3BucketArn",
@@ -98604,7 +98595,7 @@ var listSecurityLakeSubscriberFilters = map[string]string{
 	"access_types":           "Description.Subscriber.AccessTypes",
 	"created_at":             "Description.Subscriber.CreatedAt",
 	"external_id":            "Description.Subscriber.ExternalId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"role_arn":               "Description.Subscriber.RoleArn",
 	"s3_bucket_arn":          "Description.Subscriber.S3BucketArn",
 	"sns_arn":                "Description.Subscriber.SnsArn",
@@ -98683,7 +98674,7 @@ var getSecurityLakeSubscriberFilters = map[string]string{
 	"access_types":           "Description.Subscriber.AccessTypes",
 	"created_at":             "Description.Subscriber.CreatedAt",
 	"external_id":            "Description.Subscriber.ExternalId",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"role_arn":               "Description.Subscriber.RoleArn",
 	"s3_bucket_arn":          "Description.Subscriber.S3BucketArn",
 	"sns_arn":                "Description.Subscriber.SnsArn",
@@ -98840,7 +98831,7 @@ var listRamPrincipalAssociationFilters = map[string]string{
 	"creation_time":             "Description.PrincipalAssociation.CreationTime",
 	"external":                  "Description.PrincipalAssociation.External",
 	"last_updated_time":         "Description.PrincipalAssociation.LastUpdatedTime",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_share_arn":        "Description.PrincipalAssociation.ResourceShareArn",
 	"resource_share_name":       "Description.PrincipalAssociation.ResourceShareName",
 	"resource_share_permission": "Description.ResourceSharePermission",
@@ -98915,7 +98906,7 @@ var getRamPrincipalAssociationFilters = map[string]string{
 	"creation_time":             "Description.PrincipalAssociation.CreationTime",
 	"external":                  "Description.PrincipalAssociation.External",
 	"last_updated_time":         "Description.PrincipalAssociation.LastUpdatedTime",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_share_arn":        "Description.PrincipalAssociation.ResourceShareArn",
 	"resource_share_name":       "Description.PrincipalAssociation.ResourceShareName",
 	"resource_share_permission": "Description.ResourceSharePermission",
@@ -99065,7 +99056,7 @@ var listRamResourceAssociationFilters = map[string]string{
 	"creation_time":             "Description.ResourceAssociation.CreationTime",
 	"external":                  "Description.ResourceAssociation.External",
 	"last_updated_time":         "Description.ResourceAssociation.LastUpdatedTime",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_share_arn":        "Description.ResourceAssociation.ResourceShareArn",
 	"resource_share_name":       "Description.ResourceAssociation.ResourceShareName",
 	"resource_share_permission": "Description.ResourceSharePermission",
@@ -99140,7 +99131,7 @@ var getRamResourceAssociationFilters = map[string]string{
 	"creation_time":             "Description.ResourceAssociation.CreationTime",
 	"external":                  "Description.ResourceAssociation.External",
 	"last_updated_time":         "Description.ResourceAssociation.LastUpdatedTime",
-	"og_account_id":             "metadata.IntegrationID",
+	"platform_account_id":       "metadata.IntegrationID",
 	"resource_share_arn":        "Description.ResourceAssociation.ResourceShareArn",
 	"resource_share_name":       "Description.ResourceAssociation.ResourceShareName",
 	"resource_share_permission": "Description.ResourceSharePermission",
@@ -99294,7 +99285,7 @@ var listServerlessApplicationRepositoryApplicationFilters = map[string]string{
 	"labels":              "Description.Application.Labels",
 	"license_url":         "Description.Application.LicenseUrl",
 	"name":                "Description.Application.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"readme_url":          "Description.Application.ReadmeUrl",
 	"spdx_license_id":     "Description.Application.SpdxLicenseId",
 	"statements":          "Description.Statements",
@@ -99373,7 +99364,7 @@ var getServerlessApplicationRepositoryApplicationFilters = map[string]string{
 	"labels":              "Description.Application.Labels",
 	"license_url":         "Description.Application.LicenseUrl",
 	"name":                "Description.Application.Name",
-	"og_account_id":       "metadata.IntegrationID",
+	"platform_account_id": "metadata.IntegrationID",
 	"readme_url":          "Description.Application.ReadmeUrl",
 	"spdx_license_id":     "Description.Application.SpdxLicenseId",
 	"statements":          "Description.Statements",
@@ -99518,23 +99509,23 @@ func (p ServiceQuotasServiceQuotaChangeRequestPaginator) NextPage(ctx context.Co
 }
 
 var listServiceQuotasServiceQuotaChangeRequestFilters = map[string]string{
-	"case_id":       "Description.ServiceQuotaChangeRequest.CaseId",
-	"created":       "Description.ServiceQuotaChangeRequest.Created",
-	"desired_value": "Description.ServiceQuotaChangeRequest.DesiredValue",
-	"global_quota":  "Description.ServiceQuotaChangeRequest.GlobalQuota",
-	"id":            "Description.ServiceQuotaChangeRequest.Id",
-	"last_updated":  "Description.ServiceQuotaChangeRequest.LastUpdated",
-	"og_account_id": "metadata.IntegrationID",
-	"quota_arn":     "Description.ServiceQuotaChangeRequest.QuotaArn",
-	"quota_code":    "Description.ServiceQuotaChangeRequest.QuotaCode",
-	"quota_name":    "Description.ServiceQuotaChangeRequest.QuotaName",
-	"requester":     "Description.ServiceQuotaChangeRequest.Requester",
-	"service_code":  "description.ServiceQuotaChangeRequest.ServiceCode",
-	"service_name":  "Description.ServiceQuotaChangeRequest.ServiceName",
-	"status":        "description.ServiceQuotaChangeRequest.Status",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.ServiceQuotaChangeRequest.QuotaName",
-	"unit":          "Description.ServiceQuotaChangeRequest.Unit",
+	"case_id":             "Description.ServiceQuotaChangeRequest.CaseId",
+	"created":             "Description.ServiceQuotaChangeRequest.Created",
+	"desired_value":       "Description.ServiceQuotaChangeRequest.DesiredValue",
+	"global_quota":        "Description.ServiceQuotaChangeRequest.GlobalQuota",
+	"id":                  "Description.ServiceQuotaChangeRequest.Id",
+	"last_updated":        "Description.ServiceQuotaChangeRequest.LastUpdated",
+	"platform_account_id": "metadata.IntegrationID",
+	"quota_arn":           "Description.ServiceQuotaChangeRequest.QuotaArn",
+	"quota_code":          "Description.ServiceQuotaChangeRequest.QuotaCode",
+	"quota_name":          "Description.ServiceQuotaChangeRequest.QuotaName",
+	"requester":           "Description.ServiceQuotaChangeRequest.Requester",
+	"service_code":        "description.ServiceQuotaChangeRequest.ServiceCode",
+	"service_name":        "Description.ServiceQuotaChangeRequest.ServiceName",
+	"status":              "description.ServiceQuotaChangeRequest.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.ServiceQuotaChangeRequest.QuotaName",
+	"unit":                "Description.ServiceQuotaChangeRequest.Unit",
 }
 
 func ListServiceQuotasServiceQuotaChangeRequest(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -99598,23 +99589,23 @@ func ListServiceQuotasServiceQuotaChangeRequest(ctx context.Context, d *plugin.Q
 }
 
 var getServiceQuotasServiceQuotaChangeRequestFilters = map[string]string{
-	"case_id":       "Description.ServiceQuotaChangeRequest.CaseId",
-	"created":       "Description.ServiceQuotaChangeRequest.Created",
-	"desired_value": "Description.ServiceQuotaChangeRequest.DesiredValue",
-	"global_quota":  "Description.ServiceQuotaChangeRequest.GlobalQuota",
-	"id":            "description.ServiceQuotaChangeRequest.Id",
-	"last_updated":  "Description.ServiceQuotaChangeRequest.LastUpdated",
-	"og_account_id": "metadata.IntegrationID",
-	"quota_arn":     "Description.ServiceQuotaChangeRequest.QuotaArn",
-	"quota_code":    "Description.ServiceQuotaChangeRequest.QuotaCode",
-	"quota_name":    "Description.ServiceQuotaChangeRequest.QuotaName",
-	"requester":     "Description.ServiceQuotaChangeRequest.Requester",
-	"service_code":  "Description.ServiceQuotaChangeRequest.ServiceCode",
-	"service_name":  "Description.ServiceQuotaChangeRequest.ServiceName",
-	"status":        "Description.ServiceQuotaChangeRequest.Status",
-	"tags_src":      "Description.Tags",
-	"title":         "Description.ServiceQuotaChangeRequest.QuotaName",
-	"unit":          "Description.ServiceQuotaChangeRequest.Unit",
+	"case_id":             "Description.ServiceQuotaChangeRequest.CaseId",
+	"created":             "Description.ServiceQuotaChangeRequest.Created",
+	"desired_value":       "Description.ServiceQuotaChangeRequest.DesiredValue",
+	"global_quota":        "Description.ServiceQuotaChangeRequest.GlobalQuota",
+	"id":                  "description.ServiceQuotaChangeRequest.Id",
+	"last_updated":        "Description.ServiceQuotaChangeRequest.LastUpdated",
+	"platform_account_id": "metadata.IntegrationID",
+	"quota_arn":           "Description.ServiceQuotaChangeRequest.QuotaArn",
+	"quota_code":          "Description.ServiceQuotaChangeRequest.QuotaCode",
+	"quota_name":          "Description.ServiceQuotaChangeRequest.QuotaName",
+	"requester":           "Description.ServiceQuotaChangeRequest.Requester",
+	"service_code":        "Description.ServiceQuotaChangeRequest.ServiceCode",
+	"service_name":        "Description.ServiceQuotaChangeRequest.ServiceName",
+	"status":              "Description.ServiceQuotaChangeRequest.Status",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.ServiceQuotaChangeRequest.QuotaName",
+	"unit":                "Description.ServiceQuotaChangeRequest.Unit",
 }
 
 func GetServiceQuotasServiceQuotaChangeRequest(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -99966,7 +99957,7 @@ var listServiceCatalogProductFilters = map[string]string{
 	"id":                     "Description.ProductViewSummary.Id",
 	"launch_paths":           "Description.LunchPaths",
 	"name":                   "Description.ProductViewSummary.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"owner":                  "Description.ProductViewSummary.Owner",
 	"product_id":             "Description.ProductViewSummary.ProductId",
 	"provisioning_artifacts": "Description.ProvisioningArtifacts",
@@ -100045,7 +100036,7 @@ var getServiceCatalogProductFilters = map[string]string{
 	"id":                     "Description.ProductViewSummary.Id",
 	"launch_paths":           "Description.LunchPaths",
 	"name":                   "Description.ProductViewSummary.Name",
-	"og_account_id":          "metadata.IntegrationID",
+	"platform_account_id":    "metadata.IntegrationID",
 	"owner":                  "Description.ProductViewSummary.Owner",
 	"product_id":             "Description.ProductViewSummary.ProductId",
 	"provisioning_artifacts": "Description.ProvisioningArtifacts",
@@ -100193,18 +100184,18 @@ func (p ServiceCatalogPortfolioPaginator) NextPage(ctx context.Context) ([]Servi
 }
 
 var listServiceCatalogPortfolioFilters = map[string]string{
-	"arn":           "Description.Portfolio.ARN",
-	"budgets":       "Description.Budgets",
-	"created_time":  "Description.Portfolio.CreatedTime",
-	"description":   "Description.Portfolio.Description",
-	"display_name":  "Description.Portfolio.DisplayName",
-	"id":            "Description.Portfolio.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"provider_name": "Description.Portfolio.ProviderName",
-	"tag_options":   "Description.TagOptions",
-	"tags":          "Description.Tag",
-	"tags_src":      "Description.Tag",
-	"title":         "Description.Portfolio.DisplayName",
+	"arn":                 "Description.Portfolio.ARN",
+	"budgets":             "Description.Budgets",
+	"created_time":        "Description.Portfolio.CreatedTime",
+	"description":         "Description.Portfolio.Description",
+	"display_name":        "Description.Portfolio.DisplayName",
+	"id":                  "Description.Portfolio.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"provider_name":       "Description.Portfolio.ProviderName",
+	"tag_options":         "Description.TagOptions",
+	"tags":                "Description.Tag",
+	"tags_src":            "Description.Tag",
+	"title":               "Description.Portfolio.DisplayName",
 }
 
 func ListServiceCatalogPortfolio(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -100268,18 +100259,18 @@ func ListServiceCatalogPortfolio(ctx context.Context, d *plugin.QueryData, _ *pl
 }
 
 var getServiceCatalogPortfolioFilters = map[string]string{
-	"arn":           "Description.Portfolio.ARN",
-	"budgets":       "Description.Budgets",
-	"created_time":  "Description.Portfolio.CreatedTime",
-	"description":   "Description.Portfolio.Description",
-	"display_name":  "Description.Portfolio.DisplayName",
-	"id":            "Description.Portfolio.Id",
-	"og_account_id": "metadata.IntegrationID",
-	"provider_name": "Description.Portfolio.ProviderName",
-	"tag_options":   "Description.TagOptions",
-	"tags":          "Description.Tag",
-	"tags_src":      "Description.Tag",
-	"title":         "Description.Portfolio.DisplayName",
+	"arn":                 "Description.Portfolio.ARN",
+	"budgets":             "Description.Budgets",
+	"created_time":        "Description.Portfolio.CreatedTime",
+	"description":         "Description.Portfolio.Description",
+	"display_name":        "Description.Portfolio.DisplayName",
+	"id":                  "Description.Portfolio.Id",
+	"platform_account_id": "metadata.IntegrationID",
+	"provider_name":       "Description.Portfolio.ProviderName",
+	"tag_options":         "Description.TagOptions",
+	"tags":                "Description.Tag",
+	"tags_src":            "Description.Tag",
+	"title":               "Description.Portfolio.DisplayName",
 }
 
 func GetServiceCatalogPortfolio(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -100428,7 +100419,7 @@ var listServiceDiscoveryServiceFilters = map[string]string{
 	"instance_count":             "Description.Service.DnsConfig.InstanceCount",
 	"name":                       "Description.Service.Name",
 	"namespace_id":               "Description.Service.DnsConfig.NamespaceId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"routing_policy":             "Description.Service.DnsConfig.RoutingPolicy",
 	"tags":                       "Description.Tags",
 	"tags_src":                   "Description.Tags",
@@ -100507,7 +100498,7 @@ var getServiceDiscoveryServiceFilters = map[string]string{
 	"instance_count":             "Description.Service.DnsConfig.InstanceCount",
 	"name":                       "Description.Service.Name",
 	"namespace_id":               "Description.Service.DnsConfig.NamespaceId",
-	"og_account_id":              "metadata.IntegrationID",
+	"platform_account_id":        "metadata.IntegrationID",
 	"routing_policy":             "Description.Service.DnsConfig.RoutingPolicy",
 	"tags":                       "Description.Tags",
 	"tags_src":                   "Description.Tags",
@@ -100651,19 +100642,19 @@ func (p ServiceDiscoveryNamespacePaginator) NextPage(ctx context.Context) ([]Ser
 }
 
 var listServiceDiscoveryNamespaceFilters = map[string]string{
-	"arn":             "Description.Namespace.Arn",
-	"create_date":     "Description.Namespace.CreateDate",
-	"description":     "Description.Namespace.Description",
-	"dns_properties":  "Description.Namespace.Properties.DnsProperties",
-	"http_properties": "Description.Namespace.Properties.HttpProperties",
-	"id":              "Description.Namespace.Id",
-	"name":            "Description.Namespace.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"service_count":   "Description.Namespace.ServiceCount",
-	"tags":            "Description.Tags",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.Namespace.Name",
-	"type":            "Description.Namespace.Type",
+	"arn":                 "Description.Namespace.Arn",
+	"create_date":         "Description.Namespace.CreateDate",
+	"description":         "Description.Namespace.Description",
+	"dns_properties":      "Description.Namespace.Properties.DnsProperties",
+	"http_properties":     "Description.Namespace.Properties.HttpProperties",
+	"id":                  "Description.Namespace.Id",
+	"name":                "Description.Namespace.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"service_count":       "Description.Namespace.ServiceCount",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Namespace.Name",
+	"type":                "Description.Namespace.Type",
 }
 
 func ListServiceDiscoveryNamespace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -100727,19 +100718,19 @@ func ListServiceDiscoveryNamespace(ctx context.Context, d *plugin.QueryData, _ *
 }
 
 var getServiceDiscoveryNamespaceFilters = map[string]string{
-	"arn":             "Description.Namespace.Arn",
-	"create_date":     "Description.Namespace.CreateDate",
-	"description":     "Description.Namespace.Description",
-	"dns_properties":  "Description.Namespace.Properties.DnsProperties",
-	"http_properties": "Description.Namespace.Properties.HttpProperties",
-	"id":              "Description.Namespace.Id",
-	"name":            "Description.Namespace.Name",
-	"og_account_id":   "metadata.IntegrationID",
-	"service_count":   "Description.Namespace.ServiceCount",
-	"tags":            "Description.Tags",
-	"tags_src":        "Description.Tags",
-	"title":           "Description.Namespace.Name",
-	"type":            "Description.Namespace.Type",
+	"arn":                 "Description.Namespace.Arn",
+	"create_date":         "Description.Namespace.CreateDate",
+	"description":         "Description.Namespace.Description",
+	"dns_properties":      "Description.Namespace.Properties.DnsProperties",
+	"http_properties":     "Description.Namespace.Properties.HttpProperties",
+	"id":                  "Description.Namespace.Id",
+	"name":                "Description.Namespace.Name",
+	"platform_account_id": "metadata.IntegrationID",
+	"service_count":       "Description.Namespace.ServiceCount",
+	"tags":                "Description.Tags",
+	"tags_src":            "Description.Tags",
+	"title":               "Description.Namespace.Name",
+	"type":                "Description.Namespace.Type",
 }
 
 func GetServiceDiscoveryNamespace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -100878,18 +100869,18 @@ func (p ServiceDiscoveryInstancePaginator) NextPage(ctx context.Context) ([]Serv
 }
 
 var listServiceDiscoveryInstanceFilters = map[string]string{
-	"alias_dns_name":     "Description.Instance.Attributes.AWS_ALIAS_DNS_NAME",
-	"attributes":         "Description.Instance.Attributes",
-	"ec2_instance_id":    "Description.Instance.Attributes.AWS_EC2_INSTANCE_ID",
-	"id":                 "Description.Instance.Id",
-	"init_health_status": "Description.Instance.Attributes.AWS_INIT_HEALTH_STATUS",
-	"instance_cname":     "Description.Instance.Attributes.AWS_INSTANCE_CNAME",
-	"instance_ipv4":      "Description.Instance.Attributes.AWS_INSTANCE_IPV4",
-	"instance_ipv6":      "Description.Instance.Attributes.AWS_INSTANCE_IPV6",
-	"instance_port":      "Description.Instance.Attributes.AWS_INSTANCE_PORT",
-	"og_account_id":      "metadata.IntegrationID",
-	"service_id":         "Description.ServiceId",
-	"title":              "Description.Instance.Id",
+	"alias_dns_name":      "Description.Instance.Attributes.AWS_ALIAS_DNS_NAME",
+	"attributes":          "Description.Instance.Attributes",
+	"ec2_instance_id":     "Description.Instance.Attributes.AWS_EC2_INSTANCE_ID",
+	"id":                  "Description.Instance.Id",
+	"init_health_status":  "Description.Instance.Attributes.AWS_INIT_HEALTH_STATUS",
+	"instance_cname":      "Description.Instance.Attributes.AWS_INSTANCE_CNAME",
+	"instance_ipv4":       "Description.Instance.Attributes.AWS_INSTANCE_IPV4",
+	"instance_ipv6":       "Description.Instance.Attributes.AWS_INSTANCE_IPV6",
+	"instance_port":       "Description.Instance.Attributes.AWS_INSTANCE_PORT",
+	"platform_account_id": "metadata.IntegrationID",
+	"service_id":          "Description.ServiceId",
+	"title":               "Description.Instance.Id",
 }
 
 func ListServiceDiscoveryInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -100953,18 +100944,18 @@ func ListServiceDiscoveryInstance(ctx context.Context, d *plugin.QueryData, _ *p
 }
 
 var getServiceDiscoveryInstanceFilters = map[string]string{
-	"alias_dns_name":     "Description.Instance.Attributes.AWS_ALIAS_DNS_NAME",
-	"attributes":         "Description.Instance.Attributes",
-	"ec2_instance_id":    "Description.Instance.Attributes.AWS_EC2_INSTANCE_ID",
-	"id":                 "Description.Instance.Id",
-	"init_health_status": "Description.Instance.Attributes.AWS_INIT_HEALTH_STATUS",
-	"instance_cname":     "Description.Instance.Attributes.AWS_INSTANCE_CNAME",
-	"instance_ipv4":      "Description.Instance.Attributes.AWS_INSTANCE_IPV4",
-	"instance_ipv6":      "Description.Instance.Attributes.AWS_INSTANCE_IPV6",
-	"instance_port":      "Description.Instance.Attributes.AWS_INSTANCE_PORT",
-	"og_account_id":      "metadata.IntegrationID",
-	"service_id":         "Description.ServiceId",
-	"title":              "Description.Instance.Id",
+	"alias_dns_name":      "Description.Instance.Attributes.AWS_ALIAS_DNS_NAME",
+	"attributes":          "Description.Instance.Attributes",
+	"ec2_instance_id":     "Description.Instance.Attributes.AWS_EC2_INSTANCE_ID",
+	"id":                  "Description.Instance.Id",
+	"init_health_status":  "Description.Instance.Attributes.AWS_INIT_HEALTH_STATUS",
+	"instance_cname":      "Description.Instance.Attributes.AWS_INSTANCE_CNAME",
+	"instance_ipv4":       "Description.Instance.Attributes.AWS_INSTANCE_IPV4",
+	"instance_ipv6":       "Description.Instance.Attributes.AWS_INSTANCE_IPV6",
+	"instance_port":       "Description.Instance.Attributes.AWS_INSTANCE_PORT",
+	"platform_account_id": "metadata.IntegrationID",
+	"service_id":          "Description.ServiceId",
+	"title":               "Description.Instance.Id",
 }
 
 func GetServiceDiscoveryInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
