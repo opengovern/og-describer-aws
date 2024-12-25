@@ -19,7 +19,7 @@ type Client struct {
 type AccessAnalyzerAnalyzer struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.AccessAnalyzerAnalyzerDescription `json:"description"`
+	Description     aws.AccessAnalyzerAnalyzerDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -244,7 +244,7 @@ func GetAccessAnalyzerAnalyzer(ctx context.Context, d *plugin.QueryData, _ *plug
 type AccessAnalyzerAnalyzerFinding struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.AccessAnalyzerAnalyzerFindingDescription `json:"description"`
+	Description     aws.AccessAnalyzerAnalyzerFindingDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -477,7 +477,7 @@ func GetAccessAnalyzerAnalyzerFinding(ctx context.Context, d *plugin.QueryData, 
 type ApiGatewayStage struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.ApiGatewayStageDescription `json:"description"`
+	Description     aws.ApiGatewayStageDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -720,7 +720,7 @@ func GetApiGatewayStage(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type ApiGatewayV2Stage struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ApiGatewayV2StageDescription `json:"description"`
+	Description     aws.ApiGatewayV2StageDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -962,7 +962,7 @@ func GetApiGatewayV2Stage(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type ApiGatewayRestAPI struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ApiGatewayRestAPIDescription `json:"description"`
+	Description     aws.ApiGatewayRestAPIDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -1191,7 +1191,7 @@ func GetApiGatewayRestAPI(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type ApiGatewayApiKey struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.ApiGatewayApiKeyDescription `json:"description"`
+	Description     aws.ApiGatewayApiKeyDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -1414,7 +1414,7 @@ func GetApiGatewayApiKey(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type ApiGatewayUsagePlan struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.ApiGatewayUsagePlanDescription `json:"description"`
+	Description     aws.ApiGatewayUsagePlanDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -1635,7 +1635,7 @@ func GetApiGatewayUsagePlan(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type ApiGatewayAuthorizer struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.ApiGatewayAuthorizerDescription `json:"description"`
+	Description     aws.ApiGatewayAuthorizerDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -1858,7 +1858,7 @@ func GetApiGatewayAuthorizer(ctx context.Context, d *plugin.QueryData, _ *plugin
 type ApiGatewayV2API struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.ApiGatewayV2APIDescription `json:"description"`
+	Description     aws.ApiGatewayV2APIDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -2081,7 +2081,7 @@ func GetApiGatewayV2API(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type ApiGatewayV2DomainName struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.ApiGatewayV2DomainNameDescription `json:"description"`
+	Description     aws.ApiGatewayV2DomainNameDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -2296,7 +2296,7 @@ func GetApiGatewayV2DomainName(ctx context.Context, d *plugin.QueryData, _ *plug
 type ApiGatewayDomainName struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.ApiGatewayDomainNameDescription `json:"description"`
+	Description     aws.ApiGatewayDomainNameDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -2502,7 +2502,7 @@ func GetApiGatewayDomainName(ctx context.Context, d *plugin.QueryData, _ *plugin
 type ApiGatewayV2Route struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ApiGatewayV2RouteDescription `json:"description"`
+	Description     aws.ApiGatewayV2RouteDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -2734,7 +2734,7 @@ func GetApiGatewayV2Route(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type ApiGatewayV2Integration struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.ApiGatewayV2IntegrationDescription `json:"description"`
+	Description     aws.ApiGatewayV2IntegrationDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -2981,7 +2981,7 @@ func GetApiGatewayV2Integration(ctx context.Context, d *plugin.QueryData, _ *plu
 type ElasticBeanstalkEnvironment struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.ElasticBeanstalkEnvironmentDescription `json:"description"`
+	Description     aws.ElasticBeanstalkEnvironmentDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -3234,7 +3234,7 @@ func GetElasticBeanstalkEnvironment(ctx context.Context, d *plugin.QueryData, _ 
 type ElasticBeanstalkApplication struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.ElasticBeanstalkApplicationDescription `json:"description"`
+	Description     aws.ElasticBeanstalkApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -3457,7 +3457,7 @@ func GetElasticBeanstalkApplication(ctx context.Context, d *plugin.QueryData, _ 
 type ElasticBeanstalkApplicationVersion struct {
 	ResourceID      string                                            `json:"resource_id"`
 	PlatformID      string                                            `json:"platform_id"`
-	Description     aws.ElasticBeanstalkApplicationVersionDescription `json:"description"`
+	Description     aws.ElasticBeanstalkApplicationVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
 	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
@@ -3682,7 +3682,7 @@ func GetElasticBeanstalkApplicationVersion(ctx context.Context, d *plugin.QueryD
 type ElastiCacheReplicationGroup struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.ElastiCacheReplicationGroupDescription `json:"description"`
+	Description     aws.ElastiCacheReplicationGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -3933,7 +3933,7 @@ func GetElastiCacheReplicationGroup(ctx context.Context, d *plugin.QueryData, _ 
 type ElastiCacheCluster struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.ElastiCacheClusterDescription `json:"description"`
+	Description     aws.ElastiCacheClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -4206,7 +4206,7 @@ func GetElastiCacheCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type ElastiCacheParameterGroup struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.ElastiCacheParameterGroupDescription `json:"description"`
+	Description     aws.ElastiCacheParameterGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -4419,7 +4419,7 @@ func GetElastiCacheParameterGroup(ctx context.Context, d *plugin.QueryData, _ *p
 type ElastiCacheReservedCacheNode struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.ElastiCacheReservedCacheNodeDescription `json:"description"`
+	Description     aws.ElastiCacheReservedCacheNodeDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -4650,7 +4650,7 @@ func GetElastiCacheReservedCacheNode(ctx context.Context, d *plugin.QueryData, _
 type ElastiCacheSubnetGroup struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.ElastiCacheSubnetGroupDescription `json:"description"`
+	Description     aws.ElastiCacheSubnetGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -4865,7 +4865,7 @@ func GetElastiCacheSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plug
 type ESDomain struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.ESDomainDescription `json:"description"`
+	Description     aws.ESDomainDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -5120,7 +5120,7 @@ func GetESDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type EMRCluster struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.EMRClusterDescription `json:"description"`
+	Description     aws.EMRClusterDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -5387,7 +5387,7 @@ func GetEMRCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type EMRInstance struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.EMRInstanceDescription `json:"description"`
+	Description     aws.EMRInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -5622,7 +5622,7 @@ func GetEMRInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type EMRInstanceFleet struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.EMRInstanceFleetDescription `json:"description"`
+	Description     aws.EMRInstanceFleetDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -5851,7 +5851,7 @@ func GetEMRInstanceFleet(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type EMRInstanceGroup struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.EMRInstanceGroupDescription `json:"description"`
+	Description     aws.EMRInstanceGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -6096,7 +6096,7 @@ func GetEMRInstanceGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type EMRBlockPublicAccessConfiguration struct {
 	ResourceID      string                                           `json:"resource_id"`
 	PlatformID      string                                           `json:"platform_id"`
-	Description     aws.EMRBlockPublicAccessConfigurationDescription `json:"description"`
+	Description     aws.EMRBlockPublicAccessConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
 	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
@@ -6309,7 +6309,7 @@ func GetEMRBlockPublicAccessConfiguration(ctx context.Context, d *plugin.QueryDa
 type GuardDutyFinding struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.GuardDutyFindingDescription `json:"description"`
+	Description     aws.GuardDutyFindingDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -6540,7 +6540,7 @@ func GetGuardDutyFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type GuardDutyDetector struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.GuardDutyDetectorDescription `json:"description"`
+	Description     aws.GuardDutyDetectorDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -6765,7 +6765,7 @@ func GetGuardDutyDetector(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type GuardDutyFilter struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.GuardDutyFilterDescription `json:"description"`
+	Description     aws.GuardDutyFilterDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -6984,7 +6984,7 @@ func GetGuardDutyFilter(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type GuardDutyIPSet struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.GuardDutyIPSetDescription `json:"description"`
+	Description     aws.GuardDutyIPSetDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -7203,7 +7203,7 @@ func GetGuardDutyIPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type GuardDutyMember struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.GuardDutyMemberDescription `json:"description"`
+	Description     aws.GuardDutyMemberDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -7422,7 +7422,7 @@ func GetGuardDutyMember(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type GuardDutyPublishingDestination struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.GuardDutyPublishingDestinationDescription `json:"description"`
+	Description     aws.GuardDutyPublishingDestinationDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -7639,7 +7639,7 @@ func GetGuardDutyPublishingDestination(ctx context.Context, d *plugin.QueryData,
 type GuardDutyThreatIntelSet struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.GuardDutyThreatIntelSetDescription `json:"description"`
+	Description     aws.GuardDutyThreatIntelSetDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -7858,7 +7858,7 @@ func GetGuardDutyThreatIntelSet(ctx context.Context, d *plugin.QueryData, _ *plu
 type BackupPlan struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.BackupPlanDescription `json:"description"`
+	Description     aws.BackupPlanDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -8085,7 +8085,7 @@ func GetBackupPlan(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type BackupSelection struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.BackupSelectionDescription `json:"description"`
+	Description     aws.BackupSelectionDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -8308,7 +8308,7 @@ func GetBackupSelection(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type BackupVault struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.BackupVaultDescription `json:"description"`
+	Description     aws.BackupVaultDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -8533,7 +8533,7 @@ func GetBackupVault(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type BackupRecoveryPoint struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.BackupRecoveryPointDescription `json:"description"`
+	Description     aws.BackupRecoveryPointDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -8776,7 +8776,7 @@ func GetBackupRecoveryPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type BackupProtectedResource struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.BackupProtectedResourceDescription `json:"description"`
+	Description     aws.BackupProtectedResourceDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -8985,7 +8985,7 @@ func GetBackupProtectedResource(ctx context.Context, d *plugin.QueryData, _ *plu
 type BackupFramework struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.BackupFrameworkDescription `json:"description"`
+	Description     aws.BackupFrameworkDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -9206,7 +9206,7 @@ func GetBackupFramework(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type BackupLegalHold struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.BackupLegalHoldDescription `json:"description"`
+	Description     aws.BackupLegalHoldDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -9427,7 +9427,7 @@ func GetBackupLegalHold(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type BackupReportPlan struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.BackupReportPlanDescription `json:"description"`
+	Description     aws.BackupReportPlanDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -9651,7 +9651,7 @@ func GetBackupReportPlan(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type BackupRegionSetting struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.BackupRegionSettingDescription `json:"description"`
+	Description     aws.BackupRegionSettingDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -9861,7 +9861,7 @@ func GetBackupRegionSetting(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type CloudFrontDistribution struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.CloudFrontDistributionDescription `json:"description"`
+	Description     aws.CloudFrontDistributionDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -10122,7 +10122,7 @@ func GetCloudFrontDistribution(ctx context.Context, d *plugin.QueryData, _ *plug
 type CloudFrontStreamingDistribution struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.CloudFrontStreamingDistributionDescription `json:"description"`
+	Description     aws.CloudFrontStreamingDistributionDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -10335,7 +10335,7 @@ func GetCloudFrontStreamingDistribution(ctx context.Context, d *plugin.QueryData
 type CloudFrontOriginAccessControl struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.CloudFrontOriginAccessControlDescription `json:"description"`
+	Description     aws.CloudFrontOriginAccessControlDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -10546,7 +10546,7 @@ func GetCloudFrontOriginAccessControl(ctx context.Context, d *plugin.QueryData, 
 type CloudFrontCachePolicy struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.CloudFrontCachePolicyDescription `json:"description"`
+	Description     aws.CloudFrontCachePolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -10769,7 +10769,7 @@ func GetCloudFrontCachePolicy(ctx context.Context, d *plugin.QueryData, _ *plugi
 type CloudFrontFunction struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.CloudFrontFunctionDescription `json:"description"`
+	Description     aws.CloudFrontFunctionDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -10986,7 +10986,7 @@ func GetCloudFrontFunction(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type CloudFrontOriginAccessIdentity struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.CloudFrontOriginAccessIdentityDescription `json:"description"`
+	Description     aws.CloudFrontOriginAccessIdentityDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -11201,7 +11201,7 @@ func GetCloudFrontOriginAccessIdentity(ctx context.Context, d *plugin.QueryData,
 type CloudFrontOriginRequestPolicy struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.CloudFrontOriginRequestPolicyDescription `json:"description"`
+	Description     aws.CloudFrontOriginRequestPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -11422,7 +11422,7 @@ func GetCloudFrontOriginRequestPolicy(ctx context.Context, d *plugin.QueryData, 
 type CloudFrontResponseHeadersPolicy struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.CloudFrontResponseHeadersPolicyDescription `json:"description"`
+	Description     aws.CloudFrontResponseHeadersPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -11639,7 +11639,7 @@ func GetCloudFrontResponseHeadersPolicy(ctx context.Context, d *plugin.QueryData
 type CloudWatchAlarm struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.CloudWatchAlarmDescription `json:"description"`
+	Description     aws.CloudWatchAlarmDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -11900,7 +11900,7 @@ func GetCloudWatchAlarm(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type CloudWatchLogEvent struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.CloudWatchLogEventDescription `json:"description"`
+	Description     aws.CloudWatchLogEventDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -12110,7 +12110,7 @@ func GetCloudWatchLogEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type CloudWatchLogResourcePolicy struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.CloudWatchLogResourcePolicyDescription `json:"description"`
+	Description     aws.CloudWatchLogResourcePolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -12319,7 +12319,7 @@ func GetCloudWatchLogResourcePolicy(ctx context.Context, d *plugin.QueryData, _ 
 type CloudWatchLogStream struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.CloudWatchLogStreamDescription `json:"description"`
+	Description     aws.CloudWatchLogStreamDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -12532,7 +12532,7 @@ func GetCloudWatchLogStream(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type CloudWatchLogSubscriptionFilter struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.CloudWatchLogSubscriptionFilterDescription `json:"description"`
+	Description     aws.CloudWatchLogSubscriptionFilterDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -12749,7 +12749,7 @@ func GetCloudWatchLogSubscriptionFilter(ctx context.Context, d *plugin.QueryData
 type CloudWatchMetric struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.CloudWatchMetricDescription `json:"description"`
+	Description     aws.CloudWatchMetricDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -12960,7 +12960,7 @@ func GetCloudWatchMetric(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type CloudWatchLogsLogGroup struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.CloudWatchLogsLogGroupDescription `json:"description"`
+	Description     aws.CloudWatchLogsLogGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -13183,7 +13183,7 @@ func GetCloudWatchLogsLogGroup(ctx context.Context, d *plugin.QueryData, _ *plug
 type CloudWatchLogsMetricFilter struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.CloudWatchLogsMetricFilterDescription `json:"description"`
+	Description     aws.CloudWatchLogsMetricFilterDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -13396,7 +13396,7 @@ func GetCloudWatchLogsMetricFilter(ctx context.Context, d *plugin.QueryData, _ *
 type CodeBuildProject struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.CodeBuildProjectDescription `json:"description"`
+	Description     aws.CodeBuildProjectDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -13653,7 +13653,7 @@ func GetCodeBuildProject(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type CodeBuildSourceCredential struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.CodeBuildSourceCredentialDescription `json:"description"`
+	Description     aws.CodeBuildSourceCredentialDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -13862,7 +13862,7 @@ func GetCodeBuildSourceCredential(ctx context.Context, d *plugin.QueryData, _ *p
 type CodeBuildBuild struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.CodeBuildBuildDescription `json:"description"`
+	Description     aws.CodeBuildBuildDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -14129,7 +14129,7 @@ func GetCodeBuildBuild(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type ConfigConfigurationRecorder struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.ConfigConfigurationRecorderDescription `json:"description"`
+	Description     aws.ConfigConfigurationRecorderDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -14346,7 +14346,7 @@ func GetConfigConfigurationRecorder(ctx context.Context, d *plugin.QueryData, _ 
 type ConfigAggregationAuthorization struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.ConfigAggregationAuthorizationDescription `json:"description"`
+	Description     aws.ConfigAggregationAuthorizationDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -14561,7 +14561,7 @@ func GetConfigAggregationAuthorization(ctx context.Context, d *plugin.QueryData,
 type ConfigConformancePack struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.ConfigConformancePackDescription `json:"description"`
+	Description     aws.ConfigConformancePackDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -14782,7 +14782,7 @@ func GetConfigConformancePack(ctx context.Context, d *plugin.QueryData, _ *plugi
 type ConfigRule struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.ConfigRuleDescription `json:"description"`
+	Description     aws.ConfigRuleDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -15013,7 +15013,7 @@ func GetConfigRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type ConfigRetentionConfiguration struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.ConfigRetentionConfigurationDescription `json:"description"`
+	Description     aws.ConfigRetentionConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -15222,7 +15222,7 @@ func GetConfigRetentionConfiguration(ctx context.Context, d *plugin.QueryData, _
 type DAXCluster struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.DAXClusterDescription `json:"description"`
+	Description     aws.DAXClusterDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -15463,7 +15463,7 @@ func GetDAXCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type DAXParameterGroup struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.DAXParameterGroupDescription `json:"description"`
+	Description     aws.DAXParameterGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -15672,7 +15672,7 @@ func GetDAXParameterGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type DAXParameter struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.DAXParameterDescription `json:"description"`
+	Description     aws.DAXParameterDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -15897,7 +15897,7 @@ func GetDAXParameter(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type DAXSubnetGroup struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.DAXSubnetGroupDescription `json:"description"`
+	Description     aws.DAXSubnetGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -16110,7 +16110,7 @@ func GetDAXSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type DMSReplicationInstance struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.DMSReplicationInstanceDescription `json:"description"`
+	Description     aws.DMSReplicationInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -16363,7 +16363,7 @@ func GetDMSReplicationInstance(ctx context.Context, d *plugin.QueryData, _ *plug
 type DMSEndpoint struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.DMSEndpointDescription `json:"description"`
+	Description     aws.DMSEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -16638,7 +16638,7 @@ func GetDMSEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type DMSReplicationTask struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.DMSReplicationTaskDescription `json:"description"`
+	Description     aws.DMSReplicationTaskDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -16881,7 +16881,7 @@ func GetDMSReplicationTask(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type DynamoDbTable struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.DynamoDbTableDescription `json:"description"`
+	Description     aws.DynamoDbTableDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -17130,7 +17130,7 @@ func GetDynamoDbTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type DynamoDbGlobalSecondaryIndex struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.DynamoDbGlobalSecondaryIndexDescription `json:"description"`
+	Description     aws.DynamoDbGlobalSecondaryIndexDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -17339,7 +17339,7 @@ func GetDynamoDbGlobalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _
 type DynamoDbLocalSecondaryIndex struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.DynamoDbLocalSecondaryIndexDescription `json:"description"`
+	Description     aws.DynamoDbLocalSecondaryIndexDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -17548,7 +17548,7 @@ func GetDynamoDbLocalSecondaryIndex(ctx context.Context, d *plugin.QueryData, _ 
 type DynamoDbStream struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.DynamoDbStreamDescription `json:"description"`
+	Description     aws.DynamoDbStreamDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -17757,7 +17757,7 @@ func GetDynamoDbStream(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type DynamoDbBackup struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.DynamoDbBackupDescription `json:"description"`
+	Description     aws.DynamoDbBackupDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -17982,7 +17982,7 @@ func GetDynamoDbBackup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type DynamoDbGlobalTable struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.DynamoDbGlobalTableDescription `json:"description"`
+	Description     aws.DynamoDbGlobalTableDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -18197,7 +18197,7 @@ func GetDynamoDbGlobalTable(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type DynamoDbTableExport struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.DynamoDbTableExportDescription `json:"description"`
+	Description     aws.DynamoDbTableExportDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -18438,7 +18438,7 @@ func GetDynamoDbTableExport(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type OAMLink struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.OAMLinkDescription `json:"description"`
+	Description     aws.OAMLinkDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -18657,7 +18657,7 @@ func GetOAMLink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type OAMSink struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.OAMSinkDescription `json:"description"`
+	Description     aws.OAMSinkDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -18870,7 +18870,7 @@ func GetOAMSink(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type EC2VolumeSnapshot struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.EC2VolumeSnapshotDescription `json:"description"`
+	Description     aws.EC2VolumeSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -19107,7 +19107,7 @@ func GetEC2VolumeSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type EC2ElasticIP struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.EC2ElasticIPDescription `json:"description"`
+	Description     aws.EC2ElasticIPDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -19314,7 +19314,7 @@ func GetEC2ElasticIP(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type EC2CustomerGateway struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.EC2CustomerGatewayDescription `json:"description"`
+	Description     aws.EC2CustomerGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -19535,7 +19535,7 @@ func GetEC2CustomerGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type EC2VerifiedAccessInstance struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.EC2VerifiedAccessInstanceDescription `json:"description"`
+	Description     aws.EC2VerifiedAccessInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -19750,7 +19750,7 @@ func GetEC2VerifiedAccessInstance(ctx context.Context, d *plugin.QueryData, _ *p
 type EC2VerifiedAccessEndpoint struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.EC2VerifiedAccessEndpointDescription `json:"description"`
+	Description     aws.EC2VerifiedAccessEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -19989,7 +19989,7 @@ func GetEC2VerifiedAccessEndpoint(ctx context.Context, d *plugin.QueryData, _ *p
 type EC2VerifiedAccessGroup struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.EC2VerifiedAccessGroupDescription `json:"description"`
+	Description     aws.EC2VerifiedAccessGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -20210,7 +20210,7 @@ func GetEC2VerifiedAccessGroup(ctx context.Context, d *plugin.QueryData, _ *plug
 type EC2VerifiedAccessTrustProvider struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.EC2VerifiedAccessTrustProviderDescription `json:"description"`
+	Description     aws.EC2VerifiedAccessTrustProviderDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -20433,7 +20433,7 @@ func GetEC2VerifiedAccessTrustProvider(ctx context.Context, d *plugin.QueryData,
 type EC2VPNGateway struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.EC2VPNGatewayDescription `json:"description"`
+	Description     aws.EC2VPNGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -20650,7 +20650,7 @@ func GetEC2VPNGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type EC2Volume struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.EC2VolumeDescription `json:"description"`
+	Description     aws.EC2VolumeDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -20889,7 +20889,7 @@ func GetEC2Volume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type EC2ClientVpnEndpoint struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.EC2ClientVpnEndpointDescription `json:"description"`
+	Description     aws.EC2ClientVpnEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -21137,7 +21137,7 @@ func GetEC2ClientVpnEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin
 type EC2Instance struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.EC2InstanceDescription `json:"description"`
+	Description     aws.EC2InstanceDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -21478,7 +21478,7 @@ func GetEC2Instance(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type EC2Vpc struct {
 	ResourceID      string                `json:"resource_id"`
 	PlatformID      string                `json:"platform_id"`
-	Description     aws.EC2VpcDescription `json:"description"`
+	Description     aws.EC2VpcDescription `json:"Description"`
 	Metadata        aws.Metadata          `json:"metadata"`
 	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
@@ -21703,7 +21703,7 @@ func GetEC2Vpc(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 type EC2NetworkInterface struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.EC2NetworkInterfaceDescription `json:"description"`
+	Description     aws.EC2NetworkInterfaceDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -21974,7 +21974,7 @@ func GetEC2NetworkInterface(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type EC2RegionalSettings struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.EC2RegionalSettingsDescription `json:"description"`
+	Description     aws.EC2RegionalSettingsDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -22183,7 +22183,7 @@ func GetEC2RegionalSettings(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type EC2Subnet struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.EC2SubnetDescription `json:"description"`
+	Description     aws.EC2SubnetDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -22420,7 +22420,7 @@ func GetEC2Subnet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type EC2VPCEndpoint struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.EC2VPCEndpointDescription `json:"description"`
+	Description     aws.EC2VPCEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -22653,7 +22653,7 @@ func GetEC2VPCEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type EC2SecurityGroup struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.EC2SecurityGroupDescription `json:"description"`
+	Description     aws.EC2SecurityGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -22876,7 +22876,7 @@ func GetEC2SecurityGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type EC2EIP struct {
 	ResourceID      string                `json:"resource_id"`
 	PlatformID      string                `json:"platform_id"`
-	Description     aws.EC2EIPDescription `json:"description"`
+	Description     aws.EC2EIPDescription `json:"Description"`
 	Metadata        aws.Metadata          `json:"metadata"`
 	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
@@ -23111,7 +23111,7 @@ func GetEC2EIP(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 type EC2InternetGateway struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.EC2InternetGatewayDescription `json:"description"`
+	Description     aws.EC2InternetGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -23322,7 +23322,7 @@ func GetEC2InternetGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type EC2NetworkAcl struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.EC2NetworkAclDescription `json:"description"`
+	Description     aws.EC2NetworkAclDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -23541,7 +23541,7 @@ func GetEC2NetworkAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type EC2VPNConnection struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.EC2VPNConnectionDescription `json:"description"`
+	Description     aws.EC2VPNConnectionDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -23770,7 +23770,7 @@ func GetEC2VPNConnection(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type EC2RouteTable struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.EC2RouteTableDescription `json:"description"`
+	Description     aws.EC2RouteTableDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -23989,7 +23989,7 @@ func GetEC2RouteTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type EC2NatGateway struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.EC2NatGatewayDescription `json:"description"`
+	Description     aws.EC2NatGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -24216,7 +24216,7 @@ func GetEC2NatGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type EC2LocalGateway struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.EC2LocalGatewayDescription `json:"description"`
+	Description     aws.EC2LocalGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -24425,7 +24425,7 @@ func GetEC2LocalGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type EC2Region struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.EC2RegionDescription `json:"description"`
+	Description     aws.EC2RegionDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -24638,7 +24638,7 @@ func GetEC2Region(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type EC2AvailabilityZone struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.EC2AvailabilityZoneDescription `json:"description"`
+	Description     aws.EC2AvailabilityZoneDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -24861,7 +24861,7 @@ func GetEC2AvailabilityZone(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type EC2FlowLog struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.EC2FlowLogDescription `json:"description"`
+	Description     aws.EC2FlowLogDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -25092,7 +25092,7 @@ func GetEC2FlowLog(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type EC2CapacityReservation struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.EC2CapacityReservationDescription `json:"description"`
+	Description     aws.EC2CapacityReservationDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -25335,7 +25335,7 @@ func GetEC2CapacityReservation(ctx context.Context, d *plugin.QueryData, _ *plug
 type EC2KeyPair struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.EC2KeyPairDescription `json:"description"`
+	Description     aws.EC2KeyPairDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -25550,7 +25550,7 @@ func GetEC2KeyPair(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type EC2AMI struct {
 	ResourceID      string                `json:"resource_id"`
 	PlatformID      string                `json:"platform_id"`
-	Description     aws.EC2AMIDescription `json:"description"`
+	Description     aws.EC2AMIDescription `json:"Description"`
 	Metadata        aws.Metadata          `json:"metadata"`
 	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
@@ -25807,7 +25807,7 @@ func GetEC2AMI(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 type EC2ReservedInstances struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.EC2ReservedInstancesDescription `json:"description"`
+	Description     aws.EC2ReservedInstancesDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -26050,7 +26050,7 @@ func GetEC2ReservedInstances(ctx context.Context, d *plugin.QueryData, _ *plugin
 type EC2CapacityReservationFleet struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.EC2CapacityReservationFleetDescription `json:"description"`
+	Description     aws.EC2CapacityReservationFleetDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -26259,7 +26259,7 @@ func GetEC2CapacityReservationFleet(ctx context.Context, d *plugin.QueryData, _ 
 type EC2Fleet struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.EC2FleetDescription `json:"description"`
+	Description     aws.EC2FleetDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -26468,7 +26468,7 @@ func GetEC2Fleet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type EC2Host struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.EC2HostDescription `json:"description"`
+	Description     aws.EC2HostDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -26677,7 +26677,7 @@ func GetEC2Host(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type EC2PlacementGroup struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.EC2PlacementGroupDescription `json:"description"`
+	Description     aws.EC2PlacementGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -26888,7 +26888,7 @@ func GetEC2PlacementGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type EC2TransitGateway struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.EC2TransitGatewayDescription `json:"description"`
+	Description     aws.EC2TransitGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -27125,7 +27125,7 @@ func GetEC2TransitGateway(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type EC2TransitGatewayRouteTable struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.EC2TransitGatewayRouteTableDescription `json:"description"`
+	Description     aws.EC2TransitGatewayRouteTableDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -27342,7 +27342,7 @@ func GetEC2TransitGatewayRouteTable(ctx context.Context, d *plugin.QueryData, _ 
 type EC2DhcpOptions struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.EC2DhcpOptionsDescription `json:"description"`
+	Description     aws.EC2DhcpOptionsDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -27561,7 +27561,7 @@ func GetEC2DhcpOptions(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type EC2EgressOnlyInternetGateway struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.EC2EgressOnlyInternetGatewayDescription `json:"description"`
+	Description     aws.EC2EgressOnlyInternetGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -27770,7 +27770,7 @@ func GetEC2EgressOnlyInternetGateway(ctx context.Context, d *plugin.QueryData, _
 type EC2VpcPeeringConnection struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.EC2VpcPeeringConnectionDescription `json:"description"`
+	Description     aws.EC2VpcPeeringConnectionDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -28013,7 +28013,7 @@ func GetEC2VpcPeeringConnection(ctx context.Context, d *plugin.QueryData, _ *plu
 type EC2SecurityGroupRule struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.EC2SecurityGroupRuleDescription `json:"description"`
+	Description     aws.EC2SecurityGroupRuleDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -28266,7 +28266,7 @@ func GetEC2SecurityGroupRule(ctx context.Context, d *plugin.QueryData, _ *plugin
 type EC2IpamPool struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.EC2IpamPoolDescription `json:"description"`
+	Description     aws.EC2IpamPoolDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -28475,7 +28475,7 @@ func GetEC2IpamPool(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type EC2Ipam struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.EC2IpamDescription `json:"description"`
+	Description     aws.EC2IpamDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -28684,7 +28684,7 @@ func GetEC2Ipam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type EC2VPCEndpointService struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.EC2VPCEndpointServiceDescription `json:"description"`
+	Description     aws.EC2VPCEndpointServiceDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -28917,7 +28917,7 @@ func GetEC2VPCEndpointService(ctx context.Context, d *plugin.QueryData, _ *plugi
 type EC2InstanceAvailability struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.EC2InstanceAvailabilityDescription `json:"description"`
+	Description     aws.EC2InstanceAvailabilityDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -29128,7 +29128,7 @@ func GetEC2InstanceAvailability(ctx context.Context, d *plugin.QueryData, _ *plu
 type EC2InstanceType struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.EC2InstanceTypeDescription `json:"description"`
+	Description     aws.EC2InstanceTypeDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -29373,7 +29373,7 @@ func GetEC2InstanceType(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type EC2ManagedPrefixList struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.EC2ManagedPrefixListDescription `json:"description"`
+	Description     aws.EC2ManagedPrefixListDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -29598,7 +29598,7 @@ func GetEC2ManagedPrefixList(ctx context.Context, d *plugin.QueryData, _ *plugin
 type EC2ManagedPrefixListEntry struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.EC2ManagedPrefixListEntryDescription `json:"description"`
+	Description     aws.EC2ManagedPrefixListEntryDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -29805,7 +29805,7 @@ func GetEC2ManagedPrefixListEntry(ctx context.Context, d *plugin.QueryData, _ *p
 type EC2TransitGatewayRoute struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.EC2TransitGatewayRouteDescription `json:"description"`
+	Description     aws.EC2TransitGatewayRouteDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -30022,7 +30022,7 @@ func GetEC2TransitGatewayRoute(ctx context.Context, d *plugin.QueryData, _ *plug
 type EC2TransitGatewayAttachment struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.EC2TransitGatewayAttachmentDescription `json:"description"`
+	Description     aws.EC2TransitGatewayAttachmentDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -30247,7 +30247,7 @@ func GetEC2TransitGatewayAttachment(ctx context.Context, d *plugin.QueryData, _ 
 type EC2LaunchTemplate struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.EC2LaunchTemplateDescription `json:"description"`
+	Description     aws.EC2LaunchTemplateDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -30468,7 +30468,7 @@ func GetEC2LaunchTemplate(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type EC2LaunchTemplateVersion struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.EC2LaunchTemplateVersionDescription `json:"description"`
+	Description     aws.EC2LaunchTemplateVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -30707,7 +30707,7 @@ func GetEC2LaunchTemplateVersion(ctx context.Context, d *plugin.QueryData, _ *pl
 type ElasticLoadBalancingV2SslPolicy struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingV2SslPolicyDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingV2SslPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -30919,7 +30919,7 @@ func GetElasticLoadBalancingV2SslPolicy(ctx context.Context, d *plugin.QueryData
 type ElasticLoadBalancingV2TargetGroup struct {
 	ResourceID      string                                           `json:"resource_id"`
 	PlatformID      string                                           `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingV2TargetGroupDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingV2TargetGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
 	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
@@ -31162,7 +31162,7 @@ func GetElasticLoadBalancingV2TargetGroup(ctx context.Context, d *plugin.QueryDa
 type ElasticLoadBalancingV2LoadBalancer struct {
 	ResourceID      string                                            `json:"resource_id"`
 	PlatformID      string                                            `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingV2LoadBalancerDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingV2LoadBalancerDescription `json:"Description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
 	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
@@ -31399,7 +31399,7 @@ func GetElasticLoadBalancingV2LoadBalancer(ctx context.Context, d *plugin.QueryD
 type ElasticLoadBalancingLoadBalancer struct {
 	ResourceID      string                                          `json:"resource_id"`
 	PlatformID      string                                          `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingLoadBalancerDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingLoadBalancerDescription `json:"Description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
 	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
@@ -31672,7 +31672,7 @@ func GetElasticLoadBalancingLoadBalancer(ctx context.Context, d *plugin.QueryDat
 type ElasticLoadBalancingV2Listener struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingV2ListenerDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingV2ListenerDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -31891,7 +31891,7 @@ func GetElasticLoadBalancingV2Listener(ctx context.Context, d *plugin.QueryData,
 type ElasticLoadBalancingV2Rule struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.ElasticLoadBalancingV2RuleDescription `json:"description"`
+	Description     aws.ElasticLoadBalancingV2RuleDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -32098,7 +32098,7 @@ func GetElasticLoadBalancingV2Rule(ctx context.Context, d *plugin.QueryData, _ *
 type FSXFileSystem struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.FSXFileSystemDescription `json:"description"`
+	Description     aws.FSXFileSystemDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -32343,7 +32343,7 @@ func GetFSXFileSystem(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type FSXStorageVirtualMachine struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.FSXStorageVirtualMachineDescription `json:"description"`
+	Description     aws.FSXStorageVirtualMachineDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -32554,7 +32554,7 @@ func GetFSXStorageVirtualMachine(ctx context.Context, d *plugin.QueryData, _ *pl
 type FSXTask struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.FSXTaskDescription `json:"description"`
+	Description     aws.FSXTaskDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -32763,7 +32763,7 @@ func GetFSXTask(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type FSXVolume struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.FSXVolumeDescription `json:"description"`
+	Description     aws.FSXVolumeDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -32974,7 +32974,7 @@ func GetFSXVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type FSXSnapshot struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.FSXSnapshotDescription `json:"description"`
+	Description     aws.FSXSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -33185,7 +33185,7 @@ func GetFSXSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type ApplicationAutoScalingTarget struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.ApplicationAutoScalingTargetDescription `json:"description"`
+	Description     aws.ApplicationAutoScalingTargetDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -33406,7 +33406,7 @@ func GetApplicationAutoScalingTarget(ctx context.Context, d *plugin.QueryData, _
 type ApplicationAutoScalingPolicy struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.ApplicationAutoScalingPolicyDescription `json:"description"`
+	Description     aws.ApplicationAutoScalingPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -33631,7 +33631,7 @@ func GetApplicationAutoScalingPolicy(ctx context.Context, d *plugin.QueryData, _
 type AutoScalingGroup struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.AutoScalingGroupDescription `json:"description"`
+	Description     aws.AutoScalingGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -33912,7 +33912,7 @@ func GetAutoScalingGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type AutoScalingLaunchConfiguration struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.AutoScalingLaunchConfigurationDescription `json:"description"`
+	Description     aws.AutoScalingLaunchConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -34159,7 +34159,7 @@ func GetAutoScalingLaunchConfiguration(ctx context.Context, d *plugin.QueryData,
 type CertificateManagerCertificate struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.CertificateManagerCertificateDescription `json:"description"`
+	Description     aws.CertificateManagerCertificateDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -34414,7 +34414,7 @@ func GetCertificateManagerCertificate(ctx context.Context, d *plugin.QueryData, 
 type CloudTrailTrail struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.CloudTrailTrailDescription `json:"description"`
+	Description     aws.CloudTrailTrailDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -34679,7 +34679,7 @@ func GetCloudTrailTrail(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type CloudTrailChannel struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.CloudTrailChannelDescription `json:"description"`
+	Description     aws.CloudTrailChannelDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -34898,7 +34898,7 @@ func GetCloudTrailChannel(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type CloudTrailEventDataStore struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.CloudTrailEventDataStoreDescription `json:"description"`
+	Description     aws.CloudTrailEventDataStoreDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -35123,7 +35123,7 @@ func GetCloudTrailEventDataStore(ctx context.Context, d *plugin.QueryData, _ *pl
 type CloudTrailImport struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.CloudTrailImportDescription `json:"description"`
+	Description     aws.CloudTrailImportDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -35346,7 +35346,7 @@ func GetCloudTrailImport(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type CloudTrailQuery struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.CloudTrailQueryDescription `json:"description"`
+	Description     aws.CloudTrailQueryDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -35575,7 +35575,7 @@ func GetCloudTrailQuery(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type CloudTrailTrailEvent struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.CloudTrailTrailEventDescription `json:"description"`
+	Description     aws.CloudTrailTrailEventDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -35793,7 +35793,7 @@ func GetCloudTrailTrailEvent(ctx context.Context, d *plugin.QueryData, _ *plugin
 type IAMAccount struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.IAMAccountDescription `json:"description"`
+	Description     aws.IAMAccountDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -36024,7 +36024,7 @@ func GetIAMAccount(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type IAMAccessAdvisor struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.IAMAccessAdvisorDescription `json:"description"`
+	Description     aws.IAMAccessAdvisorDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -36243,7 +36243,7 @@ func GetIAMAccessAdvisor(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type IAMAccountSummary struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.IAMAccountSummaryDescription `json:"description"`
+	Description     aws.IAMAccountSummaryDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -36510,7 +36510,7 @@ func GetIAMAccountSummary(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type IAMAccessKey struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.IAMAccessKeyDescription `json:"description"`
+	Description     aws.IAMAccessKeyDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -36729,7 +36729,7 @@ func GetIAMAccessKey(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type IAMSSHPublicKey struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.IAMSSHPublicKeyDescription `json:"description"`
+	Description     aws.IAMSSHPublicKeyDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -36942,7 +36942,7 @@ func GetIAMSSHPublicKey(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type IAMAccountPasswordPolicy struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.IAMAccountPasswordPolicyDescription `json:"description"`
+	Description     aws.IAMAccountPasswordPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -37165,7 +37165,7 @@ func GetIAMAccountPasswordPolicy(ctx context.Context, d *plugin.QueryData, _ *pl
 type IAMUser struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.IAMUserDescription `json:"description"`
+	Description     aws.IAMUserDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -37398,7 +37398,7 @@ func GetIAMUser(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type IAMGroup struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.IAMGroupDescription `json:"description"`
+	Description     aws.IAMGroupDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -37619,7 +37619,7 @@ func GetIAMGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type IAMRole struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.IAMRoleDescription `json:"description"`
+	Description     aws.IAMRoleDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -37854,7 +37854,7 @@ func GetIAMRole(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type IAMServerCertificate struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.IAMServerCertificateDescription `json:"description"`
+	Description     aws.IAMServerCertificateDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -38081,7 +38081,7 @@ func GetIAMServerCertificate(ctx context.Context, d *plugin.QueryData, _ *plugin
 type IAMPolicy struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.IAMPolicyDescription `json:"description"`
+	Description     aws.IAMPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -38308,7 +38308,7 @@ func GetIAMPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type IAMCredentialReport struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.IAMCredentialReportDescription `json:"description"`
+	Description     aws.IAMCredentialReportDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -38555,7 +38555,7 @@ func GetIAMCredentialReport(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type IAMVirtualMFADevice struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.IAMVirtualMFADeviceDescription `json:"description"`
+	Description     aws.IAMVirtualMFADeviceDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -38772,7 +38772,7 @@ func GetIAMVirtualMFADevice(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type IAMPolicyAttachment struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.IAMPolicyAttachmentDescription `json:"description"`
+	Description     aws.IAMPolicyAttachmentDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -38984,7 +38984,7 @@ func GetIAMPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type IAMSamlProvider struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.IAMSamlProviderDescription `json:"description"`
+	Description     aws.IAMSamlProviderDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -39197,7 +39197,7 @@ func GetIAMSamlProvider(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type IAMServiceSpecificCredential struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.IAMServiceSpecificCredentialDescription `json:"description"`
+	Description     aws.IAMServiceSpecificCredentialDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -39414,7 +39414,7 @@ func GetIAMServiceSpecificCredential(ctx context.Context, d *plugin.QueryData, _
 type IAMOpenIdConnectProvider struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.IAMOpenIdConnectProviderDescription `json:"description"`
+	Description     aws.IAMOpenIdConnectProviderDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -39627,7 +39627,7 @@ func GetIAMOpenIdConnectProvider(ctx context.Context, d *plugin.QueryData, _ *pl
 type RDSDBCluster struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.RDSDBClusterDescription `json:"description"`
+	Description     aws.RDSDBClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -39942,7 +39942,7 @@ func GetRDSDBCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type RDSDBClusterParameterGroup struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.RDSDBClusterParameterGroupDescription `json:"description"`
+	Description     aws.RDSDBClusterParameterGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -40159,7 +40159,7 @@ func GetRDSDBClusterParameterGroup(ctx context.Context, d *plugin.QueryData, _ *
 type RDSOptionGroup struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.RDSOptionGroupDescription `json:"description"`
+	Description     aws.RDSOptionGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -40382,7 +40382,7 @@ func GetRDSOptionGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type RDSDBParameterGroup struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.RDSDBParameterGroupDescription `json:"description"`
+	Description     aws.RDSDBParameterGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -40599,7 +40599,7 @@ func GetRDSDBParameterGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type RDSDBProxy struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.RDSDBProxyDescription `json:"description"`
+	Description     aws.RDSDBProxyDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -40836,7 +40836,7 @@ func GetRDSDBProxy(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type RDSDBSubnetGroup struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.RDSDBSubnetGroupDescription `json:"description"`
+	Description     aws.RDSDBSubnetGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -41055,7 +41055,7 @@ func GetRDSDBSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type RDSDBClusterSnapshot struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.RDSDBClusterSnapshotDescription `json:"description"`
+	Description     aws.RDSDBClusterSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -41304,7 +41304,7 @@ func GetRDSDBClusterSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin
 type RDSDBEventSubscription struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.RDSDBEventSubscriptionDescription `json:"description"`
+	Description     aws.RDSDBEventSubscriptionDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -41527,7 +41527,7 @@ func GetRDSDBEventSubscription(ctx context.Context, d *plugin.QueryData, _ *plug
 type RDSDBInstance struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.RDSDBInstanceDescription `json:"description"`
+	Description     aws.RDSDBInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -41872,7 +41872,7 @@ func GetRDSDBInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type RDSDBSnapshot struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.RDSDBSnapshotDescription `json:"description"`
+	Description     aws.RDSDBSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -42137,7 +42137,7 @@ func GetRDSDBSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type RDSGlobalCluster struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.RDSGlobalClusterDescription `json:"description"`
+	Description     aws.RDSGlobalClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -42346,7 +42346,7 @@ func GetRDSGlobalCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type RDSReservedDBInstance struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.RDSReservedDBInstanceDescription `json:"description"`
+	Description     aws.RDSReservedDBInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -42583,7 +42583,7 @@ func GetRDSReservedDBInstance(ctx context.Context, d *plugin.QueryData, _ *plugi
 type RDSDBInstanceAutomatedBackup struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.RDSDBInstanceAutomatedBackupDescription `json:"description"`
+	Description     aws.RDSDBInstanceAutomatedBackupDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -42841,7 +42841,7 @@ func GetRDSDBInstanceAutomatedBackup(ctx context.Context, d *plugin.QueryData, _
 type RDSDBEngineVersion struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.RDSDBEngineVersionDescription `json:"description"`
+	Description     aws.RDSDBEngineVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -43100,7 +43100,7 @@ func GetRDSDBEngineVersion(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type RDSDBRecommendation struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.RDSDBRecommendationDescription `json:"description"`
+	Description     aws.RDSDBRecommendationDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -43341,7 +43341,7 @@ func GetRDSDBRecommendation(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type RedshiftCluster struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.RedshiftClusterDescription `json:"description"`
+	Description     aws.RedshiftClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -43648,7 +43648,7 @@ func GetRedshiftCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type RedshiftEventSubscription struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.RedshiftEventSubscriptionDescription `json:"description"`
+	Description     aws.RedshiftEventSubscriptionDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -43875,7 +43875,7 @@ func GetRedshiftEventSubscription(ctx context.Context, d *plugin.QueryData, _ *p
 type RedshiftServerlessWorkgroup struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.RedshiftServerlessWorkgroupDescription `json:"description"`
+	Description     aws.RedshiftServerlessWorkgroupDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -44108,7 +44108,7 @@ func GetRedshiftServerlessWorkgroup(ctx context.Context, d *plugin.QueryData, _ 
 type RedshiftClusterParameterGroup struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.RedshiftClusterParameterGroupDescription `json:"description"`
+	Description     aws.RedshiftClusterParameterGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -44323,7 +44323,7 @@ func GetRedshiftClusterParameterGroup(ctx context.Context, d *plugin.QueryData, 
 type RedshiftSnapshot struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.RedshiftSnapshotDescription `json:"description"`
+	Description     aws.RedshiftSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -44596,7 +44596,7 @@ func GetRedshiftSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type RedshiftServerlessNamespace struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.RedshiftServerlessNamespaceDescription `json:"description"`
+	Description     aws.RedshiftServerlessNamespaceDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -44825,7 +44825,7 @@ func GetRedshiftServerlessNamespace(ctx context.Context, d *plugin.QueryData, _ 
 type RedshiftServerlessSnapshot struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.RedshiftServerlessSnapshotDescription `json:"description"`
+	Description     aws.RedshiftServerlessSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -45034,7 +45034,7 @@ func GetRedshiftServerlessSnapshot(ctx context.Context, d *plugin.QueryData, _ *
 type RedshiftSubnetGroup struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.RedshiftSubnetGroupDescription `json:"description"`
+	Description     aws.RedshiftSubnetGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -45251,7 +45251,7 @@ func GetRedshiftSubnetGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type SNSTopic struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.SNSTopicDescription `json:"description"`
+	Description     aws.SNSTopicDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -45500,7 +45500,7 @@ func GetSNSTopic(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type SNSSubscription struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.SNSSubscriptionDescription `json:"description"`
+	Description     aws.SNSSubscriptionDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -45719,7 +45719,7 @@ func GetSNSSubscription(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type SQSQueue struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.SQSQueueDescription `json:"description"`
+	Description     aws.SQSQueueDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -45950,7 +45950,7 @@ func GetSQSQueue(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type S3Bucket struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.S3BucketDescription `json:"description"`
+	Description     aws.S3BucketDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -46193,7 +46193,7 @@ func GetS3Bucket(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type S3AccountSetting struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.S3AccountSettingDescription `json:"description"`
+	Description     aws.S3AccountSettingDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -46404,7 +46404,7 @@ func GetS3AccountSetting(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type S3Object struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.S3ObjectDescription `json:"description"`
+	Description     aws.S3ObjectDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -46697,7 +46697,7 @@ func GetS3Object(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type S3BucketIntelligentTieringConfiguration struct {
 	ResourceID      string                                                 `json:"resource_id"`
 	PlatformID      string                                                 `json:"platform_id"`
-	Description     aws.S3BucketIntelligentTieringConfigurationDescription `json:"description"`
+	Description     aws.S3BucketIntelligentTieringConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                           `json:"metadata"`
 	DescribedBy     string                                                 `json:"described_by"`
 	ResourceType    string                                                 `json:"resource_type"`
@@ -46912,7 +46912,7 @@ func GetS3BucketIntelligentTieringConfiguration(ctx context.Context, d *plugin.Q
 type S3MultiRegionAccessPoint struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.S3MultiRegionAccessPointDescription `json:"description"`
+	Description     aws.S3MultiRegionAccessPointDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -47129,7 +47129,7 @@ func GetS3MultiRegionAccessPoint(ctx context.Context, d *plugin.QueryData, _ *pl
 type SageMakerEndpointConfiguration struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.SageMakerEndpointConfigurationDescription `json:"description"`
+	Description     aws.SageMakerEndpointConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -47348,7 +47348,7 @@ func GetSageMakerEndpointConfiguration(ctx context.Context, d *plugin.QueryData,
 type SageMakerApp struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.SageMakerAppDescription `json:"description"`
+	Description     aws.SageMakerAppDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -47575,7 +47575,7 @@ func GetSageMakerApp(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type SageMakerDomain struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.SageMakerDomainDescription `json:"description"`
+	Description     aws.SageMakerDomainDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -47818,7 +47818,7 @@ func GetSageMakerDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type SageMakerNotebookInstance struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.SageMakerNotebookInstanceDescription `json:"description"`
+	Description     aws.SageMakerNotebookInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -48065,7 +48065,7 @@ func GetSageMakerNotebookInstance(ctx context.Context, d *plugin.QueryData, _ *p
 type SageMakerModel struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.SageMakerModelDescription `json:"description"`
+	Description     aws.SageMakerModelDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -48290,7 +48290,7 @@ func GetSageMakerModel(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type SageMakerTrainingJob struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.SageMakerTrainingJobDescription `json:"description"`
+	Description     aws.SageMakerTrainingJobDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -48575,7 +48575,7 @@ func GetSageMakerTrainingJob(ctx context.Context, d *plugin.QueryData, _ *plugin
 type SecretsManagerSecret struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.SecretsManagerSecretDescription `json:"description"`
+	Description     aws.SecretsManagerSecretDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -48816,7 +48816,7 @@ func GetSecretsManagerSecret(ctx context.Context, d *plugin.QueryData, _ *plugin
 type SecurityHubHub struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.SecurityHubHubDescription `json:"description"`
+	Description     aws.SecurityHubHubDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -49029,7 +49029,7 @@ func GetSecurityHubHub(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type SecurityHubActionTarget struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.SecurityHubActionTargetDescription `json:"description"`
+	Description     aws.SecurityHubActionTargetDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -49240,7 +49240,7 @@ func GetSecurityHubActionTarget(ctx context.Context, d *plugin.QueryData, _ *plu
 type SecurityHubFinding struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.SecurityHubFindingDescription `json:"description"`
+	Description     aws.SecurityHubFindingDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -49519,7 +49519,7 @@ func GetSecurityHubFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type SecurityHubFindingAggregator struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.SecurityHubFindingAggregatorDescription `json:"description"`
+	Description     aws.SecurityHubFindingAggregatorDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -49730,7 +49730,7 @@ func GetSecurityHubFindingAggregator(ctx context.Context, d *plugin.QueryData, _
 type SecurityHubInsight struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.SecurityHubInsightDescription `json:"description"`
+	Description     aws.SecurityHubInsightDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -49943,7 +49943,7 @@ func GetSecurityHubInsight(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type SecurityHubMember struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.SecurityHubMemberDescription `json:"description"`
+	Description     aws.SecurityHubMemberDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -50162,7 +50162,7 @@ func GetSecurityHubMember(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type SecurityHubProduct struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.SecurityHubProductDescription `json:"description"`
+	Description     aws.SecurityHubProductDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -50385,7 +50385,7 @@ func GetSecurityHubProduct(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type SecurityHubStandardsControl struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.SecurityHubStandardsControlDescription `json:"description"`
+	Description     aws.SecurityHubStandardsControlDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -50608,7 +50608,7 @@ func GetSecurityHubStandardsControl(ctx context.Context, d *plugin.QueryData, _ 
 type SecurityHubStandardsSubscription struct {
 	ResourceID      string                                          `json:"resource_id"`
 	PlatformID      string                                          `json:"platform_id"`
-	Description     aws.SecurityHubStandardsSubscriptionDescription `json:"description"`
+	Description     aws.SecurityHubStandardsSubscriptionDescription `json:"Description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
 	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
@@ -50831,7 +50831,7 @@ func GetSecurityHubStandardsSubscription(ctx context.Context, d *plugin.QueryDat
 type SSMManagedInstance struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.SSMManagedInstanceDescription `json:"description"`
+	Description     aws.SSMManagedInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -51074,7 +51074,7 @@ func GetSSMManagedInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type SSMAssociation struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.SSMAssociationDescription `json:"description"`
+	Description     aws.SSMAssociationDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -51327,7 +51327,7 @@ func GetSSMAssociation(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type SSMDocument struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.SSMDocumentDescription `json:"description"`
+	Description     aws.SSMDocumentDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -51593,7 +51593,7 @@ func GetSSMDocument(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type SSMDocumentPermission struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.SSMDocumentPermissionDescription `json:"description"`
+	Description     aws.SSMDocumentPermissionDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -51806,7 +51806,7 @@ func GetSSMDocumentPermission(ctx context.Context, d *plugin.QueryData, _ *plugi
 type SSMInventory struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.SSMInventoryDescription `json:"description"`
+	Description     aws.SSMInventoryDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -52023,7 +52023,7 @@ func GetSSMInventory(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type SSMInventoryEntry struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.SSMInventoryEntryDescription `json:"description"`
+	Description     aws.SSMInventoryEntryDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -52238,7 +52238,7 @@ func GetSSMInventoryEntry(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type SSMMaintenanceWindow struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.SSMMaintenanceWindowDescription `json:"description"`
+	Description     aws.SSMMaintenanceWindowDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -52481,7 +52481,7 @@ func GetSSMMaintenanceWindow(ctx context.Context, d *plugin.QueryData, _ *plugin
 type SSMParameter struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.SSMParameterDescription `json:"description"`
+	Description     aws.SSMParameterDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -52714,7 +52714,7 @@ func GetSSMParameter(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type SSMPatchBaseline struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.SSMPatchBaselineDescription `json:"description"`
+	Description     aws.SSMPatchBaselineDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -52952,7 +52952,7 @@ func GetSSMPatchBaseline(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type SSMManagedInstanceCompliance struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.SSMManagedInstanceComplianceDescription `json:"description"`
+	Description     aws.SSMManagedInstanceComplianceDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -53173,7 +53173,7 @@ func GetSSMManagedInstanceCompliance(ctx context.Context, d *plugin.QueryData, _
 type SSMManagedInstancePatchState struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.SSMManagedInstancePatchStateDescription `json:"description"`
+	Description     aws.SSMManagedInstancePatchStateDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -53420,7 +53420,7 @@ func GetSSMManagedInstancePatchState(ctx context.Context, d *plugin.QueryData, _
 type ECSTaskDefinition struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ECSTaskDefinitionDescription `json:"description"`
+	Description     aws.ECSTaskDefinitionDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -53667,7 +53667,7 @@ func GetECSTaskDefinition(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type ECSCluster struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.ECSClusterDescription `json:"description"`
+	Description     aws.ECSClusterDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -53900,7 +53900,7 @@ func GetECSCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type ECSService struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.ECSServiceDescription `json:"description"`
+	Description     aws.ECSServiceDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -54167,7 +54167,7 @@ func GetECSService(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type ECSContainerInstance struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.ECSContainerInstanceDescription `json:"description"`
+	Description     aws.ECSContainerInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -54406,7 +54406,7 @@ func GetECSContainerInstance(ctx context.Context, d *plugin.QueryData, _ *plugin
 type ECSTaskSet struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.ECSTaskSetDescription `json:"description"`
+	Description     aws.ECSTaskSetDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -54615,7 +54615,7 @@ func GetECSTaskSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type ECSTask struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.ECSTaskDescription `json:"description"`
+	Description     aws.ECSTaskDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -54891,7 +54891,7 @@ func GetECSTask(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type EFSFileSystem struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.EFSFileSystemDescription `json:"description"`
+	Description     aws.EFSFileSystemDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -55127,7 +55127,7 @@ func GetEFSFileSystem(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type EFSAccessPoint struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.EFSAccessPointDescription `json:"description"`
+	Description     aws.EFSAccessPointDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -55350,7 +55350,7 @@ func GetEFSAccessPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type EFSMountTarget struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.EFSMountTargetDescription `json:"description"`
+	Description     aws.EFSMountTargetDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -55577,7 +55577,7 @@ func GetEFSMountTarget(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type EKSCluster struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.EKSClusterDescription `json:"description"`
+	Description     aws.EKSClusterDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -55812,7 +55812,7 @@ func GetEKSCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type EKSAddon struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.EKSAddonDescription `json:"description"`
+	Description     aws.EKSAddonDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -56037,7 +56037,7 @@ func GetEKSAddon(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type EKSNodegroup struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.EKSNodegroupDescription `json:"description"`
+	Description     aws.EKSNodegroupDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -56288,7 +56288,7 @@ func GetEKSNodegroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type EKSAddonVersion struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.EKSAddonVersionDescription `json:"description"`
+	Description     aws.EKSAddonVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -56505,7 +56505,7 @@ func GetEKSAddonVersion(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type EKSFargateProfile struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.EKSFargateProfileDescription `json:"description"`
+	Description     aws.EKSFargateProfileDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -56728,7 +56728,7 @@ func GetEKSFargateProfile(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type WAFv2WebACL struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.WAFv2WebACLDescription `json:"description"`
+	Description     aws.WAFv2WebACLDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -56964,7 +56964,7 @@ func GetWAFv2WebACL(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type WAFv2IPSet struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.WAFv2IPSetDescription `json:"description"`
+	Description     aws.WAFv2IPSetDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -57190,7 +57190,7 @@ func GetWAFv2IPSet(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type WAFv2RegexPatternSet struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.WAFv2RegexPatternSetDescription `json:"description"`
+	Description     aws.WAFv2RegexPatternSetDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -57412,7 +57412,7 @@ func GetWAFv2RegexPatternSet(ctx context.Context, d *plugin.QueryData, _ *plugin
 type WAFv2RuleGroup struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.WAFv2RuleGroupDescription `json:"description"`
+	Description     aws.WAFv2RuleGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -57640,7 +57640,7 @@ func GetWAFv2RuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type KMSKey struct {
 	ResourceID      string                `json:"resource_id"`
 	PlatformID      string                `json:"platform_id"`
-	Description     aws.KMSKeyDescription `json:"description"`
+	Description     aws.KMSKeyDescription `json:"Description"`
 	Metadata        aws.Metadata          `json:"metadata"`
 	DescribedBy     string                `json:"described_by"`
 	ResourceType    string                `json:"resource_type"`
@@ -57879,7 +57879,7 @@ func GetKMSKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 type KMSKeyRotation struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.KMSKeyRotationDescription `json:"description"`
+	Description     aws.KMSKeyRotationDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -58090,7 +58090,7 @@ func GetKMSKeyRotation(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type KMSAlias struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.KMSAliasDescription `json:"description"`
+	Description     aws.KMSAliasDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -58305,7 +58305,7 @@ func GetKMSAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type LambdaFunction struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.LambdaFunctionDescription `json:"description"`
+	Description     aws.LambdaFunctionDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -58584,7 +58584,7 @@ func GetLambdaFunction(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type LambdaFunctionVersion struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.LambdaFunctionVersionDescription `json:"description"`
+	Description     aws.LambdaFunctionVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -58865,7 +58865,7 @@ func GetLambdaFunctionVersion(ctx context.Context, d *plugin.QueryData, _ *plugi
 type LambdaAlias struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.LambdaAliasDescription `json:"description"`
+	Description     aws.LambdaAliasDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -59087,7 +59087,7 @@ func GetLambdaAlias(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type LambdaLayer struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.LambdaLayerDescription `json:"description"`
+	Description     aws.LambdaLayerDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -59310,7 +59310,7 @@ func GetLambdaLayer(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type LambdaLayerVersion struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.LambdaLayerVersionDescription `json:"description"`
+	Description     aws.LambdaLayerVersionDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -59539,7 +59539,7 @@ func GetLambdaLayerVersion(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type S3AccessPoint struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.S3AccessPointDescription `json:"description"`
+	Description     aws.S3AccessPointDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -59767,7 +59767,7 @@ func GetS3AccessPoint(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type CostExplorerByAccountMonthly struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.CostExplorerByAccountMonthlyDescription `json:"description"`
+	Description     aws.CostExplorerByAccountMonthlyDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -59972,7 +59972,7 @@ func GetCostExplorerByAccountMonthly(ctx context.Context, d *plugin.QueryData, _
 type CostExplorerByServiceMonthly struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.CostExplorerByServiceMonthlyDescription `json:"description"`
+	Description     aws.CostExplorerByServiceMonthlyDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -60177,7 +60177,7 @@ func GetCostExplorerByServiceMonthly(ctx context.Context, d *plugin.QueryData, _
 type CostExplorerByRecordTypeMonthly struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.CostExplorerByRecordTypeMonthlyDescription `json:"description"`
+	Description     aws.CostExplorerByRecordTypeMonthlyDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -60384,7 +60384,7 @@ func GetCostExplorerByRecordTypeMonthly(ctx context.Context, d *plugin.QueryData
 type CostExplorerByServiceUsageTypeMonthly struct {
 	ResourceID      string                                               `json:"resource_id"`
 	PlatformID      string                                               `json:"platform_id"`
-	Description     aws.CostExplorerByServiceUsageTypeMonthlyDescription `json:"description"`
+	Description     aws.CostExplorerByServiceUsageTypeMonthlyDescription `json:"Description"`
 	Metadata        aws.Metadata                                         `json:"metadata"`
 	DescribedBy     string                                               `json:"described_by"`
 	ResourceType    string                                               `json:"resource_type"`
@@ -60591,7 +60591,7 @@ func GetCostExplorerByServiceUsageTypeMonthly(ctx context.Context, d *plugin.Que
 type CostExplorerForcastMonthly struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.CostExplorerForcastMonthlyDescription `json:"description"`
+	Description     aws.CostExplorerForcastMonthlyDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -60800,7 +60800,7 @@ func GetCostExplorerForcastMonthly(ctx context.Context, d *plugin.QueryData, _ *
 type CostExplorerByAccountDaily struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.CostExplorerByAccountDailyDescription `json:"description"`
+	Description     aws.CostExplorerByAccountDailyDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -61005,7 +61005,7 @@ func GetCostExplorerByAccountDaily(ctx context.Context, d *plugin.QueryData, _ *
 type CostExplorerByServiceDaily struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.CostExplorerByServiceDailyDescription `json:"description"`
+	Description     aws.CostExplorerByServiceDailyDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -61212,7 +61212,7 @@ func GetCostExplorerByServiceDaily(ctx context.Context, d *plugin.QueryData, _ *
 type CostExplorerByRecordTypeDaily struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.CostExplorerByRecordTypeDailyDescription `json:"description"`
+	Description     aws.CostExplorerByRecordTypeDailyDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -61419,7 +61419,7 @@ func GetCostExplorerByRecordTypeDaily(ctx context.Context, d *plugin.QueryData, 
 type CostExplorerByServiceUsageTypeDaily struct {
 	ResourceID      string                                             `json:"resource_id"`
 	PlatformID      string                                             `json:"platform_id"`
-	Description     aws.CostExplorerByServiceUsageTypeDailyDescription `json:"description"`
+	Description     aws.CostExplorerByServiceUsageTypeDailyDescription `json:"Description"`
 	Metadata        aws.Metadata                                       `json:"metadata"`
 	DescribedBy     string                                             `json:"described_by"`
 	ResourceType    string                                             `json:"resource_type"`
@@ -61626,7 +61626,7 @@ func GetCostExplorerByServiceUsageTypeDaily(ctx context.Context, d *plugin.Query
 type CostExplorerForcastDaily struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.CostExplorerForcastDailyDescription `json:"description"`
+	Description     aws.CostExplorerForcastDailyDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -61835,7 +61835,7 @@ func GetCostExplorerForcastDaily(ctx context.Context, d *plugin.QueryData, _ *pl
 type ECRRepository struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.ECRRepositoryDescription `json:"description"`
+	Description     aws.ECRRepositoryDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -62070,7 +62070,7 @@ func GetECRRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type ECRImage struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.ECRImageDescription `json:"description"`
+	Description     aws.ECRImageDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -62297,7 +62297,7 @@ func GetECRImage(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type ECRPublicRepository struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.ECRPublicRepositoryDescription `json:"description"`
+	Description     aws.ECRPublicRepositoryDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -62518,7 +62518,7 @@ func GetECRPublicRepository(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type ECRPublicRegistry struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ECRPublicRegistryDescription `json:"description"`
+	Description     aws.ECRPublicRegistryDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -62727,7 +62727,7 @@ func GetECRPublicRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type ECRRegistry struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.ECRRegistryDescription `json:"description"`
+	Description     aws.ECRRegistryDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -62936,7 +62936,7 @@ func GetECRRegistry(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type ECRRegistryScanningConfiguration struct {
 	ResourceID      string                                          `json:"resource_id"`
 	PlatformID      string                                          `json:"platform_id"`
-	Description     aws.ECRRegistryScanningConfigurationDescription `json:"description"`
+	Description     aws.ECRRegistryScanningConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                                    `json:"metadata"`
 	DescribedBy     string                                          `json:"described_by"`
 	ResourceType    string                                          `json:"resource_type"`
@@ -63139,7 +63139,7 @@ func GetECRRegistryScanningConfiguration(ctx context.Context, d *plugin.QueryDat
 type EventBridgeBus struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.EventBridgeBusDescription `json:"description"`
+	Description     aws.EventBridgeBusDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -63352,7 +63352,7 @@ func GetEventBridgeBus(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type EventBridgeRule struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.EventBridgeRuleDescription `json:"description"`
+	Description     aws.EventBridgeRuleDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -63579,7 +63579,7 @@ func GetEventBridgeRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type AppStreamApplication struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.AppStreamApplicationDescription `json:"description"`
+	Description     aws.AppStreamApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -63790,7 +63790,7 @@ func GetAppStreamApplication(ctx context.Context, d *plugin.QueryData, _ *plugin
 type AppStreamStack struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.AppStreamStackDescription `json:"description"`
+	Description     aws.AppStreamStackDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -64001,7 +64001,7 @@ func GetAppStreamStack(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type AppStreamFleet struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.AppStreamFleetDescription `json:"description"`
+	Description     aws.AppStreamFleetDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -64258,7 +64258,7 @@ func GetAppStreamFleet(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type AppStreamImage struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.AppStreamImageDescription `json:"description"`
+	Description     aws.AppStreamImageDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -64499,7 +64499,7 @@ func GetAppStreamImage(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type AthenaWorkGroup struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.AthenaWorkGroupDescription `json:"description"`
+	Description     aws.AthenaWorkGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -64736,7 +64736,7 @@ func GetAthenaWorkGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type AthenaQueryExecution struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.AthenaQueryExecutionDescription `json:"description"`
+	Description     aws.AthenaQueryExecutionDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -65006,7 +65006,7 @@ func GetAthenaQueryExecution(ctx context.Context, d *plugin.QueryData, _ *plugin
 type KinesisStream struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.KinesisStreamDescription `json:"description"`
+	Description     aws.KinesisStreamDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -65237,7 +65237,7 @@ func GetKinesisStream(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type KinesisVideoStream struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.KinesisVideoStreamDescription `json:"description"`
+	Description     aws.KinesisVideoStreamDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -65462,7 +65462,7 @@ func GetKinesisVideoStream(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type KinesisConsumer struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.KinesisConsumerDescription `json:"description"`
+	Description     aws.KinesisConsumerDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -65677,7 +65677,7 @@ func GetKinesisConsumer(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type KinesisAnalyticsV2Application struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.KinesisAnalyticsV2ApplicationDescription `json:"description"`
+	Description     aws.KinesisAnalyticsV2ApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -65906,7 +65906,7 @@ func GetKinesisAnalyticsV2Application(ctx context.Context, d *plugin.QueryData, 
 type GlacierVault struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.GlacierVaultDescription `json:"description"`
+	Description     aws.GlacierVaultDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -66133,7 +66133,7 @@ func GetGlacierVault(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type WorkspacesWorkspace struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.WorkspacesWorkspaceDescription `json:"description"`
+	Description     aws.WorkspacesWorkspaceDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -66372,7 +66372,7 @@ func GetWorkspacesWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type WorkspacesBundle struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.WorkspacesBundleDescription `json:"description"`
+	Description     aws.WorkspacesBundleDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -66583,7 +66583,7 @@ func GetWorkspacesBundle(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type KeyspacesKeyspace struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.KeyspacesKeyspaceDescription `json:"description"`
+	Description     aws.KeyspacesKeyspaceDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -66792,7 +66792,7 @@ func GetKeyspacesKeyspace(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type KeyspacesTable struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.KeyspacesTableDescription `json:"description"`
+	Description     aws.KeyspacesTableDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -67001,7 +67001,7 @@ func GetKeyspacesTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type GrafanaWorkspace struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.GrafanaWorkspaceDescription `json:"description"`
+	Description     aws.GrafanaWorkspaceDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -67214,7 +67214,7 @@ func GetGrafanaWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type AMPWorkspace struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.AMPWorkspaceDescription `json:"description"`
+	Description     aws.AMPWorkspaceDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -67425,7 +67425,7 @@ func GetAMPWorkspace(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type KafkaCluster struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.KafkaClusterDescription `json:"description"`
+	Description     aws.KafkaClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -67636,7 +67636,7 @@ func GetKafkaCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type MWAAEnvironment struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.MWAAEnvironmentDescription `json:"description"`
+	Description     aws.MWAAEnvironmentDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -67847,7 +67847,7 @@ func GetMWAAEnvironment(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type MemoryDbCluster struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.MemoryDbClusterDescription `json:"description"`
+	Description     aws.MemoryDbClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -68056,7 +68056,7 @@ func GetMemoryDbCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type MQBroker struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.MQBrokerDescription `json:"description"`
+	Description     aws.MQBrokerDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -68327,7 +68327,7 @@ func GetMQBroker(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type NeptuneDatabase struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.NeptuneDatabaseDescription `json:"description"`
+	Description     aws.NeptuneDatabaseDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -68538,7 +68538,7 @@ func GetNeptuneDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type NeptuneDatabaseCluster struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.NeptuneDatabaseClusterDescription `json:"description"`
+	Description     aws.NeptuneDatabaseClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -68818,7 +68818,7 @@ func GetNeptuneDatabaseCluster(ctx context.Context, d *plugin.QueryData, _ *plug
 type NeptuneDatabaseClusterSnapshot struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.NeptuneDatabaseClusterSnapshotDescription `json:"description"`
+	Description     aws.NeptuneDatabaseClusterSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -69063,7 +69063,7 @@ func GetNeptuneDatabaseClusterSnapshot(ctx context.Context, d *plugin.QueryData,
 type OpenSearchDomain struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.OpenSearchDomainDescription `json:"description"`
+	Description     aws.OpenSearchDomainDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -69318,7 +69318,7 @@ func GetOpenSearchDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type SESConfigurationSet struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.SESConfigurationSetDescription `json:"description"`
+	Description     aws.SESConfigurationSetDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -69527,7 +69527,7 @@ func GetSESConfigurationSet(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type SESIdentity struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.SESIdentityDescription `json:"description"`
+	Description     aws.SESIdentityDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -69737,7 +69737,7 @@ func GetSESIdentity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type SESv2EmailIdentity struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.SESv2EmailIdentityDescription `json:"description"`
+	Description     aws.SESv2EmailIdentityDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -69946,7 +69946,7 @@ func GetSESv2EmailIdentity(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type CloudFormationStack struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.CloudFormationStackDescription `json:"description"`
+	Description     aws.CloudFormationStackDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -70191,7 +70191,7 @@ func GetCloudFormationStack(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type CloudFormationStackSet struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.CloudFormationStackSetDescription `json:"description"`
+	Description     aws.CloudFormationStackSetDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -70432,7 +70432,7 @@ func GetCloudFormationStackSet(ctx context.Context, d *plugin.QueryData, _ *plug
 type CloudFormationStackResource struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.CloudFormationStackResourceDescription `json:"description"`
+	Description     aws.CloudFormationStackResourceDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -70658,7 +70658,7 @@ func GetCloudFormationStackResource(ctx context.Context, d *plugin.QueryData, _ 
 type CodeCommitRepository struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.CodeCommitRepositoryDescription `json:"description"`
+	Description     aws.CodeCommitRepositoryDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -70883,7 +70883,7 @@ func GetCodeCommitRepository(ctx context.Context, d *plugin.QueryData, _ *plugin
 type CodePipelinePipeline struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.CodePipelinePipelineDescription `json:"description"`
+	Description     aws.CodePipelinePipelineDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -71108,7 +71108,7 @@ func GetCodePipelinePipeline(ctx context.Context, d *plugin.QueryData, _ *plugin
 type DirectoryServiceDirectory struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.DirectoryServiceDirectoryDescription `json:"description"`
+	Description     aws.DirectoryServiceDirectoryDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -71373,7 +71373,7 @@ func GetDirectoryServiceDirectory(ctx context.Context, d *plugin.QueryData, _ *p
 type DirectoryServiceCertificate struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.DirectoryServiceCertificateDescription `json:"description"`
+	Description     aws.DirectoryServiceCertificateDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -71597,7 +71597,7 @@ func GetDirectoryServiceCertificate(ctx context.Context, d *plugin.QueryData, _ 
 type DirectoryServiceLogSubscription struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.DirectoryServiceLogSubscriptionDescription `json:"description"`
+	Description     aws.DirectoryServiceLogSubscriptionDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -71808,7 +71808,7 @@ func GetDirectoryServiceLogSubscription(ctx context.Context, d *plugin.QueryData
 type SSOAdminInstance struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.SSOAdminInstanceDescription `json:"description"`
+	Description     aws.SSOAdminInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -72017,7 +72017,7 @@ func GetSSOAdminInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type SSOAdminAccountAssignment struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.SSOAdminAccountAssignmentDescription `json:"description"`
+	Description     aws.SSOAdminAccountAssignmentDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -72230,7 +72230,7 @@ func GetSSOAdminAccountAssignment(ctx context.Context, d *plugin.QueryData, _ *p
 type SSOAdminPermissionSet struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.SSOAdminPermissionSetDescription `json:"description"`
+	Description     aws.SSOAdminPermissionSetDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -72453,7 +72453,7 @@ func GetSSOAdminPermissionSet(ctx context.Context, d *plugin.QueryData, _ *plugi
 type SSOAdminPolicyAttachment struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.SSOAdminPolicyAttachmentDescription `json:"description"`
+	Description     aws.SSOAdminPolicyAttachmentDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -72666,7 +72666,7 @@ func GetSSOAdminPolicyAttachment(ctx context.Context, d *plugin.QueryData, _ *pl
 type UserEffectiveAccess struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.UserEffectiveAccessDescription `json:"description"`
+	Description     aws.UserEffectiveAccessDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -72881,7 +72881,7 @@ func GetUserEffectiveAccess(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type WAFRule struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.WAFRuleDescription `json:"description"`
+	Description     aws.WAFRuleDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -73096,7 +73096,7 @@ func GetWAFRule(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type WAFRegionalRule struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.WAFRegionalRuleDescription `json:"description"`
+	Description     aws.WAFRegionalRuleDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -73311,7 +73311,7 @@ func GetWAFRegionalRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type WAFRateBasedRule struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.WAFRateBasedRuleDescription `json:"description"`
+	Description     aws.WAFRateBasedRuleDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -73532,7 +73532,7 @@ func GetWAFRateBasedRule(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type WAFRuleGroup struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.WAFRuleGroupDescription `json:"description"`
+	Description     aws.WAFRuleGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -73749,7 +73749,7 @@ func GetWAFRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type WAFWebAcl struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.WAFWebAclDescription `json:"description"`
+	Description     aws.WAFWebAclDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -73970,7 +73970,7 @@ func GetWAFWebAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type WellArchitectedWorkload struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.WellArchitectedWorkloadDescription `json:"description"`
+	Description     aws.WellArchitectedWorkloadDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -74221,7 +74221,7 @@ func GetWellArchitectedWorkload(ctx context.Context, d *plugin.QueryData, _ *plu
 type WellArchitectedAnswer struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.WellArchitectedAnswerDescription `json:"description"`
+	Description     aws.WellArchitectedAnswerDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -74462,7 +74462,7 @@ func GetWellArchitectedAnswer(ctx context.Context, d *plugin.QueryData, _ *plugi
 type WellArchitectedCheckDetail struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.WellArchitectedCheckDetailDescription `json:"description"`
+	Description     aws.WellArchitectedCheckDetailDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -74695,7 +74695,7 @@ func GetWellArchitectedCheckDetail(ctx context.Context, d *plugin.QueryData, _ *
 type WellArchitectedCheckSummary struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.WellArchitectedCheckSummaryDescription `json:"description"`
+	Description     aws.WellArchitectedCheckSummaryDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -74924,7 +74924,7 @@ func GetWellArchitectedCheckSummary(ctx context.Context, d *plugin.QueryData, _ 
 type WellArchitectedCheckConsolidatedReport struct {
 	ResourceID      string                                                `json:"resource_id"`
 	PlatformID      string                                                `json:"platform_id"`
-	Description     aws.WellArchitectedCheckConsolidatedReportDescription `json:"description"`
+	Description     aws.WellArchitectedCheckConsolidatedReportDescription `json:"Description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
 	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
@@ -75147,7 +75147,7 @@ func GetWellArchitectedCheckConsolidatedReport(ctx context.Context, d *plugin.Qu
 type WellArchitectedLens struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.WellArchitectedLensDescription `json:"description"`
+	Description     aws.WellArchitectedLensDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -75374,7 +75374,7 @@ func GetWellArchitectedLens(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type WellArchitectedLensReview struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.WellArchitectedLensReviewDescription `json:"description"`
+	Description     aws.WellArchitectedLensReviewDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -75597,7 +75597,7 @@ func GetWellArchitectedLensReview(ctx context.Context, d *plugin.QueryData, _ *p
 type WellArchitectedLensReviewImprovement struct {
 	ResourceID      string                                              `json:"resource_id"`
 	PlatformID      string                                              `json:"platform_id"`
-	Description     aws.WellArchitectedLensReviewImprovementDescription `json:"description"`
+	Description     aws.WellArchitectedLensReviewImprovementDescription `json:"Description"`
 	Metadata        aws.Metadata                                        `json:"metadata"`
 	DescribedBy     string                                              `json:"described_by"`
 	ResourceType    string                                              `json:"resource_type"`
@@ -75822,7 +75822,7 @@ func GetWellArchitectedLensReviewImprovement(ctx context.Context, d *plugin.Quer
 type WellArchitectedLensReviewReport struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.WellArchitectedLensReviewReportDescription `json:"description"`
+	Description     aws.WellArchitectedLensReviewReportDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -76035,7 +76035,7 @@ func GetWellArchitectedLensReviewReport(ctx context.Context, d *plugin.QueryData
 type WellArchitectedLensShare struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.WellArchitectedLensShareDescription `json:"description"`
+	Description     aws.WellArchitectedLensShareDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -76254,7 +76254,7 @@ func GetWellArchitectedLensShare(ctx context.Context, d *plugin.QueryData, _ *pl
 type WellArchitectedMilestone struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.WellArchitectedMilestoneDescription `json:"description"`
+	Description     aws.WellArchitectedMilestoneDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -76467,7 +76467,7 @@ func GetWellArchitectedMilestone(ctx context.Context, d *plugin.QueryData, _ *pl
 type WellArchitectedNotification struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.WellArchitectedNotificationDescription `json:"description"`
+	Description     aws.WellArchitectedNotificationDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -76684,7 +76684,7 @@ func GetWellArchitectedNotification(ctx context.Context, d *plugin.QueryData, _ 
 type WellArchitectedShareInvitation struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.WellArchitectedShareInvitationDescription `json:"description"`
+	Description     aws.WellArchitectedShareInvitationDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -76905,7 +76905,7 @@ func GetWellArchitectedShareInvitation(ctx context.Context, d *plugin.QueryData,
 type WellArchitectedWorkloadShare struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.WellArchitectedWorkloadShareDescription `json:"description"`
+	Description     aws.WellArchitectedWorkloadShareDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -77124,7 +77124,7 @@ func GetWellArchitectedWorkloadShare(ctx context.Context, d *plugin.QueryData, _
 type WAFRegionalWebAcl struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.WAFRegionalWebAclDescription `json:"description"`
+	Description     aws.WAFRegionalWebAclDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -77349,7 +77349,7 @@ func GetWAFRegionalWebAcl(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type WAFRegionalRuleGroup struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.WAFRegionalRuleGroupDescription `json:"description"`
+	Description     aws.WAFRegionalRuleGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -77570,7 +77570,7 @@ func GetWAFRegionalRuleGroup(ctx context.Context, d *plugin.QueryData, _ *plugin
 type Route53HostedZone struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.Route53HostedZoneDescription `json:"description"`
+	Description     aws.Route53HostedZoneDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -77803,7 +77803,7 @@ func GetRoute53HostedZone(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type Route53HealthCheck struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.Route53HealthCheckDescription `json:"description"`
+	Description     aws.Route53HealthCheckDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -78026,7 +78026,7 @@ func GetRoute53HealthCheck(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type Route53ResolverResolverRule struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.Route53ResolverResolverRuleDescription `json:"description"`
+	Description     aws.Route53ResolverResolverRuleDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -78265,7 +78265,7 @@ func GetRoute53ResolverResolverRule(ctx context.Context, d *plugin.QueryData, _ 
 type Route53ResolverEndpoint struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.Route53ResolverEndpointDescription `json:"description"`
+	Description     aws.Route53ResolverEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -78498,7 +78498,7 @@ func GetRoute53ResolverEndpoint(ctx context.Context, d *plugin.QueryData, _ *plu
 type Route53Domain struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.Route53DomainDescription `json:"description"`
+	Description     aws.Route53DomainDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -78749,7 +78749,7 @@ func GetRoute53Domain(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type Route53Record struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.Route53RecordDescription `json:"description"`
+	Description     aws.Route53RecordDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -78980,7 +78980,7 @@ func GetRoute53Record(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type Route53TrafficPolicy struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.Route53TrafficPolicyDescription `json:"description"`
+	Description     aws.Route53TrafficPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -79197,7 +79197,7 @@ func GetRoute53TrafficPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin
 type Route53TrafficPolicyInstance struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.Route53TrafficPolicyInstanceDescription `json:"description"`
+	Description     aws.Route53TrafficPolicyInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -79420,7 +79420,7 @@ func GetRoute53TrafficPolicyInstance(ctx context.Context, d *plugin.QueryData, _
 type Route53QueryLog struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.Route53QueryLogDescription `json:"description"`
+	Description     aws.Route53QueryLogDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -79631,7 +79631,7 @@ func GetRoute53QueryLog(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type Route53ResolverQueryLogConfig struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.Route53ResolverQueryLogConfigDescription `json:"description"`
+	Description     aws.Route53ResolverQueryLogConfigDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -79856,7 +79856,7 @@ func GetRoute53ResolverQueryLogConfig(ctx context.Context, d *plugin.QueryData, 
 type BatchComputeEnvironment struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.BatchComputeEnvironmentDescription `json:"description"`
+	Description     aws.BatchComputeEnvironmentDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -80069,7 +80069,7 @@ func GetBatchComputeEnvironment(ctx context.Context, d *plugin.QueryData, _ *plu
 type BatchJob struct {
 	ResourceID      string                  `json:"resource_id"`
 	PlatformID      string                  `json:"platform_id"`
-	Description     aws.BatchJobDescription `json:"description"`
+	Description     aws.BatchJobDescription `json:"Description"`
 	Metadata        aws.Metadata            `json:"metadata"`
 	DescribedBy     string                  `json:"described_by"`
 	ResourceType    string                  `json:"resource_type"`
@@ -80280,7 +80280,7 @@ func GetBatchJob(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 type BatchJobQueue struct {
 	ResourceID      string                       `json:"resource_id"`
 	PlatformID      string                       `json:"platform_id"`
-	Description     aws.BatchJobQueueDescription `json:"description"`
+	Description     aws.BatchJobQueueDescription `json:"Description"`
 	Metadata        aws.Metadata                 `json:"metadata"`
 	DescribedBy     string                       `json:"described_by"`
 	ResourceType    string                       `json:"resource_type"`
@@ -80494,7 +80494,7 @@ func GetBatchJobQueue(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 type CodeArtifactRepository struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.CodeArtifactRepositoryDescription `json:"description"`
+	Description     aws.CodeArtifactRepositoryDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -80723,7 +80723,7 @@ func GetCodeArtifactRepository(ctx context.Context, d *plugin.QueryData, _ *plug
 type CodeArtifactDomain struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.CodeArtifactDomainDescription `json:"description"`
+	Description     aws.CodeArtifactDomainDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -80950,7 +80950,7 @@ func GetCodeArtifactDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type CodeDeployDeploymentGroup struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.CodeDeployDeploymentGroupDescription `json:"description"`
+	Description     aws.CodeDeployDeploymentGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -81203,7 +81203,7 @@ func GetCodeDeployDeploymentGroup(ctx context.Context, d *plugin.QueryData, _ *p
 type CodeDeployApplication struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.CodeDeployApplicationDescription `json:"description"`
+	Description     aws.CodeDeployApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -81424,7 +81424,7 @@ func GetCodeDeployApplication(ctx context.Context, d *plugin.QueryData, _ *plugi
 type CodeDeployDeploymentConfig struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.CodeDeployDeploymentConfigDescription `json:"description"`
+	Description     aws.CodeDeployDeploymentConfigDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -81642,7 +81642,7 @@ func GetCodeDeployDeploymentConfig(ctx context.Context, d *plugin.QueryData, _ *
 type CodeStarProject struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.CodeStarProjectDescription `json:"description"`
+	Description     aws.CodeStarProjectDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -81855,7 +81855,7 @@ func GetCodeStarProject(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type DirectConnectConnection struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.DirectConnectConnectionDescription `json:"description"`
+	Description     aws.DirectConnectConnectionDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -82066,7 +82066,7 @@ func GetDirectConnectConnection(ctx context.Context, d *plugin.QueryData, _ *plu
 type DirectConnectGateway struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.DirectConnectGatewayDescription `json:"description"`
+	Description     aws.DirectConnectGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -82277,7 +82277,7 @@ func GetDirectConnectGateway(ctx context.Context, d *plugin.QueryData, _ *plugin
 type NetworkFirewallFirewall struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.NetworkFirewallFirewallDescription `json:"description"`
+	Description     aws.NetworkFirewallFirewallDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -82511,7 +82511,7 @@ func GetNetworkFirewallFirewall(ctx context.Context, d *plugin.QueryData, _ *plu
 type NetworkFirewallFirewallPolicy struct {
 	ResourceID      string                                       `json:"resource_id"`
 	PlatformID      string                                       `json:"platform_id"`
-	Description     aws.NetworkFirewallFirewallPolicyDescription `json:"description"`
+	Description     aws.NetworkFirewallFirewallPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                                 `json:"metadata"`
 	DescribedBy     string                                       `json:"described_by"`
 	ResourceType    string                                       `json:"resource_type"`
@@ -82740,7 +82740,7 @@ func GetNetworkFirewallFirewallPolicy(ctx context.Context, d *plugin.QueryData, 
 type NetworkFirewallRuleGroup struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.NetworkFirewallRuleGroupDescription `json:"description"`
+	Description     aws.NetworkFirewallRuleGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -82971,7 +82971,7 @@ func GetNetworkFirewallRuleGroup(ctx context.Context, d *plugin.QueryData, _ *pl
 type OpsWorksCMServer struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.OpsWorksCMServerDescription `json:"description"`
+	Description     aws.OpsWorksCMServerDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -83180,7 +83180,7 @@ func GetOpsWorksCMServer(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type OrganizationsOrganization struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.OrganizationsOrganizationDescription `json:"description"`
+	Description     aws.OrganizationsOrganizationDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -83389,7 +83389,7 @@ func GetOrganizationsOrganization(ctx context.Context, d *plugin.QueryData, _ *p
 type OrganizationsAccount struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.OrganizationsAccountDescription `json:"description"`
+	Description     aws.OrganizationsAccountDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -83612,7 +83612,7 @@ func GetOrganizationsAccount(ctx context.Context, d *plugin.QueryData, _ *plugin
 type OrganizationsPolicy struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.OrganizationsPolicyDescription `json:"description"`
+	Description     aws.OrganizationsPolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -83831,7 +83831,7 @@ func GetOrganizationsPolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type OrganizationsRoot struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.OrganizationsRootDescription `json:"description"`
+	Description     aws.OrganizationsRootDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -84042,7 +84042,7 @@ func GetOrganizationsRoot(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type OrganizationsOrganizationalUnit struct {
 	ResourceID      string                                         `json:"resource_id"`
 	PlatformID      string                                         `json:"platform_id"`
-	Description     aws.OrganizationsOrganizationalUnitDescription `json:"description"`
+	Description     aws.OrganizationsOrganizationalUnitDescription `json:"Description"`
 	Metadata        aws.Metadata                                   `json:"metadata"`
 	DescribedBy     string                                         `json:"described_by"`
 	ResourceType    string                                         `json:"resource_type"`
@@ -84257,7 +84257,7 @@ func GetOrganizationsOrganizationalUnit(ctx context.Context, d *plugin.QueryData
 type OrganizationsPolicyTarget struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.OrganizationsPolicyTargetDescription `json:"description"`
+	Description     aws.OrganizationsPolicyTargetDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -84476,7 +84476,7 @@ func GetOrganizationsPolicyTarget(ctx context.Context, d *plugin.QueryData, _ *p
 type PinPointApp struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.PinPointAppDescription `json:"description"`
+	Description     aws.PinPointAppDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -84697,7 +84697,7 @@ func GetPinPointApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type PipesPipe struct {
 	ResourceID      string                   `json:"resource_id"`
 	PlatformID      string                   `json:"platform_id"`
-	Description     aws.PipesPipeDescription `json:"description"`
+	Description     aws.PipesPipeDescription `json:"Description"`
 	Metadata        aws.Metadata             `json:"metadata"`
 	DescribedBy     string                   `json:"described_by"`
 	ResourceType    string                   `json:"resource_type"`
@@ -84932,7 +84932,7 @@ func GetPipesPipe(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 type ResourceGroupsGroup struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.ResourceGroupsGroupDescription `json:"description"`
+	Description     aws.ResourceGroupsGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -85141,7 +85141,7 @@ func GetResourceGroupsGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type OpenSearchServerlessCollection struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.OpenSearchServerlessCollectionDescription `json:"description"`
+	Description     aws.OpenSearchServerlessCollectionDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -85352,7 +85352,7 @@ func GetOpenSearchServerlessCollection(ctx context.Context, d *plugin.QueryData,
 type TimestreamDatabase struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.TimestreamDatabaseDescription `json:"description"`
+	Description     aws.TimestreamDatabaseDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -85563,7 +85563,7 @@ func GetTimestreamDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type ResourceExplorer2Index struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.ResourceExplorer2IndexDescription `json:"description"`
+	Description     aws.ResourceExplorer2IndexDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -85772,7 +85772,7 @@ func GetResourceExplorer2Index(ctx context.Context, d *plugin.QueryData, _ *plug
 type ResourceExplorer2SupportedResourceType struct {
 	ResourceID      string                                                `json:"resource_id"`
 	PlatformID      string                                                `json:"platform_id"`
-	Description     aws.ResourceExplorer2SupportedResourceTypeDescription `json:"description"`
+	Description     aws.ResourceExplorer2SupportedResourceTypeDescription `json:"Description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
 	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
@@ -85979,7 +85979,7 @@ func GetResourceExplorer2SupportedResourceType(ctx context.Context, d *plugin.Qu
 type StepFunctionsStateMachine struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.StepFunctionsStateMachineDescription `json:"description"`
+	Description     aws.StepFunctionsStateMachineDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -86204,7 +86204,7 @@ func GetStepFunctionsStateMachine(ctx context.Context, d *plugin.QueryData, _ *p
 type StepFunctionsStateMachineExecutionHistories struct {
 	ResourceID      string                                                     `json:"resource_id"`
 	PlatformID      string                                                     `json:"platform_id"`
-	Description     aws.StepFunctionsStateMachineExecutionHistoriesDescription `json:"description"`
+	Description     aws.StepFunctionsStateMachineExecutionHistoriesDescription `json:"Description"`
 	Metadata        aws.Metadata                                               `json:"metadata"`
 	DescribedBy     string                                                     `json:"described_by"`
 	ResourceType    string                                                     `json:"resource_type"`
@@ -86485,7 +86485,7 @@ func GetStepFunctionsStateMachineExecutionHistories(ctx context.Context, d *plug
 type StepFunctionsStateMachineExecution struct {
 	ResourceID      string                                            `json:"resource_id"`
 	PlatformID      string                                            `json:"platform_id"`
-	Description     aws.StepFunctionsStateMachineExecutionDescription `json:"description"`
+	Description     aws.StepFunctionsStateMachineExecutionDescription `json:"Description"`
 	Metadata        aws.Metadata                                      `json:"metadata"`
 	DescribedBy     string                                            `json:"described_by"`
 	ResourceType    string                                            `json:"resource_type"`
@@ -86712,7 +86712,7 @@ func GetStepFunctionsStateMachineExecution(ctx context.Context, d *plugin.QueryD
 type SimSpaceWeaverSimulation struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.SimSpaceWeaverSimulationDescription `json:"description"`
+	Description     aws.SimSpaceWeaverSimulationDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
@@ -86941,7 +86941,7 @@ func GetSimSpaceWeaverSimulation(ctx context.Context, d *plugin.QueryData, _ *pl
 type ACMPCACertificateAuthority struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.ACMPCACertificateAuthorityDescription `json:"description"`
+	Description     aws.ACMPCACertificateAuthorityDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -87178,7 +87178,7 @@ func GetACMPCACertificateAuthority(ctx context.Context, d *plugin.QueryData, _ *
 type ShieldProtectionGroup struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.ShieldProtectionGroupDescription `json:"description"`
+	Description     aws.ShieldProtectionGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -87387,7 +87387,7 @@ func GetShieldProtectionGroup(ctx context.Context, d *plugin.QueryData, _ *plugi
 type StorageGatewayStorageGateway struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.StorageGatewayStorageGatewayDescription `json:"description"`
+	Description     aws.StorageGatewayStorageGatewayDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -87598,7 +87598,7 @@ func GetStorageGatewayStorageGateway(ctx context.Context, d *plugin.QueryData, _
 type ImageBuilderImage struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.ImageBuilderImageDescription `json:"description"`
+	Description     aws.ImageBuilderImageDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -87809,7 +87809,7 @@ func GetImageBuilderImage(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type AccountAlternateContact struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.AccountAlternateContactDescription `json:"description"`
+	Description     aws.AccountAlternateContactDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -88026,7 +88026,7 @@ func GetAccountAlternateContact(ctx context.Context, d *plugin.QueryData, _ *plu
 type AccountContact struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.AccountContactDescription `json:"description"`
+	Description     aws.AccountContactDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -88257,7 +88257,7 @@ func GetAccountContact(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type AmplifyApp struct {
 	ResourceID      string                    `json:"resource_id"`
 	PlatformID      string                    `json:"platform_id"`
-	Description     aws.AmplifyAppDescription `json:"description"`
+	Description     aws.AmplifyAppDescription `json:"Description"`
 	Metadata        aws.Metadata              `json:"metadata"`
 	DescribedBy     string                    `json:"described_by"`
 	ResourceType    string                    `json:"resource_type"`
@@ -88508,7 +88508,7 @@ func GetAmplifyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 type AppConfigApplication struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.AppConfigApplicationDescription `json:"description"`
+	Description     aws.AppConfigApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -88721,7 +88721,7 @@ func GetAppConfigApplication(ctx context.Context, d *plugin.QueryData, _ *plugin
 type AuditManagerAssessment struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.AuditManagerAssessmentDescription `json:"description"`
+	Description     aws.AuditManagerAssessmentDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -88959,7 +88959,7 @@ func GetAuditManagerAssessment(ctx context.Context, d *plugin.QueryData, _ *plug
 type AuditManagerControl struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.AuditManagerControlDescription `json:"description"`
+	Description     aws.AuditManagerControlDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -89195,7 +89195,7 @@ func GetAuditManagerControl(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type AuditManagerEvidence struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.AuditManagerEvidenceDescription `json:"description"`
+	Description     aws.AuditManagerEvidenceDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -89434,7 +89434,7 @@ func GetAuditManagerEvidence(ctx context.Context, d *plugin.QueryData, _ *plugin
 type AuditManagerEvidenceFolder struct {
 	ResourceID      string                                    `json:"resource_id"`
 	PlatformID      string                                    `json:"platform_id"`
-	Description     aws.AuditManagerEvidenceFolderDescription `json:"description"`
+	Description     aws.AuditManagerEvidenceFolderDescription `json:"Description"`
 	Metadata        aws.Metadata                              `json:"metadata"`
 	DescribedBy     string                                    `json:"described_by"`
 	ResourceType    string                                    `json:"resource_type"`
@@ -89675,7 +89675,7 @@ func GetAuditManagerEvidenceFolder(ctx context.Context, d *plugin.QueryData, _ *
 type AuditManagerFramework struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.AuditManagerFrameworkDescription `json:"description"`
+	Description     aws.AuditManagerFrameworkDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -89913,7 +89913,7 @@ func GetAuditManagerFramework(ctx context.Context, d *plugin.QueryData, _ *plugi
 type CloudSearchDomain struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.CloudSearchDomainDescription `json:"description"`
+	Description     aws.CloudSearchDomainDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -90142,7 +90142,7 @@ func GetCloudSearchDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type DLMLifecyclePolicy struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.DLMLifecyclePolicyDescription `json:"description"`
+	Description     aws.DLMLifecyclePolicyDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -90370,7 +90370,7 @@ func GetDLMLifecyclePolicy(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type DocDBCluster struct {
 	ResourceID      string                      `json:"resource_id"`
 	PlatformID      string                      `json:"platform_id"`
-	Description     aws.DocDBClusterDescription `json:"description"`
+	Description     aws.DocDBClusterDescription `json:"Description"`
 	Metadata        aws.Metadata                `json:"metadata"`
 	DescribedBy     string                      `json:"described_by"`
 	ResourceType    string                      `json:"resource_type"`
@@ -90641,7 +90641,7 @@ func GetDocDBCluster(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 type DocDBClusterInstance struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.DocDBClusterInstanceDescription `json:"description"`
+	Description     aws.DocDBClusterInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -90914,7 +90914,7 @@ func GetDocDBClusterInstance(ctx context.Context, d *plugin.QueryData, _ *plugin
 type DocDBClusterSnapshot struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.DocDBClusterSnapshotDescription `json:"description"`
+	Description     aws.DocDBClusterSnapshotDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -91155,7 +91155,7 @@ func GetDocDBClusterSnapshot(ctx context.Context, d *plugin.QueryData, _ *plugin
 type GlobalAcceleratorAccelerator struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.GlobalAcceleratorAcceleratorDescription `json:"description"`
+	Description     aws.GlobalAcceleratorAcceleratorDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -91382,7 +91382,7 @@ func GetGlobalAcceleratorAccelerator(ctx context.Context, d *plugin.QueryData, _
 type GlobalAcceleratorEndpointGroup struct {
 	ResourceID      string                                        `json:"resource_id"`
 	PlatformID      string                                        `json:"platform_id"`
-	Description     aws.GlobalAcceleratorEndpointGroupDescription `json:"description"`
+	Description     aws.GlobalAcceleratorEndpointGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                                  `json:"metadata"`
 	DescribedBy     string                                        `json:"described_by"`
 	ResourceType    string                                        `json:"resource_type"`
@@ -91607,7 +91607,7 @@ func GetGlobalAcceleratorEndpointGroup(ctx context.Context, d *plugin.QueryData,
 type GlobalAcceleratorListener struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.GlobalAcceleratorListenerDescription `json:"description"`
+	Description     aws.GlobalAcceleratorListenerDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -91820,7 +91820,7 @@ func GetGlobalAcceleratorListener(ctx context.Context, d *plugin.QueryData, _ *p
 type GlueCatalogDatabase struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.GlueCatalogDatabaseDescription `json:"description"`
+	Description     aws.GlueCatalogDatabaseDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -92041,7 +92041,7 @@ func GetGlueCatalogDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type GlueCatalogTable struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.GlueCatalogTableDescription `json:"description"`
+	Description     aws.GlueCatalogTableDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -92286,7 +92286,7 @@ func GetGlueCatalogTable(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type GlueConnection struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.GlueConnectionDescription `json:"description"`
+	Description     aws.GlueConnectionDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -92509,7 +92509,7 @@ func GetGlueConnection(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type GlueCrawler struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.GlueCrawlerDescription `json:"description"`
+	Description     aws.GlueCrawlerDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -92752,7 +92752,7 @@ func GetGlueCrawler(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type GlueDataCatalogEncryptionSettings struct {
 	ResourceID      string                                           `json:"resource_id"`
 	PlatformID      string                                           `json:"platform_id"`
-	Description     aws.GlueDataCatalogEncryptionSettingsDescription `json:"description"`
+	Description     aws.GlueDataCatalogEncryptionSettingsDescription `json:"Description"`
 	Metadata        aws.Metadata                                     `json:"metadata"`
 	DescribedBy     string                                           `json:"described_by"`
 	ResourceType    string                                           `json:"resource_type"`
@@ -92959,7 +92959,7 @@ func GetGlueDataCatalogEncryptionSettings(ctx context.Context, d *plugin.QueryDa
 type GlueDataQualityRuleset struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.GlueDataQualityRulesetDescription `json:"description"`
+	Description     aws.GlueDataQualityRulesetDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -93184,7 +93184,7 @@ func GetGlueDataQualityRuleset(ctx context.Context, d *plugin.QueryData, _ *plug
 type GlueDevEndpoint struct {
 	ResourceID      string                         `json:"resource_id"`
 	PlatformID      string                         `json:"platform_id"`
-	Description     aws.GlueDevEndpointDescription `json:"description"`
+	Description     aws.GlueDevEndpointDescription `json:"Description"`
 	Metadata        aws.Metadata                   `json:"metadata"`
 	DescribedBy     string                         `json:"described_by"`
 	ResourceType    string                         `json:"resource_type"`
@@ -93437,7 +93437,7 @@ func GetGlueDevEndpoint(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 type GlueJob struct {
 	ResourceID      string                 `json:"resource_id"`
 	PlatformID      string                 `json:"platform_id"`
-	Description     aws.GlueJobDescription `json:"description"`
+	Description     aws.GlueJobDescription `json:"Description"`
 	Metadata        aws.Metadata           `json:"metadata"`
 	DescribedBy     string                 `json:"described_by"`
 	ResourceType    string                 `json:"resource_type"`
@@ -93684,7 +93684,7 @@ func GetGlueJob(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 type GlueSecurityConfiguration struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.GlueSecurityConfigurationDescription `json:"description"`
+	Description     aws.GlueSecurityConfigurationDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -93899,7 +93899,7 @@ func GetGlueSecurityConfiguration(ctx context.Context, d *plugin.QueryData, _ *p
 type HealthEvent struct {
 	ResourceID      string                     `json:"resource_id"`
 	PlatformID      string                     `json:"platform_id"`
-	Description     aws.HealthEventDescription `json:"description"`
+	Description     aws.HealthEventDescription `json:"Description"`
 	Metadata        aws.Metadata               `json:"metadata"`
 	DescribedBy     string                     `json:"described_by"`
 	ResourceType    string                     `json:"resource_type"`
@@ -94122,7 +94122,7 @@ func GetHealthEvent(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateD
 type HealthAffectedEntity struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.HealthAffectedEntityDescription `json:"description"`
+	Description     aws.HealthAffectedEntityDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -94339,7 +94339,7 @@ func GetHealthAffectedEntity(ctx context.Context, d *plugin.QueryData, _ *plugin
 type IdentityStoreGroup struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.IdentityStoreGroupDescription `json:"description"`
+	Description     aws.IdentityStoreGroupDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -94552,7 +94552,7 @@ func GetIdentityStoreGroup(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type IdentityStoreUser struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.IdentityStoreUserDescription `json:"description"`
+	Description     aws.IdentityStoreUserDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -94769,7 +94769,7 @@ func GetIdentityStoreUser(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type IdentityStoreGroupMembership struct {
 	ResourceID      string                                      `json:"resource_id"`
 	PlatformID      string                                      `json:"platform_id"`
-	Description     aws.IdentityStoreGroupMembershipDescription `json:"description"`
+	Description     aws.IdentityStoreGroupMembershipDescription `json:"Description"`
 	Metadata        aws.Metadata                                `json:"metadata"`
 	DescribedBy     string                                      `json:"described_by"`
 	ResourceType    string                                      `json:"resource_type"`
@@ -94983,7 +94983,7 @@ func GetIdentityStoreGroupMembership(ctx context.Context, d *plugin.QueryData, _
 type InspectorAssessmentRun struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.InspectorAssessmentRunDescription `json:"description"`
+	Description     aws.InspectorAssessmentRunDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -95218,7 +95218,7 @@ func GetInspectorAssessmentRun(ctx context.Context, d *plugin.QueryData, _ *plug
 type InspectorAssessmentTarget struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.InspectorAssessmentTargetDescription `json:"description"`
+	Description     aws.InspectorAssessmentTargetDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -95433,7 +95433,7 @@ func GetInspectorAssessmentTarget(ctx context.Context, d *plugin.QueryData, _ *p
 type InspectorAssessmentTemplate struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.InspectorAssessmentTemplateDescription `json:"description"`
+	Description     aws.InspectorAssessmentTemplateDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -95660,7 +95660,7 @@ func GetInspectorAssessmentTemplate(ctx context.Context, d *plugin.QueryData, _ 
 type InspectorExclusion struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.InspectorExclusionDescription `json:"description"`
+	Description     aws.InspectorExclusionDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -95877,7 +95877,7 @@ func GetInspectorExclusion(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type InspectorFinding struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.InspectorFindingDescription `json:"description"`
+	Description     aws.InspectorFindingDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -96122,7 +96122,7 @@ func GetInspectorFinding(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type Inspector2Coverage struct {
 	ResourceID      string                            `json:"resource_id"`
 	PlatformID      string                            `json:"platform_id"`
-	Description     aws.Inspector2CoverageDescription `json:"description"`
+	Description     aws.Inspector2CoverageDescription `json:"Description"`
 	Metadata        aws.Metadata                      `json:"metadata"`
 	DescribedBy     string                            `json:"described_by"`
 	ResourceType    string                            `json:"resource_type"`
@@ -96360,7 +96360,7 @@ func GetInspector2Coverage(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 type Inspector2CoverageStatistic struct {
 	ResourceID      string                                     `json:"resource_id"`
 	PlatformID      string                                     `json:"platform_id"`
-	Description     aws.Inspector2CoverageStatisticDescription `json:"description"`
+	Description     aws.Inspector2CoverageStatisticDescription `json:"Description"`
 	Metadata        aws.Metadata                               `json:"metadata"`
 	DescribedBy     string                                     `json:"described_by"`
 	ResourceType    string                                     `json:"resource_type"`
@@ -96567,7 +96567,7 @@ func GetInspector2CoverageStatistic(ctx context.Context, d *plugin.QueryData, _ 
 type Inspector2Member struct {
 	ResourceID      string                          `json:"resource_id"`
 	PlatformID      string                          `json:"platform_id"`
-	Description     aws.Inspector2MemberDescription `json:"description"`
+	Description     aws.Inspector2MemberDescription `json:"Description"`
 	Metadata        aws.Metadata                    `json:"metadata"`
 	DescribedBy     string                          `json:"described_by"`
 	ResourceType    string                          `json:"resource_type"`
@@ -96780,7 +96780,7 @@ func GetInspector2Member(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 type Inspector2Finding struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.Inspector2FindingDescription `json:"description"`
+	Description     aws.Inspector2FindingDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -97081,7 +97081,7 @@ func GetInspector2Finding(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type FirehoseDeliveryStream struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.FirehoseDeliveryStreamDescription `json:"description"`
+	Description     aws.FirehoseDeliveryStreamDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -97312,7 +97312,7 @@ func GetFirehoseDeliveryStream(ctx context.Context, d *plugin.QueryData, _ *plug
 type LightsailInstance struct {
 	ResourceID      string                           `json:"resource_id"`
 	PlatformID      string                           `json:"platform_id"`
-	Description     aws.LightsailInstanceDescription `json:"description"`
+	Description     aws.LightsailInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                     `json:"metadata"`
 	DescribedBy     string                           `json:"described_by"`
 	ResourceType    string                           `json:"resource_type"`
@@ -97561,7 +97561,7 @@ func GetLightsailInstance(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 type Macie2ClassificationJob struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.Macie2ClassificationJobDescription `json:"description"`
+	Description     aws.Macie2ClassificationJobDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -97800,7 +97800,7 @@ func GetMacie2ClassificationJob(ctx context.Context, d *plugin.QueryData, _ *plu
 type MediaStoreContainer struct {
 	ResourceID      string                             `json:"resource_id"`
 	PlatformID      string                             `json:"platform_id"`
-	Description     aws.MediaStoreContainerDescription `json:"description"`
+	Description     aws.MediaStoreContainerDescription `json:"Description"`
 	Metadata        aws.Metadata                       `json:"metadata"`
 	DescribedBy     string                             `json:"described_by"`
 	ResourceType    string                             `json:"resource_type"`
@@ -98021,7 +98021,7 @@ func GetMediaStoreContainer(ctx context.Context, d *plugin.QueryData, _ *plugin.
 type MgnApplication struct {
 	ResourceID      string                        `json:"resource_id"`
 	PlatformID      string                        `json:"platform_id"`
-	Description     aws.MgnApplicationDescription `json:"description"`
+	Description     aws.MgnApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                  `json:"metadata"`
 	DescribedBy     string                        `json:"described_by"`
 	ResourceType    string                        `json:"resource_type"`
@@ -98246,7 +98246,7 @@ func GetMgnApplication(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydra
 type SecurityLakeDataLake struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.SecurityLakeDataLakeDescription `json:"description"`
+	Description     aws.SecurityLakeDataLakeDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -98465,7 +98465,7 @@ func GetSecurityLakeDataLake(ctx context.Context, d *plugin.QueryData, _ *plugin
 type SecurityLakeSubscriber struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.SecurityLakeSubscriberDescription `json:"description"`
+	Description     aws.SecurityLakeSubscriberDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -98699,7 +98699,7 @@ func GetSecurityLakeSubscriber(ctx context.Context, d *plugin.QueryData, _ *plug
 type RamPrincipalAssociation struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.RamPrincipalAssociationDescription `json:"description"`
+	Description     aws.RamPrincipalAssociationDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -98924,7 +98924,7 @@ func GetRamPrincipalAssociation(ctx context.Context, d *plugin.QueryData, _ *plu
 type RamResourceAssociation struct {
 	ResourceID      string                                `json:"resource_id"`
 	PlatformID      string                                `json:"platform_id"`
-	Description     aws.RamResourceAssociationDescription `json:"description"`
+	Description     aws.RamResourceAssociationDescription `json:"Description"`
 	Metadata        aws.Metadata                          `json:"metadata"`
 	DescribedBy     string                                `json:"described_by"`
 	ResourceType    string                                `json:"resource_type"`
@@ -99149,7 +99149,7 @@ func GetRamResourceAssociation(ctx context.Context, d *plugin.QueryData, _ *plug
 type ServerlessApplicationRepositoryApplication struct {
 	ResourceID      string                                                    `json:"resource_id"`
 	PlatformID      string                                                    `json:"platform_id"`
-	Description     aws.ServerlessApplicationRepositoryApplicationDescription `json:"description"`
+	Description     aws.ServerlessApplicationRepositoryApplicationDescription `json:"Description"`
 	Metadata        aws.Metadata                                              `json:"metadata"`
 	DescribedBy     string                                                    `json:"described_by"`
 	ResourceType    string                                                    `json:"resource_type"`
@@ -99382,7 +99382,7 @@ func GetServerlessApplicationRepositoryApplication(ctx context.Context, d *plugi
 type ServiceQuotasServiceQuotaChangeRequest struct {
 	ResourceID      string                                                `json:"resource_id"`
 	PlatformID      string                                                `json:"platform_id"`
-	Description     aws.ServiceQuotasServiceQuotaChangeRequestDescription `json:"description"`
+	Description     aws.ServiceQuotasServiceQuotaChangeRequestDescription `json:"Description"`
 	Metadata        aws.Metadata                                          `json:"metadata"`
 	DescribedBy     string                                                `json:"described_by"`
 	ResourceType    string                                                `json:"resource_type"`
@@ -99617,7 +99617,7 @@ func GetServiceQuotasServiceQuotaChangeRequest(ctx context.Context, d *plugin.Qu
 type ServiceQuotasService struct {
 	ResourceID      string                              `json:"resource_id"`
 	PlatformID      string                              `json:"platform_id"`
-	Description     aws.ServiceQuotasServiceDescription `json:"description"`
+	Description     aws.ServiceQuotasServiceDescription `json:"Description"`
 	Metadata        aws.Metadata                        `json:"metadata"`
 	DescribedBy     string                              `json:"described_by"`
 	ResourceType    string                              `json:"resource_type"`
@@ -99824,7 +99824,7 @@ func GetServiceQuotasService(ctx context.Context, d *plugin.QueryData, _ *plugin
 type ServiceCatalogProduct struct {
 	ResourceID      string                               `json:"resource_id"`
 	PlatformID      string                               `json:"platform_id"`
-	Description     aws.ServiceCatalogProductDescription `json:"description"`
+	Description     aws.ServiceCatalogProductDescription `json:"Description"`
 	Metadata        aws.Metadata                         `json:"metadata"`
 	DescribedBy     string                               `json:"described_by"`
 	ResourceType    string                               `json:"resource_type"`
@@ -100057,7 +100057,7 @@ func GetServiceCatalogProduct(ctx context.Context, d *plugin.QueryData, _ *plugi
 type ServiceCatalogPortfolio struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.ServiceCatalogPortfolioDescription `json:"description"`
+	Description     aws.ServiceCatalogPortfolioDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -100282,7 +100282,7 @@ func GetServiceCatalogPortfolio(ctx context.Context, d *plugin.QueryData, _ *plu
 type ServiceDiscoveryService struct {
 	ResourceID      string                                 `json:"resource_id"`
 	PlatformID      string                                 `json:"platform_id"`
-	Description     aws.ServiceDiscoveryServiceDescription `json:"description"`
+	Description     aws.ServiceDiscoveryServiceDescription `json:"Description"`
 	Metadata        aws.Metadata                           `json:"metadata"`
 	DescribedBy     string                                 `json:"described_by"`
 	ResourceType    string                                 `json:"resource_type"`
@@ -100515,7 +100515,7 @@ func GetServiceDiscoveryService(ctx context.Context, d *plugin.QueryData, _ *plu
 type ServiceDiscoveryNamespace struct {
 	ResourceID      string                                   `json:"resource_id"`
 	PlatformID      string                                   `json:"platform_id"`
-	Description     aws.ServiceDiscoveryNamespaceDescription `json:"description"`
+	Description     aws.ServiceDiscoveryNamespaceDescription `json:"Description"`
 	Metadata        aws.Metadata                             `json:"metadata"`
 	DescribedBy     string                                   `json:"described_by"`
 	ResourceType    string                                   `json:"resource_type"`
@@ -100742,7 +100742,7 @@ func GetServiceDiscoveryNamespace(ctx context.Context, d *plugin.QueryData, _ *p
 type ServiceDiscoveryInstance struct {
 	ResourceID      string                                  `json:"resource_id"`
 	PlatformID      string                                  `json:"platform_id"`
-	Description     aws.ServiceDiscoveryInstanceDescription `json:"description"`
+	Description     aws.ServiceDiscoveryInstanceDescription `json:"Description"`
 	Metadata        aws.Metadata                            `json:"metadata"`
 	DescribedBy     string                                  `json:"described_by"`
 	ResourceType    string                                  `json:"resource_type"`
