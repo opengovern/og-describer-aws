@@ -18,12 +18,6 @@ func tableAwsDocDBClusterSnapshot(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_docdb_cluster_snapshot",
 		Description: "AWS DocumentDB Cluster Snapshot",
-		Get: &plugin.GetConfig{
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"DBSnapshotNotFound", "DBClusterSnapshotNotFoundFault"}),
-			},
-			Hydrate: opengovernance.GetDocDBClusterSnapshot,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListDocDBClusterSnapshot,
 		},

@@ -14,12 +14,6 @@ func tableAwsElasticBeanstalkApplicationVersion(_ context.Context) *plugin.Table
 	return &plugin.Table{
 		Name:        "aws_elastic_beanstalk_application_version",
 		Description: "AWS Elastic Beanstalk Application Version",
-		Get: &plugin.GetConfig{
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"ResourceNotFoundException"}),
-			},
-			Hydrate: opengovernance.GetElasticBeanstalkApplicationVersion,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListElasticBeanstalkApplicationVersion,
 		},

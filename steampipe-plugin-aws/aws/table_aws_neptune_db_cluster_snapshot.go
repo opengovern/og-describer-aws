@@ -16,9 +16,6 @@ func tableAwsNeptuneDBClusterSnapshot(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_neptune_db_cluster_snapshot",
 		Description: "AWS Neptune DB Cluster Snapshot",
-		Get: &plugin.GetConfig{
-			Hydrate: opengovernance.GetNeptuneDatabaseClusterSnapshot,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListNeptuneDatabaseClusterSnapshot,
 		},

@@ -13,9 +13,6 @@ func tableAwsEC2LaunchTemplate(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_ec2_launch_template",
 		Description: "AWS EC2 LaunchTemplate",
-		Get: &plugin.GetConfig{
-			Hydrate: opengovernance.GetEC2LaunchTemplate,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListEC2LaunchTemplate,
 		},

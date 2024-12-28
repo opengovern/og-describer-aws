@@ -16,12 +16,6 @@ func tableAwsEcrRegistry(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_ecr_registry",
 		Description: "AWS ECR Registry",
-		Get: &plugin.GetConfig{
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"RepositoryNotFoundException", "RepositoryPolicyNotFoundException", "LifecyclePolicyNotFoundException"}),
-			},
-			Hydrate: opengovernance.GetECRRegistry,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListECRRegistry,
 		},

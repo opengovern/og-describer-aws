@@ -18,13 +18,6 @@ func tableAwsWafRegionalRuleGroup(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_wafregional_rule_group",
 		Description: "AWS WAF Regional Rule Group",
-		Get: &plugin.GetConfig{
-			//KeyColumns: plugin.AllColumns([]string{"rule_group_id"}),
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"NonexistentItemException", "WAFNonexistentItemException"}),
-			},
-			Hydrate: opengovernance.GetWAFRegionalRuleGroup,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListWAFRegionalRuleGroup,
 		},

@@ -15,21 +15,8 @@ func tableAwsSSMParameter(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_ssm_parameter",
 		Description: "AWS SSM Parameter",
-		Get: &plugin.GetConfig{
-			//KeyColumns: plugin.SingleColumn("name"),
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"ValidationException"}),
-			},
-			Hydrate: opengovernance.GetSSMParameter,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListSSMParameter,
-			//KeyColumns: []*plugin.KeyColumn{
-			//	{Name: "type", Require: plugin.Optional},
-			//	{Name: "key_id", Require: plugin.Optional},
-			//	{Name: "tier", Require: plugin.Optional},
-			//	{Name: "data_type", Require: plugin.Optional},
-			//},
 		},
 
 		Columns: awsOgRegionalColumns([]*plugin.Column{

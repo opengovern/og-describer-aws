@@ -15,12 +15,6 @@ func tableAwsBackupRegionSetting(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_backup_region_settings",
 		Description: "AWS Backup Region Settings",
-		Get: &plugin.GetConfig{
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"InvalidParameterValueException", "ResourceNotFoundException"}),
-			},
-			Hydrate: opengovernance.GetBackupRegionSetting,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListBackupRegionSetting,
 		},

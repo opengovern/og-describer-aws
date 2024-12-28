@@ -20,13 +20,6 @@ func tableAwsWafRegionalWebAcl(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "aws_wafregional_web_acl",
 		Description: "AWS WAF Regional Web ACL",
-		Get: &plugin.GetConfig{
-			//KeyColumns: plugin.AllColumns([]string{"web_acl_id"}),
-			IgnoreConfig: &plugin.IgnoreConfig{
-				ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"WAFNonexistentItemException", "WAFInvalidParameterException"}),
-			},
-			Hydrate: opengovernance.GetWAFRegionalWebAcl,
-		},
 		List: &plugin.ListConfig{
 			Hydrate: opengovernance.ListWAFRegionalWebAcl,
 		},
