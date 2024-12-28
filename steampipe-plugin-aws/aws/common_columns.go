@@ -28,12 +28,6 @@ func commonColumnsForAccountResource() []*plugin.Column {
 			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
 		},
-		{
-			Name:        "platform_integration_id",
-			Type:        proto.ColumnType_STRING,
-			Description: "The Platform Account ID in which the resource is located.",
-			Transform:   transform.FromField("IntegrationID"),
-		},
 	}
 }
 
@@ -140,12 +134,6 @@ func commonColumnsForRegionalResource() []*plugin.Column {
 			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
 		},
-		{
-			Name:        "platform_integration_id",
-			Type:        proto.ColumnType_STRING,
-			Description: "The Platform Account ID in which the resource is located.",
-			Transform:   transform.FromField("IntegrationID"),
-		},
 	}
 }
 
@@ -206,12 +194,6 @@ func commonColumnsForGlobalRegionResource() []*plugin.Column {
 			Type:        proto.ColumnType_STRING,
 			Transform:   transform.FromField("Metadata.AccountID"),
 			Description: "The AWS Account ID in which the resource is located.",
-		},
-		{
-			Name:        "platform_integration_id",
-			Type:        proto.ColumnType_STRING,
-			Description: "The Platform Account ID in which the resource is located.",
-			Transform:   transform.FromField("IntegrationID"),
 		},
 	}
 }
