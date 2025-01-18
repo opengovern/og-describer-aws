@@ -1,2 +1,2 @@
-IntegrationType: github_account
-DescriberURL:  ghcr.io/opengovern/og-describer-github
+IntegrationType: aws_cloud_account
+DescriberURL:  ghcr.io/opengovern/og-describer-aws

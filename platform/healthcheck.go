@@ -2,339 +2,315 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
-	"sync"
-	"time"
+	"strings"
 
-	"github.com/google/go-github/v66/github"
-	"golang.org/x/oauth2"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
-// Config represents the JSON input configuration
-type Config struct {
-	Token            string `json:"token"`
-	OrganizationName string `json:"organization_name"`
+// AWSConfigInput encapsulates all possible AWS credentials and role information.
+type AWSConfigInput struct {
+	AccessKeyID              string `json:"aws_access_key_id"`     // Changed from "access_key_id"
+	SecretAccessKey          string `json:"aws_secret_access_key"` // Changed from "secret_access_key"
+	RoleNameInPrimaryAccount string `json:"role_name_in_primary_account"`
+	CrossAccountRoleARN      string `json:"cross_account_role_arn"`
+	ExternalID               string `json:"external_id"`
+	Region                   string `json:"region"`
 }
 
-// Define required permissions as constants
-const (
-	ReadPublicKey  = "read:public_key"
-	ReadUser       = "read:user"
-	ReadProject    = "read:project"
-	RepoDeployment = "repo_deployment"
-	ReadRepoHook   = "read:repo_hook"
-	PublicRepo     = "public_repo"
-	ReadOrg        = "read:org"
-	RepoStatus     = "repo:status"
-	ReadPackages   = "read:packages"
-)
 
-// HealthStatus represents the structure of the JSON output
-type HealthStatus struct {
-	Organization string  `json:"organization"`
-	Healthy      bool    `json:"healthy"`
-	Details      Details `json:"details"`
+// PolicyDetails provides detailed information about the policies attached to the IAM principal.
+type PolicyDetails struct {
+	RequiredPolicies []string `json:"required_policies"` // List of required policy ARNs.
+	AttachedPolicies []string `json:"attached_policies"` // List of policies attached to the principal.
+	MissingPolicies  []string `json:"missing_policies"`  // List of required policies that are missing.
+	CredentialType   string   `json:"credential_type"`   // Type of credentials used ("Single Account" or "Multi-Account").
+	IsAccessible     bool     `json:"is_accessible"`     // Indicates if the account is accessible.
+	IamPrincipal     string   `json:"iam_principal"`     // ARN of the IAM principal.
+	HasPolicies      bool     `json:"has_policies"`      // Indicates if required policies are attached.
+	Error            string   `json:"error,omitempty"`   // Error message, if any.
 }
 
-// Details contains required and missing permissions
-type Details struct {
-	RequiredPermissions []string `json:"required_permissions"`
-	MissingPermissions  []string `json:"missing_permissions"`
-}
+// List of required policy ARNs. Modify this list as needed.
 
-// PermissionCheck represents a permission and its corresponding check function
-type PermissionCheck struct {
-	Name  string
-	Check func(ctx context.Context, client *github.Client, org string) error
-}
 
-// IsHealthy checks if the PAT has read access to all required artifacts in the organization
-func IsHealthy(ctx context.Context, client *github.Client, org string) error {
-	// Define all required permissions and their corresponding checks
-	permissions := []PermissionCheck{
-		{
-			Name: PublicRepo,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to list public repositories
-				_, _, err := client.Repositories.ListByOrg(ctx, org, &github.RepositoryListByOrgOptions{
-					Type: "public",
-					ListOptions: github.ListOptions{
-						PerPage: 1,
-					},
-				})
-				return err
-			},
-		},
-		{
-			Name: ReadOrg,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to get organization details
-				_, _, err := client.Organizations.Get(ctx, org)
-				return err
-			},
-		},
-		{
-			Name: ReadPackages,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Define valid package types as per GitHub API
-				packageTypes := []string{"container", "npm", "maven", "nuget", "rubygems", "docker", "composer"}
-
-				// Iterate over each package type to check access
-				for _, pkgType := range packageTypes {
-					_, _, err := client.Organizations.ListPackages(ctx, org, &github.PackageListOptions{
-						PackageType: github.String(pkgType),
-						ListOptions: github.ListOptions{
-							PerPage: 1,
-						},
-					})
-					if err != nil {
-						// If the error is a 422 Unprocessable Entity, it might mean no packages of this type exist
-						// Skip to the next type
-						if ghErr, ok := err.(*github.ErrorResponse); ok && ghErr.Response.StatusCode == 422 {
-							continue
-						}
-						// For other errors, return immediately
-						return err
-					}
-				}
-				// If all package types resulted in 422, it implies no packages exist, but permissions might still be valid
-				return nil
-			},
-		},
-		{
-			Name: ReadProject,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to list projects in the organization
-				_, _, err := client.Organizations.ListProjects(ctx, org, &github.ProjectListOptions{
-					State: "all",
-					ListOptions: github.ListOptions{
-						PerPage: 1,
-					},
-				})
-				return err
-			},
-		},
-		{
-			Name: ReadPublicKey,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Public keys are associated with users, not organizations.
-				// Attempt to list public keys for the authenticated user
-				_, _, err := client.Users.ListKeys(ctx, "", &github.ListOptions{
-					PerPage: 1,
-				})
-				return err
-			},
-		},
-		{
-			Name: ReadRepoHook,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to list repository hooks for a sample repository
-				repos, _, err := client.Repositories.ListByOrg(ctx, org, &github.RepositoryListByOrgOptions{
-					Type: "public",
-					ListOptions: github.ListOptions{
-						PerPage: 10,
-					},
-				})
-				if err != nil {
-					return err
-				}
-				if len(repos) == 0 {
-					return errors.New("no repositories found to check repo hooks")
-				}
-				_, _, err = client.Repositories.ListHooks(ctx, org, repos[0].GetName(), &github.ListOptions{
-					PerPage: 1,
-				})
-				return err
-			},
-		},
-		{
-			Name: ReadUser,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to get the authenticated user
-				user, _, err := client.Users.Get(ctx, "")
-				if err != nil {
-					return err
-				}
-				// Verify the user belongs to the organization
-				_, _, err = client.Organizations.GetOrgMembership(ctx, user.GetLogin(), org)
-				return err
-			},
-		},
-		{
-			Name: RepoStatus,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to list commit statuses for a sample commit
-				repos, _, err := client.Repositories.ListByOrg(ctx, org, &github.RepositoryListByOrgOptions{
-					Type: "public",
-					ListOptions: github.ListOptions{
-						PerPage: 10,
-					},
-				})
-				if err != nil {
-					return err
-				}
-				if len(repos) == 0 {
-					return errors.New("no repositories found to check repo status")
-				}
-				// Get a commit SHA
-				commits, _, err := client.Repositories.ListCommits(ctx, org, repos[0].GetName(), &github.CommitsListOptions{
-					ListOptions: github.ListOptions{
-						PerPage: 1,
-					},
-				})
-				if err != nil {
-					return err
-				}
-				if len(commits) == 0 {
-					return errors.New("no commits found to check repo status")
-				}
-				// Use ListStatuses instead of the undefined ListCommitStatuses
-				_, _, err = client.Repositories.ListStatuses(ctx, org, repos[0].GetName(), commits[0].GetSHA(), &github.ListOptions{
-					PerPage: 1,
-				})
-				return err
-			},
-		},
-		{
-			Name: RepoDeployment,
-			Check: func(ctx context.Context, client *github.Client, org string) error {
-				// Attempt to list deployments for a sample repository
-				repos, _, err := client.Repositories.ListByOrg(ctx, org, &github.RepositoryListByOrgOptions{
-					Type: "public",
-					ListOptions: github.ListOptions{
-						PerPage: 10,
-					},
-				})
-				if err != nil {
-					return err
-				}
-				if len(repos) == 0 {
-					return errors.New("no repositories found to check repo deployments")
-				}
-				_, _, err = client.Repositories.ListDeployments(ctx, org, repos[0].GetName(), &github.DeploymentsListOptions{
-					ListOptions: github.ListOptions{
-						PerPage: 1,
-					},
-				})
-				return err
-			},
-		},
-		// Add more permissions and their checks as needed
-		// For brevity, not all permissions from the list are implemented here
+func AWSIntegrationHealthCheck(creds AWSConfigInput, accountID string) (bool, error) {
+	// Perform account validation
+	result := ValidateIntegrationHealth(accountID, creds)
+	if result.Details.Error != "" {
+		return false, errors.New(result.Details.Error)
 	}
 
-	requiredPermissions := []string{}
-	missingPermissions := []string{}
+	return result.Healthy, nil
+}
 
-	var wg sync.WaitGroup
-	var mu sync.Mutex
+// GenerateAWSConfigHealth initializes and returns an AWS configuration based on the provided inputs.
+// It determines whether to perform single or multi-account validation based on the inputs.
+func GenerateAWSConfigHealth(
+	accessKeyID string,
+	secretAccessKey string,
+	roleNameInPrimaryAccount string,
+	crossAccountRoleARN string,
+	externalID string,
+	region string,
+) (*aws.Config, error) {
+	// Step 1: Set default region if not provided
+	if region == "" {
+		region = "us-east-2"
+	}
 
-	// Channel to limit concurrency
-	concurrencyLimit := 5
-	sem := make(chan struct{}, concurrencyLimit)
+	// Step 2: Initialize the base credentials provider
+	if accessKeyID == "" || secretAccessKey == "" {
+		return nil, fmt.Errorf("AccessKeyID and SecretAccessKey must be provided")
+	}
+	baseCredentials := aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(accessKeyID, secretAccessKey, ""))
 
-	for _, perm := range permissions {
-		wg.Add(1)
-		go func(p PermissionCheck) {
-			defer wg.Done()
-			sem <- struct{}{}
-			defer func() { <-sem }()
+	// Step 3: Create the AWS Config manually
+	cfg := aws.Config{
+		Region:      region,
+		Credentials: baseCredentials,
+	}
 
-			err := p.Check(ctx, client, org)
-			mu.Lock()
-			defer mu.Unlock()
-			requiredPermissions = append(requiredPermissions, p.Name)
-			if err != nil {
-				// Check if the error is due to permission issues
-				if isPermissionError(err) {
-					missingPermissions = append(missingPermissions, p.Name)
-				} else {
-					// Log other errors
-					log.Printf("Error checking permission '%s': %v", p.Name, err)
-					missingPermissions = append(missingPermissions, p.Name)
-				}
+	// Step 4: Determine the type of validation based on provided inputs
+	isMultiAccount := crossAccountRoleARN != "" || roleNameInPrimaryAccount != ""
+
+	// Step 5: Assume roles if needed
+	if isMultiAccount {
+		// Create an STS client from the existing configuration
+		stsClient := sts.NewFromConfig(cfg)
+
+		// Assume Role in Primary Account if RoleNameInPrimaryAccount is provided
+		if roleNameInPrimaryAccount != "" {
+			primaryRoleARN := roleNameInPrimaryAccount // Expected to be full ARN
+
+			// Configure AssumeRole options
+			primaryAssumeRoleOptions := func(o *stscreds.AssumeRoleOptions) {
+				o.RoleSessionName = "primary-account-session"
+				// Optional: o.DurationSeconds = 3600
 			}
-		}(perm)
-	}
 
-	wg.Wait()
+			// Create an AssumeRole provider for the primary account role
+			primaryRoleProvider := stscreds.NewAssumeRoleProvider(stsClient, primaryRoleARN, primaryAssumeRoleOptions)
 
-	healthy := len(missingPermissions) == 0
+			// Cache the credentials
+			primaryCredentials := aws.NewCredentialsCache(primaryRoleProvider)
 
-	status := HealthStatus{
-		Organization: org,
-		Healthy:      healthy,
-		Details: Details{
-			RequiredPermissions: requiredPermissions,
-			MissingPermissions:  missingPermissions,
-		},
-	}
+			// Update the AWS configuration to use the assumed primary role credentials
+			cfg.Credentials = primaryCredentials
 
-	// Marshal to JSON and print
-	output, err := json.MarshalIndent(status, "", "  ")
-	if err != nil {
-		log.Fatalf("Failed to marshal JSON: %v", err)
-	}
+			// Update STS client with new credentials
+			stsClient = sts.NewFromConfig(cfg)
+		}
 
-	fmt.Println(string(output))
+		// Assume Role in Cross Account if CrossAccountRoleARN is provided
+		if crossAccountRoleARN != "" {
+			// Configure AssumeRole options
+			crossAccountAssumeRoleOptions := func(o *stscreds.AssumeRoleOptions) {
+				o.RoleSessionName = "cross-account-session"
+				if externalID != "" {
+					o.ExternalID = aws.String(externalID)
+				}
+				// Optional: o.DurationSeconds = 3600
+			}
 
-	if !healthy {
-		return errors.New("organization is not healthy due to missing permissions")
-	}
+			// Create an AssumeRole provider for the cross account role
+			crossAccountRoleProvider := stscreds.NewAssumeRoleProvider(stsClient, crossAccountRoleARN, crossAccountAssumeRoleOptions)
 
-	return nil
-}
+			// Cache the credentials
+			crossAccountCredentials := aws.NewCredentialsCache(crossAccountRoleProvider)
 
-// isPermissionError determines if an error is due to insufficient permissions
-func isPermissionError(err error) bool {
-	if err == nil {
-		return false
-	}
-	// Check if it's a GitHub API error
-	if githubErr, ok := err.(*github.ErrorResponse); ok {
-		if githubErr.Response != nil && githubErr.Response.StatusCode == 403 {
-			return true
+			// Update the AWS configuration to use the assumed cross account role credentials
+			cfg.Credentials = crossAccountCredentials
 		}
 	}
-	return false
+
+	return &cfg, nil
 }
 
-func GithubIntegrationHealthcheck(cfg Config) (bool, error) {
-	token := cfg.Token
-	if token == "" {
-		return false, fmt.Errorf("no token provided")
-	}
+// ValidateIntegrationHealth validates the integration health of the specified AWS account.
+// It checks if the account is accessible and if the IAM principal has the required policies.
+func ValidateIntegrationHealth(accountID string, creds AWSConfigInput) AccountResult {
+	var result AccountResult
+	result.AccountID = accountID
+	result.Details.RequiredPolicies = requiredPolicies
+	result.Details.CredentialType = "Single Account" // default, may change to "Multi-Account"
 
-	// Read organization name
-	orgName := cfg.OrganizationName
-	if orgName == "" {
-		return false, fmt.Errorf("organization name is required")
-	}
-
-	// Create a context with timeout
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-	defer cancel()
-
-	// Create an OAuth2 token source
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: token},
+	// Create AWS Config using provided credentials
+	awsCfg, err := GenerateAWSConfigHealth(
+		creds.AccessKeyID,
+		creds.SecretAccessKey,
+		creds.RoleNameInPrimaryAccount,
+		creds.CrossAccountRoleARN,
+		creds.ExternalID,
+		creds.Region,
 	)
-
-	// Create an OAuth2 client
-	tc := oauth2.NewClient(ctx, ts)
-
-	// Create a new GitHub client
-	client := github.NewClient(tc)
-
-	// Now process permissions for the specified organization
-	fmt.Printf("\nChecking Access for Organization: %s\n", orgName)
-	err := IsHealthy(ctx, client, orgName)
 	if err != nil {
-		return false, err
+		result.Details.Error = fmt.Sprintf("Failed to generate AWS config: %v", err)
+		result.Details.IsAccessible = false
+		result.Details.HasPolicies = false
+		result.Healthy = false
+		return result
 	}
 
-	return true, nil
+	// Initialize STS client
+	stsClient := sts.NewFromConfig(*awsCfg)
+
+	// Determine if it's multi-account based on provided inputs
+	isMultiAccount := creds.CrossAccountRoleARN != "" || creds.RoleNameInPrimaryAccount != ""
+
+	if isMultiAccount {
+		result.Details.CredentialType = "Multi-Account"
+		// Assume roles are already handled in GenerateAWSConfigHealth
+		// Proceed to get caller identity
+	}
+
+	// Get Caller Identity to check access
+	identityOutput, err := stsClient.GetCallerIdentity(context.TODO(), &sts.GetCallerIdentityInput{})
+	if err != nil {
+		result.Details.IsAccessible = false
+		result.Details.HasPolicies = false
+		result.Details.Error = fmt.Sprintf("Failed to get caller identity: %v", err)
+		result.Healthy = false
+		return result
+	}
+
+	// Verify if the account ID matches
+	if *identityOutput.Account != accountID {
+		result.Details.IsAccessible = false
+		result.Details.HasPolicies = false
+		result.Details.Error = fmt.Sprintf("Provided credentials do not match the account ID: %s", accountID)
+		result.Healthy = false
+		return result
+	}
+
+	// Record the principal ARN
+	result.Details.IsAccessible = true
+	result.Details.IamPrincipal = *identityOutput.Arn
+
+	// Check policies attached to the principal using utility functions
+	attachedPolicies, missingPolicies, err := GetAttachedPoliciesHealth(*awsCfg, result.Details.IamPrincipal, requiredPolicies)
+	if err != nil {
+		result.Details.HasPolicies = false
+		result.Details.Error = fmt.Sprintf("Error checking policies: %v", err)
+		result.Healthy = false
+		return result
+	}
+
+	result.Details.AttachedPolicies = attachedPolicies
+	result.Details.MissingPolicies = missingPolicies
+	if len(missingPolicies) > 0 {
+		result.Details.HasPolicies = false
+		result.Details.Error = fmt.Sprintf("Missing policies: %v", missingPolicies)
+	} else {
+		result.Details.HasPolicies = true
+	}
+
+	result.Healthy = result.Details.IsAccessible && result.Details.HasPolicies
+
+	return result
+}
+
+// ParsePrincipalArn parses an AWS principal ARN and returns the entity type and entity name.
+// This updated function handles assumed roles by extracting the actual role name.
+func ParsePrincipalArn(principalArn string) (string, string, error) {
+	parts := strings.Split(principalArn, ":")
+	if len(parts) < 6 {
+		return "", "", fmt.Errorf("invalid ARN format")
+	}
+
+	// parts[5] contains the resource part
+	resource := parts[5]
+	resourceParts := strings.SplitN(resource, "/", 2)
+	if len(resourceParts) != 2 {
+		return "", "", fmt.Errorf("invalid resource format in ARN")
+	}
+
+	entityType := resourceParts[0]
+	entityName := resourceParts[1]
+
+	if entityType == "assumed-role" {
+		entityType = "role"
+		// For assumed roles, entityName is "RoleName/SessionName"
+		// We only need the RoleName
+		roleParts := strings.SplitN(entityName, "/", 2)
+		entityName = roleParts[0]
+	}
+
+	return entityType, entityName, nil
+}
+
+// GetAttachedPoliciesHealth retrieves the attached policies and identifies any missing required policies.
+// It uses the ParsePrincipalArn function.
+func GetAttachedPoliciesHealth(cfg aws.Config, principalArn string, requiredPolicies []string) ([]string, []string, error) {
+	var attachedPolicies []string
+	var missingPolicies []string
+
+	iamClient := iam.NewFromConfig(cfg)
+
+	entityType, entityName, err := ParsePrincipalArn(principalArn)
+	if err != nil {
+		return attachedPolicies, missingPolicies, fmt.Errorf("failed to parse principal ARN: %v", err)
+	}
+
+	attachedPoliciesMap := make(map[string]bool)
+
+	switch entityType {
+	case "user":
+		// List policies attached to the user
+		input := &iam.ListAttachedUserPoliciesInput{
+			UserName: aws.String(entityName),
+		}
+
+		paginator := iam.NewListAttachedUserPoliciesPaginator(iamClient, input)
+
+		for paginator.HasMorePages() {
+			page, err := paginator.NextPage(context.TODO())
+			if err != nil {
+				return attachedPolicies, missingPolicies, fmt.Errorf("failed to list attached policies for user %s: %v", entityName, err)
+			}
+
+			for _, policy := range page.AttachedPolicies {
+				attachedPoliciesMap[*policy.PolicyArn] = true
+			}
+		}
+	case "role":
+		// List policies attached to the role
+		input := &iam.ListAttachedRolePoliciesInput{
+			RoleName: aws.String(entityName),
+		}
+
+		paginator := iam.NewListAttachedRolePoliciesPaginator(iamClient, input)
+
+		for paginator.HasMorePages() {
+			page, err := paginator.NextPage(context.TODO())
+			if err != nil {
+				return attachedPolicies, missingPolicies, fmt.Errorf("failed to list attached policies for role %s: %v", entityName, err)
+			}
+
+			for _, policy := range page.AttachedPolicies {
+				attachedPoliciesMap[*policy.PolicyArn] = true
+			}
+		}
+	default:
+		return attachedPolicies, missingPolicies, fmt.Errorf("unsupported entity type: %s", entityType)
+	}
+
+	// Convert map to slice
+	for arn := range attachedPoliciesMap {
+		attachedPolicies = append(attachedPolicies, arn)
+	}
+
+	// Check for missing policies
+	for _, policyArn := range requiredPolicies {
+		if !attachedPoliciesMap[policyArn] {
+			missingPolicies = append(missingPolicies, policyArn)
+		}
+	}
+
+	return attachedPolicies, missingPolicies, nil
 }

@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
-	"github.com/opengovern/og-describer-github/platform/constants"
+	"fmt"
 	"strconv"
+
+	"github.com/opengovern/og-describer-github/platform/constants"
 
 	"github.com/jackc/pgtype"
 	"github.com/opengovern/og-describer-github/global"
@@ -22,7 +25,7 @@ func (i *Integration) GetConfiguration() (interfaces.IntegrationConfiguration, e
 		NatsConsumerGroup:        global.ConsumerGroup,
 		NatsConsumerGroupManuals: global.ConsumerGroupManuals,
 
-		SteampipePluginName: "github",
+		SteampipePluginName: "aws",
 
 		UISpec:   constants.UISpec,
 		Manifest: constants.Manifest,
@@ -39,34 +42,51 @@ func (i *Integration) HealthCheck(jsonData []byte, providerId string, labels map
 	if err != nil {
 		return false, err
 	}
+	return AWSIntegrationHealthCheck(AWSConfigInput{
+		AccessKeyID:              credentials.AwsAccessKeyID,
+		SecretAccessKey:          credentials.AwsSecretAccessKey,
+		RoleNameInPrimaryAccount: credentials.RoleToAssumeInMainAccount,
+		CrossAccountRoleARN:      labels["CrossAccountRoleARN"],
+		ExternalID:               credentials.ExternalID,
+	}, providerId)
 
-	var name string
-	if v, ok := labels["OrganizationName"]; ok {
-		name = v
-	}
-	isHealthy, err := GithubIntegrationHealthcheck(Config{
-		Token:            credentials.PatToken,
-		OrganizationName: name,
-	})
-	return isHealthy, err
 }
 
 func (i *Integration) DiscoverIntegrations(jsonData []byte) ([]integration.Integration, error) {
+	ctx := context.Background()
 	var credentials global.IntegrationCredentials
 	err := json.Unmarshal(jsonData, &credentials)
 	if err != nil {
 		return nil, err
 	}
+	
 	var integrations []integration.Integration
-	accounts, err := GithubIntegrationDiscovery(Config{
-		Token: credentials.PatToken,
+	accounts := AWSIntegrationDiscovery(Config{
+		AWSAccessKeyID:                credentials.AwsAccessKeyID,
+		AWSSecretAccessKey:            credentials.AwsSecretAccessKey,
+		RoleNameToAssumeInMainAccount: credentials.RoleToAssumeInMainAccount,
+		CrossAccountRoleName:          credentials.CrossAccountRoleName,
+		ExternalID:                    credentials.ExternalID,
 	})
-	if err != nil {
-		return nil, err
-	}
 	for _, a := range accounts {
+		if a.Details.Error != "" {
+			return nil, fmt.Errorf(a.Details.Error)
+		}
+
+		isOrganizationMaster, err := IsOrganizationMasterAccount(ctx, AWSConfigInput{
+			AccessKeyID:              credentials.AwsAccessKeyID,
+			SecretAccessKey:          credentials.AwsSecretAccessKey,
+			RoleNameInPrimaryAccount: credentials.RoleToAssumeInMainAccount,
+			CrossAccountRoleARN:      a.Labels.CrossAccountRoleARN,
+			ExternalID:               credentials.ExternalID,
+		})
+
 		labels := map[string]string{
-			"OrganizationName": a.Login,
+			"RoleNameInMainAccount":               a.Labels.RoleNameInMainAccount,
+			"AccountType":                         a.Labels.AccountType,
+			"CrossAccountRoleARN":                 a.Labels.CrossAccountRoleARN,
+			"ExternalID":                          a.Labels.ExternalID,
+			"integration/aws/organization-master": strconv.FormatBool(isOrganizationMaster),
 		}
 		labelsJsonData, err := json.Marshal(labels)
 		if err != nil {
@@ -77,12 +97,14 @@ func (i *Integration) DiscoverIntegrations(jsonData []byte) ([]integration.Integ
 		if err != nil {
 			return nil, err
 		}
+
 		integrations = append(integrations, integration.Integration{
-			ProviderID: strconv.FormatInt(a.ID, 10),
-			Name:       a.Login,
+			ProviderID: a.AccountID,
+			Name:       a.AccountName,
 			Labels:     integrationLabelsJsonb,
 		})
 	}
+
 	return integrations, nil
 }
 
