@@ -14,7 +14,7 @@ import (
 	"fmt"
 
 	"github.com/opengovern/og-util/pkg/steampipe"
-	"github.com/turbot/steampipe-plugin-github/github"
+	"github.com/opengovern/og-describer-aws/cloudql/aws"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/context_key"
 )
@@ -37,7 +37,7 @@ func ExtractTableName(resourceType string) string {
 }
 
 func Plugin() *plugin.Plugin {
-	return github.Plugin(buildContext())
+	return aws.Plugin(buildContext())
 }
 
 func ExtractTagsAndNames(logger *zap.Logger, plg *plugin.Plugin, resourceType string, source interface{}) (map[string]string, string, error) {
