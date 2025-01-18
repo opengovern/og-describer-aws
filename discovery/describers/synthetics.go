@@ -5,7 +5,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics"
-	#
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
 )
 
 func SyntheticsCanary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

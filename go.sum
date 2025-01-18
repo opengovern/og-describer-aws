@@ -519,6 +519,8 @@ github.com/aws/aws-sdk-go-v2/service/sts v1.32.3 h1:wVnQ6tigGsRqSWDEEyH6lSAJ9OyF
 github.com/aws/aws-sdk-go-v2/service/sts v1.32.3/go.mod h1:VZa9yTFyj4o10YGsmDO4gbQJUvvhY72fhumT8W4LqsE=
 github.com/aws/aws-sdk-go-v2/service/support v1.26.11 h1:9d63aaC77aCpvyDvQyuhsVwCWEThjHOJav3PjNAgbjM=
 github.com/aws/aws-sdk-go-v2/service/support v1.26.11/go.mod h1:6Wdr/FtRZxcL5b4GBG83MI/1VhNXMbjuq4qqfL62Lgg=
+github.com/aws/aws-sdk-go-v2/service/synthetics v1.31.6 h1:WUV/IOODPLISC0z1x8ODdLRDoJ+NauYF0QDqeKz3CqY=
+github.com/aws/aws-sdk-go-v2/service/synthetics v1.31.6/go.mod h1:uhZMskgnLi7OeXCM5aA+8BvX9dz+2/D4n6ZVxbQN8r4=
 github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.12 h1:5NrwFCG1MHpUzZ2uik2HYsRM41ITNoPzdOrdh9byGKM=
 github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.12/go.mod h1:XsNmMlolqWE3VuMkdIZTzZGtNgxPvhR/BNPNOFH8ub4=
 github.com/aws/aws-sdk-go-v2/service/waf v1.25.11 h1:PoDsXSDBA7Eq38Nxcy5HCe9nW0V29CCAtjs2xehiOpE=

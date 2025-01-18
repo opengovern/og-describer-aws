@@ -1,10 +1,7 @@
 package maps
 
 import (
-	"github.com/opengovern/og-describer-aws/discovery/describers"
-	"github.com/opengovern/og-describer-aws/platform/constants"
 	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
-	"github.com/opengovern/og-describer-aws/discovery/provider"
 	"github.com/opengovern/og-util/pkg/integration/interfaces"
 )
 var ResourceTypes = map[string]model.ResourceType{}

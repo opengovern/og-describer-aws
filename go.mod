@@ -126,6 +126,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssoadmin v1.29.11
 	github.com/aws/aws-sdk-go-v2/service/storagegateway v1.34.11
 	github.com/aws/aws-sdk-go-v2/service/support v1.26.11
+	github.com/aws/aws-sdk-go-v2/service/synthetics v1.31.6
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.12
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.11
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.11
@@ -135,14 +136,12 @@ require (
 	github.com/go-errors/errors v1.5.1
 	github.com/gocarina/gocsv v0.0.0-20240520201108-78e41c74b4b1
 	github.com/golang-jwt/jwt/v5 v5.2.1
-	github.com/google/go-github/v55 v55.0.0
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/hashicorp/go-plugin v1.6.0
 	github.com/jackc/pgtype v1.14.4
 	github.com/nats-io/nats.go v1.36.0
 	github.com/opengovern/og-util v1.11.0
-	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7
 	github.com/spf13/cobra v1.8.1
 	github.com/turbot/steampipe-plugin-github v1.0.0
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.4
@@ -240,6 +239,7 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-github/v29 v29.0.2 // indirect
+	github.com/google/go-github/v55 v55.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/s2a-go v0.1.8 // indirect
@@ -301,6 +301,7 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/sethvargo/go-retry v0.2.4 // indirect
+	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7 // indirect
 	github.com/shurcooL/graphql v0.0.0-20220606043923-3cf50f8a0a29 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stevenle/topsort v0.2.0 // indirect
