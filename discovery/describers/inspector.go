@@ -1,8 +1,8 @@
-package describer
+package describers
 
 import (
 	"context"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"reflect"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -10,7 +10,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

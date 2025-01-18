@@ -1,4 +1,4 @@
-package describer
+package describers
 
 func PaginateRetrieveAll(fn func(prevToken *string) (nextToken *string, err error)) error {
 	first, token := true, (*string)(nil)

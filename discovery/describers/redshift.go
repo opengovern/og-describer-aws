@@ -1,10 +1,10 @@
-package describer
+package describers
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"strings"
 
 	types2 "github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
@@ -14,7 +14,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless"
 	"github.com/aws/smithy-go"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func RedshiftCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

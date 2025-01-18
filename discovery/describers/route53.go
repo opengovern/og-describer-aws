@@ -1,4 +1,4 @@
-package describer
+package describers
 
 import (
 	"context"
@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	types3 "github.com/aws/aws-sdk-go-v2/service/route53domains/types"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 	"github.com/aws/smithy-go"
@@ -17,7 +16,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver"
 	resolvertypes "github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func Route53HealthCheck(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

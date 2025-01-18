@@ -1,9 +1,9 @@
-package describer
+package describers
 
 import (
 	"context"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"time"
 
 	_ "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -11,7 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func DynamoDbTable(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

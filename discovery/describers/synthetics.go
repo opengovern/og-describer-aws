@@ -1,11 +1,11 @@
-package describer
+package describers
 
 import (
 	"context"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics"
+	#
 )
 
 func SyntheticsCanary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

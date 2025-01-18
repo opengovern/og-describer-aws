@@ -1,16 +1,17 @@
-package describer
+package describers
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"math/rand"
 	"os"
 	"sync"
 	"time"
 
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 
 	// AWS SDK for Go V2 packages
 	"github.com/aws/aws-sdk-go-v2/aws"

@@ -1,16 +1,17 @@
-package describer
+package describers
 
 import (
 	"context"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func DAXCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

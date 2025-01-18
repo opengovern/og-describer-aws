@@ -1,10 +1,10 @@
-package describer
+package describers
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -13,7 +13,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic"
 	public_types "github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
 	"github.com/aws/smithy-go"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

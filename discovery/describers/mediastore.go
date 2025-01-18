@@ -1,14 +1,14 @@
-package describer
+package describers
 
 import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func MediaStoreContainer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

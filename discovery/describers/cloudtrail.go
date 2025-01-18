@@ -1,8 +1,8 @@
-package describer
+package describers
 
 import (
 	"context"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,7 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func CloudTrailTrail(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

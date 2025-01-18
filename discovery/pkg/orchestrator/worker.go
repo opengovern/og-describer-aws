@@ -9,8 +9,8 @@ import (
 
 	"github.com/go-errors/errors"
 	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	"github.com/opengovern/og-describer-aws/discovery/provider"
 	"github.com/opengovern/og-describer-aws/global"
-	"github.com/opengovern/og-describer-awsscovery/provider"
 	describe2 "github.com/opengovern/og-util/pkg/describe"
 	"github.com/opengovern/og-util/pkg/es"
 	"github.com/opengovern/og-util/pkg/vault"

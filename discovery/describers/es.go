@@ -1,15 +1,15 @@
-package describer
+package describers
 
 import (
 	"context"
 	"math"
 
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	es "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 func ESDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

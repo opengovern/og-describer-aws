@@ -1,15 +1,15 @@
-package describer
+package describers
 
 import (
 	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 const (

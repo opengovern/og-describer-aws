@@ -1,4 +1,4 @@
-package describer
+package describers
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"github.com/opengovern/og-describer-aws/pkg/sdk/models"
+
 	"strings"
 	"time"
 
@@ -16,7 +16,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 	iam2 "github.com/aws/aws-sdk-go/service/iam"
 	"github.com/gocarina/gocsv"
-	"github.com/opengovern/og-describer-aws/provider/model"
+	"github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-github/discovery/provider"
 )
 
 const (
