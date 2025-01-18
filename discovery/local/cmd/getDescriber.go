@@ -10,9 +10,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/opengovern/og-describer-aws/discovery/pkg/orchestrator"
+	"github.com/opengovern/og-describer-aws/global"
 	model "github.com/opengovern/og-describer-awsscovery/pkg/models"
 	"github.com/opengovern/og-describer-awsscovery/provider"
-	"github.com/opengovern/og-describer-github/global"
 	"github.com/opengovern/og-util/pkg/describe"
 	"github.com/opengovern/og-util/pkg/es"
 	"github.com/spf13/cobra"

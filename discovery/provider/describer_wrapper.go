@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/google/go-github/v55/github"
-	model "github.com/opengovern/og-describer-github/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
 	"github.com/opengovern/og-util/pkg/describe/enums"
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/net/context"

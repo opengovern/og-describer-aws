@@ -1,7 +1,7 @@
 package maps
 
 import (
-	"github.com/opengovern/og-describer-github/discovery/pkg/es"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/es"
 )
 
 var ResourceTypesToTables = map[string]string{

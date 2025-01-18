@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/opengovern/og-describer-github/platform/constants"
+	"github.com/opengovern/og-describer-aws/platform/constants"
 
 	"github.com/jackc/pgtype"
-	"github.com/opengovern/og-describer-github/global"
-	"github.com/opengovern/og-describer-github/global/maps"
+	"github.com/opengovern/og-describer-aws/global"
+	"github.com/opengovern/og-describer-aws/global/maps"
 	"github.com/opengovern/og-util/pkg/integration"
 	"github.com/opengovern/og-util/pkg/integration/interfaces"
 )

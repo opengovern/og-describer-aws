@@ -3,7 +3,7 @@ package global
 import (
 	"context"
 
-	"github.com/opengovern/og-describer-awsobal/maps"
+	"github.com/opengovern/og-describer-aws/global/maps"
 
 	"strings"
 
