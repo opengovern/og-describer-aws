@@ -3,7 +3,7 @@ package aws
 import (
 	"context"
 
-	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
+	opengovernance "github.com/opengovern/og-describer-aws/discovery/pkg/es"
 
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"

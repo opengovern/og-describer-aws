@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
+	opengovernance "github.com/opengovern/og-describer-aws/discovery/pkg/es"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected"

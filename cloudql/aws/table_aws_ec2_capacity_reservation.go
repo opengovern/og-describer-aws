@@ -5,7 +5,7 @@ import (
 
 	ec2 "github.com/aws/aws-sdk-go-v2/service/ec2/types"
 
-	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
+	opengovernance "github.com/opengovern/og-describer-aws/discovery/pkg/es"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"

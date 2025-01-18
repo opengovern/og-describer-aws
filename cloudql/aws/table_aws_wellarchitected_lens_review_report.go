@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
+	opengovernance "github.com/opengovern/og-describer-aws/discovery/pkg/es"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 
 	"github.com/aws/aws-sdk-go-v2/aws"

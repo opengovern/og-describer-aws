@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	opengovernance "github.com/opengovern/og-describer-aws/pkg/sdk/es"
+	opengovernance "github.com/opengovern/og-describer-aws/discovery/pkg/es"
 	"github.com/turbot/go-kit/types"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
