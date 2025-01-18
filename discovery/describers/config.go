@@ -6,8 +6,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
-	"github.com/opengovern/og-describer-github/discovery/pkg/models"
-	model "github.com/opengovern/og-describer-github/discovery/provider"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

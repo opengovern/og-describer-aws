@@ -13,8 +13,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
-	"github.com/opengovern/og-describer-github/discovery/pkg/models"
-	model "github.com/opengovern/og-describer-github/discovery/provider"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func KMSAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

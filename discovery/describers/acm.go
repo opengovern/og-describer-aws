@@ -10,8 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca"
-	"github.com/opengovern/og-describer-github/discovery/pkg/models"
-	model "github.com/opengovern/og-describer-github/discovery/provider"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

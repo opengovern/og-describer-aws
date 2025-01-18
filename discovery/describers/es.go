@@ -8,8 +8,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	es "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
-	"github.com/opengovern/og-describer-github/discovery/pkg/models"
-	model "github.com/opengovern/og-describer-github/discovery/provider"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func ESDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {

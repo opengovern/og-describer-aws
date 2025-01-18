@@ -16,8 +16,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver"
 	resolvertypes "github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
-	"github.com/opengovern/og-describer-github/discovery/pkg/models"
-	model "github.com/opengovern/og-describer-github/discovery/provider"
+	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func Route53HealthCheck(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
