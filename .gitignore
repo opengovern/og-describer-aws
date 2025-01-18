@@ -1,3 +1,5 @@
 build/
-og-describer-aws
+og-describer-*
 .idea
+.env
+.vscode

@@ -1,0 +1,3283 @@
+[
+  {
+    "ResourceName": "AWS::Redshift::Snapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshift_snapshot",
+    "Model": "RedshiftSnapshot"
+  },
+  {
+    "ResourceName": "AWS::IAM::AccountSummary",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMAccountSummary)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_account_summary",
+    "Model": "IAMAccountSummary"
+  },
+  {
+    "ResourceName": "AWS::Glacier::Vault",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlacierVault)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glacier_vault",
+    "Model": "GlacierVault"
+  },
+  {
+    "ResourceName": "AWS::Organizations::Organization",
+    "ListDescriber": "SequentialDescribeGlobal(describers.OrganizationsOrganization)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_organization",
+    "Model": "OrganizationsOrganization"
+  },
+  {
+    "ResourceName": "AWS::Organizations::Policy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.OrganizationsPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_policy",
+    "Model": "OrganizationsPolicy"
+  },
+  {
+    "ResourceName": "AWS::Organizations::PolicyTarget",
+    "ListDescriber": "SequentialDescribeGlobal(describers.OrganizationsPolicyTarget)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_policy_target",
+    "Model": "OrganizationsPolicyTarget"
+  },
+  {
+    "ResourceName": "AWS::Organizations::OrganizationalUnit",
+    "ListDescriber": "SequentialDescribeGlobal(describers.OrganizationsOrganizationalUnit)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_organizational_unit",
+    "Model": "OrganizationsOrganizationalUnit"
+  },
+  {
+    "ResourceName": "AWS::Organizations::Root",
+    "ListDescriber": "SequentialDescribeGlobal(describers.OrganizationsRoot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_root",
+    "Model": "OrganizationsRoot"
+  },
+  {
+    "ResourceName": "AWS::CloudSearch::Domain",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudSearchDomain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudsearch_domain",
+    "Model": "CloudSearchDomain"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::GlobalSecondaryIndex",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbGlobalSecondaryIndex)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_global_secondary_index",
+    "Model": "DynamoDbGlobalSecondaryIndex"
+  },
+  {
+    "ResourceName": "AWS::EC2::RouteTable",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Route53RouteTable.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2RouteTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_route_table",
+    "Model": "EC2RouteTable"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::Hub",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubHub)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_hub",
+    "Model": "SecurityHubHub"
+  },
+  {
+    "ResourceName": "AWS::StorageGateway::StorageGateway",
+    "ListDescriber": "ParallelDescribeRegional(describers.StorageGatewayStorageGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_storagegateway_storage_gateway",
+    "Model": "StorageGatewayStorageGateway"
+  },
+  {
+    "ResourceName": "AWS::Inspector::AssessmentTemplate",
+    "ListDescriber": "ParallelDescribeRegional(describers.InspectorAssessmentTemplate)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector_assessment_template",
+    "Model": "InspectorAssessmentTemplate"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2ListenerRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_load_balancer_listener_rule",
+    "Model": "ElasticLoadBalancingV2Rule"
+  },
+  {
+    "ResourceName": "AWS::IAM::Role",
+    "Tags": {
+      "category": ["Management \u0026 Governance"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/IdentityAccessManagementRole.svg"
+      ]
+    },
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMRole)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_role",
+    "Model": "IAMRole"
+  },
+  {
+    "ResourceName": "AWS::Backup::ProtectedResource",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupProtectedResource)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_protected_resource",
+    "Model": "BackupProtectedResource"
+  },
+  {
+    "ResourceName": "AWS::CodeCommit::Repository",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeCommitRepository)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codecommit_repository",
+    "Model": "CodeCommitRepository"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPCEndpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPCEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_endpoint",
+    "Model": "EC2VPCEndpoint"
+  },
+  {
+    "ResourceName": "AWS::EventBridge::EventRule",
+    "ListDescriber": "ParallelDescribeRegional(describers.EventBridgeRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eventbridge_rule",
+    "Model": "EventBridgeRule"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::OriginAccessControl",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontOriginAccessControl)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_origin_access_control",
+    "Model": "CloudFrontOriginAccessControl"
+  },
+  {
+    "ResourceName": "AWS::CodeBuild::Project",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeBuildProject)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codebuild_project",
+    "Model": "CodeBuildProject"
+  },
+  {
+    "ResourceName": "AWS::CodeBuild::Build",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeBuildBuild)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codebuild_build",
+    "Model": "CodeBuildBuild"
+  },
+  {
+    "ResourceName": "AWS::ElastiCache::ParameterGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElastiCacheParameterGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticache_parameter_group",
+    "Model": "ElastiCacheParameterGroup"
+  },
+  {
+    "ResourceName": "AWS::MemoryDb::Cluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.MemoryDbCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_memorydb_cluster",
+    "Model": "MemoryDbCluster"
+  },
+  {
+    "ResourceName": "AWS::Glue::Crawler",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueCrawler)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_crawler",
+    "Model": "GlueCrawler"
+  },
+  {
+    "ResourceName": "AWS::DirectConnect::Gateway",
+    "ListDescriber": "ParallelDescribeRegional(describers.DirectConnectGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_directconnect_gateway",
+    "Model": "DirectConnectGateway"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::BackUp",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbBackUp)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_backup",
+    "Model": "DynamoDbBackup"
+  },
+  {
+    "ResourceName": "AWS::EC2::EIP",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2EIP)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_eip",
+    "Model": "EC2EIP"
+  },
+  {
+    "ResourceName": "AWS::EC2::InternetGateway",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/InternetGateway.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2InternetGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_internet_gateway",
+    "Model": "EC2InternetGateway"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::PublishingDestination",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyPublishingDestination)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_publishing_destination",
+    "Model": "GuardDutyPublishingDestination"
+  },
+  {
+    "ResourceName": "AWS::KinesisAnalyticsV2::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.KinesisAnalyticsV2Application)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kinesisanalyticsv2_application",
+    "Model": "KinesisAnalyticsV2Application"
+  },
+  {
+    "ResourceName": "AWS::EMR::Instance",
+    "ListDescriber": "ParallelDescribeRegional(describers.EMRInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_emr_instance",
+    "Model": "EMRInstance"
+  },
+  {
+    "ResourceName": "AWS::EMR::BlockPublicAccessConfiguration",
+    "ListDescriber": "ParallelDescribeRegional(describers.EMRBlockPublicAccessConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_emr_block_public_access_configuration",
+    "Model": "EMRBlockPublicAccessConfiguration"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::RestApi",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ApiGateway.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayRestAPI)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_rest_api",
+    "Model": "ApiGatewayRestAPI"
+  },
+  {
+    "ResourceName": "AWS::ApiGatewayV2::Integration",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayV2Integration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gatewayv2_integration",
+    "Model": "ApiGatewayV2Integration"
+  },
+  {
+    "ResourceName": "AWS::AutoScaling::AutoScalingGroup",
+    "Tags": {
+      "category": ["Compute"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AutoScaling.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.AutoScalingAutoScalingGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_autoscaling_group",
+    "Model": "AutoScalingGroup"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::TableExport",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbTableExport)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_table_export",
+    "Model": "DynamoDbTableExport"
+  },
+  {
+    "ResourceName": "AWS::EC2::KeyPair",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2KeyPair)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_key_pair",
+    "Model": "EC2KeyPair"
+  },
+  {
+    "ResourceName": "AWS::EFS::FileSystem",
+    "Tags": {
+      "category": ["Storage"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticFileSystem.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EFSFileSystem)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_efs_file_system",
+    "Model": "EFSFileSystem"
+  },
+  {
+    "ResourceName": "AWS::Kafka::Cluster",
+    "Tags": {
+      "category": ["PaaS"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ManagedStreamingForKafka.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.KafkaCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kafka_cluster",
+    "Model": "KafkaCluster"
+  },
+  {
+    "ResourceName": "AWS::SecretsManager::Secret",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecretsManagerSecret)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_secretsmanager_secret",
+    "Model": "SecretsManagerSecret"
+  },
+  {
+    "ResourceName": "AWS::Backup::LegalHold",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupLegalHold)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_legal_hold",
+    "Model": "BackupLegalHold"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::Function",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontFunction)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_function",
+    "Model": "CloudFrontFunction"
+  },
+  {
+    "ResourceName": "AWS::GlobalAccelerator::EndpointGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlobalAcceleratorEndpointGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_globalaccelerator_endpoint_group",
+    "Model": "GlobalAcceleratorEndpointGroup"
+  },
+  {
+    "ResourceName": "AWS::DAX::ParameterGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.DAXParameterGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dax_parameter_group",
+    "Model": "DAXParameterGroup"
+  },
+  {
+    "ResourceName": "AWS::SQS::Queue",
+    "ListDescriber": "ParallelDescribeRegional(describers.SQSQueue)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sqs_queue",
+    "Model": "SQSQueue"
+  },
+  {
+    "ResourceName": "AWS::Config::Rule",
+    "ListDescriber": "ParallelDescribeRegional(describers.ConfigRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_config_rule",
+    "Model": "ConfigRule"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::Member",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyMember)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_member",
+    "Model": "GuardDutyMember"
+  },
+  {
+    "ResourceName": "AWS::Inspector::Exclusion",
+    "ListDescriber": "ParallelDescribeRegional(describers.InspectorExclusion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector_exclusion",
+    "Model": "InspectorExclusion"
+  },
+  {
+    "ResourceName": "AWS::DirectoryService::Directory",
+    "ListDescriber": "ParallelDescribeRegional(describers.DirectoryServiceDirectory)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_directory_service_directory",
+    "Model": "DirectoryServiceDirectory"
+  },
+  {
+    "ResourceName": "AWS::DirectoryService::Certificate",
+    "ListDescriber": "ParallelDescribeRegional(describers.DirectoryServiceCertificate)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_directory_service_certificate",
+    "Model": "DirectoryServiceCertificate"
+  },
+  {
+    "ResourceName": "AWS::DirectoryService::LogSubscription",
+    "ListDescriber": "ParallelDescribeRegional(describers.DirectoryServiceLogSubscription)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_directory_service_log_subscription",
+    "Model": "DirectoryServiceLogSubscription"
+  },
+  {
+    "ResourceName": "AWS::EFS::AccessPoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.EFSAccessPoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_efs_access_point",
+    "Model": "EFSAccessPoint"
+  },
+  {
+    "ResourceName": "AWS::IAM::PolicyAttachment",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMPolicyAttachment)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_policy_attachment",
+    "Model": "IAMPolicyAttachment"
+  },
+  {
+    "ResourceName": "AWS::IAM::CredentialReport",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMCredentialReport)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_credential_report",
+    "Model": "IAMCredentialReport"
+  },
+  {
+    "ResourceName": "AWS::RDS::GlobalCluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSGlobalCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_global_cluster",
+    "Model": "RDSGlobalCluster"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ForcastDaily",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostForecastDaily)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_forecast_daily",
+    "Model": "CostExplorerForcastDaily"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::Detector",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyDetector)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_detector",
+    "Model": "GuardDutyDetector"
+  },
+  {
+    "ResourceName": "AWS::SNS::Topic",
+    "ListDescriber": "ParallelDescribeRegional(describers.SNSTopic)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sns_topic",
+    "Model": "SNSTopic"
+  },
+  {
+    "ResourceName": "AWS::AppConfig::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.AppConfigApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appconfig_application",
+    "Model": "AppConfigApplication"
+  },
+  {
+    "ResourceName": "AWS::Batch::Job",
+    "ListDescriber": "ParallelDescribeRegional(describers.BatchJob)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_batch_job",
+    "Model": "BatchJob"
+  },
+  {
+    "ResourceName": "AWS::Batch::JobQueue",
+    "ListDescriber": "ParallelDescribeRegional(describers.BatchJobQueue)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_batchjob_queue",
+    "Model": "BatchJobQueue"
+  },
+  {
+    "ResourceName": "AWS::ECS::Service",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSService)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_service",
+    "Model": "ECSService"
+  },
+  {
+    "ResourceName": "AWS::FSX::Task",
+    "ListDescriber": "ParallelDescribeRegional(describers.FSXTask)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_fsx_task",
+    "Model": "FSXTask"
+  },
+  {
+    "ResourceName": "AWS::IAM::VirtualMFADevice",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMVirtualMFADevice)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_virtual_mfa_device",
+    "Model": "IAMVirtualMFADevice"
+  },
+  {
+    "ResourceName": "AWS::WAFv2::WebACL",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFv2WebACL)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafv2_web_acl",
+    "Model": "WAFv2WebACL"
+  },
+  {
+    "ResourceName": "AWS::ApplicationAutoScaling::Target",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApplicationAutoScalingTarget)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appautoscaling_target",
+    "Model": "ApplicationAutoScalingTarget"
+  },
+  {
+    "ResourceName": "AWS::ApplicationAutoScaling::Policy",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApplicationAutoScalingPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appautoscaling_policy",
+    "Model": "ApplicationAutoScalingPolicy"
+  },
+  {
+    "ResourceName": "AWS::Backup::Vault",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupVault)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_vault",
+    "Model": "BackupVault"
+  },
+  {
+    "ResourceName": "AWS::ElastiCache::Cluster",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElastiCache.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ElastiCacheCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticache_cluster",
+    "Model": "ElastiCacheCluster"
+  },
+  {
+    "ResourceName": "AWS::Logs::LogGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchLogsLogGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudwatch_log_group",
+    "Model": "CloudWatchLogsLogGroup"
+  },
+  {
+    "ResourceName": "AWS::S3::Bucket",
+    "Tags": {
+      "category": ["Storage"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/SimpleStorageBucket.svg"
+      ]
+    },
+    "ListDescriber": "SequentialDescribeGlobal(describers.S3Bucket)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_s3_bucket",
+    "Model": "S3Bucket"
+  },
+  {
+    "ResourceName": "AWS::S3::Object",
+    "ListDescriber": "SequentialDescribeGlobal(describers.S3Object)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_s3_object",
+    "Model": "S3Object"
+  },
+  {
+    "ResourceName": "AWS::S3::BucketIntelligentTieringConfiguration",
+    "ListDescriber": "SequentialDescribeGlobal(describers.S3BucketIntelligentTieringConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_s3_bucket_intelligent_tiering_configuration",
+    "Model": "S3BucketIntelligentTieringConfiguration"
+  },
+  {
+    "ResourceName": "AWS::S3::MultiRegionAccessPoint",
+    "ListDescriber": "SequentialDescribeGlobal(describers.S3MultiRegionAccessPoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_s3_multi_region_access_point",
+    "Model": "S3MultiRegionAccessPoint"
+  },
+  {
+    "ResourceName": "AWS::CertificateManager::Certificate",
+    "ListDescriber": "ParallelDescribeRegional(describers.CertificateManagerCertificate)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_acm_certificate",
+    "Model": "CertificateManagerCertificate"
+  },
+  {
+    "ResourceName": "AWS::EKS::AddonVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.EKSAddonVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eks_addon_version",
+    "Model": "EKSAddonVersion"
+  },
+  {
+    "ResourceName": "AWS::ApiGatewayV2::Api",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayV2API)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gatewayv2_api",
+    "Model": "ApiGatewayV2API"
+  },
+  {
+    "ResourceName": "AWS::EC2::Volume",
+    "Tags": {
+      "category": ["Storage"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreVolume.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Volume)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ebs_volume",
+    "Model": "EC2Volume"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::ApiKey",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayApiKey)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_api_key",
+    "Model": "ApiGatewayApiKey"
+  },
+  {
+    "ResourceName": "AWS::Glue::Connection",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueConnection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_connection",
+    "Model": "GlueConnection"
+  },
+  {
+    "ResourceName": "AWS::ECS::Task",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSTask)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_task",
+    "Model": "ECSTask"
+  },
+  {
+    "ResourceName": "AWS::SSM::ManagedInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMManagedInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_managed_instance",
+    "Model": "SSMManagedInstance"
+  },
+  {
+    "ResourceName": "AWS::SSM::Inventory",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMInventory)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_inventory",
+    "Model": "SSMInventory"
+  },
+  {
+    "ResourceName": "AWS::SSM::InventoryEntry",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMInventoryEntry)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_inventory_entry",
+    "Model": "SSMInventoryEntry"
+  },
+  {
+    "ResourceName": "AWS::SSM::MaintenanceWindow",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMMaintenanceWindow)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_maintenance_window",
+    "Model": "SSMMaintenanceWindow"
+  },
+  {
+    "ResourceName": "AWS::SSM::PatchBaseline",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMPatchBaseline)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_patch_baseline",
+    "Model": "SSMPatchBaseline"
+  },
+  {
+    "ResourceName": "AWS::SSM::Parameter",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMParameter)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_parameter",
+    "Model": "SSMParameter"
+  },
+  {
+    "ResourceName": "AWS::Lambda::Function",
+    "Tags": {
+      "category": ["Serverless"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Lambda.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.LambdaFunction)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lambda_function",
+    "Model": "LambdaFunction"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBSnapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_snapshot",
+    "Model": "RDSDBSnapshot"
+  },
+  {
+    "ResourceName": "AWS::CodeDeploy::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeDeployApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codedeploy_app",
+    "Model": "CodeDeployApplication"
+  },
+  {
+    "ResourceName": "AWS::CodeDeploy::DeploymentConfig",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeDeployDeploymentConfig)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codedeploy_deployment_config",
+    "Model": "CodeDeployDeploymentConfig"
+  },
+  {
+    "ResourceName": "AWS::EMR::Cluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.EMRCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_emr_cluster",
+    "Model": "EMRCluster"
+  },
+  {
+    "ResourceName": "AWS::IAM::AccessKey",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMAccessKey)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_access_key",
+    "Model": "IAMAccessKey"
+  },
+  {
+    "ResourceName": "AWS::IAM::SSHPublicKey",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMSSHPublicKey)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_ssh_public_key",
+    "Model": "IAMSSHPublicKey"
+  },
+  {
+    "ResourceName": "AWS::Glue::CatalogTable",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueCatalogTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_catalog_table",
+    "Model": "GlueCatalogTable"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::Channel",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailChannel)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudtrail_channel",
+    "Model": "CloudTrailChannel"
+  },
+  {
+    "ResourceName": "AWS::EC2::NetworkAcl",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2NetworkAcl)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_network_acl",
+    "Model": "EC2NetworkAcl"
+  },
+  {
+    "ResourceName": "AWS::ECS::ContainerInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSContainerInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_container_instance",
+    "Model": "ECSContainerInstance"
+  },
+  {
+    "ResourceName": "AWS::RedshiftServerless::Snapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftServerlessSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshiftserverless_snapshot",
+    "Model": "RedshiftServerlessSnapshot"
+  },
+  {
+    "ResourceName": "AWS::Workspaces::Bundle",
+    "ListDescriber": "ParallelDescribeRegional(describers.WorkspacesBundle)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_workspaces_bundle",
+    "Model": "WorkspacesBundle"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::Trail",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailTrail)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudtrail_trail",
+    "Model": "CloudTrailTrail"
+  },
+  {
+    "ResourceName": "AWS::DAX::Parameter",
+    "ListDescriber": "ParallelDescribeRegional(describers.DAXParameter)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dax_parameter",
+    "Model": "DAXParameter"
+  },
+  {
+    "ResourceName": "AWS::ECR::Image",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRImage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecr_image",
+    "Model": "ECRImage"
+  },
+  {
+    "ResourceName": "AWS::IAM::ServerCertificate",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMServerCertificate)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_server_certificate",
+    "Model": "IAMServerCertificate"
+  },
+  {
+    "ResourceName": "AWS::Keyspaces::Keyspace",
+    "ListDescriber": "ParallelDescribeRegional(describers.KeyspacesKeyspace)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_keyspaces_keyspace",
+    "Model": "KeyspacesKeyspace"
+  },
+  {
+    "ResourceName": "AWS::S3::AccessPoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.S3AccessPoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_s3_access_point",
+    "Model": "S3AccessPoint"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::EndpointConfiguration",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerEndpointConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_endpoint_configuration",
+    "Model": "SageMakerEndpointConfiguration"
+  },
+  {
+    "ResourceName": "AWS::ElastiCache::ReservedCacheNode",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElastiCacheReservedCacheNode)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticache_reserved_cache_node",
+    "Model": "ElastiCacheReservedCacheNode"
+  },
+  {
+    "ResourceName": "AWS::EMR::InstanceFleet",
+    "ListDescriber": "ParallelDescribeRegional(describers.EMRInstanceFleet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_emr_instance_fleet",
+    "Model": "EMRInstanceFleet"
+  },
+  {
+    "ResourceName": "AWS::Account::Account",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMAccount)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_account",
+    "Model": "IAMAccount"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPCPeeringConnection",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPCPeeringConnection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_peering_connection",
+    "Model": "EC2VpcPeeringConnection"
+  },
+  {
+    "ResourceName": "AWS::EKS::FargateProfile",
+    "ListDescriber": "ParallelDescribeRegional(describers.EKSFargateProfile)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eks_fargate_profile",
+    "Model": "EKSFargateProfile"
+  },
+  {
+    "ResourceName": "AWS::IAM::AccountPasswordPolicy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMAccountPasswordPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_account_password_policy",
+    "Model": "IAMAccountPasswordPolicy"
+  },
+  {
+    "ResourceName": "AWS::CodePipeline::Pipeline",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodePipelinePipeline)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codepipeline_pipeline",
+    "Model": "CodePipelinePipeline"
+  },
+  {
+    "ResourceName": "AWS::DAX::Cluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.DAXCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dax_cluster",
+    "Model": "DAXCluster"
+  },
+  {
+    "ResourceName": "AWS::DLM::LifecyclePolicy",
+    "ListDescriber": "ParallelDescribeRegional(describers.DLMLifecyclePolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dlm_lifecycle_policy",
+    "Model": "DLMLifecyclePolicy"
+  },
+  {
+    "ResourceName": "AWS::OpsWorksCM::Server",
+    "ListDescriber": "ParallelDescribeRegional(describers.OpsWorksCMServer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_opsworkscm_server",
+    "Model": "OpsWorksCMServer"
+  },
+  {
+    "ResourceName": "AWS::AccessAnalyzer::Analyzer",
+    "ListDescriber": "ParallelDescribeRegional(describers.AccessAnalyzerAnalyzer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_accessanalyzer_analyzer",
+    "Model": "AccessAnalyzerAnalyzer"
+  },
+  {
+    "ResourceName": "AWS::AccessAnalyzer::Finding",
+    "ListDescriber": "ParallelDescribeRegional(describers.AccessAnalyzerAnalyzerFinding)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_accessanalyzer_finding",
+    "Model": "AccessAnalyzerAnalyzerFinding"
+  },
+  {
+    "ResourceName": "AWS::ElastiCache::SubnetGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElastiCacheSubnetGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticache_subnet_group",
+    "Model": "ElastiCacheSubnetGroup"
+  },
+  {
+    "ResourceName": "AWS::FSX::Volume",
+    "ListDescriber": "ParallelDescribeRegional(describers.FSXVolume)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_fsx_volume",
+    "Model": "FSXVolume"
+  },
+  {
+    "ResourceName": "AWS::Amplify::App",
+    "ListDescriber": "ParallelDescribeRegional(describers.AmplifyApp)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_amplify_app",
+    "Model": "AmplifyApp"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::Query",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailQuery)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudtrail_query",
+    "Model": "CloudTrailQuery"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByAccountMonthly",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByAccountLastMonth)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_account_monthly",
+    "Model": "CostExplorerByAccountMonthly"
+  },
+  {
+    "ResourceName": "AWS::ECR::PublicRegistry",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRPublicRegistry)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecrpublic_registry",
+    "Model": "ECRPublicRegistry"
+  },
+  {
+    "ResourceName": "AWS::EC2::NetworkInterface",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2NetworkInterface)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_network_interface",
+    "Model": "EC2NetworkInterface"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPNConnection",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPNConnection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_vpn_connection",
+    "Model": "EC2VPNConnection"
+  },
+  {
+    "ResourceName": "AWS::FSX::StorageVirtualMachine",
+    "ListDescriber": "ParallelDescribeRegional(describers.FSXStorageVirtualMachine)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_fsx_storage_virtual_machine",
+    "Model": "FSXStorageVirtualMachine"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::Authorizer",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayAuthorizer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_authorizer",
+    "Model": "ApiGatewayAuthorizer"
+  },
+  {
+    "ResourceName": "AWS::AppStream::Stack",
+    "ListDescriber": "ParallelDescribeRegional(describers.AppStreamStack)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appstream_stack",
+    "Model": "AppStreamStack"
+  },
+  {
+    "ResourceName": "AWS::Athena::WorkGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.AthenaWrokgroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_athena_workgroup",
+    "Model": "AthenaWorkGroup"
+  },
+  {
+    "ResourceName": "AWS::Athena::QueryExecution",
+    "ListDescriber": "ParallelDescribeRegional(describers.AthenaQueryExecution)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_athena_query_execution",
+    "Model": "AthenaQueryExecution"
+  },
+  {
+    "ResourceName": "AWS::AppStream::Image",
+    "ListDescriber": "ParallelDescribeRegional(describers.AppStreamImage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appstream_image",
+    "Model": "AppStreamImage"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::Alarm",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchAlarm)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudwatch_alarm",
+    "Model": "CloudWatchAlarm"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::LogSubscriptionFilter",
+    "ListDescriber": "SequentialDescribeRegional(describers.CloudWatchLogsSubscriptionFilter)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudwatch_log_subscription_filter",
+    "Model": "CloudWatchLogSubscriptionFilter"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByRecordTypeMonthly",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByRecordTypeLastMonth)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_record_type_monthly",
+    "Model": "CostExplorerByRecordTypeMonthly"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBCluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_cluster",
+    "Model": "RDSDBCluster"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBClusterSnapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBClusterSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_cluster_snapshot",
+    "Model": "RDSDBClusterSnapshot"
+  },
+  {
+    "ResourceName": "AWS::Backup::Framework",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupFramework)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_framework",
+    "Model": "BackupFramework"
+  },
+  {
+    "ResourceName": "AWS::CodeBuild::SourceCredential",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeBuildSourceCredential)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codebuild_source_credential",
+    "Model": "CodeBuildSourceCredential"
+  },
+  {
+    "ResourceName": "AWS::IAM::ServiceSpecificCredential",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMServiceSpecificCredential)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_service_specific_credential",
+    "Model": "IAMServiceSpecificCredential"
+  },
+  {
+    "ResourceName": "AWS::EC2::CapacityReservationFleet",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2CapacityReservationFleet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_capacity_reservation_fleet",
+    "Model": "EC2CapacityReservationFleet"
+  },
+  {
+    "ResourceName": "AWS::NetworkFirewall::Firewall",
+    "ListDescriber": "ParallelDescribeRegional(describers.NetworkFirewallFirewall)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_networkfirewall_firewall",
+    "Model": "NetworkFirewallFirewall"
+  },
+  {
+    "ResourceName": "AWS::Workspaces::Workspace",
+    "ListDescriber": "ParallelDescribeRegional(describers.WorkspacesWorkspace)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_workspaces_workspace",
+    "Model": "WorkspacesWorkspace"
+  },
+  {
+    "ResourceName": "AWS::ElasticSearch::Domain",
+    "ListDescriber": "ParallelDescribeRegional(describers.ESDomain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticsearch_domain",
+    "Model": "ESDomain"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBInstance",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Rds.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_instance",
+    "Model": "RDSDBInstance"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBInstanceAutomatedBackup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBInstanceAutomatedBackup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_instance_automated_backup",
+    "Model": "RDSDBInstanceAutomatedBackup"
+  },
+  {
+    "ResourceName": "AWS::EFS::MountTarget",
+    "ListDescriber": "ParallelDescribeRegional(describers.EFSMountTarget)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_efs_mount_target",
+    "Model": "EFSMountTarget"
+  },
+  {
+    "ResourceName": "AWS::GlobalAccelerator::Listener",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlobalAcceleratorListener)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_globalaccelerator_listener",
+    "Model": "GlobalAcceleratorListener"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByUsageTypeDaily",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByServiceUsageLastDay)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_service_usage_type_daily",
+    "Model": "CostExplorerByServiceUsageTypeDaily"
+  },
+  {
+    "ResourceName": "AWS::EKS::Addon",
+    "ListDescriber": "ParallelDescribeRegional(describers.EKSAddon)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eks_addon",
+    "Model": "EKSAddon"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByServiceMonthly",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByServiceLastMonth)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_service_monthly",
+    "Model": "CostExplorerByServiceMonthly"
+  },
+  {
+    "ResourceName": "AWS::IAM::Policy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_policy",
+    "Model": "IAMPolicy"
+  },
+  {
+    "ResourceName": "AWS::Redshift::Cluster",
+    "Tags": {
+      "category": ["Big Data"],
+      "logo_uri": [""]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshift_cluster",
+    "Model": "RedshiftCluster"
+  },
+  {
+    "ResourceName": "AWS::WAFRegional::Rule",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRegionalRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafregional_rule",
+    "Model": "WAFRegionalRule"
+  },
+  {
+    "ResourceName": "AWS::WAFRegional::RuleGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRegionalRuleGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafregional_rule_group",
+    "Model": "WAFRegionalRuleGroup"
+  },
+  {
+    "ResourceName": "AWS::Glue::DataCatalogEncryptionSettings",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueDataCatalogEncryptionSettings)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_data_catalog_encryption_settings",
+    "Model": "GlueDataCatalogEncryptionSettings"
+  },
+  {
+    "ResourceName": "AWS::EC2::FlowLog",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2FlowLog)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_flow_log",
+    "Model": "EC2FlowLog"
+  },
+  {
+    "ResourceName": "AWS::EC2::IpamPool",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2IpamPool)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_ipam_pool",
+    "Model": "EC2IpamPool"
+  },
+  {
+    "ResourceName": "AWS::IAM::SamlProvider",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMSamlProvider)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_saml_provider",
+    "Model": "IAMSamlProvider"
+  },
+  {
+    "ResourceName": "AWS::Route53::HostedZone",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53HostedZone)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_zone",
+    "Model": "Route53HostedZone"
+  },
+  {
+    "ResourceName": "AWS::Route53::QueryLog",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53QueryLog)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_query_log",
+    "Model": "Route53QueryLog"
+  },
+  {
+    "ResourceName": "AWS::EC2::PlacementGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2PlacementGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_placement_group",
+    "Model": "EC2PlacementGroup"
+  },
+  {
+    "ResourceName": "AWS::FSX::Snapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.FSXSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_fsx_snapshot",
+    "Model": "FSXSnapshot"
+  },
+  {
+    "ResourceName": "AWS::KMS::Key",
+    "ListDescriber": "ParallelDescribeRegional(describers.KMSKey)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kms_key",
+    "Model": "KMSKey"
+  },
+  {
+    "ResourceName": "AWS::KMS::KeyRotation",
+    "ListDescriber": "ParallelDescribeRegional(describers.KMSKeyRotation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kms_key_rotation",
+    "Model": "KMSKeyRotation"
+  },
+  {
+    "ResourceName": "AWS::EC2::Ipam",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Ipam)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_ipam",
+    "Model": "EC2Ipam"
+  },
+  {
+    "ResourceName": "AWS::ElasticBeanstalk::Environment",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticBeanstalkEnvironment)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elastic_beanstalk_environment",
+    "Model": "ElasticBeanstalkEnvironment"
+  },
+  {
+    "ResourceName": "AWS::ElasticBeanstalk::ApplicationVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticBeanstalkApplicationVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elastic_beanstalk_application_version",
+    "Model": "ElasticBeanstalkApplicationVersion"
+  },
+  {
+    "ResourceName": "AWS::Lambda::FunctionVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.LambdaFunctionVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lambda_version",
+    "Model": "LambdaFunctionVersion"
+  },
+  {
+    "ResourceName": "AWS::Glue::DevEndpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueDevEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_dev_endpoint",
+    "Model": "GlueDevEndpoint"
+  },
+  {
+    "ResourceName": "AWS::Backup::RecoveryPoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupRecoveryPoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_recovery_point",
+    "Model": "BackupRecoveryPoint"
+  },
+  {
+    "ResourceName": "AWS::Backup::ReportPlan",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupReportPlan)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_report_plan",
+    "Model": "BackupReportPlan"
+  },
+  {
+    "ResourceName": "AWS::Backup::RegionSetting",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupRegionSetting)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_region_settings",
+    "Model": "BackupRegionSetting"
+  },
+  {
+    "ResourceName": "AWS::DynamoDbStreams::Stream",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbStream)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodbstreams_stream",
+    "Model": "DynamoDbStream"
+  },
+  {
+    "ResourceName": "AWS::EC2::EgressOnlyInternetGateway",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2EgressOnlyInternetGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_egress_only_internet_gateway",
+    "Model": "EC2EgressOnlyInternetGateway"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::Distribution",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/CloudFront.svg"
+      ]
+    },
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontDistribution)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_distribution",
+    "Model": "CloudFrontDistribution"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::StreamingDistribution",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontStreamingDistribution)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_streamingdistribution",
+    "Model": "CloudFrontStreamingDistribution"
+  },
+  {
+    "ResourceName": "AWS::Glue::Job",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueJob)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_job",
+    "Model": "GlueJob"
+  },
+  {
+    "ResourceName": "AWS::AppStream::Fleet",
+    "ListDescriber": "ParallelDescribeRegional(describers.AppStreamFleet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appstream_fleet",
+    "Model": "AppStreamFleet"
+  },
+  {
+    "ResourceName": "AWS::SES::ConfigurationSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.SESConfigurationSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ses_configuration_set",
+    "Model": "SESConfigurationSet"
+  },
+  {
+    "ResourceName": "AWS::IAM::User",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMUser)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_user",
+    "Model": "IAMUser"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::OriginRequestPolicy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontOriginRequestPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_origin_request_policy",
+    "Model": "CloudFrontOriginRequestPolicy"
+  },
+  {
+    "ResourceName": "AWS::EC2::SecurityGroup",
+    "Tags": {
+      "category": ["Networking"]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2SecurityGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_security_group",
+    "Model": "EC2SecurityGroup"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::IPSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyIPSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_ipset",
+    "Model": "GuardDutyIPSet"
+  },
+  {
+    "ResourceName": "AWS::EKS::Cluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.EKSCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eks_cluster",
+    "Model": "EKSCluster"
+  },
+  {
+    "ResourceName": "AWS::Grafana::Workspace",
+    "ListDescriber": "ParallelDescribeRegional(describers.GrafanaWorkspace)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_grafana_workspace",
+    "Model": "GrafanaWorkspace"
+  },
+  {
+    "ResourceName": "AWS::Glue::CatalogDatabase",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueCatalogDatabase)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_catalog_database",
+    "Model": "GlueCatalogDatabase"
+  },
+  {
+    "ResourceName": "AWS::Health::Event",
+    "ListDescriber": "ParallelDescribeRegional(describers.HealthEvent)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_health_event",
+    "Model": "HealthEvent"
+  },
+  {
+    "ResourceName": "AWS::Health::AffectedEntity",
+    "ListDescriber": "ParallelDescribeRegional(describers.HealthAffectedEntity)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_health_affected_entity",
+    "Model": "HealthAffectedEntity"
+  },
+  {
+    "ResourceName": "AWS::CloudFormation::StackSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudFormationStackSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudformation_stack_set",
+    "Model": "CloudFormationStackSet"
+  },
+  {
+    "ResourceName": "AWS::EC2::AvailabilityZone",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2AvailabilityZone)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_availability_zone",
+    "Model": "EC2AvailabilityZone"
+  },
+  {
+    "ResourceName": "AWS::EC2::TransitGateway",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2TransitGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_transit_gateway",
+    "Model": "EC2TransitGateway"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::UsagePlan",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayUsagePlan)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_usage_plan",
+    "Model": "ApiGatewayUsagePlan"
+  },
+  {
+    "ResourceName": "AWS::Inspector::Finding",
+    "ListDescriber": "ParallelDescribeRegional(describers.InspectorFinding)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector_finding",
+    "Model": "InspectorFinding"
+  },
+  {
+    "ResourceName": "AWS::EC2::Fleet",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Fleet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_fleet",
+    "Model": "EC2Fleet"
+  },
+  {
+    "ResourceName": "AWS::ElasticBeanstalk::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticBeanstalkApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elastic_beanstalk_application",
+    "Model": "ElasticBeanstalkApplication"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2LoadBalancer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_application_load_balancer",
+    "Model": "ElasticLoadBalancingV2LoadBalancer"
+  },
+  {
+    "ResourceName": "AWS::OpenSearch::Domain",
+    "ListDescriber": "ParallelDescribeRegional(describers.OpenSearchDomain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_opensearch_domain",
+    "Model": "OpenSearchDomain"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBEventSubscription",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBEventSubscription)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_event_subscription",
+    "Model": "RDSDBEventSubscription"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBEngineVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBEngineVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_engine_version",
+    "Model": "RDSDBEngineVersion"
+  },
+  {
+    "ResourceName": "AWS::EC2::RegionalSettings",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2RegionalSettings)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_regional_settings",
+    "Model": "EC2RegionalSettings"
+  },
+  {
+    "ResourceName": "AWS::EC2::SecurityGroupRule",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2SecurityGroupRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_security_group_rule",
+    "Model": "EC2SecurityGroupRule"
+  },
+  {
+    "ResourceName": "AWS::EC2::TransitGatewayAttachment",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2TransitGatewayAttachment)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_transit_gateway_vpc_attachment",
+    "Model": "EC2TransitGatewayAttachment"
+  },
+  {
+    "ResourceName": "AWS::SES::Identity",
+    "ListDescriber": "ParallelDescribeRegional(describers.SESIdentity)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ses_identity",
+    "Model": "SESIdentity"
+  },
+  {
+    "ResourceName": "AWS::SESv2::EmailIdentities",
+    "ListDescriber": "ParallelDescribeRegional(describers.SESv2EmailIdentities)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sesv2_emailidentity",
+    "Model": "SESv2EmailIdentity"
+  },
+  {
+    "ResourceName": "AWS::WAF::Rule",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_waf_rule",
+    "Model": "WAFRule"
+  },
+  {
+    "ResourceName": "AWS::WAF::RuleGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRuleGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_waf_rule_group",
+    "Model": "WAFRuleGroup"
+  },
+  {
+    "ResourceName": "AWS::WAF::RateBasedRule",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRateBasedRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_waf_rate_based_rule",
+    "Model": "WAFRateBasedRule"
+  },
+  {
+    "ResourceName": "AWS::WAF::WebACL",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFWebACL)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_waf_web_acl",
+    "Model": "WAFWebAcl"
+  },
+  {
+    "ResourceName": "AWS::WAFRegional::WebACL",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFRegionalWebACL)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafregional_web_acl",
+    "Model": "WAFRegionalWebAcl"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::Workload",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedWorkload)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_workload",
+    "Model": "WellArchitectedWorkload"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::Answer",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedAnswer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_answer",
+    "Model": "WellArchitectedAnswer"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::CheckDetail",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedCheckDetail)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_check_detail",
+    "Model": "WellArchitectedCheckDetail"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::CheckSummary",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedCheckSummary)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_check_summary",
+    "Model": "WellArchitectedCheckSummary"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::ConsolidatedReport",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedConsolidatedReport)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_consolidated_report",
+    "Model": "WellArchitectedCheckConsolidatedReport"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::Lens",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedLens)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_lens",
+    "Model": "WellArchitectedLens"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::LensReview",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedLensReview)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_lens_review",
+    "Model": "WellArchitectedLensReview"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::LensReviewImprovement",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedLensReviewImprovement)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_lens_review_improvement",
+    "Model": "WellArchitectedLensReviewImprovement"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::LensReviewReport",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedLensReviewReport)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_lens_review_report",
+    "Model": "WellArchitectedLensReviewReport"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::LensShare",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedLensShare)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_lens_share",
+    "Model": "WellArchitectedLensShare"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::Milestone",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedMilestone)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_milestone",
+    "Model": "WellArchitectedMilestone"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::Notification",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedNotification)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_notification",
+    "Model": "WellArchitectedNotification"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::ShareInvitation",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedShareInvitation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_share_invitation",
+    "Model": "WellArchitectedShareInvitation"
+  },
+  {
+    "ResourceName": "AWS::WellArchitected::WorkloadShare",
+    "ListDescriber": "ParallelDescribeRegional(describers.WellArchitectedWorkloadShare)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wellarchitected_workload_share",
+    "Model": "WellArchitectedWorkloadShare"
+  },
+  {
+    "ResourceName": "AWS::AutoScaling::LaunchConfiguration",
+    "ListDescriber": "ParallelDescribeRegional(describers.AutoScalingLaunchConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_launch_configuration",
+    "Model": "AutoScalingLaunchConfiguration"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::EventDataStore",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailEventDataStore)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudtrail_event_data_store",
+    "Model": "CloudTrailEventDataStore"
+  },
+  {
+    "ResourceName": "AWS::CodeDeploy::DeploymentGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeDeployDeploymentGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codedeploy_deployment_group",
+    "Model": "CodeDeployDeploymentGroup"
+  },
+  {
+    "ResourceName": "AWS::ImageBuilder::Image",
+    "ListDescriber": "ParallelDescribeRegional(describers.ImageBuilderImage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_imagebuilder_image",
+    "Model": "ImageBuilderImage"
+  },
+  {
+    "ResourceName": "AWS::Redshift::ClusterParameterGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftClusterParameterGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshift_parameter_group",
+    "Model": "RedshiftClusterParameterGroup"
+  },
+  {
+    "ResourceName": "AWS::Account::AlternateContact",
+    "ListDescriber": "SequentialDescribeGlobal(describers.AccountAlternateContact)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_account_alternate_contact",
+    "Model": "AccountAlternateContact"
+  },
+  {
+    "ResourceName": "AWS::Inspector::AssessmentTarget",
+    "ListDescriber": "ParallelDescribeRegional(describers.InspectorAssessmentTarget)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector_assessment_target",
+    "Model": "InspectorAssessmentTarget"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::ResponseHeadersPolicy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontResponseHeadersPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_response_headers_policy",
+    "Model": "CloudFrontResponseHeadersPolicy"
+  },
+  {
+    "ResourceName": "AWS::EC2::Instance",
+    "Tags": {
+      "category": ["Compute"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2Instance.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Instance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_instance",
+    "Model": "EC2Instance"
+  },
+
+  {
+    "ResourceName": "AWS::EC2::InstanceAvailability",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2InstanceAvailability)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_instance_availability",
+    "Model": "EC2InstanceAvailability"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByRecordTypeDaily",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByRecordTypeLastDay)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_record_type_daily",
+    "Model": "CostExplorerByRecordTypeDaily"
+  },
+  {
+    "ResourceName": "AWS::EC2::ReservedInstances",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2ReservedInstances)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_reserved_instance",
+    "Model": "EC2ReservedInstances"
+  },
+  {
+    "ResourceName": "AWS::ECR::Repository",
+    "Tags": {
+      "category": ["Containers"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRRepository)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecr_repository",
+    "Model": "ECRRepository"
+  },
+  {
+    "ResourceName": "AWS::ECR::Registry",
+    "Tags": {
+      "category": ["Containers"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticContainerRegistry.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRRegistry)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecr_registry",
+    "Model": "ECRRegistry"
+  },
+  {
+    "ResourceName": "AWS::ECR::RegistryScanningConfiguration",
+    "Tags": {
+      "category": ["Containers"],
+      "logo_uri": []
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRRegistryScanningConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecr_registry_scanning_configuration",
+    "Model": "ECRRegistryScanningConfiguration"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancingV2::Listener",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2Listener)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_load_balancer_listener",
+    "Model": "ElasticLoadBalancingV2Listener"
+  },
+  {
+    "ResourceName": "AWS::IAM::Group",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_group",
+    "Model": "IAMGroup"
+  },
+  {
+    "ResourceName": "AWS::IAM::OpenIdConnectProvider",
+    "ListDescriber": "SequentialDescribeGlobal(describers.IAMOpenIdConnectProvider)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_open_id_connect_provider",
+    "Model": "IAMOpenIdConnectProvider"
+  },
+  {
+    "ResourceName": "AWS::Backup::Plan",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupPlan)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_plan",
+    "Model": "BackupPlan"
+  },
+  {
+    "ResourceName": "AWS::Config::ConformancePack",
+    "ListDescriber": "ParallelDescribeRegional(describers.ConfigConformancePack)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_config_conformance_pack",
+    "Model": "ConfigConformancePack"
+  },
+  {
+    "ResourceName": "AWS::Config::RetentionConfiguration",
+    "ListDescriber": "ParallelDescribeRegional(describers.ConfigRetentionConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_config_retention_configuration",
+    "Model": "ConfigRetentionConfiguration"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByAccountDaily",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByAccountLastDay)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_account_daily",
+    "Model": "CostExplorerByAccountDaily"
+  },
+  {
+    "ResourceName": "AWS::Account::Contact",
+    "ListDescriber": "SequentialDescribeGlobal(describers.AccountContact)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_account_contact",
+    "Model": "AccountContact"
+  },
+  {
+    "ResourceName": "AWS::Glue::DataQualityRuleset",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueDataQualityRuleset)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_data_quality_ruleset",
+    "Model": "GlueDataQualityRuleset"
+  },
+  {
+    "ResourceName": "AWS::EventBridge::EventBus",
+    "ListDescriber": "ParallelDescribeRegional(describers.EventBridgeBus)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eventbridge_bus",
+    "Model": "EventBridgeBus"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::Stage",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayStage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_stage",
+    "Model": "ApiGatewayStage"
+  },
+  {
+    "ResourceName": "AWS::ApiGatewayV2::Stage",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayV2Stage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gatewayv2_stage",
+    "Model": "ApiGatewayV2Stage"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::LocalSecondaryIndex",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbLocalSecondaryIndex)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_local_secondary_index",
+    "Model": "DynamoDbLocalSecondaryIndex"
+  },
+  {
+    "ResourceName": "AWS::ResourceGroups::Groups",
+    "ListDescriber": "ParallelDescribeRegional(describers.ResourceGroups)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_resourcegroups_group",
+    "Model": "ResourceGroupsGroup"
+  },
+  {
+    "ResourceName": "AWS::Timestream::Database",
+    "ListDescriber": "ParallelDescribeRegional(describers.TimestreamDatabase)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_timestream_database",
+    "Model": "TimestreamDatabase"
+  },
+  {
+    "ResourceName": "AWS::OpenSearchServerless::Collection",
+    "ListDescriber": "ParallelDescribeRegional(describers.OpenSearchServerlessCollection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_opensearchserverless_collection",
+    "Model": "OpenSearchServerlessCollection"
+  },
+  {
+    "ResourceName": "AWS::EC2::ElasticIP",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2ElasticIP)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_elasticip",
+    "Model": "EC2ElasticIP"
+  },
+  {
+    "ResourceName": "AWS::EC2::LocalGateway",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2LocalGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_localgateway",
+    "Model": "EC2LocalGateway"
+  },
+  {
+    "ResourceName": "AWS::EC2::Image",
+    "Tags": {
+      "category": ["Compute"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Ec2AmiResource.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2AMI)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_ami",
+    "Model": "EC2AMI"
+  },
+  {
+    "ResourceName": "AWS::EC2::Subnet",
+    "Tags": {
+      "category": ["Networking"]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Subnet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_subnet",
+    "Model": "EC2Subnet"
+  },
+  {
+    "ResourceName": "AWS::ECS::TaskSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSTaskSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_task_set",
+    "Model": "ECSTaskSet"
+  },
+  {
+    "ResourceName": "AWS::Kinesis::Stream",
+    "ListDescriber": "ParallelDescribeRegional(describers.KinesisStream)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kinesis_stream",
+    "Model": "KinesisStream"
+  },
+  {
+    "ResourceName": "AWS::Kinesis::Consumer",
+    "ListDescriber": "ParallelDescribeRegional(describers.KinesisConsumer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kinesis_consumer",
+    "Model": "KinesisConsumer"
+  },
+  {
+    "ResourceName": "AWS::DocDB::Cluster",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.DocDBCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_docdb_cluster",
+    "Model": "DocDBCluster"
+  },
+  {
+    "ResourceName": "AWS::DocDB::ClusterSnapshot",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DocumentDb.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.DocDBClusterSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_docdb_cluster_snapshot",
+    "Model": "DocDBClusterSnapshot"
+  },
+  {
+    "ResourceName": "AWS::DocDB::ClusterInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.DocDBClusterInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_docdb_cluster_instance",
+    "Model": "DocDBClusterInstance"
+  },
+  {
+    "ResourceName": "AWS::ElastiCache::ReplicationGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElastiCacheReplicationGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_elasticache_replication_group",
+    "Model": "ElastiCacheReplicationGroup"
+  },
+  {
+    "ResourceName": "AWS::GlobalAccelerator::Accelerator",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlobalAcceleratorAccelerator)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_globalaccelerator_accelerator",
+    "Model": "GlobalAcceleratorAccelerator"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::Metric",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchMetrics)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudwatch_metric",
+    "Model": "CloudWatchMetric"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ForcastMonthly",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostForecastMonthly)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_forecast_monthly",
+    "Model": "CostExplorerForcastMonthly"
+  },
+  {
+    "ResourceName": "AWS::EMR::InstanceGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.EMRInstanceGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_emr_instance_group",
+    "Model": "EMRInstanceGroup"
+  },
+  {
+    "ResourceName": "AWS::EC2::ManagedPrefixList",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2ManagedPrefixList)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_managed_prefix_list",
+    "Model": "EC2ManagedPrefixList"
+  },
+  {
+    "ResourceName": "AWS::EC2::ManagedPrefixListEntry",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2ManagedPrefixListEntry)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_managed_prefix_list_entry",
+    "Model": "EC2ManagedPrefixListEntry"
+  },
+  {
+    "ResourceName": "AWS::EC2::ClientVpnEndpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2ClientVpnEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_client_vpn_endpoint",
+    "Model": "EC2ClientVpnEndpoint"
+  },
+  {
+    "ResourceName": "AWS::MWAA::Environment",
+    "ListDescriber": "ParallelDescribeRegional(describers.MWAAEnvironment)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_mwaa_environment",
+    "Model": "MWAAEnvironment"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::LogResourcePolicy",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchLogsResourcePolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudwatch_log_resource_policy",
+    "Model": "CloudWatchLogResourcePolicy"
+  },
+  {
+    "ResourceName": "AWS::CodeArtifact::Domain",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeArtifactDomain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codeartifact_domain",
+    "Model": "CodeArtifactDomain"
+  },
+  {
+    "ResourceName": "AWS::CodeStar::Project",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeStarProject)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codestar_project",
+    "Model": "CodeStarProject"
+  },
+  {
+    "ResourceName": "AWS::Neptune::Database",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Neptune.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.NeptuneDatabase)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_neptune_database",
+    "Model": "NeptuneDatabase"
+  },
+  {
+    "ResourceName": "AWS::Neptune::DBCluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.NeptuneDatabaseCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_neptune_db_cluster",
+    "Model": "NeptuneDatabaseCluster"
+  },
+  {
+    "ResourceName": "AWS::Neptune::DBClusterSnapshot",
+    "ListDescriber": "ParallelDescribeRegional(describers.NeptuneDatabaseClusterSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_neptune_db_cluster_snapshot",
+    "Model": "NeptuneDatabaseClusterSnapshot"
+  },
+  {
+    "ResourceName": "AWS::NetworkFirewall::FirewallPolicy",
+    "ListDescriber": "ParallelDescribeRegional(describers.NetworkFirewallPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_networkfirewall_firewall_policy",
+    "Model": "NetworkFirewallFirewallPolicy"
+  },
+  {
+    "ResourceName": "AWS::NetworkFirewall::RuleGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.NetworkFirewallRuleGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_networkfirewall_rule_group",
+    "Model": "NetworkFirewallRuleGroup"
+  },
+  {
+    "ResourceName": "AWS::Oam::Link",
+    "ListDescriber": "ParallelDescribeRegional(describers.OAMLink)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_oam_link",
+    "Model": "OAMLink"
+  },
+  {
+    "ResourceName": "AWS::Oam::Sink",
+    "ListDescriber": "ParallelDescribeRegional(describers.OAMSink)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_oam_sink",
+    "Model": "OAMSink"
+  },
+  {
+    "ResourceName": "AWS::Organizations::Account",
+    "ListDescriber": "ParallelDescribeRegional(describers.OrganizationsAccount)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_organizations_account",
+    "Model": "OrganizationsAccount"
+  },
+  {
+    "ResourceName": "AWS::Pinpoint::App",
+    "ListDescriber": "ParallelDescribeRegional(describers.PinpointApp)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_pinpoint_app",
+    "Model": "PinPointApp"
+  },
+  {
+    "ResourceName": "AWS::Pipes::Pipe",
+    "ListDescriber": "ParallelDescribeRegional(describers.PipesPipe)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_pipes_pipe",
+    "Model": "PipesPipe"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBClusterParameterGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBClusterParameterGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_cluster_parameter_group",
+    "Model": "RDSDBClusterParameterGroup"
+  },
+  {
+    "ResourceName": "AWS::RDS::OptionGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSOptionGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_option_group",
+    "Model": "RDSOptionGroup"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBParameterGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBParameterGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_parameter_group",
+    "Model": "RDSDBParameterGroup"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBProxy",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBProxy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_proxy",
+    "Model": "RDSDBProxy"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBSubnetGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBSubnetGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_subnet_group",
+    "Model": "RDSDBSubnetGroup"
+  },
+  {
+    "ResourceName": "AWS::RDS::DBRecommendation",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSDBRecommendation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_db_recommendation",
+    "Model": "RDSDBRecommendation"
+  },
+  {
+    "ResourceName": "AWS::Redshift::EventSubscription",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftEventSubscription)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshift_event_subscription",
+    "Model": "RedshiftEventSubscription"
+  },
+  {
+    "ResourceName": "AWS::RedshiftServerless::Workgroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftServerlessWorkgroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshiftserverless_workgroup",
+    "Model": "RedshiftServerlessWorkgroup"
+  },
+  {
+    "ResourceName": "AWS::ResourceExplorer2::Index",
+    "ListDescriber": "ParallelDescribeRegional(describers.ResourceExplorerIndex)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_resource_explorer_index",
+    "Model": "ResourceExplorer2Index"
+  },
+  {
+    "ResourceName": "AWS::Route53::HealthCheck",
+    "ListDescriber": "ParallelDescribeRegional(describers.Route53HealthCheck)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_health_check",
+    "Model": "Route53HealthCheck"
+  },
+  {
+    "ResourceName": "AWS::Route53Resolver::ResolverRule",
+    "ListDescriber": "ParallelDescribeRegional(describers.Route53ResolverResolverRule)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_resolver_rule",
+    "Model": "Route53ResolverResolverRule"
+  },
+  {
+    "ResourceName": "AWS::Route53Resolver::QueryLogConfig",
+    "ListDescriber": "ParallelDescribeRegional(describers.Route53ResolverQueryLogConfig)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_resolver_query_log_config",
+    "Model": "Route53ResolverQueryLogConfig"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::App",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerApp)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_app",
+    "Model": "SageMakerApp"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::Domain",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerDomain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_domain",
+    "Model": "SageMakerDomain"
+  },
+  {
+    "ResourceName": "AWS::StepFunctions::StateMachine",
+    "ListDescriber": "ParallelDescribeRegional(describers.StepFunctionsStateMachine)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sfn_state_machine",
+    "Model": "StepFunctionsStateMachine"
+  },
+  {
+    "ResourceName": "AWS::StepFunctions::StateMachineExecution",
+    "ListDescriber": "ParallelDescribeRegional(describers.StepFunctionsStateMachineExecution)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sfn_state_machine_execution",
+    "Model": "StepFunctionsStateMachineExecution"
+  },
+  {
+    "ResourceName": "AWS::StepFunctions::StateMachineExecutionHistories",
+    "ListDescriber": "ParallelDescribeRegional(describers.StepFunctionsStateMachineExecutionHistories)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sfn_state_machine_execution_history",
+    "Model": "StepFunctionsStateMachineExecutionHistories"
+  },
+  {
+    "ResourceName": "AWS::SimSpaceWeaver::Simulation",
+    "ListDescriber": "ParallelDescribeRegional(describers.SimSpaceWeaverSimulation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_simspaceweaver_simulation",
+    "Model": "SimSpaceWeaverSimulation"
+  },
+  {
+    "ResourceName": "AWS::SSM::Association",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMAssociation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_association",
+    "Model": "SSMAssociation"
+  },
+  {
+    "ResourceName": "AWS::SSM::Document",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMDocument)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_document",
+    "Model": "SSMDocument"
+  },
+  {
+    "ResourceName": "AWS::SSM::DocumentPermission",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMDocumentPermission)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ssm_document_permission",
+    "Model": "SSMDocumentPermission"
+  },
+  {
+    "ResourceName": "AWS::EC2::CustomerGateway",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcCustomerGateway.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2CustomerGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_customer_gateway",
+    "Model": "EC2CustomerGateway"
+  },
+  {
+    "ResourceName": "AWS::EC2::VerifiedAccessInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VerifiedAccessInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_verified_access_instance",
+    "Model": "EC2VerifiedAccessInstance"
+  },
+  {
+    "ResourceName": "AWS::EC2::VerifiedAccessEndpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VerifiedAccessEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_verified_access_endpoint",
+    "Model": "EC2VerifiedAccessEndpoint"
+  },
+  {
+    "ResourceName": "AWS::EC2::VerifiedAccessGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VerifiedAccessGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_verified_access_group",
+    "Model": "EC2VerifiedAccessGroup"
+  },
+  {
+    "ResourceName": "AWS::EC2::VerifiedAccessTrustProvider",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VerifiedAccessTrustProvider)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_verified_access_trust_provider",
+    "Model": "EC2VerifiedAccessTrustProvider"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPNGateway",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcVpnGateway.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPNGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_vpn_gateway",
+    "Model": "EC2VPNGateway"
+  },
+  {
+    "ResourceName": "AWS::WAFv2::IPSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFv2IPSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafv2_ip_set",
+    "Model": "WAFv2IPSet"
+  },
+  {
+    "ResourceName": "AWS::WAFv2::RegexPatternSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFv2RegexPatternSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafv2_regex_pattern_set",
+    "Model": "WAFv2RegexPatternSet"
+  },
+  {
+    "ResourceName": "AWS::WAFv2::RuleGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.WAFv2RuleGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_wafv2_rule_group",
+    "Model": "WAFv2RuleGroup"
+  },
+  {
+    "ResourceName": "AWS::EC2::TransitGatewayRoute",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2TransitGatewayRoute)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_transit_gateway_route",
+    "Model": "EC2TransitGatewayRoute"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::Filter",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyFilter)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_filter",
+    "Model": "GuardDutyFilter"
+  },
+  {
+    "ResourceName": "AWS::ECS::TaskDefinition",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSTaskDefinition)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_task_definition",
+    "Model": "ECSTaskDefinition"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::ThreatIntelSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyThreatIntelSet)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_threat_intel_set",
+    "Model": "GuardDutyThreatIntelSet"
+  },
+  {
+    "ResourceName": "AWS::ApiGatewayV2::DomainName",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayV2DomainName)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gatewayv2_domain_name",
+    "Model": "ApiGatewayV2DomainName"
+  },
+  {
+    "ResourceName": "AWS::ApiGateway::DomainName",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayDomainName)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gateway_domain_name",
+    "Model": "ApiGatewayDomainName"
+  },
+  {
+    "ResourceName": "AWS::ApiGatewayV2::Route",
+    "ListDescriber": "ParallelDescribeRegional(describers.ApiGatewayV2Route)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_api_gatewayv2_route",
+    "Model": "ApiGatewayV2Route"
+  },
+  {
+    "ResourceName": "AWS::MQ::Broker",
+    "ListDescriber": "ParallelDescribeRegional(describers.MQBroker)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_mq_broker",
+    "Model": "MQBroker"
+  },
+  {
+    "ResourceName": "AWS::ACMPCA::CertificateAuthority",
+    "ListDescriber": "ParallelDescribeRegional(describers.ACMPCACertificateAuthority)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_acmpca_certificate_authority",
+    "Model": "ACMPCACertificateAuthority"
+  },
+  {
+    "ResourceName": "AWS::CloudFormation::Stack",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudFormationStack)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudformation_stack",
+    "Model": "CloudFormationStack"
+  },
+  {
+    "ResourceName": "AWS::CloudFormation::StackResource",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudFormationStackResource)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudformation_stack_resource",
+    "Model": "CloudFormationStackResource"
+  },
+  {
+    "ResourceName": "AWS::DirectConnect::Connection",
+    "ListDescriber": "ParallelDescribeRegional(describers.DirectConnectConnection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_directconnect_connection",
+    "Model": "DirectConnectConnection"
+  },
+  {
+    "ResourceName": "AWS::FSX::FileSystem",
+    "ListDescriber": "ParallelDescribeRegional(describers.FSXFileSystem)",
+    "GetDescriber": "",
+    "TerraformName": [
+      "aws_fsx_ontap_file_system",
+      "aws_fsx_openzfs_file_system"
+    ],
+    "SteampipeTable": "aws_fsx_file_system",
+    "Model": "FSXFileSystem"
+  },
+  {
+    "ResourceName": "AWS::Glue::SecurityConfiguration",
+    "ListDescriber": "ParallelDescribeRegional(describers.GlueSecurityConfiguration)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_glue_security_configuration",
+    "Model": "GlueSecurityConfiguration"
+  },
+  {
+    "ResourceName": "AWS::Inspector::AssessmentRun",
+    "ListDescriber": "ParallelDescribeRegional(describers.InspectorAssessmentRun)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector_assessment_run",
+    "Model": "InspectorAssessmentRun"
+  },
+  {
+    "ResourceName": "AWS::Inspector2::Coverage",
+    "ListDescriber": "ParallelDescribeRegional(describers.Inspector2Coverage)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector2_coverage",
+    "Model": "Inspector2Coverage"
+  },
+  {
+    "ResourceName": "AWS::Inspector2::CoverageStatistics",
+    "ListDescriber": "ParallelDescribeRegional(describers.Inspector2CoverageStatistic)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector2_coverage_statistics",
+    "Model": "Inspector2CoverageStatistic"
+  },
+  {
+    "ResourceName": "AWS::Inspector2::Member",
+    "ListDescriber": "ParallelDescribeRegional(describers.Inspector2CoverageMember)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector2_member",
+    "Model": "Inspector2Member"
+  },
+  {
+    "ResourceName": "AWS::Inspector2::Finding",
+    "ListDescriber": "ParallelDescribeRegional(describers.Inspector2Finding)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_inspector2_finding",
+    "Model": "Inspector2Finding"
+  },
+  {
+    "ResourceName": "AWS::Config::ConfigurationRecorder",
+    "ListDescriber": "ParallelDescribeRegional(describers.ConfigConfigurationRecorder)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_config_configuration_recorder",
+    "Model": "ConfigConfigurationRecorder"
+  },
+  {
+    "ResourceName": "AWS::EC2::NatGateway",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/VpcNatGateway.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2NatGateway)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_nat_gateway",
+    "Model": "EC2NatGateway"
+  },
+  {
+    "ResourceName": "AWS::ECR::PublicRepository",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECRPublicRepository)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecrpublic_repository",
+    "Model": "ECRPublicRepository"
+  },
+  {
+    "ResourceName": "AWS::ECS::Cluster",
+    "ListDescriber": "ParallelDescribeRegional(describers.ECSCluster)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ecs_cluster",
+    "Model": "ECSCluster"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2TargetGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_target_group",
+    "Model": "ElasticLoadBalancingV2TargetGroup"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::CachePolicy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontCachePolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_cache_policy",
+    "Model": "CloudFrontCachePolicy"
+  },
+  {
+    "ResourceName": "AWS::CodeArtifact::Repository",
+    "ListDescriber": "ParallelDescribeRegional(describers.CodeArtifactRepository)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_codeartifact_repository",
+    "Model": "CodeArtifactRepository"
+  },
+  {
+    "ResourceName": "AWS::AMP::Workspace",
+    "ListDescriber": "ParallelDescribeRegional(describers.AMPWorkspace)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_amp_workspace",
+    "Model": "AMPWorkspace"
+  },
+  {
+    "ResourceName": "AWS::EC2::CapacityReservation",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2CapacityReservation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_capacity_reservation",
+    "Model": "EC2CapacityReservation"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::NotebookInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerNotebookInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_notebook_instance",
+    "Model": "SageMakerNotebookInstance"
+  },
+  {
+    "ResourceName": "AWS::IAM::AccessAdvisor",
+    "ListDescriber": "ParallelDescribeRegional(describers.IAMAccessAdvisor)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_iam_access_advisor",
+    "Model": "IAMAccessAdvisor"
+  },
+  {
+    "ResourceName": "AWS::EC2::VolumeSnapshot",
+    "Tags": {
+      "category": ["Storage"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticBlockStoreSnapshot.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VolumeSnapshot)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ebs_snapshot",
+    "Model": "EC2VolumeSnapshot"
+  },
+  {
+    "ResourceName": "AWS::EC2::Region",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Region)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_region",
+    "Model": "EC2Region"
+  },
+  {
+    "ResourceName": "AWS::Keyspaces::Table",
+    "ListDescriber": "ParallelDescribeRegional(describers.KeyspacesTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_keyspaces_table",
+    "Model": "KeyspacesTable"
+  },
+  {
+    "ResourceName": "AWS::Config::AggregationAuthorization",
+    "ListDescriber": "ParallelDescribeRegional(describers.ConfigAggregateAuthorization)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_config_aggregate_authorization",
+    "Model": "ConfigAggregationAuthorization"
+  },
+  {
+    "ResourceName": "AWS::DAX::SubnetGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.DAXSubnetGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dax_subnet_group",
+    "Model": "DAXSubnetGroup"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::GlobalTable",
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbGlobalTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_global_table",
+    "Model": "DynamoDbGlobalTable"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancing::LoadBalancer",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/ElasticLoadBalancingClassicLoadBalancer.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingLoadBalancer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_classic_load_balancer",
+    "Model": "ElasticLoadBalancingLoadBalancer"
+  },
+  {
+    "ResourceName": "AWS::AppStream::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.AppStreamApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_appstream_application",
+    "Model": "AppStreamApplication"
+  },
+  {
+    "ResourceName": "AWS::RedshiftServerless::Namespace",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftServerlessNamespace)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshiftserverless_namespace",
+    "Model": "RedshiftServerlessNamespace"
+  },
+  {
+    "ResourceName": "AWS::CloudFront::OriginAccessIdentity",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CloudFrontOriginAccessIdentity)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudfront_origin_access_identity",
+    "Model": "CloudFrontOriginAccessIdentity"
+  },
+  {
+    "ResourceName": "AWS::EC2::Host",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2Host)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_host",
+    "Model": "EC2Host"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPC",
+    "Tags": {
+      "category": ["Networking"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/Vpc.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPC)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc",
+    "Model": "EC2Vpc"
+  },
+  {
+    "ResourceName": "AWS::EC2::TransitGatewayRouteTable",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2TransitGatewayRouteTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_transit_gateway_route_table",
+    "Model": "EC2TransitGatewayRouteTable"
+  },
+  {
+    "ResourceName": "AWS::EKS::Nodegroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.EKSNodegroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_eks_node_group",
+    "Model": "EKSNodegroup"
+  },
+  {
+    "ResourceName": "AWS::Backup::Selection",
+    "ListDescriber": "ParallelDescribeRegional(describers.BackupSelection)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_backup_selection",
+    "Model": "BackupSelection"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::Import",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailImport)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cloudtrail_import",
+    "Model": "CloudTrailImport"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByServiceDaily",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByServiceLastDay)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_cost_by_service_daily",
+    "Model": "CostExplorerByServiceDaily"
+  },
+  {
+    "ResourceName": "AWS::ElasticLoadBalancingV2::SslPolicy",
+    "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2SslPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_ssl_policy",
+    "Model": "ElasticLoadBalancingV2SslPolicy"
+  },
+  {
+    "ResourceName": "AWS::GuardDuty::Finding",
+    "ListDescriber": "ParallelDescribeRegional(describers.GuardDutyFinding)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_guardduty_finding",
+    "Model": "GuardDutyFinding"
+  },
+  {
+    "ResourceName": "AWS::EC2::DHCPOptions",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2DHCPOptions)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_vpc_dhcp_options",
+    "Model": "EC2DhcpOptions"
+  },
+  {
+    "ResourceName": "AWS::EC2::InstanceType",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2InstanceType)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_instance_type",
+    "Model": "EC2InstanceType"
+  },
+  {
+    "ResourceName": "AWS::Batch::ComputeEnvironment",
+    "ListDescriber": "ParallelDescribeRegional(describers.BatchComputeEnvironment)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_batch_compute_environment",
+    "Model": "BatchComputeEnvironment"
+  },
+  {
+    "ResourceName": "AWS::DMS::ReplicationInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.DMSReplicationInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dms_replication_instance",
+    "Model": "DMSReplicationInstance"
+  },
+  {
+    "ResourceName": "AWS::DMS::Endpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.DMSEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dms_endpoint",
+    "Model": "DMSEndpoint"
+  },
+  {
+    "ResourceName": "AWS::DMS::ReplicationTask",
+    "ListDescriber": "ParallelDescribeRegional(describers.DMSReplicationTask)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dms_replication_task",
+    "Model": "DMSReplicationTask"
+  },
+  {
+    "ResourceName": "AWS::DynamoDb::Table",
+    "Tags": {
+      "category": ["Database"],
+      "logo_uri": [
+        "https://raw.githubusercontent.com/opengovernance/awsicons/master/svg-export/icons/DynamoDbTable.svg"
+      ]
+    },
+    "ListDescriber": "ParallelDescribeRegional(describers.DynamoDbTable)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_dynamodb_table",
+    "Model": "DynamoDbTable"
+  },
+  {
+    "ResourceName": "AWS::Shield::ProtectionGroup",
+    "ListDescriber": "SequentialDescribeGlobal(describers.ShieldProtectionGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_shield_protection_group",
+    "Model": "ShieldProtectionGroup"
+  },
+  {
+    "ResourceName": "AWS::Firehose::DeliveryStream",
+    "ListDescriber": "ParallelDescribeRegional(describers.FirehoseDeliveryStream)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kinesis_firehose_delivery_stream",
+    "Model": "FirehoseDeliveryStream"
+  },
+  {
+    "ResourceName": "AWS::KinesisVideo::Stream",
+    "ListDescriber": "ParallelDescribeRegional(describers.KinesisVideoStream)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kinesis_video_stream",
+    "Model": "KinesisVideoStream"
+  },
+  {
+    "ResourceName": "AWS::KMS::Alias",
+    "ListDescriber": "ParallelDescribeRegional(describers.KMSAlias)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_kms_alias",
+    "Model": "KMSAlias"
+  },
+  {
+    "ResourceName": "AWS::Lambda::Alias",
+    "ListDescriber": "ParallelDescribeRegional(describers.LambdaAlias)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lambda_alias",
+    "Model": "LambdaAlias"
+  },
+  {
+    "ResourceName": "AWS::Lambda::LambdaLayer",
+    "ListDescriber": "ParallelDescribeRegional(describers.LambdaLayer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lambda_layer",
+    "Model": "LambdaLayer"
+  },
+  {
+    "ResourceName": "AWS::Lambda::LayerVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.LambdaLayerVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lambda_layer_version",
+    "Model": "LambdaLayerVersion"
+  },
+  {
+    "ResourceName": "AWS::Lightsail::Instance",
+    "ListDescriber": "ParallelDescribeRegional(describers.LightsailInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_lightsail_instance",
+    "Model": "LightsailInstance"
+  },
+  {
+    "ResourceName": "AWS::Macie2::ClassificationJob",
+    "ListDescriber": "ParallelDescribeRegional(describers.Macie2ClassificationJob)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_macie2_classification_job",
+    "Model": "Macie2ClassificationJob"
+  },
+  {
+    "ResourceName": "AWS::MediaStore::Container",
+    "ListDescriber": "ParallelDescribeRegional(describers.MediaStoreContainer)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_media_store_container",
+    "Model": "MediaStoreContainer"
+  },
+  {
+    "ResourceName": "AWS::Mgn::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.MGNApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_mgn_application",
+    "Model": "MgnApplication"
+  },
+  {
+    "ResourceName": "AWS::ResourceExplorer2::SupportedResourceType",
+    "ListDescriber": "ParallelDescribeRegional(describers.ResourceExplorer2SupportedResourceType)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_resource_explorer_supported_resource_type",
+    "Model": "ResourceExplorer2SupportedResourceType"
+  },
+  {
+    "ResourceName": "AWS::Route53Resolver::ResolverEndpoint",
+    "ListDescriber": "ParallelDescribeRegional(describers.Route53ResolverResolverEndpoint)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_resolver_endpoint",
+    "Model": "Route53ResolverEndpoint"
+  },
+  {
+    "ResourceName": "AWS::Route53Domains::Domain",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53Domain)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_domain",
+    "Model": "Route53Domain"
+  },
+  {
+    "ResourceName": "AWS::Route53::Record",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53Record)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_record",
+    "Model": "Route53Record"
+  },
+  {
+    "ResourceName": "AWS::Route53::TrafficPolicy",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53TrafficPolicy)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_traffic_policy",
+    "Model": "Route53TrafficPolicy"
+  },
+  {
+    "ResourceName": "AWS::Route53::TrafficPolicyInstance",
+    "ListDescriber": "SequentialDescribeGlobal(describers.Route53TrafficPolicyInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_route53_traffic_policy_instance",
+    "Model": "Route53TrafficPolicyInstance"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::Model",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerModel)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_model",
+    "Model": "SageMakerModel"
+  },
+  {
+    "ResourceName": "AWS::SageMaker::TrainingJob",
+    "ListDescriber": "ParallelDescribeRegional(describers.SageMakerTrainingJob)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_sagemaker_training_job",
+    "Model": "SageMakerTrainingJob"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::ActionTarget",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubActionTarget)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_action_target",
+    "Model": "SecurityHubActionTarget"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::Finding",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubFinding)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_finding",
+    "Model": "SecurityHubFinding"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::FindingAggregator",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubFindingAggregator)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_finding_aggregator",
+    "Model": "SecurityHubFindingAggregator"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::Insight",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubInsight)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_insight",
+    "Model": "SecurityHubInsight"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::Member",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubMember)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_member",
+    "Model": "SecurityHubMember"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::Product",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubProduct)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_product",
+    "Model": "SecurityHubProduct"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::StandardsControl",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubStandardsControl)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_standards_control",
+    "Model": "SecurityHubStandardsControl"
+  },
+  {
+    "ResourceName": "AWS::SecurityHub::StandardsSubscription",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityHubStandardsSubscription)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securityhub_standards_subscription",
+    "Model": "SecurityHubStandardsSubscription"
+  },
+  {
+    "ResourceName": "AWS::SecurityLake::DataLake",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityLakeDataLake)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securitylake_data_lake",
+    "Model": "SecurityLakeDataLake"
+  },
+  {
+    "ResourceName": "AWS::SecurityLake::Subscriber",
+    "ListDescriber": "ParallelDescribeRegional(describers.SecurityLakeSubscriber)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_securitylake_subscriber",
+    "Model": "SecurityLakeSubscriber"
+  },
+  {
+    "ResourceName": "AWS::Ram::PrincipalAssociation",
+    "ListDescriber": "ParallelDescribeRegional(describers.RamPrincipalAssociation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ram_principal_association",
+    "Model": "RamPrincipalAssociation"
+  },
+  {
+    "ResourceName": "AWS::Ram::ResourceAssociation",
+    "ListDescriber": "ParallelDescribeRegional(describers.RamResourceAssociation)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ram_resource_association",
+    "Model": "RamResourceAssociation"
+  },
+  {
+    "ResourceName": "AWS::RDS::ReservedDBInstance",
+    "ListDescriber": "ParallelDescribeRegional(describers.RDSReservedDBInstance)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_rds_reserved_db_instance",
+    "Model": "RDSReservedDBInstance"
+  },
+  {
+    "ResourceName": "AWS::Redshift::SubnetGroup",
+    "ListDescriber": "ParallelDescribeRegional(describers.RedshiftSubnetGroup)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_redshift_subnet_group",
+    "Model": "RedshiftSubnetGroup"
+  },
+  {
+    "ResourceName": "AWS::SeverlessApplicationRepository::Application",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServerlessApplicationRepositoryApplication)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_serverlessapplicationrepository_application",
+    "Model": "ServerlessApplicationRepositoryApplication"
+  },
+  {
+    "ResourceName": "AWS::AuditManager::Framework",
+    "ListDescriber": "ParallelDescribeRegional(describers.AuditManagerFramework)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_auditmanager_framework",
+    "Model": "AuditManagerFramework"
+  },
+  {
+    "ResourceName": "AWS::AuditManager::EvidenceFolder",
+    "ListDescriber": "ParallelDescribeRegional(describers.AuditManagerEvidenceFolder)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_auditmanager_evidence_folder",
+    "Model": "AuditManagerEvidenceFolder"
+  },
+  {
+    "ResourceName": "AWS::AuditManager::Evidence",
+    "ListDescriber": "ParallelDescribeRegional(describers.AuditManagerEvidence)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_auditmanager_evidence",
+    "Model": "AuditManagerEvidence"
+  },
+  {
+    "ResourceName": "AWS::AuditManager::Control",
+    "ListDescriber": "ParallelDescribeRegional(describers.AuditManagerControl)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_auditmanager_control",
+    "Model": "AuditManagerControl"
+  },
+  {
+    "ResourceName": "AWS::AuditManager::Assessment",
+    "ListDescriber": "ParallelDescribeRegional(describers.AuditManagerAssessment)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_auditmanager_assessment",
+    "Model": "AuditManagerAssessment"
+  },
+  {
+    "ResourceName": "AWS::CloudTrail::TrailEvent",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudTrailTrailEvent)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_cloudtrail_trail_event",
+    "Model": "CloudTrailTrailEvent"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::LogEvent",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchLogEvent)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_cloudwatch_log_event",
+    "Model": "CloudWatchLogEvent"
+  },
+  {
+    "ResourceName": "AWS::Logs::MetricFilter",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchLogsMetricFilter)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_cloudwatch_log_metric_filter",
+    "Model": "CloudWatchLogsMetricFilter"
+  },
+  {
+    "ResourceName": "AWS::CloudWatch::LogStream",
+    "ListDescriber": "ParallelDescribeRegional(describers.CloudWatchLogStream)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_cloudwatch_log_stream",
+    "Model": "CloudWatchLogStream"
+  },
+  {
+    "ResourceName": "AWS::CostExplorer::ByUsageTypeMonthly",
+    "ListDescriber": "SequentialDescribeGlobal(describers.CostByServiceUsageLastMonth)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_cost_by_service_usage_type_monthly",
+    "Model": "CostExplorerByServiceUsageTypeMonthly"
+  },
+  {
+    "ResourceName": "AWS::ServiceQuotas::ServiceQuotaChangeRequest",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceQuotasServiceQuotaChangeRequest)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_servicequotas_service_quota_change_request",
+    "Model": "ServiceQuotasServiceQuotaChangeRequest"
+  },
+  {
+    "ResourceName": "AWS::ServiceQuotas::Service",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceQuotasService)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_servicequotas_service",
+    "Model": "ServiceQuotasService"
+  },
+  {
+    "ResourceName": "AWS::EC2::VPCEndpointService",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2VPCEndpointService)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_vpc_endpoint_service",
+    "Model": "EC2VPCEndpointService"
+  },
+  {
+    "ResourceName": "AWS::EC2::LaunchTemplate",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2LaunchTemplate)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_launch_template",
+    "Model": "EC2LaunchTemplate"
+  },
+  {
+    "ResourceName": "AWS::EC2::LaunchTemplateVersion",
+    "ListDescriber": "ParallelDescribeRegional(describers.EC2LaunchTemplateVersion)",
+    "GetDescriber": "",
+    "SteampipeTable": "aws_ec2_launch_template_version",
+    "Model": "EC2LaunchTemplateVersion"
+  },
+  {
+    "ResourceName": "AWS::SNS::Subscription",
+    "ListDescriber": "ParallelDescribeRegional(describers.SNSSubscription)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_sns_topic_subscription",
+    "Model": "SNSSubscription"
+  },
+  {
+    "ResourceName": "AWS::S3::AccountSetting",
+    "ListDescriber": "SequentialDescribeGlobal(describers.S3AccountSetting)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_s3_account_settings",
+    "Model": "S3AccountSetting"
+  },
+  {
+    "ResourceName": "AWS::SSM::ManagedInstanceCompliance",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMManagedInstanceCompliance)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssm_managed_instance_compliance",
+    "Model": "SSMManagedInstanceCompliance"
+  },
+  {
+    "ResourceName": "AWS::SSM::ManagedInstancePatchState",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSMManagedInstancePatchState)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssm_managed_instance_patch_state",
+    "Model": "SSMManagedInstancePatchState"
+  },
+  {
+    "ResourceName": "AWS::SSOAdmin::AccountAssignment",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSOAdminAccountAssignment)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssoadmin_account_assignment",
+    "Model": "SSOAdminAccountAssignment"
+  },
+  {
+    "ResourceName": "AWS::SSOAdmin::UserEffectiveAccess",
+    "ListDescriber": "ParallelDescribeRegional(describers.UserEffectiveAccess)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_user_effective_access",
+    "Model": "UserEffectiveAccess"
+  },
+  {
+    "ResourceName": "AWS::SSOAdmin::Instance",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSOAdminInstance)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssoadmin_instance",
+    "Model": "SSOAdminInstance"
+  },
+  {
+    "ResourceName": "AWS::SSOAdmin::PermissionSet",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSOAdminPermissionSet)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssoadmin_permission_set",
+    "Model": "SSOAdminPermissionSet"
+  },
+  {
+    "ResourceName": "AWS::SSOAdmin::AttachedManagedPolicy",
+    "ListDescriber": "ParallelDescribeRegional(describers.SSOAdminManagedPolicyAttachment)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_ssoadmin_managed_policy_attachment",
+    "Model": "SSOAdminPolicyAttachment"
+  },
+  {
+    "ResourceName": "AWS::ServiceDiscovery::Service",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceDiscoveryService)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_service_discovery_service",
+    "Model": "ServiceDiscoveryService"
+  },
+  {
+    "ResourceName": "AWS::ServiceDiscovery::Namespace",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceDiscoveryNamespace)",
+    "GetDescriber": null,
+    "TerraformName": [
+      "aws_service_discovery_http_namespace",
+      "aws_service_discovery_dns_namespace",
+      "aws_service_discovery_private_dns_namespace",
+      "aws_service_discovery_public_dns_namespace"
+    ],
+    "SteampipeTable": "aws_service_discovery_namespace",
+    "Model": "ServiceDiscoveryNamespace"
+  },
+  {
+    "ResourceName": "AWS::ServiceDiscovery::Instance",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceDiscoveryInstance)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_service_discovery_instance",
+    "Model": "ServiceDiscoveryInstance"
+  },
+  {
+    "ResourceName": "AWS::ServiceCatalog::Portfolio",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceCatalogPortfolio)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_servicecatalog_portfolio",
+    "Model": "ServiceCatalogPortfolio"
+  },
+  {
+    "ResourceName": "AWS::ServiceCatalog::Product",
+    "ListDescriber": "ParallelDescribeRegional(describers.ServiceCatalogProduct)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_servicecatalog_product",
+    "Model": "ServiceCatalogProduct"
+  },
+  {
+    "ResourceName": "AWS::IdentityStore::User",
+    "ListDescriber": "ParallelDescribeRegional(describers.IdentityStoreUser)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_identitystore_user",
+    "Model": "IdentityStoreUser"
+  },
+  {
+    "ResourceName": "AWS::IdentityStore::Group",
+    "ListDescriber": "ParallelDescribeRegional(describers.IdentityStoreGroup)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_identitystore_group",
+    "Model": "IdentityStoreGroup"
+  },
+  {
+    "ResourceName": "AWS::IdentityStore::GroupMembership",
+    "ListDescriber": "ParallelDescribeRegional(describers.IdentityStoreGroupMembership)",
+    "GetDescriber": null,
+    "SteampipeTable": "aws_identitystore_group_membership",
+    "Model": "IdentityStoreGroupMembership"
+  }
+]
