@@ -5,13 +5,14 @@ package orchestrator
 import (
 	"context"
 	"fmt"
-	model "github.com/opengovern/og-describer-github/discovery/pkg/models"
-	"github.com/opengovern/og-describer-github/discovery/describers"
-	"github.com/opengovern/og-describer-github/global/maps"
-	"github.com/opengovern/og-util/pkg/describe/enums"
-	"go.uber.org/zap"
 	"sort"
 	"strings"
+
+	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	"github.com/opengovern/og-describer-awsobal/maps"
+	"github.com/opengovern/og-describer-awsscovery/describers"
+	"github.com/opengovern/og-util/pkg/describe/enums"
+	"go.uber.org/zap"
 )
 
 func ListResourceTypes() []string {

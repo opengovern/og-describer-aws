@@ -2,8 +2,8 @@ package global
 
 import (
 	"context"
-	"github.com/opengovern/og-describer-github/cloudql/github"
-	"github.com/opengovern/og-describer-github/global/maps"
+
+	"github.com/opengovern/og-describer-awsobal/maps"
 
 	"strings"
 
@@ -14,6 +14,7 @@ import (
 	"fmt"
 
 	"github.com/opengovern/og-util/pkg/steampipe"
+	"github.com/turbot/steampipe-plugin-github/github"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/context_key"
 )

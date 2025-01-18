@@ -4,11 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/opengovern/og-describer-github/discovery/pkg/orchestrator"
-	"github.com/opengovern/og-describer-github/global"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/opengovern/og-describer-aws/discovery/pkg/orchestrator"
+	"github.com/opengovern/og-describer-aws/global"
 
 	"github.com/nats-io/nats.go/jetstream"
 
