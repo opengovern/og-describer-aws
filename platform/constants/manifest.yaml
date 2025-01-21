@@ -1,5 +1,5 @@
 IntegrationType: aws_cloud_account
 DescriberURL:  ghcr.io/opengovern/og-describer-aws
 Publisher: opencomply.io
-Author : opencomply engineering team
+Author: opencomply engineering team
 SupportedPlatformVersion: 2.x.x
