@@ -44,7 +44,7 @@ func OpsWorksCMServer(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := opsworkscm.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &opsworkscm.ListTagsForResourceInput{

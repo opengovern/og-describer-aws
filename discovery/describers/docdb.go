@@ -47,7 +47,7 @@ func DocDBCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCluster) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	tags, err := client.ListTagsForResource(ctx, &docdb.ListTagsForResourceInput{
 		ResourceName: cluster.DBClusterArn,
@@ -133,7 +133,7 @@ func DocDBClusterInstance(ctx context.Context, cfg aws.Config, stream *models.St
 
 func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance types2.DBInstance) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	tags, err := client.ListTagsForResource(ctx, &docdb.ListTagsForResourceInput{
 		ResourceName: instance.DBInstanceArn,
@@ -230,7 +230,7 @@ func DocDBClusterSnapshot(ctx context.Context, cfg aws.Config, stream *models.St
 
 func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, cfg aws.Config, snapshot types2.DBClusterSnapshot) (models.Resource, error) {
 	client := docdb.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	tags, err := client.ListTagsForResource(ctx, &docdb.ListTagsForResourceInput{
 		ResourceName: snapshot.DBClusterSnapshotArn,

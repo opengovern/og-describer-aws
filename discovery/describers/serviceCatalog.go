@@ -11,7 +11,7 @@ import (
 )
 
 func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicecatalog.NewFromConfig(cfg)
 
 	paginator := servicecatalog.NewSearchProductsPaginator(client, &servicecatalog.SearchProductsInput{})
@@ -59,7 +59,7 @@ func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *models.S
 	return values, nil
 }
 func ServiceCatalogPortfolio(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicecatalog.NewFromConfig(cfg)
 	paginator := servicecatalog.NewListPortfoliosPaginator(client, &servicecatalog.ListPortfoliosInput{})
 	var values []models.Resource

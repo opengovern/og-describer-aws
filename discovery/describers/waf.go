@@ -25,7 +25,7 @@ import (
 )
 
 func WAFv2IPSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafv2.NewFromConfig(cfg)
 
 	scopes := []types.Scope{
@@ -97,7 +97,7 @@ func WAFv2IPSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 }
 
 func WAFv2LoggingConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafv2.NewFromConfig(cfg)
 
 	scopes := []types.Scope{
@@ -145,7 +145,7 @@ func WAFv2LoggingConfiguration(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func WAFv2RegexPatternSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafv2.NewFromConfig(cfg)
 
 	scopes := []types.Scope{
@@ -232,7 +232,7 @@ func WAFv2RegexPatternSet(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func WAFv2RuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafv2.NewFromConfig(cfg)
 
 	scopes := []types.Scope{
@@ -335,7 +335,7 @@ func WAFv2WebACL(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 
 func wAFv2WebACLHandle(ctx context.Context, cfg aws.Config, v types.WebACLSummary, scope types.Scope) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafv2.NewFromConfig(cfg)
 
 	out, err := client.GetWebACL(ctx, &wafv2.GetWebACLInput{
@@ -489,7 +489,7 @@ func listWAFv2WebACLs(ctx context.Context, cfg aws.Config, scope types.Scope) ([
 
 // Returns ResourceArns that have a WebAcl Associated
 func WAFv2WebACLAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	var values []models.Resource
 
 	regionalACls, err := listWAFv2WebACLs(ctx, cfg, types.ScopeRegional)
@@ -571,7 +571,7 @@ func WAFv2WebACLAssociation(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func WAFRegionalByteMatchSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -609,7 +609,7 @@ func WAFRegionalByteMatchSet(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func WAFRegionalGeoMatchSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -647,7 +647,7 @@ func WAFRegionalGeoMatchSet(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func WAFRegionalIPSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -685,7 +685,7 @@ func WAFRegionalIPSet(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func WAFRateBasedRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := waf.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -744,7 +744,7 @@ func WAFRateBasedRule(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func WAFRegionalRegexPatternSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -817,7 +817,7 @@ func WAFRegionalRule(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func wAFRegionalRuleHandle(ctx context.Context, cfg aws.Config, v regionaltypes.RuleSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 	arn := fmt.Sprintf("arn:%s:waf-regional:%s:%s:rule/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.RuleId)
 	tags, err := client.ListTagsForResource(ctx, &wafregional.ListTagsForResourceInput{
@@ -867,7 +867,7 @@ func GetWAFRegionalRule(ctx context.Context, cfg aws.Config, fields map[string]s
 }
 
 func WAFRegionalRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := wafregional.NewFromConfig(cfg)
 
@@ -935,7 +935,7 @@ func WAFRegionalRuleGroup(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func WAFRegionalSizeConstraintSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -973,7 +973,7 @@ func WAFRegionalSizeConstraintSet(ctx context.Context, cfg aws.Config, stream *m
 }
 
 func WAFRegionalSqlInjectionMatchSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -1011,7 +1011,7 @@ func WAFRegionalSqlInjectionMatchSet(ctx context.Context, cfg aws.Config, stream
 }
 
 func WAFRegionalWebACL(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -1090,7 +1090,7 @@ func WAFRegionalWebACL(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func WAFWebACL(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := waf.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -1163,7 +1163,7 @@ func WAFWebACL(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 }
 
 func WAFRegionalXssMatchSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wafregional.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -1244,7 +1244,7 @@ func WAFRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 }
 
 func wAFRuleHandle(ctx context.Context, cfg aws.Config, roleId string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := waf.NewFromConfig(cfg)
 
 	rule, err := client.GetRule(ctx, &waf.GetRuleInput{
@@ -1300,7 +1300,7 @@ func GetWAFRule(ctx context.Context, cfg aws.Config, fields map[string]string) (
 }
 
 func WAFRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := waf.NewFromConfig(cfg)
 

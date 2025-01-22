@@ -67,7 +67,7 @@ func EKSCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 	return values, nil
 }
 func eKSClusterHandle(ctx context.Context, cfg aws.Config, cluster string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := eks.NewFromConfig(cfg)
 
 	output, err := client.DescribeCluster(ctx, &eks.DescribeClusterInput{Name: aws.String(cluster)})
@@ -160,7 +160,7 @@ func EKSAddon(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterName string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := eks.NewFromConfig(cfg)
 
 	output, err := client.DescribeAddon(ctx, &eks.DescribeAddonInput{
@@ -258,7 +258,7 @@ func EKSFargateProfile(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (models.Resource, error) {
 	client := eks.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	output, err := client.DescribeFargateProfile(ctx, &eks.DescribeFargateProfileInput{
 		FargateProfileName: aws.String(profile),
 		ClusterName:        aws.String(clusterName),
@@ -359,7 +359,7 @@ func EKSNodegroup(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clusterName string) (models.Resource, error) {
 	client := eks.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	output, err := client.DescribeNodegroup(ctx, &eks.DescribeNodegroupInput{
 		NodegroupName: aws.String(profile),
@@ -413,7 +413,7 @@ func GetEKSNodegroup(ctx context.Context, cfg aws.Config, fields map[string]stri
 }
 
 func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	clusters, err := listEksClusters(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -469,7 +469,7 @@ func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func EKSAddonVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := eks.NewFromConfig(cfg)
 	paginator := eks.NewDescribeAddonVersionsPaginator(client, &eks.DescribeAddonVersionsInput{})

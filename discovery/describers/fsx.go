@@ -36,7 +36,7 @@ func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
@@ -93,7 +93,7 @@ func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *model
 	return values, nil
 }
 func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtualMachine) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
@@ -127,7 +127,7 @@ func GetFSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, fields map
 }
 
 func FSXTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := fsx.NewFromConfig(cfg)
 	paginator := fsx.NewDescribeDataRepositoryTasksPaginator(client, &fsx.DescribeDataRepositoryTasksInput{})
 
@@ -186,7 +186,7 @@ func FSXVolume(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 	return values, nil
 }
 func fSXVolumeHandle(ctx context.Context, item types.Volume) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,
@@ -244,7 +244,7 @@ func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 	return values, nil
 }
 func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ResourceARN,

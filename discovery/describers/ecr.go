@@ -74,7 +74,7 @@ func ECRPublicRepository(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_types.Repository, imageDetails []public_types.ImageDetail) (models.Resource, error) {
 	client := ecrpublic.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	policyOutput, err := client.GetRepositoryPolicy(ctx, &ecrpublic.GetRepositoryPolicyInput{
 		RepositoryName: v.RepositoryName,
 	})
@@ -151,7 +151,7 @@ func GetECRPublicRepository(ctx context.Context, cfg aws.Config, fields map[stri
 }
 
 func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	// Only supported in US-EAST-1
 	if !strings.EqualFold(cfg.Region, "us-east-1") {
 		return []models.Resource{}, nil
@@ -230,7 +230,7 @@ func ECRRepository(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	lifeCyclePolicyOutput, err := client.GetLifecyclePolicy(ctx, &ecr.GetLifecyclePolicyInput{
 		RepositoryName: v.RepositoryName,
@@ -323,7 +323,7 @@ func GetECRRepository(ctx context.Context, cfg aws.Config, fields map[string]str
 }
 
 func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	output, err := client.GetRegistryPolicy(ctx, &ecr.GetRegistryPolicyInput{})
 	if err != nil {
@@ -354,7 +354,7 @@ func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func ECRRegistry(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ecr.NewFromConfig(cfg)
 	output, err := client.DescribeRegistry(ctx, &ecr.DescribeRegistryInput{})
 	if err != nil {
@@ -429,7 +429,7 @@ func ECRImage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail, repository types.Repository) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	var uri string
 	if len(image.ImageTags) == 0 {
 		uri = describeCtx.AccountID + ".dkr.ecr." + describeCtx.Region + ".amazonaws.com/" + *image.RepositoryName + "@" + *image.ImageDigest
@@ -487,7 +487,7 @@ func GetECRImage(ctx context.Context, cfg aws.Config, fields map[string]string) 
 
 func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := ecr.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	scanningConfiguration, err := client.GetRegistryScanningConfiguration(ctx, &ecr.GetRegistryScanningConfigurationInput{})
 	if err != nil {

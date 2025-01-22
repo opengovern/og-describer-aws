@@ -53,7 +53,7 @@ func FirehoseDeliveryStream(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryStreamName string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := firehose.NewFromConfig(cfg)
 
 	deliveryStream, err := client.DescribeDeliveryStream(ctx, &firehose.DescribeDeliveryStreamInput{

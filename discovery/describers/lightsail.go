@@ -44,7 +44,7 @@ func LightsailInstance(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func lightsailInstanceHandle(ctx context.Context, instance types.Instance) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *instance.Arn,

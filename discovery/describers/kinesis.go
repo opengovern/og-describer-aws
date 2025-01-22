@@ -80,7 +80,7 @@ func KinesisStream(ctx context.Context, cfg aws.Config, streamS *models.StreamSe
 	return values, nil
 }
 func kinesisStreamHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, streamSummery *kinesis.DescribeStreamSummaryOutput, tags *kinesis.ListTagsForStreamOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *stream.StreamDescription.StreamARN,
@@ -194,7 +194,7 @@ func KinesisConsumer(ctx context.Context, cfg aws.Config, streamS *models.Stream
 	return values, nil
 }
 func kinesisConsumerHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, consumer types.Consumer) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *consumer.ConsumerARN,
@@ -238,7 +238,7 @@ func GetKinesisConsumer(ctx context.Context, cfg aws.Config, fields map[string]s
 }
 
 func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := kinesisvideo.NewFromConfig(cfg)
 	paginator := kinesisvideo.NewListStreamsPaginator(client, &kinesisvideo.ListStreamsInput{})
 	var values []models.Resource
@@ -324,7 +324,7 @@ func KinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 func kinesisAnalyticsV2ApplicationHandle(ctx context.Context, description *kinesisanalyticsv2.DescribeApplicationOutput, tags *kinesisanalyticsv2.ListTagsForResourceOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *description.ApplicationDetail.ApplicationARN,

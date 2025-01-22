@@ -11,7 +11,7 @@ import (
 )
 
 func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	var values []models.Resource
 
@@ -44,7 +44,7 @@ func AccountAlternateContact(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func accountAlternateContactHandle(ctx context.Context, cfg aws.Config, accountId string, contactType types.AlternateContactType) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := account.NewFromConfig(cfg)
 	op, err := client.GetAlternateContact(ctx, &account.GetAlternateContactInput{
@@ -87,7 +87,7 @@ func GetAccountAlternateContact(ctx context.Context, cfg aws.Config, fields map[
 }
 
 func AccountContact(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := account.NewFromConfig(cfg)
 

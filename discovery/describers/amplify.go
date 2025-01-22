@@ -45,7 +45,7 @@ func AmplifyApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 	return values, nil
 }
 func amplifyAppHandle(ctx context.Context, item types.App) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *item.Name,

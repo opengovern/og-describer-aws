@@ -63,7 +63,7 @@ func CodeCommitRepository(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func codeCommitRepositoryHandle(ctx context.Context, cfg aws.Config, v types.RepositoryMetadata) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := codecommit.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &codecommit.ListTagsForResourceInput{

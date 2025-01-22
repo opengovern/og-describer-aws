@@ -46,7 +46,7 @@ func DMSReplicationInstance(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item types.ReplicationInstance) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
 		ResourceArn: item.ReplicationInstanceArn,
@@ -136,7 +136,7 @@ func DMSEndpoint(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 
 func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
 		ResourceArn: item.EndpointArn,
@@ -197,7 +197,7 @@ func DMSReplicationTask(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.ReplicationTask) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dms.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &dms.ListTagsForResourceInput{
 		ResourceArn: item.ReplicationTaskArn,

@@ -10,7 +10,7 @@ import (
 )
 
 func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := eventbridge.NewFromConfig(cfg)
 
 	input := eventbridge.ListEventBusesInput{Limit: aws.Int32(100)}
@@ -62,7 +62,7 @@ func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 }
 
 func EventBridgeRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := eventbridge.NewFromConfig(cfg)
 
 	var values []models.Resource

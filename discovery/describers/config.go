@@ -11,7 +11,7 @@ import (
 )
 
 func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := configservice.NewFromConfig(cfg)
 	out, err := client.DescribeConfigurationRecorders(ctx, &configservice.DescribeConfigurationRecordersInput{})
@@ -52,7 +52,7 @@ func ConfigConfigurationRecorder(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeAggregationAuthorizationsPaginator(client, &configservice.DescribeAggregationAuthorizationsInput{})
 
@@ -93,7 +93,7 @@ func ConfigAggregateAuthorization(ctx context.Context, cfg aws.Config, stream *m
 }
 
 func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeConformancePacksPaginator(client, &configservice.DescribeConformancePacksInput{})
 
@@ -127,7 +127,7 @@ func ConfigConformancePack(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func ConfigRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeConfigRulesPaginator(client, &configservice.DescribeConfigRulesInput{})
 
@@ -188,7 +188,7 @@ func ConfigRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 }
 
 func ConfigRetentionConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := configservice.NewFromConfig(cfg)
 	paginator := configservice.NewDescribeRetentionConfigurationsPaginator(client, &configservice.DescribeRetentionConfigurationsInput{})
 

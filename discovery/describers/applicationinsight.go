@@ -6,10 +6,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights"
 	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func ApplicationInsightsApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := applicationinsights.NewFromConfig(cfg)
 	paginator := applicationinsights.NewListApplicationsPaginator(client, &applicationinsights.ListApplicationsInput{})
 

@@ -52,7 +52,7 @@ func MemoryDbCluster(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := memorydb.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &memorydb.ListTagsInput{
 		ResourceArn: cluster.ARN,

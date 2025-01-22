@@ -12,7 +12,7 @@ import (
 )
 
 func FMSPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := fms.NewFromConfig(cfg)
 	paginator := fms.NewListPoliciesPaginator(client, &fms.ListPoliciesInput{})
 
@@ -53,7 +53,7 @@ func FMSPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 }
 
 func GetFMSPolicy(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	policyID := fields["id"]
 	client := fms.NewFromConfig(cfg)
 

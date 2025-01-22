@@ -45,7 +45,7 @@ func KafkaCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 	return values, nil
 }
 func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cluster) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := kafka.NewFromConfig(cfg)
 
 	var configArn string

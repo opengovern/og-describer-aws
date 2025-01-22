@@ -15,7 +15,7 @@ import (
 )
 
 func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(client, &ssoadmin.ListInstancesInput{})
 
@@ -76,7 +76,7 @@ func SSOAdminAccountAssignment(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmin.Client, instance types.InstanceMetadata) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	paginator := ssoadmin.NewListPermissionSetsPaginator(client, &ssoadmin.ListPermissionSetsInput{
 		InstanceArn: instance.InstanceArn,
 	})
@@ -163,7 +163,7 @@ func ListSSOAdminInstancePermissionSets(ctx context.Context, client *ssoadmin.Cl
 }
 
 func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) (*models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	detail, err := client.DescribePermissionSet(ctx, &ssoadmin.DescribePermissionSetInput{
 		InstanceArn:      aws.String(instanceArn),
 		PermissionSetArn: aws.String(permissionSetArn),
@@ -256,7 +256,7 @@ func ListSSOAdminInstanceManagedPolicyAttachments(ctx context.Context, client *s
 }
 
 func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *ssoadmin.Client, instanceArn, permissionSetArn string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	paginator := ssoadmin.NewListManagedPoliciesInPermissionSetPaginator(client, &ssoadmin.ListManagedPoliciesInPermissionSetInput{
 		InstanceArn:      aws.String(instanceArn),
 		PermissionSetArn: aws.String(permissionSetArn),
@@ -287,7 +287,7 @@ func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *sso
 }
 
 func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)

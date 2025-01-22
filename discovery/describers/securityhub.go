@@ -44,7 +44,7 @@ func SecurityHubHub(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func securityHubHubHandle(ctx context.Context, cfg aws.Config, out *securityhub.DescribeHubOutput) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &securityhub.ListTagsForResourceInput{ResourceArn: out.HubArn})
@@ -130,7 +130,7 @@ func SecurityHubActionTarget(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func securityHubActionTargetHandle(ctx context.Context, actionTarget types.ActionTarget) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *actionTarget.ActionTargetArn,
@@ -165,7 +165,7 @@ func GetSecurityHubActionTarget(ctx context.Context, cfg aws.Config, fields map[
 }
 
 func SecurityHubFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -238,7 +238,7 @@ func SecurityHubFindingAggregator(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func securityHubFindingAggregatorHandle(ctx context.Context, cfg aws.Config, findingAggregatorArn string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
 	findingAggregator, err := client.GetFindingAggregator(ctx, &securityhub.GetFindingAggregatorInput{
@@ -305,7 +305,7 @@ func SecurityHubInsight(ctx context.Context, cfg aws.Config, stream *models.Stre
 	return values, nil
 }
 func securityHubInsightHandle(ctx context.Context, insight types.Insight) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *insight.InsightArn,
@@ -401,7 +401,7 @@ func SecurityHubMember(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func securityHubMemberHandle(ctx context.Context, member types.Member) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *member.AccountId,
@@ -434,7 +434,7 @@ func GetSecurityHubMember(ctx context.Context, cfg aws.Config, fields map[string
 }
 
 func SecurityHubProduct(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securityhub.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -514,7 +514,7 @@ func SecurityHubStandardsControl(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func securityHubStandardsControlHandle(ctx context.Context, standardsControl types.StandardsControl) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *standardsControl.ControlId,
@@ -587,7 +587,7 @@ func SecurityHubStandardsSubscription(ctx context.Context, cfg aws.Config, strea
 	return values, nil
 }
 func securityHubStandardsSubscriptionHandle(ctx context.Context, standardSub types.StandardsSubscription, standards map[string]types.Standard) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	standard, _ := standards[*standardSub.StandardsArn]
 	resource := models.Resource{

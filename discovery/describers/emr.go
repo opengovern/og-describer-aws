@@ -45,7 +45,7 @@ func EMRCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 	return values, nil
 }
 func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := emr.NewFromConfig(cfg)
 
 	out, err := client.DescribeCluster(ctx, &emr.DescribeClusterInput{
@@ -108,7 +108,7 @@ func EMRInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 				}
 
 				for _, instance := range instancePage.Instances {
-					describeCtx := GetDescribeContext(ctx)
+					describeCtx := model.GetDescribeContext(ctx)
 					arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instance.Id)
 					resource := models.Resource{
 						Region: describeCtx.OGRegion,
@@ -174,7 +174,7 @@ func EMRInstanceFleet(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFleet, clusterId string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-fleet/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceFleet.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -254,7 +254,7 @@ func EMRInstanceGroup(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGroup, clusterId string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceGroup.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -290,7 +290,7 @@ func GetEMRInstanceGroup(ctx context.Context, cfg aws.Config, fields map[string]
 
 func EMRBlockPublicAccessConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
 	client := emr.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	op, err := client.GetBlockPublicAccessConfiguration(ctx, &emr.GetBlockPublicAccessConfigurationInput{})
 	if err != nil {
 		return nil, err

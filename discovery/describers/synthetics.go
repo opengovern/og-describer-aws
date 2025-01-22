@@ -6,10 +6,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics"
 	"github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	model "github.com/opengovern/og-describer-aws/discovery/provider"
 )
 
 func SyntheticsCanary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := synthetics.NewFromConfig(cfg)
 	paginator := synthetics.NewDescribeCanariesPaginator(client, &synthetics.DescribeCanariesInput{})
 

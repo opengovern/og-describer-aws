@@ -13,7 +13,7 @@ import (
 )
 
 func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
@@ -58,7 +58,7 @@ func AuditManagerAssessment(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -105,7 +105,7 @@ func AuditManagerControl(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	controlID := fields["id"]
 	client := auditmanager.NewFromConfig(cfg)
 	control, err := client.GetControl(ctx, &auditmanager.GetControlInput{
@@ -130,7 +130,7 @@ func GetAuditManagerControl(ctx context.Context, cfg aws.Config, fields map[stri
 }
 
 func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
@@ -193,7 +193,7 @@ func AuditManagerEvidence(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 	paginator := auditmanager.NewListAssessmentsPaginator(client, &auditmanager.ListAssessmentsInput{})
 
@@ -243,7 +243,7 @@ func AuditManagerEvidenceFolder(ctx context.Context, cfg aws.Config, stream *mod
 }
 
 func AuditManagerFramework(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := auditmanager.NewFromConfig(cfg)
 
 	var values []models.Resource

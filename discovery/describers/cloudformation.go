@@ -44,7 +44,7 @@ func CloudFormationStack(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func cloudFormationStackHandle(ctx context.Context, cfg aws.Config, v types.Stack) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 
 	template, err := client.GetTemplate(ctx, &cloudformation.GetTemplateInput{
@@ -133,7 +133,7 @@ func CloudFormationStackSet(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func cloudFormationStackSetHandle(ctx context.Context, cfg aws.Config, stackName string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 	stackSet, err := client.DescribeStackSet(ctx, &cloudformation.DescribeStackSetInput{
 		StackSetName: &stackName,
@@ -213,7 +213,7 @@ func CloudFormationStackResource(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func cloudFormationStackResourceHandle(ctx context.Context, cfg aws.Config, stackName string, resourceId string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudformation.NewFromConfig(cfg)
 
 	stackResource, err := client.DescribeStackResource(ctx, &cloudformation.DescribeStackResourceInput{

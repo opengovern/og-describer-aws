@@ -40,7 +40,7 @@ func AppConfigApplication(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func appConfigApplicationHandle(ctx context.Context, cfg aws.Config, application types.Application) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := appconfig.NewFromConfig(cfg)
 	arn := fmt.Sprintf("arn:%s:appconfig:%s:%s:application/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *application.Id)
 

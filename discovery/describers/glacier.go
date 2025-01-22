@@ -11,7 +11,7 @@ import (
 )
 
 func GlacierVault(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := glacier.NewFromConfig(cfg)
 	paginator := glacier.NewListVaultsPaginator(client, &glacier.ListVaultsInput{
@@ -105,7 +105,7 @@ func GlacierVault(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 
 func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	vaultName := fields["name"]
 
 	client := glacier.NewFromConfig(cfg)

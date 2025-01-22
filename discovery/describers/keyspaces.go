@@ -46,7 +46,7 @@ func KeyspacesKeyspace(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.KeyspaceSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := keyspaces.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &keyspaces.ListTagsForResourceInput{
@@ -149,7 +149,7 @@ func KeyspacesTable(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := keyspaces.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &keyspaces.ListTagsForResourceInput{

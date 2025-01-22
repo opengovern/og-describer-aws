@@ -13,7 +13,7 @@ import (
 )
 
 func BackupPlan(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	paginator := backup.NewListBackupPlansPaginator(client, &backup.ListBackupPlansInput{})
 
@@ -53,7 +53,7 @@ func BackupPlan(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 }
 
 func BackupRecoveryPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	paginator := backup.NewListBackupVaultsPaginator(client, &backup.ListBackupVaultsInput{})
 
@@ -136,7 +136,7 @@ func BackupRecoveryPoint(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func BackupProtectedResource(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	paginator := backup.NewListProtectedResourcesPaginator(client, &backup.ListProtectedResourcesInput{})
 
@@ -170,7 +170,7 @@ func BackupProtectedResource(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func BackupSelection(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	plans, err := BackupPlan(ctx, cfg, nil)
 	if err != nil {
@@ -262,7 +262,7 @@ func BackupVault(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 	return values, nil
 }
 func backupVaultHandle(ctx context.Context, cfg aws.Config, v types.BackupVaultListMember, notification *backup.GetBackupVaultNotificationsOutput) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	accessPolicy, err := client.GetBackupVaultAccessPolicy(ctx, &backup.GetBackupVaultAccessPolicyInput{
 		BackupVaultName: v.BackupVaultName,
@@ -370,7 +370,7 @@ func BackupFramework(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func backupFrameworkHandle(ctx context.Context, cfg aws.Config, v types.Framework) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 
 	framework, err := client.DescribeFramework(ctx, &backup.DescribeFrameworkInput{
@@ -426,7 +426,7 @@ func GetBackupFramework(ctx context.Context, cfg aws.Config, fields map[string]s
 }
 
 func BackupLegalHold(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	paginator := backup.NewListLegalHoldsPaginator(client, &backup.ListLegalHoldsInput{})
 
@@ -497,7 +497,7 @@ func BackupReportPlan(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func backupReportPlanHandle(ctx context.Context, cfg aws.Config, v types.ReportPlan) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 
 	reportPlan, err := client.DescribeReportPlan(ctx, &backup.DescribeReportPlanInput{
@@ -553,7 +553,7 @@ func GetBackupReportPlan(ctx context.Context, cfg aws.Config, fields map[string]
 }
 
 func BackupRegionSetting(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := backup.NewFromConfig(cfg)
 	regionSetting, err := client.DescribeRegionSettings(ctx, &backup.DescribeRegionSettingsInput{})
 	if err != nil {

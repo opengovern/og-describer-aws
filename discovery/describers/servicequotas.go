@@ -11,7 +11,7 @@ import (
 )
 
 func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
 	servicesPaginator := servicequotas.NewListServicesPaginator(client, &servicequotas.ListServicesInput{})
@@ -49,7 +49,7 @@ func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -95,7 +95,7 @@ func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, strea
 }
 
 func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -148,7 +148,7 @@ func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicequotas.NewFromConfig(cfg)
 
 	var values []models.Resource

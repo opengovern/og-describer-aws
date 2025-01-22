@@ -10,7 +10,7 @@ import (
 )
 
 func OAMLink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := oam.NewFromConfig(cfg)
 	paginator := oam.NewListLinksPaginator(client, &oam.ListLinksInput{})
 
@@ -60,7 +60,7 @@ func OAMLink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 }
 
 func OAMSink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := oam.NewFromConfig(cfg)
 	paginator := oam.NewListSinksPaginator(client, &oam.ListSinksInput{})
 

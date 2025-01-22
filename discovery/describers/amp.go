@@ -40,7 +40,7 @@ func AMPWorkspace(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 	return values, nil
 }
 func aMPWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,

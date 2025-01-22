@@ -35,7 +35,7 @@ func DirectConnectConnection(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func directConnectConnectionHandle(ctx context.Context, v types.Connection) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:directconnect:%s:%s:dxcon/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.ConnectionId)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -64,12 +64,12 @@ func GetDirectConnectConnection(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 
-func getDirectConnectGatewayArn(describeCtx DescribeContext, directConnectGatewayId string) string {
+func getDirectConnectGatewayArn(describeCtx model.DescribeContext, directConnectGatewayId string) string {
 	return fmt.Sprintf("arn:%s:directconnect::%s:dx-gateway/%s", describeCtx.Partition, describeCtx.AccountID, directConnectGatewayId)
 }
 
 func DirectConnectGateway(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := directconnect.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -123,7 +123,7 @@ func DirectConnectGateway(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGateway, arnToTagMap map[string][]types.Tag) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := getDirectConnectGatewayArn(describeCtx, *v.DirectConnectGatewayId)
 
 	tagsList, ok := arnToTagMap[arn]
@@ -143,7 +143,7 @@ func directConnectGatewayHandle(ctx context.Context, v types.DirectConnectGatewa
 	return resource
 }
 func GetDirectConnectGateway(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	DirectConnectGatewayId := fields["id"]
 
 	client := directconnect.NewFromConfig(cfg)

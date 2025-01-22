@@ -44,7 +44,7 @@ func MediaStoreContainer(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func mediaStoreContainerHandle(ctx context.Context, cfg aws.Config, container types.Container) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := mediastore.NewFromConfig(cfg)
 
 	policy, err := client.GetContainerPolicy(ctx, &mediastore.GetContainerPolicyInput{

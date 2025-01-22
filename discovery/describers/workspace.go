@@ -12,7 +12,7 @@ import (
 )
 
 func WorkSpacesConnectionAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := workspaces.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -82,7 +82,7 @@ func WorkspacesWorkspace(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func workspacesWorkspaceHandle(ctx context.Context, cfg aws.Config, v types.Workspace) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := workspaces.NewFromConfig(cfg)
 
 	arn := fmt.Sprintf("arn:%s:workspaces:%s:%s:workspace/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.WorkspaceId)
@@ -165,7 +165,7 @@ func WorkspacesBundle(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func workspacesBundleHandle(ctx context.Context, v types.WorkspaceBundle, tags *workspaces.DescribeTagsOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:workspaces:%s:%s:workspacebundle/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.BundleId)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,

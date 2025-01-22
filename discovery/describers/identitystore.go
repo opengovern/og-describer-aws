@@ -12,7 +12,7 @@ import (
 )
 
 func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
@@ -56,7 +56,7 @@ func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)
 	paginator := ssoadmin.NewListInstancesPaginator(ssoadminClient, &ssoadmin.ListInstancesInput{})
@@ -104,7 +104,7 @@ func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func IdentityStoreGroupMembership(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := identitystore.NewFromConfig(cfg)
 
 	ssoadminClient := ssoadmin.NewFromConfig(cfg)

@@ -38,7 +38,7 @@ func GlueCatalogDatabase(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func glueCatalogDatabaseHandle(ctx context.Context, database types.Database) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:database/%s", describeCtx.Region, describeCtx.AccountID, *database.Name)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -113,7 +113,7 @@ func GlueCatalogTable(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func glueCatalogTableHandle(ctx context.Context, client *lakeformation.Client, table types.Table, databaseName string) (*models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:table/%s/%s", describeCtx.Region, describeCtx.AccountID, databaseName, *table.Name)
 
 	if table.ViewOriginalText != nil && len(*table.ViewOriginalText) > 5000 {
@@ -211,7 +211,7 @@ func GlueConnection(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func glueConnectionHandle(ctx context.Context, connection types.Connection) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:connection/%s", describeCtx.Region, describeCtx.AccountID, *connection.Name)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -269,7 +269,7 @@ func GlueCrawler(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 	return values, nil
 }
 func glueCrawlerHandle(ctx context.Context, crawler types.Crawler) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:crawler/%s", describeCtx.Region, describeCtx.AccountID, *crawler.Name)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -323,7 +323,7 @@ func GlueDataCatalogEncryptionSettings(ctx context.Context, cfg aws.Config, stre
 	return values, nil
 }
 func glueDataCatalogEncryptionSettingsHandle(ctx context.Context, settings *glue.GetDataCatalogEncryptionSettingsOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Description: model.GlueDataCatalogEncryptionSettingsDescription{
@@ -352,7 +352,7 @@ func GetGlueDataCatalogEncryptionSettings(ctx context.Context, cfg aws.Config, f
 }
 
 func GlueDataQualityRuleset(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := glue.NewFromConfig(cfg)
 	paginator := glue.NewListDataQualityRulesetsPaginator(client, &glue.ListDataQualityRulesetsInput{})
 
@@ -416,7 +416,7 @@ func GlueDevEndpoint(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func glueDevEndpointHandle(ctx context.Context, devEndpoint types.DevEndpoint) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:devEndpoint/%s", describeCtx.Region, describeCtx.AccountID, *devEndpoint.EndpointName)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -472,7 +472,7 @@ func GlueJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 	return values, nil
 }
 func glueJobHandle(ctx context.Context, cfg aws.Config, job types.Job) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := glue.NewFromConfig(cfg)
 
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:job/%s", describeCtx.Region, describeCtx.AccountID, *job.Name)
@@ -540,7 +540,7 @@ func GlueSecurityConfiguration(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func glueSecurityConfigurationHandle(ctx context.Context, securityConfiguration types.SecurityConfiguration) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:aws:glue:%s:%s:security-configuration/%s", describeCtx.Region, describeCtx.AccountID, *securityConfiguration.Name)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,

@@ -38,7 +38,7 @@ func SecretsManagerSecret(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func secretsManagerSecretHandle(ctx context.Context, cfg aws.Config, Arn *string, Name *string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := secretsmanager.NewFromConfig(cfg)
 	out, err := client.DescribeSecret(ctx, &secretsmanager.DescribeSecretInput{
 		SecretId: Arn,

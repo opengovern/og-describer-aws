@@ -15,7 +15,7 @@ import (
 )
 
 func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ecs.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -94,7 +94,7 @@ func ECSCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 	return values, nil
 }
 func eCSClusterHandle(ctx context.Context, v types.Cluster) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ClusterArn,
@@ -190,7 +190,7 @@ func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) 
 	if err != nil {
 		return models.Resource{}, err
 	}
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.ServiceArn,
@@ -265,7 +265,7 @@ func ECSTaskDefinition(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ecs.NewFromConfig(cfg)
 
 	output, err := client.DescribeTaskDefinition(ctx, &ecs.DescribeTaskDefinitionInput{
@@ -368,7 +368,7 @@ func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 	return values, nil
 }
 func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.TaskSetArn,
@@ -440,7 +440,7 @@ func listEcsClusters(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -511,7 +511,7 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func ECSTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	clusters, err := listEcsClusters(ctx, cfg, nil)
 	if err != nil {
 		return nil, err

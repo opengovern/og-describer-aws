@@ -46,7 +46,7 @@ func CodeArtifactRepository(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.RepositorySummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := codeartifact.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &codeartifact.ListTagsForResourceInput{
@@ -198,7 +198,7 @@ func CodeArtifactDomain(ctx context.Context, cfg aws.Config, stream *models.Stre
 	return values, nil
 }
 func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.DomainSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := codeartifact.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &codeartifact.ListTagsForResourceInput{
 		ResourceArn: v.Arn,

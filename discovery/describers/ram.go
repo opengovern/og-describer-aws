@@ -61,7 +61,7 @@ func GetRamPrincipalAssociation(ctx context.Context, cfg aws.Config, fields map[
 	return values, nil
 }
 func ramPrincipalAssociationHandle(ctx context.Context, cfg aws.Config, association types.ResourceShareAssociation, resourceShareArn string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ram.NewFromConfig(cfg)
 
 	permissionPaginator := ram.NewListResourceSharePermissionsPaginator(client, &ram.ListResourceSharePermissionsInput{
@@ -118,7 +118,7 @@ func RamResourceAssociation(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func ramResourceAssociationHandle(ctx context.Context, cfg aws.Config, association types.ResourceShareAssociation, resourceShareArn string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ram.NewFromConfig(cfg)
 	permissionPaginator := ram.NewListResourceSharePermissionsPaginator(client, &ram.ListResourceSharePermissionsInput{
 		ResourceShareArn: &resourceShareArn,

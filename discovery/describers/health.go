@@ -12,7 +12,7 @@ import (
 )
 
 func HealthEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := health.NewFromConfig(cfg)
 	paginator := health.NewDescribeEventsPaginator(client, &health.DescribeEventsInput{})
 
@@ -44,7 +44,7 @@ func HealthEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 
 func HealthAffectedEntity(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := health.NewFromConfig(cfg)
 	paginator := health.NewDescribeEventsPaginator(client, &health.DescribeEventsInput{})
 

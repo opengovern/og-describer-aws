@@ -51,7 +51,7 @@ func DynamoDbTable(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func DynamoDbTableHandle(ctx context.Context, cfg aws.Config, tableName string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 	v, err := client.DescribeTable(ctx, &dynamodb.DescribeTableInput{
 		TableName: &tableName,
@@ -123,7 +123,7 @@ func GetDynamoDbTable(ctx context.Context, cfg aws.Config, fields map[string]str
 }
 
 func DynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 	paginator := dynamodb.NewListTablesPaginator(client, &dynamodb.ListTablesInput{})
 
@@ -167,7 +167,7 @@ func DynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func GetDynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	tableName := fields["name"]
 
 	client := dynamodb.NewFromConfig(cfg)
@@ -195,7 +195,7 @@ func GetDynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, fields
 }
 
 func DynamoDbLocalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 	paginator := dynamodb.NewListTablesPaginator(client, &dynamodb.ListTablesInput{})
 
@@ -240,7 +240,7 @@ func DynamoDbLocalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func DynamoDbStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodbstreams.NewFromConfig(cfg)
 	var values []models.Resource
 	var lastArn *string = nil
@@ -284,7 +284,7 @@ func DynamoDbStream(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 }
 
 func DynamoDbBackUp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 	var values []models.Resource
 	var lastArn *string = nil
@@ -378,7 +378,7 @@ func DynamoDbGlobalTable(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func DynamoDbGlobalTableHandle(ctx context.Context, cfg aws.Config, tableName string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 
 	globalTable, err := client.DescribeGlobalTable(ctx, &dynamodb.DescribeGlobalTableInput{
@@ -419,7 +419,7 @@ func GetDynamoDbGlobalTable(ctx context.Context, cfg aws.Config, fields map[stri
 }
 
 func DynamoDbTableExport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dynamodb.NewFromConfig(cfg)
 	paginator := dynamodb.NewListExportsPaginator(client, &dynamodb.ListExportsInput{})
 
@@ -459,7 +459,7 @@ func DynamoDbTableExport(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func DynamoDBMetricAccountProvisionedReadCapacityUtilization(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	metrics, err := listCloudWatchMetricStatistics(ctx, cfg, "5_MIN", "AWS/DynamoDB", "AccountProvisionedWriteCapacityUtilization", "", "")
 	if err != nil {
 		return nil, err
@@ -488,7 +488,7 @@ func DynamoDBMetricAccountProvisionedReadCapacityUtilization(ctx context.Context
 }
 
 func DynamoDBMetricAccountProvisionedWriteCapacityUtilization(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	metrics, err := listCloudWatchMetricStatistics(ctx, cfg, "5_MIN", "AWS/DynamoDB", "AccountProvisionedWriteCapacityUtilization", "", "")
 	if err != nil {
 		return nil, err

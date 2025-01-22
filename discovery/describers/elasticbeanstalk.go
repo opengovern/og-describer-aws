@@ -44,7 +44,7 @@ func ElasticBeanstalkEnvironment(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item types.EnvironmentDescription) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := elasticbeanstalk.NewFromConfig(cfg)
 
@@ -160,7 +160,7 @@ func ElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item types.ApplicationDescription) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := elasticbeanstalk.NewFromConfig(cfg)
 
@@ -214,7 +214,7 @@ func GetElasticBeanstalkApplication(ctx context.Context, cfg aws.Config, fields 
 }
 
 func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := elasticbeanstalk.NewFromConfig(cfg)
 	paginator := elasticbeanstalk.NewListPlatformVersionsPaginator(client, &elasticbeanstalk.ListPlatformVersionsInput{})
 
@@ -305,7 +305,7 @@ func ElasticBeanstalkApplicationVersion(ctx context.Context, cfg aws.Config, str
 
 func elasticBeanstalkApplicationVersionHandle(ctx context.Context, cfg aws.Config, v types.ApplicationVersionDescription) (models.Resource, error) {
 	client := elasticbeanstalk.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	tags, err := client.ListTagsForResource(ctx, &elasticbeanstalk.ListTagsForResourceInput{
 		ResourceArn: v.ApplicationVersionArn,

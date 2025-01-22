@@ -27,7 +27,7 @@ const maxRetries = 20
 const retryIntervalMs = 1000
 
 func IAMAccessAdvisor(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	var values []models.Resource
 
@@ -146,7 +146,7 @@ func IAMAccessAdvisor(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func IAMAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	orgClient := organizations.NewFromConfig(cfg)
 	accountId, err := STSAccount(ctx, cfg)
 	if err != nil {
@@ -211,7 +211,7 @@ func IAMAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 }
 
 func IAMAccountSummary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	output, err := client.GetAccountSummary(ctx, &iam.GetAccountSummaryInput{})
 	if err != nil {
@@ -298,7 +298,7 @@ func IAMAccountPasswordPolicy(ctx context.Context, cfg aws.Config, stream *model
 
 func iAMAccountPasswordPolicyHandle(ctx context.Context, cfg aws.Config) (models.Resource, error) {
 	client := iam.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	output, err := client.GetAccountPasswordPolicy(ctx, &iam.GetAccountPasswordPolicyInput{})
 	if err != nil {
 		if !isErr(err, "NoSuchEntity") {
@@ -396,7 +396,7 @@ func getIAMUserAccessKeys(ctx context.Context, cfg aws.Config, user types.User) 
 }
 
 func iAMAccessKeyHandle(ctx context.Context, cfg aws.Config, user types.User, v types.AccessKeyMetadata) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	lastUsed, err := client.GetAccessKeyLastUsed(ctx, &iam.GetAccessKeyLastUsedInput{
 		AccessKeyId: v.AccessKeyId,
@@ -492,7 +492,7 @@ func getIAMUserSSHPublicKeys(ctx context.Context, cfg aws.Config, user types.Use
 }
 
 func iAMSSHPublicKeyHandle(ctx context.Context, cfg aws.Config, user types.User, v types.SSHPublicKeyMetadata) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	username := describeCtx.AccountID
 	if user.UserName != nil {
 		username = *v.UserName
@@ -550,7 +550,7 @@ func GetIAMAccessKey(ctx context.Context, cfg aws.Config, fields map[string]stri
 }
 
 func IAMCredentialReport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	output, err := client.GetCredentialReport(ctx, &iam.GetCredentialReportInput{})
 	if err != nil {
@@ -646,7 +646,7 @@ func IAMPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 }
 
 func iAMPolicyHandle(ctx context.Context, v types.Policy, version *types.PolicyVersion) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
@@ -741,7 +741,7 @@ func IAMGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 }
 
 func iAMGroupHandle(ctx context.Context, v types.Group, aPolicies []string, policies []model.InlinePolicy, users []types.User) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.Arn,
@@ -871,7 +871,7 @@ func getGroupAttachedPolicyArns(ctx context.Context, client *iam.Client, groupna
 }
 
 func IAMInstanceProfile(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	paginator := iam.NewListInstanceProfilesPaginator(client, &iam.ListInstanceProfilesInput{})
 
@@ -903,7 +903,7 @@ func IAMInstanceProfile(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func IAMManagedPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	paginator := iam.NewListPoliciesPaginator(client, &iam.ListPoliciesInput{
 		OnlyAttached: true,
@@ -937,7 +937,7 @@ func IAMManagedPolicy(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func IAMOIDCProvider(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	output, err := client.ListOpenIDConnectProviders(ctx, &iam.ListOpenIDConnectProvidersInput{})
 	if err != nil {
@@ -965,7 +965,7 @@ func IAMOIDCProvider(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func IAMGroupPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	groups, err := IAMGroup(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -1021,7 +1021,7 @@ func IAMGroupPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 }
 
 func IAMUserPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	users, err := IAMUser(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -1076,7 +1076,7 @@ func IAMUserPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 }
 
 func IAMRolePolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	roles, err := IAMRole(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -1162,7 +1162,7 @@ func IAMRole(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 	return values, nil
 }
 func iAMRoleHandle(ctx context.Context, client *iam.Client, v types.Role) (*models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	role, err := client.GetRole(ctx, &iam.GetRoleInput{
 		RoleName: v.RoleName,
@@ -1337,7 +1337,7 @@ func IAMServerCertificate(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func iAMServerCertificateHandle(ctx context.Context, v types.ServerCertificateMetadata, output *iam.GetServerCertificateOutput) (*models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	var bodyLength int
 	block, _ := pem.Decode([]byte(*output.ServerCertificate.CertificateBody))
@@ -1431,7 +1431,7 @@ func IAMUser(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 
 func iAMUserHandle(ctx context.Context, cfg aws.Config, v types.User) (models.Resource, error) {
 	client := iam.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	policies, err := getUserPolicies(ctx, client, v.UserName)
 	if err != nil {
 		if !isErr(err, "GetLoginProfileNotFound") && !isErr(err, "InvalidParameterValue") && !isErr(err, "NoSuchEntity") {
@@ -1515,7 +1515,7 @@ func GetIAMUser(ctx context.Context, cfg aws.Config, fields map[string]string) (
 }
 
 func IAMPolicyAttachment(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := iam.NewFromConfig(cfg)
 	paginator := iam.NewListPoliciesPaginator(client, &iam.ListPoliciesInput{
 		OnlyAttached: false,
@@ -1574,7 +1574,7 @@ func IAMPolicyAttachment(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func iAMPolicyAttachmentHandle(ctx context.Context, policy types.Policy, policyGroups []types.PolicyGroup, policyRoles []types.PolicyRole, policyUsers []types.PolicyUser) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   fmt.Sprintf("%s - Attachments", *policy.Arn),
@@ -1652,7 +1652,7 @@ func IAMSamlProvider(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func iAMSamlProviderHandle(ctx context.Context, samlProvider *iam.GetSAMLProviderOutput, Arn string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    Arn,
@@ -1717,7 +1717,7 @@ func IAMServiceSpecificCredential(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func iAMServiceSpecificCredentialHandle(ctx context.Context, credential types.ServiceSpecificCredentialMetadata) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ID:     *credential.ServiceSpecificCredentialId,
@@ -1863,7 +1863,7 @@ func IAMVirtualMFADevice(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func iAMVirtualMFADeviceHandle(ctx context.Context, v types.VirtualMFADevice, output *iam.ListMFADeviceTagsOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *v.SerialNumber,
@@ -1931,7 +1931,7 @@ func IAMOpenIdConnectProvider(ctx context.Context, cfg aws.Config, stream *model
 }
 func iAMOpenIdConnectProviderHandle(ctx context.Context, cfg aws.Config, arn string) (models.Resource, error) {
 	client := iam.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	params := &iam.GetOpenIDConnectProviderInput{
 		OpenIDConnectProviderArn: aws.String(arn),
 	}

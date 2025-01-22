@@ -37,7 +37,7 @@ func GrafanaWorkspace(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func grafanaWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:grafana:%s:%s:/workspaces/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.Id)
 
 	resource := models.Resource{

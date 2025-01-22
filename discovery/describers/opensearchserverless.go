@@ -11,7 +11,7 @@ import (
 )
 
 func OpenSearchServerlessCollection(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := opensearchserverless.NewFromConfig(cfg)
 	paginator := opensearchserverless.NewListCollectionsPaginator(client, &opensearchserverless.ListCollectionsInput{})
 

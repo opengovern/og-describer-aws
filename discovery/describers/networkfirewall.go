@@ -47,7 +47,7 @@ func NetworkFirewallFirewall(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func NetworkFirewallFirewallHandle(ctx context.Context, cfg aws.Config, v types.FirewallMetadata) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	firewall, err := client.DescribeFirewall(ctx, &networkfirewall.DescribeFirewallInput{
 		FirewallName: v.FirewallName,
@@ -109,7 +109,7 @@ func GetNetworkFirewallFirewall(ctx context.Context, cfg aws.Config, fields map[
 }
 
 func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	paginator := networkfirewall.NewListFirewallPoliciesPaginator(client, &networkfirewall.ListFirewallPoliciesInput{})
 
@@ -162,7 +162,7 @@ func NetworkFirewallPolicy(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func NetworkFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := networkfirewall.NewFromConfig(cfg)
 	paginator := networkfirewall.NewListRuleGroupsPaginator(client, &networkfirewall.ListRuleGroupsInput{})
 

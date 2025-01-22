@@ -40,7 +40,7 @@ func EFSAccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func eFSAccessPointHandle(ctx context.Context, v types.AccessPointDescription) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	name := aws.ToString(v.Name)
 	if name == "" {
 		name = *v.AccessPointId
@@ -116,7 +116,7 @@ func EFSFileSystem(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func eFSFileSystemHandle(ctx context.Context, describeFSPolicy *efs.DescribeFileSystemPolicyOutput, v types.FileSystemDescription) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	name := aws.ToString(v.Name)
 	if name == "" {
 		name = *v.FileSystemId
@@ -212,7 +212,7 @@ func EFSMountTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func eFSMountTargetHandle(ctx context.Context, securityGroups *efs.DescribeMountTargetSecurityGroupsOutput, v types.MountTargetDescription, FileSystemId *string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:elasticfilesystem:%s:%s:file-system/%s/mount-target/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *FileSystemId, *v.MountTargetId)
 
 	resource := models.Resource{

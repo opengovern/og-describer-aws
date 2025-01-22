@@ -41,7 +41,7 @@ func DLMLifecyclePolicy(ctx context.Context, cfg aws.Config, stream *models.Stre
 	return values, nil
 }
 func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary types.LifecyclePolicySummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := dlm.NewFromConfig(cfg)
 	policy, err := client.GetLifecyclePolicy(ctx, &dlm.GetLifecyclePolicyInput{
 		PolicyId: policySummary.PolicyId,

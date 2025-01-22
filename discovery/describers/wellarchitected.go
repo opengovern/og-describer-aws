@@ -13,7 +13,7 @@ import (
 )
 
 func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -61,7 +61,7 @@ func WellArchitectedWorkload(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -128,7 +128,7 @@ func WellArchitectedAnswer(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	answers, err := WellArchitectedAnswer(ctx, cfg, stream)
 	if err != nil {
@@ -202,7 +202,7 @@ func WellArchitectedCheckDetail(ctx context.Context, cfg aws.Config, stream *mod
 }
 
 func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	answers, err := WellArchitectedAnswer(ctx, cfg, stream)
 	if err != nil {
@@ -272,7 +272,7 @@ func WellArchitectedCheckSummary(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func WellArchitectedConsolidatedReport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	var values []models.Resource
 	for _, rFormat := range []types.ReportFormat{types.ReportFormatPdf, types.ReportFormatJson} {
@@ -321,7 +321,7 @@ func Contains(values []models.Resource, value models.Resource) bool {
 	return false
 }
 
-func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config, stream *models.StreamSender, client *wellarchitected.Client, describeCtx DescribeContext, input *wellarchitected.GetConsolidatedReportInput) ([]models.Resource, error) {
+func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config, stream *models.StreamSender, client *wellarchitected.Client, describeCtx model.DescribeContext, input *wellarchitected.GetConsolidatedReportInput) ([]models.Resource, error) {
 	paginator := wellarchitected.NewGetConsolidatedReportPaginator(client, input)
 
 	var values []models.Resource
@@ -357,7 +357,7 @@ func WellArchitectedConsolidatedReportHelper(ctx context.Context, cfg aws.Config
 }
 
 func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListLensesPaginator(client, &wellarchitected.ListLensesInput{})
 
@@ -411,7 +411,7 @@ func WellArchitectedLens(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -468,7 +468,7 @@ func WellArchitectedLensReview(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -524,7 +524,7 @@ func WellArchitectedLensReviewImprovement(ctx context.Context, cfg aws.Config, s
 }
 
 func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -575,7 +575,7 @@ func WellArchitectedLensReviewReport(ctx context.Context, cfg aws.Config, stream
 }
 
 func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 
 	lenses, err := WellArchitectedLens(ctx, cfg, nil)
@@ -620,7 +620,7 @@ func WellArchitectedLensShare(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 
@@ -672,7 +672,7 @@ func WellArchitectedMilestone(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListNotificationsPaginator(client, &wellarchitected.ListNotificationsInput{})
 
@@ -703,7 +703,7 @@ func WellArchitectedNotification(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListShareInvitationsPaginator(client, &wellarchitected.ListShareInvitationsInput{})
 
@@ -737,7 +737,7 @@ func WellArchitectedShareInvitation(ctx context.Context, cfg aws.Config, stream 
 }
 
 func WellArchitectedWorkloadShare(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := wellarchitected.NewFromConfig(cfg)
 	paginator := wellarchitected.NewListWorkloadsPaginator(client, &wellarchitected.ListWorkloadsInput{})
 

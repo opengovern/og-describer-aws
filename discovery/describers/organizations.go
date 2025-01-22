@@ -46,7 +46,7 @@ func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func organizationsOrganizationHandle(ctx context.Context, req *organizations.DescribeOrganizationOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *req.Organization.Arn,
@@ -103,7 +103,7 @@ func OrganizationAccounts(ctx context.Context, cfg aws.Config) ([]types.Account,
 }
 
 //func OrganizationsAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-//	describeCtx := GetDescribeContext(ctx)
+//	describeCtx := model.GetDescribeContext(ctx)
 //	client := organizations.NewFromConfig(cfg)
 //
 //	paginator := organizations.NewListAccountsPaginator(client, &organizations.ListAccountsInput{})
@@ -170,7 +170,7 @@ func OrganizationsPolicy(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyType types.PolicyType) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := organizations.NewFromConfig(cfg)
 	paginator := organizations.NewListPoliciesPaginator(client, &organizations.ListPoliciesInput{Filter: policyType})
 
@@ -232,7 +232,7 @@ func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func organizationsRootHandle(ctx context.Context, root types.Root) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *root.Arn,
@@ -311,7 +311,7 @@ func listAllNestedOUs(ctx context.Context, svc *organizations.Client, parentId s
 }
 
 func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizations.Client, unit types.OrganizationalUnit, parentId, path string) (*models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	tagsResponse, err := svc.ListTagsForResource(ctx, &organizations.ListTagsForResourceInput{
 		ResourceId: unit.Id,
 	})
@@ -441,7 +441,7 @@ func organizationsPolicyForTarget(ctx context.Context, svc *organizations.Client
 }
 
 func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organizations.Client, targetId string, policyType types.PolicyType) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	var values []models.Resource
 

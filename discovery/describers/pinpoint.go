@@ -12,7 +12,7 @@ import (
 )
 
 func PinpointApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := pinpoint.NewFromConfig(cfg)
 
 	input := &pinpoint.GetAppsInput{

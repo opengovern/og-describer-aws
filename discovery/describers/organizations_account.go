@@ -162,7 +162,7 @@ func GetOrganizationAccounts(ctx context.Context, cfg aws.Config) ([]models.Reso
 
 // processAccount processes individual account details.
 func processAccount(ctx context.Context, orgClient *organizations.Client, acct orgtypes.Account) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	// Get Tags
 	var tagsOutput *organizations.ListTagsForResourceOutput

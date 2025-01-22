@@ -21,7 +21,7 @@ import (
 )
 
 func Route53HealthCheck(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -128,7 +128,7 @@ func Route53HostedZone(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func route53HostedZoneHandle(ctx context.Context, cfg aws.Config, v types.HostedZone) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := route53.NewFromConfig(cfg)
 
@@ -219,7 +219,7 @@ func GetRoute53HostedZone(ctx context.Context, cfg aws.Config, fields map[string
 }
 
 func Route53DNSSEC(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	zones, err := Route53HostedZone(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -257,7 +257,7 @@ func Route53DNSSEC(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 }
 
 func Route53RecordSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	zones, err := Route53HostedZone(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -307,7 +307,7 @@ func Route53RecordSet(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func Route53ResolverFirewallDomainList(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListFirewallDomainListsPaginator(client, &route53resolver.ListFirewallDomainListsInput{})
 
@@ -339,7 +339,7 @@ func Route53ResolverFirewallDomainList(ctx context.Context, cfg aws.Config, stre
 }
 
 func Route53ResolverFirewallRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListFirewallRuleGroupsPaginator(client, &route53resolver.ListFirewallRuleGroupsInput{})
 
@@ -371,7 +371,7 @@ func Route53ResolverFirewallRuleGroup(ctx context.Context, cfg aws.Config, strea
 }
 
 func Route53ResolverFirewallRuleGroupAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListFirewallRuleGroupAssociationsPaginator(client, &route53resolver.ListFirewallRuleGroupAssociationsInput{})
 
@@ -403,7 +403,7 @@ func Route53ResolverFirewallRuleGroupAssociation(ctx context.Context, cfg aws.Co
 }
 
 func Route53ResolverResolverDNSSECConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	vpcs, err := EC2VPC(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -439,7 +439,7 @@ func Route53ResolverResolverDNSSECConfig(ctx context.Context, cfg aws.Config, st
 }
 
 func Route53ResolverResolverQueryLoggingConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListResolverQueryLogConfigsPaginator(client, &route53resolver.ListResolverQueryLogConfigsInput{})
 
@@ -471,7 +471,7 @@ func Route53ResolverResolverQueryLoggingConfig(ctx context.Context, cfg aws.Conf
 }
 
 func Route53ResolverResolverQueryLoggingConfigAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListResolverQueryLogConfigAssociationsPaginator(client, &route53resolver.ListResolverQueryLogConfigAssociationsInput{})
 
@@ -503,7 +503,7 @@ func Route53ResolverResolverQueryLoggingConfigAssociation(ctx context.Context, c
 }
 
 func Route53ResolverResolverRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListResolverRulesPaginator(client, &route53resolver.ListResolverRulesInput{})
 
@@ -594,7 +594,7 @@ func Route53ResolverResolverEndpoint(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 func route53ResolverResolverEndpointHandle(ctx context.Context, cfg aws.Config, resolverEndpoint resolvertypes.ResolverEndpoint) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 
 	ipAddresesses, err := client.ListResolverEndpointIpAddresses(ctx, &route53resolver.ListResolverEndpointIpAddressesInput{
@@ -642,7 +642,7 @@ func GetRoute53ResolverResolverEndpoint(ctx context.Context, cfg aws.Config, fie
 }
 
 func Route53ResolverResolverRuleAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53resolver.NewFromConfig(cfg)
 	paginator := route53resolver.NewListResolverRuleAssociationsPaginator(client, &route53resolver.ListResolverRuleAssociationsInput{})
 
@@ -701,7 +701,7 @@ func Route53Domain(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func Route53DomainHandle(ctx context.Context, cfg aws.Config, v types3.DomainSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53domains.NewFromConfig(cfg)
 	domain, err := client.GetDomainDetail(ctx, &route53domains.GetDomainDetailInput{
 		DomainName: v.DomainName,
@@ -800,7 +800,7 @@ func Route53Record(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 	return values, nil
 }
 func route53RecordHandle(ctx context.Context, record types.ResourceRecordSet, hostedZoneId string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:route53:::hostedzone/%s/recordset/%s/%s", describeCtx.Partition, hostedZoneId, *record.Name, record.Type)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -884,7 +884,7 @@ func Route53TrafficPolicy(ctx context.Context, cfg aws.Config, stream *models.St
 }
 func route53TrafficPolicyHandle(ctx context.Context, cfg aws.Config, policySummary types.TrafficPolicySummary) (models.Resource, error) {
 
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := route53.NewFromConfig(cfg)
 	policy, err := client.GetTrafficPolicy(ctx, &route53.GetTrafficPolicyInput{
@@ -966,7 +966,7 @@ func Route53TrafficPolicyInstance(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func route53TrafficPolicyInstanceHandle(ctx context.Context, policyInstance types.TrafficPolicyInstance) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:route53::%s:trafficpolicyinstance/%s", describeCtx.Partition, describeCtx.AccountID, *policyInstance.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -1000,7 +1000,7 @@ func GetRoute53TrafficPolicyInstance(ctx context.Context, cfg aws.Config, fields
 }
 
 func Route53QueryLog(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := route53.NewFromConfig(cfg)
 	paginator := route53.NewListQueryLoggingConfigsPaginator(client, &route53.ListQueryLoggingConfigsInput{})
 
@@ -1061,7 +1061,7 @@ func Route53ResolverQueryLogConfig(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 func route53ResolverQueryLogConfigHandle(ctx context.Context, cfg aws.Config, queryLogConfig resolvertypes.ResolverQueryLogConfig) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,

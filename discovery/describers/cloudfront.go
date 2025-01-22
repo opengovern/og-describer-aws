@@ -51,7 +51,7 @@ func CloudFrontDistribution(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func cloudFrontDistributionHandle(ctx context.Context, tags *cloudfront.ListTagsForResourceOutput, distribution *cloudfront.GetDistributionOutput, ARN *string, Id *string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *ARN,
@@ -104,7 +104,7 @@ func GetCloudFrontDistribution(ctx context.Context, cfg aws.Config, fields map[s
 }
 
 func CloudFrontStreamingDistribution(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudfront.NewFromConfig(cfg)
 	paginator := cloudfront.NewListStreamingDistributionsPaginator(client, &cloudfront.ListStreamingDistributionsInput{})
 
@@ -185,7 +185,7 @@ func CloudFrontOriginAccessControl(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 func cloudFrontOriginAccessControlHandle(ctx context.Context, cfg aws.Config, v types.OriginAccessControlSummary) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudfront.NewFromConfig(cfg)
 
 	var tags []types.Tag
@@ -278,7 +278,7 @@ func CloudFrontCachePolicy(ctx context.Context, cfg aws.Config, stream *models.S
 	return values, nil
 }
 func cloudFrontCachePolicyHandle(ctx context.Context, cachePolicy *cloudfront.GetCachePolicyOutput, id string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:cache-policy/%s", describeCtx.Partition, describeCtx.AccountID, id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -348,7 +348,7 @@ func CloudFrontFunction(ctx context.Context, cfg aws.Config, stream *models.Stre
 	return values, nil
 }
 func cloudFrontFunctionHandle(ctx context.Context, function *cloudfront.DescribeFunctionOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -410,7 +410,7 @@ func CloudFrontOriginAccessIdentity(ctx context.Context, cfg aws.Config, stream 
 	return values, nil
 }
 func cloudFrontOriginAccessIdentityHandle(ctx context.Context, originAccessIdentity *cloudfront.GetCloudFrontOriginAccessIdentityOutput, id string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:origin-access-identity/%s", describeCtx.Partition, describeCtx.AccountID, id)
 
 	resource := models.Resource{
@@ -481,7 +481,7 @@ func CloudFrontOriginRequestPolicy(ctx context.Context, cfg aws.Config, stream *
 	return values, nil
 }
 func cloudFrontOriginRequestPolicyHandle(ctx context.Context, policy *cloudfront.GetOriginRequestPolicyOutput, id string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:origin-request-policy/%s", describeCtx.Partition, describeCtx.AccountID, &id)
 
 	resource := models.Resource{
@@ -554,7 +554,7 @@ func CloudFrontResponseHeadersPolicy(ctx context.Context, cfg aws.Config, stream
 	return values, nil
 }
 func cloudFrontResponseHeadersPolicyHandle(ctx context.Context, policy *cloudfront.GetResponseHeadersPolicyOutput, id *string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:cloudfront::%s:response-headers-policy/%s", describeCtx.Partition, describeCtx.AccountID, *id)
 
 	resource := models.Resource{

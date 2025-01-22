@@ -56,7 +56,7 @@ func OpenSearchDomain(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.DomainStatus) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := opensearch.NewFromConfig(cfg)
 
 	tags, err := client.ListTags(ctx, &opensearch.ListTagsInput{

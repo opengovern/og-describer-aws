@@ -43,7 +43,7 @@ func ApplicationAutoScalingTarget(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func applicationAutoScalingTargetHandle(ctx context.Context, item types.ScalableTarget) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
 	resource := models.Resource{
@@ -107,7 +107,7 @@ func ApplicationAutoScalingPolicy(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func applicationAutoScalingPolicyHandle(ctx context.Context, item types.ScalingPolicy) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":application-autoscaling:" + describeCtx.Region + ":" + describeCtx.AccountID + ":service-namespace:" + string(item.ServiceNamespace) + "/target/" + *item.ResourceId
 
 	resource := models.Resource{

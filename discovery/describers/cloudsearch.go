@@ -45,7 +45,7 @@ func CloudSearchDomain(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func cloudSearchDomainHandle(ctx context.Context, domain types.DomainStatus) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *domain.ARN,

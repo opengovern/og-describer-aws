@@ -11,7 +11,7 @@ import (
 )
 
 func AppStreamApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -98,7 +98,7 @@ func AppStreamStack(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func appStreamStackHandle(ctx context.Context, cfg aws.Config, item types.Stack) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &appstream.ListTagsForResourceInput{
@@ -191,7 +191,7 @@ func AppStreamFleet(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func appStreamFleetHandle(ctx context.Context, cfg aws.Config, item types.Fleet) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &appstream.ListTagsForResourceInput{
 		ResourceArn: item.Arn,
@@ -293,7 +293,7 @@ func AppStreamImage(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func appStreamImageHandle(ctx context.Context, cfg aws.Config, item types.Image) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := appstream.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &appstream.ListTagsForResourceInput{
 		ResourceArn: item.Arn,

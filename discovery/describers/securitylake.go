@@ -11,7 +11,7 @@ import (
 
 // SecurityLakeDataLake TODO: new sdk version available but a field is missing
 func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securitylake.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -48,7 +48,7 @@ func SecurityLakeDataLake(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func SecurityLakeSubscriber(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := securitylake.NewFromConfig(cfg)
 
 	var values []models.Resource

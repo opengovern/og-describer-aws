@@ -41,7 +41,7 @@ func StorageGatewayStorageGateway(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gatewayARN string, gatewayId string, v types.GatewayInfo) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := storagegateway.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &storagegateway.ListTagsForResourceInput{
 		ResourceARN: &gatewayARN,

@@ -10,7 +10,7 @@ import (
 )
 
 func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListServicesPaginator(client, &servicediscovery.ListServicesInput{})
@@ -49,7 +49,7 @@ func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListNamespacesPaginator(client, &servicediscovery.ListNamespacesInput{})
@@ -117,7 +117,7 @@ func ServiceDiscoveryInstance(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func getServiceDiscoveryInstances(ctx context.Context, cfg aws.Config, id *string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := servicediscovery.NewFromConfig(cfg)
 
 	paginator := servicediscovery.NewListInstancesPaginator(client, &servicediscovery.ListInstancesInput{ServiceId: id})

@@ -39,7 +39,7 @@ func ServerlessApplicationRepositoryApplication(ctx context.Context, cfg aws.Con
 	return values, nil
 }
 func serverlessApplicationRepositoryApplicationHandle(ctx context.Context, cfg aws.Config, applicationId string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := serverlessapplicationrepository.NewFromConfig(cfg)
 
 	application, err := client.GetApplication(ctx, &serverlessapplicationrepository.GetApplicationInput{

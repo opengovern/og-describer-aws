@@ -42,7 +42,7 @@ func AthenaWrokgroup(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func authenaWorkgroupHandle(ctx context.Context, cfg aws.Config, item types.WorkGroupSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := athena.NewFromConfig(cfg)
 	output, err := client.GetWorkGroup(ctx, &athena.GetWorkGroupInput{
 		WorkGroup: item.Name,
@@ -96,7 +96,7 @@ func AthenaQueryExecution(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func authenaQueryExecutionHandle(ctx context.Context, cfg aws.Config, id string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := athena.NewFromConfig(cfg)
 	output, err := client.GetQueryExecution(ctx, &athena.GetQueryExecutionInput{
 		QueryExecutionId: aws.String(id),

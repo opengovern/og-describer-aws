@@ -12,18 +12,34 @@ import (
 	"golang.org/x/net/context"
 )
 
-
 type describeContextKey string
 
 var (
 	key            describeContextKey = "describe_ctx"
 	triggerTypeKey string             = "trigger_type"
 )
+
 type DescribeContext struct {
-	AccountID   string
+	AccountID string
 	Region    string
 	OGRegion  string
 	Partition string
+}
+
+func GetDescribeContext(ctx context.Context) DescribeContext {
+	describe, ok := ctx.Value(key).(DescribeContext)
+	if !ok {
+		panic("context key not found")
+	}
+	return describe
+}
+
+func GetTriggerTypeFromContext(ctx context.Context) enums.DescribeTriggerType {
+	tt, ok := ctx.Value(triggerTypeKey).(enums.DescribeTriggerType)
+	if !ok {
+		return ""
+	}
+	return tt
 }
 
 func WithTriggerType(ctx context.Context, tt enums.DescribeTriggerType) context.Context {
@@ -68,7 +84,7 @@ func ParallelDescribeRegionalSingleResource(describe func(context.Context, aws.C
 				rCfg.Region = r
 
 				partition, _ := PartitionOf(r)
-				ctx := WithDescribeContext(ctx, DescribeContext{
+				ctx = WithDescribeContext(ctx, DescribeContext{
 					AccountID: additionalData["accountID"],
 					Region:    region,
 					OGRegion:  region,
@@ -134,7 +150,7 @@ func SequentialDescribeRegional(describe func(context.Context, aws.Config, *mode
 			rCfg.Region = region
 
 			partition, _ := PartitionOf(region)
-			ctx := WithDescribeContext(ctx, DescribeContext{
+			ctx = WithDescribeContext(ctx, DescribeContext{
 				AccountID: additionalData["accountID"],
 				Region:    region,
 				OGRegion:  region,
@@ -203,7 +219,7 @@ func ParallelDescribeRegional(describe func(context.Context, aws.Config, *model.
 				}
 
 				fmt.Println("ParallelDescribeRegional for region", r, rCfg.Region, describeCtx.Region)
-				ctx := WithDescribeContext(ctx, describeCtx)
+				ctx = WithDescribeContext(ctx, describeCtx)
 				ctx = WithTriggerType(ctx, triggerType)
 				fmt.Println("running describe")
 				resources, err := describe(ctx, rCfg, stream)
@@ -270,7 +286,7 @@ func SequentialDescribeGlobal(describe func(context.Context, aws.Config, *model.
 			rCfg.Region = region
 
 			partition, _ := PartitionOf(region)
-			ctx := WithDescribeContext(ctx, DescribeContext{
+			ctx = WithDescribeContext(ctx, DescribeContext{
 				AccountID: additionalData["accountID"],
 				Region:    region,
 				OGRegion:  "global",

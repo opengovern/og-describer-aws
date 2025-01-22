@@ -16,7 +16,7 @@ import (
 )
 
 func SSMManagedInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribeInstanceInformationPaginator(client, &ssm.DescribeInstanceInformationInput{})
 
@@ -56,7 +56,7 @@ func SSMManagedInstance(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func SSMInventory(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewGetInventoryPaginator(client, &ssm.GetInventoryInput{})
 
@@ -107,7 +107,7 @@ func SSMInventory(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 
 func SSMInventoryEntry(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewGetInventoryPaginator(client, &ssm.GetInventoryInput{})
 	var values []models.Resource
@@ -155,7 +155,7 @@ func SSMInventoryEntry(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func SSMManagedInstanceCompliance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribeInstanceInformationPaginator(client, &ssm.DescribeInstanceInformationInput{})
 
@@ -203,7 +203,7 @@ func SSMManagedInstanceCompliance(ctx context.Context, cfg aws.Config, stream *m
 }
 
 func SSMAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewListAssociationsPaginator(client, &ssm.ListAssociationsInput{})
 
@@ -247,7 +247,7 @@ func SSMAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 }
 
 func SSMDocument(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewListDocumentsPaginator(client, &ssm.ListDocumentsInput{
 		Filters: []types.DocumentKeyValuesFilter{
@@ -313,7 +313,7 @@ func SSMDocument(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 
 func SSMDocumentPermission(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewListDocumentsPaginator(client, &ssm.ListDocumentsInput{
 		Filters: []types.DocumentKeyValuesFilter{
@@ -368,7 +368,7 @@ func SSMDocumentPermission(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func SSMMaintenanceWindow(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribeMaintenanceWindowsPaginator(client, &ssm.DescribeMaintenanceWindowsInput{})
 
@@ -437,7 +437,7 @@ func SSMMaintenanceWindow(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func SSMMaintenanceWindowTarget(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	windows, err := SSMMaintenanceWindow(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -480,7 +480,7 @@ func SSMMaintenanceWindowTarget(ctx context.Context, cfg aws.Config, stream *mod
 }
 
 func SSMMaintenanceWindowTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	windows, err := SSMMaintenanceWindow(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -523,7 +523,7 @@ func SSMMaintenanceWindowTask(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func SSMParameter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribeParametersPaginator(client, &ssm.DescribeParametersInput{})
 
@@ -586,7 +586,7 @@ func SSMParameter(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 
 func SSMPatchBaseline(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribePatchBaselinesPaginator(client, &ssm.DescribePatchBaselinesInput{
 		Filters: []types.PatchOrchestratorFilter{
@@ -652,7 +652,7 @@ func SSMPatchBaseline(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func SSMResourceDataSync(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewListResourceDataSyncPaginator(client, &ssm.ListResourceDataSyncInput{})
 
@@ -683,7 +683,7 @@ func SSMResourceDataSync(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func SSMManagedInstancePatchState(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ssm.NewFromConfig(cfg)
 	paginator := ssm.NewDescribeInstanceInformationPaginator(client, &ssm.DescribeInstanceInformationInput{})
 	var values []models.Resource

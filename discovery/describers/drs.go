@@ -10,7 +10,7 @@ import (
 )
 
 func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
 		MaxResults: aws.Int32(100),
@@ -59,7 +59,7 @@ func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeRecoveryInstancesPaginator(client, &drs.DescribeRecoveryInstancesInput{
 		MaxResults: aws.Int32(100),
@@ -100,7 +100,7 @@ func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func DRSJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeJobsPaginator(client, &drs.DescribeJobsInput{
 		MaxResults: aws.Int32(100),
@@ -141,7 +141,7 @@ func DRSJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([
 }
 
 func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := drs.NewFromConfig(cfg)
 	paginator := drs.NewDescribeSourceServersPaginator(client, &drs.DescribeSourceServersInput{
 		MaxResults: aws.Int32(100),

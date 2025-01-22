@@ -11,7 +11,7 @@ import (
 )
 
 func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := neptune.NewFromConfig(cfg)
 	paginator := neptune.NewDescribeDBInstancesPaginator(client, &neptune.DescribeDBInstancesInput{})
 
@@ -64,7 +64,7 @@ func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := neptune.NewFromConfig(cfg)
 	paginator := neptune.NewDescribeDBClustersPaginator(client, &neptune.DescribeDBClustersInput{})
 
@@ -167,7 +167,7 @@ func NeptuneDatabaseClusterSnapshot(ctx context.Context, cfg aws.Config, stream 
 }
 
 func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.Client, snapshot types.DBClusterSnapshot) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	params := &neptune.DescribeDBClusterSnapshotAttributesInput{
 		DBClusterSnapshotIdentifier: snapshot.DBClusterSnapshotIdentifier,

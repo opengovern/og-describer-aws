@@ -43,7 +43,7 @@ func MWAAEnvironment(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func mWAAEnvironmentHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := mwaa.NewFromConfig(cfg)
 	environment, err := client.GetEnvironment(ctx, &mwaa.GetEnvironmentInput{
 		Name: &v,

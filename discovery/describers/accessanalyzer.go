@@ -11,7 +11,7 @@ import (
 )
 
 func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	analyzerName := fields["name"]
 	client := accessanalyzer.NewFromConfig(cfg)
 	v, err := client.GetAnalyzer(ctx, &accessanalyzer.GetAnalyzerInput{
@@ -39,7 +39,7 @@ func GetAccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, fields map[s
 }
 
 func AccessAnalyzerAnalyzer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := accessanalyzer.NewFromConfig(cfg)
 	paginator := accessanalyzer.NewListAnalyzersPaginator(client, &accessanalyzer.ListAnalyzersInput{})
 
@@ -98,7 +98,7 @@ func getAnalyzerFindings(ctx context.Context, client *accessanalyzer.Client, ana
 }
 
 func AccessAnalyzerAnalyzerFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := accessanalyzer.NewFromConfig(cfg)
 	paginator := accessanalyzer.NewListAnalyzersPaginator(client, &accessanalyzer.ListAnalyzersInput{})
 

@@ -15,7 +15,7 @@ import (
 )
 
 func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := acm.NewFromConfig(cfg)
 	output, err := client.GetAccountConfiguration(ctx, &acm.GetAccountConfigurationInput{})
 	if err != nil {
@@ -31,7 +31,7 @@ func CertificateManagerAccount(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func CertificateManagerCertificate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := acm.NewFromConfig(cfg)
 	paginator := acm.NewListCertificatesPaginator(client, &acm.ListCertificatesInput{})
 
@@ -137,7 +137,7 @@ func ACMPCACertificateAuthority(ctx context.Context, cfg aws.Config, stream *mod
 	return values, nil
 }
 func aCMPCACertificateAuthorityHandle(ctx context.Context, cfg aws.Config, v types.CertificateAuthority) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := acmpca.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &acmpca.ListTagsInput{
 		CertificateAuthorityArn: v.Arn,

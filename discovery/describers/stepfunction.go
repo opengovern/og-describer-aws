@@ -13,7 +13,7 @@ import (
 )
 
 func StepFunctionsStateMachine(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})
@@ -79,7 +79,7 @@ type historyInfo struct {
 }
 
 func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})
@@ -172,7 +172,7 @@ func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Co
 }
 
 func StepFunctionsStateMachineExecution(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := sfn.NewFromConfig(cfg)
 	paginator := sfn.NewListStateMachinesPaginator(client, &sfn.ListStateMachinesInput{})

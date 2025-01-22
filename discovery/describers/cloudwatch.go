@@ -17,7 +17,7 @@ import (
 )
 
 func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAlarmsPaginator(client, &cloudwatch.DescribeAlarmsInput{
 		AlarmTypes: []types.AlarmType{types.AlarmTypeMetricAlarm},
@@ -61,7 +61,7 @@ func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	alarmName := fields["name"]
 	client := cloudwatch.NewFromConfig(cfg)
 	out, err := client.DescribeAlarms(ctx, &cloudwatch.DescribeAlarmsInput{
@@ -95,7 +95,7 @@ func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]s
 }
 
 func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.DescribeAnomalyDetectors(ctx, &cloudwatch.DescribeAnomalyDetectorsInput{})
 	if err != nil {
@@ -123,7 +123,7 @@ func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAlarmsPaginator(client, &cloudwatch.DescribeAlarmsInput{
 		AlarmTypes: []types.AlarmType{types.AlarmTypeCompositeAlarm},
@@ -157,7 +157,7 @@ func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.ListDashboards(ctx, &cloudwatch.ListDashboardsInput{})
 	if err != nil {
@@ -185,7 +185,7 @@ func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeInsightRulesPaginator(client, &cloudwatch.DescribeInsightRulesInput{})
 
@@ -217,7 +217,7 @@ func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	output, err := client.ListMetricStreams(ctx, &cloudwatch.ListMetricStreamsInput{})
 	if err != nil {
@@ -245,7 +245,7 @@ func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeDestinationsPaginator(client, &cloudwatchlogs.DescribeDestinationsInput{})
 
@@ -277,7 +277,7 @@ func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeLogGroupsPaginator(client, &cloudwatchlogs.DescribeLogGroupsInput{})
 
@@ -331,7 +331,7 @@ func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	paginator := cloudwatchlogs.NewDescribeMetricFiltersPaginator(client, &cloudwatchlogs.DescribeMetricFiltersInput{})
 
@@ -367,7 +367,7 @@ func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *mod
 }
 
 func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -404,7 +404,7 @@ func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *
 }
 
 func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroups, err := CloudWatchLogsLogGroup(ctx, cfg, nil)
 	if err != nil {
@@ -452,7 +452,7 @@ func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -492,7 +492,8 @@ func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *m
 }
 
 func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
+	fmt.Println("context3::", describeCtx)
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroups, err := CloudWatchLogsLogGroup(ctx, cfg, nil)
 	if err != nil {
@@ -544,7 +545,7 @@ func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := cloudwatchlogs.NewFromConfig(cfg)
 	logGroupPaginator := cloudwatchlogs.NewDescribeLogGroupsPaginator(client, &cloudwatchlogs.DescribeLogGroupsInput{})
@@ -596,7 +597,7 @@ func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, strea
 }
 
 func CloudWatchMetrics(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewListMetricsPaginator(client, &cloudwatch.ListMetricsInput{})
 
@@ -710,7 +711,7 @@ func listCloudWatchMetricStatistics(ctx context.Context, cfg aws.Config, granula
 }
 
 func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := cloudwatch.NewFromConfig(cfg)
 	paginator := cloudwatch.NewDescribeAnomalyDetectorsPaginator(client, &cloudwatch.DescribeAnomalyDetectorsInput{})
 
@@ -763,7 +764,7 @@ func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *mode
 
 //
 //func CloudWatchMetricStatisticDataPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-//	describeCtx := GetDescribeContext(ctx)
+//	describeCtx := model.GetDescribeContext(ctx)
 //	client := cloudwatch.NewFromConfig(cfg)
 //	paginator := cloudwatch.NewDescribeAnomalyDetectorsPaginator(client, &cloudwatch.DescribeAnomalyDetectorsInput{})
 //

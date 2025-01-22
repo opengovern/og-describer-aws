@@ -59,7 +59,7 @@ func Macie2ClassificationJob(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func macie2ClassificationJobHandle(ctx context.Context, cfg aws.Config, jobId string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := macie2.NewFromConfig(cfg)
 
 	job, err := client.DescribeClassificationJob(ctx, &macie2.DescribeClassificationJobInput{

@@ -60,7 +60,7 @@ func ESDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func ESDomainHandle(ctx context.Context, cfg aws.Config, v types.ElasticsearchDomainStatus) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := es.NewFromConfig(cfg)
 
 	out, err := client.ListTags(ctx, &es.ListTagsInput{

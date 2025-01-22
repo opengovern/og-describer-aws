@@ -35,7 +35,7 @@ func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func elastiCacheReplicationGroupHandle(ctx context.Context, item types.ReplicationGroup) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *item.ARN,
@@ -97,7 +97,7 @@ func ElastiCacheCluster(ctx context.Context, cfg aws.Config, stream *models.Stre
 	return values, nil
 }
 func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, client *elasticache.Client) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	tagsOutput, err := client.ListTagsForResource(ctx, &elasticache.ListTagsForResourceInput{
 		ResourceName: cluster.ARN,
@@ -171,7 +171,7 @@ func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup types.CacheParameterGroup) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cacheParameterGroup.ARN,
@@ -226,7 +226,7 @@ func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode types.ReservedCacheNode) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *reservedCacheNode.ReservationARN,
@@ -284,7 +284,7 @@ func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.CacheSubnetGroup) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *cacheSubnetGroup.ARN,

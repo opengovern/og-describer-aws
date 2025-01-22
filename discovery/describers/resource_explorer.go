@@ -10,7 +10,7 @@ import (
 )
 
 func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := resourceexplorer2.NewFromConfig(cfg)
 	paginator := resourceexplorer2.NewListIndexesPaginator(client, &resourceexplorer2.ListIndexesInput{})
 
@@ -44,7 +44,7 @@ func ResourceExplorerIndex(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func ResourceExplorer2SupportedResourceType(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := resourceexplorer2.NewFromConfig(cfg)
 	paginator := resourceexplorer2.NewListSupportedResourceTypesPaginator(client, &resourceexplorer2.ListSupportedResourceTypesInput{})
 

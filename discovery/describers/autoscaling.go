@@ -11,7 +11,7 @@ import (
 )
 
 func AutoScalingAutoScalingGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := autoscaling.NewFromConfig(cfg)
 	paginator := autoscaling.NewDescribeAutoScalingGroupsPaginator(client, &autoscaling.DescribeAutoScalingGroupsInput{})
 
@@ -53,7 +53,7 @@ func AutoScalingAutoScalingGroup(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func GetAutoScalingAutoScalingGroup(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	autoScalingGroupName := fields["name"]
 	client := autoscaling.NewFromConfig(cfg)
 
@@ -108,7 +108,7 @@ func getAutoScalingPolicies(ctx context.Context, cfg aws.Config, asgName *string
 }
 
 func AutoScalingLaunchConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := autoscaling.NewFromConfig(cfg)
 	paginator := autoscaling.NewDescribeLaunchConfigurationsPaginator(client, &autoscaling.DescribeLaunchConfigurationsInput{})
 
@@ -142,7 +142,7 @@ func AutoScalingLaunchConfiguration(ctx context.Context, cfg aws.Config, stream 
 }
 
 func GetAutoScalingLaunchConfiguration(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	launchConfigurationName := fields["name"]
 	client := autoscaling.NewFromConfig(cfg)
 	out, err := client.DescribeLaunchConfigurations(ctx, &autoscaling.DescribeLaunchConfigurationsInput{
@@ -168,7 +168,7 @@ func GetAutoScalingLaunchConfiguration(ctx context.Context, cfg aws.Config, fiel
 }
 
 func AutoScalingLifecycleHook(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	groups, err := AutoScalingAutoScalingGroup(ctx, cfg, nil)
 	if groups != nil {
 		return nil, err
@@ -207,7 +207,7 @@ func AutoScalingLifecycleHook(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func AutoScalingScalingPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := autoscaling.NewFromConfig(cfg)
 	paginator := autoscaling.NewDescribePoliciesPaginator(client, &autoscaling.DescribePoliciesInput{})
 
@@ -239,7 +239,7 @@ func AutoScalingScalingPolicy(ctx context.Context, cfg aws.Config, stream *model
 }
 
 func AutoScalingScheduledAction(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := autoscaling.NewFromConfig(cfg)
 	paginator := autoscaling.NewDescribeScheduledActionsPaginator(client, &autoscaling.DescribeScheduledActionsInput{})
 
@@ -271,7 +271,7 @@ func AutoScalingScheduledAction(ctx context.Context, cfg aws.Config, stream *mod
 }
 
 func AutoScalingWarmPool(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	groups, err := AutoScalingAutoScalingGroup(ctx, cfg, nil)
 	if groups != nil {
 		return nil, err

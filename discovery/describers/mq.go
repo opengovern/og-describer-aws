@@ -45,7 +45,7 @@ func MQBroker(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := mq.NewFromConfig(cfg)
 	tags, err := client.ListTags(ctx, &mq.ListTagsInput{
 		ResourceArn: v.BrokerArn,

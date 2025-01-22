@@ -68,7 +68,7 @@ func S3Bucket(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func s3BucketHandle(ctx context.Context, region string, desc *model.S3BucketDescription, bucket types.Bucket) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":s3:::" + *bucket.Name
 	resource := models.Resource{
 		Region:      region,
@@ -414,7 +414,7 @@ func isErr(err error, code string) bool {
 }
 
 func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	stsClient := sts.NewFromConfig(cfg)
 	output, err := stsClient.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
@@ -490,7 +490,7 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 }
 
 func S3StorageLens(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	stsClient := sts.NewFromConfig(cfg)
 	output, err := stsClient.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
@@ -530,7 +530,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 }
 
 func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	accountId, err := STSAccount(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -576,7 +576,7 @@ func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func S3Object(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := s3.NewFromConfig(cfg)
 	buckets, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
 	if err != nil {
@@ -698,7 +698,7 @@ func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config
 }
 
 func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	accountId, err := STSAccount(ctx, cfg)
 	if err != nil {
 		return nil, err

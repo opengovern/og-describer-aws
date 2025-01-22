@@ -11,7 +11,7 @@ import (
 )
 
 func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListApplicationsPaginator(client, &codedeploy.ListApplicationsInput{})
@@ -78,7 +78,7 @@ func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListApplicationsPaginator(client, &codedeploy.ListApplicationsInput{})
@@ -130,7 +130,7 @@ func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *models.S
 }
 
 func CodeDeployDeploymentConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := codedeploy.NewFromConfig(cfg)
 	paginator := codedeploy.NewListDeploymentConfigsPaginator(client, &codedeploy.ListDeploymentConfigsInput{})

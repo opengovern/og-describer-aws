@@ -50,7 +50,7 @@ func ApiGatewayStage(ctx context.Context, cfg aws.Config, stream *models.StreamS
 	return values, nil
 }
 func apiGatewayStageHandle(ctx context.Context, stageItem types.Stage, id string, name string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":apigateway:" + describeCtx.Region + "::/restapis/" + id + "/stages/" + *stageItem.StageName
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -104,7 +104,7 @@ func GetApiGatewayStage(ctx context.Context, cfg aws.Config, fields map[string]s
 }
 
 func ApiGatewayV2Stage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := apigatewayv2.NewFromConfig(cfg)
 
 	var apis []typesv2.Api
@@ -197,7 +197,7 @@ func ApiGatewayRestAPI(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func apiGatewayRestAPIHandle(ctx context.Context, restItem types.RestApi) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s", describeCtx.Partition, describeCtx.Region, *restItem.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -272,7 +272,7 @@ func ApiGatewayApiKey(ctx context.Context, cfg aws.Config, stream *models.Stream
 	return values, nil
 }
 func apiGatewayApiKeyHandle(ctx context.Context, apiKey types.ApiKey) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apikeys/%s", describeCtx.Partition, describeCtx.Region, *apiKey.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -345,7 +345,7 @@ func ApiGatewayUsagePlan(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func apiGatewayUsagePlanHandle(ctx context.Context, usagePlan types.UsagePlan) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/usageplans/%s", describeCtx.Partition, describeCtx.Region, *usagePlan.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -424,7 +424,7 @@ func ApiGatewayAuthorizer(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func apiGatewayAuthorizerHandle(ctx context.Context, authorizer types.Authorizer, apiId string, apiName string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/restapis/%s/authorizer/%s", describeCtx.Partition, describeCtx.Region, apiId, *authorizer.Id)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -502,7 +502,7 @@ func ApiGatewayV2API(ctx context.Context, cfg aws.Config, stream *models.StreamS
 }
 
 func apiGatewayV2APIHandle(ctx context.Context, api typesv2.Api) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s", describeCtx.Partition, describeCtx.Region, *api.ApiId)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -586,7 +586,7 @@ func ApiGatewayV2DomainName(ctx context.Context, cfg aws.Config, stream *models.
 	return values, nil
 }
 func apiGatewayV2DomainNameHandle(ctx context.Context, domainName typesv2.DomainName) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainnames/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -685,7 +685,7 @@ func ApiGatewayV2Integration(ctx context.Context, cfg aws.Config, stream *models
 	return values, nil
 }
 func apiGatewayV2IntegrationHandle(ctx context.Context, integration typesv2.Integration, apiId string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/integrations/%s", describeCtx.Partition, describeCtx.Region, apiId, *integration.IntegrationId)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -776,7 +776,7 @@ func ApiGatewayDomainName(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func apiGatewayDomainNameHandle(ctx context.Context, domainName types.DomainName) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/domainname/%s", describeCtx.Partition, describeCtx.Region, *domainName.DomainName)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
@@ -859,7 +859,7 @@ func ApiGatewayV2Route(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func apiGatewayV2Route(ctx context.Context, route typesv2.Route) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:apigateway:%s::/apis/%s/routes/%s", describeCtx.Partition, describeCtx.Region, *route.RouteId)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,

@@ -51,7 +51,7 @@ func CodePipelinePipeline(ctx context.Context, cfg aws.Config, stream *models.St
 	return values, nil
 }
 func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *codepipeline.GetPipelineOutput) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := codepipeline.NewFromConfig(cfg)
 	tags, err := client.ListTagsForResource(ctx, &codepipeline.ListTagsForResourceInput{
 		ResourceArn: pipeline.Metadata.PipelineArn,

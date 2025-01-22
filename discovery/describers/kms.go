@@ -43,7 +43,7 @@ func KMSAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func KMSAliasHandle(ctx context.Context, v types.AliasListEntry) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ARN:         *v.AliasArn,
@@ -74,7 +74,7 @@ func GetKMSAlias(ctx context.Context, cfg aws.Config, fields map[string]string) 
 }
 
 func KMSKey(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := kms.NewFromConfig(cfg)
 	paginator := kms.NewListKeysPaginator(client, &kms.ListKeysInput{})
 
@@ -192,7 +192,7 @@ func KMSKey(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([
 }
 
 func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	id := fields["id"]
 	client := kms.NewFromConfig(cfg)
 
@@ -288,8 +288,8 @@ func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 	logger.Info("KMSKeyRotation start working")
 
-	describeCtx := GetDescribeContext(ctx)
-	logger.Info("KMSKeyRotation GetDescribeContext")
+	describeCtx := model.GetDescribeContext(ctx)
+	logger.Info("KMSKeyRotation model.GetDescribeContext")
 
 	client := kms.NewFromConfig(cfg)
 	paginator := kms.NewListKeysPaginator(client, &kms.ListKeysInput{})

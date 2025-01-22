@@ -58,7 +58,7 @@ func LambdaFunction(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.FunctionConfiguration) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	listUrlConfig, err := client.ListFunctionUrlConfigs(ctx, &lambda.ListFunctionUrlConfigsInput{
 		FunctionName: v.FunctionName,
@@ -139,7 +139,7 @@ func GetLambdaFunction(ctx context.Context, cfg aws.Config, fields map[string]st
 }
 
 func LambdaFunctionVersion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListFunctionsPaginator(client, &lambda.ListFunctionsInput{
 		FunctionVersion: types.FunctionVersionAll,
@@ -232,7 +232,7 @@ func LambdaAlias(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfiguration, fn *types.FunctionConfiguration) (models.Resource, error) {
 	client := lambda.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	policy, err := client.GetPolicy(ctx, &lambda.GetPolicyInput{
 		FunctionName: fn.FunctionName,
@@ -310,7 +310,7 @@ func GetLambdaAlias(ctx context.Context, cfg aws.Config, fields map[string]strin
 }
 
 func LambdaPermission(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	fns, err := LambdaFunction(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -352,7 +352,7 @@ func LambdaPermission(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	fns, err := LambdaFunction(ctx, cfg, nil)
 	if err != nil {
 		return nil, err
@@ -396,7 +396,7 @@ func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListCodeSigningConfigsPaginator(client, &lambda.ListCodeSigningConfigsInput{})
 
@@ -428,7 +428,7 @@ func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *models
 }
 
 func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := lambda.NewFromConfig(cfg)
 	paginator := lambda.NewListEventSourceMappingsPaginator(client, &lambda.ListEventSourceMappingsInput{})
 
@@ -500,7 +500,7 @@ func LambdaLayerVersion(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.LayersListItem, v types.LayerVersionsListItem) (models.Resource, error) {
 	client := lambda.NewFromConfig(cfg)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	layerVersion, err := client.GetLayerVersion(ctx, &lambda.GetLayerVersionInput{
 		LayerName:     layer.LayerArn,
 		VersionNumber: &v.Version,
@@ -576,7 +576,7 @@ func GetLambdaLayerVersion(ctx context.Context, cfg aws.Config, fields map[strin
 }
 
 func LambdaLayer(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	layers, err := listLayers(ctx, cfg)
 	if err != nil {
 		return nil, err
@@ -605,7 +605,7 @@ func LambdaLayer(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 }
 
 func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	lvs, err := LambdaLayerVersion(ctx, cfg, nil)
 	if err != nil {
 		return nil, err

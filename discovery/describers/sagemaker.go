@@ -54,7 +54,7 @@ func SageMakerEndpointConfiguration(ctx context.Context, cfg aws.Config, stream 
 	return values, nil
 }
 func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, endpointConfigArn *string, out *sagemaker.DescribeEndpointConfigOutput) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	tags, err := client.ListTags(ctx, &sagemaker.ListTagsInput{
@@ -106,7 +106,7 @@ func GetMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, fi
 }
 
 func SageMakerApp(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -165,7 +165,7 @@ func SageMakerApp(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 }
 
 func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -269,7 +269,7 @@ func SageMakerNotebookInstance(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *sagemaker.DescribeNotebookInstanceOutput) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	tags, err := client.ListTags(ctx, &sagemaker.ListTagsInput{
@@ -352,7 +352,7 @@ func SageMakerModel(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 	return values, nil
 }
 func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagemaker.DescribeModelOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	tags, err := client.ListTags(ctx, &sagemaker.ListTagsInput{
@@ -393,7 +393,7 @@ func GetSageMakerModel(ctx context.Context, cfg aws.Config, fields map[string]st
 }
 
 func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sagemaker.NewFromConfig(cfg)
 
 	var values []models.Resource

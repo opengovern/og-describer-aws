@@ -68,7 +68,7 @@ func setRowMetrics(row *model.CostExplorerRow, metrics map[string]types.MetricVa
 }
 
 func costMonthly(ctx context.Context, cfg aws.Config, by string, startDate, endDate time.Time) ([]model.CostExplorerRow, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	timeFormat := "2006-01-02"
 	endTime := endDate.Format(timeFormat)
 	startTime := startDate.Format(timeFormat)
@@ -159,8 +159,8 @@ func costMonthly(ctx context.Context, cfg aws.Config, by string, startDate, endD
 }
 
 func CostByServiceLastMonth(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
-	triggerType := GetTriggerTypeFromContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
+	triggerType := model.GetTriggerTypeFromContext(ctx)
 	startDate := time.Now().AddDate(0, -1, 0)
 	if triggerType == enums.DescribeTriggerTypeInitialDiscovery {
 		startDate = time.Now().AddDate(0, -3, -7)
@@ -192,8 +192,8 @@ func CostByServiceLastMonth(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func CostByAccountLastMonth(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
-	triggerType := GetTriggerTypeFromContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
+	triggerType := model.GetTriggerTypeFromContext(ctx)
 	startDate := time.Now().AddDate(0, -1, 0)
 	if triggerType == enums.DescribeTriggerTypeInitialDiscovery {
 		startDate = time.Now().AddDate(0, -3, -7)
@@ -225,7 +225,7 @@ func CostByAccountLastMonth(ctx context.Context, cfg aws.Config, stream *models.
 }
 
 func costDaily(ctx context.Context, cfg aws.Config, by string, startDate, endDate time.Time) ([]model.CostExplorerRow, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	timeFormat := "2006-01-02"
 	endTime := endDate.Format(timeFormat)
 	startTime := startDate.Format(timeFormat)
@@ -344,7 +344,7 @@ func getEc2OtherCostKeyFromDimension(dimension string) string {
 }
 
 func ec2OtherCostDaily(ctx context.Context, cfg aws.Config, startDate, endDate time.Time) ([]model.CostExplorerRow, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	timeFormat := "2006-01-02"
 	endTime := endDate.Format(timeFormat)
 	startTime := startDate.Format(timeFormat)
@@ -459,8 +459,8 @@ func ec2OtherCostDaily(ctx context.Context, cfg aws.Config, startDate, endDate t
 }
 
 func CostByServiceLastDay(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
-	triggerType := GetTriggerTypeFromContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
+	triggerType := model.GetTriggerTypeFromContext(ctx)
 	startDate := time.Now().AddDate(0, 0, -7)
 	if time.Now().Day() == 6 {
 		y, m, _ := time.Now().Date()
@@ -549,8 +549,8 @@ func CostByServiceLastDay(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func CostByAccountLastDay(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
-	triggerType := GetTriggerTypeFromContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
+	triggerType := model.GetTriggerTypeFromContext(ctx)
 	startDate := time.Now().AddDate(0, 0, -7)
 	if triggerType == enums.DescribeTriggerTypeInitialDiscovery {
 		startDate = time.Now().AddDate(0, -3, -7)
@@ -621,7 +621,7 @@ func buildCostByRecordTypeInput(granularity string) *costexplorer.GetCostAndUsag
 }
 
 func CostByRecordTypeLastMonth(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostByRecordTypeInput("MONTHLY")
@@ -667,7 +667,7 @@ func CostByRecordTypeLastMonth(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func CostByRecordTypeLastDay(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostByRecordTypeInput("DAILY")
@@ -751,7 +751,7 @@ func buildCostByServiceAndUsageInput(granularity string) *costexplorer.GetCostAn
 }
 
 func CostByServiceUsageLastMonth(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostByServiceAndUsageInput("MONTHLY")
@@ -797,7 +797,7 @@ func CostByServiceUsageLastMonth(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func CostByServiceUsageLastDay(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostByServiceAndUsageInput("DAILY")
@@ -862,7 +862,7 @@ func buildCostForecastInput(granularity string) *costexplorer.GetCostForecastInp
 }
 
 func CostForecastMonthly(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostForecastInput("MONTHLY")
@@ -894,7 +894,7 @@ func CostForecastMonthly(ctx context.Context, cfg aws.Config, stream *models.Str
 }
 
 func CostForecastDaily(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := costexplorer.NewFromConfig(cfg)
 
 	params := buildCostForecastInput("DAILY")

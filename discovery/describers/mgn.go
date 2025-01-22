@@ -10,7 +10,7 @@ import (
 )
 
 func MGNApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := mgn.NewFromConfig(cfg)
 	var values []models.Resource
 	err := PaginateRetrieveAll(func(prevToken *string) (nextToken *string, err error) {

@@ -57,7 +57,7 @@ func ImageBuilderImage(ctx context.Context, cfg aws.Config, stream *models.Strea
 	return values, nil
 }
 func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary types.ImageSummary) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := imagebuilder.NewFromConfig(cfg)
 	image, err := client.GetImage(ctx, &imagebuilder.GetImageInput{
 		ImageBuildVersionArn: imageSummary.Arn,

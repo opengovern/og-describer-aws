@@ -14,7 +14,7 @@ import (
 )
 
 func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})
@@ -96,7 +96,7 @@ func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *mode
 }
 
 func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})
@@ -164,7 +164,7 @@ func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *mo
 }
 
 func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := directoryservice.NewFromConfig(cfg)
 	paginator := directoryservice.NewDescribeDirectoriesPaginator(client, &directoryservice.DescribeDirectoriesInput{})

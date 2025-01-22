@@ -15,7 +15,7 @@ import (
 )
 
 func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentRunsPaginator(client, &inspector.ListAssessmentRunsInput{})
 
@@ -95,7 +95,7 @@ func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types.AssessmentTarget) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *assessmentTarget.Name,
@@ -179,7 +179,7 @@ func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *mo
 	return values, nil
 }
 func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate types.AssessmentTemplate, eventSubscriptions *inspector.ListEventSubscriptionsOutput, tags *inspector.ListTagsForResourceOutput) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		Name:   *assessmentTemplate.Name,
@@ -226,7 +226,7 @@ func GetInspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, fields 
 }
 
 func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListAssessmentRunsPaginator(client, &inspector.ListAssessmentRunsInput{})
 
@@ -279,7 +279,7 @@ func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func InspectorFinding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector.NewFromConfig(cfg)
 	paginator := inspector.NewListFindingsPaginator(client, &inspector.ListFindingsInput{})
 
@@ -326,7 +326,7 @@ func InspectorFinding(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListCoveragePaginator(client, &inspector2.ListCoverageInput{})
 
@@ -359,7 +359,7 @@ func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *models.Stre
 }
 
 func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListCoverageStatisticsPaginator(client, &inspector2.ListCoverageStatisticsInput{})
 
@@ -422,7 +422,7 @@ func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client 
 		OnlyAssociated: &onlyAssociated,
 	}
 	paginator := inspector2.NewListMembersPaginator(client, input)
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	var values []models.Resource
 	for paginator.HasMorePages() {
@@ -447,7 +447,7 @@ func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client 
 }
 
 func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := inspector2.NewFromConfig(cfg)
 	paginator := inspector2.NewListFindingsPaginator(client, &inspector2.ListFindingsInput{})
 

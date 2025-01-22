@@ -48,7 +48,7 @@ func SESConfigurationSet(ctx context.Context, cfg aws.Config, stream *models.Str
 	return values, nil
 }
 func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	sesClient := ses.NewFromConfig(cfg)
 
@@ -162,7 +162,7 @@ func SESv2EmailIdentities(ctx context.Context, cfg aws.Config, stream *models.St
 }
 
 func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2types.IdentityInfo) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := sesv2.NewFromConfig(cfg)
 
@@ -192,7 +192,7 @@ func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2type
 }
 
 func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 
 	client := ses.NewFromConfig(cfg)
 
@@ -284,7 +284,7 @@ func GetSESIdentity(ctx context.Context, cfg aws.Config, fields map[string]strin
 }
 
 func SESContactList(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sesv2.NewFromConfig(cfg)
 	paginator := sesv2.NewListContactListsPaginator(client, &sesv2.ListContactListsInput{})
 
@@ -316,7 +316,7 @@ func SESContactList(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 }
 
 func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
 	output, err := client.ListReceiptFilters(ctx, &ses.ListReceiptFiltersInput{})
@@ -345,7 +345,7 @@ func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *models.Stream
 }
 
 func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
 	var values []models.Resource
@@ -387,7 +387,7 @@ func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *models.Strea
 }
 
 func SESTemplate(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := ses.NewFromConfig(cfg)
 
 	var values []models.Resource

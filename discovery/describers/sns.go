@@ -12,7 +12,7 @@ import (
 )
 
 func SNSSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sns.NewFromConfig(cfg)
 	paginator := sns.NewListSubscriptionsPaginator(client, &sns.ListSubscriptionsInput{})
 
@@ -94,7 +94,7 @@ func SNSTopic(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 	return values, nil
 }
 func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := sns.NewFromConfig(cfg)
 
 	output, err := client.GetTopicAttributes(ctx, &sns.GetTopicAttributesInput{

@@ -49,7 +49,7 @@ func GlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, stream *m
 	return values, nil
 }
 func globalAcceleratorAcceleratorHandle(ctx context.Context, attribute *globalaccelerator.DescribeAcceleratorAttributesOutput, tags *globalaccelerator.ListTagsForResourceOutput, accelerator types.Accelerator) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *accelerator.AcceleratorArn,
@@ -141,7 +141,7 @@ func GlobalAcceleratorListener(ctx context.Context, cfg aws.Config, stream *mode
 	return values, nil
 }
 func globalAcceleratorListenerHandle(ctx context.Context, listener types.Listener, ARN string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *listener.ListenerArn,
@@ -231,7 +231,7 @@ func GlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, stream 
 	return values, nil
 }
 func globalAcceleratorEndpointGroupHandle(ctx context.Context, endpointGroup types.EndpointGroup, listener types.Listener, ARN string) models.Resource {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region: describeCtx.OGRegion,
 		ARN:    *endpointGroup.EndpointGroupArn,

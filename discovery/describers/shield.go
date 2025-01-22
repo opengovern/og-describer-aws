@@ -49,7 +49,7 @@ func ShieldProtectionGroup(ctx context.Context, cfg aws.Config, stream *models.S
 	return values, nil
 }
 func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.ProtectionGroup) (models.Resource, error) {
-	describeCtx := GetDescribeContext(ctx)
+	describeCtx := model.GetDescribeContext(ctx)
 	client := shield.NewFromConfig(cfg)
 
 	tags, err := client.ListTagsForResource(ctx, &shield.ListTagsForResourceInput{
