@@ -6,7 +6,7 @@ file_path="manifest.yaml"
 cat <<EOF >> "$file_path"
 
 DescriberTag: local-$TAG
-UpdateDate: $(date +%Y-%m-%d %H:%M:%S)
+UpdateDate: $(date +%Y-%m-%d) $(date +%H:%M:%S)
 
 EOF
 
