@@ -1481,7 +1481,7 @@
     "ResourceName": "AWS::ElasticLoadBalancingV2::LoadBalancer",
     "ListDescriber": "ParallelDescribeRegional(describers.ElasticLoadBalancingV2LoadBalancer)",
     "GetDescriber": "",
-    "SteampipeTable": "aws_ec2_application_load_balancer",
+    "SteampipeTable": "aws_ec2_application_load_balancer,aws_ec2_gateway_load_balancer,aws_ec2_network_load_balancer",
     "Model": "ElasticLoadBalancingV2LoadBalancer"
   },
   {

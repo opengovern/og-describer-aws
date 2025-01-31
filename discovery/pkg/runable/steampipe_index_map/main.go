@@ -81,7 +81,14 @@ var TablesToResourceTypes = map[string]string{
 
 	// Build the reverse map
 	for _, resourceType := range resourceTypes {
-		b.WriteString(fmt.Sprintf("  \"%s\": \"%s\",\n", resourceType.SteampipeTable, resourceType.ResourceName))
+		if strings.Contains(resourceType.SteampipeTable, ",") {
+			sts := strings.Split(resourceType.SteampipeTable, ",")
+			for _, st := range sts {
+				b.WriteString(fmt.Sprintf("  \"%s\": \"%s\",\n", st, resourceType.ResourceName))
+			}
+		} else {
+			b.WriteString(fmt.Sprintf("  \"%s\": \"%s\",\n", resourceType.SteampipeTable, resourceType.ResourceName))
+		}
 	}
 	b.WriteString("}\n")
 
