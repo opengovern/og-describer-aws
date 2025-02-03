@@ -1,0 +1,31 @@
+{
+  "index_patterns": [
+    "aws_ecs_service"
+  ],
+  "template": {
+    "settings": {
+      "index":{
+        "mapping":{
+          "total_fields": {
+            "limit": "10000"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "description.Service.Events": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "priority": 20,
+  "composed_of": [
+    "resource_component_template"
+  ],
+  "version": 1,
+  "_meta": {
+    "description": "AWS ECS Service index"
+  }
+}

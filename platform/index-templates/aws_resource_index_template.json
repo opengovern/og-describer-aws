@@ -1,0 +1,52 @@
+{
+    "index_patterns": [
+        "aws_*"
+    ],
+    "template": {
+        "settings": {
+            "number_of_shards": 1,
+            "index":{
+                "mapping":{
+                    "total_fields": {
+                        "limit": "10000"
+                    }
+                }
+            }
+        },
+        "aliases": {
+            "aws": {
+                "is_write_index": false
+            }
+        },
+        "mappings": {
+            "dynamic_templates": [
+                {
+                    "tags_as_objects": {
+                        "match_mapping_type": "*",
+                        "match": "tags",
+                        "mapping": {
+                            "type": "object",
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "date": {
+                        "match_mapping_type": "date",
+                        "mapping": {
+                            "type": "keyword"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "priority": 10,
+    "composed_of": [
+        "resource_component_template"
+    ],
+    "version": 1,
+    "_meta": {
+        "description": "AWS resources indices"
+    }
+}

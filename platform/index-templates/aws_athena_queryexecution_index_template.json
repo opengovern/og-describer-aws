@@ -1,0 +1,31 @@
+{
+  "index_patterns": [
+    "aws_athena_queryexecution"
+  ],
+  "template": {
+    "settings": {
+      "index":{
+        "mapping":{
+          "total_fields": {
+            "limit": "10000"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "description.QueryExecution.Query": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "priority": 20,
+  "composed_of": [
+    "resource_component_template"
+  ],
+  "version": 1,
+  "_meta": {
+    "description": "AWS Athena Query Execution index"
+  }
+}

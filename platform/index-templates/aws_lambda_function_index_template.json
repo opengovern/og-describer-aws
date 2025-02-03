@@ -1,0 +1,34 @@
+{
+    "index_patterns": [
+        "aws_lambda_function"
+    ],
+    "template": {
+        "settings": {
+            "index":{
+                "mapping":{
+                    "total_fields": {
+                        "limit": "10000"
+                    }
+                }
+            }
+        },
+        "mappings": {
+            "properties": {
+                "description.Function.Configuration.Environment.Variables": {
+                    "enabled": false
+                },
+                "description.Function.Tags": {
+                    "enabled": false
+                }
+            }
+        }
+    },
+    "priority": 20,
+    "composed_of": [
+        "resource_component_template"
+    ],
+    "version": 1,
+    "_meta": {
+        "description": "AWS Lambda function index"
+    }
+}

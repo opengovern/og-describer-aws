@@ -1,0 +1,31 @@
+{
+  "index_patterns": [
+    "aws_accessanalyzer_analyzer"
+  ],
+  "template": {
+    "settings": {
+      "index":{
+        "mapping":{
+          "total_fields": {
+            "limit": "10000"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "description.Findings": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "priority": 20,
+  "composed_of": [
+    "resource_component_template"
+  ],
+  "version": 1,
+  "_meta": {
+    "description": "AWS AccessAnalyzer Analyzer index"
+  }
+}

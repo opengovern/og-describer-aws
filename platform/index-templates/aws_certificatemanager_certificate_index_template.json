@@ -1,0 +1,31 @@
+{
+  "index_patterns": [
+    "aws_certificatemanager_certificate"
+  ],
+  "template": {
+    "settings": {
+      "index":{
+        "mapping":{
+          "total_fields": {
+            "limit": "10000"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "description.Certificate.DomainValidationOptions": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "priority": 20,
+  "composed_of": [
+    "resource_component_template"
+  ],
+  "version": 1,
+  "_meta": {
+    "description": "AWS CertificateManager Certificate index"
+  }
+}

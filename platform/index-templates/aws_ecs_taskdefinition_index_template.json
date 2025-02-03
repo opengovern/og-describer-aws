@@ -1,0 +1,31 @@
+{
+  "index_patterns": [
+    "aws_ecs_taskdefinition"
+  ],
+  "template": {
+    "settings": {
+      "index":{
+        "mapping":{
+          "total_fields": {
+            "limit": "10000"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "description.TaskDefinition.ContainerDefinitions.Environment": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "priority": 20,
+  "composed_of": [
+    "resource_component_template"
+  ],
+  "version": 1,
+  "_meta": {
+    "description": "AWS ECS Task Definition Group index"
+  }
+}

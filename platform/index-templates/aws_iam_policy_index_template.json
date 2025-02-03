@@ -1,0 +1,31 @@
+{
+    "index_patterns": [
+        "aws_iam_policy"
+    ],
+    "template": {
+        "settings": {
+            "index":{
+                "mapping":{
+                    "total_fields": {
+                        "limit": "10000"
+                    }
+                }
+            }
+        },
+        "mappings": {
+            "properties": {
+                "description.PolicyVersion.Document": {
+                    "enabled": false
+                }
+            }
+        }
+    },
+    "priority": 20,
+    "composed_of": [
+        "resource_component_template"
+    ],
+    "version": 1,
+    "_meta": {
+        "description": "AWS IAM Policy index"
+    }
+}

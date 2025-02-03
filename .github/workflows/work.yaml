@@ -94,6 +94,9 @@ jobs:
       - name: Copy manifest to output directory
         working-directory: .
         run: cp ./platform/constants/manifest.yaml ./aws-plugin/
+      - name: Copy index templates folder to output directory
+        working-directory: .
+        run: cp -r ./platform/index-templates ./aws-plugin/
       - name: Pack output
         working-directory: .
         run: |

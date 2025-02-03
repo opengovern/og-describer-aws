@@ -1,0 +1,37 @@
+{
+    "index_patterns": [
+        "aws_glue_catalogtable"
+    ],
+    "template": {
+        "settings": {
+            "index":{
+                "mapping":{
+                    "total_fields": {
+                        "limit": "10000"
+                    }
+                }
+            }
+        },
+        "mappings": {
+            "properties": {
+                "description.Table.Parameters": {
+                    "enabled": false
+                },
+                "description.Table.StorageDescriptor.Columns": {
+                    "enabled": false
+                },
+                "description.Table.StorageDescriptor.SerdeInfo.Parameters": {
+                    "enabled": false
+                }
+            }
+        }
+    },
+    "priority": 20,
+    "composed_of": [
+        "resource_component_template"
+    ],
+    "version": 1,
+    "_meta": {
+        "description": "AWS Glue catalogtable version index"
+    }
+}
