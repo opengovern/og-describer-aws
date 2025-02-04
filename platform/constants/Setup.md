@@ -1,68 +1,73 @@
-# Setup GitHub Integration
-
-Integrating opencomply with your GitHub organization using a Classic Personal Access Token (PAT) is a straightforward process. Here's a step-by-step guide to help you through it:
+# SOP: Setting Up AWS Organization for OpenGovernance Integration
 
 ## Prerequisites
+- **AWS CLI Installed and Configured:** Ensure the AWS CLI is installed and configured with administrative privileges.
+- **Git Installed:** Make sure Git is installed on your machine.
+- **SSH Access:** Confirm you have SSH access to `git@github.com:opengovern/automation-for-aws.git`.
+- **Root Organization ID:** Retrieve your AWS Organization's Root ID by running:
+  ```sh
+  aws organizations list-roots --output=text --query='Roots[0].Id' --no-cli-pager
+  ```
 
-1. **opencomply Should be Installed and Running**: Ensure you have opencomply set up and ready to integrate with external services.
-2. **GitHub Organization Admin Permissions**: Make sure you have administrative access to the GitHub organization you want to integrate with.
-3. **Read Access to All Organization Repositories**: Ensure you have the necessary permissions to access the data in your GitHub organization.
+## Steps
 
-<br>
+1. **Clone the Automation Repository**
+    ```sh
+    git clone git@github.com:opengovern/automation-for-aws.git
+    cd automation-for-aws
+    ```
 
-## Create a Classic Personal Access Token (PAT)
+2. **Deploy the CloudFormation Stack**
+    Replace `<ROOT_ORG_ID>` with your AWS Organization's Root ID obtained from the prerequisites.
+    ```sh
+    aws cloudformation create-stack \
+      --stack-name OpenGovernance-Deploy \
+      --template-body file://./AWSOrganizationDeployment.yml \
+      --capabilities CAPABILITY_NAMED_IAM \
+      --parameters ParameterKey=OrganizationUnitList,ParameterValue=<ROOT_ORG_ID>
+    ```
 
-1. **Access GitHub Settings**:
-    - In the upper-right corner of any GitHub page, click your profile photo.
-    - Select **Settings** from the dropdown menu.
+3. **Monitor Stack Deployment**
+    Wait until the stack status is `CREATE_COMPLETE`.
+    ```sh
+    aws cloudformation describe-stacks \
+      --stack-name OpenGovernance-Deploy \
+      --query "Stacks[0].StackStatus" \
+      --output text
+    ```
 
-2. **Go to Developer Settings**:
-    - In the left sidebar, navigate to **Developer settings**.
+4. **Generate IAM Access Keys for OpenGovernanceIAMUser**
+    Retrieve the IAM username from the CloudFormation stack outputs and create access keys.
+    ```sh
+    IAM_USER=$(aws cloudformation describe-stacks \
+      --stack-name OpenGovernance-Deploy \
+      --query "Stacks[0].Outputs[?OutputKey=='IAMUserNameInMasterAccount'].OutputValue" \
+      --output text)
+    
+    aws iam create-access-key --user-name $IAM_USER
+    ```
+    *Store the `AccessKeyId` and `SecretAccessKey` from the output securely.*
 
-3. **Generate a New Token**:
-    - Under **Personal access tokens**, select **Tokens (classic)**.
-    - Click **Generate new token**, and then **Generate new token (classic)** again.
+5. **Configure OpenGovernance Integration**
+    Retrieve the IAM Role name from the CloudFormation stack outputs:
+    ```sh
+    IAM_ROLE=$(aws cloudformation describe-stacks \
+      --stack-name OpenGovernance-Deploy \
+      --query "Stacks[0].Outputs[?OutputKey=='IAMRoleName'].OutputValue" \
+      --output text)
+    ```
+    Navigate to the OpenGovernance dashboard:
+    - Go to **Integrations** -> **AWS** -> **Add AWS Account**.
+    - Enter the following details in the wizard:
+      - **AccessKeyID:** *(Use the `AccessKeyId` from Step 4)*
+      - **SecretAccessKey:** *(Use the `SecretAccessKey` from Step 4)*
+      - **IAM Role Name:** `IAM_ROLE`
 
-4. **Set Token Expiration**:
-    - Choose an expiration for the token by selecting **Expiration** and picking a default option or entering a custom date.
+## Notes
+- **Security:** Store IAM access keys securely and rotate them regularly.
+- **Permissions:** The CloudFormation stack automatically creates the `OpenGovernanceIAMUser` and attaches the necessary policies, as well as creates roles in target accounts. Ensure these permissions align with OpenGovernance requirements.
+- **Support:** Refer to the [AWS CloudFormation Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) for assistance.
 
-5. **Select Required Scopes**:
-    - Ensure you select the following scopes to grant opencomply the necessary access:
-        - `repo`
-        - `read:org`
-        - `read:packages`
-        - `read:project`
-        - `read:ssh_signing_key`
-        - `read:audit_log`
-        - `read:enterprise`
-        - `read:discussion`
-        - `read:user`
-        - `user:email`
-        - `notification`
-        - `read:repo_hook`
-        - `read:public_key`
+---
 
-6. **Generate the Token**:
-    - After selecting the scopes, generate the token and copy it for use in opencomply integration.
-
-## Configure Integration in opencomply
-
-1. **Open opencomply Dashboard**:
-    - Navigate to the opencomply dashboard.
-
-2. **Go to Integrations**:
-    - Select **Integrations** and then choose **GitHub** from the options.
-
-3. **Select Classic PAT Integration**:
-    - Opt for the **Classic PAT integration** method.
-
-4. **Paste the PAT**:
-    - Paste the copied PAT into the appropriate field.
-
-5. **Select GitHub Organization**:
-    - In the dropdown menu, choose the GitHub organization you want to connect.
-
-6. **Finalize Integration**:
-    - Click **Save** to confirm and enable the connection.
-
-With these steps, opencomply will have read access to your GitHub repositories and related metadata, allowing it to provide governance and compliance oversight effectively.
+**Reminder:** Follow your organization's security policies when handling IAM credentials and managing AWS resources.
