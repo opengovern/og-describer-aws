@@ -2,14 +2,13 @@ package provider
 
 import (
 	"encoding/json"
-	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
-	"github.com/opengovern/og-util/pkg/describe"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	"fmt"
+	model "github.com/opengovern/og-describer-aws/discovery/pkg/models"
+	"github.com/opengovern/og-util/pkg/describe"
 	"golang.org/x/net/context"
-
 )
 
 // AccountCredentialsFromMap TODO: converts a map to a configs.IntegrationCredentials.
@@ -104,8 +103,8 @@ func AdjustResource(job describe.DescribeJob, resource *model.Resource) error {
 func GetAdditionalParameters(job describe.DescribeJob) (map[string]string, error) {
 	additionalParameters := make(map[string]string)
 
-	if _, ok := job.IntegrationLabels["OrganizationName"]; ok {
-		additionalParameters["OrganizationName"] = job.IntegrationLabels["OrganizationName"]
+	if _, ok := job.IntegrationLabels["accountID"]; ok {
+		additionalParameters["accountID"] = job.IntegrationLabels["accountID"]
 	}
 
 	return additionalParameters, nil
