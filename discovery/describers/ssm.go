@@ -36,9 +36,10 @@ func SSMManagedInstance(ctx context.Context, cfg aws.Config, stream *models.Stre
 				name = *item.InstanceId
 			}
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    name,
+				Account: describeCtx.AccountID,
 				Description: model.SSMManagedInstanceDescription{
 					InstanceInformation: item,
 				},
@@ -80,9 +81,10 @@ func SSMInventory(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 						schemas = append(schemas, schemaPage.Schemas...)
 					}
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *inventory.Id,
-						Name:   *inventory.Id,
+						Region:  describeCtx.OGRegion,
+						ID:      *inventory.Id,
+						Name:    *inventory.Id,
+						Account: describeCtx.AccountID,
 						Description: model.SSMInventoryDescription{
 							Id:            inventory.Id,
 							CaptureTime:   data.CaptureTime,
@@ -128,9 +130,10 @@ func SSMInventoryEntry(ctx context.Context, cfg aws.Config, stream *models.Strea
 					}
 					for _, v := range op.Entries {
 						resource := models.Resource{
-							Region: describeCtx.OGRegion,
-							ID:     *op.InstanceId,
-							Name:   *op.InstanceId,
+							Region:  describeCtx.OGRegion,
+							ID:      *op.InstanceId,
+							Name:    *op.InstanceId,
+							Account: describeCtx.AccountID,
 							Description: model.SSMInventoryEntryDescription{
 								InstanceId:    op.InstanceId,
 								TypeName:      op.TypeName,
@@ -180,9 +183,10 @@ func SSMManagedInstanceCompliance(ctx context.Context, cfg aws.Config, stream *m
 				for _, item := range cpage.ComplianceItems {
 					arn := "arn:" + describeCtx.Partition + ":ssm:" + describeCtx.Region + ":" + describeCtx.AccountID + ":managed-instance/" + *item.ResourceId + "/compliance-item/" + *item.Id + ":" + *item.ComplianceType
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    arn,
-						Name:   *item.Title,
+						Region:  describeCtx.OGRegion,
+						ARN:     arn,
+						Name:    *item.Title,
+						Account: describeCtx.AccountID,
 						Description: model.SSMManagedInstanceComplianceDescription{
 							ComplianceItem: item,
 						},
@@ -224,10 +228,11 @@ func SSMAssociation(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 			arn := fmt.Sprintf("arn:%s:ssm:%s:%s:association/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.AssociationId)
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.AssociationId,
-				Name:   *v.Name,
-				ARN:    arn,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.AssociationId,
+				Name:    *v.Name,
+				ARN:     arn,
+				Account: describeCtx.AccountID,
 				Description: model.SSMAssociationDescription{
 					AssociationItem: v,
 					Association:     out,
@@ -289,10 +294,11 @@ func SSMDocument(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Name,
-				Name:   *v.Name,
-				ARN:    arn,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Name,
+				Name:    *v.Name,
+				ARN:     arn,
+				Account: describeCtx.AccountID,
 				Description: model.SSMDocumentDescription{
 					DocumentIdentifier: v,
 					Document:           data,
@@ -347,9 +353,10 @@ func SSMDocumentPermission(ctx context.Context, cfg aws.Config, stream *models.S
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Name,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Name,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.SSMDocumentPermissionDescription{
 					Document:    data,
 					Permissions: permissions,
@@ -411,9 +418,10 @@ func SSMMaintenanceWindow(ctx context.Context, cfg aws.Config, stream *models.St
 			aka := "arn:" + describeCtx.Partition + ":ssm:" + describeCtx.Region + ":" + describeCtx.AccountID + ":maintenancewindow" + "/" + *v.WindowId
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    aka,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     aka,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.SSMMaintenanceWindowDescription{
 					ARN:                       aka,
 					MaintenanceWindowIdentity: v,
@@ -463,6 +471,7 @@ func SSMMaintenanceWindowTarget(ctx context.Context, cfg aws.Config, stream *mod
 					Region:      describeCtx.OGRegion,
 					ID:          *v.WindowTargetId,
 					Name:        *v.Name,
+					Account:     describeCtx.AccountID,
 					Description: v,
 				}
 				if stream != nil {
@@ -506,6 +515,7 @@ func SSMMaintenanceWindowTask(ctx context.Context, cfg aws.Config, stream *model
 					Region:      describeCtx.OGRegion,
 					ARN:         *v.TaskArn,
 					Name:        *v.Name,
+					Account:     describeCtx.AccountID,
 					Description: v,
 				}
 				if stream != nil {
@@ -563,9 +573,10 @@ func SSMParameter(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Name,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Name,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.SSMParameterDescription{
 					ParameterMetadata: v,
 					Parameter:         op.Parameter,
@@ -628,9 +639,10 @@ func SSMPatchBaseline(ctx context.Context, cfg aws.Config, stream *models.Stream
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    aka,
-				Name:   *v.BaselineName,
+				Region:  describeCtx.OGRegion,
+				ARN:     aka,
+				Name:    *v.BaselineName,
+				Account: describeCtx.AccountID,
 				Description: model.SSMPatchBaselineDescription{
 					ARN:                   aka,
 					PatchBaselineIdentity: v,
@@ -668,6 +680,7 @@ func SSMResourceDataSync(ctx context.Context, cfg aws.Config, stream *models.Str
 				Region:      describeCtx.OGRegion,
 				ID:          *v.SyncName,
 				Name:        *v.SyncName,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -705,8 +718,9 @@ func SSMManagedInstancePatchState(ctx context.Context, cfg aws.Config, stream *m
 
 				for _, item := range pagePS.InstancePatchStates {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *item.InstanceId,
+						Region:  describeCtx.OGRegion,
+						ID:      *item.InstanceId,
+						Account: describeCtx.AccountID,
 						Description: model.SSMManagedInstancePatchStateDescription{
 							PatchState: item,
 						},

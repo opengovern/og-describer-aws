@@ -81,9 +81,10 @@ func kafkaClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Clust
 		operationInfo = op.ClusterOperationInfo
 	}
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cluster.ClusterArn,
-		Name:   *cluster.ClusterName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cluster.ClusterArn,
+		Account: describeCtx.AccountID,
+		Name:    *cluster.ClusterName,
 		Description: model.KafkaClusterDescription{
 			Cluster:              cluster,
 			ClusterOperationInfo: operationInfo,

@@ -51,9 +51,10 @@ func DAXCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 func dAXClusterHandle(ctx context.Context, tags *dax.ListTagsOutput, cluster types.Cluster) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cluster.ClusterArn,
-		Name:   *cluster.ClusterName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cluster.ClusterArn,
+		Name:    *cluster.ClusterName,
+		Account: describeCtx.AccountID,
 		Description: model.DAXClusterDescription{
 			Cluster: cluster,
 			Tags:    tags.Tags,
@@ -130,8 +131,9 @@ func DAXParameterGroup(ctx context.Context, cfg aws.Config, stream *models.Strea
 func dAXParameterGroupHandle(ctx context.Context, parameterGroup types.ParameterGroup) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *parameterGroup.ParameterGroupName,
+		Region:  describeCtx.OGRegion,
+		Name:    *parameterGroup.ParameterGroupName,
+		Account: describeCtx.AccountID,
 		Description: model.DAXParameterGroupDescription{
 			ParameterGroup: parameterGroup,
 		},
@@ -187,8 +189,9 @@ func DAXParameter(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 
 				for _, parameter := range parameters.Parameters {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						Name:   *parameter.ParameterName,
+						Region:  describeCtx.OGRegion,
+						Account: describeCtx.AccountID,
+						Name:    *parameter.ParameterName,
 						Description: model.DAXParameterDescription{
 							Parameter:          parameter,
 							ParameterGroupName: *parameterGroup.ParameterGroupName,
@@ -259,9 +262,10 @@ func dAXSubnetGroupHandle(ctx context.Context, subnetGroup types.SubnetGroup) mo
 	arn := fmt.Sprintf("arn:%s:dax:%s::subnetgroup:%s", describeCtx.Partition, describeCtx.Region, *subnetGroup.SubnetGroupName)
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *subnetGroup.SubnetGroupName,
-		ARN:    arn,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		Name:    *subnetGroup.SubnetGroupName,
+		ARN:     arn,
 		Description: model.DAXSubnetGroupDescription{
 			SubnetGroup: subnetGroup,
 		},

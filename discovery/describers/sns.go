@@ -39,9 +39,10 @@ func SNSSubscription(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.SubscriptionArn,
-				Name:   nameFromArn(*v.SubscriptionArn),
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.SubscriptionArn,
+				Name:    nameFromArn(*v.SubscriptionArn),
+				Account: describeCtx.AccountID,
 				Description: model.SNSSubscriptionDescription{
 					Subscription: v,
 					Attributes:   output.Attributes,
@@ -118,9 +119,10 @@ func sNSTopicHandle(ctx context.Context, cfg aws.Config, v types.Topic) (models.
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.TopicArn,
-		Name:   nameFromArn(*v.TopicArn),
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.TopicArn,
+		Name:    nameFromArn(*v.TopicArn),
+		Account: describeCtx.AccountID,
 		Description: model.SNSTopicDescription{
 			Attributes: output.Attributes,
 			Tags:       tOutput.Tags,

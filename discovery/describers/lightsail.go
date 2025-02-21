@@ -46,9 +46,10 @@ func LightsailInstance(ctx context.Context, cfg aws.Config, stream *models.Strea
 func lightsailInstanceHandle(ctx context.Context, instance types.Instance) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *instance.Arn,
-		Name:   *instance.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *instance.Arn,
+		Account: describeCtx.AccountID,
+		Name:    *instance.Name,
 		Description: model.LightsailInstanceDescription{
 			Instance: instance,
 		},

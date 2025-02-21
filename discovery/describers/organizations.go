@@ -48,9 +48,10 @@ func OrganizationsOrganization(ctx context.Context, cfg aws.Config, stream *mode
 func organizationsOrganizationHandle(ctx context.Context, req *organizations.DescribeOrganizationOutput) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *req.Organization.Arn,
-		Name:   *req.Organization.Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     *req.Organization.Arn,
+		Name:    *req.Organization.Id,
+		Account: describeCtx.AccountID,
 		Description: model.OrganizationsOrganizationDescription{
 			Organization: *req.Organization,
 		},
@@ -190,9 +191,10 @@ func getOrganizationsPolicyByType(ctx context.Context, cfg aws.Config, policyTyp
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *p.Arn,
-				Name:   *p.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *p.Arn,
+				Account: describeCtx.AccountID,
+				Name:    *p.Name,
 				Description: model.OrganizationsPolicyDescription{
 					Policy: *policy.Policy,
 				},
@@ -234,9 +236,10 @@ func OrganizationsRoot(ctx context.Context, cfg aws.Config, stream *models.Strea
 func organizationsRootHandle(ctx context.Context, root types.Root) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *root.Arn,
-		Name:   *root.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *root.Arn,
+		Name:    *root.Name,
+		Account: describeCtx.AccountID,
 		Description: model.OrganizationsRootDescription{
 			Root: root,
 		},
@@ -323,10 +326,11 @@ func organizationsOrganizationalUnitHandle(ctx context.Context, svc *organizatio
 		tags = tagsResponse.Tags
 	}
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *unit.Arn,
-		Name:   *unit.Name,
-		ID:     *unit.Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     *unit.Arn,
+		Account: describeCtx.AccountID,
+		Name:    *unit.Name,
+		ID:      *unit.Id,
 		Description: model.OrganizationsOrganizationalUnitDescription{
 			Unit:     unit,
 			Path:     path,
@@ -465,9 +469,10 @@ func organizationsPolicyForTargetByPolicyType(ctx context.Context, svc *organiza
 				return nil, err
 			}
 			values = append(values, models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *policy.Arn,
-				Name:   *policy.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *policy.Arn,
+				Name:    *policy.Name,
+				Account: describeCtx.AccountID,
 				Description: model.OrganizationsPolicyTargetDescription{
 					PolicySummary: policy,
 					PolicyContent: op.Policy.Content,

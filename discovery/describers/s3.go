@@ -71,6 +71,7 @@ func s3BucketHandle(ctx context.Context, region string, desc *model.S3BucketDesc
 	describeCtx := model.GetDescribeContext(ctx)
 	arn := "arn:" + describeCtx.Partition + ":s3:::" + *bucket.Name
 	resource := models.Resource{
+		Account:     describeCtx.AccountID,
 		Region:      region,
 		ARN:         arn,
 		Name:        *bucket.Name,
@@ -468,9 +469,10 @@ func S3AccessPoint(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.AccessPointArn,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.AccessPointArn,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.S3AccessPointDescription{
 					AccessPoint:  ap,
 					Policy:       app.Policy,
@@ -511,6 +513,7 @@ func S3StorageLens(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 
 		for _, v := range page.StorageLensConfigurationList {
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.StorageLensArn,
 				Name:        *v.Id,
@@ -557,7 +560,8 @@ func S3AccountSetting(ctx context.Context, cfg aws.Config, stream *models.Stream
 
 	var values []models.Resource
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
 		// No ARN or ID. Account level setting
 		Name: accountId + " S3 Account Setting",
 		Description: model.S3AccountSettingDescription{
@@ -632,8 +636,9 @@ func S3Object(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 				}
 
 				resource := models.Resource{
-					Region: region,
-					ARN:    arn,
+					Region:  region,
+					ARN:     arn,
+					Account: describeCtx.AccountID,
 					Description: model.S3ObjectDescription{
 						Object:           object,
 						ObjectSummary:    v,
@@ -657,6 +662,7 @@ func S3Object(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 }
 
 func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([]models.Resource, error) {
+	describeCtx := model.GetDescribeContext(ctx)
 	client := s3.NewFromConfig(cfg)
 	buckets, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
 	if err != nil {
@@ -677,8 +683,9 @@ func S3BucketIntelligentTieringConfiguration(ctx context.Context, cfg aws.Config
 		}
 		for _, v := range conf.IntelligentTieringConfigurationList {
 			resource := models.Resource{
-				Region: region,
-				ID:     *v.Id,
+				Region:  region,
+				ID:      *v.Id,
+				Account: describeCtx.AccountID,
 				Description: model.S3BucketIntelligentTieringConfigurationDescription{
 					BucketName:                      *bucket.Name,
 					IntelligentTieringConfiguration: v,
@@ -723,9 +730,10 @@ func S3MultiRegionAccessPoint(ctx context.Context, cfg aws.Config, stream *model
 			arn := "arn:" + describeCtx.Partition + ":s3::" + accountId + ":accesspoint/" + *report.Name
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *report.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    *report.Name,
+				Account: describeCtx.AccountID,
 				Description: model.S3MultiRegionAccessPointDescription{
 					Report: report,
 				},

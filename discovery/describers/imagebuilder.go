@@ -70,9 +70,10 @@ func imageBuilderImageHandle(ctx context.Context, cfg aws.Config, imageSummary t
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *image.Image.Arn,
-		Name:   *image.Image.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *image.Image.Arn,
+		Account: describeCtx.AccountID,
+		Name:    *image.Image.Name,
 		Description: model.ImageBuilderImageDescription{
 			Image: *image.Image,
 		},

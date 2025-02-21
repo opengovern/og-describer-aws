@@ -27,9 +27,10 @@ func SSOAdminInstance(ctx context.Context, cfg aws.Config, stream *models.Stream
 		}
 		for _, v := range page.Instances {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.InstanceArn,
-				Name:   *v.InstanceArn,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.InstanceArn,
+				Name:    *v.InstanceArn,
+				Account: describeCtx.AccountID,
 				Description: model.SSOAdminInstanceDescription{
 					Instance: v,
 				},
@@ -98,8 +99,9 @@ func ListSSOAdminInstanceAccountAssignments(ctx context.Context, client *ssoadmi
 
 			for _, accountA := range accountAssignment.AccountAssignments {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     fmt.Sprintf("%s|%s|%s", *accountA.AccountId, *accountA.PermissionSetArn, *accountA.PrincipalId),
+					Region:  describeCtx.OGRegion,
+					ID:      fmt.Sprintf("%s|%s|%s", *accountA.AccountId, *accountA.PermissionSetArn, *accountA.PrincipalId),
+					Account: describeCtx.AccountID,
 					Description: model.SSOAdminAccountAssignmentDescription{
 						Instance:          instance,
 						AccountAssignment: accountA,
@@ -193,9 +195,10 @@ func GetSSOAdminPermissionSet(ctx context.Context, client *ssoadmin.Client, inst
 		tagsMap[*tag.Key] = *tag.Value
 	}
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *detail.PermissionSet.PermissionSetArn,
-		ARN:    *detail.PermissionSet.PermissionSetArn,
+		Region:  describeCtx.OGRegion,
+		ID:      *detail.PermissionSet.PermissionSetArn,
+		ARN:     *detail.PermissionSet.PermissionSetArn,
+		Account: describeCtx.AccountID,
 		Description: model.SSOAdminPermissionSetDescription{
 			InstanceArn:   instanceArn,
 			PermissionSet: *detail.PermissionSet,
@@ -271,9 +274,10 @@ func ListSSOAdminPermissionSetPolicyAttachments(ctx context.Context, client *sso
 
 		for _, item := range output.AttachedManagedPolicies {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *item.Arn,
-				ARN:    *item.Arn,
+				Region:  describeCtx.OGRegion,
+				ID:      *item.Arn,
+				ARN:     *item.Arn,
+				Account: describeCtx.AccountID,
 				Description: model.SSOAdminPolicyAttachmentDescription{
 					InstanceArn:           instanceArn,
 					PermissionSetArn:      permissionSetArn,
@@ -339,8 +343,9 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *models.Str
 										return nil, err
 									}
 									resource := models.Resource{
-										Region: describeCtx.OGRegion,
-										ID:     id,
+										Region:  describeCtx.OGRegion,
+										ID:      id,
+										Account: describeCtx.AccountID,
 										Description: model.UserEffectiveAccessDescription{
 											AccountAssignment: accountA,
 											UserId:            membership.MemberId,
@@ -367,8 +372,9 @@ func UserEffectiveAccess(ctx context.Context, cfg aws.Config, stream *models.Str
 								return nil, err
 							}
 							resource := models.Resource{
-								Region: describeCtx.OGRegion,
-								ID:     id,
+								Region:  describeCtx.OGRegion,
+								ID:      id,
+								Account: describeCtx.AccountID,
 								Description: model.UserEffectiveAccessDescription{
 									AccountAssignment: accountA,
 									UserId:            accountA.PrincipalId,

@@ -80,9 +80,10 @@ func redshiftClusterHandle(ctx context.Context, cfg aws.Config, v types.Cluster)
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ClusterNamespaceArn,
-		Name:   *v.ClusterIdentifier,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *v.ClusterNamespaceArn,
+		Name:    *v.ClusterIdentifier,
 		Description: model.RedshiftClusterDescription{
 			Cluster:          v,
 			LoggingStatus:    logStatus,
@@ -137,9 +138,10 @@ func RedshiftEventSubscription(ctx context.Context, cfg aws.Config, stream *mode
 
 		for _, v := range page.EventSubscriptionsList {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.CustSubscriptionId,
-				Name:   *v.CustSubscriptionId,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.CustSubscriptionId,
+				Name:    *v.CustSubscriptionId,
 				Description: model.RedshiftEventSubscriptionDescription{
 					EventSubscription: v,
 				},
@@ -212,9 +214,10 @@ func redshiftClusterParameterGroupHandle(ctx context.Context, cfg aws.Config, v 
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *v.ParameterGroupName,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    *v.ParameterGroupName,
 		Description: model.RedshiftClusterParameterGroupDescription{
 			ClusterParameterGroup: v,
 			Parameters:            param.Parameters,
@@ -272,6 +275,7 @@ func RedshiftClusterSecurityGroup(ctx context.Context, cfg aws.Config, stream *m
 
 		for _, v := range page.ClusterSecurityGroups {
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ID:          *v.ClusterSecurityGroupName,
 				Name:        *v.ClusterSecurityGroupName,
@@ -354,9 +358,10 @@ func redshiftSnapshotHandle(ctx context.Context, v types.Snapshot) models.Resour
 	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:redshift:%s:%s:snapshot:%s/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.ClusterIdentifier, *v.SnapshotIdentifier)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *v.SnapshotIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		Name:    *v.SnapshotIdentifier,
 		Description: model.RedshiftSnapshotDescription{
 			Snapshot: v,
 		},
@@ -433,9 +438,10 @@ func redshiftServerlessNamespaceHandle(ctx context.Context, cfg aws.Config, v ty
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.NamespaceArn,
-		Name:   *v.NamespaceName,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.NamespaceArn,
+		Name:    *v.NamespaceName,
 		Description: model.RedshiftServerlessNamespaceDescription{
 			Namespace: v,
 			Tags:      tags.Tags,
@@ -518,9 +524,10 @@ func redshiftServerlessSnapshotHandle(ctx context.Context, cfg aws.Config, v typ
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.NamespaceArn,
-		Name:   *v.NamespaceName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.NamespaceArn,
+		Name:    *v.NamespaceName,
+		Account: describeCtx.AccountID,
 		Description: model.RedshiftServerlessSnapshotDescription{
 			Snapshot: v,
 			Tags:     tags.Tags,
@@ -577,9 +584,10 @@ func RedshiftServerlessWorkgroup(ctx context.Context, cfg aws.Config, stream *mo
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.WorkgroupArn,
-				Name:   *v.WorkgroupName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.WorkgroupArn,
+				Name:    *v.WorkgroupName,
+				Account: describeCtx.AccountID,
 				Description: model.RedshiftServerlessWorkgroupDescription{
 					Workgroup: v,
 					Tags:      tags.Tags,
@@ -627,9 +635,10 @@ func redshiftSubnetGroupHandle(ctx context.Context, clusterSubnetGroup types.Clu
 	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:redshift:%s:%s:subnetgroup:%s", describeCtx.Partition, describeCtx.OGRegion, describeCtx.AccountID, *clusterSubnetGroup.ClusterSubnetGroupName)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *clusterSubnetGroup.ClusterSubnetGroupName,
-		ARN:    arn,
+		Region:  describeCtx.OGRegion,
+		Name:    *clusterSubnetGroup.ClusterSubnetGroupName,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
 		Description: model.RedshiftSubnetGroupDescription{
 			ClusterSubnetGroup: clusterSubnetGroup,
 		},

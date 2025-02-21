@@ -47,9 +47,10 @@ func SimSpaceWeaverSimulation(ctx context.Context, cfg aws.Config, stream *model
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   name,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Name:    name,
 				Description: model.SimSpaceWeaverSimulationDescription{
 					Simulation:     v,
 					SimulationItem: data,

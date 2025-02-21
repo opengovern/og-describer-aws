@@ -42,9 +42,10 @@ func NeptuneDatabase(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBInstanceArn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ARN:     *v.DBInstanceArn,
+				Name:    name,
 				Description: model.NeptuneDatabaseDescription{
 					Database: v,
 					Tags:     tags.TagList,
@@ -95,9 +96,10 @@ func NeptuneDatabaseCluster(ctx context.Context, cfg aws.Config, stream *models.
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBClusterArn,
-				Name:   name,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.DBClusterArn,
+				Name:    name,
 				Description: model.NeptuneDatabaseClusterDescription{
 					Cluster: v,
 					Tags:    tags.TagList,
@@ -198,10 +200,11 @@ func neptuneDatabaseClusterSnapshotHandler(ctx context.Context, client *neptune.
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *snapshot.DBClusterSnapshotArn,
-		Name:   *snapshot.DBClusterSnapshotIdentifier,
-		ID:     *snapshot.DBClusterSnapshotIdentifier,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *snapshot.DBClusterSnapshotArn,
+		Name:    *snapshot.DBClusterSnapshotIdentifier,
+		ID:      *snapshot.DBClusterSnapshotIdentifier,
 		Description: model.NeptuneDatabaseClusterSnapshotDescription{
 			Snapshot:   snapshot,
 			Attributes: attributes,

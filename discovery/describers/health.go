@@ -25,8 +25,9 @@ func HealthEvent(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 
 		for _, event := range page.Events {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *event.Arn,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ARN:     *event.Arn,
 				Description: model.HealthEventDescription{
 					Event: event,
 				},
@@ -68,8 +69,9 @@ func HealthAffectedEntity(ctx context.Context, cfg aws.Config, stream *models.St
 				}
 				for _, entity := range entitiesPage.Entities {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *event.Arn,
+						Region:  describeCtx.OGRegion,
+						Account: describeCtx.AccountID,
+						ARN:     *event.Arn,
 						Description: model.HealthAffectedEntityDescription{
 							Entity: entity,
 						},

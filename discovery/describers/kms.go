@@ -46,6 +46,7 @@ func KMSAliasHandle(ctx context.Context, v types.AliasListEntry) models.Resource
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
+		Account:     describeCtx.AccountID,
 		ARN:         *v.AliasArn,
 		Name:        *v.AliasName,
 		Description: v,
@@ -166,9 +167,10 @@ func KMSKey(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.KeyArn,
-				Name:   *v.KeyId,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.KeyArn,
+				Account: describeCtx.AccountID,
+				Name:    *v.KeyId,
 				Description: model.KMSKeyDescription{
 					Metadata:           key.KeyMetadata,
 					Aliases:            keyAlias,
@@ -268,9 +270,10 @@ func GetKMSKey(ctx context.Context, cfg aws.Config, fields map[string]string) ([
 	}
 
 	values = append(values, models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *key.KeyMetadata.Arn,
-		Name:   *v.KeyId,
+		Region:  describeCtx.OGRegion,
+		ARN:     *key.KeyMetadata.Arn,
+		Name:    *v.KeyId,
+		Account: describeCtx.AccountID,
 		Description: model.KMSKeyDescription{
 			Metadata:           key.KeyMetadata,
 			Aliases:            keyAlias,
@@ -319,9 +322,10 @@ func KMSKeyRotation(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 				for _, rotation := range output.Rotations {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *v.KeyArn,
-						Name:   *v.KeyId,
+						Region:  describeCtx.OGRegion,
+						ARN:     *v.KeyArn,
+						Account: describeCtx.AccountID,
+						Name:    *v.KeyId,
 						Description: model.KMSKeyRotationDescription{
 							KeyId:        strings.Split(*rotation.KeyId, "/")[1],
 							KeyArn:       *rotation.KeyId,

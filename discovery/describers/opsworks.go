@@ -58,9 +58,10 @@ func opsWorksCMServerHandle(ctx context.Context, cfg aws.Config, v types.Server)
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ServerArn,
-		Name:   *v.ServerName,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ServerArn,
+		Name:    *v.ServerName,
 		Description: model.OpsWorksCMServerDescription{
 			Server: v,
 			Tags:   tags.Tags,

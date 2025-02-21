@@ -36,9 +36,10 @@ func EventBridgeBus(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *bus.Arn,
-				Name:   *bus.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *bus.Arn,
+				Name:    *bus.Name,
+				Account: describeCtx.AccountID,
 				Description: model.EventBridgeBusDescription{
 					Bus:  bus,
 					Tags: tagsOutput.Tags,
@@ -102,9 +103,10 @@ func EventBridgeRule(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *rule.Arn,
-				Name:   *rule.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *rule.Arn,
+				Name:    *rule.Name,
+				Account: describeCtx.AccountID,
 				Description: model.EventBridgeRuleDescription{
 					Rule:    *rule,
 					Tags:    tagsOutput.Tags,

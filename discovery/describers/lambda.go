@@ -101,9 +101,10 @@ func lambdaFunctionHandle(ctx context.Context, client *lambda.Client, v types.Fu
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.FunctionArn,
-		Name:   *v.FunctionName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.FunctionArn,
+		Name:    *v.FunctionName,
+		Account: describeCtx.AccountID,
 		Description: model.LambdaFunctionDescription{
 			Function:  function,
 			UrlConfig: listUrlConfig.FunctionUrlConfigs,
@@ -259,9 +260,10 @@ func LambdaAliasHandle(ctx context.Context, cfg aws.Config, v types.AliasConfigu
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.AliasArn,
-		Name:   *v.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.AliasArn,
+		Name:    *v.Name,
+		Account: describeCtx.AccountID,
 		Description: model.LambdaAliasDescription{
 			FunctionName: *fn.FunctionName,
 			Alias:        v,
@@ -337,6 +339,7 @@ func LambdaPermission(ctx context.Context, cfg aws.Config, stream *models.Stream
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*fn.FunctionArn, *v.Policy),
 			Name:        *v.Policy,
+			Account:     describeCtx.AccountID,
 			Description: v,
 		}
 		if stream != nil {
@@ -378,6 +381,7 @@ func LambdaEventInvokeConfig(ctx context.Context, cfg aws.Config, stream *models
 					Region:      describeCtx.OGRegion,
 					ID:          *fn.FunctionName, // Invoke Config is unique per function
 					Name:        *fn.FunctionName,
+					Account:     describeCtx.AccountID,
 					Description: v,
 				}
 				if stream != nil {
@@ -412,6 +416,7 @@ func LambdaCodeSigningConfig(ctx context.Context, cfg aws.Config, stream *models
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.CodeSigningConfigArn,
 				Name:        *v.CodeSigningConfigArn,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -444,6 +449,7 @@ func LambdaEventSourceMapping(ctx context.Context, cfg aws.Config, stream *model
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.EventSourceArn,
 				Name:        *v.UUID,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -522,9 +528,10 @@ func lambdaLayerVersionHandle(ctx context.Context, cfg aws.Config, layer types.L
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.LayerVersionArn,
-		Name:   *v.LayerVersionArn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.LayerVersionArn,
+		Name:    *v.LayerVersionArn,
+		Account: describeCtx.AccountID,
 		Description: model.LambdaLayerVersionDescription{
 			LayerName:    *layer.LayerName,
 			LayerVersion: *layerVersion,
@@ -585,9 +592,10 @@ func LambdaLayer(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 	var values []models.Resource
 	for _, layer := range layers {
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ARN:    *layer.LayerArn,
-			Name:   *layer.LayerName,
+			Region:  describeCtx.OGRegion,
+			ARN:     *layer.LayerArn,
+			Account: describeCtx.AccountID,
+			Name:    *layer.LayerName,
 			Description: model.LambdaLayerDescription{
 				Layer: layer,
 			},
@@ -629,6 +637,7 @@ func LambdaLayerVersionPermission(ctx context.Context, cfg aws.Config, stream *m
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*arn, fmt.Sprintf("%d", version)),
 			Name:        *arn,
+			Account:     describeCtx.AccountID,
 			Description: v,
 		}
 		if stream != nil {

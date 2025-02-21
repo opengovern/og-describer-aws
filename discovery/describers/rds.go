@@ -50,9 +50,10 @@ func rDSDBClusterHandle(ctx context.Context, client *rds.Client, v types.DBClust
 	}
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.DBClusterArn,
-		Name:   *v.DBClusterIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.DBClusterArn,
+		Name:    *v.DBClusterIdentifier,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBClusterDescription{
 			DBCluster:                 v,
 			PendingMaintenanceActions: actions,
@@ -131,9 +132,10 @@ func rDSDBClusterSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBC
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.DBClusterSnapshotArn,
-		Name:   *v.DBClusterSnapshotIdentifier,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.DBClusterSnapshotArn,
+		Name:    *v.DBClusterSnapshotIdentifier,
 		Description: model.RDSDBClusterSnapshotDescription{
 			DBClusterSnapshot: v,
 			Attributes:        attr.DBClusterSnapshotAttributesResult,
@@ -206,9 +208,10 @@ func RDSDBClusterParameterGroup(ctx context.Context, cfg aws.Config, stream *mod
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBClusterParameterGroupArn,
-				Name:   *v.DBClusterParameterGroupName,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.DBClusterParameterGroupArn,
+				Name:    *v.DBClusterParameterGroupName,
 				Description: model.RDSDBClusterParameterGroupDescription{
 					DBClusterParameterGroup: v,
 					Parameters:              params.Parameters,
@@ -281,9 +284,10 @@ func rDSDBInstanceHandle(ctx context.Context, client *rds.Client, v types.DBInst
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.DBInstanceArn,
-		Name:   *v.DBInstanceIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.DBInstanceArn,
+		Name:    *v.DBInstanceIdentifier,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBInstanceDescription{
 			DBInstance:         v,
 			PendingMaintenance: pendingMaintenance.PendingMaintenanceActions,
@@ -349,9 +353,10 @@ func RDSDBParameterGroup(ctx context.Context, cfg aws.Config, stream *models.Str
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBParameterGroupArn,
-				Name:   *v.DBParameterGroupName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.DBParameterGroupArn,
+				Name:    *v.DBParameterGroupName,
+				Account: describeCtx.AccountID,
 				Description: model.RDSDBParameterGroupDescription{
 					DBParameterGroup: v,
 					Parameters:       dbParams.Parameters,
@@ -392,9 +397,10 @@ func RDSDBProxy(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBProxyArn,
-				Name:   *v.DBProxyName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.DBProxyArn,
+				Name:    *v.DBProxyName,
+				Account: describeCtx.AccountID,
 				Description: model.RDSDBProxyDescription{
 					DBProxy: v,
 					Tags:    tags.TagList,
@@ -430,6 +436,7 @@ func RDSDBProxyEndpoint(ctx context.Context, cfg aws.Config, stream *models.Stre
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBProxyEndpointArn,
 				Name:        *v.DBProxyEndpointName,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -472,6 +479,7 @@ func RDSDBProxyTargetGroup(ctx context.Context, cfg aws.Config, stream *models.S
 					Region:      describeCtx.OGRegion,
 					ARN:         *v.TargetGroupArn,
 					Name:        *v.TargetGroupName,
+					Account:     describeCtx.AccountID,
 					Description: v,
 				}
 				if stream != nil {
@@ -505,6 +513,7 @@ func RDSDBSecurityGroup(ctx context.Context, cfg aws.Config, stream *models.Stre
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.DBSecurityGroupArn,
 				Name:        *v.DBSecurityGroupName,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -541,9 +550,10 @@ func RDSDBSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.Stream
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.DBSubnetGroupArn,
-				Name:   *v.DBSubnetGroupName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.DBSubnetGroupArn,
+				Name:    *v.DBSubnetGroupName,
+				Account: describeCtx.AccountID,
 				Description: model.RDSDBSubnetGroupDescription{
 					DBSubnetGroup: v,
 					Tags:          tags,
@@ -590,9 +600,10 @@ func RDSDBEventSubscription(ctx context.Context, cfg aws.Config, stream *models.
 func rDSDBEventSubscriptionHandle(ctx context.Context, v types.EventSubscription) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.EventSubscriptionArn,
-		Name:   *v.CustSubscriptionId,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.EventSubscriptionArn,
+		Name:    *v.CustSubscriptionId,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBEventSubscriptionDescription{
 			EventSubscription: v,
 		},
@@ -657,9 +668,10 @@ func rDSGlobalClusterHandle(ctx context.Context, cfg aws.Config, v types.GlobalC
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.GlobalClusterArn,
-		Name:   *v.GlobalClusterIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.GlobalClusterArn,
+		Name:    *v.GlobalClusterIdentifier,
+		Account: describeCtx.AccountID,
 		Description: model.RDSGlobalClusterDescription{
 			GlobalCluster: v,
 			Tags:          tags.TagList,
@@ -736,9 +748,10 @@ func rDSOptionGroupHandle(ctx context.Context, cfg aws.Config, v types.OptionGro
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.OptionGroupArn,
-		Name:   *v.OptionGroupName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.OptionGroupArn,
+		Name:    *v.OptionGroupName,
+		Account: describeCtx.AccountID,
 		Description: model.RDSOptionGroupDescription{
 			OptionGroup: v,
 			Tags:        tags,
@@ -823,9 +836,10 @@ func rDSDBSnapshotHandle(ctx context.Context, cfg aws.Config, v types.DBSnapshot
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.DBSnapshotArn,
-		Name:   *v.DBSnapshotIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.DBSnapshotArn,
+		Name:    *v.DBSnapshotIdentifier,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBSnapshotDescription{
 			DBSnapshot:           v,
 			DBSnapshotAttributes: attrs.DBSnapshotAttributesResult.DBSnapshotAttributes,
@@ -891,9 +905,10 @@ func RDSReservedDBInstance(ctx context.Context, cfg aws.Config, stream *models.S
 func rDSReservedDBInstanceHandle(ctx context.Context, reservedDBInstance types.ReservedDBInstance) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *reservedDBInstance.ReservedDBInstanceArn,
-		ID:     *reservedDBInstance.ReservedDBInstanceId,
+		Region:  describeCtx.OGRegion,
+		ARN:     *reservedDBInstance.ReservedDBInstanceArn,
+		ID:      *reservedDBInstance.ReservedDBInstanceId,
+		Account: describeCtx.AccountID,
 		Description: model.RDSReservedDBInstanceDescription{
 			ReservedDBInstance: reservedDBInstance,
 		},
@@ -949,9 +964,10 @@ func RDSDBInstanceAutomatedBackup(ctx context.Context, cfg aws.Config, stream *m
 func rDSDBInstanceAutomatedBackupHandle(ctx context.Context, v types.DBInstanceAutomatedBackup) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.DBInstanceArn,
-		ID:     *v.DBInstanceIdentifier,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.DBInstanceArn,
+		ID:      *v.DBInstanceIdentifier,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBInstanceAutomatedBackupDescription{
 			InstanceAutomatedBackup: v,
 		},
@@ -1017,8 +1033,9 @@ func rDSDBEngineVersionHandle(ctx context.Context, v types.DBEngineVersion) mode
 	}
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBEngineVersionDescription{
 			EngineVersion: v,
 		},
@@ -1063,8 +1080,9 @@ func rDSDBRecommendationHandler(ctx context.Context, v types.DBRecommendation) m
 	describeCtx := model.GetDescribeContext(ctx)
 
 	return models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ResourceArn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ResourceArn,
+		Account: describeCtx.AccountID,
 		Description: model.RDSDBRecommendationDescription{
 			DBRecommendation: v,
 		},

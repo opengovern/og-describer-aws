@@ -87,9 +87,10 @@ func elasticBeanstalkEnvironmentHandle(ctx context.Context, cfg aws.Config, item
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.EnvironmentArn,
-		Name:   *item.EnvironmentName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.EnvironmentArn,
+		Name:    *item.EnvironmentName,
+		Account: describeCtx.AccountID,
 		Description: model.ElasticBeanstalkEnvironmentDescription{
 			EnvironmentDescription: item,
 			ManagedAction:          managedActions.ManagedActions,
@@ -175,9 +176,10 @@ func elasticBeanstalkApplicationHandle(ctx context.Context, cfg aws.Config, item
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ApplicationArn,
-		Name:   *item.ApplicationName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.ApplicationArn,
+		Name:    *item.ApplicationName,
+		Account: describeCtx.AccountID,
 		Description: model.ElasticBeanstalkApplicationDescription{
 			Application: item,
 			Tags:        tags.ResourceTags,
@@ -234,9 +236,10 @@ func ElasticBeanstalkPlatform(ctx context.Context, cfg aws.Config, stream *model
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *platform.PlatformDescription.PlatformArn,
-				Name:   *platform.PlatformDescription.PlatformName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *platform.PlatformDescription.PlatformArn,
+				Name:    *platform.PlatformDescription.PlatformName,
+				Account: describeCtx.AccountID,
 				Description: model.ElasticBeanstalkPlatformDescription{
 					Platform: *platform.PlatformDescription,
 				},
@@ -318,9 +321,10 @@ func elasticBeanstalkApplicationVersionHandle(ctx context.Context, cfg aws.Confi
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ApplicationVersionArn,
-		Name:   *v.ApplicationName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ApplicationVersionArn,
+		Name:    *v.ApplicationName,
+		Account: describeCtx.AccountID,
 		Description: model.ElasticBeanstalkApplicationVersionDescription{
 			ApplicationVersion: v,
 			Tags:               tags.ResourceTags,

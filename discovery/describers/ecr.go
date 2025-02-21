@@ -96,9 +96,10 @@ func eCRPublicRepositoryHandle(ctx context.Context, cfg aws.Config, v public_typ
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.RepositoryArn,
-		Name:   *v.RepositoryName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.RepositoryArn,
+		Account: describeCtx.AccountID,
+		Name:    *v.RepositoryName,
 		Description: model.ECRPublicRepositoryDescription{
 			PublicRepository: v,
 			ImageDetails:     imageDetails,
@@ -176,9 +177,10 @@ func ECRPublicRegistry(ctx context.Context, cfg aws.Config, stream *models.Strea
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.RegistryArn,
-				Name:   *v.RegistryId,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.RegistryArn,
+				Name:    *v.RegistryId,
 				Description: model.ECRPublicRegistryDescription{
 					PublicRegistry: v,
 					Tags:           tags,
@@ -287,9 +289,10 @@ func eCRRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Repository
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.RepositoryArn,
-		Name:   *v.RepositoryName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.RepositoryArn,
+		Name:    *v.RepositoryName,
+		Account: describeCtx.AccountID,
 		Description: model.ECRRepositoryDescription{
 			Repository:                      v,
 			LifecyclePolicy:                 lifeCyclePolicyOutput,
@@ -340,6 +343,7 @@ func ECRRegistryPolicy(ctx context.Context, cfg aws.Config, stream *models.Strea
 		Region:      describeCtx.OGRegion,
 		ID:          *output.RegistryId,
 		Name:        *output.RegistryId,
+		Account:     describeCtx.AccountID,
 		Description: output,
 	}
 	if stream != nil {
@@ -363,9 +367,10 @@ func ECRRegistry(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 
 	var values []models.Resource
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *output.RegistryId,
-		Name:   *output.RegistryId,
+		Region:  describeCtx.OGRegion,
+		ID:      *output.RegistryId,
+		Name:    *output.RegistryId,
+		Account: describeCtx.AccountID,
 		Description: model.ECRRegistryDescription{
 			RegistryId:       *output.RegistryId,
 			ReplicationRules: output.ReplicationConfiguration.Rules,
@@ -438,8 +443,9 @@ func eCRImageHandle(ctx context.Context, cfg aws.Config, image types.ImageDetail
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   fmt.Sprintf("%s:%s", *repository.RepositoryArn, *image.ImageDigest),
+		Region:  describeCtx.OGRegion,
+		Name:    fmt.Sprintf("%s:%s", *repository.RepositoryArn, *image.ImageDigest),
+		Account: describeCtx.AccountID,
 		Description: model.ECRImageDescription{
 			Image:    image,
 			ImageUri: uri,
@@ -496,9 +502,10 @@ func ECRRegistryScanningConfiguration(ctx context.Context, cfg aws.Config, strea
 	var values []models.Resource
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *scanningConfiguration.RegistryId,
-		Name:   *scanningConfiguration.RegistryId,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ID:      *scanningConfiguration.RegistryId,
+		Name:    *scanningConfiguration.RegistryId,
 		Description: model.ECRRegistryScanningConfigurationDescription{
 			RegistryId:            *scanningConfiguration.RegistryId,
 			ScanningConfiguration: scanningConfiguration.ScanningConfiguration,

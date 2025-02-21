@@ -51,9 +51,10 @@ func StepFunctionsStateMachine(ctx context.Context, cfg aws.Config, stream *mode
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.StateMachineArn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.StateMachineArn,
+				Name:    name,
+				Account: describeCtx.AccountID,
 				Description: model.StepFunctionsStateMachineDescription{
 					StateMachineItem: v,
 					StateMachine:     data,
@@ -148,9 +149,10 @@ func StepFunctionsStateMachineExecutionHistories(ctx context.Context, cfg aws.Co
 			for item := range executionCh {
 				for _, data := range item {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    data.ExecutionArn,
-						Name:   data.ExecutionArn,
+						Region:  describeCtx.OGRegion,
+						ARN:     data.ExecutionArn,
+						Name:    data.ExecutionArn,
+						Account: describeCtx.AccountID,
 						Description: model.StepFunctionsStateMachineExecutionHistoriesDescription{
 							ExecutionHistory: data.HistoryEvent,
 							ARN:              data.ExecutionArn,
@@ -217,9 +219,10 @@ func StepFunctionsStateMachineExecution(ctx context.Context, cfg aws.Config, str
 					}
 
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *execution.ExecutionArn,
-						Name:   *execution.ExecutionArn,
+						Region:  describeCtx.OGRegion,
+						ARN:     *execution.ExecutionArn,
+						Name:    *execution.ExecutionArn,
+						Account: describeCtx.AccountID,
 						Description: model.StepFunctionsStateMachineExecutionDescription{
 							ExecutionItem: execution,
 							Execution:     data,

@@ -113,9 +113,10 @@ func codeArtifactRepositoryHandle(ctx context.Context, cfg aws.Config, v types.R
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.Arn,
-		Name:   *v.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.Arn,
+		Name:    *v.Name,
+		Account: describeCtx.AccountID,
 		Description: model.CodeArtifactRepositoryDescription{
 			Repository:  v,
 			Policy:      policy,
@@ -234,8 +235,9 @@ func CodeArtifactDomainHandle(ctx context.Context, cfg aws.Config, v types.Domai
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.Arn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.Arn,
+		Account: describeCtx.AccountID,
 		Description: model.CodeArtifactDomainDescription{
 			Domain: *domain.Domain,
 			Policy: *policy.Policy,

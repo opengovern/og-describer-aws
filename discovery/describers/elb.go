@@ -75,6 +75,7 @@ func elasticLoadBalancingV2LoadBalancerHandle(ctx context.Context, cfg aws.Confi
 	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
 		ARN:         *v.LoadBalancerArn,
+		Account:     describeCtx.AccountID,
 		Name:        *v.LoadBalancerName,
 		Description: description,
 	}
@@ -142,9 +143,10 @@ func ElasticLoadBalancingV2Listener(ctx context.Context, cfg aws.Config, stream 
 func elasticLoadBalancingV2ListenerHandle(ctx context.Context, v types.Listener) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ListenerArn,
-		Name:   nameFromArn(*v.ListenerArn),
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ListenerArn,
+		Name:    nameFromArn(*v.ListenerArn),
+		Account: describeCtx.AccountID,
 		Description: model.ElasticLoadBalancingV2ListenerDescription{
 			Listener: v,
 		},
@@ -212,9 +214,10 @@ func ElasticLoadBalancingV2ListenerRule(ctx context.Context, cfg aws.Config, str
 func elasticLoadBalancingV2ListenerRuleHandle(ctx context.Context, v types.Rule) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.RuleArn,
-		Name:   *v.RuleArn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.RuleArn,
+		Name:    *v.RuleArn,
+		Account: describeCtx.AccountID,
 		Description: model.ElasticLoadBalancingV2RuleDescription{
 			Rule: v,
 		},
@@ -315,6 +318,7 @@ func elasticLoadBalancingLoadBalancerHandle(ctx context.Context, cfg aws.Config,
 	arn := "arn:" + describeCtx.Partition + ":elasticloadbalancing:" + describeCtx.Region + ":" + describeCtx.AccountID + ":loadbalancer/" + *v.LoadBalancerName
 	resource := models.Resource{
 		Region:      describeCtx.OGRegion,
+		Account:     describeCtx.AccountID,
 		ARN:         arn,
 		Name:        *v.LoadBalancerName,
 		Description: description,
@@ -359,9 +363,10 @@ func ElasticLoadBalancingV2SslPolicy(ctx context.Context, cfg aws.Config, stream
 		for _, v := range output.SslPolicies {
 			arn := fmt.Sprintf("arn:%s:elbv2:%s:%s:ssl-policy/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.Name)
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *v.Name,
-				ARN:    arn,
+				Region:  describeCtx.OGRegion,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
+				ARN:     arn,
 				Description: model.ElasticLoadBalancingV2SslPolicyDescription{
 					SslPolicy: v,
 				},
@@ -448,9 +453,10 @@ func elasticLoadBalancingV2TargetGroupHandle(ctx context.Context, cfg aws.Config
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.TargetGroupArn,
-		Name:   *v.TargetGroupName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.TargetGroupArn,
+		Name:    *v.TargetGroupName,
+		Account: describeCtx.AccountID,
 		Description: model.ElasticLoadBalancingV2TargetGroupDescription{
 			TargetGroup: v,
 			Health:      healthDescriptions.TargetHealthDescriptions,
@@ -511,8 +517,9 @@ func ApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.Conf
 			}
 			for _, metric := range metrics {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.ApplicationLoadBalancerMetricRequestCountDescription{
 						CloudWatchMetricRow: metric,
 					},
@@ -554,8 +561,9 @@ func GetApplicationLoadBalancerMetricRequestCount(ctx context.Context, cfg aws.C
 		}
 		for _, metric := range metrics {
 			values = append(values, models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 				Description: model.ApplicationLoadBalancerMetricRequestCountDescription{
 					CloudWatchMetricRow: metric,
 				},
@@ -589,8 +597,9 @@ func ApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg aws
 			}
 			for _, metric := range metrics {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.ApplicationLoadBalancerMetricRequestCountDailyDescription{
 						CloudWatchMetricRow: metric,
 					},
@@ -631,8 +640,9 @@ func GetApplicationLoadBalancerMetricRequestCountDaily(ctx context.Context, cfg 
 		}
 		for _, metric := range metrics {
 			values = append(values, models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 				Description: model.ApplicationLoadBalancerMetricRequestCountDailyDescription{
 					CloudWatchMetricRow: metric,
 				},
@@ -666,8 +676,9 @@ func NetworkLoadBalancerMetricNetFlowCount(ctx context.Context, cfg aws.Config, 
 			}
 			for _, metric := range metrics {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+					Account: describeCtx.AccountID,
+					Region:  describeCtx.OGRegion,
+					ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.NetworkLoadBalancerMetricNetFlowCountDescription{
 						CloudWatchMetricRow: metric,
 					},
@@ -709,8 +720,9 @@ func NetworkLoadBalancerMetricNetFlowCountDaily(ctx context.Context, cfg aws.Con
 			}
 			for _, metric := range metrics {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ID:      fmt.Sprintf("%s:%s:%s:%s", arn, metric.Timestamp.Format(time.RFC3339), *metric.DimensionName, *metric.DimensionValue),
 					Description: model.NetworkLoadBalancerMetricNetFlowCountDailyDescription{
 						CloudWatchMetricRow: metric,
 					},

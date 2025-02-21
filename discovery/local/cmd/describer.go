@@ -55,8 +55,8 @@ var describerCmd = &cobra.Command{
 		logger, _ := zap.NewProduction()
 
 		creds, err := provider.AccountCredentialsFromMap(map[string]any{
-			"aws_access_key_id":     "",
-			"aws_secret_access_key": "",
+			"aws_access_key_id":     os.Getenv("AWS_ACCESS_KEY_ID"),
+			"aws_secret_access_key": os.Getenv("AWS_SECRET_ACCESS_KEY"),
 		})
 		if err != nil {
 			return fmt.Errorf(" account credentials: %w", err)
@@ -94,6 +94,18 @@ var describerCmd = &cobra.Command{
 			err = json.Unmarshal(descriptionJSON, &desc)
 			if err != nil {
 				return fmt.Errorf("unmarshal description: %v", err.Error())
+			}
+
+			descMap, ok := desc.(map[string]any)
+			if !ok {
+				return fmt.Errorf("unexpected description format, expected map[string]any")
+			}
+
+			descMap["AwsAccountID"] = resource.Account
+
+			descriptionJSON, err = json.Marshal(descMap)
+			if err != nil {
+				return fmt.Errorf("failed to marshal modified description: %v", err.Error())
 			}
 
 			if plg != nil {

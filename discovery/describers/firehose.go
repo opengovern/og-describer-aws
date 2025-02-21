@@ -77,9 +77,10 @@ func FirehoseDeliveryStreamHandle(ctx context.Context, cfg aws.Config, deliveryS
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *deliveryStream.DeliveryStreamDescription.DeliveryStreamARN,
-		Name:   *deliveryStream.DeliveryStreamDescription.DeliveryStreamName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *deliveryStream.DeliveryStreamDescription.DeliveryStreamARN,
+		Name:    *deliveryStream.DeliveryStreamDescription.DeliveryStreamName,
+		Account: describeCtx.AccountID,
 		Description: model.FirehoseDeliveryStreamDescription{
 			DeliveryStream: *deliveryStream.DeliveryStreamDescription,
 			Tags:           tags.Tags,

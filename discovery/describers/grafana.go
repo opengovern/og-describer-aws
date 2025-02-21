@@ -41,9 +41,10 @@ func grafanaWorkspaceHandle(ctx context.Context, v types.WorkspaceSummary) model
 	arn := fmt.Sprintf("arn:%s:grafana:%s:%s:/workspaces/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *v.Id)
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *v.Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		Name:    *v.Id,
 		Description: model.GrafanaWorkspaceDescription{
 			Workspace: v,
 		},

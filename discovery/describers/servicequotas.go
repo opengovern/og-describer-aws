@@ -27,10 +27,11 @@ func ServiceQuotasService(ctx context.Context, cfg aws.Config, stream *models.St
 			arn := fmt.Sprintf("arn:%s:servicequotas:%s:%s:%s", describeCtx.Partition, describeCtx.OGRegion, describeCtx.AccountID, *service.ServiceCode)
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *service.ServiceName,
-				ID:     *service.ServiceCode,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    *service.ServiceName,
+				ID:      *service.ServiceCode,
+				Account: describeCtx.AccountID,
 				Description: model.ServiceQuotasServiceDescription{
 					Service: service,
 				},
@@ -72,10 +73,11 @@ func ServiceQuotasDefaultServiceQuota(ctx context.Context, cfg aws.Config, strea
 
 				for _, quota := range page.Quotas {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *quota.QuotaArn + "--default",
-						Name:   *quota.QuotaName,
-						ID:     *quota.QuotaCode,
+						Region:  describeCtx.OGRegion,
+						ARN:     *quota.QuotaArn + "--default",
+						Name:    *quota.QuotaName,
+						ID:      *quota.QuotaCode,
+						Account: describeCtx.AccountID,
 						Description: model.ServiceQuotasDefaultServiceQuotaDescription{
 							DefaultServiceQuota: quota,
 						},
@@ -124,10 +126,11 @@ func ServiceQuotasServiceQuota(ctx context.Context, cfg aws.Config, stream *mode
 						tags = &servicequotas.ListTagsForResourceOutput{}
 					}
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *quota.QuotaArn,
-						Name:   *quota.QuotaName,
-						ID:     *quota.QuotaCode,
+						Region:  describeCtx.OGRegion,
+						ARN:     *quota.QuotaArn,
+						Name:    *quota.QuotaName,
+						ID:      *quota.QuotaCode,
+						Account: describeCtx.AccountID,
 						Description: model.ServiceQuotasServiceQuotaDescription{
 							ServiceQuota: quota,
 							Tags:         tags.Tags,
@@ -170,9 +173,10 @@ func ServiceQuotasServiceQuotaChangeRequest(ctx context.Context, cfg aws.Config,
 
 			arn := fmt.Sprintf("arn:aws:servicequotas:%s:%s:changeRequest/%s", describeCtx.OGRegion, describeCtx.AccountID, *requestedQuota.Id)
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				ID:     *requestedQuota.Id,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				ID:      *requestedQuota.Id,
+				Account: describeCtx.AccountID,
 				Description: model.ServiceQuotasServiceQuotaChangeRequestDescription{
 					ServiceQuotaChangeRequest: requestedQuota,
 					Tags:                      tags.Tags,

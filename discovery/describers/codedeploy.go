@@ -54,9 +54,10 @@ func CodeDeployDeploymentGroup(ctx context.Context, cfg aws.Config, stream *mode
 					}
 
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    arn,
-						Name:   *deploymentGroup.DeploymentGroupInfo.DeploymentGroupName,
+						Region:  describeCtx.OGRegion,
+						ARN:     arn,
+						Account: describeCtx.AccountID,
+						Name:    *deploymentGroup.DeploymentGroupInfo.DeploymentGroupName,
 						Description: model.CodeDeployDeploymentGroupDescription{
 							DeploymentGroup: *deploymentGroup.DeploymentGroupInfo,
 							Tags:            tags.Tags,
@@ -108,9 +109,10 @@ func CodeDeployApplication(ctx context.Context, cfg aws.Config, stream *models.S
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *application.Application.ApplicationName,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Account: describeCtx.AccountID,
+				Name:    *application.Application.ApplicationName,
 				Description: model.CodeDeployApplicationDescription{
 					Application: *application.Application,
 					Tags:        tags.Tags,
@@ -153,10 +155,11 @@ func CodeDeployDeploymentConfig(ctx context.Context, cfg aws.Config, stream *mod
 			arn := fmt.Sprintf("arn:%s:codedeploy:%s:%s:deploymentconfig:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *config.DeploymentConfigInfo.DeploymentConfigName)
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *config.DeploymentConfigInfo.DeploymentConfigName,
-				ID:     *config.DeploymentConfigInfo.DeploymentConfigId,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    *config.DeploymentConfigInfo.DeploymentConfigName,
+				Account: describeCtx.AccountID,
+				ID:      *config.DeploymentConfigInfo.DeploymentConfigId,
 				Description: model.CodeDeployDeploymentConfigDescription{
 					Config: *config.DeploymentConfigInfo,
 				},

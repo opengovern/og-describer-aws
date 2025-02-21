@@ -34,9 +34,10 @@ func PipesPipe(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *pipe.Arn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *pipe.Arn,
+				Name:    name,
+				Account: describeCtx.AccountID,
 				Description: model.PipesPipeDescription{
 					PipeOutput: pipe,
 					Pipe:       v,

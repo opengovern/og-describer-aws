@@ -51,9 +51,10 @@ func storageGatewayStorageGatewayHandle(ctx context.Context, cfg aws.Config, gat
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    gatewayARN,
-		Name:   gatewayId,
+		Region:  describeCtx.OGRegion,
+		ARN:     gatewayARN,
+		Name:    gatewayId,
+		Account: describeCtx.AccountID,
 		Description: model.StorageGatewayStorageGatewayDescription{
 			StorageGateway: v,
 			Tags:           tags.Tags,

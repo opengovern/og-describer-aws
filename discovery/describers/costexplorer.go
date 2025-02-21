@@ -176,6 +176,7 @@ func CostByServiceLastMonth(ctx context.Context, cfg aws.Config, stream *models.
 		}
 		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
+			Account:     describeCtx.AccountID,
 			ID:          "service-" + *cost.Dimension1 + "-cost-monthly",
 			Description: model.CostExplorerByServiceMonthlyDescription{CostExplorerRow: cost},
 		}
@@ -209,6 +210,7 @@ func CostByAccountLastMonth(ctx context.Context, cfg aws.Config, stream *models.
 			continue
 		}
 		resource := models.Resource{
+			Account:     describeCtx.AccountID,
 			Region:      describeCtx.OGRegion,
 			ID:          "account-" + *cost.Dimension1 + "-cost-monthly",
 			Description: model.CostExplorerByAccountMonthlyDescription{CostExplorerRow: cost},
@@ -498,6 +500,7 @@ func CostByServiceLastDay(ctx context.Context, cfg aws.Config, stream *models.St
 
 		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
+			Account:     describeCtx.AccountID,
 			ID:          "service-" + *cost.Dimension1 + "-cost-" + *cost.PeriodEnd,
 			Description: model.CostExplorerByServiceDailyDescription{CostExplorerRow: cost, CostDateMillis: costDate.UnixMilli()},
 		}
@@ -533,6 +536,7 @@ func CostByServiceLastDay(ctx context.Context, cfg aws.Config, stream *models.St
 
 		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
+			Account:     describeCtx.AccountID,
 			ID:          "service-" + *cost.Dimension1 + "-cost-" + *cost.PeriodEnd,
 			Description: model.CostExplorerByServiceDailyDescription{CostExplorerRow: cost, CostDateMillis: costDate.UnixMilli()},
 		}
@@ -567,6 +571,7 @@ func CostByAccountLastDay(ctx context.Context, cfg aws.Config, stream *models.St
 			continue
 		}
 		resource := models.Resource{
+			Account:     describeCtx.AccountID,
 			Region:      describeCtx.OGRegion,
 			ID:          "account-" + *cost.Dimension1 + "-cost-" + *cost.PeriodEnd,
 			Description: model.CostExplorerByAccountDailyDescription{CostExplorerRow: cost},
@@ -650,6 +655,7 @@ func CostByRecordTypeLastMonth(ctx context.Context, cfg aws.Config, stream *mode
 
 			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
+				Account:     describeCtx.AccountID,
 				ID:          "account-" + *row.Dimension1 + "-" + *row.Dimension2 + "-cost-monthly",
 				Description: model.CostExplorerByRecordTypeMonthlyDescription{CostExplorerRow: row},
 			}
@@ -696,6 +702,7 @@ func CostByRecordTypeLastDay(ctx context.Context, cfg aws.Config, stream *models
 
 			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
+				Account:     describeCtx.AccountID,
 				ID:          "account-" + *row.Dimension1 + "-" + *row.Dimension2 + "-cost-" + *row.PeriodEnd,
 				Description: model.CostExplorerByRecordTypeDailyDescription{CostExplorerRow: row},
 			}
@@ -779,6 +786,7 @@ func CostByServiceUsageLastMonth(ctx context.Context, cfg aws.Config, stream *mo
 			setRowMetrics(&row, group.Metrics)
 
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ID:          "service-" + *row.Dimension1 + "-" + *row.Dimension2 + "-cost-monthly",
 				Description: model.CostExplorerByServiceUsageTypeMonthlyDescription{CostExplorerRow: row},
@@ -826,6 +834,7 @@ func CostByServiceUsageLastDay(ctx context.Context, cfg aws.Config, stream *mode
 
 			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
+				Account:     describeCtx.AccountID,
 				ID:          "service-" + *row.Dimension1 + "-" + *row.Dimension2 + "-cost-" + *row.PeriodEnd,
 				Description: model.CostExplorerByServiceUsageTypeDailyDescription{CostExplorerRow: row},
 			}
@@ -873,8 +882,9 @@ func CostForecastMonthly(ctx context.Context, cfg aws.Config, stream *models.Str
 	var values []models.Resource
 	for _, forecast := range output.ForecastResultsByTime {
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ID:     "forecast-monthly",
+			Region:  describeCtx.OGRegion,
+			Account: describeCtx.AccountID,
+			ID:      "forecast-monthly",
 			Description: model.CostExplorerForcastMonthlyDescription{CostExplorerRow: model.CostExplorerRow{
 				Estimated:   true,
 				PeriodStart: forecast.TimePeriod.Start,
@@ -905,8 +915,9 @@ func CostForecastDaily(ctx context.Context, cfg aws.Config, stream *models.Strea
 	var values []models.Resource
 	for _, forecast := range output.ForecastResultsByTime {
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ID:     "forecast-daily",
+			Account: describeCtx.AccountID,
+			Region:  describeCtx.OGRegion,
+			ID:      "forecast-daily",
 			Description: model.CostExplorerForcastDailyDescription{CostExplorerRow: model.CostExplorerRow{
 				Estimated:   true,
 				PeriodStart: forecast.TimePeriod.Start,

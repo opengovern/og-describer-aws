@@ -49,9 +49,10 @@ func PinpointApp(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *app.Arn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *app.Arn,
+				Name:    name,
+				Account: describeCtx.AccountID,
 				Description: model.PinPointAppDescription{
 					App:      app,
 					Settings: settings,

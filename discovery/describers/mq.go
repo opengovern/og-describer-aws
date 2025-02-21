@@ -65,9 +65,10 @@ func mQBrokerHandle(ctx context.Context, cfg aws.Config, v types.BrokerSummary) 
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.BrokerArn,
-		Name:   *v.BrokerName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.BrokerArn,
+		Name:    *v.BrokerName,
+		Account: describeCtx.AccountID,
 		Description: model.MQBrokerDescription{
 			BrokerDescription: brokerDescription,
 			Tags:              tags.Tags,

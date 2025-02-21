@@ -37,9 +37,10 @@ func ElastiCacheReplicationGroup(ctx context.Context, cfg aws.Config, stream *mo
 func elastiCacheReplicationGroupHandle(ctx context.Context, item types.ReplicationGroup) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ARN,
-		Name:   *item.ARN,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.ARN,
+		Name:    *item.ARN,
+		Account: describeCtx.AccountID,
 		Description: model.ElastiCacheReplicationGroupDescription{
 			ReplicationGroup: item,
 		},
@@ -111,9 +112,10 @@ func elastiCacheClusterHandle(ctx context.Context, cluster types.CacheCluster, c
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cluster.ARN,
-		Name:   *cluster.ARN,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cluster.ARN,
+		Account: describeCtx.AccountID,
+		Name:    *cluster.ARN,
 		Description: model.ElastiCacheClusterDescription{
 			Cluster: cluster,
 			TagList: tagsOutput.TagList,
@@ -173,9 +175,10 @@ func ElastiCacheParameterGroup(ctx context.Context, cfg aws.Config, stream *mode
 func elastiCacheParameterGroupHandle(ctx context.Context, cacheParameterGroup types.CacheParameterGroup) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cacheParameterGroup.ARN,
-		Name:   *cacheParameterGroup.CacheParameterGroupName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cacheParameterGroup.ARN,
+		Account: describeCtx.AccountID,
+		Name:    *cacheParameterGroup.CacheParameterGroupName,
 		Description: model.ElastiCacheParameterGroupDescription{
 			ParameterGroup: cacheParameterGroup,
 		},
@@ -228,9 +231,10 @@ func ElastiCacheReservedCacheNode(ctx context.Context, cfg aws.Config, stream *m
 func elastiCacheReservedCacheNodeHandle(ctx context.Context, reservedCacheNode types.ReservedCacheNode) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *reservedCacheNode.ReservationARN,
-		ID:     *reservedCacheNode.ReservedCacheNodeId,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *reservedCacheNode.ReservationARN,
+		ID:      *reservedCacheNode.ReservedCacheNodeId,
 		Description: model.ElastiCacheReservedCacheNodeDescription{
 			ReservedCacheNode: reservedCacheNode,
 		},
@@ -286,9 +290,10 @@ func ElastiCacheSubnetGroup(ctx context.Context, cfg aws.Config, stream *models.
 func elastiCacheSubnetGroupHandle(ctx context.Context, cacheSubnetGroup types.CacheSubnetGroup) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cacheSubnetGroup.ARN,
-		Name:   *cacheSubnetGroup.CacheSubnetGroupName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cacheSubnetGroup.ARN,
+		Name:    *cacheSubnetGroup.CacheSubnetGroupName,
+		Account: describeCtx.AccountID,
 		Description: model.ElastiCacheSubnetGroupDescription{
 			SubnetGroup: cacheSubnetGroup,
 		},

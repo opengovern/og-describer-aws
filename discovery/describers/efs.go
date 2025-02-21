@@ -47,9 +47,10 @@ func eFSAccessPointHandle(ctx context.Context, v types.AccessPointDescription) m
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.AccessPointArn,
-		Name:   name,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *v.AccessPointArn,
+		Name:    name,
 		Description: model.EFSAccessPointDescription{
 			AccessPoint: v,
 		},
@@ -123,9 +124,10 @@ func eFSFileSystemHandle(ctx context.Context, describeFSPolicy *efs.DescribeFile
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.FileSystemArn,
-		Name:   name,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *v.FileSystemArn,
+		Name:    name,
 		Description: model.EFSFileSystemDescription{
 			FileSystem: v,
 			Policy:     describeFSPolicy.Policy,
@@ -216,9 +218,10 @@ func eFSMountTargetHandle(ctx context.Context, securityGroups *efs.DescribeMount
 	arn := fmt.Sprintf("arn:%s:elasticfilesystem:%s:%s:file-system/%s/mount-target/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *FileSystemId, *v.MountTargetId)
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		ID:     *v.MountTargetId,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		ID:      *v.MountTargetId,
 		Description: model.EFSMountTargetDescription{
 			MountTarget:    v,
 			SecurityGroups: securityGroups.SecurityGroups,

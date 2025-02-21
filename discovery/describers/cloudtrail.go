@@ -124,9 +124,10 @@ func cloudTrailTrailHandle(ctx context.Context, cfg aws.Config, v types.Trail) (
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.TrailARN,
-		Name:   *v.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.TrailARN,
+		Account: describeCtx.AccountID,
+		Name:    *v.Name,
 		Description: model.CloudTrailTrailDescription{
 			Trail:                  v,
 			TrailStatus:            *statusOutput,
@@ -224,9 +225,10 @@ func CloudTrailChannel(ctx context.Context, cfg aws.Config, stream *models.Strea
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *channel.ChannelArn,
-				Name:   *channel.Name,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ARN:     *channel.ChannelArn,
+				Name:    *channel.Name,
 				Description: model.CloudTrailChannelDescription{
 					Channel: *output,
 				},
@@ -291,9 +293,10 @@ func cloudTrailEventDataStoreHandle(ctx context.Context, cfg aws.Config, eventDa
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *eventDataStore.EventDataStoreArn,
-		Name:   *eventDataStore.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *eventDataStore.EventDataStoreArn,
+		Name:    *eventDataStore.Name,
+		Account: describeCtx.AccountID,
 		Description: model.CloudTrailEventDataStoreDescription{
 			EventDataStore: *output,
 		},
@@ -359,8 +362,9 @@ func CloudTrailImport(ctx context.Context, cfg aws.Config, stream *models.Stream
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *trailImport.ImportId,
+				Region:  describeCtx.OGRegion,
+				Name:    *trailImport.ImportId,
+				Account: describeCtx.AccountID,
 				Description: model.CloudTrailImportDescription{
 					Import: *output,
 				},
@@ -408,8 +412,9 @@ func CloudTrailQuery(ctx context.Context, cfg aws.Config, stream *models.StreamS
 					}
 
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						Name:   *query.QueryId,
+						Account: describeCtx.AccountID,
+						Region:  describeCtx.OGRegion,
+						Name:    *query.QueryId,
 						Description: model.CloudTrailQueryDescription{
 							Query:             *output,
 							EventDataStoreARN: *eventDataStore.EventDataStoreArn,
@@ -457,8 +462,9 @@ func CloudTrailTrailEvent(ctx context.Context, cfg aws.Config, stream *models.St
 
 			for _, event := range page.Events {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     *event.EventId,
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ID:      *event.EventId,
 					Description: model.CloudTrailTrailEventDescription{
 						TrailEvent:   event,
 						LogGroupName: logGroup.Name,

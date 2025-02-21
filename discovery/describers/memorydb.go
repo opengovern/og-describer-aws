@@ -65,9 +65,10 @@ func memoryDbClusterHandle(ctx context.Context, cfg aws.Config, cluster types.Cl
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *cluster.ARN,
-		Name:   *cluster.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *cluster.ARN,
+		Name:    *cluster.Name,
+		Account: describeCtx.AccountID,
 		Description: model.MemoryDbClusterDescription{
 			Cluster: cluster,
 			Tags:    tags.TagList,

@@ -68,9 +68,10 @@ func sageMakerEndpointConfigurationHandle(ctx context.Context, cfg aws.Config, e
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *out.EndpointConfigArn,
-		Name:   *out.EndpointConfigName,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *out.EndpointConfigArn,
+		Name:    *out.EndpointConfigName,
 		Description: model.SageMakerEndpointConfigurationDescription{
 			EndpointConfig: out,
 			Tags:           tags.Tags,
@@ -142,9 +143,10 @@ func SageMakerApp(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 					}
 
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *data.AppArn,
-						Name:   *data.AppName,
+						Account: describeCtx.AccountID,
+						Region:  describeCtx.OGRegion,
+						ARN:     *data.AppArn,
+						Name:    *data.AppName,
 						Description: model.SageMakerAppDescription{
 							AppDetails:        items,
 							DescribeAppOutput: data,
@@ -204,9 +206,10 @@ func SageMakerDomain(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *domain.DomainArn,
-				Name:   *domain.DomainName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *domain.DomainArn,
+				Name:    *domain.DomainName,
+				Account: describeCtx.AccountID,
 				Description: model.SageMakerDomainDescription{
 					Domain:     data,
 					DomainItem: domain,
@@ -283,9 +286,10 @@ func sageMakerNotebookInstanceHandle(ctx context.Context, cfg aws.Config, out *s
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *out.NotebookInstanceArn,
-		Name:   *out.NotebookInstanceName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *out.NotebookInstanceArn,
+		Name:    *out.NotebookInstanceName,
+		Account: describeCtx.AccountID,
 		Description: model.SageMakerNotebookInstanceDescription{
 			NotebookInstance: out,
 			Tags:             tags.Tags,
@@ -363,9 +367,10 @@ func sageMakerModelHandle(ctx context.Context, cfg aws.Config, sageModel *sagema
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *sageModel.ModelArn,
-		Name:   *sageModel.ModelName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *sageModel.ModelArn,
+		Name:    *sageModel.ModelName,
+		Account: describeCtx.AccountID,
 		Description: model.SageMakerModelDescription{
 			Model: sageModel,
 			Tags:  tags.Tags,
@@ -420,9 +425,10 @@ func SageMakerTrainingJob(ctx context.Context, cfg aws.Config, stream *models.St
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *trainingJob.TrainingJobArn,
-				Name:   *trainingJob.TrainingJobName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *trainingJob.TrainingJobArn,
+				Name:    *trainingJob.TrainingJobName,
+				Account: describeCtx.AccountID,
 				Description: model.SageMakerTrainingJobDescription{
 					TrainingJob: trainingJob,
 					Tags:        tags.Tags,

@@ -94,9 +94,10 @@ func DynamoDbTableHandle(ctx context.Context, cfg aws.Config, tableName string) 
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.Table.TableArn,
-		Name:   *v.Table.TableName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.Table.TableArn,
+		Name:    *v.Table.TableName,
+		Account: describeCtx.AccountID,
 		Description: model.DynamoDbTableDescription{
 			Table:                v.Table,
 			ContinuousBackup:     continuousBackup.ContinuousBackupsDescription,
@@ -146,9 +147,10 @@ func DynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *m
 
 			for _, v := range tableOutput.Table.GlobalSecondaryIndexes {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.IndexArn,
-					Name:   *v.IndexName,
+					Region:  describeCtx.OGRegion,
+					ARN:     *v.IndexArn,
+					Account: describeCtx.AccountID,
+					Name:    *v.IndexName,
 					Description: model.DynamoDbGlobalSecondaryIndexDescription{
 						GlobalSecondaryIndex: v,
 					},
@@ -182,9 +184,10 @@ func GetDynamoDbGlobalSecondaryIndex(ctx context.Context, cfg aws.Config, fields
 
 	for _, v := range tableOutput.Table.GlobalSecondaryIndexes {
 		values = append(values, models.Resource{
-			Region: describeCtx.OGRegion,
-			ARN:    *v.IndexArn,
-			Name:   *v.IndexName,
+			Region:  describeCtx.OGRegion,
+			ARN:     *v.IndexArn,
+			Account: describeCtx.AccountID,
+			Name:    *v.IndexName,
 			Description: model.DynamoDbGlobalSecondaryIndexDescription{
 				GlobalSecondaryIndex: v,
 			},
@@ -218,9 +221,10 @@ func DynamoDbLocalSecondaryIndex(ctx context.Context, cfg aws.Config, stream *mo
 
 			for _, v := range tableOutput.Table.LocalSecondaryIndexes {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.IndexArn,
-					Name:   *v.IndexName,
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ARN:     *v.IndexArn,
+					Name:    *v.IndexName,
 					Description: model.DynamoDbLocalSecondaryIndexDescription{
 						LocalSecondaryIndex: v,
 					},
@@ -259,9 +263,10 @@ func DynamoDbStream(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 		for _, v := range streams.Streams {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.StreamArn,
-				Name:   *v.StreamLabel,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.StreamArn,
+				Name:    *v.StreamLabel,
 				Description: model.DynamoDbStreamDescription{
 					Stream: v,
 				},
@@ -305,9 +310,10 @@ func DynamoDbBackUp(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 		for _, v := range backups.BackupSummaries {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.BackupArn,
-				Name:   *v.BackupName,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ARN:     *v.BackupArn,
+				Name:    *v.BackupName,
 				Description: model.DynamoDbBackupDescription{
 					Backup: v,
 				},
@@ -392,9 +398,10 @@ func DynamoDbGlobalTableHandle(ctx context.Context, cfg aws.Config, tableName st
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *globalTable.GlobalTableDescription.GlobalTableArn,
-		Name:   *globalTable.GlobalTableDescription.GlobalTableName,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *globalTable.GlobalTableDescription.GlobalTableArn,
+		Name:    *globalTable.GlobalTableDescription.GlobalTableName,
 		Description: model.DynamoDbGlobalTableDescription{
 			GlobalTable: *globalTable.GlobalTableDescription,
 		},
@@ -439,8 +446,9 @@ func DynamoDbTableExport(ctx context.Context, cfg aws.Config, stream *models.Str
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *export.ExportDescription.ExportArn,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *export.ExportDescription.ExportArn,
 				Description: model.DynamoDbTableExportDescription{
 					Export: *export.ExportDescription,
 				},
@@ -468,8 +476,9 @@ func DynamoDBMetricAccountProvisionedReadCapacityUtilization(ctx context.Context
 	var values []models.Resource
 	for _, metric := range metrics {
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ID:     fmt.Sprintf("dynamodb-metric-account-provisioned-read-capacity-utilization-%s-%s-%s", *metric.DimensionName, *metric.DimensionValue, metric.Timestamp.Format(time.RFC3339)),
+			Region:  describeCtx.OGRegion,
+			Account: describeCtx.AccountID,
+			ID:      fmt.Sprintf("dynamodb-metric-account-provisioned-read-capacity-utilization-%s-%s-%s", *metric.DimensionName, *metric.DimensionValue, metric.Timestamp.Format(time.RFC3339)),
 			Description: model.DynamoDBMetricAccountProvisionedReadCapacityUtilizationDescription{
 				CloudWatchMetricRow: metric,
 			},
@@ -497,8 +506,9 @@ func DynamoDBMetricAccountProvisionedWriteCapacityUtilization(ctx context.Contex
 	var values []models.Resource
 	for _, metric := range metrics {
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ID:     fmt.Sprintf("dynamodb-metric-account-provisioned-write-capacity-utilization-%s-%s-%s", *metric.DimensionName, *metric.DimensionValue, metric.Timestamp.Format(time.RFC3339)),
+			Account: describeCtx.AccountID,
+			Region:  describeCtx.OGRegion,
+			ID:      fmt.Sprintf("dynamodb-metric-account-provisioned-write-capacity-utilization-%s-%s-%s", *metric.DimensionName, *metric.DimensionValue, metric.Timestamp.Format(time.RFC3339)),
 			Description: model.DynamoDBMetricAccountProvisionedWriteCapacityUtilizationDescription{
 				CloudWatchMetricRow: metric,
 			},

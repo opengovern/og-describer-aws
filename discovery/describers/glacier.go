@@ -78,9 +78,10 @@ func GlacierVault(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *vault.VaultARN,
-				Name:   *vault.VaultName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *vault.VaultARN,
+				Account: describeCtx.AccountID,
+				Name:    *vault.VaultName,
 				Description: model.GlacierVaultDescription{
 					Vault:        vault,
 					AccessPolicy: *accessPolicy.Policy,
@@ -157,9 +158,10 @@ func GetGlacierVault(ctx context.Context, cfg aws.Config, fields map[string]stri
 	}
 
 	values = append(values, models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *vault.VaultARN,
-		Name:   *vault.VaultName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *vault.VaultARN,
+		Name:    *vault.VaultName,
+		Account: describeCtx.AccountID,
 		Description: model.GlacierVaultDescription{
 			Vault: types.DescribeVaultOutput{
 				CreationDate:      vault.CreationDate,

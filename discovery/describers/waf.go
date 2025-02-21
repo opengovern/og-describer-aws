@@ -67,9 +67,10 @@ func WAFv2IPSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 				}
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.ARN,
-					Name:   *v.Name,
+					Region:  describeCtx.OGRegion,
+					ARN:     *v.ARN,
+					Name:    *v.Name,
+					Account: describeCtx.AccountID,
 					Description: model.WAFv2IPSetDescription{
 						IPSetSummary: v,
 						Scope:        scope,
@@ -123,6 +124,7 @@ func WAFv2LoggingConfiguration(ctx context.Context, cfg aws.Config, stream *mode
 					Region:      describeCtx.OGRegion,
 					ARN:         *v.ResourceArn, // TODO: might not be the actual ARN
 					Name:        *v.ResourceArn,
+					Account:     describeCtx.AccountID,
 					Description: v,
 				}
 				if stream != nil {
@@ -202,9 +204,10 @@ func WAFv2RegexPatternSet(ctx context.Context, cfg aws.Config, stream *models.St
 				}
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.ARN,
-					Name:   *v.Name,
+					Region:  describeCtx.OGRegion,
+					ARN:     *v.ARN,
+					Name:    *v.Name,
+					Account: describeCtx.AccountID,
 					Description: model.WAFv2RegexPatternSetDescription{
 						RegexPatternSetSummary: v,
 						Scope:                  types.Scope(scope),
@@ -272,9 +275,10 @@ func WAFv2RuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 				ruleGroupTags, err := client.ListTagsForResource(ctx, param)
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.ARN,
-					Name:   *v.Name,
+					Region:  describeCtx.OGRegion,
+					ARN:     *v.ARN,
+					Name:    *v.Name,
+					Account: describeCtx.AccountID,
 					Description: model.WAFv2RuleGroupDescription{
 						RuleGroupSummary: v,
 						RuleGroup:        op.RuleGroup,
@@ -419,9 +423,10 @@ func wAFv2WebACLHandle(ctx context.Context, cfg aws.Config, v types.WebACLSummar
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ARN,
-		Name:   *v.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ARN,
+		Name:    *v.Name,
+		Account: describeCtx.AccountID,
 		Description: model.WAFv2WebACLDescription{
 			WebACL:               out.WebACL,
 			Scope:                scope,
@@ -507,9 +512,10 @@ func WAFv2WebACLAssociation(ctx context.Context, cfg aws.Config, stream *models.
 		}
 
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
-			ID:     *acl.Id, // Unique per WebACL
-			Name:   *acl.Name,
+			Region:  describeCtx.OGRegion,
+			ID:      *acl.Id, // Unique per WebACL
+			Name:    *acl.Name,
+			Account: describeCtx.AccountID,
 			Description: map[string]interface{}{
 				"WebACLArn":    *acl.ARN,
 				"ResourceArns": output.ResourceArns,
@@ -543,9 +549,10 @@ func WAFv2WebACLAssociation(ctx context.Context, cfg aws.Config, stream *models.
 				}
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     *acl.Id, // Unique per WebACL
-					Name:   *acl.Name,
+					Region:  describeCtx.OGRegion,
+					ID:      *acl.Id, // Unique per WebACL
+					Name:    *acl.Name,
+					Account: describeCtx.AccountID,
 					Description: map[string]interface{}{
 						"WebACLArn":     *acl.ARN,
 						"Distributions": output.DistributionList.Items,
@@ -588,6 +595,7 @@ func WAFRegionalByteMatchSet(ctx context.Context, cfg aws.Config, stream *models
 				Region:      describeCtx.OGRegion,
 				ID:          *v.ByteMatchSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -626,6 +634,7 @@ func WAFRegionalGeoMatchSet(ctx context.Context, cfg aws.Config, stream *models.
 				Region:      describeCtx.OGRegion,
 				ID:          *v.GeoMatchSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -664,6 +673,7 @@ func WAFRegionalIPSet(ctx context.Context, cfg aws.Config, stream *models.Stream
 				Region:      describeCtx.OGRegion,
 				ID:          *v.IPSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -715,9 +725,10 @@ func WAFRateBasedRule(ctx context.Context, cfg aws.Config, stream *models.Stream
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.WAFRateBasedRuleDescription{
 					ARN:         arn,
 					RuleSummary: v,
@@ -761,6 +772,7 @@ func WAFRegionalRegexPatternSet(ctx context.Context, cfg aws.Config, stream *mod
 				Region:      describeCtx.OGRegion,
 				ID:          *v.RegexPatternSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -833,10 +845,11 @@ func wAFRegionalRuleHandle(ctx context.Context, cfg aws.Config, v regionaltypes.
 		return models.Resource{}, err
 	}
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		ID:     *v.RuleId,
-		Name:   *v.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		ID:      *v.RuleId,
+		Name:    *v.Name,
+		Account: describeCtx.AccountID,
 		Description: model.WAFRegionalRuleDescription{
 			Rule: *rule.Rule,
 			Tags: tags.TagInfoForResource.TagList,
@@ -905,9 +918,10 @@ func WAFRegionalRuleGroup(ctx context.Context, cfg aws.Config, stream *models.St
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *rule.RuleGroup.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Account: describeCtx.AccountID,
+				Name:    *rule.RuleGroup.Name,
 				Description: model.WAFRegionalRuleGroupDescription{
 					ARN:              arn,
 					RuleGroupSummary: v,
@@ -952,6 +966,7 @@ func WAFRegionalSizeConstraintSet(ctx context.Context, cfg aws.Config, stream *m
 				Region:      describeCtx.OGRegion,
 				ID:          *v.SizeConstraintSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -990,6 +1005,7 @@ func WAFRegionalSqlInjectionMatchSet(ctx context.Context, cfg aws.Config, stream
 				Region:      describeCtx.OGRegion,
 				ID:          *v.SqlInjectionMatchSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -1061,9 +1077,10 @@ func WAFRegionalWebACL(ctx context.Context, cfg aws.Config, stream *models.Strea
 				return nil, err
 			}
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.WebACLId,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.WebACLId,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.WAFRegionalWebAclDescription{
 					WebACL:               webAcl.WebACL,
 					AssociatedResources:  resources.ResourceArns,
@@ -1134,9 +1151,10 @@ func WAFWebACL(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.WebACLId,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.WebACLId,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.WAFWebAclDescription{
 					WebACLSummary:        v,
 					WebACL:               op.WebACL,
@@ -1180,6 +1198,7 @@ func WAFRegionalXssMatchSet(ctx context.Context, cfg aws.Config, stream *models.
 				Region:      describeCtx.OGRegion,
 				ID:          *v.XssMatchSetId,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -1272,9 +1291,10 @@ func wAFRuleHandle(ctx context.Context, cfg aws.Config, roleId string) (models.R
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *rule.Rule.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    *rule.Rule.Name,
+		Account: describeCtx.AccountID,
 		Description: model.WAFRuleDescription{
 			Rule: *rule.Rule,
 			Tags: tags.TagInfoForResource.TagList,
@@ -1341,8 +1361,9 @@ func WAFRuleGroup(ctx context.Context, cfg aws.Config, stream *models.StreamSend
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Account: describeCtx.AccountID,
 				Description: model.WAFRuleGroupDescription{
 					ARN:              arn,
 					RuleGroupSummary: v,

@@ -166,6 +166,10 @@ func SequentialDescribeRegional(describe func(context.Context, aws.Config, *mode
 				resources = []model.Resource{}
 			}
 
+			for i := range resources {
+				resources[i].Account = additionalData["accountID"]
+			}
+
 			result = append(result, resources...)
 		}
 		return result, nil

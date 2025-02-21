@@ -39,9 +39,10 @@ func InspectorAssessmentRun(ctx context.Context, cfg aws.Config, stream *models.
 
 		for _, assessmentRun := range assessmentRuns.AssessmentRuns {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *assessmentRun.Name,
-				ARN:    *assessmentRun.Arn,
+				Region:  describeCtx.OGRegion,
+				Name:    *assessmentRun.Name,
+				ARN:     *assessmentRun.Arn,
+				Account: describeCtx.AccountID,
 				Description: model.InspectorAssessmentRunDescription{
 					AssessmentRun: assessmentRun,
 				},
@@ -97,9 +98,10 @@ func InspectorAssessmentTarget(ctx context.Context, cfg aws.Config, stream *mode
 func inspectorAssessmentTargetHandle(ctx context.Context, assessmentTarget types.AssessmentTarget) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *assessmentTarget.Name,
-		ARN:    *assessmentTarget.Arn,
+		Region:  describeCtx.OGRegion,
+		Name:    *assessmentTarget.Name,
+		ARN:     *assessmentTarget.Arn,
+		Account: describeCtx.AccountID,
 		Description: model.InspectorAssessmentTargetDescription{
 			AssessmentTarget: assessmentTarget,
 		},
@@ -181,9 +183,10 @@ func InspectorAssessmentTemplate(ctx context.Context, cfg aws.Config, stream *mo
 func inspectorAssessmentTemplateHandle(ctx context.Context, assessmentTemplate types.AssessmentTemplate, eventSubscriptions *inspector.ListEventSubscriptionsOutput, tags *inspector.ListTagsForResourceOutput) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *assessmentTemplate.Name,
-		ARN:    *assessmentTemplate.Arn,
+		Region:  describeCtx.OGRegion,
+		Name:    *assessmentTemplate.Name,
+		ARN:     *assessmentTemplate.Arn,
+		Account: describeCtx.AccountID,
 		Description: model.InspectorAssessmentTemplateDescription{
 			AssessmentTemplate: assessmentTemplate,
 			EventSubscriptions: eventSubscriptions.Subscriptions,
@@ -257,9 +260,10 @@ func InspectorExclusion(ctx context.Context, cfg aws.Config, stream *models.Stre
 
 				for _, exclusion := range exclusions.Exclusions {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						Name:   *exclusion.Title,
-						ARN:    *exclusion.Arn,
+						Region:  describeCtx.OGRegion,
+						Name:    *exclusion.Title,
+						ARN:     *exclusion.Arn,
+						Account: describeCtx.AccountID,
 						Description: model.InspectorExclusionDescription{
 							Exclusion: exclusion,
 						},
@@ -303,10 +307,11 @@ func InspectorFinding(ctx context.Context, cfg aws.Config, stream *models.Stream
 
 		for _, finding := range findings.Findings {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *finding.Title,
-				ID:     *finding.Id,
-				ARN:    *finding.Arn,
+				Region:  describeCtx.OGRegion,
+				Name:    *finding.Title,
+				ID:      *finding.Id,
+				ARN:     *finding.Arn,
+				Account: describeCtx.AccountID,
 				Description: model.InspectorFindingDescription{
 					Finding:     finding,
 					FailedItems: findings.FailedItems,
@@ -339,8 +344,9 @@ func Inspector2Coverage(ctx context.Context, cfg aws.Config, stream *models.Stre
 
 		for _, coveredResource := range page.CoveredResources {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *coveredResource.ResourceId,
+				Region:  describeCtx.OGRegion,
+				ID:      *coveredResource.ResourceId,
+				Account: describeCtx.AccountID,
 				Description: model.Inspector2CoverageDescription{
 					CoveredResource: coveredResource,
 				},
@@ -370,7 +376,8 @@ func Inspector2CoverageStatistic(ctx context.Context, cfg aws.Config, stream *mo
 			return nil, err
 		}
 		resource := models.Resource{
-			Region: describeCtx.OGRegion,
+			Region:  describeCtx.OGRegion,
+			Account: describeCtx.AccountID,
 			Description: model.Inspector2CoverageStatisticDescription{
 				TotalCounts: page.TotalCounts,
 				Counts:      page.CountsByGroup,
@@ -432,7 +439,8 @@ func Inspector2CoverageMemberHelper(ctx context.Context, cfg aws.Config, client 
 		}
 		for _, member := range page.Members {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				Region:  describeCtx.OGRegion,
 				Description: model.Inspector2MemberDescription{
 					Member:         member,
 					OnlyAssociated: onlyAssociated,
@@ -460,7 +468,8 @@ func Inspector2Finding(ctx context.Context, cfg aws.Config, stream *models.Strea
 			}
 			for _, v := range finding.Resources {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
 					Description: model.Inspector2FindingDescription{
 						Finding:  finding,
 						Resource: v,

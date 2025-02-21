@@ -54,9 +54,10 @@ func dLMLifecyclePolicyHandle(ctx context.Context, cfg aws.Config, policySummary
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *policy.Policy.PolicyId,
-		ARN:    *policy.Policy.PolicyArn,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ID:      *policy.Policy.PolicyId,
+		ARN:     *policy.Policy.PolicyArn,
 		Description: model.DLMLifecyclePolicyDescription{
 			LifecyclePolicy: *policy.Policy,
 		},

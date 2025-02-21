@@ -59,9 +59,10 @@ func dMSReplicationInstanceHandle(ctx context.Context, cfg aws.Config, item type
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ReplicationInstanceArn,
-		Name:   *item.ReplicationInstanceIdentifier,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *item.ReplicationInstanceArn,
+		Name:    *item.ReplicationInstanceIdentifier,
 		Description: model.DMSReplicationInstanceDescription{
 			ReplicationInstance: item,
 			Tags:                tags.TagList,
@@ -149,9 +150,10 @@ func dMSEndpointHandle(ctx context.Context, cfg aws.Config, item types.Endpoint)
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.EndpointArn,
-		Name:   *item.EndpointIdentifier,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.EndpointArn,
+		Name:    *item.EndpointIdentifier,
 		Description: model.DMSEndpointDescription{
 			Endpoint: item,
 			Tags:     tags.TagList,
@@ -210,10 +212,11 @@ func dMSReplicationTaskHandle(ctx context.Context, cfg aws.Config, item types.Re
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ReplicationTaskArn,
-		ID:     *item.ReplicationTaskIdentifier,
-		Name:   *item.ReplicationTaskIdentifier,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *item.ReplicationTaskArn,
+		ID:      *item.ReplicationTaskIdentifier,
+		Name:    *item.ReplicationTaskIdentifier,
 		Description: model.DMSReplicationTaskDescription{
 			ReplicationTask: item,
 			Tags:            tags.TagList,

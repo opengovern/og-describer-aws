@@ -39,9 +39,10 @@ func CloudWatchAlarm(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.AlarmArn,
-				Name:   *v.AlarmName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.AlarmArn,
+				Account: describeCtx.AccountID,
+				Name:    *v.AlarmName,
 				Description: model.CloudWatchAlarmDescription{
 					MetricAlarm: v,
 					Tags:        tags.Tags,
@@ -81,9 +82,10 @@ func GetCloudWatchAlarm(ctx context.Context, cfg aws.Config, fields map[string]s
 		}
 
 		values = append(values, models.Resource{
-			Region: describeCtx.OGRegion,
-			ARN:    *v.AlarmArn,
-			Name:   *v.AlarmName,
+			Region:  describeCtx.OGRegion,
+			ARN:     *v.AlarmArn,
+			Account: describeCtx.AccountID,
+			Name:    *v.AlarmName,
 			Description: model.CloudWatchAlarmDescription{
 				MetricAlarm: v,
 				Tags:        tags.Tags,
@@ -105,6 +107,7 @@ func CloudWatchAnomalyDetector(ctx context.Context, cfg aws.Config, stream *mode
 	var values []models.Resource
 	for _, v := range output.AnomalyDetectors {
 		resource := models.Resource{
+			Account:     describeCtx.AccountID,
 			Region:      describeCtx.OGRegion,
 			ID:          CompositeID(*v.SingleMetricAnomalyDetector.Namespace, *v.SingleMetricAnomalyDetector.MetricName),
 			Name:        *v.SingleMetricAnomalyDetector.MetricName,
@@ -138,6 +141,7 @@ func CloudWatchCompositeAlarm(ctx context.Context, cfg aws.Config, stream *model
 
 		for _, v := range page.MetricAlarms {
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.AlarmArn,
 				Name:        *v.AlarmName,
@@ -168,6 +172,7 @@ func CloudWatchDashboard(ctx context.Context, cfg aws.Config, stream *models.Str
 	for _, v := range output.DashboardEntries {
 		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
+			Account:     describeCtx.AccountID,
 			ARN:         *v.DashboardArn,
 			Name:        *v.DashboardName,
 			Description: v,
@@ -199,6 +204,7 @@ func CloudWatchInsightRule(ctx context.Context, cfg aws.Config, stream *models.S
 		for _, v := range page.InsightRules {
 			resource := models.Resource{
 				Region:      describeCtx.OGRegion,
+				Account:     describeCtx.AccountID,
 				ID:          *v.Name,
 				Name:        *v.Name,
 				Description: v,
@@ -228,6 +234,7 @@ func CloudWatchMetricStream(ctx context.Context, cfg aws.Config, stream *models.
 	for _, v := range output.Entries {
 		resource := models.Resource{
 			Region:      describeCtx.OGRegion,
+			Account:     describeCtx.AccountID,
 			ARN:         *v.Arn,
 			Name:        *v.Name,
 			Description: v,
@@ -258,6 +265,7 @@ func CloudWatchLogsDestination(ctx context.Context, cfg aws.Config, stream *mode
 
 		for _, v := range page.Destinations {
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.Arn,
 				Name:        *v.DestinationName,
@@ -308,9 +316,10 @@ func CloudWatchLogsLogGroup(ctx context.Context, cfg aws.Config, stream *models.
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   *v.LogGroupName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Account: describeCtx.AccountID,
+				Name:    *v.LogGroupName,
 				Description: model.CloudWatchLogsLogGroupDescription{
 					LogGroup:       v,
 					DataProtection: dataProtectionPolicyData,
@@ -345,10 +354,11 @@ func CloudWatchLogsMetricFilter(ctx context.Context, cfg aws.Config, stream *mod
 		for _, v := range page.MetricFilters {
 			arn := "arn:" + describeCtx.Partition + ":logs:" + describeCtx.Region + ":" + describeCtx.AccountID + ":log-group:" + *v.LogGroupName + ":metric-filter:" + *v.FilterName
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				ID:     *v.FilterName,
-				Name:   *v.FilterName,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				ID:      *v.FilterName,
+				Name:    *v.FilterName,
+				Account: describeCtx.AccountID,
 				Description: model.CloudWatchLogsMetricFilterDescription{
 					MetricFilter: v,
 				},
@@ -379,6 +389,7 @@ func CloudWatchLogsQueryDefinition(ctx context.Context, cfg aws.Config, stream *
 
 		for _, v := range output.QueryDefinitions {
 			resource := models.Resource{
+				Account:     describeCtx.AccountID,
 				Region:      describeCtx.OGRegion,
 				ID:          *v.QueryDefinitionId,
 				Name:        *v.Name,
@@ -429,9 +440,10 @@ func CloudWatchLogEvent(ctx context.Context, cfg aws.Config, stream *models.Stre
 
 			for _, v := range page.Events {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     *v.EventId,
-					Name:   *v.LogStreamName,
+					Region:  describeCtx.OGRegion,
+					Account: describeCtx.AccountID,
+					ID:      *v.EventId,
+					Name:    *v.LogStreamName,
 					Description: model.CloudWatchLogEventDescription{
 						LogEvent:     v,
 						LogGroupName: *logGroupName,
@@ -466,8 +478,9 @@ func CloudWatchLogsResourcePolicy(ctx context.Context, cfg aws.Config, stream *m
 
 		for _, v := range output.ResourcePolicies {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *v.PolicyName,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				Name:    *v.PolicyName,
 				Description: model.CloudWatchLogResourcePolicyDescription{
 					ResourcePolicy: v,
 				},
@@ -522,9 +535,10 @@ func CloudWatchLogStream(ctx context.Context, cfg aws.Config, stream *models.Str
 
 			for _, v := range page.LogStreams {
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *v.Arn,
-					Name:   *v.LogStreamName,
+					Region:  describeCtx.OGRegion,
+					ARN:     *v.Arn,
+					Name:    *v.LogStreamName,
+					Account: describeCtx.AccountID,
 					Description: model.CloudWatchLogStreamDescription{
 						LogStream:    v,
 						LogGroupName: *logGroupName,
@@ -572,10 +586,11 @@ func CloudWatchLogsSubscriptionFilter(ctx context.Context, cfg aws.Config, strea
 				for _, v := range page.SubscriptionFilters {
 					arn := fmt.Sprintf("arn:%s:logs:%s:%s:log-group:%s:subscription-filter:%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *logGroupName, *v.FilterName)
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     CompositeID(*v.LogGroupName, *v.FilterName),
-						ARN:    arn,
-						Name:   *v.LogGroupName,
+						Account: describeCtx.AccountID,
+						Region:  describeCtx.OGRegion,
+						ID:      CompositeID(*v.LogGroupName, *v.FilterName),
+						ARN:     arn,
+						Name:    *v.LogGroupName,
 						Description: model.CloudWatchLogSubscriptionFilterDescription{
 							SubscriptionFilter: v,
 							LogGroupName:       *logGroupName,
@@ -610,8 +625,9 @@ func CloudWatchMetrics(ctx context.Context, cfg aws.Config, stream *models.Strea
 
 		for _, v := range page.Metrics {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				Name:   *v.MetricName,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				Name:    *v.MetricName,
 				Description: model.CloudWatchMetricDescription{
 					Metric: v,
 				},
@@ -736,8 +752,9 @@ func CloudWatchMetricDataPoint(ctx context.Context, cfg aws.Config, stream *mode
 					for _, r := range metricsPage.MetricDataResults {
 						for item := 0; item < len(r.Timestamps); item++ {
 							resource := models.Resource{
-								Region: describeCtx.OGRegion,
-								ID:     *r.Id,
+								Region:  describeCtx.OGRegion,
+								Account: describeCtx.AccountID,
+								ID:      *r.Id,
 								Description: model.CloudWatchMetricDataPointDescription{
 									MetricDataResult: r,
 									MetricDataQuery:  q,

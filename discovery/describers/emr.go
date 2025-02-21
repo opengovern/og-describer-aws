@@ -59,9 +59,10 @@ func eMRClusterHandle(ctx context.Context, cfg aws.Config, clusterId string) (mo
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *out.Cluster.ClusterArn,
-		Name:   *out.Cluster.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *out.Cluster.ClusterArn,
+		Name:    *out.Cluster.Name,
+		Account: describeCtx.AccountID,
 		Description: model.EMRClusterDescription{
 			Cluster: out.Cluster,
 		},
@@ -111,9 +112,10 @@ func EMRInstance(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 					describeCtx := model.GetDescribeContext(ctx)
 					arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instance.Id)
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *instance.Id,
-						ARN:    arn,
+						Region:  describeCtx.OGRegion,
+						ID:      *instance.Id,
+						ARN:     arn,
+						Account: describeCtx.AccountID,
 						Description: model.EMRInstanceDescription{
 							Instance:  instance,
 							ClusterID: *cluster.Id,
@@ -177,10 +179,11 @@ func eMRInstanceFleetHandle(ctx context.Context, instanceFleet types.InstanceFle
 	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-fleet/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceFleet.Id)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *instanceFleet.Id,
-		Name:   *instanceFleet.Name,
-		ARN:    arn,
+		Region:  describeCtx.OGRegion,
+		ID:      *instanceFleet.Id,
+		Name:    *instanceFleet.Name,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
 		Description: model.EMRInstanceFleetDescription{
 			InstanceFleet: instanceFleet,
 			ClusterID:     clusterId,
@@ -257,9 +260,10 @@ func eMRInstanceGroupHandle(ctx context.Context, instanceGroup types.InstanceGro
 	describeCtx := model.GetDescribeContext(ctx)
 	arn := fmt.Sprintf("arn:%s:emr:%s:%s:instance-group/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *instanceGroup.Id)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *instanceGroup.Id,
-		ARN:    arn,
+		Region:  describeCtx.OGRegion,
+		ID:      *instanceGroup.Id,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
 		Description: model.EMRInstanceGroupDescription{
 			InstanceGroup: instanceGroup,
 			ClusterID:     clusterId,
@@ -297,7 +301,8 @@ func EMRBlockPublicAccessConfiguration(ctx context.Context, cfg aws.Config, stre
 	}
 	var values []models.Resource
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
 		Description: model.EMRBlockPublicAccessConfigurationDescription{
 			Configuration:         *op.BlockPublicAccessConfiguration,
 			ConfigurationMetadata: *op.BlockPublicAccessConfigurationMetadata,

@@ -26,10 +26,11 @@ func MGNApplication(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 
 		for _, application := range applications.Items {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *application.Arn,
-				Name:   *application.Name,
-				ID:     *application.ApplicationID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *application.Arn,
+				Name:    *application.Name,
+				Account: describeCtx.AccountID,
+				ID:      *application.ApplicationID,
 				Description: model.MgnApplicationDescription{
 					Application: application,
 				},

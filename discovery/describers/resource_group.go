@@ -33,9 +33,10 @@ func ResourceGroups(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.GroupArn,
-				Name:   *v.GroupName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.GroupArn,
+				Name:    *v.GroupName,
+				Account: describeCtx.AccountID,
 				Description: model.ResourceGroupsGroupDescription{
 					GroupIdentifier: v,
 					Resources:       resources.Resources,

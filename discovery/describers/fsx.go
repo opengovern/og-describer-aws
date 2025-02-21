@@ -38,9 +38,10 @@ func FSXFileSystem(ctx context.Context, cfg aws.Config, stream *models.StreamSen
 func fSXFileSystemHandle(ctx context.Context, item types.FileSystem) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ResourceARN,
-		Name:   *item.FileSystemId,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *item.ResourceARN,
+		Name:    *item.FileSystemId,
 		Description: model.FSXFileSystemDescription{
 			FileSystem: item,
 		},
@@ -95,9 +96,10 @@ func FSXStorageVirtualMachine(ctx context.Context, cfg aws.Config, stream *model
 func fSXStorageVirtualMachineHandle(ctx context.Context, item types.StorageVirtualMachine) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ResourceARN,
-		Name:   *item.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.ResourceARN,
+		Name:    *item.Name,
+		Account: describeCtx.AccountID,
 		Description: model.FSXStorageVirtualMachineDescription{
 			StorageVirtualMachine: item,
 		},
@@ -140,9 +142,10 @@ func FSXTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 
 		for _, item := range page.DataRepositoryTasks {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *item.ResourceARN,
-				Name:   *item.TaskId,
+				Region:  describeCtx.OGRegion,
+				ARN:     *item.ResourceARN,
+				Name:    *item.TaskId,
+				Account: describeCtx.AccountID,
 				Description: model.FSXTaskDescription{
 					Task: item,
 				},
@@ -188,9 +191,10 @@ func FSXVolume(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 func fSXVolumeHandle(ctx context.Context, item types.Volume) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ResourceARN,
-		Name:   *item.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.ResourceARN,
+		Name:    *item.Name,
+		Account: describeCtx.AccountID,
 		Description: model.FSXVolumeDescription{
 			Volume: item,
 		},
@@ -246,9 +250,10 @@ func FSXSnapshot(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 func fSXSnapshotHandle(ctx context.Context, item types.Snapshot) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.ResourceARN,
-		Name:   *item.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.ResourceARN,
+		Name:    *item.Name,
+		Account: describeCtx.AccountID,
 		Description: model.FSXSnapshotDescription{
 			Snapshot: item,
 		},

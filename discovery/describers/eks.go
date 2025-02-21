@@ -79,9 +79,10 @@ func eKSClusterHandle(ctx context.Context, cfg aws.Config, cluster string) (mode
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *output.Cluster.Arn,
-		Name:   *output.Cluster.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *output.Cluster.Arn,
+		Name:    *output.Cluster.Name,
+		Account: describeCtx.AccountID,
 		Description: model.EKSClusterDescription{
 			Cluster: *output.Cluster,
 		},
@@ -175,9 +176,10 @@ func eKSAddonHandle(ctx context.Context, cfg aws.Config, addon string, clusterNa
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *output.Addon.AddonArn,
-		Name:   *output.Addon.AddonName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *output.Addon.AddonArn,
+		Name:    *output.Addon.AddonName,
+		Account: describeCtx.AccountID,
 		Description: model.EKSAddonDescription{
 			Addon: *output.Addon,
 		},
@@ -271,9 +273,10 @@ func eKSFargateProfileHandle(ctx context.Context, cfg aws.Config, profile string
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *output.FargateProfile.FargateProfileArn,
-		Name:   *output.FargateProfile.FargateProfileName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *output.FargateProfile.FargateProfileArn,
+		Name:    *output.FargateProfile.FargateProfileName,
+		Account: describeCtx.AccountID,
 		Description: model.EKSFargateProfileDescription{
 			FargateProfile: *output.FargateProfile,
 		},
@@ -373,9 +376,10 @@ func eKSNodegroupHandle(ctx context.Context, cfg aws.Config, profile string, clu
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *output.Nodegroup.NodegroupArn,
-		Name:   *output.Nodegroup.NodegroupName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *output.Nodegroup.NodegroupArn,
+		Name:    *output.Nodegroup.NodegroupName,
+		Account: describeCtx.AccountID,
 		Description: model.EKSNodegroupDescription{
 			Nodegroup: *output.Nodegroup,
 		},
@@ -444,9 +448,10 @@ func EKSIdentityProviderConfig(ctx context.Context, cfg aws.Config, stream *mode
 				}
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    *output.IdentityProviderConfig.Oidc.IdentityProviderConfigArn,
-					Name:   *config.Name,
+					Region:  describeCtx.OGRegion,
+					ARN:     *output.IdentityProviderConfig.Oidc.IdentityProviderConfigArn,
+					Name:    *config.Name,
+					Account: describeCtx.AccountID,
 					Description: EKSIdentityProviderConfigDescription{
 						ConfigName:             *config.Name,
 						ConfigType:             *config.Type,
@@ -494,8 +499,9 @@ func EKSAddonVersion(ctx context.Context, cfg aws.Config, stream *models.StreamS
 				}
 
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ARN:    arn,
+					Region:  describeCtx.OGRegion,
+					ARN:     arn,
+					Account: describeCtx.AccountID,
 					Description: model.EKSAddonVersionDescription{
 						AddonVersion:       version,
 						AddonConfiguration: configuration.ConfigurationSchema,

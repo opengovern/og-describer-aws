@@ -33,6 +33,7 @@ func ECSCapacityProvider(ctx context.Context, cfg aws.Config, stream *models.Str
 				Region:      describeCtx.OGRegion,
 				ARN:         *v.CapacityProviderArn,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -96,9 +97,10 @@ func ECSCluster(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 func eCSClusterHandle(ctx context.Context, v types.Cluster) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ClusterArn,
-		Name:   *v.ClusterName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ClusterArn,
+		Account: describeCtx.AccountID,
+		Name:    *v.ClusterName,
 		Description: model.ECSClusterDescription{
 			Cluster: v,
 		},
@@ -192,9 +194,10 @@ func eCSServiceHandle(ctx context.Context, v types.Service, client *ecs.Client) 
 	}
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ServiceArn,
-		Name:   *v.ServiceName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ServiceArn,
+		Name:    *v.ServiceName,
+		Account: describeCtx.AccountID,
 		Description: model.ECSServiceDescription{
 			Service: v,
 			Tags:    response.Tags,
@@ -286,9 +289,10 @@ func eCSTaskDefinitionHandle(ctx context.Context, cfg aws.Config, arn string) (m
 	name := splitArn[len(splitArn)-1]
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    name,
+		Account: describeCtx.AccountID,
 		Description: model.ECSTaskDefinitionDescription{
 			TaskDefinition: output.TaskDefinition,
 			Tags:           output.Tags,
@@ -370,9 +374,10 @@ func ECSTaskSet(ctx context.Context, cfg aws.Config, stream *models.StreamSender
 func eCSTaskSetHandle(ctx context.Context, v types.TaskSet) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.TaskSetArn,
-		Name:   *v.Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.TaskSetArn,
+		Name:    *v.Id,
+		Account: describeCtx.AccountID,
 		Description: model.ECSTaskSetDescription{
 			TaskSet: v,
 		},
@@ -486,9 +491,10 @@ func ECSContainerInstance(ctx context.Context, cfg aws.Config, stream *models.St
 			for _, v := range output.ContainerInstances {
 				for _, c := range describeCluster.Clusters {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *v.ContainerInstanceArn,
-						Name:   *v.ContainerInstanceArn,
+						Region:  describeCtx.OGRegion,
+						Account: describeCtx.AccountID,
+						ARN:     *v.ContainerInstanceArn,
+						Name:    *v.ContainerInstanceArn,
 						Description: model.ECSContainerInstanceDescription{
 							ContainerInstance: v,
 							Cluster:           c,
@@ -581,6 +587,7 @@ func ECSTask(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 						Region:      describeCtx.OGRegion,
 						ARN:         *v.TaskArn,
 						Name:        *v.TaskArn,
+						Account:     describeCtx.AccountID,
 						Description: description,
 					}
 					if stream != nil {

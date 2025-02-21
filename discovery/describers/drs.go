@@ -37,9 +37,10 @@ func DRSSourceServer(ctx context.Context, cfg aws.Config, stream *models.StreamS
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   *v.SourceServerID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Name:    *v.SourceServerID,
+				Account: describeCtx.AccountID,
 				Description: model.DRSSourceServerDescription{
 					SourceServer:        v,
 					LaunchConfiguration: *launchConfiguration,
@@ -79,9 +80,10 @@ func DRSRecoveryInstance(ctx context.Context, cfg aws.Config, stream *models.Str
 
 		for _, v := range page.Items {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   *v.RecoveryInstanceID,
+				Region:  describeCtx.OGRegion,
+				Account: describeCtx.AccountID,
+				ARN:     *v.Arn,
+				Name:    *v.RecoveryInstanceID,
 				Description: model.DRSRecoveryInstanceDescription{
 					RecoveryInstance: v,
 				},
@@ -120,9 +122,10 @@ func DRSJob(ctx context.Context, cfg aws.Config, stream *models.StreamSender) ([
 
 		for _, v := range page.Items {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				ID:     *v.JobID,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				ID:      *v.JobID,
+				Account: describeCtx.AccountID,
 				Description: model.DRSJobDescription{
 					Job: v,
 				},
@@ -175,8 +178,9 @@ func DRSRecoverySnapshot(ctx context.Context, cfg aws.Config, stream *models.Str
 
 				for _, recoverySnapshot := range recoverySnapshotPage.Items {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *recoverySnapshot.SnapshotID,
+						Region:  describeCtx.OGRegion,
+						ID:      *recoverySnapshot.SnapshotID,
+						Account: describeCtx.AccountID,
 						Description: model.DRSRecoverySnapshotDescription{
 							RecoverySnapshot: recoverySnapshot,
 						},

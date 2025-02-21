@@ -52,9 +52,10 @@ func CodeBuildProject(ctx context.Context, cfg aws.Config, stream *models.Stream
 func codeBuildProjectHandle(ctx context.Context, project types.Project) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *project.Arn,
-		Name:   *project.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *project.Arn,
+		Account: describeCtx.AccountID,
+		Name:    *project.Name,
 		Description: model.CodeBuildProjectDescription{
 			Project: project,
 		},
@@ -106,9 +107,10 @@ func CodeBuildSourceCredential(ctx context.Context, cfg aws.Config, stream *mode
 func codeBuildSourceCredentialHandle(ctx context.Context, item types.SourceCredentialsInfo) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *item.Arn,
-		Name:   nameFromArn(*item.Arn),
+		Region:  describeCtx.OGRegion,
+		ARN:     *item.Arn,
+		Account: describeCtx.AccountID,
+		Name:    nameFromArn(*item.Arn),
 		Description: model.CodeBuildSourceCredentialDescription{
 			SourceCredentialsInfo: item,
 		},
@@ -180,9 +182,10 @@ func CodeBuildBuild(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 func codeBuildBuildHandle(ctx context.Context, build types.Build) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *build.Arn,
-		ID:     *build.Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     *build.Arn,
+		Account: describeCtx.AccountID,
+		ID:      *build.Id,
 		Description: model.CodeBuildBuildDescription{
 			Build: build,
 		},

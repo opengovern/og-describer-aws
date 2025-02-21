@@ -33,9 +33,10 @@ func IdentityStoreGroup(ctx context.Context, cfg aws.Config, stream *models.Stre
 
 				for _, group := range page2.Groups {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *group.GroupId,
-						Name:   *group.DisplayName,
+						Region:  describeCtx.OGRegion,
+						ID:      *group.GroupId,
+						Account: describeCtx.AccountID,
+						Name:    *group.DisplayName,
 						Description: model.IdentityStoreGroupDescription{
 							Group: group,
 						},
@@ -81,9 +82,10 @@ func IdentityStoreUser(ctx context.Context, cfg aws.Config, stream *models.Strea
 					}
 				}
 				resource := models.Resource{
-					Region: describeCtx.OGRegion,
-					ID:     *user.UserId,
-					Name:   *user.UserName,
+					Region:  describeCtx.OGRegion,
+					ID:      *user.UserId,
+					Account: describeCtx.AccountID,
+					Name:    *user.UserName,
 					Description: model.IdentityStoreUserDescription{
 						User:         user,
 						PrimaryEmail: primaryEmail,
@@ -135,8 +137,9 @@ func IdentityStoreGroupMembership(ctx context.Context, cfg aws.Config, stream *m
 					}
 					for _, membership := range membershipPage.GroupMemberships {
 						resource := models.Resource{
-							Region: describeCtx.OGRegion,
-							ID:     *membership.MembershipId,
+							Region:  describeCtx.OGRegion,
+							ID:      *membership.MembershipId,
+							Account: describeCtx.AccountID,
 							Description: model.IdentityStoreGroupMembershipDescription{
 								GroupId:         membership.GroupId,
 								IdentityStoreId: membership.IdentityStoreId,

@@ -48,9 +48,10 @@ func GuardDutyFinding(ctx context.Context, cfg aws.Config, stream *models.Stream
 
 				for _, item := range findings.Findings {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ARN:    *item.Arn,
-						Name:   *item.Id,
+						Region:  describeCtx.OGRegion,
+						ARN:     *item.Arn,
+						Name:    *item.Id,
+						Account: describeCtx.AccountID,
 						Description: model.GuardDutyFindingDescription{
 							Finding: item,
 						},
@@ -105,9 +106,10 @@ func guardDutyDetectorHandle(ctx context.Context, out *guardduty.GetDetectorOutp
 
 	arn := "arn:" + describeCtx.Partition + ":guardduty:" + describeCtx.Region + ":" + describeCtx.AccountID + ":detector/" + id
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   id,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		Name:    id,
 		Description: model.GuardDutyDetectorDescription{
 			DetectorId: id,
 			Detector:   out,
@@ -277,9 +279,10 @@ func guardDutyIPSetHandle(ctx context.Context, ipSetOutput *guardduty.GetIPSetOu
 
 	arn := fmt.Sprintf("arn:%s:guardduty:%s:%s:detector/%s/ipset/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, detectorId, ipSetId)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *ipSetOutput.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		Name:    *ipSetOutput.Name,
 		Description: model.GuardDutyIPSetDescription{
 			IPSet:      *ipSetOutput,
 			DetectorId: detectorId,
@@ -360,8 +363,9 @@ func GuardDutyMember(ctx context.Context, cfg aws.Config, stream *models.StreamS
 func guardDutyMemberHandle(ctx context.Context, member types.Member) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *member.AccountId,
+		Region:  describeCtx.OGRegion,
+		Name:    *member.AccountId,
+		Account: describeCtx.AccountID,
 		Description: model.GuardDutyMemberDescription{
 			Member: member,
 		},
@@ -440,9 +444,10 @@ func guardDutyPublishingDestinationHandle(ctx context.Context, detectorId string
 
 	arn := fmt.Sprintf("arn:%s:guardduty:%s:%s:detector/%s/publishingDestination/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, detectorId, *destination.DestinationId)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		ID:     *destinationOutput.DestinationId,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		ID:      *destinationOutput.DestinationId,
+		Account: describeCtx.AccountID,
 		Description: model.GuardDutyPublishingDestinationDescription{
 			PublishingDestination: *destinationOutput,
 			DetectorId:            detectorId,
@@ -533,9 +538,10 @@ func guardDutyThreatIntelSetHandle(ctx context.Context, threatIntelSetOutput *gu
 	arn := fmt.Sprintf("arn:%s:guardduty:%s:%s:detector/%s/threatintelset/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, detectorId, threatIntelSetId)
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *threatIntelSetOutput.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    *threatIntelSetOutput.Name,
+		Account: describeCtx.AccountID,
 		Description: model.GuardDutyThreatIntelSetDescription{
 			ThreatIntelSet:   *threatIntelSetOutput,
 			DetectorId:       detectorId,

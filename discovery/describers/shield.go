@@ -63,9 +63,10 @@ func shieldProtectionGroupHandle(ctx context.Context, cfg aws.Config, v types.Pr
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ProtectionGroupArn,
-		Name:   *v.ProtectionGroupId,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ProtectionGroupArn,
+		Account: describeCtx.AccountID,
+		Name:    *v.ProtectionGroupId,
 		Description: model.ShieldProtectionGroupDescription{
 			ProtectionGroup: v,
 			Tags:            tags.Tags,

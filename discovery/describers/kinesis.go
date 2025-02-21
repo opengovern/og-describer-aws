@@ -82,9 +82,10 @@ func KinesisStream(ctx context.Context, cfg aws.Config, streamS *models.StreamSe
 func kinesisStreamHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, streamSummery *kinesis.DescribeStreamSummaryOutput, tags *kinesis.ListTagsForStreamOutput) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *stream.StreamDescription.StreamARN,
-		Name:   *stream.StreamDescription.StreamName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *stream.StreamDescription.StreamARN,
+		Account: describeCtx.AccountID,
+		Name:    *stream.StreamDescription.StreamName,
 		Description: model.KinesisStreamDescription{
 			Stream:             *stream.StreamDescription,
 			DescriptionSummary: *streamSummery.StreamDescriptionSummary,
@@ -196,9 +197,10 @@ func KinesisConsumer(ctx context.Context, cfg aws.Config, streamS *models.Stream
 func kinesisConsumerHandle(ctx context.Context, stream *kinesis.DescribeStreamOutput, consumer types.Consumer) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *consumer.ConsumerARN,
-		Name:   *consumer.ConsumerName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *consumer.ConsumerARN,
+		Name:    *consumer.ConsumerName,
+		Account: describeCtx.AccountID,
 		Description: model.KinesisConsumerDescription{
 			StreamARN: *stream.StreamDescription.StreamARN,
 			Consumer:  consumer,
@@ -256,9 +258,10 @@ func KinesisVideoStream(ctx context.Context, cfg aws.Config, streamS *models.Str
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *stream.StreamARN,
-				Name:   *stream.StreamName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *stream.StreamARN,
+				Account: describeCtx.AccountID,
+				Name:    *stream.StreamName,
 				Description: model.KinesisVideoStreamDescription{
 					Stream: stream,
 					Tags:   tags.Tags,
@@ -326,9 +329,10 @@ func KinesisAnalyticsV2Application(ctx context.Context, cfg aws.Config, stream *
 func kinesisAnalyticsV2ApplicationHandle(ctx context.Context, description *kinesisanalyticsv2.DescribeApplicationOutput, tags *kinesisanalyticsv2.ListTagsForResourceOutput) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *description.ApplicationDetail.ApplicationARN,
-		Name:   *description.ApplicationDetail.ApplicationName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *description.ApplicationDetail.ApplicationARN,
+		Name:    *description.ApplicationDetail.ApplicationName,
+		Account: describeCtx.AccountID,
 		Description: model.KinesisAnalyticsV2ApplicationDescription{
 			Application: *description.ApplicationDetail,
 			Tags:        tags.Tags,

@@ -58,9 +58,10 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 			output.Attributes["QueueUrl"] = url
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    url,
-				Name:   nameFromArn(url),
+				Region:  describeCtx.OGRegion,
+				ARN:     url,
+				Name:    nameFromArn(url),
+				Account: describeCtx.AccountID,
 				Description: model.SQSQueueDescription{
 					Attributes: output.Attributes,
 					Tags:       tOutput.Tags,
@@ -81,9 +82,10 @@ func SQSQueue(ctx context.Context, cfg aws.Config, stream *models.StreamSender) 
 func sQSQueueHandle(ctx context.Context, url string, queueAttributes *sqs.GetQueueAttributesOutput, tagOutput *sqs.ListQueueTagsOutput) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    url,
-		Name:   nameFromArn(url),
+		Region:  describeCtx.OGRegion,
+		ARN:     url,
+		Name:    nameFromArn(url),
+		Account: describeCtx.AccountID,
 		Description: model.SQSQueueDescription{
 			Attributes: queueAttributes.Attributes,
 			Tags:       tagOutput.Tags,

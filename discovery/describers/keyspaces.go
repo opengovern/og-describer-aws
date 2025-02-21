@@ -60,9 +60,10 @@ func keyspacesKeyspaceHandle(ctx context.Context, cfg aws.Config, v types.Keyspa
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.ResourceArn,
-		Name:   *v.KeyspaceName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *v.ResourceArn,
+		Name:    *v.KeyspaceName,
+		Account: describeCtx.AccountID,
 		Description: model.KeyspacesKeyspaceDescription{
 			Keyspace: v,
 			Tags:     tags.Tags,
@@ -163,9 +164,10 @@ func keyspacesTableHandle(ctx context.Context, cfg aws.Config, v types.TableSumm
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *v.ResourceArn,
-		Name:   *v.KeyspaceName,
+		Region:  describeCtx.OGRegion,
+		ID:      *v.ResourceArn,
+		Name:    *v.KeyspaceName,
+		Account: describeCtx.AccountID,
 		Description: model.KeyspacesTableDescription{
 			Table: v,
 			Tags:  tags.Tags,

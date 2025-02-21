@@ -31,9 +31,10 @@ func STSCallerIdentity(ctx context.Context, cfg aws.Config, stream *models.Strea
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *ci.UserId,
-		ARN:    *ci.Arn,
+		Region:  describeCtx.OGRegion,
+		ID:      *ci.UserId,
+		ARN:     *ci.Arn,
+		Account: describeCtx.AccountID,
 		Description: model.STSCallerIdentityDescription{
 			UsrId:   *ci.UserId,
 			Account: *ci.Account,

@@ -85,7 +85,7 @@ func doDescribe(
 	describeToken string,
 	useOpenSearch bool) ([]string, error) {
 	logger.Info("Making New Resource Sender")
-	rs, err := NewResourceSender(grpcEndpoint, ingestionPipelineEndpoint, describeToken, job.JobID, params,useOpenSearch, logger)
+	rs, err := NewResourceSender(grpcEndpoint, ingestionPipelineEndpoint, describeToken, job.JobID, params, useOpenSearch, logger)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to resource sender: %w", err)
 	}
@@ -133,6 +133,18 @@ func doDescribe(
 			if err != nil {
 				logger.Error("failed to build tags for service", zap.Error(err), zap.String("resourceType", job.ResourceType), zap.Any("resource", resource))
 			}
+		}
+
+		descMap, ok := desc.(map[string]any)
+		if !ok {
+			return fmt.Errorf("unexpected description format, expected map[string]any")
+		}
+
+		descMap["AwsAccountID"] = resource.Account
+
+		descriptionJSON, err = json.Marshal(descMap)
+		if err != nil {
+			return fmt.Errorf("failed to marshal modified description: %v", err.Error())
 		}
 
 		var description any

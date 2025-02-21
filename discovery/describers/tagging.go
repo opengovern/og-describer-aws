@@ -23,9 +23,10 @@ func TaggingResources(ctx context.Context, cfg aws.Config, stream *models.Stream
 		}
 		for _, v := range page.ResourceTagMappingList {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.ResourceARN,
-				Name:   *v.ResourceARN,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.ResourceARN,
+				Name:    *v.ResourceARN,
+				Account: describeCtx.AccountID,
 				Description: model.TaggingResourcesDescription{
 					TagMapping: v,
 				},

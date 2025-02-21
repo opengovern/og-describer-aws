@@ -39,9 +39,10 @@ func OAMLink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Account: describeCtx.AccountID,
+				Name:    name,
 				Description: model.OAMLinkDescription{
 					Link: out,
 				},
@@ -89,9 +90,10 @@ func OAMSink(ctx context.Context, cfg aws.Config, stream *models.StreamSender) (
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   name,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Account: describeCtx.AccountID,
+				Name:    name,
 				Description: model.OAMSinkDescription{
 					Sink: v,
 					Tags: out.Tags,

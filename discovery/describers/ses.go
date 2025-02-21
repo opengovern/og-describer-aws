@@ -63,9 +63,10 @@ func sESConfigurationSetHandle(ctx context.Context, cfg aws.Config, v string) (m
 	arn := fmt.Sprintf("arn:%s:ses:%s:%s:configuration-set/%s", describeCtx.Partition, describeCtx.Region, describeCtx.AccountID, *output.ConfigurationSet.Name)
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *output.ConfigurationSet.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Account: describeCtx.AccountID,
+		Name:    *output.ConfigurationSet.Name,
 		Description: model.SESConfigurationSetDescription{
 			ConfigurationSet: *output.ConfigurationSet,
 		},
@@ -179,9 +180,10 @@ func sESv2EmailIdentitiesHandle(ctx context.Context, cfg aws.Config, v sesv2type
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   *v.IdentityName,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    *v.IdentityName,
+		Account: describeCtx.AccountID,
 		Description: model.SESv2EmailIdentityDescription{
 			ARN:      arn,
 			Identity: v,
@@ -239,9 +241,10 @@ func sESIdentityHandle(ctx context.Context, cfg aws.Config, v string) (models.Re
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    arn,
-		Name:   v,
+		Region:  describeCtx.OGRegion,
+		ARN:     arn,
+		Name:    v,
+		Account: describeCtx.AccountID,
 		Description: model.SESIdentityDescription{
 			ARN:                    arn,
 			Identity:               v,
@@ -300,6 +303,7 @@ func SESContactList(ctx context.Context, cfg aws.Config, stream *models.StreamSe
 				Region:      describeCtx.OGRegion,
 				ID:          *v.ContactListName,
 				Name:        *v.ContactListName,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {
@@ -330,6 +334,7 @@ func SESReceiptFilter(ctx context.Context, cfg aws.Config, stream *models.Stream
 			Region:      describeCtx.OGRegion,
 			ID:          *v.Name,
 			Name:        *v.Name,
+			Account:     describeCtx.AccountID,
 			Description: v,
 		}
 		if stream != nil {
@@ -365,6 +370,7 @@ func SESReceiptRuleSet(ctx context.Context, cfg aws.Config, stream *models.Strea
 				Region:      describeCtx.OGRegion,
 				ID:          *output.Metadata.Name,
 				Name:        *output.Metadata.Name,
+				Account:     describeCtx.AccountID,
 				Description: output,
 			}
 			if stream != nil {
@@ -402,6 +408,7 @@ func SESTemplate(ctx context.Context, cfg aws.Config, stream *models.StreamSende
 				Region:      describeCtx.OGRegion,
 				ID:          *v.Name,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {

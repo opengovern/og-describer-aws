@@ -51,9 +51,10 @@ func GlobalAcceleratorAccelerator(ctx context.Context, cfg aws.Config, stream *m
 func globalAcceleratorAcceleratorHandle(ctx context.Context, attribute *globalaccelerator.DescribeAcceleratorAttributesOutput, tags *globalaccelerator.ListTagsForResourceOutput, accelerator types.Accelerator) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *accelerator.AcceleratorArn,
-		Name:   *accelerator.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *accelerator.AcceleratorArn,
+		Name:    *accelerator.Name,
+		Account: describeCtx.AccountID,
 		Description: model.GlobalAcceleratorAcceleratorDescription{
 			Accelerator:           accelerator,
 			AcceleratorAttributes: attribute.AcceleratorAttributes,
@@ -143,9 +144,10 @@ func GlobalAcceleratorListener(ctx context.Context, cfg aws.Config, stream *mode
 func globalAcceleratorListenerHandle(ctx context.Context, listener types.Listener, ARN string) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *listener.ListenerArn,
-		Name:   *listener.ListenerArn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *listener.ListenerArn,
+		Name:    *listener.ListenerArn,
+		Account: describeCtx.AccountID,
 		Description: model.GlobalAcceleratorListenerDescription{
 			Listener:       listener,
 			AcceleratorArn: ARN,
@@ -233,9 +235,10 @@ func GlobalAcceleratorEndpointGroup(ctx context.Context, cfg aws.Config, stream 
 func globalAcceleratorEndpointGroupHandle(ctx context.Context, endpointGroup types.EndpointGroup, listener types.Listener, ARN string) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *endpointGroup.EndpointGroupArn,
-		Name:   *endpointGroup.EndpointGroupArn,
+		Region:  describeCtx.OGRegion,
+		ARN:     *endpointGroup.EndpointGroupArn,
+		Account: describeCtx.AccountID,
+		Name:    *endpointGroup.EndpointGroupArn,
 		Description: model.GlobalAcceleratorEndpointGroupDescription{
 			EndpointGroup:  endpointGroup,
 			ListenerArn:    *listener.ListenerArn,

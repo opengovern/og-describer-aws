@@ -55,9 +55,10 @@ func secretsManagerSecretHandle(ctx context.Context, cfg aws.Config, Arn *string
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *Arn,
-		Name:   *Name,
+		Account: describeCtx.AccountID,
+		Region:  describeCtx.OGRegion,
+		ARN:     *Arn,
+		Name:    *Name,
 		Description: model.SecretsManagerSecretDescription{
 			Secret:         out,
 			ResourcePolicy: policy.ResourcePolicy,

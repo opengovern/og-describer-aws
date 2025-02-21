@@ -29,8 +29,9 @@ func ServiceDiscoveryService(ctx context.Context, cfg aws.Config, stream *models
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *item.Id,
+				Region:  describeCtx.OGRegion,
+				ID:      *item.Id,
+				Account: describeCtx.AccountID,
 				Description: model.ServiceDiscoveryServiceDescription{
 					Service: item,
 					Tags:    tag.Tags,
@@ -68,9 +69,10 @@ func ServiceDiscoveryNamespace(ctx context.Context, cfg aws.Config, stream *mode
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Id,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Id,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.ServiceDiscoveryNamespaceDescription{
 					Namespace: v,
 					Tags:      tag.Tags,
@@ -129,9 +131,10 @@ func getServiceDiscoveryInstances(ctx context.Context, cfg aws.Config, id *strin
 		}
 		for _, v := range page.Instances {
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Id,
-				Name:   *v.Id,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Id,
+				Account: describeCtx.AccountID,
+				Name:    *v.Id,
 				Description: model.ServiceDiscoveryInstanceDescription{
 					Instance: v,
 				},

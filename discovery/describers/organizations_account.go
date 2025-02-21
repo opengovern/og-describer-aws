@@ -210,10 +210,11 @@ func processAccount(ctx context.Context, orgClient *organizations.Client, acct o
 	ouId := aws.ToString(parent.Id)
 
 	details := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *acct.Arn,
-		ID:     *acct.Id,
-		Name:   *acct.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *acct.Arn,
+		ID:      *acct.Id,
+		Name:    *acct.Name,
+		Account: describeCtx.AccountID,
 		Description: model.OrganizationsAccountDescription{
 			Account:  acct,
 			Tags:     tagsOutput.Tags,

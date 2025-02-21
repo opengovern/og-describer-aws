@@ -31,9 +31,10 @@ func FMSPolicy(ctx context.Context, cfg aws.Config, stream *models.StreamSender)
 				return nil, err
 			}
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.PolicyArn,
-				Name:   *v.PolicyName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.PolicyArn,
+				Name:    *v.PolicyName,
+				Account: describeCtx.AccountID,
 				Description: model.FMSPolicyDescription{
 					Policy: v,
 					Tags:   tags.TagList,
@@ -70,9 +71,10 @@ func GetFMSPolicy(ctx context.Context, cfg aws.Config, fields map[string]string)
 		return nil, err
 	}
 	values = append(values, models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *out.PolicyArn,
-		Name:   *out.Policy.PolicyName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *out.PolicyArn,
+		Name:    *out.Policy.PolicyName,
+		Account: describeCtx.AccountID,
 		Description: model.FMSPolicyDescription{
 			Policy: types.PolicySummary{
 				DeleteUnusedFMManagedResources: out.Policy.DeleteUnusedFMManagedResources,

@@ -53,9 +53,10 @@ func CloudFrontDistribution(ctx context.Context, cfg aws.Config, stream *models.
 func cloudFrontDistributionHandle(ctx context.Context, tags *cloudfront.ListTagsForResourceOutput, distribution *cloudfront.GetDistributionOutput, ARN *string, Id *string) models.Resource {
 	describeCtx := model.GetDescribeContext(ctx)
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *ARN,
-		Name:   *Id,
+		Region:  describeCtx.OGRegion,
+		ARN:     *ARN,
+		Account: describeCtx.AccountID,
+		Name:    *Id,
 		Description: model.CloudFrontDistributionDescription{
 			Distribution: distribution.Distribution,
 			ETag:         distribution.ETag,
@@ -131,9 +132,10 @@ func CloudFrontStreamingDistribution(ctx context.Context, cfg aws.Config, stream
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *item.ARN,
-				Name:   *item.Id,
+				Region:  describeCtx.OGRegion,
+				ARN:     *item.ARN,
+				Name:    *item.Id,
+				Account: describeCtx.AccountID,
 				Description: model.CloudFrontStreamingDistributionDescription{
 					StreamingDistribution: distribution.StreamingDistribution,
 					ETag:                  distribution.ETag,

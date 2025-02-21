@@ -70,9 +70,10 @@ func openSearchDomainHandle(ctx context.Context, cfg aws.Config, domain types.Do
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *domain.ARN,
-		Name:   *domain.DomainName,
+		Region:  describeCtx.OGRegion,
+		ARN:     *domain.ARN,
+		Account: describeCtx.AccountID,
+		Name:    *domain.DomainName,
 		Description: model.OpenSearchDomainDescription{
 			Domain: domain,
 			Tags:   tags.TagList,

@@ -26,6 +26,7 @@ func SyntheticsCanary(ctx context.Context, cfg aws.Config, stream *models.Stream
 				Region:      describeCtx.OGRegion,
 				ID:          *v.Id,
 				Name:        *v.Name,
+				Account:     describeCtx.AccountID,
 				Description: v,
 			}
 			if stream != nil {

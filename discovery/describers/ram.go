@@ -78,9 +78,10 @@ func ramPrincipalAssociationHandle(ctx context.Context, cfg aws.Config, associat
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *association.ResourceShareName,
-		ARN:    *association.ResourceShareArn,
+		Region:  describeCtx.OGRegion,
+		Name:    *association.ResourceShareName,
+		ARN:     *association.ResourceShareArn,
+		Account: describeCtx.AccountID,
 		Description: model.RamPrincipalAssociationDescription{
 			PrincipalAssociation:    association,
 			ResourceSharePermission: permissions,
@@ -133,9 +134,10 @@ func ramResourceAssociationHandle(ctx context.Context, cfg aws.Config, associati
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		Name:   *association.ResourceShareName,
-		ARN:    *association.ResourceShareArn,
+		Region:  describeCtx.OGRegion,
+		Name:    *association.ResourceShareName,
+		ARN:     *association.ResourceShareArn,
+		Account: describeCtx.AccountID,
 		Description: model.RamResourceAssociationDescription{
 			ResourceAssociation:     association,
 			ResourceSharePermission: permissions,

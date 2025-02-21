@@ -60,9 +60,10 @@ func DocDBClusterHandle(ctx context.Context, cfg aws.Config, cluster types2.DBCl
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *cluster.DBClusterIdentifier,
-		ARN:    *cluster.DBClusterArn,
+		Region:  describeCtx.OGRegion,
+		ID:      *cluster.DBClusterIdentifier,
+		Account: describeCtx.AccountID,
+		ARN:     *cluster.DBClusterArn,
 		Description: model.DocDBClusterDescription{
 			DBCluster: cluster,
 			Tags:      tags.TagList,
@@ -146,9 +147,10 @@ func DocDBClusterInstanceHandle(ctx context.Context, cfg aws.Config, instance ty
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *instance.DBInstanceIdentifier,
-		ARN:    *instance.DBInstanceArn,
+		Region:  describeCtx.OGRegion,
+		ID:      *instance.DBInstanceIdentifier,
+		ARN:     *instance.DBInstanceArn,
+		Account: describeCtx.AccountID,
 		Description: model.DocDBClusterInstanceDescription{
 			DBInstance: instance,
 			Tags:       tags.TagList,
@@ -253,9 +255,10 @@ func DocDBClusterSnapshotHandle(ctx context.Context, docdbClient *docdb.Client, 
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ID:     *snapshot.DBClusterSnapshotIdentifier,
-		ARN:    *snapshot.DBClusterSnapshotArn,
+		Region:  describeCtx.OGRegion,
+		ID:      *snapshot.DBClusterSnapshotIdentifier,
+		Account: describeCtx.AccountID,
+		ARN:     *snapshot.DBClusterSnapshotArn,
 		Description: model.DocDBClusterSnapshotDescription{
 			DBClusterSnapshot: snapshot,
 			Tags:              tags.TagList,

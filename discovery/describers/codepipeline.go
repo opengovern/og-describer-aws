@@ -64,9 +64,10 @@ func codePipelinePipelineHandle(ctx context.Context, cfg aws.Config, pipeline *c
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *pipeline.Metadata.PipelineArn,
-		Name:   *pipeline.Pipeline.Name,
+		Region:  describeCtx.OGRegion,
+		ARN:     *pipeline.Metadata.PipelineArn,
+		Account: describeCtx.AccountID,
+		Name:    *pipeline.Pipeline.Name,
 		Description: model.CodePipelinePipelineDescription{
 			Pipeline: *pipeline.Pipeline,
 			Metadata: *pipeline.Metadata,

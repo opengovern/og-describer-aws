@@ -37,9 +37,10 @@ func ServiceCatalogProduct(ctx context.Context, cfg aws.Config, stream *models.S
 				return nil, err
 			}
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *item.Id,
-				Name:   *item.Name,
+				Region:  describeCtx.OGRegion,
+				ID:      *item.Id,
+				Name:    *item.Name,
+				Account: describeCtx.AccountID,
 				Description: model.ServiceCatalogProductDescription{
 					ProductViewSummary:    item,
 					Budgets:               productAsA.Budgets,
@@ -73,10 +74,11 @@ func ServiceCatalogPortfolio(ctx context.Context, cfg aws.Config, stream *models
 				Id: v.Id,
 			})
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ID:     *v.Id,
-				Name:   *v.ProviderName,
-				ARN:    *v.ARN,
+				Region:  describeCtx.OGRegion,
+				ID:      *v.Id,
+				Name:    *v.ProviderName,
+				Account: describeCtx.AccountID,
+				ARN:     *v.ARN,
 				Description: model.ServiceCatalogPortfolioDescription{
 					Portfolio: v,
 				},

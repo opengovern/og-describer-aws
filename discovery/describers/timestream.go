@@ -28,9 +28,10 @@ func TimestreamDatabase(ctx context.Context, cfg aws.Config, stream *models.Stre
 			}
 
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    *v.Arn,
-				Name:   *v.DatabaseName,
+				Region:  describeCtx.OGRegion,
+				ARN:     *v.Arn,
+				Name:    *v.DatabaseName,
+				Account: describeCtx.AccountID,
 				Description: model.TimestreamDatabaseDescription{
 					Database: v,
 					Tags:     tags,

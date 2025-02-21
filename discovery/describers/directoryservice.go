@@ -71,9 +71,10 @@ func DirectoryServiceDirectory(ctx context.Context, cfg aws.Config, stream *mode
 				return nil, err
 			}
 			resource := models.Resource{
-				Region: describeCtx.OGRegion,
-				ARN:    arn,
-				Name:   *v.Name,
+				Region:  describeCtx.OGRegion,
+				ARN:     arn,
+				Name:    *v.Name,
+				Account: describeCtx.AccountID,
 				Description: model.DirectoryServiceDirectoryDescription{
 					Directory:       v,
 					Snapshot:        *snapshot.SnapshotLimits,
@@ -140,9 +141,10 @@ func DirectoryServiceCertificate(ctx context.Context, cfg aws.Config, stream *mo
 						return nil, err
 					}
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						ID:     *certificate.Certificate.CertificateId,
-						Name:   *certificate.Certificate.CommonName,
+						Region:  describeCtx.OGRegion,
+						Account: describeCtx.AccountID,
+						ID:      *certificate.Certificate.CertificateId,
+						Name:    *certificate.Certificate.CommonName,
 						Description: model.DirectoryServiceCertificateDescription{
 							Certificate: *certificate.Certificate,
 							DirectoryId: *v.DirectoryId,
@@ -195,8 +197,9 @@ func DirectoryServiceLogSubscription(ctx context.Context, cfg aws.Config, stream
 				}
 				for _, logSub := range logPage.LogSubscriptions {
 					resource := models.Resource{
-						Region: describeCtx.OGRegion,
-						Name:   *logSub.LogGroupName,
+						Region:  describeCtx.OGRegion,
+						Account: describeCtx.AccountID,
+						Name:    *logSub.LogGroupName,
 						Description: model.DirectoryServiceLogSubscriptionDescription{
 							LogSubscription: logSub,
 						},

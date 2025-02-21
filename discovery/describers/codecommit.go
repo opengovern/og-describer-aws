@@ -77,9 +77,10 @@ func codeCommitRepositoryHandle(ctx context.Context, cfg aws.Config, v types.Rep
 	}
 
 	resource := models.Resource{
-		Region: describeCtx.OGRegion,
-		ARN:    *v.Arn,
-		Name:   *v.RepositoryName,
+		Region:  describeCtx.OGRegion,
+		Account: describeCtx.AccountID,
+		ARN:     *v.Arn,
+		Name:    *v.RepositoryName,
 		Description: model.CodeCommitRepositoryDescription{
 			Repository: v,
 			Tags:       tags.Tags,
